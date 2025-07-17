@@ -3,4 +3,4 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**inlineResponse2013Data** | **Object** |  |  [optional]
+**inlineResponse2013Data** | [**SupplyResponse**](SupplyResponse.md) |  |  [optional]

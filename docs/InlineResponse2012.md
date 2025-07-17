@@ -3,4 +3,4 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**inlineResponse2012Data** | [**WithdrawResponse**](WithdrawResponse.md) |  |  [optional]
+**inlineResponse2012Data** | [**DeCollateralizeResponse**](DeCollateralizeResponse.md) |  |  [optional]

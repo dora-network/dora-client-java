@@ -3,4 +3,4 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**inlineResponse2016Data** | [**LiquidityResponse**](LiquidityResponse.md) |  |  [optional]
+**inlineResponse2016Data** | [**IsolateCollateralResponse**](IsolateCollateralResponse.md) |  |  [optional]
