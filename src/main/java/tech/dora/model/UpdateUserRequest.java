@@ -28,7 +28,7 @@ import tech.dora.model.UpdateFieldUUID;
  * Request body for PUT /user/{id} (admin-only): update a user&#x27;s details.
  */
 @Schema(description = "Request body for PUT /user/{id} (admin-only): update a user's details.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-17T12:01:43.728636988+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
 
 public class UpdateUserRequest {
   @SerializedName("email")

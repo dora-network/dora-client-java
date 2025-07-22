@@ -26,7 +26,7 @@ import org.threeten.bp.OffsetDateTime;
  * A generic struct to handle optional updates for date-time fields in user requests.
  */
 @Schema(description = "A generic struct to handle optional updates for date-time fields in user requests.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-17T12:01:43.728636988+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
 
 public class UpdateFieldDateTime {
   @SerializedName("update")
