@@ -21,72 +21,35 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import tech.dora.model.Metadata;
+import tech.dora.model.ResponseEnvelope;
+import tech.dora.model.UserInterest;
 /**
  * UserInterestResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
-public class UserInterestResponse {
-  @SerializedName("available")
-  private Map<String, Integer> available = null;
+public class UserInterestResponse extends ResponseEnvelope {
+  @SerializedName("data")
+  private UserInterest userInterestResponseData = null;
 
-  @SerializedName("value")
-  private Map<String, String> value = null;
-
-  public UserInterestResponse available(Map<String, Integer> available) {
-    this.available = available;
-    return this;
-  }
-
-  public UserInterestResponse putAvailableItem(String key, Integer availableItem) {
-    if (this.available == null) {
-      this.available = new HashMap<String, Integer>();
-    }
-    this.available.put(key, availableItem);
+  public UserInterestResponse userInterestResponseData(UserInterest userInterestResponseData) {
+    this.userInterestResponseData = userInterestResponseData;
     return this;
   }
 
    /**
-   * Get available
-   * @return available
+   * Get userInterestResponseData
+   * @return userInterestResponseData
   **/
   @Schema(description = "")
-  public Map<String, Integer> getAvailable() {
-    return available;
+  public UserInterest getUserInterestResponseData() {
+    return userInterestResponseData;
   }
 
-  public void setAvailable(Map<String, Integer> available) {
-    this.available = available;
-  }
-
-  public UserInterestResponse value(Map<String, String> value) {
-    this.value = value;
-    return this;
-  }
-
-  public UserInterestResponse putValueItem(String key, String valueItem) {
-    if (this.value == null) {
-      this.value = new HashMap<String, String>();
-    }
-    this.value.put(key, valueItem);
-    return this;
-  }
-
-   /**
-   * Get value
-   * @return value
-  **/
-  @Schema(description = "")
-  public Map<String, String> getValue() {
-    return value;
-  }
-
-  public void setValue(Map<String, String> value) {
-    this.value = value;
+  public void setUserInterestResponseData(UserInterest userInterestResponseData) {
+    this.userInterestResponseData = userInterestResponseData;
   }
 
 
@@ -99,13 +62,13 @@ public class UserInterestResponse {
       return false;
     }
     UserInterestResponse userInterestResponse = (UserInterestResponse) o;
-    return Objects.equals(this.available, userInterestResponse.available) &&
-        Objects.equals(this.value, userInterestResponse.value);
+    return Objects.equals(this.userInterestResponseData, userInterestResponse.userInterestResponseData) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(available, value);
+    return Objects.hash(userInterestResponseData, super.hashCode());
   }
 
 
@@ -113,9 +76,8 @@ public class UserInterestResponse {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserInterestResponse {\n");
-    
-    sb.append("    available: ").append(toIndentedString(available)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    userInterestResponseData: ").append(toIndentedString(userInterestResponseData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

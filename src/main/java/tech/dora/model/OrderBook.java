@@ -24,11 +24,12 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.UUID;
 import org.threeten.bp.OffsetDateTime;
+import tech.dora.model.OrderBookStatus;
 /**
  * OrderBook
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
 public class OrderBook {
   @SerializedName("order_book_id")
@@ -74,7 +75,7 @@ public class OrderBook {
   private BigDecimal sharesQuantity = null;
 
   @SerializedName("status")
-  private String status = null;
+  private OrderBookStatus status = null;
 
   @SerializedName("tick_size")
   private BigDecimal tickSize = null;
@@ -349,7 +350,7 @@ public class OrderBook {
     this.sharesQuantity = sharesQuantity;
   }
 
-  public OrderBook status(String status) {
+  public OrderBook status(OrderBookStatus status) {
     this.status = status;
     return this;
   }
@@ -359,11 +360,11 @@ public class OrderBook {
    * @return status
   **/
   @Schema(description = "")
-  public String getStatus() {
+  public OrderBookStatus getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(OrderBookStatus status) {
     this.status = status;
   }
 

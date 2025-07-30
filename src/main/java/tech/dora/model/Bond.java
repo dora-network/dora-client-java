@@ -23,18 +23,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 import java.util.UUID;
 import org.threeten.bp.OffsetDateTime;
+import tech.dora.model.BondKind;
 /**
  * Bond
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
 public class Bond {
   @SerializedName("id")
   private UUID id = null;
 
   @SerializedName("kind")
-  private String kind = null;
+  private BondKind kind = null;
 
   @SerializedName("coupon_start_at")
   private OffsetDateTime couponStartAt = null;
@@ -78,7 +79,7 @@ public class Bond {
     this.id = id;
   }
 
-  public Bond kind(String kind) {
+  public Bond kind(BondKind kind) {
     this.kind = kind;
     return this;
   }
@@ -88,11 +89,11 @@ public class Bond {
    * @return kind
   **/
   @Schema(description = "")
-  public String getKind() {
+  public BondKind getKind() {
     return kind;
   }
 
-  public void setKind(String kind) {
+  public void setKind(BondKind kind) {
     this.kind = kind;
   }
 

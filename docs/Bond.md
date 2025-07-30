@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**UUID**](UUID.md) |  |  [optional]
-**kind** | **String** |  |  [optional]
+**kind** | [**BondKind**](BondKind.md) |  |  [optional]
 **couponStartAt** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **createdAt** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **finalCouponAt** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]

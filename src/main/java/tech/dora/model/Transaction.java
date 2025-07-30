@@ -23,11 +23,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 import java.util.UUID;
 import org.threeten.bp.OffsetDateTime;
+import tech.dora.model.TransactionKind;
 /**
  * Transaction
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
 public class Transaction {
   @SerializedName("id")
@@ -37,7 +38,7 @@ public class Transaction {
   private OffsetDateTime createdAt = null;
 
   @SerializedName("kind")
-  private String kind = null;
+  private TransactionKind kind = null;
 
   @SerializedName("asset0")
   private UUID asset0 = null;
@@ -90,7 +91,7 @@ public class Transaction {
     this.createdAt = createdAt;
   }
 
-  public Transaction kind(String kind) {
+  public Transaction kind(TransactionKind kind) {
     this.kind = kind;
     return this;
   }
@@ -100,11 +101,11 @@ public class Transaction {
    * @return kind
   **/
   @Schema(description = "")
-  public String getKind() {
+  public TransactionKind getKind() {
     return kind;
   }
 
-  public void setKind(String kind) {
+  public void setKind(TransactionKind kind) {
     this.kind = kind;
   }
 

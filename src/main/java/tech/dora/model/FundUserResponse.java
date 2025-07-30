@@ -21,96 +21,35 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
+import tech.dora.model.FundUser;
+import tech.dora.model.Metadata;
+import tech.dora.model.ResponseEnvelope;
 /**
  * FundUserResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
-public class FundUserResponse {
-  @SerializedName("user_id")
-  private UUID userId = null;
+public class FundUserResponse extends ResponseEnvelope {
+  @SerializedName("data")
+  private FundUser fundUserResponseData = null;
 
-  @SerializedName("position_id")
-  private UUID positionId = null;
-
-  @SerializedName("asset_id")
-  private UUID assetId = null;
-
-  @SerializedName("final_amount")
-  private String finalAmount = null;
-
-  public FundUserResponse userId(UUID userId) {
-    this.userId = userId;
+  public FundUserResponse fundUserResponseData(FundUser fundUserResponseData) {
+    this.fundUserResponseData = fundUserResponseData;
     return this;
   }
 
    /**
-   * Get userId
-   * @return userId
+   * Get fundUserResponseData
+   * @return fundUserResponseData
   **/
   @Schema(description = "")
-  public UUID getUserId() {
-    return userId;
+  public FundUser getFundUserResponseData() {
+    return fundUserResponseData;
   }
 
-  public void setUserId(UUID userId) {
-    this.userId = userId;
-  }
-
-  public FundUserResponse positionId(UUID positionId) {
-    this.positionId = positionId;
-    return this;
-  }
-
-   /**
-   * Get positionId
-   * @return positionId
-  **/
-  @Schema(description = "")
-  public UUID getPositionId() {
-    return positionId;
-  }
-
-  public void setPositionId(UUID positionId) {
-    this.positionId = positionId;
-  }
-
-  public FundUserResponse assetId(UUID assetId) {
-    this.assetId = assetId;
-    return this;
-  }
-
-   /**
-   * Get assetId
-   * @return assetId
-  **/
-  @Schema(description = "")
-  public UUID getAssetId() {
-    return assetId;
-  }
-
-  public void setAssetId(UUID assetId) {
-    this.assetId = assetId;
-  }
-
-  public FundUserResponse finalAmount(String finalAmount) {
-    this.finalAmount = finalAmount;
-    return this;
-  }
-
-   /**
-   * Get finalAmount
-   * @return finalAmount
-  **/
-  @Schema(description = "")
-  public String getFinalAmount() {
-    return finalAmount;
-  }
-
-  public void setFinalAmount(String finalAmount) {
-    this.finalAmount = finalAmount;
+  public void setFundUserResponseData(FundUser fundUserResponseData) {
+    this.fundUserResponseData = fundUserResponseData;
   }
 
 
@@ -123,15 +62,13 @@ public class FundUserResponse {
       return false;
     }
     FundUserResponse fundUserResponse = (FundUserResponse) o;
-    return Objects.equals(this.userId, fundUserResponse.userId) &&
-        Objects.equals(this.positionId, fundUserResponse.positionId) &&
-        Objects.equals(this.assetId, fundUserResponse.assetId) &&
-        Objects.equals(this.finalAmount, fundUserResponse.finalAmount);
+    return Objects.equals(this.fundUserResponseData, fundUserResponse.fundUserResponseData) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, positionId, assetId, finalAmount);
+    return Objects.hash(fundUserResponseData, super.hashCode());
   }
 
 
@@ -139,11 +76,8 @@ public class FundUserResponse {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class FundUserResponse {\n");
-    
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
-    sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
-    sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
-    sb.append("    finalAmount: ").append(toIndentedString(finalAmount)).append("\n");
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    fundUserResponseData: ").append(toIndentedString(fundUserResponseData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

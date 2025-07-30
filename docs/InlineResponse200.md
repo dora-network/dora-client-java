@@ -3,4 +3,4 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**inlineResponse200Data** | [**List&lt;Asset&gt;**](Asset.md) |  |  [optional]
+**inlineResponse200Data** | [**List&lt;AssetPrice&gt;**](AssetPrice.md) |  |  [optional]

@@ -11,11 +11,11 @@ Method | HTTP request | Description
 [**getAllAssetPrices**](DefaultApi.md#getAllAssetPrices) | **GET** /v1/price | Get the current price of all assets
 [**getAssetById**](DefaultApi.md#getAssetById) | **GET** /v1/assets/{id} | Get asset by ID
 [**getAssetPrice**](DefaultApi.md#getAssetPrice) | **GET** /v1/price/asset/{asset_id} | Get the current price of an asset
-[**getCandleData**](DefaultApi.md#getCandleData) | **GET** /v1/charts/candle/{orderbook} | Get candlestick data for an orderbook
-[**getCouponsByAssetId**](DefaultApi.md#getCouponsByAssetId) | **GET** /v1/assets/{id}/coupons | Get coupons for a bond asset
-[**getL1Depth**](DefaultApi.md#getL1Depth) | **GET** /v1/orderbooks/{orderbook_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
-[**getL2Depth**](DefaultApi.md#getL2Depth) | **GET** /v1/orderbooks/{orderbook_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth)
-[**getL3Depth**](DefaultApi.md#getL3Depth) | **GET** /v1/orderbooks/{orderbook_id}/L3 | Get all open orders for a specific orderbook (L3 market depth)
+[**getCandleData**](DefaultApi.md#getCandleData) | **GET** /v1/charts/{orderbook}/candle | Get candlestick data for an orderbook
+[**getCouponPaymentsByAssetId**](DefaultApi.md#getCouponPaymentsByAssetId) | **GET** /v1/assets/{id}/coupon_payments | Get coupon payments for a bond asset
+[**getL1Depth**](DefaultApi.md#getL1Depth) | **GET** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
+[**getL2Depth**](DefaultApi.md#getL2Depth) | **GET** /v1/orderbooks/{order_book_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth)
+[**getL3Depth**](DefaultApi.md#getL3Depth) | **GET** /v1/orderbooks/{order_book_id}/L3 | Get all open orders for a specific orderbook (L3 market depth)
 [**getLedgerBalancesSelf**](DefaultApi.md#getLedgerBalancesSelf) | **GET** /v1/ledger/balances/self | Get your own available, locked, and borrowed assets
 [**getLedgerInterestSelf**](DefaultApi.md#getLedgerInterestSelf) | **GET** /v1/ledger/interest/self | Get your own interest
 [**getLedgerModule**](DefaultApi.md#getLedgerModule) | **GET** /v1/ledger/module | Get the entire module object, including unborrowed leverage assets and total leverage trackers
@@ -23,21 +23,20 @@ Method | HTTP request | Description
 [**getLedgerPositionsSelf**](DefaultApi.md#getLedgerPositionsSelf) | **GET** /v1/ledger/positions/self | Get your own positions
 [**getLedgerValueSelf**](DefaultApi.md#getLedgerValueSelf) | **GET** /v1/ledger/value/self | Get your own available, locked, and borrowed USD value; and realized and unrealized PnL
 [**getOrderById**](DefaultApi.md#getOrderById) | **GET** /v1/orders/{order_id} | Get order by ID
-[**getOrderbookBBO**](DefaultApi.md#getOrderbookBBO) | **GET** /v1/orderbooks/{orderbook_id}/bbo | Get the top price levels for a specific orderbook (L1 market depth)
-[**getOrderbookById**](DefaultApi.md#getOrderbookById) | **GET** /v1/orderbooks/{orderbook_id} | Get orderbook by ID
-[**getOrderbookDepth**](DefaultApi.md#getOrderbookDepth) | **GET** /v1/orderbooks/{orderbook_id}/depth | Get the aggregated price levels for a specific orderbook (L2 market depth)
-[**getOrderbookOrders**](DefaultApi.md#getOrderbookOrders) | **GET** /v1/orderbooks/{orderbook_id}/orders | Get all open orders for a specific orderbook (L3 market depth)
-[**getOrderbookSummary**](DefaultApi.md#getOrderbookSummary) | **GET** /v1/orderbooks/{orderbook_id}/summary | Get summary of an orderbook
-[**getOrderbookTop**](DefaultApi.md#getOrderbookTop) | **GET** /v1/orderbooks/{orderbook_id}/top | Get the top price levels for a specific orderbook (L1 market depth)
+[**getOrderbookById**](DefaultApi.md#getOrderbookById) | **GET** /v1/orderbooks/{order_book_id} | Get orderbook by ID
+[**getOrderbookDepth**](DefaultApi.md#getOrderbookDepth) | **GET** /v1/orderbooks/{order_book_id}/depth | Get the aggregated price levels for a specific orderbook (L2 market depth)
+[**getOrderbookOrders**](DefaultApi.md#getOrderbookOrders) | **GET** /v1/orderbooks/{order_book_id}/orders | Get all open orders for a specific orderbook (L3 market depth)
+[**getOrderbookSummary**](DefaultApi.md#getOrderbookSummary) | **GET** /v1/orderbooks/{order_book_id}/summary | Get summary of an orderbook
+[**getOrderbookTop**](DefaultApi.md#getOrderbookTop) | **GET** /v1/orderbooks/{order_book_id}/top | Get the top price levels for a specific orderbook (L1 market depth)
 [**getPoolPrice**](DefaultApi.md#getPoolPrice) | **GET** /v1/price/pool/{pool_id} | Get the current price of a pool
 [**getTradeById**](DefaultApi.md#getTradeById) | **GET** /v1/trade/{trade_id} | Get a trade by ID
 [**getTrades**](DefaultApi.md#getTrades) | **GET** /v1/trade | Get a filtered, paginated list of trades
 [**getTransactionById**](DefaultApi.md#getTransactionById) | **GET** /v1/transactions/{id} | Get a transaction by ID
 [**getTransactions**](DefaultApi.md#getTransactions) | **GET** /v1/transactions | Get a filtered, paginated list of transactions
-[**getUserById**](DefaultApi.md#getUserById) | **GET** /v1/user/{user_id} | Get user by ID
+[**getUserById**](DefaultApi.md#getUserById) | **GET** /v1/user/{user_id} | Get user by ID (admin only)
 [**getUserLedgerStream**](DefaultApi.md#getUserLedgerStream) | **GET** /v1/user/{user_id}/ledger/stream | Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates
-[**getUserOrdersStream**](DefaultApi.md#getUserOrdersStream) | **GET** /v1/user/{user_id}/orders/{orderbook_id}/stream | Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
-[**getUserOrdersStreamAll**](DefaultApi.md#getUserOrdersStreamAll) | **GET** /v1/user/{user_id}/orders/all/stream | Get a snapshot of user&#x27;s order updates since a specific time, and opens a stream for further updates
+[**getUserOrdersStream**](DefaultApi.md#getUserOrdersStream) | **GET** /v1/user/{user_id}/orders/{order_book_id}/stream | Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
+[**getUserOrdersStreamAll**](DefaultApi.md#getUserOrdersStreamAll) | **GET** /v1/user/{user_id}/orders/all/stream | Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
 [**getUserSelf**](DefaultApi.md#getUserSelf) | **GET** /v1/user/self | Get user details for the authenticated user
 [**getUserTransactionsStream**](DefaultApi.md#getUserTransactionsStream) | **GET** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
 [**ledgerDeposit**](DefaultApi.md#ledgerDeposit) | **POST** /v1/ledger/deposit | Deposit assets into your account from the outside world
@@ -57,17 +56,17 @@ Method | HTTP request | Description
 [**listOrderBooks**](DefaultApi.md#listOrderBooks) | **GET** /v1/orderbooks | List order books
 [**listOrders**](DefaultApi.md#listOrders) | **GET** /v1/orders | List all orders
 [**streamAssetPrices**](DefaultApi.md#streamAssetPrices) | **GET** /v1/price/stream | Get a snapshot of asset prices from a specific date and open a stream for real-time updates
-[**streamCandleData**](DefaultApi.md#streamCandleData) | **GET** /v1/charts/candle/stream/{orderbook} | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
-[**streamOrderBookBalances**](DefaultApi.md#streamOrderBookBalances) | **GET** /v1/orderbooks/{orderbook_id}/stream/balances | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
-[**streamOrderbookOpenOrders**](DefaultApi.md#streamOrderbookOpenOrders) | **GET** /v1/orderbooks/{orderbook_id}/stream/open | Get a snapshot of open orders in an order book and open a stream for real-time updates
-[**streamTrades**](DefaultApi.md#streamTrades) | **GET** /v1/trade/{orderbook_id}/stream | Get a snapshot of trades from a specific date and open a stream for real-time updates
+[**streamCandleData**](DefaultApi.md#streamCandleData) | **GET** /v1/charts/{orderbook}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
+[**streamOrderBookBalances**](DefaultApi.md#streamOrderBookBalances) | **GET** /v1/orderbooks/{order_book_id}/stream/balances | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
+[**streamOrderbookOpenOrders**](DefaultApi.md#streamOrderbookOpenOrders) | **GET** /v1/orderbooks/{order_book_id}/stream/open | Get a snapshot of open orders in an order book and open a stream for real-time updates
+[**streamTrades**](DefaultApi.md#streamTrades) | **GET** /v1/trade/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
 [**updateUserConfig**](DefaultApi.md#updateUserConfig) | **PUT** /v1/user/{user_id}/config | Update user configuration by ID
 [**updateUserConfigSelf**](DefaultApi.md#updateUserConfigSelf) | **PUT** /v1/user/config/self | Update user configuration for the authenticated user
 [**verifyUser**](DefaultApi.md#verifyUser) | **PUT** /v1/user/{user_id}/verify | Verify a user by ID
 
 <a name="cancelAllOpenOrders"></a>
 # **cancelAllOpenOrders**
-> InlineResponse20015 cancelAllOpenOrders()
+> CancelOrdersResponse cancelAllOpenOrders()
 
 Cancel all open orders
 
@@ -80,7 +79,7 @@ Cancel all open orders
 
 DefaultApi apiInstance = new DefaultApi();
 try {
-    InlineResponse20015 result = apiInstance.cancelAllOpenOrders();
+    CancelOrdersResponse result = apiInstance.cancelAllOpenOrders();
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#cancelAllOpenOrders");
@@ -93,7 +92,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20015**](InlineResponse20015.md)
+[**CancelOrdersResponse**](CancelOrdersResponse.md)
 
 ### Authorization
 
@@ -106,7 +105,7 @@ No authorization required
 
 <a name="cancelOrderById"></a>
 # **cancelOrderById**
-> InlineResponse204 cancelOrderById(orderId)
+> OrderCancelledResponse cancelOrderById(orderId)
 
 Cancel an order by ID
 
@@ -120,7 +119,7 @@ Cancel an order by ID
 DefaultApi apiInstance = new DefaultApi();
 UUID orderId = new UUID(); // UUID | 
 try {
-    InlineResponse204 result = apiInstance.cancelOrderById(orderId);
+    OrderCancelledResponse result = apiInstance.cancelOrderById(orderId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#cancelOrderById");
@@ -136,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse204**](InlineResponse204.md)
+[**OrderCancelledResponse**](OrderCancelledResponse.md)
 
 ### Authorization
 
@@ -192,7 +191,7 @@ No authorization required
 
 <a name="deleteUser"></a>
 # **deleteUser**
-> InlineResponse2004 deleteUser(userId)
+> UserDeletedResponse deleteUser(userId)
 
 Delete user by ID
 
@@ -206,7 +205,7 @@ Delete user by ID
 DefaultApi apiInstance = new DefaultApi();
 UUID userId = new UUID(); // UUID | 
 try {
-    InlineResponse2004 result = apiInstance.deleteUser(userId);
+    UserDeletedResponse result = apiInstance.deleteUser(userId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#deleteUser");
@@ -222,7 +221,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2004**](InlineResponse2004.md)
+[**UserDeletedResponse**](UserDeletedResponse.md)
 
 ### Authorization
 
@@ -235,7 +234,7 @@ No authorization required
 
 <a name="getAllAssetPrices"></a>
 # **getAllAssetPrices**
-> InlineResponse20028 getAllAssetPrices()
+> ListAssetPriceResponse getAllAssetPrices()
 
 Get the current price of all assets
 
@@ -248,7 +247,7 @@ Get the current price of all assets
 
 DefaultApi apiInstance = new DefaultApi();
 try {
-    InlineResponse20028 result = apiInstance.getAllAssetPrices();
+    ListAssetPriceResponse result = apiInstance.getAllAssetPrices();
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getAllAssetPrices");
@@ -261,7 +260,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20028**](InlineResponse20028.md)
+[**ListAssetPriceResponse**](ListAssetPriceResponse.md)
 
 ### Authorization
 
@@ -274,7 +273,7 @@ No authorization required
 
 <a name="getAssetById"></a>
 # **getAssetById**
-> InlineResponse2001 getAssetById(id)
+> GetAssetByIDResponse getAssetById(id)
 
 Get asset by ID
 
@@ -288,7 +287,7 @@ Get asset by ID
 DefaultApi apiInstance = new DefaultApi();
 UUID id = new UUID(); // UUID | 
 try {
-    InlineResponse2001 result = apiInstance.getAssetById(id);
+    GetAssetByIDResponse result = apiInstance.getAssetById(id);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getAssetById");
@@ -304,7 +303,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**GetAssetByIDResponse**](GetAssetByIDResponse.md)
 
 ### Authorization
 
@@ -317,7 +316,7 @@ No authorization required
 
 <a name="getAssetPrice"></a>
 # **getAssetPrice**
-> InlineResponse20029 getAssetPrice(assetId)
+> GetAssetPriceResponse getAssetPrice(assetId)
 
 Get the current price of an asset
 
@@ -331,7 +330,7 @@ Get the current price of an asset
 DefaultApi apiInstance = new DefaultApi();
 UUID assetId = new UUID(); // UUID | 
 try {
-    InlineResponse20029 result = apiInstance.getAssetPrice(assetId);
+    GetAssetPriceResponse result = apiInstance.getAssetPrice(assetId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getAssetPrice");
@@ -347,7 +346,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20029**](InlineResponse20029.md)
+[**GetAssetPriceResponse**](GetAssetPriceResponse.md)
 
 ### Authorization
 
@@ -360,7 +359,7 @@ No authorization required
 
 <a name="getCandleData"></a>
 # **getCandleData**
-> InlineResponse20017 getCandleData(orderbook, start, end, resolution)
+> ListCandlesResponse getCandleData(orderbook, start, end, resolution)
 
 Get candlestick data for an orderbook
 
@@ -375,9 +374,9 @@ DefaultApi apiInstance = new DefaultApi();
 String orderbook = "orderbook_example"; // String | 
 OffsetDateTime start = new OffsetDateTime(); // OffsetDateTime | 
 OffsetDateTime end = new OffsetDateTime(); // OffsetDateTime | 
-String resolution = "resolution_example"; // String | 
+CandleResolution resolution = new CandleResolution(); // CandleResolution | 
 try {
-    InlineResponse20017 result = apiInstance.getCandleData(orderbook, start, end, resolution);
+    ListCandlesResponse result = apiInstance.getCandleData(orderbook, start, end, resolution);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getCandleData");
@@ -392,11 +391,11 @@ Name | Type | Description  | Notes
  **orderbook** | **String**|  |
  **start** | **OffsetDateTime**|  | [optional]
  **end** | **OffsetDateTime**|  | [optional]
- **resolution** | **String**|  | [optional] [enum: 1m, 5m, 15m, 1h, 4h, 1d]
+ **resolution** | [**CandleResolution**](.md)|  | [optional]
 
 ### Return type
 
-[**InlineResponse20017**](InlineResponse20017.md)
+[**ListCandlesResponse**](ListCandlesResponse.md)
 
 ### Authorization
 
@@ -407,11 +406,11 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getCouponsByAssetId"></a>
-# **getCouponsByAssetId**
-> InlineResponse2002 getCouponsByAssetId(id, start, end, page, limit)
+<a name="getCouponPaymentsByAssetId"></a>
+# **getCouponPaymentsByAssetId**
+> ListCouponPaymentsResponse getCouponPaymentsByAssetId(id)
 
-Get coupons for a bond asset
+Get coupon payments for a bond asset
 
 ### Example
 ```java
@@ -422,15 +421,11 @@ Get coupons for a bond asset
 
 DefaultApi apiInstance = new DefaultApi();
 UUID id = new UUID(); // UUID | 
-OffsetDateTime start = new OffsetDateTime(); // OffsetDateTime | 
-OffsetDateTime end = new OffsetDateTime(); // OffsetDateTime | 
-Integer page = 1; // Integer | 
-Integer limit = 100; // Integer | 
 try {
-    InlineResponse2002 result = apiInstance.getCouponsByAssetId(id, start, end, page, limit);
+    ListCouponPaymentsResponse result = apiInstance.getCouponPaymentsByAssetId(id);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getCouponsByAssetId");
+    System.err.println("Exception when calling DefaultApi#getCouponPaymentsByAssetId");
     e.printStackTrace();
 }
 ```
@@ -440,14 +435,10 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | [**UUID**](.md)|  |
- **start** | **OffsetDateTime**|  | [optional]
- **end** | **OffsetDateTime**|  | [optional]
- **page** | **Integer**|  | [optional] [default to 1]
- **limit** | **Integer**|  | [optional] [default to 100]
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**ListCouponPaymentsResponse**](ListCouponPaymentsResponse.md)
 
 ### Authorization
 
@@ -460,7 +451,7 @@ No authorization required
 
 <a name="getL1Depth"></a>
 # **getL1Depth**
-> InlineResponse20012 getL1Depth(orderbookId)
+> GetTopOfBookResponse getL1Depth(orderBookId)
 
 Get the top price levels for a specific orderbook (L1 market depth)
 
@@ -472,9 +463,9 @@ Get the top price levels for a specific orderbook (L1 market depth)
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderbookId = new UUID(); // UUID | 
+UUID orderBookId = new UUID(); // UUID | 
 try {
-    InlineResponse20012 result = apiInstance.getL1Depth(orderbookId);
+    GetTopOfBookResponse result = apiInstance.getL1Depth(orderBookId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getL1Depth");
@@ -486,11 +477,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderbookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**UUID**](.md)|  |
 
 ### Return type
 
-[**InlineResponse20012**](InlineResponse20012.md)
+[**GetTopOfBookResponse**](GetTopOfBookResponse.md)
 
 ### Authorization
 
@@ -503,7 +494,7 @@ No authorization required
 
 <a name="getL2Depth"></a>
 # **getL2Depth**
-> InlineResponse20011 getL2Depth(orderbookId)
+> ListOrderBookDepthResponse getL2Depth(orderBookId)
 
 Get the aggregated price levels for a specific orderbook (L2 market depth)
 
@@ -515,9 +506,9 @@ Get the aggregated price levels for a specific orderbook (L2 market depth)
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderbookId = new UUID(); // UUID | 
+UUID orderBookId = new UUID(); // UUID | 
 try {
-    InlineResponse20011 result = apiInstance.getL2Depth(orderbookId);
+    ListOrderBookDepthResponse result = apiInstance.getL2Depth(orderBookId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getL2Depth");
@@ -529,11 +520,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderbookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**UUID**](.md)|  |
 
 ### Return type
 
-[**InlineResponse20011**](InlineResponse20011.md)
+[**ListOrderBookDepthResponse**](ListOrderBookDepthResponse.md)
 
 ### Authorization
 
@@ -546,7 +537,7 @@ No authorization required
 
 <a name="getL3Depth"></a>
 # **getL3Depth**
-> InlineResponse2006 getL3Depth(orderbookId)
+> ListOrdersResponse getL3Depth(orderBookId)
 
 Get all open orders for a specific orderbook (L3 market depth)
 
@@ -558,9 +549,9 @@ Get all open orders for a specific orderbook (L3 market depth)
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderbookId = new UUID(); // UUID | 
+UUID orderBookId = new UUID(); // UUID | 
 try {
-    InlineResponse2006 result = apiInstance.getL3Depth(orderbookId);
+    ListOrdersResponse result = apiInstance.getL3Depth(orderBookId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getL3Depth");
@@ -572,11 +563,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderbookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**UUID**](.md)|  |
 
 ### Return type
 
-[**InlineResponse2006**](InlineResponse2006.md)
+[**ListOrdersResponse**](ListOrdersResponse.md)
 
 ### Authorization
 
@@ -589,7 +580,7 @@ No authorization required
 
 <a name="getLedgerBalancesSelf"></a>
 # **getLedgerBalancesSelf**
-> InlineResponse20021 getLedgerBalancesSelf()
+> UserBalanceResponse getLedgerBalancesSelf()
 
 Get your own available, locked, and borrowed assets
 
@@ -602,7 +593,7 @@ Get your own available, locked, and borrowed assets
 
 DefaultApi apiInstance = new DefaultApi();
 try {
-    InlineResponse20021 result = apiInstance.getLedgerBalancesSelf();
+    UserBalanceResponse result = apiInstance.getLedgerBalancesSelf();
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getLedgerBalancesSelf");
@@ -615,7 +606,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20021**](InlineResponse20021.md)
+[**UserBalanceResponse**](UserBalanceResponse.md)
 
 ### Authorization
 
@@ -628,7 +619,7 @@ No authorization required
 
 <a name="getLedgerInterestSelf"></a>
 # **getLedgerInterestSelf**
-> InlineResponse20023 getLedgerInterestSelf()
+> UserInterestResponse getLedgerInterestSelf()
 
 Get your own interest
 
@@ -641,7 +632,7 @@ Get your own interest
 
 DefaultApi apiInstance = new DefaultApi();
 try {
-    InlineResponse20023 result = apiInstance.getLedgerInterestSelf();
+    UserInterestResponse result = apiInstance.getLedgerInterestSelf();
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getLedgerInterestSelf");
@@ -654,7 +645,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20023**](InlineResponse20023.md)
+[**UserInterestResponse**](UserInterestResponse.md)
 
 ### Authorization
 
@@ -667,7 +658,7 @@ No authorization required
 
 <a name="getLedgerModule"></a>
 # **getLedgerModule**
-> InlineResponse20018 getLedgerModule()
+> LedgerModuleResponse getLedgerModule()
 
 Get the entire module object, including unborrowed leverage assets and total leverage trackers
 
@@ -680,7 +671,7 @@ Get the entire module object, including unborrowed leverage assets and total lev
 
 DefaultApi apiInstance = new DefaultApi();
 try {
-    InlineResponse20018 result = apiInstance.getLedgerModule();
+    LedgerModuleResponse result = apiInstance.getLedgerModule();
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getLedgerModule");
@@ -693,7 +684,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20018**](InlineResponse20018.md)
+[**LedgerModuleResponse**](LedgerModuleResponse.md)
 
 ### Authorization
 
@@ -706,7 +697,7 @@ No authorization required
 
 <a name="getLedgerModuleByAsset"></a>
 # **getLedgerModuleByAsset**
-> InlineResponse20019 getLedgerModuleByAsset(assetId)
+> LedgerModuleByAssetResponse getLedgerModuleByAsset(assetId)
 
 Get the module object for a single asset ID
 
@@ -720,7 +711,7 @@ Get the module object for a single asset ID
 DefaultApi apiInstance = new DefaultApi();
 UUID assetId = new UUID(); // UUID | 
 try {
-    InlineResponse20019 result = apiInstance.getLedgerModuleByAsset(assetId);
+    LedgerModuleByAssetResponse result = apiInstance.getLedgerModuleByAsset(assetId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getLedgerModuleByAsset");
@@ -736,7 +727,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20019**](InlineResponse20019.md)
+[**LedgerModuleByAssetResponse**](LedgerModuleByAssetResponse.md)
 
 ### Authorization
 
@@ -749,7 +740,7 @@ No authorization required
 
 <a name="getLedgerPositionsSelf"></a>
 # **getLedgerPositionsSelf**
-> InlineResponse20020 getLedgerPositionsSelf()
+> UserPositionResponse getLedgerPositionsSelf()
 
 Get your own positions
 
@@ -762,7 +753,7 @@ Get your own positions
 
 DefaultApi apiInstance = new DefaultApi();
 try {
-    InlineResponse20020 result = apiInstance.getLedgerPositionsSelf();
+    UserPositionResponse result = apiInstance.getLedgerPositionsSelf();
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getLedgerPositionsSelf");
@@ -775,7 +766,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20020**](InlineResponse20020.md)
+[**UserPositionResponse**](UserPositionResponse.md)
 
 ### Authorization
 
@@ -788,7 +779,7 @@ No authorization required
 
 <a name="getLedgerValueSelf"></a>
 # **getLedgerValueSelf**
-> InlineResponse20022 getLedgerValueSelf()
+> UserValueResponse getLedgerValueSelf()
 
 Get your own available, locked, and borrowed USD value; and realized and unrealized PnL
 
@@ -801,7 +792,7 @@ Get your own available, locked, and borrowed USD value; and realized and unreali
 
 DefaultApi apiInstance = new DefaultApi();
 try {
-    InlineResponse20022 result = apiInstance.getLedgerValueSelf();
+    UserValueResponse result = apiInstance.getLedgerValueSelf();
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getLedgerValueSelf");
@@ -814,7 +805,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse20022**](InlineResponse20022.md)
+[**UserValueResponse**](UserValueResponse.md)
 
 ### Authorization
 
@@ -827,7 +818,7 @@ No authorization required
 
 <a name="getOrderById"></a>
 # **getOrderById**
-> InlineResponse20016 getOrderById(orderId)
+> GetOrderResponse getOrderById(orderId)
 
 Get order by ID
 
@@ -841,7 +832,7 @@ Get order by ID
 DefaultApi apiInstance = new DefaultApi();
 UUID orderId = new UUID(); // UUID | 
 try {
-    InlineResponse20016 result = apiInstance.getOrderById(orderId);
+    GetOrderResponse result = apiInstance.getOrderById(orderId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getOrderById");
@@ -857,50 +848,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20016**](InlineResponse20016.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-<a name="getOrderbookBBO"></a>
-# **getOrderbookBBO**
-> InlineResponse20012 getOrderbookBBO(orderbookId)
-
-Get the top price levels for a specific orderbook (L1 market depth)
-
-### Example
-```java
-// Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
-
-
-DefaultApi apiInstance = new DefaultApi();
-UUID orderbookId = new UUID(); // UUID | 
-try {
-    InlineResponse20012 result = apiInstance.getOrderbookBBO(orderbookId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getOrderbookBBO");
-    e.printStackTrace();
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderbookId** | [**UUID**](.md)|  |
-
-### Return type
-
-[**InlineResponse20012**](InlineResponse20012.md)
+[**GetOrderResponse**](GetOrderResponse.md)
 
 ### Authorization
 
@@ -913,7 +861,7 @@ No authorization required
 
 <a name="getOrderbookById"></a>
 # **getOrderbookById**
-> InlineResponse20010 getOrderbookById(orderbookId)
+> GetOrderBookResponse getOrderbookById(orderBookId)
 
 Get orderbook by ID
 
@@ -925,9 +873,9 @@ Get orderbook by ID
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderbookId = new UUID(); // UUID | 
+UUID orderBookId = new UUID(); // UUID | 
 try {
-    InlineResponse20010 result = apiInstance.getOrderbookById(orderbookId);
+    GetOrderBookResponse result = apiInstance.getOrderbookById(orderBookId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getOrderbookById");
@@ -939,11 +887,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderbookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**UUID**](.md)|  |
 
 ### Return type
 
-[**InlineResponse20010**](InlineResponse20010.md)
+[**GetOrderBookResponse**](GetOrderBookResponse.md)
 
 ### Authorization
 
@@ -956,7 +904,7 @@ No authorization required
 
 <a name="getOrderbookDepth"></a>
 # **getOrderbookDepth**
-> InlineResponse20011 getOrderbookDepth(orderbookId)
+> ListOrderBookDepthResponse getOrderbookDepth(orderBookId)
 
 Get the aggregated price levels for a specific orderbook (L2 market depth)
 
@@ -968,9 +916,9 @@ Get the aggregated price levels for a specific orderbook (L2 market depth)
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderbookId = new UUID(); // UUID | 
+UUID orderBookId = new UUID(); // UUID | 
 try {
-    InlineResponse20011 result = apiInstance.getOrderbookDepth(orderbookId);
+    ListOrderBookDepthResponse result = apiInstance.getOrderbookDepth(orderBookId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getOrderbookDepth");
@@ -982,11 +930,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderbookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**UUID**](.md)|  |
 
 ### Return type
 
-[**InlineResponse20011**](InlineResponse20011.md)
+[**ListOrderBookDepthResponse**](ListOrderBookDepthResponse.md)
 
 ### Authorization
 
@@ -999,7 +947,7 @@ No authorization required
 
 <a name="getOrderbookOrders"></a>
 # **getOrderbookOrders**
-> InlineResponse2006 getOrderbookOrders(orderbookId)
+> ListOrdersResponse getOrderbookOrders(orderBookId)
 
 Get all open orders for a specific orderbook (L3 market depth)
 
@@ -1011,9 +959,9 @@ Get all open orders for a specific orderbook (L3 market depth)
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderbookId = new UUID(); // UUID | 
+UUID orderBookId = new UUID(); // UUID | 
 try {
-    InlineResponse2006 result = apiInstance.getOrderbookOrders(orderbookId);
+    ListOrdersResponse result = apiInstance.getOrderbookOrders(orderBookId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getOrderbookOrders");
@@ -1025,11 +973,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderbookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**UUID**](.md)|  |
 
 ### Return type
 
-[**InlineResponse2006**](InlineResponse2006.md)
+[**ListOrdersResponse**](ListOrdersResponse.md)
 
 ### Authorization
 
@@ -1042,7 +990,7 @@ No authorization required
 
 <a name="getOrderbookSummary"></a>
 # **getOrderbookSummary**
-> InlineResponse20013 getOrderbookSummary(orderbookId)
+> GetOrderBookSummaryResponse getOrderbookSummary(orderBookId)
 
 Get summary of an orderbook
 
@@ -1054,9 +1002,9 @@ Get summary of an orderbook
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderbookId = new UUID(); // UUID | 
+UUID orderBookId = new UUID(); // UUID | 
 try {
-    InlineResponse20013 result = apiInstance.getOrderbookSummary(orderbookId);
+    GetOrderBookSummaryResponse result = apiInstance.getOrderbookSummary(orderBookId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getOrderbookSummary");
@@ -1068,11 +1016,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderbookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**UUID**](.md)|  |
 
 ### Return type
 
-[**InlineResponse20013**](InlineResponse20013.md)
+[**GetOrderBookSummaryResponse**](GetOrderBookSummaryResponse.md)
 
 ### Authorization
 
@@ -1085,7 +1033,7 @@ No authorization required
 
 <a name="getOrderbookTop"></a>
 # **getOrderbookTop**
-> InlineResponse20012 getOrderbookTop(orderbookId)
+> GetTopOfBookResponse getOrderbookTop(orderBookId)
 
 Get the top price levels for a specific orderbook (L1 market depth)
 
@@ -1097,9 +1045,9 @@ Get the top price levels for a specific orderbook (L1 market depth)
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderbookId = new UUID(); // UUID | 
+UUID orderBookId = new UUID(); // UUID | 
 try {
-    InlineResponse20012 result = apiInstance.getOrderbookTop(orderbookId);
+    GetTopOfBookResponse result = apiInstance.getOrderbookTop(orderBookId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getOrderbookTop");
@@ -1111,11 +1059,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderbookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**UUID**](.md)|  |
 
 ### Return type
 
-[**InlineResponse20012**](InlineResponse20012.md)
+[**GetTopOfBookResponse**](GetTopOfBookResponse.md)
 
 ### Authorization
 
@@ -1128,7 +1076,7 @@ No authorization required
 
 <a name="getPoolPrice"></a>
 # **getPoolPrice**
-> InlineResponse20030 getPoolPrice(poolId)
+> GetPoolPriceResponse getPoolPrice(poolId)
 
 Get the current price of a pool
 
@@ -1142,7 +1090,7 @@ Get the current price of a pool
 DefaultApi apiInstance = new DefaultApi();
 UUID poolId = new UUID(); // UUID | 
 try {
-    InlineResponse20030 result = apiInstance.getPoolPrice(poolId);
+    GetPoolPriceResponse result = apiInstance.getPoolPrice(poolId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getPoolPrice");
@@ -1158,7 +1106,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20030**](InlineResponse20030.md)
+[**GetPoolPriceResponse**](GetPoolPriceResponse.md)
 
 ### Authorization
 
@@ -1171,7 +1119,7 @@ No authorization required
 
 <a name="getTradeById"></a>
 # **getTradeById**
-> InlineResponse20027 getTradeById(tradeId)
+> TradeResponse getTradeById(tradeId)
 
 Get a trade by ID
 
@@ -1185,7 +1133,7 @@ Get a trade by ID
 DefaultApi apiInstance = new DefaultApi();
 UUID tradeId = new UUID(); // UUID | 
 try {
-    InlineResponse20027 result = apiInstance.getTradeById(tradeId);
+    TradeResponse result = apiInstance.getTradeById(tradeId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getTradeById");
@@ -1201,7 +1149,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20027**](InlineResponse20027.md)
+[**TradeResponse**](TradeResponse.md)
 
 ### Authorization
 
@@ -1214,7 +1162,7 @@ No authorization required
 
 <a name="getTrades"></a>
 # **getTrades**
-> InlineResponse20026 getTrades(pools, userIds, start, end, page, limit)
+> ListTradeResponse getTrades(pools, userIds, start, end, page, limit)
 
 Get a filtered, paginated list of trades
 
@@ -1233,7 +1181,7 @@ OffsetDateTime end = new OffsetDateTime(); // OffsetDateTime |
 Integer page = 1; // Integer | 
 Integer limit = 100; // Integer | 
 try {
-    InlineResponse20026 result = apiInstance.getTrades(pools, userIds, start, end, page, limit);
+    ListTradeResponse result = apiInstance.getTrades(pools, userIds, start, end, page, limit);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getTrades");
@@ -1254,7 +1202,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20026**](InlineResponse20026.md)
+[**ListTradeResponse**](ListTradeResponse.md)
 
 ### Authorization
 
@@ -1267,7 +1215,7 @@ No authorization required
 
 <a name="getTransactionById"></a>
 # **getTransactionById**
-> InlineResponse20025 getTransactionById(id)
+> GetTransactionResponse getTransactionById(id)
 
 Get a transaction by ID
 
@@ -1281,7 +1229,7 @@ Get a transaction by ID
 DefaultApi apiInstance = new DefaultApi();
 UUID id = new UUID(); // UUID | 
 try {
-    InlineResponse20025 result = apiInstance.getTransactionById(id);
+    GetTransactionResponse result = apiInstance.getTransactionById(id);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getTransactionById");
@@ -1297,7 +1245,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20025**](InlineResponse20025.md)
+[**GetTransactionResponse**](GetTransactionResponse.md)
 
 ### Authorization
 
@@ -1310,7 +1258,7 @@ No authorization required
 
 <a name="getTransactions"></a>
 # **getTransactions**
-> InlineResponse2008 getTransactions(pools, userIds, txKinds, start, end, page, limit)
+> ListTransactionsResponse getTransactions(pools, userIds, txKinds, start, end, page, limit)
 
 Get a filtered, paginated list of transactions
 
@@ -1324,13 +1272,13 @@ Get a filtered, paginated list of transactions
 DefaultApi apiInstance = new DefaultApi();
 List<String> pools = Arrays.asList("pools_example"); // List<String> | 
 List<UUID> userIds = Arrays.asList(new UUID()); // List<UUID> | 
-List<String> txKinds = Arrays.asList("txKinds_example"); // List<String> | 
+List<TransactionKind> txKinds = Arrays.asList(new TransactionKind()); // List<TransactionKind> | 
 OffsetDateTime start = new OffsetDateTime(); // OffsetDateTime | 
 OffsetDateTime end = new OffsetDateTime(); // OffsetDateTime | 
 Integer page = 1; // Integer | 
 Integer limit = 100; // Integer | 
 try {
-    InlineResponse2008 result = apiInstance.getTransactions(pools, userIds, txKinds, start, end, page, limit);
+    ListTransactionsResponse result = apiInstance.getTransactions(pools, userIds, txKinds, start, end, page, limit);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getTransactions");
@@ -1344,7 +1292,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pools** | [**List&lt;String&gt;**](String.md)|  | [optional]
  **userIds** | [**List&lt;UUID&gt;**](UUID.md)|  | [optional]
- **txKinds** | [**List&lt;String&gt;**](String.md)|  | [optional] [enum: ACCRUE_INTEREST, ADD_LIQUIDITY, BOND_MATURE, CLAIM_INTEREST, CREDIT, DEBIT, EXTERNAL_DEPOSIT, EXTERNAL_WITHDRAW, FILL, LENDING_INTEREST_ACCRUAL, LIQUIDATE, MATCH_ORDER, PAY_INTEREST, SUBTRACT_LIQUIDITY, REPAY, SUPPLY, WITHDRAW, ISOLATE_COLLATERAL, ISOLATE_POSITION, UNITE_POSITION]
+ **txKinds** | [**List&lt;TransactionKind&gt;**](TransactionKind.md)|  | [optional]
  **start** | **OffsetDateTime**|  | [optional]
  **end** | **OffsetDateTime**|  | [optional]
  **page** | **Integer**|  | [optional] [default to 1]
@@ -1352,7 +1300,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2008**](InlineResponse2008.md)
+[**ListTransactionsResponse**](ListTransactionsResponse.md)
 
 ### Authorization
 
@@ -1365,9 +1313,9 @@ No authorization required
 
 <a name="getUserById"></a>
 # **getUserById**
-> InlineResponse2003 getUserById(userId)
+> GetUserResponse getUserById(userId)
 
-Get user by ID
+Get user by ID (admin only)
 
 ### Example
 ```java
@@ -1379,7 +1327,7 @@ Get user by ID
 DefaultApi apiInstance = new DefaultApi();
 UUID userId = new UUID(); // UUID | 
 try {
-    InlineResponse2003 result = apiInstance.getUserById(userId);
+    GetUserResponse result = apiInstance.getUserById(userId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getUserById");
@@ -1395,7 +1343,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**GetUserResponse**](GetUserResponse.md)
 
 ### Authorization
 
@@ -1408,7 +1356,7 @@ No authorization required
 
 <a name="getUserLedgerStream"></a>
 # **getUserLedgerStream**
-> InlineResponse2007 getUserLedgerStream(userId, since)
+> ListPositionsResponse getUserLedgerStream(userId, since)
 
 Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates
 
@@ -1423,7 +1371,7 @@ DefaultApi apiInstance = new DefaultApi();
 UUID userId = new UUID(); // UUID | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    InlineResponse2007 result = apiInstance.getUserLedgerStream(userId, since);
+    ListPositionsResponse result = apiInstance.getUserLedgerStream(userId, since);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getUserLedgerStream");
@@ -1440,7 +1388,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2007**](InlineResponse2007.md)
+[**ListPositionsResponse**](ListPositionsResponse.md)
 
 ### Authorization
 
@@ -1453,7 +1401,7 @@ No authorization required
 
 <a name="getUserOrdersStream"></a>
 # **getUserOrdersStream**
-> InlineResponse2006 getUserOrdersStream(userId, orderbookId, since)
+> ListOrdersResponse getUserOrdersStream(userId, orderBookId, since)
 
 Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
 
@@ -1466,10 +1414,10 @@ Get a snapshot of user&#x27;s order updates for the given order book since a spe
 
 DefaultApi apiInstance = new DefaultApi();
 UUID userId = new UUID(); // UUID | 
-UUID orderbookId = new UUID(); // UUID | 
+UUID orderBookId = new UUID(); // UUID | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    InlineResponse2006 result = apiInstance.getUserOrdersStream(userId, orderbookId, since);
+    ListOrdersResponse result = apiInstance.getUserOrdersStream(userId, orderBookId, since);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getUserOrdersStream");
@@ -1482,12 +1430,12 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userId** | [**UUID**](.md)|  |
- **orderbookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**UUID**](.md)|  |
  **since** | **OffsetDateTime**|  | [optional]
 
 ### Return type
 
-[**InlineResponse2006**](InlineResponse2006.md)
+[**ListOrdersResponse**](ListOrdersResponse.md)
 
 ### Authorization
 
@@ -1500,9 +1448,9 @@ No authorization required
 
 <a name="getUserOrdersStreamAll"></a>
 # **getUserOrdersStreamAll**
-> InlineResponse2006 getUserOrdersStreamAll(userId, since, orderbookIds)
+> ListOrdersResponse getUserOrdersStreamAll(userId, orderBookId, since)
 
-Get a snapshot of user&#x27;s order updates since a specific time, and opens a stream for further updates
+Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
 
 ### Example
 ```java
@@ -1513,10 +1461,10 @@ Get a snapshot of user&#x27;s order updates since a specific time, and opens a s
 
 DefaultApi apiInstance = new DefaultApi();
 UUID userId = new UUID(); // UUID | 
+UUID orderBookId = new UUID(); // UUID | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
-List<UUID> orderbookIds = Arrays.asList(new UUID()); // List<UUID> | 
 try {
-    InlineResponse2006 result = apiInstance.getUserOrdersStreamAll(userId, since, orderbookIds);
+    ListOrdersResponse result = apiInstance.getUserOrdersStreamAll(userId, orderBookId, since);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getUserOrdersStreamAll");
@@ -1529,12 +1477,12 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userId** | [**UUID**](.md)|  |
+ **orderBookId** | [**UUID**](.md)|  |
  **since** | **OffsetDateTime**|  | [optional]
- **orderbookIds** | [**List&lt;UUID&gt;**](UUID.md)|  | [optional]
 
 ### Return type
 
-[**InlineResponse2006**](InlineResponse2006.md)
+[**ListOrdersResponse**](ListOrdersResponse.md)
 
 ### Authorization
 
@@ -1547,7 +1495,7 @@ No authorization required
 
 <a name="getUserSelf"></a>
 # **getUserSelf**
-> InlineResponse2003 getUserSelf()
+> GetUserResponse getUserSelf()
 
 Get user details for the authenticated user
 
@@ -1560,7 +1508,7 @@ Get user details for the authenticated user
 
 DefaultApi apiInstance = new DefaultApi();
 try {
-    InlineResponse2003 result = apiInstance.getUserSelf();
+    GetUserResponse result = apiInstance.getUserSelf();
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getUserSelf");
@@ -1573,7 +1521,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**GetUserResponse**](GetUserResponse.md)
 
 ### Authorization
 
@@ -1586,7 +1534,7 @@ No authorization required
 
 <a name="getUserTransactionsStream"></a>
 # **getUserTransactionsStream**
-> InlineResponse2008 getUserTransactionsStream(userId, since)
+> ListTransactionsResponse getUserTransactionsStream(userId, since)
 
 Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
 
@@ -1601,7 +1549,7 @@ DefaultApi apiInstance = new DefaultApi();
 UUID userId = new UUID(); // UUID | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    InlineResponse2008 result = apiInstance.getUserTransactionsStream(userId, since);
+    ListTransactionsResponse result = apiInstance.getUserTransactionsStream(userId, since);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getUserTransactionsStream");
@@ -1618,7 +1566,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2008**](InlineResponse2008.md)
+[**ListTransactionsResponse**](ListTransactionsResponse.md)
 
 ### Authorization
 
@@ -1631,7 +1579,7 @@ No authorization required
 
 <a name="ledgerDeposit"></a>
 # **ledgerDeposit**
-> InlineResponse201 ledgerDeposit(body)
+> FundUserResponse ledgerDeposit(body)
 
 Deposit assets into your account from the outside world
 
@@ -1647,7 +1595,7 @@ TODO: finish this when implementation has been completed
 DefaultApi apiInstance = new DefaultApi();
 FundUserRequest body = new FundUserRequest(); // FundUserRequest | 
 try {
-    InlineResponse201 result = apiInstance.ledgerDeposit(body);
+    FundUserResponse result = apiInstance.ledgerDeposit(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#ledgerDeposit");
@@ -1663,7 +1611,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse201**](InlineResponse201.md)
+[**FundUserResponse**](FundUserResponse.md)
 
 ### Authorization
 
@@ -1676,7 +1624,7 @@ No authorization required
 
 <a name="ledgerWithdraw"></a>
 # **ledgerWithdraw**
-> InlineResponse201 ledgerWithdraw(body)
+> FundUserResponse ledgerWithdraw(body)
 
 Withdraw assets from your account to the outside world
 
@@ -1692,7 +1640,7 @@ TODO: Finish this when implementation has been completed
 DefaultApi apiInstance = new DefaultApi();
 FundUserRequest body = new FundUserRequest(); // FundUserRequest | 
 try {
-    InlineResponse201 result = apiInstance.ledgerWithdraw(body);
+    FundUserResponse result = apiInstance.ledgerWithdraw(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#ledgerWithdraw");
@@ -1708,7 +1656,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse201**](InlineResponse201.md)
+[**FundUserResponse**](FundUserResponse.md)
 
 ### Authorization
 
@@ -1721,7 +1669,7 @@ No authorization required
 
 <a name="leverageBorrow"></a>
 # **leverageBorrow**
-> InlineResponse2015 leverageBorrow(body)
+> InlineResponse201 leverageBorrow(body)
 
 Directly borrow assets
 
@@ -1737,7 +1685,7 @@ TODO: Finish this when implementation has been completed
 DefaultApi apiInstance = new DefaultApi();
 Object body = null; // Object | 
 try {
-    InlineResponse2015 result = apiInstance.leverageBorrow(body);
+    InlineResponse201 result = apiInstance.leverageBorrow(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#leverageBorrow");
@@ -1753,7 +1701,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2015**](InlineResponse2015.md)
+[**InlineResponse201**](InlineResponse201.md)
 
 ### Authorization
 
@@ -1766,7 +1714,7 @@ No authorization required
 
 <a name="leverageCollateralize"></a>
 # **leverageCollateralize**
-> InlineResponse2011 leverageCollateralize(body)
+> CollateralizeResponse leverageCollateralize(body)
 
 Move supplied and available to supplied_collateral and collateral, for a specified position
 
@@ -1780,7 +1728,7 @@ Move supplied and available to supplied_collateral and collateral, for a specifi
 DefaultApi apiInstance = new DefaultApi();
 CollateralizeRequest body = new CollateralizeRequest(); // CollateralizeRequest | 
 try {
-    InlineResponse2011 result = apiInstance.leverageCollateralize(body);
+    CollateralizeResponse result = apiInstance.leverageCollateralize(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#leverageCollateralize");
@@ -1796,7 +1744,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2011**](InlineResponse2011.md)
+[**CollateralizeResponse**](CollateralizeResponse.md)
 
 ### Authorization
 
@@ -1809,7 +1757,7 @@ No authorization required
 
 <a name="leverageDeCollateralize"></a>
 # **leverageDeCollateralize**
-> InlineResponse2012 leverageDeCollateralize(body)
+> DeCollateralizeResponse leverageDeCollateralize(body)
 
 Move collateral and supplied_collateral to available and supplied, for a specified position.
 
@@ -1823,7 +1771,7 @@ Move collateral and supplied_collateral to available and supplied, for a specifi
 DefaultApi apiInstance = new DefaultApi();
 DeCollateralizeRequest body = new DeCollateralizeRequest(); // DeCollateralizeRequest | 
 try {
-    InlineResponse2012 result = apiInstance.leverageDeCollateralize(body);
+    DeCollateralizeResponse result = apiInstance.leverageDeCollateralize(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#leverageDeCollateralize");
@@ -1839,7 +1787,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2012**](InlineResponse2012.md)
+[**DeCollateralizeResponse**](DeCollateralizeResponse.md)
 
 ### Authorization
 
@@ -1852,7 +1800,7 @@ No authorization required
 
 <a name="leverageIsolateCollateral"></a>
 # **leverageIsolateCollateral**
-> InlineResponse2016 leverageIsolateCollateral(body)
+> IsolateCollateralResponse leverageIsolateCollateral(body)
 
 Create an isolated position by transferring collateral to the position from the user&#x27;s global collateral
 
@@ -1866,7 +1814,7 @@ Create an isolated position by transferring collateral to the position from the 
 DefaultApi apiInstance = new DefaultApi();
 IsolateCollateralRequest body = new IsolateCollateralRequest(); // IsolateCollateralRequest | 
 try {
-    InlineResponse2016 result = apiInstance.leverageIsolateCollateral(body);
+    IsolateCollateralResponse result = apiInstance.leverageIsolateCollateral(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#leverageIsolateCollateral");
@@ -1882,7 +1830,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2016**](InlineResponse2016.md)
+[**IsolateCollateralResponse**](IsolateCollateralResponse.md)
 
 ### Authorization
 
@@ -1895,7 +1843,7 @@ No authorization required
 
 <a name="leverageIsolatePosition"></a>
 # **leverageIsolatePosition**
-> InlineResponse2017 leverageIsolatePosition(body)
+> IsolatePositionResponse leverageIsolatePosition(body)
 
 Create an isolated position using all collateral, supplied_collateral, and borrows from the user&#x27;s global position
 
@@ -1909,7 +1857,7 @@ Create an isolated position using all collateral, supplied_collateral, and borro
 DefaultApi apiInstance = new DefaultApi();
 IsolatePositionRequest body = new IsolatePositionRequest(); // IsolatePositionRequest | 
 try {
-    InlineResponse2017 result = apiInstance.leverageIsolatePosition(body);
+    IsolatePositionResponse result = apiInstance.leverageIsolatePosition(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#leverageIsolatePosition");
@@ -1925,7 +1873,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2017**](InlineResponse2017.md)
+[**IsolatePositionResponse**](IsolatePositionResponse.md)
 
 ### Authorization
 
@@ -1938,7 +1886,7 @@ No authorization required
 
 <a name="leverageRepay"></a>
 # **leverageRepay**
-> InlineResponse2015 leverageRepay(body)
+> InlineResponse201 leverageRepay(body)
 
 Repay borrowed assets
 
@@ -1954,7 +1902,7 @@ TODO: Finish this when implementation has been completed
 DefaultApi apiInstance = new DefaultApi();
 Object body = null; // Object | 
 try {
-    InlineResponse2015 result = apiInstance.leverageRepay(body);
+    InlineResponse201 result = apiInstance.leverageRepay(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#leverageRepay");
@@ -1970,7 +1918,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2015**](InlineResponse2015.md)
+[**InlineResponse201**](InlineResponse201.md)
 
 ### Authorization
 
@@ -1983,7 +1931,7 @@ No authorization required
 
 <a name="leverageSupply"></a>
 # **leverageSupply**
-> InlineResponse2013 leverageSupply(body)
+> SupplyResponse leverageSupply(body)
 
 Supply leverage for a specific asset
 
@@ -1997,7 +1945,7 @@ Supply leverage for a specific asset
 DefaultApi apiInstance = new DefaultApi();
 SupplyRequest body = new SupplyRequest(); // SupplyRequest | 
 try {
-    InlineResponse2013 result = apiInstance.leverageSupply(body);
+    SupplyResponse result = apiInstance.leverageSupply(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#leverageSupply");
@@ -2013,7 +1961,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2013**](InlineResponse2013.md)
+[**SupplyResponse**](SupplyResponse.md)
 
 ### Authorization
 
@@ -2026,7 +1974,7 @@ No authorization required
 
 <a name="leverageUnite"></a>
 # **leverageUnite**
-> InlineResponse20024 leverageUnite(body)
+> UnitePositionResponse leverageUnite(body)
 
 Combines all isolated positions into a single global position
 
@@ -2042,7 +1990,7 @@ TODO: Finish this when implementation has been completed
 DefaultApi apiInstance = new DefaultApi();
 UnitePositionRequest body = new UnitePositionRequest(); // UnitePositionRequest | 
 try {
-    InlineResponse20024 result = apiInstance.leverageUnite(body);
+    UnitePositionResponse result = apiInstance.leverageUnite(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#leverageUnite");
@@ -2058,7 +2006,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20024**](InlineResponse20024.md)
+[**UnitePositionResponse**](UnitePositionResponse.md)
 
 ### Authorization
 
@@ -2071,7 +2019,7 @@ No authorization required
 
 <a name="leverageWithdraw"></a>
 # **leverageWithdraw**
-> InlineResponse2014 leverageWithdraw(body)
+> WithdrawResponse leverageWithdraw(body)
 
 Withdraw leverage for a specific asset
 
@@ -2085,7 +2033,7 @@ Withdraw leverage for a specific asset
 DefaultApi apiInstance = new DefaultApi();
 WithdrawRequest body = new WithdrawRequest(); // WithdrawRequest | 
 try {
-    InlineResponse2014 result = apiInstance.leverageWithdraw(body);
+    WithdrawResponse result = apiInstance.leverageWithdraw(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#leverageWithdraw");
@@ -2101,7 +2049,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2014**](InlineResponse2014.md)
+[**WithdrawResponse**](WithdrawResponse.md)
 
 ### Authorization
 
@@ -2114,7 +2062,7 @@ No authorization required
 
 <a name="liquidityAdd"></a>
 # **liquidityAdd**
-> InlineResponse2018 liquidityAdd(body, poolId)
+> LiquidityResponse liquidityAdd(body, poolId)
 
 Add liquidity to a pool
 
@@ -2129,7 +2077,7 @@ DefaultApi apiInstance = new DefaultApi();
 LiquidityRequest body = new LiquidityRequest(); // LiquidityRequest | 
 UUID poolId = new UUID(); // UUID | 
 try {
-    InlineResponse2018 result = apiInstance.liquidityAdd(body, poolId);
+    LiquidityResponse result = apiInstance.liquidityAdd(body, poolId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#liquidityAdd");
@@ -2146,7 +2094,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2018**](InlineResponse2018.md)
+[**LiquidityResponse**](LiquidityResponse.md)
 
 ### Authorization
 
@@ -2159,7 +2107,7 @@ No authorization required
 
 <a name="liquiditySubtract"></a>
 # **liquiditySubtract**
-> InlineResponse2018 liquiditySubtract(body, poolId)
+> LiquidityResponse liquiditySubtract(body, poolId)
 
 Subtract liquidity from a pool
 
@@ -2174,7 +2122,7 @@ DefaultApi apiInstance = new DefaultApi();
 LiquidityRequest body = new LiquidityRequest(); // LiquidityRequest | 
 UUID poolId = new UUID(); // UUID | 
 try {
-    InlineResponse2018 result = apiInstance.liquiditySubtract(body, poolId);
+    LiquidityResponse result = apiInstance.liquiditySubtract(body, poolId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#liquiditySubtract");
@@ -2191,7 +2139,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2018**](InlineResponse2018.md)
+[**LiquidityResponse**](LiquidityResponse.md)
 
 ### Authorization
 
@@ -2204,7 +2152,7 @@ No authorization required
 
 <a name="listAssets"></a>
 # **listAssets**
-> InlineResponse200 listAssets(createdAfter, createdBefore, assetKind, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, page, limit)
+> ListAssetsResponse listAssets(createdAfter, createdBefore, assetKind, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, page, limit)
 
 List assets
 
@@ -2218,7 +2166,7 @@ List assets
 DefaultApi apiInstance = new DefaultApi();
 OffsetDateTime createdAfter = new OffsetDateTime(); // OffsetDateTime | 
 OffsetDateTime createdBefore = new OffsetDateTime(); // OffsetDateTime | 
-String assetKind = "assetKind_example"; // String | Asset kind (BOND, CURRENCY, INTEREST, POOL_SHARE)
+AssetKind assetKind = new AssetKind(); // AssetKind | Asset kind (BOND, CURRENCY, INTEREST, POOL_SHARE)
 Boolean canAddLiquidity = true; // Boolean | 
 Boolean canDirectBorrow = true; // Boolean | 
 Boolean canOnboard = true; // Boolean | 
@@ -2227,7 +2175,7 @@ Boolean canVirtualBorrow = true; // Boolean |
 Integer page = 1; // Integer | 
 Integer limit = 100; // Integer | 
 try {
-    InlineResponse200 result = apiInstance.listAssets(createdAfter, createdBefore, assetKind, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, page, limit);
+    ListAssetsResponse result = apiInstance.listAssets(createdAfter, createdBefore, assetKind, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, page, limit);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#listAssets");
@@ -2241,7 +2189,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **createdAfter** | **OffsetDateTime**|  | [optional]
  **createdBefore** | **OffsetDateTime**|  | [optional]
- **assetKind** | **String**| Asset kind (BOND, CURRENCY, INTEREST, POOL_SHARE) | [optional]
+ **assetKind** | [**AssetKind**](.md)| Asset kind (BOND, CURRENCY, INTEREST, POOL_SHARE) | [optional]
  **canAddLiquidity** | **Boolean**|  | [optional]
  **canDirectBorrow** | **Boolean**|  | [optional]
  **canOnboard** | **Boolean**|  | [optional]
@@ -2252,7 +2200,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**ListAssetsResponse**](ListAssetsResponse.md)
 
 ### Authorization
 
@@ -2265,7 +2213,7 @@ No authorization required
 
 <a name="listOrderBooks"></a>
 # **listOrderBooks**
-> InlineResponse2009 listOrderBooks(status, baseAssetId, quoteAssetId, page, limit)
+> ListOrderBooksResponse listOrderBooks(status, baseAssetId, quoteAssetId, page, limit)
 
 List order books
 
@@ -2277,13 +2225,13 @@ List order books
 
 
 DefaultApi apiInstance = new DefaultApi();
-String status = "status_example"; // String | 
+OrderBookStatus status = new OrderBookStatus(); // OrderBookStatus | 
 UUID baseAssetId = new UUID(); // UUID | 
 UUID quoteAssetId = new UUID(); // UUID | 
 Integer page = 1; // Integer | 
 Integer limit = 100; // Integer | 
 try {
-    InlineResponse2009 result = apiInstance.listOrderBooks(status, baseAssetId, quoteAssetId, page, limit);
+    ListOrderBooksResponse result = apiInstance.listOrderBooks(status, baseAssetId, quoteAssetId, page, limit);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#listOrderBooks");
@@ -2295,7 +2243,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **status** | **String**|  | [optional] [enum: OPEN, CLOSED, SUSPENDED]
+ **status** | [**OrderBookStatus**](.md)|  | [optional]
  **baseAssetId** | [**UUID**](.md)|  | [optional]
  **quoteAssetId** | [**UUID**](.md)|  | [optional]
  **page** | **Integer**|  | [optional] [default to 1]
@@ -2303,7 +2251,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2009**](InlineResponse2009.md)
+[**ListOrderBooksResponse**](ListOrderBooksResponse.md)
 
 ### Authorization
 
@@ -2316,7 +2264,7 @@ No authorization required
 
 <a name="listOrders"></a>
 # **listOrders**
-> InlineResponse2006 listOrders(orderbookId, kind, status, side, from, to, page, limit)
+> ListOrdersResponse listOrders(orderBookId, kind, status, side, from, to, page, limit)
 
 List all orders
 
@@ -2328,16 +2276,16 @@ List all orders
 
 
 DefaultApi apiInstance = new DefaultApi();
-List<UUID> orderbookId = Arrays.asList(new UUID()); // List<UUID> | 
-String kind = "kind_example"; // String | 
-String status = "status_example"; // String | 
-String side = "side_example"; // String | 
+List<UUID> orderBookId = Arrays.asList(new UUID()); // List<UUID> | 
+OrderKind kind = new OrderKind(); // OrderKind | 
+OrderStatus status = new OrderStatus(); // OrderStatus | 
+Side side = new Side(); // Side | 
 OffsetDateTime from = new OffsetDateTime(); // OffsetDateTime | 
 OffsetDateTime to = new OffsetDateTime(); // OffsetDateTime | 
 Integer page = 1; // Integer | 
 Integer limit = 100; // Integer | 
 try {
-    InlineResponse2006 result = apiInstance.listOrders(orderbookId, kind, status, side, from, to, page, limit);
+    ListOrdersResponse result = apiInstance.listOrders(orderBookId, kind, status, side, from, to, page, limit);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#listOrders");
@@ -2349,10 +2297,10 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderbookId** | [**List&lt;UUID&gt;**](UUID.md)|  | [optional]
- **kind** | **String**|  | [optional] [enum: LIMIT, MARKET]
- **status** | **String**|  | [optional] [enum: OPEN, CLOSED, CANCELED]
- **side** | **String**|  | [optional] [enum: BUY, SELL]
+ **orderBookId** | [**List&lt;UUID&gt;**](UUID.md)|  | [optional]
+ **kind** | [**OrderKind**](.md)|  | [optional]
+ **status** | [**OrderStatus**](.md)|  | [optional]
+ **side** | [**Side**](.md)|  | [optional]
  **from** | **OffsetDateTime**|  | [optional]
  **to** | **OffsetDateTime**|  | [optional]
  **page** | **Integer**|  | [optional] [default to 1]
@@ -2360,7 +2308,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2006**](InlineResponse2006.md)
+[**ListOrdersResponse**](ListOrdersResponse.md)
 
 ### Authorization
 
@@ -2373,7 +2321,7 @@ No authorization required
 
 <a name="streamAssetPrices"></a>
 # **streamAssetPrices**
-> InlineResponse20028 streamAssetPrices(since)
+> InlineResponse200 streamAssetPrices(since)
 
 Get a snapshot of asset prices from a specific date and open a stream for real-time updates
 
@@ -2387,7 +2335,7 @@ Get a snapshot of asset prices from a specific date and open a stream for real-t
 DefaultApi apiInstance = new DefaultApi();
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    InlineResponse20028 result = apiInstance.streamAssetPrices(since);
+    InlineResponse200 result = apiInstance.streamAssetPrices(since);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#streamAssetPrices");
@@ -2403,7 +2351,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20028**](InlineResponse20028.md)
+[**InlineResponse200**](InlineResponse200.md)
 
 ### Authorization
 
@@ -2416,7 +2364,7 @@ No authorization required
 
 <a name="streamCandleData"></a>
 # **streamCandleData**
-> InlineResponse20017 streamCandleData(orderbook, since, resolution)
+> ListCandlesResponse streamCandleData(orderbook, since, resolution)
 
 Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
 
@@ -2430,9 +2378,9 @@ Get a snapshot of candlestick data from date provided, and open a stream for rea
 DefaultApi apiInstance = new DefaultApi();
 String orderbook = "orderbook_example"; // String | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
-String resolution = "resolution_example"; // String | 
+CandleResolution resolution = new CandleResolution(); // CandleResolution | 
 try {
-    InlineResponse20017 result = apiInstance.streamCandleData(orderbook, since, resolution);
+    ListCandlesResponse result = apiInstance.streamCandleData(orderbook, since, resolution);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#streamCandleData");
@@ -2446,11 +2394,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **orderbook** | **String**|  |
  **since** | **OffsetDateTime**|  | [optional]
- **resolution** | **String**|  | [optional] [enum: 1m, 5m, 15m, 1h, 4h, 1d]
+ **resolution** | [**CandleResolution**](.md)|  | [optional]
 
 ### Return type
 
-[**InlineResponse20017**](InlineResponse20017.md)
+[**ListCandlesResponse**](ListCandlesResponse.md)
 
 ### Authorization
 
@@ -2463,7 +2411,7 @@ No authorization required
 
 <a name="streamOrderBookBalances"></a>
 # **streamOrderBookBalances**
-> InlineResponse20014 streamOrderBookBalances(orderbookId, since)
+> OrderBookBalanceResponse streamOrderBookBalances(orderBookId, since)
 
 Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
 
@@ -2475,10 +2423,10 @@ Get a snapshot of base and quote balances for an order book and open a stream fo
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderbookId = new UUID(); // UUID | 
+UUID orderBookId = new UUID(); // UUID | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    InlineResponse20014 result = apiInstance.streamOrderBookBalances(orderbookId, since);
+    OrderBookBalanceResponse result = apiInstance.streamOrderBookBalances(orderBookId, since);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#streamOrderBookBalances");
@@ -2490,12 +2438,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderbookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**UUID**](.md)|  |
  **since** | **OffsetDateTime**|  | [optional]
 
 ### Return type
 
-[**InlineResponse20014**](InlineResponse20014.md)
+[**OrderBookBalanceResponse**](OrderBookBalanceResponse.md)
 
 ### Authorization
 
@@ -2508,7 +2456,7 @@ No authorization required
 
 <a name="streamOrderbookOpenOrders"></a>
 # **streamOrderbookOpenOrders**
-> InlineResponse2006 streamOrderbookOpenOrders(orderbookId, since)
+> ListOrdersResponse streamOrderbookOpenOrders(orderBookId, since)
 
 Get a snapshot of open orders in an order book and open a stream for real-time updates
 
@@ -2520,10 +2468,10 @@ Get a snapshot of open orders in an order book and open a stream for real-time u
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderbookId = new UUID(); // UUID | 
+UUID orderBookId = new UUID(); // UUID | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    InlineResponse2006 result = apiInstance.streamOrderbookOpenOrders(orderbookId, since);
+    ListOrdersResponse result = apiInstance.streamOrderbookOpenOrders(orderBookId, since);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#streamOrderbookOpenOrders");
@@ -2535,12 +2483,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderbookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**UUID**](.md)|  |
  **since** | **OffsetDateTime**|  | [optional]
 
 ### Return type
 
-[**InlineResponse2006**](InlineResponse2006.md)
+[**ListOrdersResponse**](ListOrdersResponse.md)
 
 ### Authorization
 
@@ -2553,9 +2501,9 @@ No authorization required
 
 <a name="streamTrades"></a>
 # **streamTrades**
-> TradeResponse streamTrades(orderbookId, since)
+> ListTradeResponse streamTrades(orderbookId, since)
 
-Get a snapshot of trades from a specific date and open a stream for real-time updates
+Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
 
 ### Example
 ```java
@@ -2568,7 +2516,7 @@ DefaultApi apiInstance = new DefaultApi();
 UUID orderbookId = new UUID(); // UUID | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    TradeResponse result = apiInstance.streamTrades(orderbookId, since);
+    ListTradeResponse result = apiInstance.streamTrades(orderbookId, since);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#streamTrades");
@@ -2585,7 +2533,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TradeResponse**](TradeResponse.md)
+[**ListTradeResponse**](ListTradeResponse.md)
 
 ### Authorization
 
@@ -2598,7 +2546,7 @@ No authorization required
 
 <a name="updateUserConfig"></a>
 # **updateUserConfig**
-> InlineResponse2005 updateUserConfig(body, userId)
+> UserUpdatedResponse updateUserConfig(body, userId)
 
 Update user configuration by ID
 
@@ -2613,7 +2561,7 @@ DefaultApi apiInstance = new DefaultApi();
 UpdateUserConfigRequest body = new UpdateUserConfigRequest(); // UpdateUserConfigRequest | 
 UUID userId = new UUID(); // UUID | 
 try {
-    InlineResponse2005 result = apiInstance.updateUserConfig(body, userId);
+    UserUpdatedResponse result = apiInstance.updateUserConfig(body, userId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#updateUserConfig");
@@ -2630,7 +2578,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2005**](InlineResponse2005.md)
+[**UserUpdatedResponse**](UserUpdatedResponse.md)
 
 ### Authorization
 
@@ -2643,7 +2591,7 @@ No authorization required
 
 <a name="updateUserConfigSelf"></a>
 # **updateUserConfigSelf**
-> InlineResponse2005 updateUserConfigSelf(body)
+> UserUpdatedResponse updateUserConfigSelf(body)
 
 Update user configuration for the authenticated user
 
@@ -2657,7 +2605,7 @@ Update user configuration for the authenticated user
 DefaultApi apiInstance = new DefaultApi();
 UpdateUserConfigRequest body = new UpdateUserConfigRequest(); // UpdateUserConfigRequest | 
 try {
-    InlineResponse2005 result = apiInstance.updateUserConfigSelf(body);
+    UserUpdatedResponse result = apiInstance.updateUserConfigSelf(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#updateUserConfigSelf");
@@ -2673,7 +2621,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2005**](InlineResponse2005.md)
+[**UserUpdatedResponse**](UserUpdatedResponse.md)
 
 ### Authorization
 
@@ -2686,7 +2634,7 @@ No authorization required
 
 <a name="verifyUser"></a>
 # **verifyUser**
-> InlineResponse2005 verifyUser(userId)
+> UserUpdatedResponse verifyUser(userId)
 
 Verify a user by ID
 
@@ -2700,7 +2648,7 @@ Verify a user by ID
 DefaultApi apiInstance = new DefaultApi();
 UUID userId = new UUID(); // UUID | 
 try {
-    InlineResponse2005 result = apiInstance.verifyUser(userId);
+    UserUpdatedResponse result = apiInstance.verifyUser(userId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#verifyUser");
@@ -2716,7 +2664,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2005**](InlineResponse2005.md)
+[**UserUpdatedResponse**](UserUpdatedResponse.md)
 
 ### Authorization
 

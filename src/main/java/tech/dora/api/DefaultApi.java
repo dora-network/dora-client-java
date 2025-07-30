@@ -26,64 +26,71 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import tech.dora.model.AssetKind;
+import tech.dora.model.CancelOrdersResponse;
+import tech.dora.model.CandleResolution;
 import tech.dora.model.CollateralizeRequest;
+import tech.dora.model.CollateralizeResponse;
 import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.DeCollateralizeRequest;
+import tech.dora.model.DeCollateralizeResponse;
 import tech.dora.model.FundUserRequest;
+import tech.dora.model.FundUserResponse;
+import tech.dora.model.GetAssetByIDResponse;
+import tech.dora.model.GetAssetPriceResponse;
+import tech.dora.model.GetOrderBookResponse;
+import tech.dora.model.GetOrderBookSummaryResponse;
+import tech.dora.model.GetOrderResponse;
+import tech.dora.model.GetPoolPriceResponse;
+import tech.dora.model.GetTopOfBookResponse;
+import tech.dora.model.GetTransactionResponse;
+import tech.dora.model.GetUserResponse;
 import tech.dora.model.InlineResponse200;
-import tech.dora.model.InlineResponse2001;
-import tech.dora.model.InlineResponse20010;
-import tech.dora.model.InlineResponse20011;
-import tech.dora.model.InlineResponse20012;
-import tech.dora.model.InlineResponse20013;
-import tech.dora.model.InlineResponse20014;
-import tech.dora.model.InlineResponse20015;
-import tech.dora.model.InlineResponse20016;
-import tech.dora.model.InlineResponse20017;
-import tech.dora.model.InlineResponse20018;
-import tech.dora.model.InlineResponse20019;
-import tech.dora.model.InlineResponse2002;
-import tech.dora.model.InlineResponse20020;
-import tech.dora.model.InlineResponse20021;
-import tech.dora.model.InlineResponse20022;
-import tech.dora.model.InlineResponse20023;
-import tech.dora.model.InlineResponse20024;
-import tech.dora.model.InlineResponse20025;
-import tech.dora.model.InlineResponse20026;
-import tech.dora.model.InlineResponse20027;
-import tech.dora.model.InlineResponse20028;
-import tech.dora.model.InlineResponse20029;
-import tech.dora.model.InlineResponse2003;
-import tech.dora.model.InlineResponse20030;
-import tech.dora.model.InlineResponse2004;
-import tech.dora.model.InlineResponse2005;
-import tech.dora.model.InlineResponse2006;
-import tech.dora.model.InlineResponse2007;
-import tech.dora.model.InlineResponse2008;
-import tech.dora.model.InlineResponse2009;
 import tech.dora.model.InlineResponse201;
-import tech.dora.model.InlineResponse2011;
-import tech.dora.model.InlineResponse2012;
-import tech.dora.model.InlineResponse2013;
-import tech.dora.model.InlineResponse2014;
-import tech.dora.model.InlineResponse2015;
-import tech.dora.model.InlineResponse2016;
-import tech.dora.model.InlineResponse2017;
-import tech.dora.model.InlineResponse2018;
-import tech.dora.model.InlineResponse204;
 import tech.dora.model.InlineResponse400;
 import tech.dora.model.IsolateCollateralRequest;
+import tech.dora.model.IsolateCollateralResponse;
 import tech.dora.model.IsolatePositionRequest;
+import tech.dora.model.IsolatePositionResponse;
+import tech.dora.model.LedgerModuleByAssetResponse;
+import tech.dora.model.LedgerModuleResponse;
 import tech.dora.model.LiquidityRequest;
+import tech.dora.model.LiquidityResponse;
+import tech.dora.model.ListAssetPriceResponse;
+import tech.dora.model.ListAssetsResponse;
+import tech.dora.model.ListCandlesResponse;
+import tech.dora.model.ListCouponPaymentsResponse;
+import tech.dora.model.ListOrderBookDepthResponse;
+import tech.dora.model.ListOrderBooksResponse;
+import tech.dora.model.ListOrdersResponse;
+import tech.dora.model.ListPositionsResponse;
+import tech.dora.model.ListTradeResponse;
+import tech.dora.model.ListTransactionsResponse;
 import org.threeten.bp.OffsetDateTime;
+import tech.dora.model.OrderBookBalanceResponse;
+import tech.dora.model.OrderBookStatus;
+import tech.dora.model.OrderCancelledResponse;
 import tech.dora.model.OrderId;
+import tech.dora.model.OrderKind;
+import tech.dora.model.OrderStatus;
 import tech.dora.model.ResponseEnvelope;
+import tech.dora.model.Side;
 import tech.dora.model.SupplyRequest;
+import tech.dora.model.SupplyResponse;
 import tech.dora.model.TradeResponse;
+import tech.dora.model.TransactionKind;
 import java.util.UUID;
 import tech.dora.model.UnitePositionRequest;
+import tech.dora.model.UnitePositionResponse;
 import tech.dora.model.UpdateUserConfigRequest;
+import tech.dora.model.UserBalanceResponse;
+import tech.dora.model.UserDeletedResponse;
+import tech.dora.model.UserInterestResponse;
+import tech.dora.model.UserPositionResponse;
+import tech.dora.model.UserUpdatedResponse;
+import tech.dora.model.UserValueResponse;
 import tech.dora.model.WithdrawRequest;
+import tech.dora.model.WithdrawResponse;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -181,23 +188,23 @@ public class DefaultApi {
     /**
      * Cancel all open orders
      * 
-     * @return InlineResponse20015
+     * @return CancelOrdersResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20015 cancelAllOpenOrders() throws ApiException {
-        ApiResponse<InlineResponse20015> resp = cancelAllOpenOrdersWithHttpInfo();
+    public CancelOrdersResponse cancelAllOpenOrders() throws ApiException {
+        ApiResponse<CancelOrdersResponse> resp = cancelAllOpenOrdersWithHttpInfo();
         return resp.getData();
     }
 
     /**
      * Cancel all open orders
      * 
-     * @return ApiResponse&lt;InlineResponse20015&gt;
+     * @return ApiResponse&lt;CancelOrdersResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20015> cancelAllOpenOrdersWithHttpInfo() throws ApiException {
+    public ApiResponse<CancelOrdersResponse> cancelAllOpenOrdersWithHttpInfo() throws ApiException {
         com.squareup.okhttp.Call call = cancelAllOpenOrdersValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20015>(){}.getType();
+        Type localVarReturnType = new TypeToken<CancelOrdersResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -208,7 +215,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call cancelAllOpenOrdersAsync(final ApiCallback<InlineResponse20015> callback) throws ApiException {
+    public com.squareup.okhttp.Call cancelAllOpenOrdersAsync(final ApiCallback<CancelOrdersResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -230,7 +237,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = cancelAllOpenOrdersValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20015>(){}.getType();
+        Type localVarReturnType = new TypeToken<CancelOrdersResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -307,11 +314,11 @@ public class DefaultApi {
      * Cancel an order by ID
      * 
      * @param orderId  (required)
-     * @return InlineResponse204
+     * @return OrderCancelledResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse204 cancelOrderById(UUID orderId) throws ApiException {
-        ApiResponse<InlineResponse204> resp = cancelOrderByIdWithHttpInfo(orderId);
+    public OrderCancelledResponse cancelOrderById(UUID orderId) throws ApiException {
+        ApiResponse<OrderCancelledResponse> resp = cancelOrderByIdWithHttpInfo(orderId);
         return resp.getData();
     }
 
@@ -319,12 +326,12 @@ public class DefaultApi {
      * Cancel an order by ID
      * 
      * @param orderId  (required)
-     * @return ApiResponse&lt;InlineResponse204&gt;
+     * @return ApiResponse&lt;OrderCancelledResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse204> cancelOrderByIdWithHttpInfo(UUID orderId) throws ApiException {
+    public ApiResponse<OrderCancelledResponse> cancelOrderByIdWithHttpInfo(UUID orderId) throws ApiException {
         com.squareup.okhttp.Call call = cancelOrderByIdValidateBeforeCall(orderId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse204>(){}.getType();
+        Type localVarReturnType = new TypeToken<OrderCancelledResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -336,7 +343,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call cancelOrderByIdAsync(UUID orderId, final ApiCallback<InlineResponse204> callback) throws ApiException {
+    public com.squareup.okhttp.Call cancelOrderByIdAsync(UUID orderId, final ApiCallback<OrderCancelledResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -358,7 +365,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = cancelOrderByIdValidateBeforeCall(orderId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse204>(){}.getType();
+        Type localVarReturnType = new TypeToken<OrderCancelledResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -562,11 +569,11 @@ public class DefaultApi {
      * Delete user by ID
      * 
      * @param userId  (required)
-     * @return InlineResponse2004
+     * @return UserDeletedResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2004 deleteUser(UUID userId) throws ApiException {
-        ApiResponse<InlineResponse2004> resp = deleteUserWithHttpInfo(userId);
+    public UserDeletedResponse deleteUser(UUID userId) throws ApiException {
+        ApiResponse<UserDeletedResponse> resp = deleteUserWithHttpInfo(userId);
         return resp.getData();
     }
 
@@ -574,12 +581,12 @@ public class DefaultApi {
      * Delete user by ID
      * 
      * @param userId  (required)
-     * @return ApiResponse&lt;InlineResponse2004&gt;
+     * @return ApiResponse&lt;UserDeletedResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2004> deleteUserWithHttpInfo(UUID userId) throws ApiException {
+    public ApiResponse<UserDeletedResponse> deleteUserWithHttpInfo(UUID userId) throws ApiException {
         com.squareup.okhttp.Call call = deleteUserValidateBeforeCall(userId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2004>(){}.getType();
+        Type localVarReturnType = new TypeToken<UserDeletedResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -591,7 +598,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call deleteUserAsync(UUID userId, final ApiCallback<InlineResponse2004> callback) throws ApiException {
+    public com.squareup.okhttp.Call deleteUserAsync(UUID userId, final ApiCallback<UserDeletedResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -613,7 +620,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = deleteUserValidateBeforeCall(userId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2004>(){}.getType();
+        Type localVarReturnType = new TypeToken<UserDeletedResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -683,23 +690,23 @@ public class DefaultApi {
     /**
      * Get the current price of all assets
      * 
-     * @return InlineResponse20028
+     * @return ListAssetPriceResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20028 getAllAssetPrices() throws ApiException {
-        ApiResponse<InlineResponse20028> resp = getAllAssetPricesWithHttpInfo();
+    public ListAssetPriceResponse getAllAssetPrices() throws ApiException {
+        ApiResponse<ListAssetPriceResponse> resp = getAllAssetPricesWithHttpInfo();
         return resp.getData();
     }
 
     /**
      * Get the current price of all assets
      * 
-     * @return ApiResponse&lt;InlineResponse20028&gt;
+     * @return ApiResponse&lt;ListAssetPriceResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20028> getAllAssetPricesWithHttpInfo() throws ApiException {
+    public ApiResponse<ListAssetPriceResponse> getAllAssetPricesWithHttpInfo() throws ApiException {
         com.squareup.okhttp.Call call = getAllAssetPricesValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20028>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListAssetPriceResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -710,7 +717,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getAllAssetPricesAsync(final ApiCallback<InlineResponse20028> callback) throws ApiException {
+    public com.squareup.okhttp.Call getAllAssetPricesAsync(final ApiCallback<ListAssetPriceResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -732,7 +739,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getAllAssetPricesValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20028>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListAssetPriceResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -809,11 +816,11 @@ public class DefaultApi {
      * Get asset by ID
      * 
      * @param id  (required)
-     * @return InlineResponse2001
+     * @return GetAssetByIDResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2001 getAssetById(UUID id) throws ApiException {
-        ApiResponse<InlineResponse2001> resp = getAssetByIdWithHttpInfo(id);
+    public GetAssetByIDResponse getAssetById(UUID id) throws ApiException {
+        ApiResponse<GetAssetByIDResponse> resp = getAssetByIdWithHttpInfo(id);
         return resp.getData();
     }
 
@@ -821,12 +828,12 @@ public class DefaultApi {
      * Get asset by ID
      * 
      * @param id  (required)
-     * @return ApiResponse&lt;InlineResponse2001&gt;
+     * @return ApiResponse&lt;GetAssetByIDResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2001> getAssetByIdWithHttpInfo(UUID id) throws ApiException {
+    public ApiResponse<GetAssetByIDResponse> getAssetByIdWithHttpInfo(UUID id) throws ApiException {
         com.squareup.okhttp.Call call = getAssetByIdValidateBeforeCall(id, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2001>(){}.getType();
+        Type localVarReturnType = new TypeToken<GetAssetByIDResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -838,7 +845,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getAssetByIdAsync(UUID id, final ApiCallback<InlineResponse2001> callback) throws ApiException {
+    public com.squareup.okhttp.Call getAssetByIdAsync(UUID id, final ApiCallback<GetAssetByIDResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -860,7 +867,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getAssetByIdValidateBeforeCall(id, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2001>(){}.getType();
+        Type localVarReturnType = new TypeToken<GetAssetByIDResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -937,11 +944,11 @@ public class DefaultApi {
      * Get the current price of an asset
      * 
      * @param assetId  (required)
-     * @return InlineResponse20029
+     * @return GetAssetPriceResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20029 getAssetPrice(UUID assetId) throws ApiException {
-        ApiResponse<InlineResponse20029> resp = getAssetPriceWithHttpInfo(assetId);
+    public GetAssetPriceResponse getAssetPrice(UUID assetId) throws ApiException {
+        ApiResponse<GetAssetPriceResponse> resp = getAssetPriceWithHttpInfo(assetId);
         return resp.getData();
     }
 
@@ -949,12 +956,12 @@ public class DefaultApi {
      * Get the current price of an asset
      * 
      * @param assetId  (required)
-     * @return ApiResponse&lt;InlineResponse20029&gt;
+     * @return ApiResponse&lt;GetAssetPriceResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20029> getAssetPriceWithHttpInfo(UUID assetId) throws ApiException {
+    public ApiResponse<GetAssetPriceResponse> getAssetPriceWithHttpInfo(UUID assetId) throws ApiException {
         com.squareup.okhttp.Call call = getAssetPriceValidateBeforeCall(assetId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20029>(){}.getType();
+        Type localVarReturnType = new TypeToken<GetAssetPriceResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -966,7 +973,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getAssetPriceAsync(UUID assetId, final ApiCallback<InlineResponse20029> callback) throws ApiException {
+    public com.squareup.okhttp.Call getAssetPriceAsync(UUID assetId, final ApiCallback<GetAssetPriceResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -988,7 +995,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getAssetPriceValidateBeforeCall(assetId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20029>(){}.getType();
+        Type localVarReturnType = new TypeToken<GetAssetPriceResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -1003,11 +1010,11 @@ public class DefaultApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getCandleDataCall(String orderbook, OffsetDateTime start, OffsetDateTime end, String resolution, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getCandleDataCall(String orderbook, OffsetDateTime start, OffsetDateTime end, CandleResolution resolution, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/charts/candle/{orderbook}"
+        String localVarPath = "/v1/charts/{orderbook}/candle"
             .replaceAll("\\{" + "orderbook" + "\\}", apiClient.escapeString(orderbook.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -1055,7 +1062,7 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getCandleDataValidateBeforeCall(String orderbook, OffsetDateTime start, OffsetDateTime end, String resolution, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getCandleDataValidateBeforeCall(String orderbook, OffsetDateTime start, OffsetDateTime end, CandleResolution resolution, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'orderbook' is set
         if (orderbook == null) {
             throw new ApiException("Missing the required parameter 'orderbook' when calling getCandleData(Async)");
@@ -1077,11 +1084,11 @@ public class DefaultApi {
      * @param start  (optional)
      * @param end  (optional)
      * @param resolution  (optional)
-     * @return InlineResponse20017
+     * @return ListCandlesResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20017 getCandleData(String orderbook, OffsetDateTime start, OffsetDateTime end, String resolution) throws ApiException {
-        ApiResponse<InlineResponse20017> resp = getCandleDataWithHttpInfo(orderbook, start, end, resolution);
+    public ListCandlesResponse getCandleData(String orderbook, OffsetDateTime start, OffsetDateTime end, CandleResolution resolution) throws ApiException {
+        ApiResponse<ListCandlesResponse> resp = getCandleDataWithHttpInfo(orderbook, start, end, resolution);
         return resp.getData();
     }
 
@@ -1092,12 +1099,12 @@ public class DefaultApi {
      * @param start  (optional)
      * @param end  (optional)
      * @param resolution  (optional)
-     * @return ApiResponse&lt;InlineResponse20017&gt;
+     * @return ApiResponse&lt;ListCandlesResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20017> getCandleDataWithHttpInfo(String orderbook, OffsetDateTime start, OffsetDateTime end, String resolution) throws ApiException {
+    public ApiResponse<ListCandlesResponse> getCandleDataWithHttpInfo(String orderbook, OffsetDateTime start, OffsetDateTime end, CandleResolution resolution) throws ApiException {
         com.squareup.okhttp.Call call = getCandleDataValidateBeforeCall(orderbook, start, end, resolution, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20017>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListCandlesResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -1112,7 +1119,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getCandleDataAsync(String orderbook, OffsetDateTime start, OffsetDateTime end, String resolution, final ApiCallback<InlineResponse20017> callback) throws ApiException {
+    public com.squareup.okhttp.Call getCandleDataAsync(String orderbook, OffsetDateTime start, OffsetDateTime end, CandleResolution resolution, final ApiCallback<ListCandlesResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1134,39 +1141,27 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getCandleDataValidateBeforeCall(orderbook, start, end, resolution, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20017>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListCandlesResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
-     * Build call for getCouponsByAssetId
+     * Build call for getCouponPaymentsByAssetId
      * @param id  (required)
-     * @param start  (optional)
-     * @param end  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 100)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getCouponsByAssetIdCall(UUID id, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getCouponPaymentsByAssetIdCall(UUID id, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/assets/{id}/coupons"
+        String localVarPath = "/v1/assets/{id}/coupon_payments"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (start != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("start", start));
-        if (end != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("end", end));
-        if (page != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("page", page));
-        if (limit != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("limit", limit));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -1204,13 +1199,13 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getCouponsByAssetIdValidateBeforeCall(UUID id, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getCouponPaymentsByAssetIdValidateBeforeCall(UUID id, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
-            throw new ApiException("Missing the required parameter 'id' when calling getCouponsByAssetId(Async)");
+            throw new ApiException("Missing the required parameter 'id' when calling getCouponPaymentsByAssetId(Async)");
         }
         
-        com.squareup.okhttp.Call call = getCouponsByAssetIdCall(id, start, end, page, limit, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getCouponPaymentsByAssetIdCall(id, progressListener, progressRequestListener);
         return call;
 
         
@@ -1220,51 +1215,39 @@ public class DefaultApi {
     }
 
     /**
-     * Get coupons for a bond asset
+     * Get coupon payments for a bond asset
      * 
      * @param id  (required)
-     * @param start  (optional)
-     * @param end  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 100)
-     * @return InlineResponse2002
+     * @return ListCouponPaymentsResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2002 getCouponsByAssetId(UUID id, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit) throws ApiException {
-        ApiResponse<InlineResponse2002> resp = getCouponsByAssetIdWithHttpInfo(id, start, end, page, limit);
+    public ListCouponPaymentsResponse getCouponPaymentsByAssetId(UUID id) throws ApiException {
+        ApiResponse<ListCouponPaymentsResponse> resp = getCouponPaymentsByAssetIdWithHttpInfo(id);
         return resp.getData();
     }
 
     /**
-     * Get coupons for a bond asset
+     * Get coupon payments for a bond asset
      * 
      * @param id  (required)
-     * @param start  (optional)
-     * @param end  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 100)
-     * @return ApiResponse&lt;InlineResponse2002&gt;
+     * @return ApiResponse&lt;ListCouponPaymentsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2002> getCouponsByAssetIdWithHttpInfo(UUID id, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit) throws ApiException {
-        com.squareup.okhttp.Call call = getCouponsByAssetIdValidateBeforeCall(id, start, end, page, limit, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
+    public ApiResponse<ListCouponPaymentsResponse> getCouponPaymentsByAssetIdWithHttpInfo(UUID id) throws ApiException {
+        com.squareup.okhttp.Call call = getCouponPaymentsByAssetIdValidateBeforeCall(id, null, null);
+        Type localVarReturnType = new TypeToken<ListCouponPaymentsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
-     * Get coupons for a bond asset (asynchronously)
+     * Get coupon payments for a bond asset (asynchronously)
      * 
      * @param id  (required)
-     * @param start  (optional)
-     * @param end  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 100)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getCouponsByAssetIdAsync(UUID id, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit, final ApiCallback<InlineResponse2002> callback) throws ApiException {
+    public com.squareup.okhttp.Call getCouponPaymentsByAssetIdAsync(UUID id, final ApiCallback<ListCouponPaymentsResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1285,25 +1268,25 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getCouponsByAssetIdValidateBeforeCall(id, start, end, page, limit, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
+        com.squareup.okhttp.Call call = getCouponPaymentsByAssetIdValidateBeforeCall(id, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ListCouponPaymentsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for getL1Depth
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getL1DepthCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getL1DepthCall(UUID orderBookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/orderbooks/{orderbook_id}/L1"
-            .replaceAll("\\{" + "orderbook_id" + "\\}", apiClient.escapeString(orderbookId.toString()));
+        String localVarPath = "/v1/orderbooks/{order_book_id}/L1"
+            .replaceAll("\\{" + "order_book_id" + "\\}", apiClient.escapeString(orderBookId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1344,13 +1327,13 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getL1DepthValidateBeforeCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        // verify the required parameter 'orderbookId' is set
-        if (orderbookId == null) {
-            throw new ApiException("Missing the required parameter 'orderbookId' when calling getL1Depth(Async)");
+    private com.squareup.okhttp.Call getL1DepthValidateBeforeCall(UUID orderBookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'orderBookId' is set
+        if (orderBookId == null) {
+            throw new ApiException("Missing the required parameter 'orderBookId' when calling getL1Depth(Async)");
         }
         
-        com.squareup.okhttp.Call call = getL1DepthCall(orderbookId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getL1DepthCall(orderBookId, progressListener, progressRequestListener);
         return call;
 
         
@@ -1362,37 +1345,37 @@ public class DefaultApi {
     /**
      * Get the top price levels for a specific orderbook (L1 market depth)
      * 
-     * @param orderbookId  (required)
-     * @return InlineResponse20012
+     * @param orderBookId  (required)
+     * @return GetTopOfBookResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20012 getL1Depth(UUID orderbookId) throws ApiException {
-        ApiResponse<InlineResponse20012> resp = getL1DepthWithHttpInfo(orderbookId);
+    public GetTopOfBookResponse getL1Depth(UUID orderBookId) throws ApiException {
+        ApiResponse<GetTopOfBookResponse> resp = getL1DepthWithHttpInfo(orderBookId);
         return resp.getData();
     }
 
     /**
      * Get the top price levels for a specific orderbook (L1 market depth)
      * 
-     * @param orderbookId  (required)
-     * @return ApiResponse&lt;InlineResponse20012&gt;
+     * @param orderBookId  (required)
+     * @return ApiResponse&lt;GetTopOfBookResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20012> getL1DepthWithHttpInfo(UUID orderbookId) throws ApiException {
-        com.squareup.okhttp.Call call = getL1DepthValidateBeforeCall(orderbookId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20012>(){}.getType();
+    public ApiResponse<GetTopOfBookResponse> getL1DepthWithHttpInfo(UUID orderBookId) throws ApiException {
+        com.squareup.okhttp.Call call = getL1DepthValidateBeforeCall(orderBookId, null, null);
+        Type localVarReturnType = new TypeToken<GetTopOfBookResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Get the top price levels for a specific orderbook (L1 market depth) (asynchronously)
      * 
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getL1DepthAsync(UUID orderbookId, final ApiCallback<InlineResponse20012> callback) throws ApiException {
+    public com.squareup.okhttp.Call getL1DepthAsync(UUID orderBookId, final ApiCallback<GetTopOfBookResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1413,25 +1396,25 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getL1DepthValidateBeforeCall(orderbookId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20012>(){}.getType();
+        com.squareup.okhttp.Call call = getL1DepthValidateBeforeCall(orderBookId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<GetTopOfBookResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for getL2Depth
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getL2DepthCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getL2DepthCall(UUID orderBookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/orderbooks/{orderbook_id}/L2"
-            .replaceAll("\\{" + "orderbook_id" + "\\}", apiClient.escapeString(orderbookId.toString()));
+        String localVarPath = "/v1/orderbooks/{order_book_id}/L2"
+            .replaceAll("\\{" + "order_book_id" + "\\}", apiClient.escapeString(orderBookId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1472,13 +1455,13 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getL2DepthValidateBeforeCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        // verify the required parameter 'orderbookId' is set
-        if (orderbookId == null) {
-            throw new ApiException("Missing the required parameter 'orderbookId' when calling getL2Depth(Async)");
+    private com.squareup.okhttp.Call getL2DepthValidateBeforeCall(UUID orderBookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'orderBookId' is set
+        if (orderBookId == null) {
+            throw new ApiException("Missing the required parameter 'orderBookId' when calling getL2Depth(Async)");
         }
         
-        com.squareup.okhttp.Call call = getL2DepthCall(orderbookId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getL2DepthCall(orderBookId, progressListener, progressRequestListener);
         return call;
 
         
@@ -1490,37 +1473,37 @@ public class DefaultApi {
     /**
      * Get the aggregated price levels for a specific orderbook (L2 market depth)
      * 
-     * @param orderbookId  (required)
-     * @return InlineResponse20011
+     * @param orderBookId  (required)
+     * @return ListOrderBookDepthResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20011 getL2Depth(UUID orderbookId) throws ApiException {
-        ApiResponse<InlineResponse20011> resp = getL2DepthWithHttpInfo(orderbookId);
+    public ListOrderBookDepthResponse getL2Depth(UUID orderBookId) throws ApiException {
+        ApiResponse<ListOrderBookDepthResponse> resp = getL2DepthWithHttpInfo(orderBookId);
         return resp.getData();
     }
 
     /**
      * Get the aggregated price levels for a specific orderbook (L2 market depth)
      * 
-     * @param orderbookId  (required)
-     * @return ApiResponse&lt;InlineResponse20011&gt;
+     * @param orderBookId  (required)
+     * @return ApiResponse&lt;ListOrderBookDepthResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20011> getL2DepthWithHttpInfo(UUID orderbookId) throws ApiException {
-        com.squareup.okhttp.Call call = getL2DepthValidateBeforeCall(orderbookId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20011>(){}.getType();
+    public ApiResponse<ListOrderBookDepthResponse> getL2DepthWithHttpInfo(UUID orderBookId) throws ApiException {
+        com.squareup.okhttp.Call call = getL2DepthValidateBeforeCall(orderBookId, null, null);
+        Type localVarReturnType = new TypeToken<ListOrderBookDepthResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Get the aggregated price levels for a specific orderbook (L2 market depth) (asynchronously)
      * 
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getL2DepthAsync(UUID orderbookId, final ApiCallback<InlineResponse20011> callback) throws ApiException {
+    public com.squareup.okhttp.Call getL2DepthAsync(UUID orderBookId, final ApiCallback<ListOrderBookDepthResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1541,25 +1524,25 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getL2DepthValidateBeforeCall(orderbookId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20011>(){}.getType();
+        com.squareup.okhttp.Call call = getL2DepthValidateBeforeCall(orderBookId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ListOrderBookDepthResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for getL3Depth
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getL3DepthCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getL3DepthCall(UUID orderBookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/orderbooks/{orderbook_id}/L3"
-            .replaceAll("\\{" + "orderbook_id" + "\\}", apiClient.escapeString(orderbookId.toString()));
+        String localVarPath = "/v1/orderbooks/{order_book_id}/L3"
+            .replaceAll("\\{" + "order_book_id" + "\\}", apiClient.escapeString(orderBookId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1600,13 +1583,13 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getL3DepthValidateBeforeCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        // verify the required parameter 'orderbookId' is set
-        if (orderbookId == null) {
-            throw new ApiException("Missing the required parameter 'orderbookId' when calling getL3Depth(Async)");
+    private com.squareup.okhttp.Call getL3DepthValidateBeforeCall(UUID orderBookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'orderBookId' is set
+        if (orderBookId == null) {
+            throw new ApiException("Missing the required parameter 'orderBookId' when calling getL3Depth(Async)");
         }
         
-        com.squareup.okhttp.Call call = getL3DepthCall(orderbookId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getL3DepthCall(orderBookId, progressListener, progressRequestListener);
         return call;
 
         
@@ -1618,37 +1601,37 @@ public class DefaultApi {
     /**
      * Get all open orders for a specific orderbook (L3 market depth)
      * 
-     * @param orderbookId  (required)
-     * @return InlineResponse2006
+     * @param orderBookId  (required)
+     * @return ListOrdersResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2006 getL3Depth(UUID orderbookId) throws ApiException {
-        ApiResponse<InlineResponse2006> resp = getL3DepthWithHttpInfo(orderbookId);
+    public ListOrdersResponse getL3Depth(UUID orderBookId) throws ApiException {
+        ApiResponse<ListOrdersResponse> resp = getL3DepthWithHttpInfo(orderBookId);
         return resp.getData();
     }
 
     /**
      * Get all open orders for a specific orderbook (L3 market depth)
      * 
-     * @param orderbookId  (required)
-     * @return ApiResponse&lt;InlineResponse2006&gt;
+     * @param orderBookId  (required)
+     * @return ApiResponse&lt;ListOrdersResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2006> getL3DepthWithHttpInfo(UUID orderbookId) throws ApiException {
-        com.squareup.okhttp.Call call = getL3DepthValidateBeforeCall(orderbookId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
+    public ApiResponse<ListOrdersResponse> getL3DepthWithHttpInfo(UUID orderBookId) throws ApiException {
+        com.squareup.okhttp.Call call = getL3DepthValidateBeforeCall(orderBookId, null, null);
+        Type localVarReturnType = new TypeToken<ListOrdersResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Get all open orders for a specific orderbook (L3 market depth) (asynchronously)
      * 
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getL3DepthAsync(UUID orderbookId, final ApiCallback<InlineResponse2006> callback) throws ApiException {
+    public com.squareup.okhttp.Call getL3DepthAsync(UUID orderBookId, final ApiCallback<ListOrdersResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1669,8 +1652,8 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getL3DepthValidateBeforeCall(orderbookId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
+        com.squareup.okhttp.Call call = getL3DepthValidateBeforeCall(orderBookId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ListOrdersResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -1740,23 +1723,23 @@ public class DefaultApi {
     /**
      * Get your own available, locked, and borrowed assets
      * 
-     * @return InlineResponse20021
+     * @return UserBalanceResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20021 getLedgerBalancesSelf() throws ApiException {
-        ApiResponse<InlineResponse20021> resp = getLedgerBalancesSelfWithHttpInfo();
+    public UserBalanceResponse getLedgerBalancesSelf() throws ApiException {
+        ApiResponse<UserBalanceResponse> resp = getLedgerBalancesSelfWithHttpInfo();
         return resp.getData();
     }
 
     /**
      * Get your own available, locked, and borrowed assets
      * 
-     * @return ApiResponse&lt;InlineResponse20021&gt;
+     * @return ApiResponse&lt;UserBalanceResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20021> getLedgerBalancesSelfWithHttpInfo() throws ApiException {
+    public ApiResponse<UserBalanceResponse> getLedgerBalancesSelfWithHttpInfo() throws ApiException {
         com.squareup.okhttp.Call call = getLedgerBalancesSelfValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20021>(){}.getType();
+        Type localVarReturnType = new TypeToken<UserBalanceResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -1767,7 +1750,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getLedgerBalancesSelfAsync(final ApiCallback<InlineResponse20021> callback) throws ApiException {
+    public com.squareup.okhttp.Call getLedgerBalancesSelfAsync(final ApiCallback<UserBalanceResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1789,7 +1772,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getLedgerBalancesSelfValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20021>(){}.getType();
+        Type localVarReturnType = new TypeToken<UserBalanceResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -1859,23 +1842,23 @@ public class DefaultApi {
     /**
      * Get your own interest
      * 
-     * @return InlineResponse20023
+     * @return UserInterestResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20023 getLedgerInterestSelf() throws ApiException {
-        ApiResponse<InlineResponse20023> resp = getLedgerInterestSelfWithHttpInfo();
+    public UserInterestResponse getLedgerInterestSelf() throws ApiException {
+        ApiResponse<UserInterestResponse> resp = getLedgerInterestSelfWithHttpInfo();
         return resp.getData();
     }
 
     /**
      * Get your own interest
      * 
-     * @return ApiResponse&lt;InlineResponse20023&gt;
+     * @return ApiResponse&lt;UserInterestResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20023> getLedgerInterestSelfWithHttpInfo() throws ApiException {
+    public ApiResponse<UserInterestResponse> getLedgerInterestSelfWithHttpInfo() throws ApiException {
         com.squareup.okhttp.Call call = getLedgerInterestSelfValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20023>(){}.getType();
+        Type localVarReturnType = new TypeToken<UserInterestResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -1886,7 +1869,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getLedgerInterestSelfAsync(final ApiCallback<InlineResponse20023> callback) throws ApiException {
+    public com.squareup.okhttp.Call getLedgerInterestSelfAsync(final ApiCallback<UserInterestResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1908,7 +1891,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getLedgerInterestSelfValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20023>(){}.getType();
+        Type localVarReturnType = new TypeToken<UserInterestResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -1978,23 +1961,23 @@ public class DefaultApi {
     /**
      * Get the entire module object, including unborrowed leverage assets and total leverage trackers
      * 
-     * @return InlineResponse20018
+     * @return LedgerModuleResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20018 getLedgerModule() throws ApiException {
-        ApiResponse<InlineResponse20018> resp = getLedgerModuleWithHttpInfo();
+    public LedgerModuleResponse getLedgerModule() throws ApiException {
+        ApiResponse<LedgerModuleResponse> resp = getLedgerModuleWithHttpInfo();
         return resp.getData();
     }
 
     /**
      * Get the entire module object, including unborrowed leverage assets and total leverage trackers
      * 
-     * @return ApiResponse&lt;InlineResponse20018&gt;
+     * @return ApiResponse&lt;LedgerModuleResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20018> getLedgerModuleWithHttpInfo() throws ApiException {
+    public ApiResponse<LedgerModuleResponse> getLedgerModuleWithHttpInfo() throws ApiException {
         com.squareup.okhttp.Call call = getLedgerModuleValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20018>(){}.getType();
+        Type localVarReturnType = new TypeToken<LedgerModuleResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -2005,7 +1988,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getLedgerModuleAsync(final ApiCallback<InlineResponse20018> callback) throws ApiException {
+    public com.squareup.okhttp.Call getLedgerModuleAsync(final ApiCallback<LedgerModuleResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -2027,7 +2010,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getLedgerModuleValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20018>(){}.getType();
+        Type localVarReturnType = new TypeToken<LedgerModuleResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -2104,11 +2087,11 @@ public class DefaultApi {
      * Get the module object for a single asset ID
      * 
      * @param assetId  (required)
-     * @return InlineResponse20019
+     * @return LedgerModuleByAssetResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20019 getLedgerModuleByAsset(UUID assetId) throws ApiException {
-        ApiResponse<InlineResponse20019> resp = getLedgerModuleByAssetWithHttpInfo(assetId);
+    public LedgerModuleByAssetResponse getLedgerModuleByAsset(UUID assetId) throws ApiException {
+        ApiResponse<LedgerModuleByAssetResponse> resp = getLedgerModuleByAssetWithHttpInfo(assetId);
         return resp.getData();
     }
 
@@ -2116,12 +2099,12 @@ public class DefaultApi {
      * Get the module object for a single asset ID
      * 
      * @param assetId  (required)
-     * @return ApiResponse&lt;InlineResponse20019&gt;
+     * @return ApiResponse&lt;LedgerModuleByAssetResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20019> getLedgerModuleByAssetWithHttpInfo(UUID assetId) throws ApiException {
+    public ApiResponse<LedgerModuleByAssetResponse> getLedgerModuleByAssetWithHttpInfo(UUID assetId) throws ApiException {
         com.squareup.okhttp.Call call = getLedgerModuleByAssetValidateBeforeCall(assetId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20019>(){}.getType();
+        Type localVarReturnType = new TypeToken<LedgerModuleByAssetResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -2133,7 +2116,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getLedgerModuleByAssetAsync(UUID assetId, final ApiCallback<InlineResponse20019> callback) throws ApiException {
+    public com.squareup.okhttp.Call getLedgerModuleByAssetAsync(UUID assetId, final ApiCallback<LedgerModuleByAssetResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -2155,7 +2138,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getLedgerModuleByAssetValidateBeforeCall(assetId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20019>(){}.getType();
+        Type localVarReturnType = new TypeToken<LedgerModuleByAssetResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -2225,23 +2208,23 @@ public class DefaultApi {
     /**
      * Get your own positions
      * 
-     * @return InlineResponse20020
+     * @return UserPositionResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20020 getLedgerPositionsSelf() throws ApiException {
-        ApiResponse<InlineResponse20020> resp = getLedgerPositionsSelfWithHttpInfo();
+    public UserPositionResponse getLedgerPositionsSelf() throws ApiException {
+        ApiResponse<UserPositionResponse> resp = getLedgerPositionsSelfWithHttpInfo();
         return resp.getData();
     }
 
     /**
      * Get your own positions
      * 
-     * @return ApiResponse&lt;InlineResponse20020&gt;
+     * @return ApiResponse&lt;UserPositionResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20020> getLedgerPositionsSelfWithHttpInfo() throws ApiException {
+    public ApiResponse<UserPositionResponse> getLedgerPositionsSelfWithHttpInfo() throws ApiException {
         com.squareup.okhttp.Call call = getLedgerPositionsSelfValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20020>(){}.getType();
+        Type localVarReturnType = new TypeToken<UserPositionResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -2252,7 +2235,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getLedgerPositionsSelfAsync(final ApiCallback<InlineResponse20020> callback) throws ApiException {
+    public com.squareup.okhttp.Call getLedgerPositionsSelfAsync(final ApiCallback<UserPositionResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -2274,7 +2257,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getLedgerPositionsSelfValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20020>(){}.getType();
+        Type localVarReturnType = new TypeToken<UserPositionResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -2344,23 +2327,23 @@ public class DefaultApi {
     /**
      * Get your own available, locked, and borrowed USD value; and realized and unrealized PnL
      * 
-     * @return InlineResponse20022
+     * @return UserValueResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20022 getLedgerValueSelf() throws ApiException {
-        ApiResponse<InlineResponse20022> resp = getLedgerValueSelfWithHttpInfo();
+    public UserValueResponse getLedgerValueSelf() throws ApiException {
+        ApiResponse<UserValueResponse> resp = getLedgerValueSelfWithHttpInfo();
         return resp.getData();
     }
 
     /**
      * Get your own available, locked, and borrowed USD value; and realized and unrealized PnL
      * 
-     * @return ApiResponse&lt;InlineResponse20022&gt;
+     * @return ApiResponse&lt;UserValueResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20022> getLedgerValueSelfWithHttpInfo() throws ApiException {
+    public ApiResponse<UserValueResponse> getLedgerValueSelfWithHttpInfo() throws ApiException {
         com.squareup.okhttp.Call call = getLedgerValueSelfValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20022>(){}.getType();
+        Type localVarReturnType = new TypeToken<UserValueResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -2371,7 +2354,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getLedgerValueSelfAsync(final ApiCallback<InlineResponse20022> callback) throws ApiException {
+    public com.squareup.okhttp.Call getLedgerValueSelfAsync(final ApiCallback<UserValueResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -2393,7 +2376,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getLedgerValueSelfValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20022>(){}.getType();
+        Type localVarReturnType = new TypeToken<UserValueResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -2470,11 +2453,11 @@ public class DefaultApi {
      * Get order by ID
      * 
      * @param orderId  (required)
-     * @return InlineResponse20016
+     * @return GetOrderResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20016 getOrderById(UUID orderId) throws ApiException {
-        ApiResponse<InlineResponse20016> resp = getOrderByIdWithHttpInfo(orderId);
+    public GetOrderResponse getOrderById(UUID orderId) throws ApiException {
+        ApiResponse<GetOrderResponse> resp = getOrderByIdWithHttpInfo(orderId);
         return resp.getData();
     }
 
@@ -2482,12 +2465,12 @@ public class DefaultApi {
      * Get order by ID
      * 
      * @param orderId  (required)
-     * @return ApiResponse&lt;InlineResponse20016&gt;
+     * @return ApiResponse&lt;GetOrderResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20016> getOrderByIdWithHttpInfo(UUID orderId) throws ApiException {
+    public ApiResponse<GetOrderResponse> getOrderByIdWithHttpInfo(UUID orderId) throws ApiException {
         com.squareup.okhttp.Call call = getOrderByIdValidateBeforeCall(orderId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20016>(){}.getType();
+        Type localVarReturnType = new TypeToken<GetOrderResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -2499,7 +2482,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getOrderByIdAsync(UUID orderId, final ApiCallback<InlineResponse20016> callback) throws ApiException {
+    public com.squareup.okhttp.Call getOrderByIdAsync(UUID orderId, final ApiCallback<GetOrderResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -2521,152 +2504,24 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getOrderByIdValidateBeforeCall(orderId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20016>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
-        return call;
-    }
-    /**
-     * Build call for getOrderbookBBO
-     * @param orderbookId  (required)
-     * @param progressListener Progress listener
-     * @param progressRequestListener Progress request listener
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     */
-    public com.squareup.okhttp.Call getOrderbookBBOCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        Object localVarPostBody = null;
-        
-        // create path and map variables
-        String localVarPath = "/v1/orderbooks/{orderbook_id}/bbo"
-            .replaceAll("\\{" + "orderbook_id" + "\\}", apiClient.escapeString(orderbookId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
-
-        final String[] localVarContentTypes = {
-            
-        };
-        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
-
-        if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
-                @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
-                    return originalResponse.newBuilder()
-                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
-                    .build();
-                }
-            });
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        if (headers != null) {
-            localVarHeaderParams.putAll(headers);
-        }
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
-    }
-    
-    @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getOrderbookBBOValidateBeforeCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        // verify the required parameter 'orderbookId' is set
-        if (orderbookId == null) {
-            throw new ApiException("Missing the required parameter 'orderbookId' when calling getOrderbookBBO(Async)");
-        }
-        
-        com.squareup.okhttp.Call call = getOrderbookBBOCall(orderbookId, progressListener, progressRequestListener);
-        return call;
-
-        
-        
-        
-        
-    }
-
-    /**
-     * Get the top price levels for a specific orderbook (L1 market depth)
-     * 
-     * @param orderbookId  (required)
-     * @return InlineResponse20012
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     */
-    public InlineResponse20012 getOrderbookBBO(UUID orderbookId) throws ApiException {
-        ApiResponse<InlineResponse20012> resp = getOrderbookBBOWithHttpInfo(orderbookId);
-        return resp.getData();
-    }
-
-    /**
-     * Get the top price levels for a specific orderbook (L1 market depth)
-     * 
-     * @param orderbookId  (required)
-     * @return ApiResponse&lt;InlineResponse20012&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     */
-    public ApiResponse<InlineResponse20012> getOrderbookBBOWithHttpInfo(UUID orderbookId) throws ApiException {
-        com.squareup.okhttp.Call call = getOrderbookBBOValidateBeforeCall(orderbookId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20012>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
-    }
-
-    /**
-     * Get the top price levels for a specific orderbook (L1 market depth) (asynchronously)
-     * 
-     * @param orderbookId  (required)
-     * @param callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     */
-    public com.squareup.okhttp.Call getOrderbookBBOAsync(UUID orderbookId, final ApiCallback<InlineResponse20012> callback) throws ApiException {
-
-        ProgressResponseBody.ProgressListener progressListener = null;
-        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
-
-        if (callback != null) {
-            progressListener = new ProgressResponseBody.ProgressListener() {
-                @Override
-                public void update(long bytesRead, long contentLength, boolean done) {
-                    callback.onDownloadProgress(bytesRead, contentLength, done);
-                }
-            };
-
-            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
-                @Override
-                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
-                    callback.onUploadProgress(bytesWritten, contentLength, done);
-                }
-            };
-        }
-
-        com.squareup.okhttp.Call call = getOrderbookBBOValidateBeforeCall(orderbookId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20012>(){}.getType();
+        Type localVarReturnType = new TypeToken<GetOrderResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for getOrderbookById
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getOrderbookByIdCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getOrderbookByIdCall(UUID orderBookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/orderbooks/{orderbook_id}"
-            .replaceAll("\\{" + "orderbook_id" + "\\}", apiClient.escapeString(orderbookId.toString()));
+        String localVarPath = "/v1/orderbooks/{order_book_id}"
+            .replaceAll("\\{" + "order_book_id" + "\\}", apiClient.escapeString(orderBookId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -2707,13 +2562,13 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getOrderbookByIdValidateBeforeCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        // verify the required parameter 'orderbookId' is set
-        if (orderbookId == null) {
-            throw new ApiException("Missing the required parameter 'orderbookId' when calling getOrderbookById(Async)");
+    private com.squareup.okhttp.Call getOrderbookByIdValidateBeforeCall(UUID orderBookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'orderBookId' is set
+        if (orderBookId == null) {
+            throw new ApiException("Missing the required parameter 'orderBookId' when calling getOrderbookById(Async)");
         }
         
-        com.squareup.okhttp.Call call = getOrderbookByIdCall(orderbookId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getOrderbookByIdCall(orderBookId, progressListener, progressRequestListener);
         return call;
 
         
@@ -2725,37 +2580,37 @@ public class DefaultApi {
     /**
      * Get orderbook by ID
      * 
-     * @param orderbookId  (required)
-     * @return InlineResponse20010
+     * @param orderBookId  (required)
+     * @return GetOrderBookResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20010 getOrderbookById(UUID orderbookId) throws ApiException {
-        ApiResponse<InlineResponse20010> resp = getOrderbookByIdWithHttpInfo(orderbookId);
+    public GetOrderBookResponse getOrderbookById(UUID orderBookId) throws ApiException {
+        ApiResponse<GetOrderBookResponse> resp = getOrderbookByIdWithHttpInfo(orderBookId);
         return resp.getData();
     }
 
     /**
      * Get orderbook by ID
      * 
-     * @param orderbookId  (required)
-     * @return ApiResponse&lt;InlineResponse20010&gt;
+     * @param orderBookId  (required)
+     * @return ApiResponse&lt;GetOrderBookResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20010> getOrderbookByIdWithHttpInfo(UUID orderbookId) throws ApiException {
-        com.squareup.okhttp.Call call = getOrderbookByIdValidateBeforeCall(orderbookId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20010>(){}.getType();
+    public ApiResponse<GetOrderBookResponse> getOrderbookByIdWithHttpInfo(UUID orderBookId) throws ApiException {
+        com.squareup.okhttp.Call call = getOrderbookByIdValidateBeforeCall(orderBookId, null, null);
+        Type localVarReturnType = new TypeToken<GetOrderBookResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Get orderbook by ID (asynchronously)
      * 
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getOrderbookByIdAsync(UUID orderbookId, final ApiCallback<InlineResponse20010> callback) throws ApiException {
+    public com.squareup.okhttp.Call getOrderbookByIdAsync(UUID orderBookId, final ApiCallback<GetOrderBookResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -2776,25 +2631,25 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getOrderbookByIdValidateBeforeCall(orderbookId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20010>(){}.getType();
+        com.squareup.okhttp.Call call = getOrderbookByIdValidateBeforeCall(orderBookId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<GetOrderBookResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for getOrderbookDepth
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getOrderbookDepthCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getOrderbookDepthCall(UUID orderBookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/orderbooks/{orderbook_id}/depth"
-            .replaceAll("\\{" + "orderbook_id" + "\\}", apiClient.escapeString(orderbookId.toString()));
+        String localVarPath = "/v1/orderbooks/{order_book_id}/depth"
+            .replaceAll("\\{" + "order_book_id" + "\\}", apiClient.escapeString(orderBookId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -2835,13 +2690,13 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getOrderbookDepthValidateBeforeCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        // verify the required parameter 'orderbookId' is set
-        if (orderbookId == null) {
-            throw new ApiException("Missing the required parameter 'orderbookId' when calling getOrderbookDepth(Async)");
+    private com.squareup.okhttp.Call getOrderbookDepthValidateBeforeCall(UUID orderBookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'orderBookId' is set
+        if (orderBookId == null) {
+            throw new ApiException("Missing the required parameter 'orderBookId' when calling getOrderbookDepth(Async)");
         }
         
-        com.squareup.okhttp.Call call = getOrderbookDepthCall(orderbookId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getOrderbookDepthCall(orderBookId, progressListener, progressRequestListener);
         return call;
 
         
@@ -2853,37 +2708,37 @@ public class DefaultApi {
     /**
      * Get the aggregated price levels for a specific orderbook (L2 market depth)
      * 
-     * @param orderbookId  (required)
-     * @return InlineResponse20011
+     * @param orderBookId  (required)
+     * @return ListOrderBookDepthResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20011 getOrderbookDepth(UUID orderbookId) throws ApiException {
-        ApiResponse<InlineResponse20011> resp = getOrderbookDepthWithHttpInfo(orderbookId);
+    public ListOrderBookDepthResponse getOrderbookDepth(UUID orderBookId) throws ApiException {
+        ApiResponse<ListOrderBookDepthResponse> resp = getOrderbookDepthWithHttpInfo(orderBookId);
         return resp.getData();
     }
 
     /**
      * Get the aggregated price levels for a specific orderbook (L2 market depth)
      * 
-     * @param orderbookId  (required)
-     * @return ApiResponse&lt;InlineResponse20011&gt;
+     * @param orderBookId  (required)
+     * @return ApiResponse&lt;ListOrderBookDepthResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20011> getOrderbookDepthWithHttpInfo(UUID orderbookId) throws ApiException {
-        com.squareup.okhttp.Call call = getOrderbookDepthValidateBeforeCall(orderbookId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20011>(){}.getType();
+    public ApiResponse<ListOrderBookDepthResponse> getOrderbookDepthWithHttpInfo(UUID orderBookId) throws ApiException {
+        com.squareup.okhttp.Call call = getOrderbookDepthValidateBeforeCall(orderBookId, null, null);
+        Type localVarReturnType = new TypeToken<ListOrderBookDepthResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Get the aggregated price levels for a specific orderbook (L2 market depth) (asynchronously)
      * 
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getOrderbookDepthAsync(UUID orderbookId, final ApiCallback<InlineResponse20011> callback) throws ApiException {
+    public com.squareup.okhttp.Call getOrderbookDepthAsync(UUID orderBookId, final ApiCallback<ListOrderBookDepthResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -2904,25 +2759,25 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getOrderbookDepthValidateBeforeCall(orderbookId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20011>(){}.getType();
+        com.squareup.okhttp.Call call = getOrderbookDepthValidateBeforeCall(orderBookId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ListOrderBookDepthResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for getOrderbookOrders
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getOrderbookOrdersCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getOrderbookOrdersCall(UUID orderBookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/orderbooks/{orderbook_id}/orders"
-            .replaceAll("\\{" + "orderbook_id" + "\\}", apiClient.escapeString(orderbookId.toString()));
+        String localVarPath = "/v1/orderbooks/{order_book_id}/orders"
+            .replaceAll("\\{" + "order_book_id" + "\\}", apiClient.escapeString(orderBookId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -2963,13 +2818,13 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getOrderbookOrdersValidateBeforeCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        // verify the required parameter 'orderbookId' is set
-        if (orderbookId == null) {
-            throw new ApiException("Missing the required parameter 'orderbookId' when calling getOrderbookOrders(Async)");
+    private com.squareup.okhttp.Call getOrderbookOrdersValidateBeforeCall(UUID orderBookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'orderBookId' is set
+        if (orderBookId == null) {
+            throw new ApiException("Missing the required parameter 'orderBookId' when calling getOrderbookOrders(Async)");
         }
         
-        com.squareup.okhttp.Call call = getOrderbookOrdersCall(orderbookId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getOrderbookOrdersCall(orderBookId, progressListener, progressRequestListener);
         return call;
 
         
@@ -2981,37 +2836,37 @@ public class DefaultApi {
     /**
      * Get all open orders for a specific orderbook (L3 market depth)
      * 
-     * @param orderbookId  (required)
-     * @return InlineResponse2006
+     * @param orderBookId  (required)
+     * @return ListOrdersResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2006 getOrderbookOrders(UUID orderbookId) throws ApiException {
-        ApiResponse<InlineResponse2006> resp = getOrderbookOrdersWithHttpInfo(orderbookId);
+    public ListOrdersResponse getOrderbookOrders(UUID orderBookId) throws ApiException {
+        ApiResponse<ListOrdersResponse> resp = getOrderbookOrdersWithHttpInfo(orderBookId);
         return resp.getData();
     }
 
     /**
      * Get all open orders for a specific orderbook (L3 market depth)
      * 
-     * @param orderbookId  (required)
-     * @return ApiResponse&lt;InlineResponse2006&gt;
+     * @param orderBookId  (required)
+     * @return ApiResponse&lt;ListOrdersResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2006> getOrderbookOrdersWithHttpInfo(UUID orderbookId) throws ApiException {
-        com.squareup.okhttp.Call call = getOrderbookOrdersValidateBeforeCall(orderbookId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
+    public ApiResponse<ListOrdersResponse> getOrderbookOrdersWithHttpInfo(UUID orderBookId) throws ApiException {
+        com.squareup.okhttp.Call call = getOrderbookOrdersValidateBeforeCall(orderBookId, null, null);
+        Type localVarReturnType = new TypeToken<ListOrdersResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Get all open orders for a specific orderbook (L3 market depth) (asynchronously)
      * 
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getOrderbookOrdersAsync(UUID orderbookId, final ApiCallback<InlineResponse2006> callback) throws ApiException {
+    public com.squareup.okhttp.Call getOrderbookOrdersAsync(UUID orderBookId, final ApiCallback<ListOrdersResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -3032,25 +2887,25 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getOrderbookOrdersValidateBeforeCall(orderbookId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
+        com.squareup.okhttp.Call call = getOrderbookOrdersValidateBeforeCall(orderBookId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ListOrdersResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for getOrderbookSummary
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getOrderbookSummaryCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getOrderbookSummaryCall(UUID orderBookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/orderbooks/{orderbook_id}/summary"
-            .replaceAll("\\{" + "orderbook_id" + "\\}", apiClient.escapeString(orderbookId.toString()));
+        String localVarPath = "/v1/orderbooks/{order_book_id}/summary"
+            .replaceAll("\\{" + "order_book_id" + "\\}", apiClient.escapeString(orderBookId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -3091,13 +2946,13 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getOrderbookSummaryValidateBeforeCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        // verify the required parameter 'orderbookId' is set
-        if (orderbookId == null) {
-            throw new ApiException("Missing the required parameter 'orderbookId' when calling getOrderbookSummary(Async)");
+    private com.squareup.okhttp.Call getOrderbookSummaryValidateBeforeCall(UUID orderBookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'orderBookId' is set
+        if (orderBookId == null) {
+            throw new ApiException("Missing the required parameter 'orderBookId' when calling getOrderbookSummary(Async)");
         }
         
-        com.squareup.okhttp.Call call = getOrderbookSummaryCall(orderbookId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getOrderbookSummaryCall(orderBookId, progressListener, progressRequestListener);
         return call;
 
         
@@ -3109,37 +2964,37 @@ public class DefaultApi {
     /**
      * Get summary of an orderbook
      * 
-     * @param orderbookId  (required)
-     * @return InlineResponse20013
+     * @param orderBookId  (required)
+     * @return GetOrderBookSummaryResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20013 getOrderbookSummary(UUID orderbookId) throws ApiException {
-        ApiResponse<InlineResponse20013> resp = getOrderbookSummaryWithHttpInfo(orderbookId);
+    public GetOrderBookSummaryResponse getOrderbookSummary(UUID orderBookId) throws ApiException {
+        ApiResponse<GetOrderBookSummaryResponse> resp = getOrderbookSummaryWithHttpInfo(orderBookId);
         return resp.getData();
     }
 
     /**
      * Get summary of an orderbook
      * 
-     * @param orderbookId  (required)
-     * @return ApiResponse&lt;InlineResponse20013&gt;
+     * @param orderBookId  (required)
+     * @return ApiResponse&lt;GetOrderBookSummaryResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20013> getOrderbookSummaryWithHttpInfo(UUID orderbookId) throws ApiException {
-        com.squareup.okhttp.Call call = getOrderbookSummaryValidateBeforeCall(orderbookId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20013>(){}.getType();
+    public ApiResponse<GetOrderBookSummaryResponse> getOrderbookSummaryWithHttpInfo(UUID orderBookId) throws ApiException {
+        com.squareup.okhttp.Call call = getOrderbookSummaryValidateBeforeCall(orderBookId, null, null);
+        Type localVarReturnType = new TypeToken<GetOrderBookSummaryResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Get summary of an orderbook (asynchronously)
      * 
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getOrderbookSummaryAsync(UUID orderbookId, final ApiCallback<InlineResponse20013> callback) throws ApiException {
+    public com.squareup.okhttp.Call getOrderbookSummaryAsync(UUID orderBookId, final ApiCallback<GetOrderBookSummaryResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -3160,25 +3015,25 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getOrderbookSummaryValidateBeforeCall(orderbookId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20013>(){}.getType();
+        com.squareup.okhttp.Call call = getOrderbookSummaryValidateBeforeCall(orderBookId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<GetOrderBookSummaryResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for getOrderbookTop
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getOrderbookTopCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getOrderbookTopCall(UUID orderBookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/orderbooks/{orderbook_id}/top"
-            .replaceAll("\\{" + "orderbook_id" + "\\}", apiClient.escapeString(orderbookId.toString()));
+        String localVarPath = "/v1/orderbooks/{order_book_id}/top"
+            .replaceAll("\\{" + "order_book_id" + "\\}", apiClient.escapeString(orderBookId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -3219,13 +3074,13 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getOrderbookTopValidateBeforeCall(UUID orderbookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        // verify the required parameter 'orderbookId' is set
-        if (orderbookId == null) {
-            throw new ApiException("Missing the required parameter 'orderbookId' when calling getOrderbookTop(Async)");
+    private com.squareup.okhttp.Call getOrderbookTopValidateBeforeCall(UUID orderBookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'orderBookId' is set
+        if (orderBookId == null) {
+            throw new ApiException("Missing the required parameter 'orderBookId' when calling getOrderbookTop(Async)");
         }
         
-        com.squareup.okhttp.Call call = getOrderbookTopCall(orderbookId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getOrderbookTopCall(orderBookId, progressListener, progressRequestListener);
         return call;
 
         
@@ -3237,37 +3092,37 @@ public class DefaultApi {
     /**
      * Get the top price levels for a specific orderbook (L1 market depth)
      * 
-     * @param orderbookId  (required)
-     * @return InlineResponse20012
+     * @param orderBookId  (required)
+     * @return GetTopOfBookResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20012 getOrderbookTop(UUID orderbookId) throws ApiException {
-        ApiResponse<InlineResponse20012> resp = getOrderbookTopWithHttpInfo(orderbookId);
+    public GetTopOfBookResponse getOrderbookTop(UUID orderBookId) throws ApiException {
+        ApiResponse<GetTopOfBookResponse> resp = getOrderbookTopWithHttpInfo(orderBookId);
         return resp.getData();
     }
 
     /**
      * Get the top price levels for a specific orderbook (L1 market depth)
      * 
-     * @param orderbookId  (required)
-     * @return ApiResponse&lt;InlineResponse20012&gt;
+     * @param orderBookId  (required)
+     * @return ApiResponse&lt;GetTopOfBookResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20012> getOrderbookTopWithHttpInfo(UUID orderbookId) throws ApiException {
-        com.squareup.okhttp.Call call = getOrderbookTopValidateBeforeCall(orderbookId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20012>(){}.getType();
+    public ApiResponse<GetTopOfBookResponse> getOrderbookTopWithHttpInfo(UUID orderBookId) throws ApiException {
+        com.squareup.okhttp.Call call = getOrderbookTopValidateBeforeCall(orderBookId, null, null);
+        Type localVarReturnType = new TypeToken<GetTopOfBookResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Get the top price levels for a specific orderbook (L1 market depth) (asynchronously)
      * 
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getOrderbookTopAsync(UUID orderbookId, final ApiCallback<InlineResponse20012> callback) throws ApiException {
+    public com.squareup.okhttp.Call getOrderbookTopAsync(UUID orderBookId, final ApiCallback<GetTopOfBookResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -3288,8 +3143,8 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getOrderbookTopValidateBeforeCall(orderbookId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20012>(){}.getType();
+        com.squareup.okhttp.Call call = getOrderbookTopValidateBeforeCall(orderBookId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<GetTopOfBookResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -3366,11 +3221,11 @@ public class DefaultApi {
      * Get the current price of a pool
      * 
      * @param poolId  (required)
-     * @return InlineResponse20030
+     * @return GetPoolPriceResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20030 getPoolPrice(UUID poolId) throws ApiException {
-        ApiResponse<InlineResponse20030> resp = getPoolPriceWithHttpInfo(poolId);
+    public GetPoolPriceResponse getPoolPrice(UUID poolId) throws ApiException {
+        ApiResponse<GetPoolPriceResponse> resp = getPoolPriceWithHttpInfo(poolId);
         return resp.getData();
     }
 
@@ -3378,12 +3233,12 @@ public class DefaultApi {
      * Get the current price of a pool
      * 
      * @param poolId  (required)
-     * @return ApiResponse&lt;InlineResponse20030&gt;
+     * @return ApiResponse&lt;GetPoolPriceResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20030> getPoolPriceWithHttpInfo(UUID poolId) throws ApiException {
+    public ApiResponse<GetPoolPriceResponse> getPoolPriceWithHttpInfo(UUID poolId) throws ApiException {
         com.squareup.okhttp.Call call = getPoolPriceValidateBeforeCall(poolId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20030>(){}.getType();
+        Type localVarReturnType = new TypeToken<GetPoolPriceResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -3395,7 +3250,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getPoolPriceAsync(UUID poolId, final ApiCallback<InlineResponse20030> callback) throws ApiException {
+    public com.squareup.okhttp.Call getPoolPriceAsync(UUID poolId, final ApiCallback<GetPoolPriceResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -3417,7 +3272,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getPoolPriceValidateBeforeCall(poolId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20030>(){}.getType();
+        Type localVarReturnType = new TypeToken<GetPoolPriceResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -3494,11 +3349,11 @@ public class DefaultApi {
      * Get a trade by ID
      * 
      * @param tradeId  (required)
-     * @return InlineResponse20027
+     * @return TradeResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20027 getTradeById(UUID tradeId) throws ApiException {
-        ApiResponse<InlineResponse20027> resp = getTradeByIdWithHttpInfo(tradeId);
+    public TradeResponse getTradeById(UUID tradeId) throws ApiException {
+        ApiResponse<TradeResponse> resp = getTradeByIdWithHttpInfo(tradeId);
         return resp.getData();
     }
 
@@ -3506,12 +3361,12 @@ public class DefaultApi {
      * Get a trade by ID
      * 
      * @param tradeId  (required)
-     * @return ApiResponse&lt;InlineResponse20027&gt;
+     * @return ApiResponse&lt;TradeResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20027> getTradeByIdWithHttpInfo(UUID tradeId) throws ApiException {
+    public ApiResponse<TradeResponse> getTradeByIdWithHttpInfo(UUID tradeId) throws ApiException {
         com.squareup.okhttp.Call call = getTradeByIdValidateBeforeCall(tradeId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20027>(){}.getType();
+        Type localVarReturnType = new TypeToken<TradeResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -3523,7 +3378,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getTradeByIdAsync(UUID tradeId, final ApiCallback<InlineResponse20027> callback) throws ApiException {
+    public com.squareup.okhttp.Call getTradeByIdAsync(UUID tradeId, final ApiCallback<TradeResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -3545,7 +3400,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getTradeByIdValidateBeforeCall(tradeId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20027>(){}.getType();
+        Type localVarReturnType = new TypeToken<TradeResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -3639,11 +3494,11 @@ public class DefaultApi {
      * @param end  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
-     * @return InlineResponse20026
+     * @return ListTradeResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20026 getTrades(List<String> pools, List<UUID> userIds, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit) throws ApiException {
-        ApiResponse<InlineResponse20026> resp = getTradesWithHttpInfo(pools, userIds, start, end, page, limit);
+    public ListTradeResponse getTrades(List<String> pools, List<UUID> userIds, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit) throws ApiException {
+        ApiResponse<ListTradeResponse> resp = getTradesWithHttpInfo(pools, userIds, start, end, page, limit);
         return resp.getData();
     }
 
@@ -3656,12 +3511,12 @@ public class DefaultApi {
      * @param end  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
-     * @return ApiResponse&lt;InlineResponse20026&gt;
+     * @return ApiResponse&lt;ListTradeResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20026> getTradesWithHttpInfo(List<String> pools, List<UUID> userIds, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit) throws ApiException {
+    public ApiResponse<ListTradeResponse> getTradesWithHttpInfo(List<String> pools, List<UUID> userIds, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit) throws ApiException {
         com.squareup.okhttp.Call call = getTradesValidateBeforeCall(pools, userIds, start, end, page, limit, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20026>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListTradeResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -3678,7 +3533,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getTradesAsync(List<String> pools, List<UUID> userIds, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit, final ApiCallback<InlineResponse20026> callback) throws ApiException {
+    public com.squareup.okhttp.Call getTradesAsync(List<String> pools, List<UUID> userIds, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit, final ApiCallback<ListTradeResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -3700,7 +3555,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getTradesValidateBeforeCall(pools, userIds, start, end, page, limit, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20026>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListTradeResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -3777,11 +3632,11 @@ public class DefaultApi {
      * Get a transaction by ID
      * 
      * @param id  (required)
-     * @return InlineResponse20025
+     * @return GetTransactionResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20025 getTransactionById(UUID id) throws ApiException {
-        ApiResponse<InlineResponse20025> resp = getTransactionByIdWithHttpInfo(id);
+    public GetTransactionResponse getTransactionById(UUID id) throws ApiException {
+        ApiResponse<GetTransactionResponse> resp = getTransactionByIdWithHttpInfo(id);
         return resp.getData();
     }
 
@@ -3789,12 +3644,12 @@ public class DefaultApi {
      * Get a transaction by ID
      * 
      * @param id  (required)
-     * @return ApiResponse&lt;InlineResponse20025&gt;
+     * @return ApiResponse&lt;GetTransactionResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20025> getTransactionByIdWithHttpInfo(UUID id) throws ApiException {
+    public ApiResponse<GetTransactionResponse> getTransactionByIdWithHttpInfo(UUID id) throws ApiException {
         com.squareup.okhttp.Call call = getTransactionByIdValidateBeforeCall(id, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20025>(){}.getType();
+        Type localVarReturnType = new TypeToken<GetTransactionResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -3806,7 +3661,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getTransactionByIdAsync(UUID id, final ApiCallback<InlineResponse20025> callback) throws ApiException {
+    public com.squareup.okhttp.Call getTransactionByIdAsync(UUID id, final ApiCallback<GetTransactionResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -3828,7 +3683,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getTransactionByIdValidateBeforeCall(id, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20025>(){}.getType();
+        Type localVarReturnType = new TypeToken<GetTransactionResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -3846,7 +3701,7 @@ public class DefaultApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getTransactionsCall(List<String> pools, List<UUID> userIds, List<String> txKinds, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getTransactionsCall(List<String> pools, List<UUID> userIds, List<TransactionKind> txKinds, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -3905,7 +3760,7 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getTransactionsValidateBeforeCall(List<String> pools, List<UUID> userIds, List<String> txKinds, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getTransactionsValidateBeforeCall(List<String> pools, List<UUID> userIds, List<TransactionKind> txKinds, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = getTransactionsCall(pools, userIds, txKinds, start, end, page, limit, progressListener, progressRequestListener);
         return call;
@@ -3926,11 +3781,11 @@ public class DefaultApi {
      * @param end  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
-     * @return InlineResponse2008
+     * @return ListTransactionsResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2008 getTransactions(List<String> pools, List<UUID> userIds, List<String> txKinds, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit) throws ApiException {
-        ApiResponse<InlineResponse2008> resp = getTransactionsWithHttpInfo(pools, userIds, txKinds, start, end, page, limit);
+    public ListTransactionsResponse getTransactions(List<String> pools, List<UUID> userIds, List<TransactionKind> txKinds, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit) throws ApiException {
+        ApiResponse<ListTransactionsResponse> resp = getTransactionsWithHttpInfo(pools, userIds, txKinds, start, end, page, limit);
         return resp.getData();
     }
 
@@ -3944,12 +3799,12 @@ public class DefaultApi {
      * @param end  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
-     * @return ApiResponse&lt;InlineResponse2008&gt;
+     * @return ApiResponse&lt;ListTransactionsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2008> getTransactionsWithHttpInfo(List<String> pools, List<UUID> userIds, List<String> txKinds, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit) throws ApiException {
+    public ApiResponse<ListTransactionsResponse> getTransactionsWithHttpInfo(List<String> pools, List<UUID> userIds, List<TransactionKind> txKinds, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit) throws ApiException {
         com.squareup.okhttp.Call call = getTransactionsValidateBeforeCall(pools, userIds, txKinds, start, end, page, limit, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2008>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListTransactionsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -3967,7 +3822,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getTransactionsAsync(List<String> pools, List<UUID> userIds, List<String> txKinds, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit, final ApiCallback<InlineResponse2008> callback) throws ApiException {
+    public com.squareup.okhttp.Call getTransactionsAsync(List<String> pools, List<UUID> userIds, List<TransactionKind> txKinds, OffsetDateTime start, OffsetDateTime end, Integer page, Integer limit, final ApiCallback<ListTransactionsResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -3989,7 +3844,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getTransactionsValidateBeforeCall(pools, userIds, txKinds, start, end, page, limit, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2008>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListTransactionsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -4063,39 +3918,39 @@ public class DefaultApi {
     }
 
     /**
-     * Get user by ID
+     * Get user by ID (admin only)
      * 
      * @param userId  (required)
-     * @return InlineResponse2003
+     * @return GetUserResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2003 getUserById(UUID userId) throws ApiException {
-        ApiResponse<InlineResponse2003> resp = getUserByIdWithHttpInfo(userId);
+    public GetUserResponse getUserById(UUID userId) throws ApiException {
+        ApiResponse<GetUserResponse> resp = getUserByIdWithHttpInfo(userId);
         return resp.getData();
     }
 
     /**
-     * Get user by ID
+     * Get user by ID (admin only)
      * 
      * @param userId  (required)
-     * @return ApiResponse&lt;InlineResponse2003&gt;
+     * @return ApiResponse&lt;GetUserResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2003> getUserByIdWithHttpInfo(UUID userId) throws ApiException {
+    public ApiResponse<GetUserResponse> getUserByIdWithHttpInfo(UUID userId) throws ApiException {
         com.squareup.okhttp.Call call = getUserByIdValidateBeforeCall(userId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
+        Type localVarReturnType = new TypeToken<GetUserResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
-     * Get user by ID (asynchronously)
+     * Get user by ID (admin only) (asynchronously)
      * 
      * @param userId  (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getUserByIdAsync(UUID userId, final ApiCallback<InlineResponse2003> callback) throws ApiException {
+    public com.squareup.okhttp.Call getUserByIdAsync(UUID userId, final ApiCallback<GetUserResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -4117,7 +3972,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getUserByIdValidateBeforeCall(userId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
+        Type localVarReturnType = new TypeToken<GetUserResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -4198,11 +4053,11 @@ public class DefaultApi {
      * 
      * @param userId  (required)
      * @param since  (optional)
-     * @return InlineResponse2007
+     * @return ListPositionsResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2007 getUserLedgerStream(UUID userId, OffsetDateTime since) throws ApiException {
-        ApiResponse<InlineResponse2007> resp = getUserLedgerStreamWithHttpInfo(userId, since);
+    public ListPositionsResponse getUserLedgerStream(UUID userId, OffsetDateTime since) throws ApiException {
+        ApiResponse<ListPositionsResponse> resp = getUserLedgerStreamWithHttpInfo(userId, since);
         return resp.getData();
     }
 
@@ -4211,12 +4066,12 @@ public class DefaultApi {
      * 
      * @param userId  (required)
      * @param since  (optional)
-     * @return ApiResponse&lt;InlineResponse2007&gt;
+     * @return ApiResponse&lt;ListPositionsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2007> getUserLedgerStreamWithHttpInfo(UUID userId, OffsetDateTime since) throws ApiException {
+    public ApiResponse<ListPositionsResponse> getUserLedgerStreamWithHttpInfo(UUID userId, OffsetDateTime since) throws ApiException {
         com.squareup.okhttp.Call call = getUserLedgerStreamValidateBeforeCall(userId, since, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2007>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListPositionsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -4229,7 +4084,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getUserLedgerStreamAsync(UUID userId, OffsetDateTime since, final ApiCallback<InlineResponse2007> callback) throws ApiException {
+    public com.squareup.okhttp.Call getUserLedgerStreamAsync(UUID userId, OffsetDateTime since, final ApiCallback<ListPositionsResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -4251,27 +4106,27 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getUserLedgerStreamValidateBeforeCall(userId, since, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2007>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListPositionsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for getUserOrdersStream
      * @param userId  (required)
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param since  (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getUserOrdersStreamCall(UUID userId, UUID orderbookId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getUserOrdersStreamCall(UUID userId, UUID orderBookId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/user/{user_id}/orders/{orderbook_id}/stream"
+        String localVarPath = "/v1/user/{user_id}/orders/{order_book_id}/stream"
             .replaceAll("\\{" + "user_id" + "\\}", apiClient.escapeString(userId.toString()))
-            .replaceAll("\\{" + "orderbook_id" + "\\}", apiClient.escapeString(orderbookId.toString()));
+            .replaceAll("\\{" + "order_book_id" + "\\}", apiClient.escapeString(orderBookId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -4314,17 +4169,17 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getUserOrdersStreamValidateBeforeCall(UUID userId, UUID orderbookId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getUserOrdersStreamValidateBeforeCall(UUID userId, UUID orderBookId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling getUserOrdersStream(Async)");
         }
-        // verify the required parameter 'orderbookId' is set
-        if (orderbookId == null) {
-            throw new ApiException("Missing the required parameter 'orderbookId' when calling getUserOrdersStream(Async)");
+        // verify the required parameter 'orderBookId' is set
+        if (orderBookId == null) {
+            throw new ApiException("Missing the required parameter 'orderBookId' when calling getUserOrdersStream(Async)");
         }
         
-        com.squareup.okhttp.Call call = getUserOrdersStreamCall(userId, orderbookId, since, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getUserOrdersStreamCall(userId, orderBookId, since, progressListener, progressRequestListener);
         return call;
 
         
@@ -4337,13 +4192,13 @@ public class DefaultApi {
      * Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
      * 
      * @param userId  (required)
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param since  (optional)
-     * @return InlineResponse2006
+     * @return ListOrdersResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2006 getUserOrdersStream(UUID userId, UUID orderbookId, OffsetDateTime since) throws ApiException {
-        ApiResponse<InlineResponse2006> resp = getUserOrdersStreamWithHttpInfo(userId, orderbookId, since);
+    public ListOrdersResponse getUserOrdersStream(UUID userId, UUID orderBookId, OffsetDateTime since) throws ApiException {
+        ApiResponse<ListOrdersResponse> resp = getUserOrdersStreamWithHttpInfo(userId, orderBookId, since);
         return resp.getData();
     }
 
@@ -4351,14 +4206,14 @@ public class DefaultApi {
      * Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
      * 
      * @param userId  (required)
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param since  (optional)
-     * @return ApiResponse&lt;InlineResponse2006&gt;
+     * @return ApiResponse&lt;ListOrdersResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2006> getUserOrdersStreamWithHttpInfo(UUID userId, UUID orderbookId, OffsetDateTime since) throws ApiException {
-        com.squareup.okhttp.Call call = getUserOrdersStreamValidateBeforeCall(userId, orderbookId, since, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
+    public ApiResponse<ListOrdersResponse> getUserOrdersStreamWithHttpInfo(UUID userId, UUID orderBookId, OffsetDateTime since) throws ApiException {
+        com.squareup.okhttp.Call call = getUserOrdersStreamValidateBeforeCall(userId, orderBookId, since, null, null);
+        Type localVarReturnType = new TypeToken<ListOrdersResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -4366,13 +4221,13 @@ public class DefaultApi {
      * Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates (asynchronously)
      * 
      * @param userId  (required)
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param since  (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getUserOrdersStreamAsync(UUID userId, UUID orderbookId, OffsetDateTime since, final ApiCallback<InlineResponse2006> callback) throws ApiException {
+    public com.squareup.okhttp.Call getUserOrdersStreamAsync(UUID userId, UUID orderBookId, OffsetDateTime since, final ApiCallback<ListOrdersResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -4393,34 +4248,33 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getUserOrdersStreamValidateBeforeCall(userId, orderbookId, since, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
+        com.squareup.okhttp.Call call = getUserOrdersStreamValidateBeforeCall(userId, orderBookId, since, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ListOrdersResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for getUserOrdersStreamAll
      * @param userId  (required)
+     * @param orderBookId  (required)
      * @param since  (optional)
-     * @param orderbookIds  (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getUserOrdersStreamAllCall(UUID userId, OffsetDateTime since, List<UUID> orderbookIds, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getUserOrdersStreamAllCall(UUID userId, UUID orderBookId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
         String localVarPath = "/v1/user/{user_id}/orders/all/stream"
-            .replaceAll("\\{" + "user_id" + "\\}", apiClient.escapeString(userId.toString()));
+            .replaceAll("\\{" + "user_id" + "\\}", apiClient.escapeString(userId.toString()))
+            .replaceAll("\\{" + "order_book_id" + "\\}", apiClient.escapeString(orderBookId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (since != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("since", since));
-        if (orderbookIds != null)
-        localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("multi", "orderbookIds", orderbookIds));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -4458,13 +4312,17 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getUserOrdersStreamAllValidateBeforeCall(UUID userId, OffsetDateTime since, List<UUID> orderbookIds, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getUserOrdersStreamAllValidateBeforeCall(UUID userId, UUID orderBookId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling getUserOrdersStreamAll(Async)");
         }
+        // verify the required parameter 'orderBookId' is set
+        if (orderBookId == null) {
+            throw new ApiException("Missing the required parameter 'orderBookId' when calling getUserOrdersStreamAll(Async)");
+        }
         
-        com.squareup.okhttp.Call call = getUserOrdersStreamAllCall(userId, since, orderbookIds, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getUserOrdersStreamAllCall(userId, orderBookId, since, progressListener, progressRequestListener);
         return call;
 
         
@@ -4474,45 +4332,45 @@ public class DefaultApi {
     }
 
     /**
-     * Get a snapshot of user&#x27;s order updates since a specific time, and opens a stream for further updates
+     * Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
      * 
      * @param userId  (required)
+     * @param orderBookId  (required)
      * @param since  (optional)
-     * @param orderbookIds  (optional)
-     * @return InlineResponse2006
+     * @return ListOrdersResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2006 getUserOrdersStreamAll(UUID userId, OffsetDateTime since, List<UUID> orderbookIds) throws ApiException {
-        ApiResponse<InlineResponse2006> resp = getUserOrdersStreamAllWithHttpInfo(userId, since, orderbookIds);
+    public ListOrdersResponse getUserOrdersStreamAll(UUID userId, UUID orderBookId, OffsetDateTime since) throws ApiException {
+        ApiResponse<ListOrdersResponse> resp = getUserOrdersStreamAllWithHttpInfo(userId, orderBookId, since);
         return resp.getData();
     }
 
     /**
-     * Get a snapshot of user&#x27;s order updates since a specific time, and opens a stream for further updates
+     * Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
      * 
      * @param userId  (required)
+     * @param orderBookId  (required)
      * @param since  (optional)
-     * @param orderbookIds  (optional)
-     * @return ApiResponse&lt;InlineResponse2006&gt;
+     * @return ApiResponse&lt;ListOrdersResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2006> getUserOrdersStreamAllWithHttpInfo(UUID userId, OffsetDateTime since, List<UUID> orderbookIds) throws ApiException {
-        com.squareup.okhttp.Call call = getUserOrdersStreamAllValidateBeforeCall(userId, since, orderbookIds, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
+    public ApiResponse<ListOrdersResponse> getUserOrdersStreamAllWithHttpInfo(UUID userId, UUID orderBookId, OffsetDateTime since) throws ApiException {
+        com.squareup.okhttp.Call call = getUserOrdersStreamAllValidateBeforeCall(userId, orderBookId, since, null, null);
+        Type localVarReturnType = new TypeToken<ListOrdersResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
-     * Get a snapshot of user&#x27;s order updates since a specific time, and opens a stream for further updates (asynchronously)
+     * Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates (asynchronously)
      * 
      * @param userId  (required)
+     * @param orderBookId  (required)
      * @param since  (optional)
-     * @param orderbookIds  (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getUserOrdersStreamAllAsync(UUID userId, OffsetDateTime since, List<UUID> orderbookIds, final ApiCallback<InlineResponse2006> callback) throws ApiException {
+    public com.squareup.okhttp.Call getUserOrdersStreamAllAsync(UUID userId, UUID orderBookId, OffsetDateTime since, final ApiCallback<ListOrdersResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -4533,8 +4391,8 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getUserOrdersStreamAllValidateBeforeCall(userId, since, orderbookIds, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
+        com.squareup.okhttp.Call call = getUserOrdersStreamAllValidateBeforeCall(userId, orderBookId, since, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ListOrdersResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -4604,23 +4462,23 @@ public class DefaultApi {
     /**
      * Get user details for the authenticated user
      * 
-     * @return InlineResponse2003
+     * @return GetUserResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2003 getUserSelf() throws ApiException {
-        ApiResponse<InlineResponse2003> resp = getUserSelfWithHttpInfo();
+    public GetUserResponse getUserSelf() throws ApiException {
+        ApiResponse<GetUserResponse> resp = getUserSelfWithHttpInfo();
         return resp.getData();
     }
 
     /**
      * Get user details for the authenticated user
      * 
-     * @return ApiResponse&lt;InlineResponse2003&gt;
+     * @return ApiResponse&lt;GetUserResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2003> getUserSelfWithHttpInfo() throws ApiException {
+    public ApiResponse<GetUserResponse> getUserSelfWithHttpInfo() throws ApiException {
         com.squareup.okhttp.Call call = getUserSelfValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
+        Type localVarReturnType = new TypeToken<GetUserResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -4631,7 +4489,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getUserSelfAsync(final ApiCallback<InlineResponse2003> callback) throws ApiException {
+    public com.squareup.okhttp.Call getUserSelfAsync(final ApiCallback<GetUserResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -4653,7 +4511,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getUserSelfValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
+        Type localVarReturnType = new TypeToken<GetUserResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -4734,11 +4592,11 @@ public class DefaultApi {
      * 
      * @param userId  (required)
      * @param since  (optional)
-     * @return InlineResponse2008
+     * @return ListTransactionsResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2008 getUserTransactionsStream(UUID userId, OffsetDateTime since) throws ApiException {
-        ApiResponse<InlineResponse2008> resp = getUserTransactionsStreamWithHttpInfo(userId, since);
+    public ListTransactionsResponse getUserTransactionsStream(UUID userId, OffsetDateTime since) throws ApiException {
+        ApiResponse<ListTransactionsResponse> resp = getUserTransactionsStreamWithHttpInfo(userId, since);
         return resp.getData();
     }
 
@@ -4747,12 +4605,12 @@ public class DefaultApi {
      * 
      * @param userId  (required)
      * @param since  (optional)
-     * @return ApiResponse&lt;InlineResponse2008&gt;
+     * @return ApiResponse&lt;ListTransactionsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2008> getUserTransactionsStreamWithHttpInfo(UUID userId, OffsetDateTime since) throws ApiException {
+    public ApiResponse<ListTransactionsResponse> getUserTransactionsStreamWithHttpInfo(UUID userId, OffsetDateTime since) throws ApiException {
         com.squareup.okhttp.Call call = getUserTransactionsStreamValidateBeforeCall(userId, since, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2008>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListTransactionsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -4765,7 +4623,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getUserTransactionsStreamAsync(UUID userId, OffsetDateTime since, final ApiCallback<InlineResponse2008> callback) throws ApiException {
+    public com.squareup.okhttp.Call getUserTransactionsStreamAsync(UUID userId, OffsetDateTime since, final ApiCallback<ListTransactionsResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -4787,7 +4645,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = getUserTransactionsStreamValidateBeforeCall(userId, since, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2008>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListTransactionsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -4863,11 +4721,11 @@ public class DefaultApi {
      * Deposit assets into your account from the outside world
      * TODO: finish this when implementation has been completed
      * @param body  (required)
-     * @return InlineResponse201
+     * @return FundUserResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse201 ledgerDeposit(FundUserRequest body) throws ApiException {
-        ApiResponse<InlineResponse201> resp = ledgerDepositWithHttpInfo(body);
+    public FundUserResponse ledgerDeposit(FundUserRequest body) throws ApiException {
+        ApiResponse<FundUserResponse> resp = ledgerDepositWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -4875,12 +4733,12 @@ public class DefaultApi {
      * Deposit assets into your account from the outside world
      * TODO: finish this when implementation has been completed
      * @param body  (required)
-     * @return ApiResponse&lt;InlineResponse201&gt;
+     * @return ApiResponse&lt;FundUserResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse201> ledgerDepositWithHttpInfo(FundUserRequest body) throws ApiException {
+    public ApiResponse<FundUserResponse> ledgerDepositWithHttpInfo(FundUserRequest body) throws ApiException {
         com.squareup.okhttp.Call call = ledgerDepositValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse201>(){}.getType();
+        Type localVarReturnType = new TypeToken<FundUserResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -4892,7 +4750,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call ledgerDepositAsync(FundUserRequest body, final ApiCallback<InlineResponse201> callback) throws ApiException {
+    public com.squareup.okhttp.Call ledgerDepositAsync(FundUserRequest body, final ApiCallback<FundUserResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -4914,7 +4772,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = ledgerDepositValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse201>(){}.getType();
+        Type localVarReturnType = new TypeToken<FundUserResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -4990,11 +4848,11 @@ public class DefaultApi {
      * Withdraw assets from your account to the outside world
      * TODO: Finish this when implementation has been completed
      * @param body  (required)
-     * @return InlineResponse201
+     * @return FundUserResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse201 ledgerWithdraw(FundUserRequest body) throws ApiException {
-        ApiResponse<InlineResponse201> resp = ledgerWithdrawWithHttpInfo(body);
+    public FundUserResponse ledgerWithdraw(FundUserRequest body) throws ApiException {
+        ApiResponse<FundUserResponse> resp = ledgerWithdrawWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -5002,12 +4860,12 @@ public class DefaultApi {
      * Withdraw assets from your account to the outside world
      * TODO: Finish this when implementation has been completed
      * @param body  (required)
-     * @return ApiResponse&lt;InlineResponse201&gt;
+     * @return ApiResponse&lt;FundUserResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse201> ledgerWithdrawWithHttpInfo(FundUserRequest body) throws ApiException {
+    public ApiResponse<FundUserResponse> ledgerWithdrawWithHttpInfo(FundUserRequest body) throws ApiException {
         com.squareup.okhttp.Call call = ledgerWithdrawValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse201>(){}.getType();
+        Type localVarReturnType = new TypeToken<FundUserResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -5019,7 +4877,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call ledgerWithdrawAsync(FundUserRequest body, final ApiCallback<InlineResponse201> callback) throws ApiException {
+    public com.squareup.okhttp.Call ledgerWithdrawAsync(FundUserRequest body, final ApiCallback<FundUserResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -5041,7 +4899,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = ledgerWithdrawValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse201>(){}.getType();
+        Type localVarReturnType = new TypeToken<FundUserResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -5117,11 +4975,11 @@ public class DefaultApi {
      * Directly borrow assets
      * TODO: Finish this when implementation has been completed
      * @param body  (required)
-     * @return InlineResponse2015
+     * @return InlineResponse201
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2015 leverageBorrow(Object body) throws ApiException {
-        ApiResponse<InlineResponse2015> resp = leverageBorrowWithHttpInfo(body);
+    public InlineResponse201 leverageBorrow(Object body) throws ApiException {
+        ApiResponse<InlineResponse201> resp = leverageBorrowWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -5129,12 +4987,12 @@ public class DefaultApi {
      * Directly borrow assets
      * TODO: Finish this when implementation has been completed
      * @param body  (required)
-     * @return ApiResponse&lt;InlineResponse2015&gt;
+     * @return ApiResponse&lt;InlineResponse201&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2015> leverageBorrowWithHttpInfo(Object body) throws ApiException {
+    public ApiResponse<InlineResponse201> leverageBorrowWithHttpInfo(Object body) throws ApiException {
         com.squareup.okhttp.Call call = leverageBorrowValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2015>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse201>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -5146,7 +5004,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call leverageBorrowAsync(Object body, final ApiCallback<InlineResponse2015> callback) throws ApiException {
+    public com.squareup.okhttp.Call leverageBorrowAsync(Object body, final ApiCallback<InlineResponse201> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -5168,7 +5026,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = leverageBorrowValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2015>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse201>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -5244,11 +5102,11 @@ public class DefaultApi {
      * Move supplied and available to supplied_collateral and collateral, for a specified position
      * 
      * @param body  (required)
-     * @return InlineResponse2011
+     * @return CollateralizeResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2011 leverageCollateralize(CollateralizeRequest body) throws ApiException {
-        ApiResponse<InlineResponse2011> resp = leverageCollateralizeWithHttpInfo(body);
+    public CollateralizeResponse leverageCollateralize(CollateralizeRequest body) throws ApiException {
+        ApiResponse<CollateralizeResponse> resp = leverageCollateralizeWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -5256,12 +5114,12 @@ public class DefaultApi {
      * Move supplied and available to supplied_collateral and collateral, for a specified position
      * 
      * @param body  (required)
-     * @return ApiResponse&lt;InlineResponse2011&gt;
+     * @return ApiResponse&lt;CollateralizeResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2011> leverageCollateralizeWithHttpInfo(CollateralizeRequest body) throws ApiException {
+    public ApiResponse<CollateralizeResponse> leverageCollateralizeWithHttpInfo(CollateralizeRequest body) throws ApiException {
         com.squareup.okhttp.Call call = leverageCollateralizeValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2011>(){}.getType();
+        Type localVarReturnType = new TypeToken<CollateralizeResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -5273,7 +5131,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call leverageCollateralizeAsync(CollateralizeRequest body, final ApiCallback<InlineResponse2011> callback) throws ApiException {
+    public com.squareup.okhttp.Call leverageCollateralizeAsync(CollateralizeRequest body, final ApiCallback<CollateralizeResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -5295,7 +5153,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = leverageCollateralizeValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2011>(){}.getType();
+        Type localVarReturnType = new TypeToken<CollateralizeResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -5371,11 +5229,11 @@ public class DefaultApi {
      * Move collateral and supplied_collateral to available and supplied, for a specified position.
      * 
      * @param body  (required)
-     * @return InlineResponse2012
+     * @return DeCollateralizeResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2012 leverageDeCollateralize(DeCollateralizeRequest body) throws ApiException {
-        ApiResponse<InlineResponse2012> resp = leverageDeCollateralizeWithHttpInfo(body);
+    public DeCollateralizeResponse leverageDeCollateralize(DeCollateralizeRequest body) throws ApiException {
+        ApiResponse<DeCollateralizeResponse> resp = leverageDeCollateralizeWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -5383,12 +5241,12 @@ public class DefaultApi {
      * Move collateral and supplied_collateral to available and supplied, for a specified position.
      * 
      * @param body  (required)
-     * @return ApiResponse&lt;InlineResponse2012&gt;
+     * @return ApiResponse&lt;DeCollateralizeResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2012> leverageDeCollateralizeWithHttpInfo(DeCollateralizeRequest body) throws ApiException {
+    public ApiResponse<DeCollateralizeResponse> leverageDeCollateralizeWithHttpInfo(DeCollateralizeRequest body) throws ApiException {
         com.squareup.okhttp.Call call = leverageDeCollateralizeValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2012>(){}.getType();
+        Type localVarReturnType = new TypeToken<DeCollateralizeResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -5400,7 +5258,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call leverageDeCollateralizeAsync(DeCollateralizeRequest body, final ApiCallback<InlineResponse2012> callback) throws ApiException {
+    public com.squareup.okhttp.Call leverageDeCollateralizeAsync(DeCollateralizeRequest body, final ApiCallback<DeCollateralizeResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -5422,7 +5280,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = leverageDeCollateralizeValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2012>(){}.getType();
+        Type localVarReturnType = new TypeToken<DeCollateralizeResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -5498,11 +5356,11 @@ public class DefaultApi {
      * Create an isolated position by transferring collateral to the position from the user&#x27;s global collateral
      * 
      * @param body  (required)
-     * @return InlineResponse2016
+     * @return IsolateCollateralResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2016 leverageIsolateCollateral(IsolateCollateralRequest body) throws ApiException {
-        ApiResponse<InlineResponse2016> resp = leverageIsolateCollateralWithHttpInfo(body);
+    public IsolateCollateralResponse leverageIsolateCollateral(IsolateCollateralRequest body) throws ApiException {
+        ApiResponse<IsolateCollateralResponse> resp = leverageIsolateCollateralWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -5510,12 +5368,12 @@ public class DefaultApi {
      * Create an isolated position by transferring collateral to the position from the user&#x27;s global collateral
      * 
      * @param body  (required)
-     * @return ApiResponse&lt;InlineResponse2016&gt;
+     * @return ApiResponse&lt;IsolateCollateralResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2016> leverageIsolateCollateralWithHttpInfo(IsolateCollateralRequest body) throws ApiException {
+    public ApiResponse<IsolateCollateralResponse> leverageIsolateCollateralWithHttpInfo(IsolateCollateralRequest body) throws ApiException {
         com.squareup.okhttp.Call call = leverageIsolateCollateralValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2016>(){}.getType();
+        Type localVarReturnType = new TypeToken<IsolateCollateralResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -5527,7 +5385,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call leverageIsolateCollateralAsync(IsolateCollateralRequest body, final ApiCallback<InlineResponse2016> callback) throws ApiException {
+    public com.squareup.okhttp.Call leverageIsolateCollateralAsync(IsolateCollateralRequest body, final ApiCallback<IsolateCollateralResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -5549,7 +5407,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = leverageIsolateCollateralValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2016>(){}.getType();
+        Type localVarReturnType = new TypeToken<IsolateCollateralResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -5625,11 +5483,11 @@ public class DefaultApi {
      * Create an isolated position using all collateral, supplied_collateral, and borrows from the user&#x27;s global position
      * 
      * @param body  (required)
-     * @return InlineResponse2017
+     * @return IsolatePositionResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2017 leverageIsolatePosition(IsolatePositionRequest body) throws ApiException {
-        ApiResponse<InlineResponse2017> resp = leverageIsolatePositionWithHttpInfo(body);
+    public IsolatePositionResponse leverageIsolatePosition(IsolatePositionRequest body) throws ApiException {
+        ApiResponse<IsolatePositionResponse> resp = leverageIsolatePositionWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -5637,12 +5495,12 @@ public class DefaultApi {
      * Create an isolated position using all collateral, supplied_collateral, and borrows from the user&#x27;s global position
      * 
      * @param body  (required)
-     * @return ApiResponse&lt;InlineResponse2017&gt;
+     * @return ApiResponse&lt;IsolatePositionResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2017> leverageIsolatePositionWithHttpInfo(IsolatePositionRequest body) throws ApiException {
+    public ApiResponse<IsolatePositionResponse> leverageIsolatePositionWithHttpInfo(IsolatePositionRequest body) throws ApiException {
         com.squareup.okhttp.Call call = leverageIsolatePositionValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2017>(){}.getType();
+        Type localVarReturnType = new TypeToken<IsolatePositionResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -5654,7 +5512,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call leverageIsolatePositionAsync(IsolatePositionRequest body, final ApiCallback<InlineResponse2017> callback) throws ApiException {
+    public com.squareup.okhttp.Call leverageIsolatePositionAsync(IsolatePositionRequest body, final ApiCallback<IsolatePositionResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -5676,7 +5534,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = leverageIsolatePositionValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2017>(){}.getType();
+        Type localVarReturnType = new TypeToken<IsolatePositionResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -5752,11 +5610,11 @@ public class DefaultApi {
      * Repay borrowed assets
      * TODO: Finish this when implementation has been completed
      * @param body  (required)
-     * @return InlineResponse2015
+     * @return InlineResponse201
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2015 leverageRepay(Object body) throws ApiException {
-        ApiResponse<InlineResponse2015> resp = leverageRepayWithHttpInfo(body);
+    public InlineResponse201 leverageRepay(Object body) throws ApiException {
+        ApiResponse<InlineResponse201> resp = leverageRepayWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -5764,12 +5622,12 @@ public class DefaultApi {
      * Repay borrowed assets
      * TODO: Finish this when implementation has been completed
      * @param body  (required)
-     * @return ApiResponse&lt;InlineResponse2015&gt;
+     * @return ApiResponse&lt;InlineResponse201&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2015> leverageRepayWithHttpInfo(Object body) throws ApiException {
+    public ApiResponse<InlineResponse201> leverageRepayWithHttpInfo(Object body) throws ApiException {
         com.squareup.okhttp.Call call = leverageRepayValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2015>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse201>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -5781,7 +5639,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call leverageRepayAsync(Object body, final ApiCallback<InlineResponse2015> callback) throws ApiException {
+    public com.squareup.okhttp.Call leverageRepayAsync(Object body, final ApiCallback<InlineResponse201> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -5803,7 +5661,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = leverageRepayValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2015>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse201>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -5879,11 +5737,11 @@ public class DefaultApi {
      * Supply leverage for a specific asset
      * 
      * @param body  (required)
-     * @return InlineResponse2013
+     * @return SupplyResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2013 leverageSupply(SupplyRequest body) throws ApiException {
-        ApiResponse<InlineResponse2013> resp = leverageSupplyWithHttpInfo(body);
+    public SupplyResponse leverageSupply(SupplyRequest body) throws ApiException {
+        ApiResponse<SupplyResponse> resp = leverageSupplyWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -5891,12 +5749,12 @@ public class DefaultApi {
      * Supply leverage for a specific asset
      * 
      * @param body  (required)
-     * @return ApiResponse&lt;InlineResponse2013&gt;
+     * @return ApiResponse&lt;SupplyResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2013> leverageSupplyWithHttpInfo(SupplyRequest body) throws ApiException {
+    public ApiResponse<SupplyResponse> leverageSupplyWithHttpInfo(SupplyRequest body) throws ApiException {
         com.squareup.okhttp.Call call = leverageSupplyValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2013>(){}.getType();
+        Type localVarReturnType = new TypeToken<SupplyResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -5908,7 +5766,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call leverageSupplyAsync(SupplyRequest body, final ApiCallback<InlineResponse2013> callback) throws ApiException {
+    public com.squareup.okhttp.Call leverageSupplyAsync(SupplyRequest body, final ApiCallback<SupplyResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -5930,7 +5788,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = leverageSupplyValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2013>(){}.getType();
+        Type localVarReturnType = new TypeToken<SupplyResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -6006,11 +5864,11 @@ public class DefaultApi {
      * Combines all isolated positions into a single global position
      * TODO: Finish this when implementation has been completed
      * @param body  (required)
-     * @return InlineResponse20024
+     * @return UnitePositionResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20024 leverageUnite(UnitePositionRequest body) throws ApiException {
-        ApiResponse<InlineResponse20024> resp = leverageUniteWithHttpInfo(body);
+    public UnitePositionResponse leverageUnite(UnitePositionRequest body) throws ApiException {
+        ApiResponse<UnitePositionResponse> resp = leverageUniteWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -6018,12 +5876,12 @@ public class DefaultApi {
      * Combines all isolated positions into a single global position
      * TODO: Finish this when implementation has been completed
      * @param body  (required)
-     * @return ApiResponse&lt;InlineResponse20024&gt;
+     * @return ApiResponse&lt;UnitePositionResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20024> leverageUniteWithHttpInfo(UnitePositionRequest body) throws ApiException {
+    public ApiResponse<UnitePositionResponse> leverageUniteWithHttpInfo(UnitePositionRequest body) throws ApiException {
         com.squareup.okhttp.Call call = leverageUniteValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20024>(){}.getType();
+        Type localVarReturnType = new TypeToken<UnitePositionResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -6035,7 +5893,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call leverageUniteAsync(UnitePositionRequest body, final ApiCallback<InlineResponse20024> callback) throws ApiException {
+    public com.squareup.okhttp.Call leverageUniteAsync(UnitePositionRequest body, final ApiCallback<UnitePositionResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -6057,7 +5915,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = leverageUniteValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20024>(){}.getType();
+        Type localVarReturnType = new TypeToken<UnitePositionResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -6133,11 +5991,11 @@ public class DefaultApi {
      * Withdraw leverage for a specific asset
      * 
      * @param body  (required)
-     * @return InlineResponse2014
+     * @return WithdrawResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2014 leverageWithdraw(WithdrawRequest body) throws ApiException {
-        ApiResponse<InlineResponse2014> resp = leverageWithdrawWithHttpInfo(body);
+    public WithdrawResponse leverageWithdraw(WithdrawRequest body) throws ApiException {
+        ApiResponse<WithdrawResponse> resp = leverageWithdrawWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -6145,12 +6003,12 @@ public class DefaultApi {
      * Withdraw leverage for a specific asset
      * 
      * @param body  (required)
-     * @return ApiResponse&lt;InlineResponse2014&gt;
+     * @return ApiResponse&lt;WithdrawResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2014> leverageWithdrawWithHttpInfo(WithdrawRequest body) throws ApiException {
+    public ApiResponse<WithdrawResponse> leverageWithdrawWithHttpInfo(WithdrawRequest body) throws ApiException {
         com.squareup.okhttp.Call call = leverageWithdrawValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2014>(){}.getType();
+        Type localVarReturnType = new TypeToken<WithdrawResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -6162,7 +6020,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call leverageWithdrawAsync(WithdrawRequest body, final ApiCallback<InlineResponse2014> callback) throws ApiException {
+    public com.squareup.okhttp.Call leverageWithdrawAsync(WithdrawRequest body, final ApiCallback<WithdrawResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -6184,7 +6042,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = leverageWithdrawValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2014>(){}.getType();
+        Type localVarReturnType = new TypeToken<WithdrawResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -6267,11 +6125,11 @@ public class DefaultApi {
      * 
      * @param body  (required)
      * @param poolId  (required)
-     * @return InlineResponse2018
+     * @return LiquidityResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2018 liquidityAdd(LiquidityRequest body, UUID poolId) throws ApiException {
-        ApiResponse<InlineResponse2018> resp = liquidityAddWithHttpInfo(body, poolId);
+    public LiquidityResponse liquidityAdd(LiquidityRequest body, UUID poolId) throws ApiException {
+        ApiResponse<LiquidityResponse> resp = liquidityAddWithHttpInfo(body, poolId);
         return resp.getData();
     }
 
@@ -6280,12 +6138,12 @@ public class DefaultApi {
      * 
      * @param body  (required)
      * @param poolId  (required)
-     * @return ApiResponse&lt;InlineResponse2018&gt;
+     * @return ApiResponse&lt;LiquidityResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2018> liquidityAddWithHttpInfo(LiquidityRequest body, UUID poolId) throws ApiException {
+    public ApiResponse<LiquidityResponse> liquidityAddWithHttpInfo(LiquidityRequest body, UUID poolId) throws ApiException {
         com.squareup.okhttp.Call call = liquidityAddValidateBeforeCall(body, poolId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2018>(){}.getType();
+        Type localVarReturnType = new TypeToken<LiquidityResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -6298,7 +6156,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call liquidityAddAsync(LiquidityRequest body, UUID poolId, final ApiCallback<InlineResponse2018> callback) throws ApiException {
+    public com.squareup.okhttp.Call liquidityAddAsync(LiquidityRequest body, UUID poolId, final ApiCallback<LiquidityResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -6320,7 +6178,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = liquidityAddValidateBeforeCall(body, poolId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2018>(){}.getType();
+        Type localVarReturnType = new TypeToken<LiquidityResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -6403,11 +6261,11 @@ public class DefaultApi {
      * 
      * @param body  (required)
      * @param poolId  (required)
-     * @return InlineResponse2018
+     * @return LiquidityResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2018 liquiditySubtract(LiquidityRequest body, UUID poolId) throws ApiException {
-        ApiResponse<InlineResponse2018> resp = liquiditySubtractWithHttpInfo(body, poolId);
+    public LiquidityResponse liquiditySubtract(LiquidityRequest body, UUID poolId) throws ApiException {
+        ApiResponse<LiquidityResponse> resp = liquiditySubtractWithHttpInfo(body, poolId);
         return resp.getData();
     }
 
@@ -6416,12 +6274,12 @@ public class DefaultApi {
      * 
      * @param body  (required)
      * @param poolId  (required)
-     * @return ApiResponse&lt;InlineResponse2018&gt;
+     * @return ApiResponse&lt;LiquidityResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2018> liquiditySubtractWithHttpInfo(LiquidityRequest body, UUID poolId) throws ApiException {
+    public ApiResponse<LiquidityResponse> liquiditySubtractWithHttpInfo(LiquidityRequest body, UUID poolId) throws ApiException {
         com.squareup.okhttp.Call call = liquiditySubtractValidateBeforeCall(body, poolId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2018>(){}.getType();
+        Type localVarReturnType = new TypeToken<LiquidityResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -6434,7 +6292,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call liquiditySubtractAsync(LiquidityRequest body, UUID poolId, final ApiCallback<InlineResponse2018> callback) throws ApiException {
+    public com.squareup.okhttp.Call liquiditySubtractAsync(LiquidityRequest body, UUID poolId, final ApiCallback<LiquidityResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -6456,7 +6314,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = liquiditySubtractValidateBeforeCall(body, poolId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2018>(){}.getType();
+        Type localVarReturnType = new TypeToken<LiquidityResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -6477,7 +6335,7 @@ public class DefaultApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listAssetsCall(OffsetDateTime createdAfter, OffsetDateTime createdBefore, String assetKind, Boolean canAddLiquidity, Boolean canDirectBorrow, Boolean canOnboard, Boolean canTrade, Boolean canVirtualBorrow, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listAssetsCall(OffsetDateTime createdAfter, OffsetDateTime createdBefore, AssetKind assetKind, Boolean canAddLiquidity, Boolean canDirectBorrow, Boolean canOnboard, Boolean canTrade, Boolean canVirtualBorrow, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -6542,7 +6400,7 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listAssetsValidateBeforeCall(OffsetDateTime createdAfter, OffsetDateTime createdBefore, String assetKind, Boolean canAddLiquidity, Boolean canDirectBorrow, Boolean canOnboard, Boolean canTrade, Boolean canVirtualBorrow, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listAssetsValidateBeforeCall(OffsetDateTime createdAfter, OffsetDateTime createdBefore, AssetKind assetKind, Boolean canAddLiquidity, Boolean canDirectBorrow, Boolean canOnboard, Boolean canTrade, Boolean canVirtualBorrow, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = listAssetsCall(createdAfter, createdBefore, assetKind, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, page, limit, progressListener, progressRequestListener);
         return call;
@@ -6566,11 +6424,11 @@ public class DefaultApi {
      * @param canVirtualBorrow  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
-     * @return InlineResponse200
+     * @return ListAssetsResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse200 listAssets(OffsetDateTime createdAfter, OffsetDateTime createdBefore, String assetKind, Boolean canAddLiquidity, Boolean canDirectBorrow, Boolean canOnboard, Boolean canTrade, Boolean canVirtualBorrow, Integer page, Integer limit) throws ApiException {
-        ApiResponse<InlineResponse200> resp = listAssetsWithHttpInfo(createdAfter, createdBefore, assetKind, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, page, limit);
+    public ListAssetsResponse listAssets(OffsetDateTime createdAfter, OffsetDateTime createdBefore, AssetKind assetKind, Boolean canAddLiquidity, Boolean canDirectBorrow, Boolean canOnboard, Boolean canTrade, Boolean canVirtualBorrow, Integer page, Integer limit) throws ApiException {
+        ApiResponse<ListAssetsResponse> resp = listAssetsWithHttpInfo(createdAfter, createdBefore, assetKind, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, page, limit);
         return resp.getData();
     }
 
@@ -6587,12 +6445,12 @@ public class DefaultApi {
      * @param canVirtualBorrow  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
-     * @return ApiResponse&lt;InlineResponse200&gt;
+     * @return ApiResponse&lt;ListAssetsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse200> listAssetsWithHttpInfo(OffsetDateTime createdAfter, OffsetDateTime createdBefore, String assetKind, Boolean canAddLiquidity, Boolean canDirectBorrow, Boolean canOnboard, Boolean canTrade, Boolean canVirtualBorrow, Integer page, Integer limit) throws ApiException {
+    public ApiResponse<ListAssetsResponse> listAssetsWithHttpInfo(OffsetDateTime createdAfter, OffsetDateTime createdBefore, AssetKind assetKind, Boolean canAddLiquidity, Boolean canDirectBorrow, Boolean canOnboard, Boolean canTrade, Boolean canVirtualBorrow, Integer page, Integer limit) throws ApiException {
         com.squareup.okhttp.Call call = listAssetsValidateBeforeCall(createdAfter, createdBefore, assetKind, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, page, limit, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse200>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListAssetsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -6613,7 +6471,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listAssetsAsync(OffsetDateTime createdAfter, OffsetDateTime createdBefore, String assetKind, Boolean canAddLiquidity, Boolean canDirectBorrow, Boolean canOnboard, Boolean canTrade, Boolean canVirtualBorrow, Integer page, Integer limit, final ApiCallback<InlineResponse200> callback) throws ApiException {
+    public com.squareup.okhttp.Call listAssetsAsync(OffsetDateTime createdAfter, OffsetDateTime createdBefore, AssetKind assetKind, Boolean canAddLiquidity, Boolean canDirectBorrow, Boolean canOnboard, Boolean canTrade, Boolean canVirtualBorrow, Integer page, Integer limit, final ApiCallback<ListAssetsResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -6635,7 +6493,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = listAssetsValidateBeforeCall(createdAfter, createdBefore, assetKind, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, page, limit, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse200>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListAssetsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -6651,7 +6509,7 @@ public class DefaultApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listOrderBooksCall(String status, UUID baseAssetId, UUID quoteAssetId, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listOrderBooksCall(OrderBookStatus status, UUID baseAssetId, UUID quoteAssetId, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -6706,7 +6564,7 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listOrderBooksValidateBeforeCall(String status, UUID baseAssetId, UUID quoteAssetId, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listOrderBooksValidateBeforeCall(OrderBookStatus status, UUID baseAssetId, UUID quoteAssetId, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = listOrderBooksCall(status, baseAssetId, quoteAssetId, page, limit, progressListener, progressRequestListener);
         return call;
@@ -6725,11 +6583,11 @@ public class DefaultApi {
      * @param quoteAssetId  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
-     * @return InlineResponse2009
+     * @return ListOrderBooksResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2009 listOrderBooks(String status, UUID baseAssetId, UUID quoteAssetId, Integer page, Integer limit) throws ApiException {
-        ApiResponse<InlineResponse2009> resp = listOrderBooksWithHttpInfo(status, baseAssetId, quoteAssetId, page, limit);
+    public ListOrderBooksResponse listOrderBooks(OrderBookStatus status, UUID baseAssetId, UUID quoteAssetId, Integer page, Integer limit) throws ApiException {
+        ApiResponse<ListOrderBooksResponse> resp = listOrderBooksWithHttpInfo(status, baseAssetId, quoteAssetId, page, limit);
         return resp.getData();
     }
 
@@ -6741,12 +6599,12 @@ public class DefaultApi {
      * @param quoteAssetId  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
-     * @return ApiResponse&lt;InlineResponse2009&gt;
+     * @return ApiResponse&lt;ListOrderBooksResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2009> listOrderBooksWithHttpInfo(String status, UUID baseAssetId, UUID quoteAssetId, Integer page, Integer limit) throws ApiException {
+    public ApiResponse<ListOrderBooksResponse> listOrderBooksWithHttpInfo(OrderBookStatus status, UUID baseAssetId, UUID quoteAssetId, Integer page, Integer limit) throws ApiException {
         com.squareup.okhttp.Call call = listOrderBooksValidateBeforeCall(status, baseAssetId, quoteAssetId, page, limit, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2009>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListOrderBooksResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -6762,7 +6620,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listOrderBooksAsync(String status, UUID baseAssetId, UUID quoteAssetId, Integer page, Integer limit, final ApiCallback<InlineResponse2009> callback) throws ApiException {
+    public com.squareup.okhttp.Call listOrderBooksAsync(OrderBookStatus status, UUID baseAssetId, UUID quoteAssetId, Integer page, Integer limit, final ApiCallback<ListOrderBooksResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -6784,13 +6642,13 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = listOrderBooksValidateBeforeCall(status, baseAssetId, quoteAssetId, page, limit, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2009>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListOrderBooksResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for listOrders
-     * @param orderbookId  (optional)
+     * @param orderBookId  (optional)
      * @param kind  (optional)
      * @param status  (optional)
      * @param side  (optional)
@@ -6803,7 +6661,7 @@ public class DefaultApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listOrdersCall(List<UUID> orderbookId, String kind, String status, String side, OffsetDateTime from, OffsetDateTime to, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listOrdersCall(List<UUID> orderBookId, OrderKind kind, OrderStatus status, Side side, OffsetDateTime from, OffsetDateTime to, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -6811,8 +6669,8 @@ public class DefaultApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (orderbookId != null)
-        localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("multi", "orderbook_id", orderbookId));
+        if (orderBookId != null)
+        localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("multi", "order_book_id", orderBookId));
         if (kind != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("kind", kind));
         if (status != null)
@@ -6864,9 +6722,9 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listOrdersValidateBeforeCall(List<UUID> orderbookId, String kind, String status, String side, OffsetDateTime from, OffsetDateTime to, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listOrdersValidateBeforeCall(List<UUID> orderBookId, OrderKind kind, OrderStatus status, Side side, OffsetDateTime from, OffsetDateTime to, Integer page, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        com.squareup.okhttp.Call call = listOrdersCall(orderbookId, kind, status, side, from, to, page, limit, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listOrdersCall(orderBookId, kind, status, side, from, to, page, limit, progressListener, progressRequestListener);
         return call;
 
         
@@ -6878,7 +6736,7 @@ public class DefaultApi {
     /**
      * List all orders
      * 
-     * @param orderbookId  (optional)
+     * @param orderBookId  (optional)
      * @param kind  (optional)
      * @param status  (optional)
      * @param side  (optional)
@@ -6886,18 +6744,18 @@ public class DefaultApi {
      * @param to  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
-     * @return InlineResponse2006
+     * @return ListOrdersResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2006 listOrders(List<UUID> orderbookId, String kind, String status, String side, OffsetDateTime from, OffsetDateTime to, Integer page, Integer limit) throws ApiException {
-        ApiResponse<InlineResponse2006> resp = listOrdersWithHttpInfo(orderbookId, kind, status, side, from, to, page, limit);
+    public ListOrdersResponse listOrders(List<UUID> orderBookId, OrderKind kind, OrderStatus status, Side side, OffsetDateTime from, OffsetDateTime to, Integer page, Integer limit) throws ApiException {
+        ApiResponse<ListOrdersResponse> resp = listOrdersWithHttpInfo(orderBookId, kind, status, side, from, to, page, limit);
         return resp.getData();
     }
 
     /**
      * List all orders
      * 
-     * @param orderbookId  (optional)
+     * @param orderBookId  (optional)
      * @param kind  (optional)
      * @param status  (optional)
      * @param side  (optional)
@@ -6905,19 +6763,19 @@ public class DefaultApi {
      * @param to  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
-     * @return ApiResponse&lt;InlineResponse2006&gt;
+     * @return ApiResponse&lt;ListOrdersResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2006> listOrdersWithHttpInfo(List<UUID> orderbookId, String kind, String status, String side, OffsetDateTime from, OffsetDateTime to, Integer page, Integer limit) throws ApiException {
-        com.squareup.okhttp.Call call = listOrdersValidateBeforeCall(orderbookId, kind, status, side, from, to, page, limit, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
+    public ApiResponse<ListOrdersResponse> listOrdersWithHttpInfo(List<UUID> orderBookId, OrderKind kind, OrderStatus status, Side side, OffsetDateTime from, OffsetDateTime to, Integer page, Integer limit) throws ApiException {
+        com.squareup.okhttp.Call call = listOrdersValidateBeforeCall(orderBookId, kind, status, side, from, to, page, limit, null, null);
+        Type localVarReturnType = new TypeToken<ListOrdersResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * List all orders (asynchronously)
      * 
-     * @param orderbookId  (optional)
+     * @param orderBookId  (optional)
      * @param kind  (optional)
      * @param status  (optional)
      * @param side  (optional)
@@ -6929,7 +6787,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listOrdersAsync(List<UUID> orderbookId, String kind, String status, String side, OffsetDateTime from, OffsetDateTime to, Integer page, Integer limit, final ApiCallback<InlineResponse2006> callback) throws ApiException {
+    public com.squareup.okhttp.Call listOrdersAsync(List<UUID> orderBookId, OrderKind kind, OrderStatus status, Side side, OffsetDateTime from, OffsetDateTime to, Integer page, Integer limit, final ApiCallback<ListOrdersResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -6950,8 +6808,8 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listOrdersValidateBeforeCall(orderbookId, kind, status, side, from, to, page, limit, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
+        com.squareup.okhttp.Call call = listOrdersValidateBeforeCall(orderBookId, kind, status, side, from, to, page, limit, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ListOrdersResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -7025,11 +6883,11 @@ public class DefaultApi {
      * Get a snapshot of asset prices from a specific date and open a stream for real-time updates
      * 
      * @param since  (optional)
-     * @return InlineResponse20028
+     * @return InlineResponse200
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20028 streamAssetPrices(OffsetDateTime since) throws ApiException {
-        ApiResponse<InlineResponse20028> resp = streamAssetPricesWithHttpInfo(since);
+    public InlineResponse200 streamAssetPrices(OffsetDateTime since) throws ApiException {
+        ApiResponse<InlineResponse200> resp = streamAssetPricesWithHttpInfo(since);
         return resp.getData();
     }
 
@@ -7037,12 +6895,12 @@ public class DefaultApi {
      * Get a snapshot of asset prices from a specific date and open a stream for real-time updates
      * 
      * @param since  (optional)
-     * @return ApiResponse&lt;InlineResponse20028&gt;
+     * @return ApiResponse&lt;InlineResponse200&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20028> streamAssetPricesWithHttpInfo(OffsetDateTime since) throws ApiException {
+    public ApiResponse<InlineResponse200> streamAssetPricesWithHttpInfo(OffsetDateTime since) throws ApiException {
         com.squareup.okhttp.Call call = streamAssetPricesValidateBeforeCall(since, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20028>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse200>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -7054,7 +6912,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call streamAssetPricesAsync(OffsetDateTime since, final ApiCallback<InlineResponse20028> callback) throws ApiException {
+    public com.squareup.okhttp.Call streamAssetPricesAsync(OffsetDateTime since, final ApiCallback<InlineResponse200> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -7076,7 +6934,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = streamAssetPricesValidateBeforeCall(since, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20028>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse200>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -7090,11 +6948,11 @@ public class DefaultApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call streamCandleDataCall(String orderbook, OffsetDateTime since, String resolution, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call streamCandleDataCall(String orderbook, OffsetDateTime since, CandleResolution resolution, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/charts/candle/stream/{orderbook}"
+        String localVarPath = "/v1/charts/{orderbook}/candle/stream"
             .replaceAll("\\{" + "orderbook" + "\\}", apiClient.escapeString(orderbook.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -7140,7 +6998,7 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call streamCandleDataValidateBeforeCall(String orderbook, OffsetDateTime since, String resolution, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call streamCandleDataValidateBeforeCall(String orderbook, OffsetDateTime since, CandleResolution resolution, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'orderbook' is set
         if (orderbook == null) {
             throw new ApiException("Missing the required parameter 'orderbook' when calling streamCandleData(Async)");
@@ -7161,11 +7019,11 @@ public class DefaultApi {
      * @param orderbook  (required)
      * @param since  (optional)
      * @param resolution  (optional)
-     * @return InlineResponse20017
+     * @return ListCandlesResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20017 streamCandleData(String orderbook, OffsetDateTime since, String resolution) throws ApiException {
-        ApiResponse<InlineResponse20017> resp = streamCandleDataWithHttpInfo(orderbook, since, resolution);
+    public ListCandlesResponse streamCandleData(String orderbook, OffsetDateTime since, CandleResolution resolution) throws ApiException {
+        ApiResponse<ListCandlesResponse> resp = streamCandleDataWithHttpInfo(orderbook, since, resolution);
         return resp.getData();
     }
 
@@ -7175,12 +7033,12 @@ public class DefaultApi {
      * @param orderbook  (required)
      * @param since  (optional)
      * @param resolution  (optional)
-     * @return ApiResponse&lt;InlineResponse20017&gt;
+     * @return ApiResponse&lt;ListCandlesResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20017> streamCandleDataWithHttpInfo(String orderbook, OffsetDateTime since, String resolution) throws ApiException {
+    public ApiResponse<ListCandlesResponse> streamCandleDataWithHttpInfo(String orderbook, OffsetDateTime since, CandleResolution resolution) throws ApiException {
         com.squareup.okhttp.Call call = streamCandleDataValidateBeforeCall(orderbook, since, resolution, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20017>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListCandlesResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -7194,7 +7052,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call streamCandleDataAsync(String orderbook, OffsetDateTime since, String resolution, final ApiCallback<InlineResponse20017> callback) throws ApiException {
+    public com.squareup.okhttp.Call streamCandleDataAsync(String orderbook, OffsetDateTime since, CandleResolution resolution, final ApiCallback<ListCandlesResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -7216,25 +7074,25 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = streamCandleDataValidateBeforeCall(orderbook, since, resolution, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20017>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListCandlesResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for streamOrderBookBalances
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param since  (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call streamOrderBookBalancesCall(UUID orderbookId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call streamOrderBookBalancesCall(UUID orderBookId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/orderbooks/{orderbook_id}/stream/balances"
-            .replaceAll("\\{" + "orderbook_id" + "\\}", apiClient.escapeString(orderbookId.toString()));
+        String localVarPath = "/v1/orderbooks/{order_book_id}/stream/balances"
+            .replaceAll("\\{" + "order_book_id" + "\\}", apiClient.escapeString(orderBookId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -7277,13 +7135,13 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call streamOrderBookBalancesValidateBeforeCall(UUID orderbookId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        // verify the required parameter 'orderbookId' is set
-        if (orderbookId == null) {
-            throw new ApiException("Missing the required parameter 'orderbookId' when calling streamOrderBookBalances(Async)");
+    private com.squareup.okhttp.Call streamOrderBookBalancesValidateBeforeCall(UUID orderBookId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'orderBookId' is set
+        if (orderBookId == null) {
+            throw new ApiException("Missing the required parameter 'orderBookId' when calling streamOrderBookBalances(Async)");
         }
         
-        com.squareup.okhttp.Call call = streamOrderBookBalancesCall(orderbookId, since, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = streamOrderBookBalancesCall(orderBookId, since, progressListener, progressRequestListener);
         return call;
 
         
@@ -7295,40 +7153,40 @@ public class DefaultApi {
     /**
      * Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
      * 
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param since  (optional)
-     * @return InlineResponse20014
+     * @return OrderBookBalanceResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse20014 streamOrderBookBalances(UUID orderbookId, OffsetDateTime since) throws ApiException {
-        ApiResponse<InlineResponse20014> resp = streamOrderBookBalancesWithHttpInfo(orderbookId, since);
+    public OrderBookBalanceResponse streamOrderBookBalances(UUID orderBookId, OffsetDateTime since) throws ApiException {
+        ApiResponse<OrderBookBalanceResponse> resp = streamOrderBookBalancesWithHttpInfo(orderBookId, since);
         return resp.getData();
     }
 
     /**
      * Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
      * 
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param since  (optional)
-     * @return ApiResponse&lt;InlineResponse20014&gt;
+     * @return ApiResponse&lt;OrderBookBalanceResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse20014> streamOrderBookBalancesWithHttpInfo(UUID orderbookId, OffsetDateTime since) throws ApiException {
-        com.squareup.okhttp.Call call = streamOrderBookBalancesValidateBeforeCall(orderbookId, since, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse20014>(){}.getType();
+    public ApiResponse<OrderBookBalanceResponse> streamOrderBookBalancesWithHttpInfo(UUID orderBookId, OffsetDateTime since) throws ApiException {
+        com.squareup.okhttp.Call call = streamOrderBookBalancesValidateBeforeCall(orderBookId, since, null, null);
+        Type localVarReturnType = new TypeToken<OrderBookBalanceResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Get a snapshot of base and quote balances for an order book and open a stream for real-time updates (asynchronously)
      * 
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param since  (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call streamOrderBookBalancesAsync(UUID orderbookId, OffsetDateTime since, final ApiCallback<InlineResponse20014> callback) throws ApiException {
+    public com.squareup.okhttp.Call streamOrderBookBalancesAsync(UUID orderBookId, OffsetDateTime since, final ApiCallback<OrderBookBalanceResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -7349,26 +7207,26 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = streamOrderBookBalancesValidateBeforeCall(orderbookId, since, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse20014>(){}.getType();
+        com.squareup.okhttp.Call call = streamOrderBookBalancesValidateBeforeCall(orderBookId, since, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<OrderBookBalanceResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for streamOrderbookOpenOrders
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param since  (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call streamOrderbookOpenOrdersCall(UUID orderbookId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call streamOrderbookOpenOrdersCall(UUID orderBookId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/orderbooks/{orderbook_id}/stream/open"
-            .replaceAll("\\{" + "orderbook_id" + "\\}", apiClient.escapeString(orderbookId.toString()));
+        String localVarPath = "/v1/orderbooks/{order_book_id}/stream/open"
+            .replaceAll("\\{" + "order_book_id" + "\\}", apiClient.escapeString(orderBookId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -7411,13 +7269,13 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call streamOrderbookOpenOrdersValidateBeforeCall(UUID orderbookId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        // verify the required parameter 'orderbookId' is set
-        if (orderbookId == null) {
-            throw new ApiException("Missing the required parameter 'orderbookId' when calling streamOrderbookOpenOrders(Async)");
+    private com.squareup.okhttp.Call streamOrderbookOpenOrdersValidateBeforeCall(UUID orderBookId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'orderBookId' is set
+        if (orderBookId == null) {
+            throw new ApiException("Missing the required parameter 'orderBookId' when calling streamOrderbookOpenOrders(Async)");
         }
         
-        com.squareup.okhttp.Call call = streamOrderbookOpenOrdersCall(orderbookId, since, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = streamOrderbookOpenOrdersCall(orderBookId, since, progressListener, progressRequestListener);
         return call;
 
         
@@ -7429,40 +7287,40 @@ public class DefaultApi {
     /**
      * Get a snapshot of open orders in an order book and open a stream for real-time updates
      * 
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param since  (optional)
-     * @return InlineResponse2006
+     * @return ListOrdersResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2006 streamOrderbookOpenOrders(UUID orderbookId, OffsetDateTime since) throws ApiException {
-        ApiResponse<InlineResponse2006> resp = streamOrderbookOpenOrdersWithHttpInfo(orderbookId, since);
+    public ListOrdersResponse streamOrderbookOpenOrders(UUID orderBookId, OffsetDateTime since) throws ApiException {
+        ApiResponse<ListOrdersResponse> resp = streamOrderbookOpenOrdersWithHttpInfo(orderBookId, since);
         return resp.getData();
     }
 
     /**
      * Get a snapshot of open orders in an order book and open a stream for real-time updates
      * 
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param since  (optional)
-     * @return ApiResponse&lt;InlineResponse2006&gt;
+     * @return ApiResponse&lt;ListOrdersResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2006> streamOrderbookOpenOrdersWithHttpInfo(UUID orderbookId, OffsetDateTime since) throws ApiException {
-        com.squareup.okhttp.Call call = streamOrderbookOpenOrdersValidateBeforeCall(orderbookId, since, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
+    public ApiResponse<ListOrdersResponse> streamOrderbookOpenOrdersWithHttpInfo(UUID orderBookId, OffsetDateTime since) throws ApiException {
+        com.squareup.okhttp.Call call = streamOrderbookOpenOrdersValidateBeforeCall(orderBookId, since, null, null);
+        Type localVarReturnType = new TypeToken<ListOrdersResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Get a snapshot of open orders in an order book and open a stream for real-time updates (asynchronously)
      * 
-     * @param orderbookId  (required)
+     * @param orderBookId  (required)
      * @param since  (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call streamOrderbookOpenOrdersAsync(UUID orderbookId, OffsetDateTime since, final ApiCallback<InlineResponse2006> callback) throws ApiException {
+    public com.squareup.okhttp.Call streamOrderbookOpenOrdersAsync(UUID orderBookId, OffsetDateTime since, final ApiCallback<ListOrdersResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -7483,8 +7341,8 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = streamOrderbookOpenOrdersValidateBeforeCall(orderbookId, since, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
+        com.squareup.okhttp.Call call = streamOrderbookOpenOrdersValidateBeforeCall(orderBookId, since, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ListOrdersResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -7501,7 +7359,7 @@ public class DefaultApi {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/trade/{orderbook_id}/stream"
+        String localVarPath = "/v1/trade/{order_book_id}/stream"
             .replaceAll("\\{" + "orderbookId" + "\\}", apiClient.escapeString(orderbookId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -7561,34 +7419,34 @@ public class DefaultApi {
     }
 
     /**
-     * Get a snapshot of trades from a specific date and open a stream for real-time updates
+     * Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
      * 
      * @param orderbookId  (required)
      * @param since  (optional)
-     * @return TradeResponse
+     * @return ListTradeResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public TradeResponse streamTrades(UUID orderbookId, OffsetDateTime since) throws ApiException {
-        ApiResponse<TradeResponse> resp = streamTradesWithHttpInfo(orderbookId, since);
+    public ListTradeResponse streamTrades(UUID orderbookId, OffsetDateTime since) throws ApiException {
+        ApiResponse<ListTradeResponse> resp = streamTradesWithHttpInfo(orderbookId, since);
         return resp.getData();
     }
 
     /**
-     * Get a snapshot of trades from a specific date and open a stream for real-time updates
+     * Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
      * 
      * @param orderbookId  (required)
      * @param since  (optional)
-     * @return ApiResponse&lt;TradeResponse&gt;
+     * @return ApiResponse&lt;ListTradeResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<TradeResponse> streamTradesWithHttpInfo(UUID orderbookId, OffsetDateTime since) throws ApiException {
+    public ApiResponse<ListTradeResponse> streamTradesWithHttpInfo(UUID orderbookId, OffsetDateTime since) throws ApiException {
         com.squareup.okhttp.Call call = streamTradesValidateBeforeCall(orderbookId, since, null, null);
-        Type localVarReturnType = new TypeToken<TradeResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListTradeResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
-     * Get a snapshot of trades from a specific date and open a stream for real-time updates (asynchronously)
+     * Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates (asynchronously)
      * 
      * @param orderbookId  (required)
      * @param since  (optional)
@@ -7596,7 +7454,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call streamTradesAsync(UUID orderbookId, OffsetDateTime since, final ApiCallback<TradeResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call streamTradesAsync(UUID orderbookId, OffsetDateTime since, final ApiCallback<ListTradeResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -7618,7 +7476,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = streamTradesValidateBeforeCall(orderbookId, since, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<TradeResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<ListTradeResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -7701,11 +7559,11 @@ public class DefaultApi {
      * 
      * @param body  (required)
      * @param userId  (required)
-     * @return InlineResponse2005
+     * @return UserUpdatedResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2005 updateUserConfig(UpdateUserConfigRequest body, UUID userId) throws ApiException {
-        ApiResponse<InlineResponse2005> resp = updateUserConfigWithHttpInfo(body, userId);
+    public UserUpdatedResponse updateUserConfig(UpdateUserConfigRequest body, UUID userId) throws ApiException {
+        ApiResponse<UserUpdatedResponse> resp = updateUserConfigWithHttpInfo(body, userId);
         return resp.getData();
     }
 
@@ -7714,12 +7572,12 @@ public class DefaultApi {
      * 
      * @param body  (required)
      * @param userId  (required)
-     * @return ApiResponse&lt;InlineResponse2005&gt;
+     * @return ApiResponse&lt;UserUpdatedResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2005> updateUserConfigWithHttpInfo(UpdateUserConfigRequest body, UUID userId) throws ApiException {
+    public ApiResponse<UserUpdatedResponse> updateUserConfigWithHttpInfo(UpdateUserConfigRequest body, UUID userId) throws ApiException {
         com.squareup.okhttp.Call call = updateUserConfigValidateBeforeCall(body, userId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2005>(){}.getType();
+        Type localVarReturnType = new TypeToken<UserUpdatedResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -7732,7 +7590,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call updateUserConfigAsync(UpdateUserConfigRequest body, UUID userId, final ApiCallback<InlineResponse2005> callback) throws ApiException {
+    public com.squareup.okhttp.Call updateUserConfigAsync(UpdateUserConfigRequest body, UUID userId, final ApiCallback<UserUpdatedResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -7754,7 +7612,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = updateUserConfigValidateBeforeCall(body, userId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2005>(){}.getType();
+        Type localVarReturnType = new TypeToken<UserUpdatedResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -7830,11 +7688,11 @@ public class DefaultApi {
      * Update user configuration for the authenticated user
      * 
      * @param body  (required)
-     * @return InlineResponse2005
+     * @return UserUpdatedResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2005 updateUserConfigSelf(UpdateUserConfigRequest body) throws ApiException {
-        ApiResponse<InlineResponse2005> resp = updateUserConfigSelfWithHttpInfo(body);
+    public UserUpdatedResponse updateUserConfigSelf(UpdateUserConfigRequest body) throws ApiException {
+        ApiResponse<UserUpdatedResponse> resp = updateUserConfigSelfWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -7842,12 +7700,12 @@ public class DefaultApi {
      * Update user configuration for the authenticated user
      * 
      * @param body  (required)
-     * @return ApiResponse&lt;InlineResponse2005&gt;
+     * @return ApiResponse&lt;UserUpdatedResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2005> updateUserConfigSelfWithHttpInfo(UpdateUserConfigRequest body) throws ApiException {
+    public ApiResponse<UserUpdatedResponse> updateUserConfigSelfWithHttpInfo(UpdateUserConfigRequest body) throws ApiException {
         com.squareup.okhttp.Call call = updateUserConfigSelfValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2005>(){}.getType();
+        Type localVarReturnType = new TypeToken<UserUpdatedResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -7859,7 +7717,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call updateUserConfigSelfAsync(UpdateUserConfigRequest body, final ApiCallback<InlineResponse2005> callback) throws ApiException {
+    public com.squareup.okhttp.Call updateUserConfigSelfAsync(UpdateUserConfigRequest body, final ApiCallback<UserUpdatedResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -7881,7 +7739,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = updateUserConfigSelfValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2005>(){}.getType();
+        Type localVarReturnType = new TypeToken<UserUpdatedResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -7958,11 +7816,11 @@ public class DefaultApi {
      * Verify a user by ID
      * 
      * @param userId  (required)
-     * @return InlineResponse2005
+     * @return UserUpdatedResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2005 verifyUser(UUID userId) throws ApiException {
-        ApiResponse<InlineResponse2005> resp = verifyUserWithHttpInfo(userId);
+    public UserUpdatedResponse verifyUser(UUID userId) throws ApiException {
+        ApiResponse<UserUpdatedResponse> resp = verifyUserWithHttpInfo(userId);
         return resp.getData();
     }
 
@@ -7970,12 +7828,12 @@ public class DefaultApi {
      * Verify a user by ID
      * 
      * @param userId  (required)
-     * @return ApiResponse&lt;InlineResponse2005&gt;
+     * @return ApiResponse&lt;UserUpdatedResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2005> verifyUserWithHttpInfo(UUID userId) throws ApiException {
+    public ApiResponse<UserUpdatedResponse> verifyUserWithHttpInfo(UUID userId) throws ApiException {
         com.squareup.okhttp.Call call = verifyUserValidateBeforeCall(userId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2005>(){}.getType();
+        Type localVarReturnType = new TypeToken<UserUpdatedResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -7987,7 +7845,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call verifyUserAsync(UUID userId, final ApiCallback<InlineResponse2005> callback) throws ApiException {
+    public com.squareup.okhttp.Call verifyUserAsync(UUID userId, final ApiCallback<UserUpdatedResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -8009,7 +7867,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = verifyUserValidateBeforeCall(userId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2005>(){}.getType();
+        Type localVarReturnType = new TypeToken<UserUpdatedResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

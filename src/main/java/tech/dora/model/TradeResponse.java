@@ -14,13 +14,44 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
+import tech.dora.model.Metadata;
+import tech.dora.model.ResponseEnvelope;
+import tech.dora.model.Trade;
 /**
  * TradeResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
-public class TradeResponse {
+public class TradeResponse extends ResponseEnvelope {
+  @SerializedName("data")
+  private Trade tradeResponseData = null;
+
+  public TradeResponse tradeResponseData(Trade tradeResponseData) {
+    this.tradeResponseData = tradeResponseData;
+    return this;
+  }
+
+   /**
+   * Get tradeResponseData
+   * @return tradeResponseData
+  **/
+  @Schema(description = "")
+  public Trade getTradeResponseData() {
+    return tradeResponseData;
+  }
+
+  public void setTradeResponseData(Trade tradeResponseData) {
+    this.tradeResponseData = tradeResponseData;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -30,12 +61,14 @@ public class TradeResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    return true;
+    TradeResponse tradeResponse = (TradeResponse) o;
+    return Objects.equals(this.tradeResponseData, tradeResponse.tradeResponseData) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash();
+    return Objects.hash(tradeResponseData, super.hashCode());
   }
 
 
@@ -43,7 +76,8 @@ public class TradeResponse {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TradeResponse {\n");
-    
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    tradeResponseData: ").append(toIndentedString(tradeResponseData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -25,11 +25,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import tech.dora.model.OrderKind;
+import tech.dora.model.OrderModifierKind;
+import tech.dora.model.Side;
 /**
  * CreateOrderRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
 public class CreateOrderRequest {
   @SerializedName("quantity")
@@ -41,54 +44,11 @@ public class CreateOrderRequest {
   @SerializedName("price")
   private String price = null;
 
-  /**
-   * Gets or Sets kind
-   */
-  @JsonAdapter(KindEnum.Adapter.class)
-  public enum KindEnum {
-    @SerializedName("MARKET")
-    MARKET("MARKET"),
-    @SerializedName("LIMIT")
-    LIMIT("LIMIT");
-
-    private String value;
-
-    KindEnum(String value) {
-      this.value = value;
-    }
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-    public static KindEnum fromValue(String input) {
-      for (KindEnum b : KindEnum.values()) {
-        if (b.value.equals(input)) {
-          return b;
-        }
-      }
-      return null;
-    }
-    public static class Adapter extends TypeAdapter<KindEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final KindEnum enumeration) throws IOException {
-        jsonWriter.value(String.valueOf(enumeration.getValue()));
-      }
-
-      @Override
-      public KindEnum read(final JsonReader jsonReader) throws IOException {
-        Object value = jsonReader.nextString();
-        return KindEnum.fromValue((String)(value));
-      }
-    }
-  }  @SerializedName("kind")
-  private KindEnum kind = null;
+  @SerializedName("kind")
+  private OrderKind kind = null;
 
   @SerializedName("side")
-  private String side = null;
+  private Side side = null;
 
   @SerializedName("order_book_id")
   private UUID orderBookId = null;
@@ -96,49 +56,8 @@ public class CreateOrderRequest {
   @SerializedName("user_text")
   private String userText = null;
 
-  /**
-   * Gets or Sets orderModifiers
-   */
-  @JsonAdapter(OrderModifiersEnum.Adapter.class)
-  public enum OrderModifiersEnum {
-    @SerializedName("MAX_BUY")
-    MAX_BUY("MAX_BUY");
-
-    private String value;
-
-    OrderModifiersEnum(String value) {
-      this.value = value;
-    }
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-    public static OrderModifiersEnum fromValue(String input) {
-      for (OrderModifiersEnum b : OrderModifiersEnum.values()) {
-        if (b.value.equals(input)) {
-          return b;
-        }
-      }
-      return null;
-    }
-    public static class Adapter extends TypeAdapter<OrderModifiersEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final OrderModifiersEnum enumeration) throws IOException {
-        jsonWriter.value(String.valueOf(enumeration.getValue()));
-      }
-
-      @Override
-      public OrderModifiersEnum read(final JsonReader jsonReader) throws IOException {
-        Object value = jsonReader.nextString();
-        return OrderModifiersEnum.fromValue((String)(value));
-      }
-    }
-  }  @SerializedName("order_modifiers")
-  private List<OrderModifiersEnum> orderModifiers = null;
+  @SerializedName("order_modifiers")
+  private List<OrderModifierKind> orderModifiers = null;
 
   public CreateOrderRequest quantity(String quantity) {
     this.quantity = quantity;
@@ -194,7 +113,7 @@ public class CreateOrderRequest {
     this.price = price;
   }
 
-  public CreateOrderRequest kind(KindEnum kind) {
+  public CreateOrderRequest kind(OrderKind kind) {
     this.kind = kind;
     return this;
   }
@@ -204,29 +123,29 @@ public class CreateOrderRequest {
    * @return kind
   **/
   @Schema(description = "")
-  public KindEnum getKind() {
+  public OrderKind getKind() {
     return kind;
   }
 
-  public void setKind(KindEnum kind) {
+  public void setKind(OrderKind kind) {
     this.kind = kind;
   }
 
-  public CreateOrderRequest side(String side) {
+  public CreateOrderRequest side(Side side) {
     this.side = side;
     return this;
   }
 
    /**
-   * Required: Must be either &#x27;BUY&#x27; or &#x27;SELL&#x27;
+   * Get side
    * @return side
   **/
-  @Schema(description = "Required: Must be either 'BUY' or 'SELL'")
-  public String getSide() {
+  @Schema(description = "")
+  public Side getSide() {
     return side;
   }
 
-  public void setSide(String side) {
+  public void setSide(Side side) {
     this.side = side;
   }
 
@@ -266,14 +185,14 @@ public class CreateOrderRequest {
     this.userText = userText;
   }
 
-  public CreateOrderRequest orderModifiers(List<OrderModifiersEnum> orderModifiers) {
+  public CreateOrderRequest orderModifiers(List<OrderModifierKind> orderModifiers) {
     this.orderModifiers = orderModifiers;
     return this;
   }
 
-  public CreateOrderRequest addOrderModifiersItem(OrderModifiersEnum orderModifiersItem) {
+  public CreateOrderRequest addOrderModifiersItem(OrderModifierKind orderModifiersItem) {
     if (this.orderModifiers == null) {
-      this.orderModifiers = new ArrayList<OrderModifiersEnum>();
+      this.orderModifiers = new ArrayList<OrderModifierKind>();
     }
     this.orderModifiers.add(orderModifiersItem);
     return this;
@@ -284,11 +203,11 @@ public class CreateOrderRequest {
    * @return orderModifiers
   **/
   @Schema(description = "")
-  public List<OrderModifiersEnum> getOrderModifiers() {
+  public List<OrderModifierKind> getOrderModifiers() {
     return orderModifiers;
   }
 
-  public void setOrderModifiers(List<OrderModifiersEnum> orderModifiers) {
+  public void setOrderModifiers(List<OrderModifierKind> orderModifiers) {
     this.orderModifiers = orderModifiers;
   }
 

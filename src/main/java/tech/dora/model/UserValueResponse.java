@@ -21,275 +21,35 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import tech.dora.model.Metadata;
+import tech.dora.model.ResponseEnvelope;
+import tech.dora.model.UserValue;
 /**
  * UserValueResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
-public class UserValueResponse {
-  @SerializedName("available")
-  private Map<String, String> available = null;
+public class UserValueResponse extends ResponseEnvelope {
+  @SerializedName("data")
+  private UserValue userValueResponseData = null;
 
-  @SerializedName("locked")
-  private Map<String, String> locked = null;
-
-  @SerializedName("borrowed")
-  private Map<String, String> borrowed = null;
-
-  @SerializedName("notional_long")
-  private Map<String, String> notionalLong = null;
-
-  @SerializedName("notional_short")
-  private Map<String, String> notionalShort = null;
-
-  @SerializedName("portfolio_value")
-  private Map<String, String> portfolioValue = null;
-
-  @SerializedName("net_liquidation_value")
-  private Map<String, String> netLiquidationValue = null;
-
-  @SerializedName("unrealized_pnl")
-  private Map<String, String> unrealizedPnl = null;
-
-  @SerializedName("realized_pnl")
-  private Map<String, String> realizedPnl = null;
-
-  public UserValueResponse available(Map<String, String> available) {
-    this.available = available;
-    return this;
-  }
-
-  public UserValueResponse putAvailableItem(String key, String availableItem) {
-    if (this.available == null) {
-      this.available = new HashMap<String, String>();
-    }
-    this.available.put(key, availableItem);
+  public UserValueResponse userValueResponseData(UserValue userValueResponseData) {
+    this.userValueResponseData = userValueResponseData;
     return this;
   }
 
    /**
-   * Get available
-   * @return available
+   * Get userValueResponseData
+   * @return userValueResponseData
   **/
   @Schema(description = "")
-  public Map<String, String> getAvailable() {
-    return available;
+  public UserValue getUserValueResponseData() {
+    return userValueResponseData;
   }
 
-  public void setAvailable(Map<String, String> available) {
-    this.available = available;
-  }
-
-  public UserValueResponse locked(Map<String, String> locked) {
-    this.locked = locked;
-    return this;
-  }
-
-  public UserValueResponse putLockedItem(String key, String lockedItem) {
-    if (this.locked == null) {
-      this.locked = new HashMap<String, String>();
-    }
-    this.locked.put(key, lockedItem);
-    return this;
-  }
-
-   /**
-   * Get locked
-   * @return locked
-  **/
-  @Schema(description = "")
-  public Map<String, String> getLocked() {
-    return locked;
-  }
-
-  public void setLocked(Map<String, String> locked) {
-    this.locked = locked;
-  }
-
-  public UserValueResponse borrowed(Map<String, String> borrowed) {
-    this.borrowed = borrowed;
-    return this;
-  }
-
-  public UserValueResponse putBorrowedItem(String key, String borrowedItem) {
-    if (this.borrowed == null) {
-      this.borrowed = new HashMap<String, String>();
-    }
-    this.borrowed.put(key, borrowedItem);
-    return this;
-  }
-
-   /**
-   * Get borrowed
-   * @return borrowed
-  **/
-  @Schema(description = "")
-  public Map<String, String> getBorrowed() {
-    return borrowed;
-  }
-
-  public void setBorrowed(Map<String, String> borrowed) {
-    this.borrowed = borrowed;
-  }
-
-  public UserValueResponse notionalLong(Map<String, String> notionalLong) {
-    this.notionalLong = notionalLong;
-    return this;
-  }
-
-  public UserValueResponse putNotionalLongItem(String key, String notionalLongItem) {
-    if (this.notionalLong == null) {
-      this.notionalLong = new HashMap<String, String>();
-    }
-    this.notionalLong.put(key, notionalLongItem);
-    return this;
-  }
-
-   /**
-   * Get notionalLong
-   * @return notionalLong
-  **/
-  @Schema(description = "")
-  public Map<String, String> getNotionalLong() {
-    return notionalLong;
-  }
-
-  public void setNotionalLong(Map<String, String> notionalLong) {
-    this.notionalLong = notionalLong;
-  }
-
-  public UserValueResponse notionalShort(Map<String, String> notionalShort) {
-    this.notionalShort = notionalShort;
-    return this;
-  }
-
-  public UserValueResponse putNotionalShortItem(String key, String notionalShortItem) {
-    if (this.notionalShort == null) {
-      this.notionalShort = new HashMap<String, String>();
-    }
-    this.notionalShort.put(key, notionalShortItem);
-    return this;
-  }
-
-   /**
-   * Get notionalShort
-   * @return notionalShort
-  **/
-  @Schema(description = "")
-  public Map<String, String> getNotionalShort() {
-    return notionalShort;
-  }
-
-  public void setNotionalShort(Map<String, String> notionalShort) {
-    this.notionalShort = notionalShort;
-  }
-
-  public UserValueResponse portfolioValue(Map<String, String> portfolioValue) {
-    this.portfolioValue = portfolioValue;
-    return this;
-  }
-
-  public UserValueResponse putPortfolioValueItem(String key, String portfolioValueItem) {
-    if (this.portfolioValue == null) {
-      this.portfolioValue = new HashMap<String, String>();
-    }
-    this.portfolioValue.put(key, portfolioValueItem);
-    return this;
-  }
-
-   /**
-   * Get portfolioValue
-   * @return portfolioValue
-  **/
-  @Schema(description = "")
-  public Map<String, String> getPortfolioValue() {
-    return portfolioValue;
-  }
-
-  public void setPortfolioValue(Map<String, String> portfolioValue) {
-    this.portfolioValue = portfolioValue;
-  }
-
-  public UserValueResponse netLiquidationValue(Map<String, String> netLiquidationValue) {
-    this.netLiquidationValue = netLiquidationValue;
-    return this;
-  }
-
-  public UserValueResponse putNetLiquidationValueItem(String key, String netLiquidationValueItem) {
-    if (this.netLiquidationValue == null) {
-      this.netLiquidationValue = new HashMap<String, String>();
-    }
-    this.netLiquidationValue.put(key, netLiquidationValueItem);
-    return this;
-  }
-
-   /**
-   * Get netLiquidationValue
-   * @return netLiquidationValue
-  **/
-  @Schema(description = "")
-  public Map<String, String> getNetLiquidationValue() {
-    return netLiquidationValue;
-  }
-
-  public void setNetLiquidationValue(Map<String, String> netLiquidationValue) {
-    this.netLiquidationValue = netLiquidationValue;
-  }
-
-  public UserValueResponse unrealizedPnl(Map<String, String> unrealizedPnl) {
-    this.unrealizedPnl = unrealizedPnl;
-    return this;
-  }
-
-  public UserValueResponse putUnrealizedPnlItem(String key, String unrealizedPnlItem) {
-    if (this.unrealizedPnl == null) {
-      this.unrealizedPnl = new HashMap<String, String>();
-    }
-    this.unrealizedPnl.put(key, unrealizedPnlItem);
-    return this;
-  }
-
-   /**
-   * Get unrealizedPnl
-   * @return unrealizedPnl
-  **/
-  @Schema(description = "")
-  public Map<String, String> getUnrealizedPnl() {
-    return unrealizedPnl;
-  }
-
-  public void setUnrealizedPnl(Map<String, String> unrealizedPnl) {
-    this.unrealizedPnl = unrealizedPnl;
-  }
-
-  public UserValueResponse realizedPnl(Map<String, String> realizedPnl) {
-    this.realizedPnl = realizedPnl;
-    return this;
-  }
-
-  public UserValueResponse putRealizedPnlItem(String key, String realizedPnlItem) {
-    if (this.realizedPnl == null) {
-      this.realizedPnl = new HashMap<String, String>();
-    }
-    this.realizedPnl.put(key, realizedPnlItem);
-    return this;
-  }
-
-   /**
-   * Get realizedPnl
-   * @return realizedPnl
-  **/
-  @Schema(description = "")
-  public Map<String, String> getRealizedPnl() {
-    return realizedPnl;
-  }
-
-  public void setRealizedPnl(Map<String, String> realizedPnl) {
-    this.realizedPnl = realizedPnl;
+  public void setUserValueResponseData(UserValue userValueResponseData) {
+    this.userValueResponseData = userValueResponseData;
   }
 
 
@@ -302,20 +62,13 @@ public class UserValueResponse {
       return false;
     }
     UserValueResponse userValueResponse = (UserValueResponse) o;
-    return Objects.equals(this.available, userValueResponse.available) &&
-        Objects.equals(this.locked, userValueResponse.locked) &&
-        Objects.equals(this.borrowed, userValueResponse.borrowed) &&
-        Objects.equals(this.notionalLong, userValueResponse.notionalLong) &&
-        Objects.equals(this.notionalShort, userValueResponse.notionalShort) &&
-        Objects.equals(this.portfolioValue, userValueResponse.portfolioValue) &&
-        Objects.equals(this.netLiquidationValue, userValueResponse.netLiquidationValue) &&
-        Objects.equals(this.unrealizedPnl, userValueResponse.unrealizedPnl) &&
-        Objects.equals(this.realizedPnl, userValueResponse.realizedPnl);
+    return Objects.equals(this.userValueResponseData, userValueResponse.userValueResponseData) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(available, locked, borrowed, notionalLong, notionalShort, portfolioValue, netLiquidationValue, unrealizedPnl, realizedPnl);
+    return Objects.hash(userValueResponseData, super.hashCode());
   }
 
 
@@ -323,16 +76,8 @@ public class UserValueResponse {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserValueResponse {\n");
-    
-    sb.append("    available: ").append(toIndentedString(available)).append("\n");
-    sb.append("    locked: ").append(toIndentedString(locked)).append("\n");
-    sb.append("    borrowed: ").append(toIndentedString(borrowed)).append("\n");
-    sb.append("    notionalLong: ").append(toIndentedString(notionalLong)).append("\n");
-    sb.append("    notionalShort: ").append(toIndentedString(notionalShort)).append("\n");
-    sb.append("    portfolioValue: ").append(toIndentedString(portfolioValue)).append("\n");
-    sb.append("    netLiquidationValue: ").append(toIndentedString(netLiquidationValue)).append("\n");
-    sb.append("    unrealizedPnl: ").append(toIndentedString(unrealizedPnl)).append("\n");
-    sb.append("    realizedPnl: ").append(toIndentedString(realizedPnl)).append("\n");
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    userValueResponseData: ").append(toIndentedString(userValueResponseData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

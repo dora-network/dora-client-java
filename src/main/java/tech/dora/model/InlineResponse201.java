@@ -21,20 +21,19 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import tech.dora.model.FundUserResponse;
 import tech.dora.model.Metadata;
 import tech.dora.model.ResponseEnvelope;
 /**
  * InlineResponse201
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
 public class InlineResponse201 extends ResponseEnvelope {
   @SerializedName("data")
-  private FundUserResponse inlineResponse201Data = null;
+  private Object inlineResponse201Data = null;
 
-  public InlineResponse201 inlineResponse201Data(FundUserResponse inlineResponse201Data) {
+  public InlineResponse201 inlineResponse201Data(Object inlineResponse201Data) {
     this.inlineResponse201Data = inlineResponse201Data;
     return this;
   }
@@ -44,11 +43,11 @@ public class InlineResponse201 extends ResponseEnvelope {
    * @return inlineResponse201Data
   **/
   @Schema(description = "")
-  public FundUserResponse getInlineResponse201Data() {
+  public Object getInlineResponse201Data() {
     return inlineResponse201Data;
   }
 
-  public void setInlineResponse201Data(FundUserResponse inlineResponse201Data) {
+  public void setInlineResponse201Data(Object inlineResponse201Data) {
     this.inlineResponse201Data = inlineResponse201Data;
   }
 

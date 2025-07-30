@@ -21,75 +21,35 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
+import tech.dora.model.IsolatedPosition;
+import tech.dora.model.Metadata;
+import tech.dora.model.ResponseEnvelope;
 /**
  * IsolatePositionResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
-public class IsolatePositionResponse {
-  @SerializedName("global_position_id")
-  private UUID globalPositionId = null;
+public class IsolatePositionResponse extends ResponseEnvelope {
+  @SerializedName("data")
+  private IsolatedPosition isolatePositionResponseData = null;
 
-  @SerializedName("isolated_position_id")
-  private UUID isolatedPositionId = null;
-
-  @SerializedName("transaction_id")
-  private UUID transactionId = null;
-
-  public IsolatePositionResponse globalPositionId(UUID globalPositionId) {
-    this.globalPositionId = globalPositionId;
+  public IsolatePositionResponse isolatePositionResponseData(IsolatedPosition isolatePositionResponseData) {
+    this.isolatePositionResponseData = isolatePositionResponseData;
     return this;
   }
 
    /**
-   * Get globalPositionId
-   * @return globalPositionId
+   * Get isolatePositionResponseData
+   * @return isolatePositionResponseData
   **/
   @Schema(description = "")
-  public UUID getGlobalPositionId() {
-    return globalPositionId;
+  public IsolatedPosition getIsolatePositionResponseData() {
+    return isolatePositionResponseData;
   }
 
-  public void setGlobalPositionId(UUID globalPositionId) {
-    this.globalPositionId = globalPositionId;
-  }
-
-  public IsolatePositionResponse isolatedPositionId(UUID isolatedPositionId) {
-    this.isolatedPositionId = isolatedPositionId;
-    return this;
-  }
-
-   /**
-   * Get isolatedPositionId
-   * @return isolatedPositionId
-  **/
-  @Schema(description = "")
-  public UUID getIsolatedPositionId() {
-    return isolatedPositionId;
-  }
-
-  public void setIsolatedPositionId(UUID isolatedPositionId) {
-    this.isolatedPositionId = isolatedPositionId;
-  }
-
-  public IsolatePositionResponse transactionId(UUID transactionId) {
-    this.transactionId = transactionId;
-    return this;
-  }
-
-   /**
-   * Get transactionId
-   * @return transactionId
-  **/
-  @Schema(description = "")
-  public UUID getTransactionId() {
-    return transactionId;
-  }
-
-  public void setTransactionId(UUID transactionId) {
-    this.transactionId = transactionId;
+  public void setIsolatePositionResponseData(IsolatedPosition isolatePositionResponseData) {
+    this.isolatePositionResponseData = isolatePositionResponseData;
   }
 
 
@@ -102,14 +62,13 @@ public class IsolatePositionResponse {
       return false;
     }
     IsolatePositionResponse isolatePositionResponse = (IsolatePositionResponse) o;
-    return Objects.equals(this.globalPositionId, isolatePositionResponse.globalPositionId) &&
-        Objects.equals(this.isolatedPositionId, isolatePositionResponse.isolatedPositionId) &&
-        Objects.equals(this.transactionId, isolatePositionResponse.transactionId);
+    return Objects.equals(this.isolatePositionResponseData, isolatePositionResponse.isolatePositionResponseData) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(globalPositionId, isolatedPositionId, transactionId);
+    return Objects.hash(isolatePositionResponseData, super.hashCode());
   }
 
 
@@ -117,10 +76,8 @@ public class IsolatePositionResponse {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class IsolatePositionResponse {\n");
-    
-    sb.append("    globalPositionId: ").append(toIndentedString(globalPositionId)).append("\n");
-    sb.append("    isolatedPositionId: ").append(toIndentedString(isolatedPositionId)).append("\n");
-    sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    isolatePositionResponseData: ").append(toIndentedString(isolatePositionResponseData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

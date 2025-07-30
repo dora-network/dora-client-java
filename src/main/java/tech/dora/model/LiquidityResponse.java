@@ -21,138 +21,35 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
+import tech.dora.model.Liquidity;
+import tech.dora.model.Metadata;
+import tech.dora.model.ResponseEnvelope;
 /**
  * LiquidityResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
-public class LiquidityResponse {
-  @SerializedName("order_book_id")
-  private UUID orderBookId = null;
+public class LiquidityResponse extends ResponseEnvelope {
+  @SerializedName("data")
+  private Liquidity liquidityResponseData = null;
 
-  @SerializedName("position_id")
-  private UUID positionId = null;
-
-  @SerializedName("transaction_id")
-  private UUID transactionId = null;
-
-  @SerializedName("base_quantity")
-  private String baseQuantity = null;
-
-  @SerializedName("quote_quantity")
-  private String quoteQuantity = null;
-
-  @SerializedName("shares_quantity")
-  private String sharesQuantity = null;
-
-  public LiquidityResponse orderBookId(UUID orderBookId) {
-    this.orderBookId = orderBookId;
+  public LiquidityResponse liquidityResponseData(Liquidity liquidityResponseData) {
+    this.liquidityResponseData = liquidityResponseData;
     return this;
   }
 
    /**
-   * Get orderBookId
-   * @return orderBookId
+   * Get liquidityResponseData
+   * @return liquidityResponseData
   **/
   @Schema(description = "")
-  public UUID getOrderBookId() {
-    return orderBookId;
+  public Liquidity getLiquidityResponseData() {
+    return liquidityResponseData;
   }
 
-  public void setOrderBookId(UUID orderBookId) {
-    this.orderBookId = orderBookId;
-  }
-
-  public LiquidityResponse positionId(UUID positionId) {
-    this.positionId = positionId;
-    return this;
-  }
-
-   /**
-   * Get positionId
-   * @return positionId
-  **/
-  @Schema(description = "")
-  public UUID getPositionId() {
-    return positionId;
-  }
-
-  public void setPositionId(UUID positionId) {
-    this.positionId = positionId;
-  }
-
-  public LiquidityResponse transactionId(UUID transactionId) {
-    this.transactionId = transactionId;
-    return this;
-  }
-
-   /**
-   * Get transactionId
-   * @return transactionId
-  **/
-  @Schema(description = "")
-  public UUID getTransactionId() {
-    return transactionId;
-  }
-
-  public void setTransactionId(UUID transactionId) {
-    this.transactionId = transactionId;
-  }
-
-  public LiquidityResponse baseQuantity(String baseQuantity) {
-    this.baseQuantity = baseQuantity;
-    return this;
-  }
-
-   /**
-   * Get baseQuantity
-   * @return baseQuantity
-  **/
-  @Schema(description = "")
-  public String getBaseQuantity() {
-    return baseQuantity;
-  }
-
-  public void setBaseQuantity(String baseQuantity) {
-    this.baseQuantity = baseQuantity;
-  }
-
-  public LiquidityResponse quoteQuantity(String quoteQuantity) {
-    this.quoteQuantity = quoteQuantity;
-    return this;
-  }
-
-   /**
-   * Get quoteQuantity
-   * @return quoteQuantity
-  **/
-  @Schema(description = "")
-  public String getQuoteQuantity() {
-    return quoteQuantity;
-  }
-
-  public void setQuoteQuantity(String quoteQuantity) {
-    this.quoteQuantity = quoteQuantity;
-  }
-
-  public LiquidityResponse sharesQuantity(String sharesQuantity) {
-    this.sharesQuantity = sharesQuantity;
-    return this;
-  }
-
-   /**
-   * Get sharesQuantity
-   * @return sharesQuantity
-  **/
-  @Schema(description = "")
-  public String getSharesQuantity() {
-    return sharesQuantity;
-  }
-
-  public void setSharesQuantity(String sharesQuantity) {
-    this.sharesQuantity = sharesQuantity;
+  public void setLiquidityResponseData(Liquidity liquidityResponseData) {
+    this.liquidityResponseData = liquidityResponseData;
   }
 
 
@@ -165,17 +62,13 @@ public class LiquidityResponse {
       return false;
     }
     LiquidityResponse liquidityResponse = (LiquidityResponse) o;
-    return Objects.equals(this.orderBookId, liquidityResponse.orderBookId) &&
-        Objects.equals(this.positionId, liquidityResponse.positionId) &&
-        Objects.equals(this.transactionId, liquidityResponse.transactionId) &&
-        Objects.equals(this.baseQuantity, liquidityResponse.baseQuantity) &&
-        Objects.equals(this.quoteQuantity, liquidityResponse.quoteQuantity) &&
-        Objects.equals(this.sharesQuantity, liquidityResponse.sharesQuantity);
+    return Objects.equals(this.liquidityResponseData, liquidityResponse.liquidityResponseData) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderBookId, positionId, transactionId, baseQuantity, quoteQuantity, sharesQuantity);
+    return Objects.hash(liquidityResponseData, super.hashCode());
   }
 
 
@@ -183,13 +76,8 @@ public class LiquidityResponse {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class LiquidityResponse {\n");
-    
-    sb.append("    orderBookId: ").append(toIndentedString(orderBookId)).append("\n");
-    sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
-    sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
-    sb.append("    baseQuantity: ").append(toIndentedString(baseQuantity)).append("\n");
-    sb.append("    quoteQuantity: ").append(toIndentedString(quoteQuantity)).append("\n");
-    sb.append("    sharesQuantity: ").append(toIndentedString(sharesQuantity)).append("\n");
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    liquidityResponseData: ").append(toIndentedString(liquidityResponseData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

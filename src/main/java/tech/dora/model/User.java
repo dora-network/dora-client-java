@@ -25,11 +25,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import org.threeten.bp.OffsetDateTime;
+import tech.dora.model.UserRole;
 /**
  * User
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
 public class User {
   @SerializedName("id")
@@ -60,13 +61,16 @@ public class User {
   private UUID providerId = null;
 
   @SerializedName("roles")
-  private List<String> roles = null;
+  private List<UserRole> roles = null;
 
   @SerializedName("timezone")
   private String timezone = null;
 
   @SerializedName("timezone_offset")
   private Integer timezoneOffset = null;
+
+  @SerializedName("verified_at")
+  private OffsetDateTime verifiedAt = null;
 
   public User id(UUID id) {
     this.id = id;
@@ -230,14 +234,14 @@ public class User {
     this.providerId = providerId;
   }
 
-  public User roles(List<String> roles) {
+  public User roles(List<UserRole> roles) {
     this.roles = roles;
     return this;
   }
 
-  public User addRolesItem(String rolesItem) {
+  public User addRolesItem(UserRole rolesItem) {
     if (this.roles == null) {
-      this.roles = new ArrayList<String>();
+      this.roles = new ArrayList<UserRole>();
     }
     this.roles.add(rolesItem);
     return this;
@@ -248,11 +252,11 @@ public class User {
    * @return roles
   **/
   @Schema(description = "")
-  public List<String> getRoles() {
+  public List<UserRole> getRoles() {
     return roles;
   }
 
-  public void setRoles(List<String> roles) {
+  public void setRoles(List<UserRole> roles) {
     this.roles = roles;
   }
 
@@ -292,6 +296,24 @@ public class User {
     this.timezoneOffset = timezoneOffset;
   }
 
+  public User verifiedAt(OffsetDateTime verifiedAt) {
+    this.verifiedAt = verifiedAt;
+    return this;
+  }
+
+   /**
+   * Get verifiedAt
+   * @return verifiedAt
+  **/
+  @Schema(description = "")
+  public OffsetDateTime getVerifiedAt() {
+    return verifiedAt;
+  }
+
+  public void setVerifiedAt(OffsetDateTime verifiedAt) {
+    this.verifiedAt = verifiedAt;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -313,12 +335,13 @@ public class User {
         Objects.equals(this.providerId, user.providerId) &&
         Objects.equals(this.roles, user.roles) &&
         Objects.equals(this.timezone, user.timezone) &&
-        Objects.equals(this.timezoneOffset, user.timezoneOffset);
+        Objects.equals(this.timezoneOffset, user.timezoneOffset) &&
+        Objects.equals(this.verifiedAt, user.verifiedAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, closedAt, disabledAt, email, name, nativeAssetId, photoUrl, provider, providerId, roles, timezone, timezoneOffset);
+    return Objects.hash(id, closedAt, disabledAt, email, name, nativeAssetId, photoUrl, provider, providerId, roles, timezone, timezoneOffset, verifiedAt);
   }
 
 
@@ -339,6 +362,7 @@ public class User {
     sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("    timezone: ").append(toIndentedString(timezone)).append("\n");
     sb.append("    timezoneOffset: ").append(toIndentedString(timezoneOffset)).append("\n");
+    sb.append("    verifiedAt: ").append(toIndentedString(verifiedAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }

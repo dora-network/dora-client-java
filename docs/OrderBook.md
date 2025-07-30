@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **quoteQuantity** | [**BigDecimal**](BigDecimal.md) |  |  [optional]
 **quoteAssetId** | [**UUID**](UUID.md) |  |  [optional]
 **sharesQuantity** | [**BigDecimal**](BigDecimal.md) |  |  [optional]
-**status** | **String** |  |  [optional]
+**status** | [**OrderBookStatus**](OrderBookStatus.md) |  |  [optional]
 **tickSize** | [**BigDecimal**](BigDecimal.md) |  |  [optional]
 **updatedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **haltedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]

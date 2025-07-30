@@ -21,117 +21,35 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
+import tech.dora.model.IsolatedCollateral;
+import tech.dora.model.Metadata;
+import tech.dora.model.ResponseEnvelope;
 /**
  * IsolateCollateralResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
-public class IsolateCollateralResponse {
-  @SerializedName("global_position_id")
-  private UUID globalPositionId = null;
+public class IsolateCollateralResponse extends ResponseEnvelope {
+  @SerializedName("data")
+  private IsolatedCollateral isolateCollateralResponseData = null;
 
-  @SerializedName("isolated_position_id")
-  private UUID isolatedPositionId = null;
-
-  @SerializedName("transaction_id")
-  private UUID transactionId = null;
-
-  @SerializedName("asset_id")
-  private UUID assetId = null;
-
-  @SerializedName("quantity")
-  private String quantity = null;
-
-  public IsolateCollateralResponse globalPositionId(UUID globalPositionId) {
-    this.globalPositionId = globalPositionId;
+  public IsolateCollateralResponse isolateCollateralResponseData(IsolatedCollateral isolateCollateralResponseData) {
+    this.isolateCollateralResponseData = isolateCollateralResponseData;
     return this;
   }
 
    /**
-   * Get globalPositionId
-   * @return globalPositionId
+   * Get isolateCollateralResponseData
+   * @return isolateCollateralResponseData
   **/
   @Schema(description = "")
-  public UUID getGlobalPositionId() {
-    return globalPositionId;
+  public IsolatedCollateral getIsolateCollateralResponseData() {
+    return isolateCollateralResponseData;
   }
 
-  public void setGlobalPositionId(UUID globalPositionId) {
-    this.globalPositionId = globalPositionId;
-  }
-
-  public IsolateCollateralResponse isolatedPositionId(UUID isolatedPositionId) {
-    this.isolatedPositionId = isolatedPositionId;
-    return this;
-  }
-
-   /**
-   * Get isolatedPositionId
-   * @return isolatedPositionId
-  **/
-  @Schema(description = "")
-  public UUID getIsolatedPositionId() {
-    return isolatedPositionId;
-  }
-
-  public void setIsolatedPositionId(UUID isolatedPositionId) {
-    this.isolatedPositionId = isolatedPositionId;
-  }
-
-  public IsolateCollateralResponse transactionId(UUID transactionId) {
-    this.transactionId = transactionId;
-    return this;
-  }
-
-   /**
-   * Get transactionId
-   * @return transactionId
-  **/
-  @Schema(description = "")
-  public UUID getTransactionId() {
-    return transactionId;
-  }
-
-  public void setTransactionId(UUID transactionId) {
-    this.transactionId = transactionId;
-  }
-
-  public IsolateCollateralResponse assetId(UUID assetId) {
-    this.assetId = assetId;
-    return this;
-  }
-
-   /**
-   * Get assetId
-   * @return assetId
-  **/
-  @Schema(description = "")
-  public UUID getAssetId() {
-    return assetId;
-  }
-
-  public void setAssetId(UUID assetId) {
-    this.assetId = assetId;
-  }
-
-  public IsolateCollateralResponse quantity(String quantity) {
-    this.quantity = quantity;
-    return this;
-  }
-
-   /**
-   * Get quantity
-   * @return quantity
-  **/
-  @Schema(description = "")
-  public String getQuantity() {
-    return quantity;
-  }
-
-  public void setQuantity(String quantity) {
-    this.quantity = quantity;
+  public void setIsolateCollateralResponseData(IsolatedCollateral isolateCollateralResponseData) {
+    this.isolateCollateralResponseData = isolateCollateralResponseData;
   }
 
 
@@ -144,16 +62,13 @@ public class IsolateCollateralResponse {
       return false;
     }
     IsolateCollateralResponse isolateCollateralResponse = (IsolateCollateralResponse) o;
-    return Objects.equals(this.globalPositionId, isolateCollateralResponse.globalPositionId) &&
-        Objects.equals(this.isolatedPositionId, isolateCollateralResponse.isolatedPositionId) &&
-        Objects.equals(this.transactionId, isolateCollateralResponse.transactionId) &&
-        Objects.equals(this.assetId, isolateCollateralResponse.assetId) &&
-        Objects.equals(this.quantity, isolateCollateralResponse.quantity);
+    return Objects.equals(this.isolateCollateralResponseData, isolateCollateralResponse.isolateCollateralResponseData) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(globalPositionId, isolatedPositionId, transactionId, assetId, quantity);
+    return Objects.hash(isolateCollateralResponseData, super.hashCode());
   }
 
 
@@ -161,12 +76,8 @@ public class IsolateCollateralResponse {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class IsolateCollateralResponse {\n");
-    
-    sb.append("    globalPositionId: ").append(toIndentedString(globalPositionId)).append("\n");
-    sb.append("    isolatedPositionId: ").append(toIndentedString(isolatedPositionId)).append("\n");
-    sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
-    sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
-    sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    isolateCollateralResponseData: ").append(toIndentedString(isolateCollateralResponseData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

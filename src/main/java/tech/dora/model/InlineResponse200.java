@@ -23,27 +23,27 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import tech.dora.model.Asset;
+import tech.dora.model.AssetPrice;
 import tech.dora.model.Metadata;
 import tech.dora.model.ResponseEnvelope;
 /**
  * InlineResponse200
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
 public class InlineResponse200 extends ResponseEnvelope {
   @SerializedName("data")
-  private List<Asset> inlineResponse200Data = null;
+  private List<AssetPrice> inlineResponse200Data = null;
 
-  public InlineResponse200 inlineResponse200Data(List<Asset> inlineResponse200Data) {
+  public InlineResponse200 inlineResponse200Data(List<AssetPrice> inlineResponse200Data) {
     this.inlineResponse200Data = inlineResponse200Data;
     return this;
   }
 
-  public InlineResponse200 addInlineResponse200DataItem(Asset inlineResponse200DataItem) {
+  public InlineResponse200 addInlineResponse200DataItem(AssetPrice inlineResponse200DataItem) {
     if (this.inlineResponse200Data == null) {
-      this.inlineResponse200Data = new ArrayList<Asset>();
+      this.inlineResponse200Data = new ArrayList<AssetPrice>();
     }
     this.inlineResponse200Data.add(inlineResponse200DataItem);
     return this;
@@ -54,11 +54,11 @@ public class InlineResponse200 extends ResponseEnvelope {
    * @return inlineResponse200Data
   **/
   @Schema(description = "")
-  public List<Asset> getInlineResponse200Data() {
+  public List<AssetPrice> getInlineResponse200Data() {
     return inlineResponse200Data;
   }
 
-  public void setInlineResponse200Data(List<Asset> inlineResponse200Data) {
+  public void setInlineResponse200Data(List<AssetPrice> inlineResponse200Data) {
     this.inlineResponse200Data = inlineResponse200Data;
   }
 

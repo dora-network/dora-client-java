@@ -21,14 +21,19 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import tech.dora.model.OrderKind;
+import tech.dora.model.OrderModifierKind;
+import tech.dora.model.OrderStatus;
+import tech.dora.model.Side;
 /**
  * Order
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
 public class Order {
   @SerializedName("id")
@@ -41,13 +46,19 @@ public class Order {
   private String quantity = null;
 
   @SerializedName("kind")
-  private String kind = null;
+  private OrderKind kind = null;
 
   @SerializedName("price")
   private String price = null;
 
+  @SerializedName("inverse_leverage")
+  private BigDecimal inverseLeverage = null;
+
+  @SerializedName("side")
+  private Side side = null;
+
   @SerializedName("status")
-  private String status = null;
+  private OrderStatus status = null;
 
   @SerializedName("user_id")
   private UUID userId = null;
@@ -56,7 +67,10 @@ public class Order {
   private String userText = null;
 
   @SerializedName("order_modifiers")
-  private List<String> orderModifiers = null;
+  private List<OrderModifierKind> orderModifiers = null;
+
+  @SerializedName("position_id")
+  private UUID positionId = null;
 
   public Order id(UUID id) {
     this.id = id;
@@ -112,7 +126,7 @@ public class Order {
     this.quantity = quantity;
   }
 
-  public Order kind(String kind) {
+  public Order kind(OrderKind kind) {
     this.kind = kind;
     return this;
   }
@@ -122,11 +136,11 @@ public class Order {
    * @return kind
   **/
   @Schema(description = "")
-  public String getKind() {
+  public OrderKind getKind() {
     return kind;
   }
 
-  public void setKind(String kind) {
+  public void setKind(OrderKind kind) {
     this.kind = kind;
   }
 
@@ -148,7 +162,43 @@ public class Order {
     this.price = price;
   }
 
-  public Order status(String status) {
+  public Order inverseLeverage(BigDecimal inverseLeverage) {
+    this.inverseLeverage = inverseLeverage;
+    return this;
+  }
+
+   /**
+   * Get inverseLeverage
+   * @return inverseLeverage
+  **/
+  @Schema(description = "")
+  public BigDecimal getInverseLeverage() {
+    return inverseLeverage;
+  }
+
+  public void setInverseLeverage(BigDecimal inverseLeverage) {
+    this.inverseLeverage = inverseLeverage;
+  }
+
+  public Order side(Side side) {
+    this.side = side;
+    return this;
+  }
+
+   /**
+   * Get side
+   * @return side
+  **/
+  @Schema(description = "")
+  public Side getSide() {
+    return side;
+  }
+
+  public void setSide(Side side) {
+    this.side = side;
+  }
+
+  public Order status(OrderStatus status) {
     this.status = status;
     return this;
   }
@@ -158,11 +208,11 @@ public class Order {
    * @return status
   **/
   @Schema(description = "")
-  public String getStatus() {
+  public OrderStatus getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(OrderStatus status) {
     this.status = status;
   }
 
@@ -202,14 +252,14 @@ public class Order {
     this.userText = userText;
   }
 
-  public Order orderModifiers(List<String> orderModifiers) {
+  public Order orderModifiers(List<OrderModifierKind> orderModifiers) {
     this.orderModifiers = orderModifiers;
     return this;
   }
 
-  public Order addOrderModifiersItem(String orderModifiersItem) {
+  public Order addOrderModifiersItem(OrderModifierKind orderModifiersItem) {
     if (this.orderModifiers == null) {
-      this.orderModifiers = new ArrayList<String>();
+      this.orderModifiers = new ArrayList<OrderModifierKind>();
     }
     this.orderModifiers.add(orderModifiersItem);
     return this;
@@ -220,12 +270,30 @@ public class Order {
    * @return orderModifiers
   **/
   @Schema(description = "")
-  public List<String> getOrderModifiers() {
+  public List<OrderModifierKind> getOrderModifiers() {
     return orderModifiers;
   }
 
-  public void setOrderModifiers(List<String> orderModifiers) {
+  public void setOrderModifiers(List<OrderModifierKind> orderModifiers) {
     this.orderModifiers = orderModifiers;
+  }
+
+  public Order positionId(UUID positionId) {
+    this.positionId = positionId;
+    return this;
+  }
+
+   /**
+   * Get positionId
+   * @return positionId
+  **/
+  @Schema(description = "")
+  public UUID getPositionId() {
+    return positionId;
+  }
+
+  public void setPositionId(UUID positionId) {
+    this.positionId = positionId;
   }
 
 
@@ -243,15 +311,18 @@ public class Order {
         Objects.equals(this.quantity, order.quantity) &&
         Objects.equals(this.kind, order.kind) &&
         Objects.equals(this.price, order.price) &&
+        Objects.equals(this.inverseLeverage, order.inverseLeverage) &&
+        Objects.equals(this.side, order.side) &&
         Objects.equals(this.status, order.status) &&
         Objects.equals(this.userId, order.userId) &&
         Objects.equals(this.userText, order.userText) &&
-        Objects.equals(this.orderModifiers, order.orderModifiers);
+        Objects.equals(this.orderModifiers, order.orderModifiers) &&
+        Objects.equals(this.positionId, order.positionId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, orderBookId, quantity, kind, price, status, userId, userText, orderModifiers);
+    return Objects.hash(id, orderBookId, quantity, kind, price, inverseLeverage, side, status, userId, userText, orderModifiers, positionId);
   }
 
 
@@ -265,10 +336,13 @@ public class Order {
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("    kind: ").append(toIndentedString(kind)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
+    sb.append("    inverseLeverage: ").append(toIndentedString(inverseLeverage)).append("\n");
+    sb.append("    side: ").append(toIndentedString(side)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    userText: ").append(toIndentedString(userText)).append("\n");
     sb.append("    orderModifiers: ").append(toIndentedString(orderModifiers)).append("\n");
+    sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

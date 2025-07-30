@@ -21,64 +21,35 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import tech.dora.model.Metadata;
+import tech.dora.model.ResponseEnvelope;
+import tech.dora.model.UnitedPosition;
 /**
  * UnitePositionResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
-public class UnitePositionResponse {
-  @SerializedName("global_position_id")
-  private UUID globalPositionId = null;
+public class UnitePositionResponse extends ResponseEnvelope {
+  @SerializedName("data")
+  private UnitedPosition unitePositionResponseData = null;
 
-  @SerializedName("transaction_ids")
-  private List<UUID> transactionIds = null;
-
-  public UnitePositionResponse globalPositionId(UUID globalPositionId) {
-    this.globalPositionId = globalPositionId;
+  public UnitePositionResponse unitePositionResponseData(UnitedPosition unitePositionResponseData) {
+    this.unitePositionResponseData = unitePositionResponseData;
     return this;
   }
 
    /**
-   * Get globalPositionId
-   * @return globalPositionId
+   * Get unitePositionResponseData
+   * @return unitePositionResponseData
   **/
   @Schema(description = "")
-  public UUID getGlobalPositionId() {
-    return globalPositionId;
+  public UnitedPosition getUnitePositionResponseData() {
+    return unitePositionResponseData;
   }
 
-  public void setGlobalPositionId(UUID globalPositionId) {
-    this.globalPositionId = globalPositionId;
-  }
-
-  public UnitePositionResponse transactionIds(List<UUID> transactionIds) {
-    this.transactionIds = transactionIds;
-    return this;
-  }
-
-  public UnitePositionResponse addTransactionIdsItem(UUID transactionIdsItem) {
-    if (this.transactionIds == null) {
-      this.transactionIds = new ArrayList<UUID>();
-    }
-    this.transactionIds.add(transactionIdsItem);
-    return this;
-  }
-
-   /**
-   * Get transactionIds
-   * @return transactionIds
-  **/
-  @Schema(description = "")
-  public List<UUID> getTransactionIds() {
-    return transactionIds;
-  }
-
-  public void setTransactionIds(List<UUID> transactionIds) {
-    this.transactionIds = transactionIds;
+  public void setUnitePositionResponseData(UnitedPosition unitePositionResponseData) {
+    this.unitePositionResponseData = unitePositionResponseData;
   }
 
 
@@ -91,13 +62,13 @@ public class UnitePositionResponse {
       return false;
     }
     UnitePositionResponse unitePositionResponse = (UnitePositionResponse) o;
-    return Objects.equals(this.globalPositionId, unitePositionResponse.globalPositionId) &&
-        Objects.equals(this.transactionIds, unitePositionResponse.transactionIds);
+    return Objects.equals(this.unitePositionResponseData, unitePositionResponse.unitePositionResponseData) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(globalPositionId, transactionIds);
+    return Objects.hash(unitePositionResponseData, super.hashCode());
   }
 
 
@@ -105,9 +76,8 @@ public class UnitePositionResponse {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class UnitePositionResponse {\n");
-    
-    sb.append("    globalPositionId: ").append(toIndentedString(globalPositionId)).append("\n");
-    sb.append("    transactionIds: ").append(toIndentedString(transactionIds)).append("\n");
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    unitePositionResponseData: ").append(toIndentedString(unitePositionResponseData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

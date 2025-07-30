@@ -21,96 +21,35 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
+import tech.dora.model.Collateral;
+import tech.dora.model.Metadata;
+import tech.dora.model.ResponseEnvelope;
 /**
  * DeCollateralizeResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
-public class DeCollateralizeResponse {
-  @SerializedName("position_id")
-  private UUID positionId = null;
+public class DeCollateralizeResponse extends ResponseEnvelope {
+  @SerializedName("data")
+  private Collateral deCollateralizeResponseData = null;
 
-  @SerializedName("transaction_id")
-  private UUID transactionId = null;
-
-  @SerializedName("asset_id")
-  private UUID assetId = null;
-
-  @SerializedName("quantity")
-  private String quantity = null;
-
-  public DeCollateralizeResponse positionId(UUID positionId) {
-    this.positionId = positionId;
+  public DeCollateralizeResponse deCollateralizeResponseData(Collateral deCollateralizeResponseData) {
+    this.deCollateralizeResponseData = deCollateralizeResponseData;
     return this;
   }
 
    /**
-   * Get positionId
-   * @return positionId
+   * Get deCollateralizeResponseData
+   * @return deCollateralizeResponseData
   **/
   @Schema(description = "")
-  public UUID getPositionId() {
-    return positionId;
+  public Collateral getDeCollateralizeResponseData() {
+    return deCollateralizeResponseData;
   }
 
-  public void setPositionId(UUID positionId) {
-    this.positionId = positionId;
-  }
-
-  public DeCollateralizeResponse transactionId(UUID transactionId) {
-    this.transactionId = transactionId;
-    return this;
-  }
-
-   /**
-   * Get transactionId
-   * @return transactionId
-  **/
-  @Schema(description = "")
-  public UUID getTransactionId() {
-    return transactionId;
-  }
-
-  public void setTransactionId(UUID transactionId) {
-    this.transactionId = transactionId;
-  }
-
-  public DeCollateralizeResponse assetId(UUID assetId) {
-    this.assetId = assetId;
-    return this;
-  }
-
-   /**
-   * Get assetId
-   * @return assetId
-  **/
-  @Schema(description = "")
-  public UUID getAssetId() {
-    return assetId;
-  }
-
-  public void setAssetId(UUID assetId) {
-    this.assetId = assetId;
-  }
-
-  public DeCollateralizeResponse quantity(String quantity) {
-    this.quantity = quantity;
-    return this;
-  }
-
-   /**
-   * Get quantity
-   * @return quantity
-  **/
-  @Schema(description = "")
-  public String getQuantity() {
-    return quantity;
-  }
-
-  public void setQuantity(String quantity) {
-    this.quantity = quantity;
+  public void setDeCollateralizeResponseData(Collateral deCollateralizeResponseData) {
+    this.deCollateralizeResponseData = deCollateralizeResponseData;
   }
 
 
@@ -123,15 +62,13 @@ public class DeCollateralizeResponse {
       return false;
     }
     DeCollateralizeResponse deCollateralizeResponse = (DeCollateralizeResponse) o;
-    return Objects.equals(this.positionId, deCollateralizeResponse.positionId) &&
-        Objects.equals(this.transactionId, deCollateralizeResponse.transactionId) &&
-        Objects.equals(this.assetId, deCollateralizeResponse.assetId) &&
-        Objects.equals(this.quantity, deCollateralizeResponse.quantity);
+    return Objects.equals(this.deCollateralizeResponseData, deCollateralizeResponse.deCollateralizeResponseData) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(positionId, transactionId, assetId, quantity);
+    return Objects.hash(deCollateralizeResponseData, super.hashCode());
   }
 
 
@@ -139,11 +76,8 @@ public class DeCollateralizeResponse {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class DeCollateralizeResponse {\n");
-    
-    sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
-    sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
-    sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
-    sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    deCollateralizeResponseData: ").append(toIndentedString(deCollateralizeResponseData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

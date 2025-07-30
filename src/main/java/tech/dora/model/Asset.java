@@ -24,12 +24,13 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.UUID;
 import org.threeten.bp.OffsetDateTime;
+import tech.dora.model.AssetKind;
 import tech.dora.model.Bond;
 /**
  * Asset
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
 
 public class Asset {
   @SerializedName("id")
@@ -66,7 +67,7 @@ public class Asset {
   private String symbol = null;
 
   @SerializedName("kind")
-  private String kind = null;
+  private AssetKind kind = null;
 
   @SerializedName("yield")
   private BigDecimal yield = null;
@@ -287,7 +288,7 @@ public class Asset {
     this.symbol = symbol;
   }
 
-  public Asset kind(String kind) {
+  public Asset kind(AssetKind kind) {
     this.kind = kind;
     return this;
   }
@@ -297,11 +298,11 @@ public class Asset {
    * @return kind
   **/
   @Schema(description = "")
-  public String getKind() {
+  public AssetKind getKind() {
     return kind;
   }
 
-  public void setKind(String kind) {
+  public void setKind(AssetKind kind) {
     this.kind = kind;
   }
 

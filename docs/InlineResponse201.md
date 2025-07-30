@@ -3,4 +3,4 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**inlineResponse201Data** | [**FundUserResponse**](FundUserResponse.md) |  |  [optional]
+**inlineResponse201Data** | **Object** |  |  [optional]
