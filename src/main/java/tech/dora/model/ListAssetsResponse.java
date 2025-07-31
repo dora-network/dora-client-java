@@ -21,6 +21,8 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import tech.dora.model.Asset;
 import tech.dora.model.Metadata;
 import tech.dora.model.ResponseEnvelope;
@@ -28,14 +30,22 @@ import tech.dora.model.ResponseEnvelope;
  * ListAssetsResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-31T14:00:14.316927622+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-31T14:07:25.766711372+02:00[Europe/Paris]")
 
 public class ListAssetsResponse extends ResponseEnvelope {
   @SerializedName("data")
-  private Asset listAssetsResponseData = null;
+  private List<Asset> listAssetsResponseData = null;
 
-  public ListAssetsResponse listAssetsResponseData(Asset listAssetsResponseData) {
+  public ListAssetsResponse listAssetsResponseData(List<Asset> listAssetsResponseData) {
     this.listAssetsResponseData = listAssetsResponseData;
+    return this;
+  }
+
+  public ListAssetsResponse addListAssetsResponseDataItem(Asset listAssetsResponseDataItem) {
+    if (this.listAssetsResponseData == null) {
+      this.listAssetsResponseData = new ArrayList<Asset>();
+    }
+    this.listAssetsResponseData.add(listAssetsResponseDataItem);
     return this;
   }
 
@@ -44,11 +54,11 @@ public class ListAssetsResponse extends ResponseEnvelope {
    * @return listAssetsResponseData
   **/
   @Schema(description = "")
-  public Asset getListAssetsResponseData() {
+  public List<Asset> getListAssetsResponseData() {
     return listAssetsResponseData;
   }
 
-  public void setListAssetsResponseData(Asset listAssetsResponseData) {
+  public void setListAssetsResponseData(List<Asset> listAssetsResponseData) {
     this.listAssetsResponseData = listAssetsResponseData;
   }
 

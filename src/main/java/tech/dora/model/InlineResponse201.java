@@ -27,7 +27,7 @@ import tech.dora.model.ResponseEnvelope;
  * InlineResponse201
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-31T14:00:14.316927622+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-31T14:07:25.766711372+02:00[Europe/Paris]")
 
 public class InlineResponse201 extends ResponseEnvelope {
   @SerializedName("data")

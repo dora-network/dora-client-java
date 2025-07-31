@@ -3,4 +3,4 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**listAssetsResponseData** | [**Asset**](Asset.md) |  |  [optional]
+**listAssetsResponseData** | [**List&lt;Asset&gt;**](Asset.md) |  |  [optional]
