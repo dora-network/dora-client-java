@@ -1669,7 +1669,7 @@ No authorization required
 
 <a name="leverageBorrow"></a>
 # **leverageBorrow**
-> InlineResponse201 leverageBorrow(body)
+> BorrowResponse leverageBorrow(body)
 
 Directly borrow assets
 
@@ -1683,9 +1683,9 @@ TODO: Finish this when implementation has been completed
 
 
 DefaultApi apiInstance = new DefaultApi();
-Object body = null; // Object | 
+BorrowRequest body = new BorrowRequest(); // BorrowRequest | 
 try {
-    InlineResponse201 result = apiInstance.leverageBorrow(body);
+    BorrowResponse result = apiInstance.leverageBorrow(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#leverageBorrow");
@@ -1697,11 +1697,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Object**](Object.md)|  |
+ **body** | [**BorrowRequest**](BorrowRequest.md)|  |
 
 ### Return type
 
-[**InlineResponse201**](InlineResponse201.md)
+[**BorrowResponse**](BorrowResponse.md)
 
 ### Authorization
 
@@ -1886,7 +1886,7 @@ No authorization required
 
 <a name="leverageRepay"></a>
 # **leverageRepay**
-> InlineResponse201 leverageRepay(body)
+> RepayResponse leverageRepay(body)
 
 Repay borrowed assets
 
@@ -1900,9 +1900,9 @@ TODO: Finish this when implementation has been completed
 
 
 DefaultApi apiInstance = new DefaultApi();
-Object body = null; // Object | 
+RepayRequest body = new RepayRequest(); // RepayRequest | 
 try {
-    InlineResponse201 result = apiInstance.leverageRepay(body);
+    RepayResponse result = apiInstance.leverageRepay(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#leverageRepay");
@@ -1914,11 +1914,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Object**](Object.md)|  |
+ **body** | [**RepayRequest**](RepayRequest.md)|  |
 
 ### Return type
 
-[**InlineResponse201**](InlineResponse201.md)
+[**RepayResponse**](RepayResponse.md)
 
 ### Authorization
 
@@ -2321,7 +2321,7 @@ No authorization required
 
 <a name="streamAssetPrices"></a>
 # **streamAssetPrices**
-> InlineResponse200 streamAssetPrices(since)
+> ListAssetPriceResponse streamAssetPrices(since)
 
 Get a snapshot of asset prices from a specific date and open a stream for real-time updates
 
@@ -2335,7 +2335,7 @@ Get a snapshot of asset prices from a specific date and open a stream for real-t
 DefaultApi apiInstance = new DefaultApi();
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    InlineResponse200 result = apiInstance.streamAssetPrices(since);
+    ListAssetPriceResponse result = apiInstance.streamAssetPrices(since);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#streamAssetPrices");
@@ -2351,7 +2351,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**ListAssetPriceResponse**](ListAssetPriceResponse.md)
 
 ### Authorization
 

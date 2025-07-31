@@ -26,7 +26,7 @@ import java.util.UUID;
  * Liquidity
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-31T14:07:25.766711372+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-31T15:56:15.177543067+02:00[Europe/Paris]")
 
 public class Liquidity {
   @SerializedName("order_book_id")
