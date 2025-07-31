@@ -26,11 +26,11 @@ import java.util.UUID;
  * FundUserRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-31T14:00:14.316927622+02:00[Europe/Paris]")
 
 public class FundUserRequest {
-  @SerializedName("user_id")
-  private UUID userId = null;
+  @SerializedName("position_id")
+  private UUID positionId = null;
 
   @SerializedName("asset_id")
   private UUID assetId = null;
@@ -38,22 +38,22 @@ public class FundUserRequest {
   @SerializedName("amount")
   private String amount = null;
 
-  public FundUserRequest userId(UUID userId) {
-    this.userId = userId;
+  public FundUserRequest positionId(UUID positionId) {
+    this.positionId = positionId;
     return this;
   }
 
    /**
-   * Get userId
-   * @return userId
+   * Get positionId
+   * @return positionId
   **/
   @Schema(description = "")
-  public UUID getUserId() {
-    return userId;
+  public UUID getPositionId() {
+    return positionId;
   }
 
-  public void setUserId(UUID userId) {
-    this.userId = userId;
+  public void setPositionId(UUID positionId) {
+    this.positionId = positionId;
   }
 
   public FundUserRequest assetId(UUID assetId) {
@@ -102,14 +102,14 @@ public class FundUserRequest {
       return false;
     }
     FundUserRequest fundUserRequest = (FundUserRequest) o;
-    return Objects.equals(this.userId, fundUserRequest.userId) &&
+    return Objects.equals(this.positionId, fundUserRequest.positionId) &&
         Objects.equals(this.assetId, fundUserRequest.assetId) &&
         Objects.equals(this.amount, fundUserRequest.amount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, assetId, amount);
+    return Objects.hash(positionId, assetId, amount);
   }
 
 
@@ -118,7 +118,7 @@ public class FundUserRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class FundUserRequest {\n");
     
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("}");

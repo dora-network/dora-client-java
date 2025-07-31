@@ -25,7 +25,7 @@ import java.io.IOException;
  * PriceLevel
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-30T15:33:45.934694888+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-31T14:00:14.316927622+02:00[Europe/Paris]")
 
 public class PriceLevel {
   @SerializedName("price")
