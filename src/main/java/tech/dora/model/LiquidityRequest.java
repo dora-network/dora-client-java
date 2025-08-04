@@ -26,35 +26,14 @@ import java.util.UUID;
  * LiquidityRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-31T15:56:15.177543067+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
 
 public class LiquidityRequest {
-  @SerializedName("order_book_id")
-  private UUID orderBookId = null;
-
   @SerializedName("position_id")
   private UUID positionId = null;
 
   @SerializedName("quantity")
   private String quantity = null;
-
-  public LiquidityRequest orderBookId(UUID orderBookId) {
-    this.orderBookId = orderBookId;
-    return this;
-  }
-
-   /**
-   * Get orderBookId
-   * @return orderBookId
-  **/
-  @Schema(description = "")
-  public UUID getOrderBookId() {
-    return orderBookId;
-  }
-
-  public void setOrderBookId(UUID orderBookId) {
-    this.orderBookId = orderBookId;
-  }
 
   public LiquidityRequest positionId(UUID positionId) {
     this.positionId = positionId;
@@ -65,7 +44,7 @@ public class LiquidityRequest {
    * Get positionId
    * @return positionId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public UUID getPositionId() {
     return positionId;
   }
@@ -83,7 +62,7 @@ public class LiquidityRequest {
    * Get quantity
    * @return quantity
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public String getQuantity() {
     return quantity;
   }
@@ -102,14 +81,13 @@ public class LiquidityRequest {
       return false;
     }
     LiquidityRequest liquidityRequest = (LiquidityRequest) o;
-    return Objects.equals(this.orderBookId, liquidityRequest.orderBookId) &&
-        Objects.equals(this.positionId, liquidityRequest.positionId) &&
+    return Objects.equals(this.positionId, liquidityRequest.positionId) &&
         Objects.equals(this.quantity, liquidityRequest.quantity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderBookId, positionId, quantity);
+    return Objects.hash(positionId, quantity);
   }
 
 
@@ -118,7 +96,6 @@ public class LiquidityRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class LiquidityRequest {\n");
     
-    sb.append("    orderBookId: ").append(toIndentedString(orderBookId)).append("\n");
     sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("}");

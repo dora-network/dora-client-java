@@ -29,8 +29,8 @@ Method | HTTP request | Description
 [**getOrderbookSummary**](DefaultApi.md#getOrderbookSummary) | **GET** /v1/orderbooks/{order_book_id}/summary | Get summary of an orderbook
 [**getOrderbookTop**](DefaultApi.md#getOrderbookTop) | **GET** /v1/orderbooks/{order_book_id}/top | Get the top price levels for a specific orderbook (L1 market depth)
 [**getPoolPrice**](DefaultApi.md#getPoolPrice) | **GET** /v1/price/pool/{pool_id} | Get the current price of a pool
-[**getTradeById**](DefaultApi.md#getTradeById) | **GET** /v1/trade/{trade_id} | Get a trade by ID
-[**getTrades**](DefaultApi.md#getTrades) | **GET** /v1/trade | Get a filtered, paginated list of trades
+[**getTradeById**](DefaultApi.md#getTradeById) | **GET** /v1/trades/{trade_id} | Get a trade by ID
+[**getTrades**](DefaultApi.md#getTrades) | **GET** /v1/trades | Get a filtered, paginated list of trades
 [**getTransactionById**](DefaultApi.md#getTransactionById) | **GET** /v1/transactions/{id} | Get a transaction by ID
 [**getTransactions**](DefaultApi.md#getTransactions) | **GET** /v1/transactions | Get a filtered, paginated list of transactions
 [**getUserById**](DefaultApi.md#getUserById) | **GET** /v1/user/{user_id} | Get user by ID (admin only)
@@ -59,7 +59,7 @@ Method | HTTP request | Description
 [**streamCandleData**](DefaultApi.md#streamCandleData) | **GET** /v1/charts/{orderbook}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
 [**streamOrderBookBalances**](DefaultApi.md#streamOrderBookBalances) | **GET** /v1/orderbooks/{order_book_id}/stream/balances | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
 [**streamOrderbookOpenOrders**](DefaultApi.md#streamOrderbookOpenOrders) | **GET** /v1/orderbooks/{order_book_id}/stream/open | Get a snapshot of open orders in an order book and open a stream for real-time updates
-[**streamTrades**](DefaultApi.md#streamTrades) | **GET** /v1/trade/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
+[**streamTrades**](DefaultApi.md#streamTrades) | **GET** /v1/trades/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
 [**updateUserConfig**](DefaultApi.md#updateUserConfig) | **PUT** /v1/user/{user_id}/config | Update user configuration by ID
 [**updateUserConfigSelf**](DefaultApi.md#updateUserConfigSelf) | **PUT** /v1/user/config/self | Update user configuration for the authenticated user
 [**verifyUser**](DefaultApi.md#verifyUser) | **PUT** /v1/user/{user_id}/verify | Verify a user by ID

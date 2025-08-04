@@ -26,7 +26,7 @@ import java.util.UUID;
  * CollateralizeRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-31T15:56:15.177543067+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
 
 public class CollateralizeRequest {
   @SerializedName("position_id")
@@ -47,7 +47,7 @@ public class CollateralizeRequest {
    * Get positionId
    * @return positionId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public UUID getPositionId() {
     return positionId;
   }
@@ -65,7 +65,7 @@ public class CollateralizeRequest {
    * Get assetId
    * @return assetId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public UUID getAssetId() {
     return assetId;
   }
@@ -83,7 +83,7 @@ public class CollateralizeRequest {
    * Get quantity
    * @return quantity
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public String getQuantity() {
     return quantity;
   }

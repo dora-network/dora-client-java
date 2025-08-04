@@ -26,7 +26,7 @@ import java.util.UUID;
  * Response body for POST /user or PUT /user/{id}: contains the ID of the created or updated user.
  */
 @Schema(description = "Response body for POST /user or PUT /user/{id}: contains the ID of the created or updated user.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-22T16:47:33.999725182+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
 
 public class CreateOrUpdateUserResponse {
   @SerializedName("id")

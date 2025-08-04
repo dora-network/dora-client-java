@@ -26,7 +26,7 @@ import java.util.UUID;
  * FundUserRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-31T15:56:15.177543067+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
 
 public class FundUserRequest {
   @SerializedName("position_id")
@@ -35,8 +35,8 @@ public class FundUserRequest {
   @SerializedName("asset_id")
   private UUID assetId = null;
 
-  @SerializedName("amount")
-  private String amount = null;
+  @SerializedName("quantity")
+  private String quantity = null;
 
   public FundUserRequest positionId(UUID positionId) {
     this.positionId = positionId;
@@ -47,7 +47,7 @@ public class FundUserRequest {
    * Get positionId
    * @return positionId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public UUID getPositionId() {
     return positionId;
   }
@@ -65,7 +65,7 @@ public class FundUserRequest {
    * Get assetId
    * @return assetId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public UUID getAssetId() {
     return assetId;
   }
@@ -74,22 +74,22 @@ public class FundUserRequest {
     this.assetId = assetId;
   }
 
-  public FundUserRequest amount(String amount) {
-    this.amount = amount;
+  public FundUserRequest quantity(String quantity) {
+    this.quantity = quantity;
     return this;
   }
 
    /**
-   * Get amount
-   * @return amount
+   * Get quantity
+   * @return quantity
   **/
-  @Schema(description = "")
-  public String getAmount() {
-    return amount;
+  @Schema(required = true, description = "")
+  public String getQuantity() {
+    return quantity;
   }
 
-  public void setAmount(String amount) {
-    this.amount = amount;
+  public void setQuantity(String quantity) {
+    this.quantity = quantity;
   }
 
 
@@ -104,12 +104,12 @@ public class FundUserRequest {
     FundUserRequest fundUserRequest = (FundUserRequest) o;
     return Objects.equals(this.positionId, fundUserRequest.positionId) &&
         Objects.equals(this.assetId, fundUserRequest.assetId) &&
-        Objects.equals(this.amount, fundUserRequest.amount);
+        Objects.equals(this.quantity, fundUserRequest.quantity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(positionId, assetId, amount);
+    return Objects.hash(positionId, assetId, quantity);
   }
 
 
@@ -120,7 +120,7 @@ public class FundUserRequest {
     
     sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
-    sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
+    sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("}");
     return sb.toString();
   }

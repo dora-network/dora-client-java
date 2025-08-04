@@ -25,7 +25,7 @@ import java.io.IOException;
  * A generic struct to handle optional updates for string fields in user requests.
  */
 @Schema(description = "A generic struct to handle optional updates for string fields in user requests.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-31T15:56:15.177543067+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
 
 public class UpdateFieldString {
   @SerializedName("update")
@@ -43,7 +43,7 @@ public class UpdateFieldString {
    * Whether to update the field.
    * @return update
   **/
-  @Schema(description = "Whether to update the field.")
+  @Schema(required = true, description = "Whether to update the field.")
   public Boolean isUpdate() {
     return update;
   }

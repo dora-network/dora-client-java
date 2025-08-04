@@ -32,7 +32,7 @@ import tech.dora.model.Side;
  * CreateOrderRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-31T15:56:15.177543067+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
 
 public class CreateOrderRequest {
   @SerializedName("quantity")
@@ -68,7 +68,7 @@ public class CreateOrderRequest {
    * Get quantity
    * @return quantity
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public String getQuantity() {
     return quantity;
   }
@@ -86,7 +86,7 @@ public class CreateOrderRequest {
    * Required: Inverse leverage for the order, must be between 0 and 1 (inclusive)
    * @return inverseLeverage
   **/
-  @Schema(description = "Required: Inverse leverage for the order, must be between 0 and 1 (inclusive)")
+  @Schema(required = true, description = "Required: Inverse leverage for the order, must be between 0 and 1 (inclusive)")
   public BigDecimal getInverseLeverage() {
     return inverseLeverage;
   }
@@ -104,7 +104,7 @@ public class CreateOrderRequest {
    * Get price
    * @return price
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public String getPrice() {
     return price;
   }
@@ -122,7 +122,7 @@ public class CreateOrderRequest {
    * Get kind
    * @return kind
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public OrderKind getKind() {
     return kind;
   }
@@ -140,7 +140,7 @@ public class CreateOrderRequest {
    * Get side
    * @return side
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Side getSide() {
     return side;
   }
@@ -158,7 +158,7 @@ public class CreateOrderRequest {
    * Required: the order book to submit the order to
    * @return orderBookId
   **/
-  @Schema(description = "Required: the order book to submit the order to")
+  @Schema(required = true, description = "Required: the order book to submit the order to")
   public UUID getOrderBookId() {
     return orderBookId;
   }

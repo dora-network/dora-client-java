@@ -26,7 +26,7 @@ import java.util.UUID;
  * FundUser
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-31T15:56:15.177543067+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
 
 public class FundUser {
   @SerializedName("user_id")
@@ -38,8 +38,8 @@ public class FundUser {
   @SerializedName("asset_id")
   private UUID assetId = null;
 
-  @SerializedName("final_amount")
-  private String finalAmount = null;
+  @SerializedName("final_quantity")
+  private String finalQuantity = null;
 
   public FundUser userId(UUID userId) {
     this.userId = userId;
@@ -95,22 +95,22 @@ public class FundUser {
     this.assetId = assetId;
   }
 
-  public FundUser finalAmount(String finalAmount) {
-    this.finalAmount = finalAmount;
+  public FundUser finalQuantity(String finalQuantity) {
+    this.finalQuantity = finalQuantity;
     return this;
   }
 
    /**
-   * Get finalAmount
-   * @return finalAmount
+   * Get finalQuantity
+   * @return finalQuantity
   **/
   @Schema(description = "")
-  public String getFinalAmount() {
-    return finalAmount;
+  public String getFinalQuantity() {
+    return finalQuantity;
   }
 
-  public void setFinalAmount(String finalAmount) {
-    this.finalAmount = finalAmount;
+  public void setFinalQuantity(String finalQuantity) {
+    this.finalQuantity = finalQuantity;
   }
 
 
@@ -126,12 +126,12 @@ public class FundUser {
     return Objects.equals(this.userId, fundUser.userId) &&
         Objects.equals(this.positionId, fundUser.positionId) &&
         Objects.equals(this.assetId, fundUser.assetId) &&
-        Objects.equals(this.finalAmount, fundUser.finalAmount);
+        Objects.equals(this.finalQuantity, fundUser.finalQuantity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, positionId, assetId, finalAmount);
+    return Objects.hash(userId, positionId, assetId, finalQuantity);
   }
 
 
@@ -143,7 +143,7 @@ public class FundUser {
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
-    sb.append("    finalAmount: ").append(toIndentedString(finalAmount)).append("\n");
+    sb.append("    finalQuantity: ").append(toIndentedString(finalQuantity)).append("\n");
     sb.append("}");
     return sb.toString();
   }

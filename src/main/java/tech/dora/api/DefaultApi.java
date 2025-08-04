@@ -3294,7 +3294,7 @@ public class DefaultApi {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/trade/{trade_id}"
+        String localVarPath = "/v1/trades/{trade_id}"
             .replaceAll("\\{" + "trade_id" + "\\}", apiClient.escapeString(tradeId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -3427,7 +3427,7 @@ public class DefaultApi {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/trade";
+        String localVarPath = "/v1/trades";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -7365,7 +7365,7 @@ public class DefaultApi {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/trade/{order_book_id}/stream"
+        String localVarPath = "/v1/trades/{order_book_id}/stream"
             .replaceAll("\\{" + "orderbookId" + "\\}", apiClient.escapeString(orderbookId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();

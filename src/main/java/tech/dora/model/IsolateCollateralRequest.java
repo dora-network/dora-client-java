@@ -26,7 +26,7 @@ import java.util.UUID;
  * IsolateCollateralRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-07-31T15:56:15.177543067+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
 
 public class IsolateCollateralRequest {
   @SerializedName("global_position_id")
@@ -47,7 +47,7 @@ public class IsolateCollateralRequest {
    * Get globalPositionId
    * @return globalPositionId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public UUID getGlobalPositionId() {
     return globalPositionId;
   }
@@ -65,7 +65,7 @@ public class IsolateCollateralRequest {
    * Get assetId
    * @return assetId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public UUID getAssetId() {
     return assetId;
   }
@@ -83,7 +83,7 @@ public class IsolateCollateralRequest {
    * Get quantity
    * @return quantity
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public String getQuantity() {
     return quantity;
   }

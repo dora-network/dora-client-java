@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**globalPositionId** | [**UUID**](UUID.md) |  |  [optional]
-**assetId** | [**UUID**](UUID.md) |  |  [optional]
-**quantity** | **String** |  |  [optional]
+**globalPositionId** | [**UUID**](UUID.md) |  | 
+**assetId** | [**UUID**](UUID.md) |  | 
+**quantity** | **String** |  | 
