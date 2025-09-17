@@ -21,7 +21,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -32,14 +31,14 @@ import tech.dora.model.Side;
  * CreateOrderRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
 
 public class CreateOrderRequest {
   @SerializedName("quantity")
   private String quantity = null;
 
   @SerializedName("inverse_leverage")
-  private BigDecimal inverseLeverage = null;
+  private String inverseLeverage = null;
 
   @SerializedName("price")
   private String price = null;
@@ -50,11 +49,14 @@ public class CreateOrderRequest {
   @SerializedName("side")
   private Side side = null;
 
+  @SerializedName("position_id")
+  private UUID positionId = null;
+
   @SerializedName("order_book_id")
   private UUID orderBookId = null;
 
-  @SerializedName("user_text")
-  private String userText = null;
+  @SerializedName("order_info")
+  private String orderInfo = null;
 
   @SerializedName("order_modifiers")
   private List<OrderModifierKind> orderModifiers = null;
@@ -77,21 +79,21 @@ public class CreateOrderRequest {
     this.quantity = quantity;
   }
 
-  public CreateOrderRequest inverseLeverage(BigDecimal inverseLeverage) {
+  public CreateOrderRequest inverseLeverage(String inverseLeverage) {
     this.inverseLeverage = inverseLeverage;
     return this;
   }
 
    /**
-   * Required: Inverse leverage for the order, must be between 0 and 1 (inclusive)
+   * Get inverseLeverage
    * @return inverseLeverage
   **/
-  @Schema(required = true, description = "Required: Inverse leverage for the order, must be between 0 and 1 (inclusive)")
-  public BigDecimal getInverseLeverage() {
+  @Schema(required = true, description = "")
+  public String getInverseLeverage() {
     return inverseLeverage;
   }
 
-  public void setInverseLeverage(BigDecimal inverseLeverage) {
+  public void setInverseLeverage(String inverseLeverage) {
     this.inverseLeverage = inverseLeverage;
   }
 
@@ -104,7 +106,7 @@ public class CreateOrderRequest {
    * Get price
    * @return price
   **/
-  @Schema(required = true, description = "")
+  @Schema(description = "")
   public String getPrice() {
     return price;
   }
@@ -149,6 +151,24 @@ public class CreateOrderRequest {
     this.side = side;
   }
 
+  public CreateOrderRequest positionId(UUID positionId) {
+    this.positionId = positionId;
+    return this;
+  }
+
+   /**
+   * position ID to use for the order. required.
+   * @return positionId
+  **/
+  @Schema(required = true, description = "position ID to use for the order. required.")
+  public UUID getPositionId() {
+    return positionId;
+  }
+
+  public void setPositionId(UUID positionId) {
+    this.positionId = positionId;
+  }
+
   public CreateOrderRequest orderBookId(UUID orderBookId) {
     this.orderBookId = orderBookId;
     return this;
@@ -167,22 +187,22 @@ public class CreateOrderRequest {
     this.orderBookId = orderBookId;
   }
 
-  public CreateOrderRequest userText(String userText) {
-    this.userText = userText;
+  public CreateOrderRequest orderInfo(String orderInfo) {
+    this.orderInfo = orderInfo;
     return this;
   }
 
    /**
    * Optional: User-defined text for the order, e.g., &#x27;buying dips&#x27;
-   * @return userText
+   * @return orderInfo
   **/
   @Schema(description = "Optional: User-defined text for the order, e.g., 'buying dips'")
-  public String getUserText() {
-    return userText;
+  public String getOrderInfo() {
+    return orderInfo;
   }
 
-  public void setUserText(String userText) {
-    this.userText = userText;
+  public void setOrderInfo(String orderInfo) {
+    this.orderInfo = orderInfo;
   }
 
   public CreateOrderRequest orderModifiers(List<OrderModifierKind> orderModifiers) {
@@ -226,14 +246,15 @@ public class CreateOrderRequest {
         Objects.equals(this.price, createOrderRequest.price) &&
         Objects.equals(this.kind, createOrderRequest.kind) &&
         Objects.equals(this.side, createOrderRequest.side) &&
+        Objects.equals(this.positionId, createOrderRequest.positionId) &&
         Objects.equals(this.orderBookId, createOrderRequest.orderBookId) &&
-        Objects.equals(this.userText, createOrderRequest.userText) &&
+        Objects.equals(this.orderInfo, createOrderRequest.orderInfo) &&
         Objects.equals(this.orderModifiers, createOrderRequest.orderModifiers);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(quantity, inverseLeverage, price, kind, side, orderBookId, userText, orderModifiers);
+    return Objects.hash(quantity, inverseLeverage, price, kind, side, positionId, orderBookId, orderInfo, orderModifiers);
   }
 
 
@@ -247,8 +268,9 @@ public class CreateOrderRequest {
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    kind: ").append(toIndentedString(kind)).append("\n");
     sb.append("    side: ").append(toIndentedString(side)).append("\n");
+    sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
     sb.append("    orderBookId: ").append(toIndentedString(orderBookId)).append("\n");
-    sb.append("    userText: ").append(toIndentedString(userText)).append("\n");
+    sb.append("    orderInfo: ").append(toIndentedString(orderInfo)).append("\n");
     sb.append("    orderModifiers: ").append(toIndentedString(orderModifiers)).append("\n");
     sb.append("}");
     return sb.toString();

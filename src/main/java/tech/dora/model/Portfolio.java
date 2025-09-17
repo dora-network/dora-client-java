@@ -31,14 +31,14 @@ import tech.dora.model.TransformedAssets;
  * Portfolio
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
 
 public class Portfolio {
   @SerializedName("user_id")
   private UUID userId = null;
 
   @SerializedName("position")
-  private Map<String, Map<String, Map<String, Position>>> position = null;
+  private Map<String, Map<String, Position>> position = null;
 
   @SerializedName("net_stablecoin_equivalence")
   private TransformedAssets netStablecoinEquivalence = null;
@@ -61,14 +61,14 @@ public class Portfolio {
     this.userId = userId;
   }
 
-  public Portfolio position(Map<String, Map<String, Map<String, Position>>> position) {
+  public Portfolio position(Map<String, Map<String, Position>> position) {
     this.position = position;
     return this;
   }
 
-  public Portfolio putPositionItem(String key, Map<String, Map<String, Position>> positionItem) {
+  public Portfolio putPositionItem(String key, Map<String, Position> positionItem) {
     if (this.position == null) {
-      this.position = new HashMap<String, Map<String, Map<String, Position>>>();
+      this.position = new HashMap<String, Map<String, Position>>();
     }
     this.position.put(key, positionItem);
     return this;
@@ -79,11 +79,11 @@ public class Portfolio {
    * @return position
   **/
   @Schema(description = "")
-  public Map<String, Map<String, Map<String, Position>>> getPosition() {
+  public Map<String, Map<String, Position>> getPosition() {
     return position;
   }
 
-  public void setPosition(Map<String, Map<String, Map<String, Position>>> position) {
+  public void setPosition(Map<String, Map<String, Position>> position) {
     this.position = position;
   }
 

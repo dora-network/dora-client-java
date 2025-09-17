@@ -28,7 +28,7 @@ import tech.dora.model.UserConfig;
  * GetUserConfigResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
 
 public class GetUserConfigResponse extends ResponseEnvelope {
   @SerializedName("data")

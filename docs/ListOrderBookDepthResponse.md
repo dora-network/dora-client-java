@@ -3,4 +3,4 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**listOrderBookDepthResponseData** | [**List&lt;OrderBookDepth&gt;**](OrderBookDepth.md) |  |  [optional]
+**listOrderBookDepthResponseData** | [**OrderBookDepth**](OrderBookDepth.md) |  |  [optional]

@@ -27,32 +27,17 @@ import org.threeten.bp.OffsetDateTime;
  * Trade
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
 
 public class Trade {
   @SerializedName("transaction_id")
   private UUID transactionId = null;
 
-  @SerializedName("user_id")
-  private UUID userId = null;
+  @SerializedName("asset_0")
+  private UUID asset0 = null;
 
-  @SerializedName("order_id")
-  private UUID orderId = null;
-
-  @SerializedName("order_seq")
-  private Integer orderSeq = null;
-
-  @SerializedName("order_book_id")
-  private UUID orderBookId = null;
-
-  @SerializedName("asset_id")
-  private UUID assetId = null;
-
-  @SerializedName("quantity")
-  private String quantity = null;
-
-  @SerializedName("price")
-  private String price = null;
+  @SerializedName("created_at")
+  private OffsetDateTime createdAt = null;
 
   @SerializedName("fee_asset_id")
   private UUID feeAssetId = null;
@@ -60,8 +45,23 @@ public class Trade {
   @SerializedName("fee_quantity")
   private String feeQuantity = null;
 
-  @SerializedName("created_at")
-  private OffsetDateTime createdAt = null;
+  @SerializedName("order_book_id")
+  private UUID orderBookId = null;
+
+  @SerializedName("order_id")
+  private UUID orderId = null;
+
+  @SerializedName("order_seq")
+  private Integer orderSeq = null;
+
+  @SerializedName("price")
+  private String price = null;
+
+  @SerializedName("quantity_0")
+  private String quantity0 = null;
+
+  @SerializedName("user_id")
+  private UUID userId = null;
 
   public Trade transactionId(UUID transactionId) {
     this.transactionId = transactionId;
@@ -81,130 +81,40 @@ public class Trade {
     this.transactionId = transactionId;
   }
 
-  public Trade userId(UUID userId) {
-    this.userId = userId;
+  public Trade asset0(UUID asset0) {
+    this.asset0 = asset0;
     return this;
   }
 
    /**
-   * Get userId
-   * @return userId
+   * Get asset0
+   * @return asset0
   **/
   @Schema(description = "")
-  public UUID getUserId() {
-    return userId;
+  public UUID getAsset0() {
+    return asset0;
   }
 
-  public void setUserId(UUID userId) {
-    this.userId = userId;
+  public void setAsset0(UUID asset0) {
+    this.asset0 = asset0;
   }
 
-  public Trade orderId(UUID orderId) {
-    this.orderId = orderId;
+  public Trade createdAt(OffsetDateTime createdAt) {
+    this.createdAt = createdAt;
     return this;
   }
 
    /**
-   * Get orderId
-   * @return orderId
+   * Get createdAt
+   * @return createdAt
   **/
   @Schema(description = "")
-  public UUID getOrderId() {
-    return orderId;
+  public OffsetDateTime getCreatedAt() {
+    return createdAt;
   }
 
-  public void setOrderId(UUID orderId) {
-    this.orderId = orderId;
-  }
-
-  public Trade orderSeq(Integer orderSeq) {
-    this.orderSeq = orderSeq;
-    return this;
-  }
-
-   /**
-   * Get orderSeq
-   * @return orderSeq
-  **/
-  @Schema(description = "")
-  public Integer getOrderSeq() {
-    return orderSeq;
-  }
-
-  public void setOrderSeq(Integer orderSeq) {
-    this.orderSeq = orderSeq;
-  }
-
-  public Trade orderBookId(UUID orderBookId) {
-    this.orderBookId = orderBookId;
-    return this;
-  }
-
-   /**
-   * Get orderBookId
-   * @return orderBookId
-  **/
-  @Schema(description = "")
-  public UUID getOrderBookId() {
-    return orderBookId;
-  }
-
-  public void setOrderBookId(UUID orderBookId) {
-    this.orderBookId = orderBookId;
-  }
-
-  public Trade assetId(UUID assetId) {
-    this.assetId = assetId;
-    return this;
-  }
-
-   /**
-   * Get assetId
-   * @return assetId
-  **/
-  @Schema(description = "")
-  public UUID getAssetId() {
-    return assetId;
-  }
-
-  public void setAssetId(UUID assetId) {
-    this.assetId = assetId;
-  }
-
-  public Trade quantity(String quantity) {
-    this.quantity = quantity;
-    return this;
-  }
-
-   /**
-   * Get quantity
-   * @return quantity
-  **/
-  @Schema(description = "")
-  public String getQuantity() {
-    return quantity;
-  }
-
-  public void setQuantity(String quantity) {
-    this.quantity = quantity;
-  }
-
-  public Trade price(String price) {
-    this.price = price;
-    return this;
-  }
-
-   /**
-   * Get price
-   * @return price
-  **/
-  @Schema(description = "")
-  public String getPrice() {
-    return price;
-  }
-
-  public void setPrice(String price) {
-    this.price = price;
+  public void setCreatedAt(OffsetDateTime createdAt) {
+    this.createdAt = createdAt;
   }
 
   public Trade feeAssetId(UUID feeAssetId) {
@@ -243,22 +153,112 @@ public class Trade {
     this.feeQuantity = feeQuantity;
   }
 
-  public Trade createdAt(OffsetDateTime createdAt) {
-    this.createdAt = createdAt;
+  public Trade orderBookId(UUID orderBookId) {
+    this.orderBookId = orderBookId;
     return this;
   }
 
    /**
-   * Get createdAt
-   * @return createdAt
+   * Get orderBookId
+   * @return orderBookId
   **/
   @Schema(description = "")
-  public OffsetDateTime getCreatedAt() {
-    return createdAt;
+  public UUID getOrderBookId() {
+    return orderBookId;
   }
 
-  public void setCreatedAt(OffsetDateTime createdAt) {
-    this.createdAt = createdAt;
+  public void setOrderBookId(UUID orderBookId) {
+    this.orderBookId = orderBookId;
+  }
+
+  public Trade orderId(UUID orderId) {
+    this.orderId = orderId;
+    return this;
+  }
+
+   /**
+   * Get orderId
+   * @return orderId
+  **/
+  @Schema(description = "")
+  public UUID getOrderId() {
+    return orderId;
+  }
+
+  public void setOrderId(UUID orderId) {
+    this.orderId = orderId;
+  }
+
+  public Trade orderSeq(Integer orderSeq) {
+    this.orderSeq = orderSeq;
+    return this;
+  }
+
+   /**
+   * Get orderSeq
+   * @return orderSeq
+  **/
+  @Schema(description = "")
+  public Integer getOrderSeq() {
+    return orderSeq;
+  }
+
+  public void setOrderSeq(Integer orderSeq) {
+    this.orderSeq = orderSeq;
+  }
+
+  public Trade price(String price) {
+    this.price = price;
+    return this;
+  }
+
+   /**
+   * Get price
+   * @return price
+  **/
+  @Schema(description = "")
+  public String getPrice() {
+    return price;
+  }
+
+  public void setPrice(String price) {
+    this.price = price;
+  }
+
+  public Trade quantity0(String quantity0) {
+    this.quantity0 = quantity0;
+    return this;
+  }
+
+   /**
+   * Get quantity0
+   * @return quantity0
+  **/
+  @Schema(description = "")
+  public String getQuantity0() {
+    return quantity0;
+  }
+
+  public void setQuantity0(String quantity0) {
+    this.quantity0 = quantity0;
+  }
+
+  public Trade userId(UUID userId) {
+    this.userId = userId;
+    return this;
+  }
+
+   /**
+   * Get userId
+   * @return userId
+  **/
+  @Schema(description = "")
+  public UUID getUserId() {
+    return userId;
+  }
+
+  public void setUserId(UUID userId) {
+    this.userId = userId;
   }
 
 
@@ -272,21 +272,21 @@ public class Trade {
     }
     Trade trade = (Trade) o;
     return Objects.equals(this.transactionId, trade.transactionId) &&
-        Objects.equals(this.userId, trade.userId) &&
-        Objects.equals(this.orderId, trade.orderId) &&
-        Objects.equals(this.orderSeq, trade.orderSeq) &&
-        Objects.equals(this.orderBookId, trade.orderBookId) &&
-        Objects.equals(this.assetId, trade.assetId) &&
-        Objects.equals(this.quantity, trade.quantity) &&
-        Objects.equals(this.price, trade.price) &&
+        Objects.equals(this.asset0, trade.asset0) &&
+        Objects.equals(this.createdAt, trade.createdAt) &&
         Objects.equals(this.feeAssetId, trade.feeAssetId) &&
         Objects.equals(this.feeQuantity, trade.feeQuantity) &&
-        Objects.equals(this.createdAt, trade.createdAt);
+        Objects.equals(this.orderBookId, trade.orderBookId) &&
+        Objects.equals(this.orderId, trade.orderId) &&
+        Objects.equals(this.orderSeq, trade.orderSeq) &&
+        Objects.equals(this.price, trade.price) &&
+        Objects.equals(this.quantity0, trade.quantity0) &&
+        Objects.equals(this.userId, trade.userId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(transactionId, userId, orderId, orderSeq, orderBookId, assetId, quantity, price, feeAssetId, feeQuantity, createdAt);
+    return Objects.hash(transactionId, asset0, createdAt, feeAssetId, feeQuantity, orderBookId, orderId, orderSeq, price, quantity0, userId);
   }
 
 
@@ -296,16 +296,16 @@ public class Trade {
     sb.append("class Trade {\n");
     
     sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
-    sb.append("    orderId: ").append(toIndentedString(orderId)).append("\n");
-    sb.append("    orderSeq: ").append(toIndentedString(orderSeq)).append("\n");
-    sb.append("    orderBookId: ").append(toIndentedString(orderBookId)).append("\n");
-    sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
-    sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
-    sb.append("    price: ").append(toIndentedString(price)).append("\n");
+    sb.append("    asset0: ").append(toIndentedString(asset0)).append("\n");
+    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    feeAssetId: ").append(toIndentedString(feeAssetId)).append("\n");
     sb.append("    feeQuantity: ").append(toIndentedString(feeQuantity)).append("\n");
-    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    orderBookId: ").append(toIndentedString(orderBookId)).append("\n");
+    sb.append("    orderId: ").append(toIndentedString(orderId)).append("\n");
+    sb.append("    orderSeq: ").append(toIndentedString(orderSeq)).append("\n");
+    sb.append("    price: ").append(toIndentedString(price)).append("\n");
+    sb.append("    quantity0: ").append(toIndentedString(quantity0)).append("\n");
+    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

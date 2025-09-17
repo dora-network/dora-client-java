@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **collateralWeight** | [**BigDecimal**](BigDecimal.md) |  |  [optional]
 **createdAt** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **decimals** | **Integer** |  |  [optional]
+**fractionalizedUnits** | **Integer** |  |  [optional]
 **description** | **String** |  |  [optional]
 **liquidationThreshold** | [**BigDecimal**](BigDecimal.md) |  |  [optional]
 **maturityId** | [**UUID**](UUID.md) |  |  [optional]

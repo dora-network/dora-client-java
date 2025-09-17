@@ -28,7 +28,7 @@ import tech.dora.model.BondKind;
  * Bond
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
 
 public class Bond {
   @SerializedName("id")
@@ -58,8 +58,14 @@ public class Bond {
   @SerializedName("maturity_at")
   private OffsetDateTime maturityAt = null;
 
+  @SerializedName("principal_value")
+  private String principalValue = null;
+
   @SerializedName("payments_per_year")
   private Integer paymentsPerYear = null;
+
+  @SerializedName("payments_every")
+  private Integer paymentsEvery = null;
 
   public Bond id(UUID id) {
     this.id = id;
@@ -223,6 +229,24 @@ public class Bond {
     this.maturityAt = maturityAt;
   }
 
+  public Bond principalValue(String principalValue) {
+    this.principalValue = principalValue;
+    return this;
+  }
+
+   /**
+   * Get principalValue
+   * @return principalValue
+  **/
+  @Schema(description = "")
+  public String getPrincipalValue() {
+    return principalValue;
+  }
+
+  public void setPrincipalValue(String principalValue) {
+    this.principalValue = principalValue;
+  }
+
   public Bond paymentsPerYear(Integer paymentsPerYear) {
     this.paymentsPerYear = paymentsPerYear;
     return this;
@@ -239,6 +263,25 @@ public class Bond {
 
   public void setPaymentsPerYear(Integer paymentsPerYear) {
     this.paymentsPerYear = paymentsPerYear;
+  }
+
+  public Bond paymentsEvery(Integer paymentsEvery) {
+    this.paymentsEvery = paymentsEvery;
+    return this;
+  }
+
+   /**
+   * Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond)
+   * minimum: 1000
+   * @return paymentsEvery
+  **/
+  @Schema(description = "Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond)")
+  public Integer getPaymentsEvery() {
+    return paymentsEvery;
+  }
+
+  public void setPaymentsEvery(Integer paymentsEvery) {
+    this.paymentsEvery = paymentsEvery;
   }
 
 
@@ -260,12 +303,14 @@ public class Bond {
         Objects.equals(this.issuedAt, bond.issuedAt) &&
         Objects.equals(this.issuer, bond.issuer) &&
         Objects.equals(this.maturityAt, bond.maturityAt) &&
-        Objects.equals(this.paymentsPerYear, bond.paymentsPerYear);
+        Objects.equals(this.principalValue, bond.principalValue) &&
+        Objects.equals(this.paymentsPerYear, bond.paymentsPerYear) &&
+        Objects.equals(this.paymentsEvery, bond.paymentsEvery);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, kind, couponStartAt, createdAt, finalCouponAt, isin, issuedAt, issuer, maturityAt, paymentsPerYear);
+    return Objects.hash(id, kind, couponStartAt, createdAt, finalCouponAt, isin, issuedAt, issuer, maturityAt, principalValue, paymentsPerYear, paymentsEvery);
   }
 
 
@@ -283,7 +328,9 @@ public class Bond {
     sb.append("    issuedAt: ").append(toIndentedString(issuedAt)).append("\n");
     sb.append("    issuer: ").append(toIndentedString(issuer)).append("\n");
     sb.append("    maturityAt: ").append(toIndentedString(maturityAt)).append("\n");
+    sb.append("    principalValue: ").append(toIndentedString(principalValue)).append("\n");
     sb.append("    paymentsPerYear: ").append(toIndentedString(paymentsPerYear)).append("\n");
+    sb.append("    paymentsEvery: ").append(toIndentedString(paymentsEvery)).append("\n");
     sb.append("}");
     return sb.toString();
   }

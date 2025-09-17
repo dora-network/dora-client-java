@@ -21,10 +21,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import org.threeten.bp.OffsetDateTime;
 import tech.dora.model.OrderKind;
 import tech.dora.model.OrderModifierKind;
 import tech.dora.model.OrderStatus;
@@ -33,26 +33,44 @@ import tech.dora.model.Side;
  * Order
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
 
 public class Order {
-  @SerializedName("id")
-  private UUID id = null;
+  @SerializedName("order_id")
+  private UUID orderId = null;
 
   @SerializedName("order_book_id")
   private UUID orderBookId = null;
 
-  @SerializedName("quantity")
-  private String quantity = null;
-
   @SerializedName("kind")
   private OrderKind kind = null;
 
-  @SerializedName("price")
-  private String price = null;
+  @SerializedName("original_price")
+  private String originalPrice = null;
+
+  @SerializedName("avg_fill_price")
+  private String avgFillPrice = null;
+
+  @SerializedName("cancelled_quantity")
+  private String cancelledQuantity = null;
+
+  @SerializedName("open_quantity")
+  private String openQuantity = null;
+
+  @SerializedName("original_quantity")
+  private String originalQuantity = null;
+
+  @SerializedName("filled_quantity")
+  private String filledQuantity = null;
+
+  @SerializedName("last_update_at")
+  private OffsetDateTime lastUpdateAt = null;
+
+  @SerializedName("opened_at")
+  private OffsetDateTime openedAt = null;
 
   @SerializedName("inverse_leverage")
-  private BigDecimal inverseLeverage = null;
+  private String inverseLeverage = null;
 
   @SerializedName("side")
   private Side side = null;
@@ -63,31 +81,28 @@ public class Order {
   @SerializedName("user_id")
   private UUID userId = null;
 
-  @SerializedName("user_text")
-  private String userText = null;
-
   @SerializedName("order_modifiers")
   private List<OrderModifierKind> orderModifiers = null;
 
   @SerializedName("position_id")
   private UUID positionId = null;
 
-  public Order id(UUID id) {
-    this.id = id;
+  public Order orderId(UUID orderId) {
+    this.orderId = orderId;
     return this;
   }
 
    /**
-   * Get id
-   * @return id
+   * Get orderId
+   * @return orderId
   **/
   @Schema(description = "")
-  public UUID getId() {
-    return id;
+  public UUID getOrderId() {
+    return orderId;
   }
 
-  public void setId(UUID id) {
-    this.id = id;
+  public void setOrderId(UUID orderId) {
+    this.orderId = orderId;
   }
 
   public Order orderBookId(UUID orderBookId) {
@@ -108,24 +123,6 @@ public class Order {
     this.orderBookId = orderBookId;
   }
 
-  public Order quantity(String quantity) {
-    this.quantity = quantity;
-    return this;
-  }
-
-   /**
-   * Get quantity
-   * @return quantity
-  **/
-  @Schema(description = "")
-  public String getQuantity() {
-    return quantity;
-  }
-
-  public void setQuantity(String quantity) {
-    this.quantity = quantity;
-  }
-
   public Order kind(OrderKind kind) {
     this.kind = kind;
     return this;
@@ -144,25 +141,151 @@ public class Order {
     this.kind = kind;
   }
 
-  public Order price(String price) {
-    this.price = price;
+  public Order originalPrice(String originalPrice) {
+    this.originalPrice = originalPrice;
     return this;
   }
 
    /**
-   * Get price
-   * @return price
+   * If Kind is LIMIT, this is the original limit price. If Kind is MARKET, this may be 0 or omitted.
+   * @return originalPrice
+  **/
+  @Schema(description = "If Kind is LIMIT, this is the original limit price. If Kind is MARKET, this may be 0 or omitted.")
+  public String getOriginalPrice() {
+    return originalPrice;
+  }
+
+  public void setOriginalPrice(String originalPrice) {
+    this.originalPrice = originalPrice;
+  }
+
+  public Order avgFillPrice(String avgFillPrice) {
+    this.avgFillPrice = avgFillPrice;
+    return this;
+  }
+
+   /**
+   * Get avgFillPrice
+   * @return avgFillPrice
   **/
   @Schema(description = "")
-  public String getPrice() {
-    return price;
+  public String getAvgFillPrice() {
+    return avgFillPrice;
   }
 
-  public void setPrice(String price) {
-    this.price = price;
+  public void setAvgFillPrice(String avgFillPrice) {
+    this.avgFillPrice = avgFillPrice;
   }
 
-  public Order inverseLeverage(BigDecimal inverseLeverage) {
+  public Order cancelledQuantity(String cancelledQuantity) {
+    this.cancelledQuantity = cancelledQuantity;
+    return this;
+  }
+
+   /**
+   * Quantity that was cancelled, if any.
+   * @return cancelledQuantity
+  **/
+  @Schema(description = "Quantity that was cancelled, if any.")
+  public String getCancelledQuantity() {
+    return cancelledQuantity;
+  }
+
+  public void setCancelledQuantity(String cancelledQuantity) {
+    this.cancelledQuantity = cancelledQuantity;
+  }
+
+  public Order openQuantity(String openQuantity) {
+    this.openQuantity = openQuantity;
+    return this;
+  }
+
+   /**
+   * Quantity that is still open, i.e., not filled or cancelled.
+   * @return openQuantity
+  **/
+  @Schema(description = "Quantity that is still open, i.e., not filled or cancelled.")
+  public String getOpenQuantity() {
+    return openQuantity;
+  }
+
+  public void setOpenQuantity(String openQuantity) {
+    this.openQuantity = openQuantity;
+  }
+
+  public Order originalQuantity(String originalQuantity) {
+    this.originalQuantity = originalQuantity;
+    return this;
+  }
+
+   /**
+   * The original quantity of the order when it was created.
+   * @return originalQuantity
+  **/
+  @Schema(description = "The original quantity of the order when it was created.")
+  public String getOriginalQuantity() {
+    return originalQuantity;
+  }
+
+  public void setOriginalQuantity(String originalQuantity) {
+    this.originalQuantity = originalQuantity;
+  }
+
+  public Order filledQuantity(String filledQuantity) {
+    this.filledQuantity = filledQuantity;
+    return this;
+  }
+
+   /**
+   * Quantity that has been filled so far.
+   * @return filledQuantity
+  **/
+  @Schema(description = "Quantity that has been filled so far.")
+  public String getFilledQuantity() {
+    return filledQuantity;
+  }
+
+  public void setFilledQuantity(String filledQuantity) {
+    this.filledQuantity = filledQuantity;
+  }
+
+  public Order lastUpdateAt(OffsetDateTime lastUpdateAt) {
+    this.lastUpdateAt = lastUpdateAt;
+    return this;
+  }
+
+   /**
+   * Get lastUpdateAt
+   * @return lastUpdateAt
+  **/
+  @Schema(description = "")
+  public OffsetDateTime getLastUpdateAt() {
+    return lastUpdateAt;
+  }
+
+  public void setLastUpdateAt(OffsetDateTime lastUpdateAt) {
+    this.lastUpdateAt = lastUpdateAt;
+  }
+
+  public Order openedAt(OffsetDateTime openedAt) {
+    this.openedAt = openedAt;
+    return this;
+  }
+
+   /**
+   * Get openedAt
+   * @return openedAt
+  **/
+  @Schema(description = "")
+  public OffsetDateTime getOpenedAt() {
+    return openedAt;
+  }
+
+  public void setOpenedAt(OffsetDateTime openedAt) {
+    this.openedAt = openedAt;
+  }
+
+  public Order inverseLeverage(String inverseLeverage) {
     this.inverseLeverage = inverseLeverage;
     return this;
   }
@@ -172,11 +295,11 @@ public class Order {
    * @return inverseLeverage
   **/
   @Schema(description = "")
-  public BigDecimal getInverseLeverage() {
+  public String getInverseLeverage() {
     return inverseLeverage;
   }
 
-  public void setInverseLeverage(BigDecimal inverseLeverage) {
+  public void setInverseLeverage(String inverseLeverage) {
     this.inverseLeverage = inverseLeverage;
   }
 
@@ -234,24 +357,6 @@ public class Order {
     this.userId = userId;
   }
 
-  public Order userText(String userText) {
-    this.userText = userText;
-    return this;
-  }
-
-   /**
-   * Get userText
-   * @return userText
-  **/
-  @Schema(description = "")
-  public String getUserText() {
-    return userText;
-  }
-
-  public void setUserText(String userText) {
-    this.userText = userText;
-  }
-
   public Order orderModifiers(List<OrderModifierKind> orderModifiers) {
     this.orderModifiers = orderModifiers;
     return this;
@@ -306,23 +411,28 @@ public class Order {
       return false;
     }
     Order order = (Order) o;
-    return Objects.equals(this.id, order.id) &&
+    return Objects.equals(this.orderId, order.orderId) &&
         Objects.equals(this.orderBookId, order.orderBookId) &&
-        Objects.equals(this.quantity, order.quantity) &&
         Objects.equals(this.kind, order.kind) &&
-        Objects.equals(this.price, order.price) &&
+        Objects.equals(this.originalPrice, order.originalPrice) &&
+        Objects.equals(this.avgFillPrice, order.avgFillPrice) &&
+        Objects.equals(this.cancelledQuantity, order.cancelledQuantity) &&
+        Objects.equals(this.openQuantity, order.openQuantity) &&
+        Objects.equals(this.originalQuantity, order.originalQuantity) &&
+        Objects.equals(this.filledQuantity, order.filledQuantity) &&
+        Objects.equals(this.lastUpdateAt, order.lastUpdateAt) &&
+        Objects.equals(this.openedAt, order.openedAt) &&
         Objects.equals(this.inverseLeverage, order.inverseLeverage) &&
         Objects.equals(this.side, order.side) &&
         Objects.equals(this.status, order.status) &&
         Objects.equals(this.userId, order.userId) &&
-        Objects.equals(this.userText, order.userText) &&
         Objects.equals(this.orderModifiers, order.orderModifiers) &&
         Objects.equals(this.positionId, order.positionId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, orderBookId, quantity, kind, price, inverseLeverage, side, status, userId, userText, orderModifiers, positionId);
+    return Objects.hash(orderId, orderBookId, kind, originalPrice, avgFillPrice, cancelledQuantity, openQuantity, originalQuantity, filledQuantity, lastUpdateAt, openedAt, inverseLeverage, side, status, userId, orderModifiers, positionId);
   }
 
 
@@ -331,16 +441,21 @@ public class Order {
     StringBuilder sb = new StringBuilder();
     sb.append("class Order {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    orderId: ").append(toIndentedString(orderId)).append("\n");
     sb.append("    orderBookId: ").append(toIndentedString(orderBookId)).append("\n");
-    sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("    kind: ").append(toIndentedString(kind)).append("\n");
-    sb.append("    price: ").append(toIndentedString(price)).append("\n");
+    sb.append("    originalPrice: ").append(toIndentedString(originalPrice)).append("\n");
+    sb.append("    avgFillPrice: ").append(toIndentedString(avgFillPrice)).append("\n");
+    sb.append("    cancelledQuantity: ").append(toIndentedString(cancelledQuantity)).append("\n");
+    sb.append("    openQuantity: ").append(toIndentedString(openQuantity)).append("\n");
+    sb.append("    originalQuantity: ").append(toIndentedString(originalQuantity)).append("\n");
+    sb.append("    filledQuantity: ").append(toIndentedString(filledQuantity)).append("\n");
+    sb.append("    lastUpdateAt: ").append(toIndentedString(lastUpdateAt)).append("\n");
+    sb.append("    openedAt: ").append(toIndentedString(openedAt)).append("\n");
     sb.append("    inverseLeverage: ").append(toIndentedString(inverseLeverage)).append("\n");
     sb.append("    side: ").append(toIndentedString(side)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
-    sb.append("    userText: ").append(toIndentedString(userText)).append("\n");
     sb.append("    orderModifiers: ").append(toIndentedString(orderModifiers)).append("\n");
     sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
     sb.append("}");

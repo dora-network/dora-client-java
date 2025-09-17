@@ -26,35 +26,14 @@ import java.util.UUID;
  * FundUserRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
 
 public class FundUserRequest {
-  @SerializedName("position_id")
-  private UUID positionId = null;
-
   @SerializedName("asset_id")
   private UUID assetId = null;
 
   @SerializedName("quantity")
   private String quantity = null;
-
-  public FundUserRequest positionId(UUID positionId) {
-    this.positionId = positionId;
-    return this;
-  }
-
-   /**
-   * Get positionId
-   * @return positionId
-  **/
-  @Schema(required = true, description = "")
-  public UUID getPositionId() {
-    return positionId;
-  }
-
-  public void setPositionId(UUID positionId) {
-    this.positionId = positionId;
-  }
 
   public FundUserRequest assetId(UUID assetId) {
     this.assetId = assetId;
@@ -102,14 +81,13 @@ public class FundUserRequest {
       return false;
     }
     FundUserRequest fundUserRequest = (FundUserRequest) o;
-    return Objects.equals(this.positionId, fundUserRequest.positionId) &&
-        Objects.equals(this.assetId, fundUserRequest.assetId) &&
+    return Objects.equals(this.assetId, fundUserRequest.assetId) &&
         Objects.equals(this.quantity, fundUserRequest.quantity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(positionId, assetId, quantity);
+    return Objects.hash(assetId, quantity);
   }
 
 
@@ -118,7 +96,6 @@ public class FundUserRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class FundUserRequest {\n");
     
-    sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("}");

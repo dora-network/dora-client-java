@@ -9,10 +9,10 @@ Method | HTTP request | Description
 [**createOrder**](DefaultApi.md#createOrder) | **POST** /v1/orders | Create a new order
 [**deleteUser**](DefaultApi.md#deleteUser) | **DELETE** /v1/user/{user_id} | Delete user by ID
 [**getAllAssetPrices**](DefaultApi.md#getAllAssetPrices) | **GET** /v1/price | Get the current price of all assets
-[**getAssetById**](DefaultApi.md#getAssetById) | **GET** /v1/assets/{id} | Get asset by ID
+[**getAssetById**](DefaultApi.md#getAssetById) | **GET** /v1/assets/{asset_id} | Get asset by ID
 [**getAssetPrice**](DefaultApi.md#getAssetPrice) | **GET** /v1/price/asset/{asset_id} | Get the current price of an asset
-[**getCandleData**](DefaultApi.md#getCandleData) | **GET** /v1/charts/{orderbook}/candle | Get candlestick data for an orderbook
-[**getCouponPaymentsByAssetId**](DefaultApi.md#getCouponPaymentsByAssetId) | **GET** /v1/assets/{id}/coupon_payments | Get coupon payments for a bond asset
+[**getCandleData**](DefaultApi.md#getCandleData) | **GET** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
+[**getCouponPaymentsByAssetId**](DefaultApi.md#getCouponPaymentsByAssetId) | **GET** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
 [**getL1Depth**](DefaultApi.md#getL1Depth) | **GET** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
 [**getL2Depth**](DefaultApi.md#getL2Depth) | **GET** /v1/orderbooks/{order_book_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth)
 [**getL3Depth**](DefaultApi.md#getL3Depth) | **GET** /v1/orderbooks/{order_book_id}/L3 | Get all open orders for a specific orderbook (L3 market depth)
@@ -31,12 +31,12 @@ Method | HTTP request | Description
 [**getPoolPrice**](DefaultApi.md#getPoolPrice) | **GET** /v1/price/pool/{pool_id} | Get the current price of a pool
 [**getTradeById**](DefaultApi.md#getTradeById) | **GET** /v1/trades/{trade_id} | Get a trade by ID
 [**getTrades**](DefaultApi.md#getTrades) | **GET** /v1/trades | Get a filtered, paginated list of trades
-[**getTransactionById**](DefaultApi.md#getTransactionById) | **GET** /v1/transactions/{id} | Get a transaction by ID
+[**getTransactionById**](DefaultApi.md#getTransactionById) | **GET** /v1/transactions/{transaction_id} | Get a transaction by ID
 [**getTransactions**](DefaultApi.md#getTransactions) | **GET** /v1/transactions | Get a filtered, paginated list of transactions
 [**getUserById**](DefaultApi.md#getUserById) | **GET** /v1/user/{user_id} | Get user by ID (admin only)
 [**getUserLedgerStream**](DefaultApi.md#getUserLedgerStream) | **GET** /v1/user/{user_id}/ledger/stream | Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates
-[**getUserOrdersStream**](DefaultApi.md#getUserOrdersStream) | **GET** /v1/user/{user_id}/orders/{order_book_id}/stream | Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
-[**getUserOrdersStreamAll**](DefaultApi.md#getUserOrdersStreamAll) | **GET** /v1/user/{user_id}/orders/all/stream | Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
+[**getUserOrderUpdatesStream**](DefaultApi.md#getUserOrderUpdatesStream) | **GET** /v1/user/{user_id}/orders/{order_book_id}/updates/stream | Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
+[**getUserOrdersUpdatesStreamAll**](DefaultApi.md#getUserOrdersUpdatesStreamAll) | **GET** /v1/user/{user_id}/orders/all/updates/stream | Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
 [**getUserSelf**](DefaultApi.md#getUserSelf) | **GET** /v1/user/self | Get user details for the authenticated user
 [**getUserTransactionsStream**](DefaultApi.md#getUserTransactionsStream) | **GET** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
 [**ledgerDeposit**](DefaultApi.md#ledgerDeposit) | **POST** /v1/ledger/deposit | Deposit assets into your account from the outside world
@@ -55,10 +55,10 @@ Method | HTTP request | Description
 [**listAssets**](DefaultApi.md#listAssets) | **GET** /v1/assets | List assets
 [**listOrderBooks**](DefaultApi.md#listOrderBooks) | **GET** /v1/orderbooks | List order books
 [**listOrders**](DefaultApi.md#listOrders) | **GET** /v1/orders | List all orders
-[**streamAssetPrices**](DefaultApi.md#streamAssetPrices) | **GET** /v1/price/stream | Get a snapshot of asset prices from a specific date and open a stream for real-time updates
-[**streamCandleData**](DefaultApi.md#streamCandleData) | **GET** /v1/charts/{orderbook}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
-[**streamOrderBookBalances**](DefaultApi.md#streamOrderBookBalances) | **GET** /v1/orderbooks/{order_book_id}/stream/balances | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
-[**streamOrderbookOpenOrders**](DefaultApi.md#streamOrderbookOpenOrders) | **GET** /v1/orderbooks/{order_book_id}/stream/open | Get a snapshot of open orders in an order book and open a stream for real-time updates
+[**streamAssetPrices**](DefaultApi.md#streamAssetPrices) | **GET** /v1/prices/stream | Stream real-time asset prices as map objects
+[**streamCandleData**](DefaultApi.md#streamCandleData) | **GET** /v1/charts/{order_book_id}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
+[**streamOrderBookBalances**](DefaultApi.md#streamOrderBookBalances) | **GET** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
+[**streamOrderbookOpenOrders**](DefaultApi.md#streamOrderbookOpenOrders) | **GET** /v1/orderbooks/{order_book_id}/open/stream | Get a snapshot of open orders in an order book and open a stream for real-time updates
 [**streamTrades**](DefaultApi.md#streamTrades) | **GET** /v1/trades/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
 [**updateUserConfig**](DefaultApi.md#updateUserConfig) | **PUT** /v1/user/{user_id}/config | Update user configuration by ID
 [**updateUserConfigSelf**](DefaultApi.md#updateUserConfigSelf) | **PUT** /v1/user/config/self | Update user configuration for the authenticated user
@@ -66,7 +66,7 @@ Method | HTTP request | Description
 
 <a name="cancelAllOpenOrders"></a>
 # **cancelAllOpenOrders**
-> CancelOrdersResponse cancelAllOpenOrders()
+> ListOrdersResponse cancelAllOpenOrders()
 
 Cancel all open orders
 
@@ -79,7 +79,7 @@ Cancel all open orders
 
 DefaultApi apiInstance = new DefaultApi();
 try {
-    CancelOrdersResponse result = apiInstance.cancelAllOpenOrders();
+    ListOrdersResponse result = apiInstance.cancelAllOpenOrders();
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#cancelAllOpenOrders");
@@ -92,7 +92,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**CancelOrdersResponse**](CancelOrdersResponse.md)
+[**ListOrdersResponse**](ListOrdersResponse.md)
 
 ### Authorization
 
@@ -105,7 +105,7 @@ No authorization required
 
 <a name="cancelOrderById"></a>
 # **cancelOrderById**
-> OrderCancelledResponse cancelOrderById(orderId)
+> CancelOrderResponse cancelOrderById(orderId)
 
 Cancel an order by ID
 
@@ -119,7 +119,7 @@ Cancel an order by ID
 DefaultApi apiInstance = new DefaultApi();
 UUID orderId = new UUID(); // UUID | 
 try {
-    OrderCancelledResponse result = apiInstance.cancelOrderById(orderId);
+    CancelOrderResponse result = apiInstance.cancelOrderById(orderId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#cancelOrderById");
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrderCancelledResponse**](OrderCancelledResponse.md)
+[**CancelOrderResponse**](CancelOrderResponse.md)
 
 ### Authorization
 
@@ -148,7 +148,7 @@ No authorization required
 
 <a name="createOrder"></a>
 # **createOrder**
-> OrderId createOrder(body)
+> CreateOrderResponse createOrder(body)
 
 Create a new order
 
@@ -162,7 +162,7 @@ Create a new order
 DefaultApi apiInstance = new DefaultApi();
 CreateOrderRequest body = new CreateOrderRequest(); // CreateOrderRequest | 
 try {
-    OrderId result = apiInstance.createOrder(body);
+    CreateOrderResponse result = apiInstance.createOrder(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#createOrder");
@@ -178,7 +178,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrderId**](OrderId.md)
+[**CreateOrderResponse**](CreateOrderResponse.md)
 
 ### Authorization
 
@@ -273,7 +273,7 @@ No authorization required
 
 <a name="getAssetById"></a>
 # **getAssetById**
-> GetAssetByIDResponse getAssetById(id)
+> GetAssetByIDResponse getAssetById(assetId)
 
 Get asset by ID
 
@@ -285,9 +285,9 @@ Get asset by ID
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID id = new UUID(); // UUID | 
+UUID assetId = new UUID(); // UUID | 
 try {
-    GetAssetByIDResponse result = apiInstance.getAssetById(id);
+    GetAssetByIDResponse result = apiInstance.getAssetById(assetId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getAssetById");
@@ -299,7 +299,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md)|  |
+ **assetId** | [**UUID**](.md)|  |
 
 ### Return type
 
@@ -359,7 +359,7 @@ No authorization required
 
 <a name="getCandleData"></a>
 # **getCandleData**
-> ListCandlesResponse getCandleData(orderbook, start, end, resolution)
+> ListCandlesResponse getCandleData(orderBookId, start, end, resolution)
 
 Get candlestick data for an orderbook
 
@@ -371,12 +371,12 @@ Get candlestick data for an orderbook
 
 
 DefaultApi apiInstance = new DefaultApi();
-String orderbook = "orderbook_example"; // String | 
+String orderBookId = "orderBookId_example"; // String | 
 OffsetDateTime start = new OffsetDateTime(); // OffsetDateTime | 
 OffsetDateTime end = new OffsetDateTime(); // OffsetDateTime | 
 CandleResolution resolution = new CandleResolution(); // CandleResolution | 
 try {
-    ListCandlesResponse result = apiInstance.getCandleData(orderbook, start, end, resolution);
+    ListCandlesResponse result = apiInstance.getCandleData(orderBookId, start, end, resolution);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getCandleData");
@@ -388,7 +388,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderbook** | **String**|  |
+ **orderBookId** | **String**|  |
  **start** | **OffsetDateTime**|  | [optional]
  **end** | **OffsetDateTime**|  | [optional]
  **resolution** | [**CandleResolution**](.md)|  | [optional]
@@ -408,7 +408,7 @@ No authorization required
 
 <a name="getCouponPaymentsByAssetId"></a>
 # **getCouponPaymentsByAssetId**
-> ListCouponPaymentsResponse getCouponPaymentsByAssetId(id)
+> ListCouponPaymentsResponse getCouponPaymentsByAssetId(assetId)
 
 Get coupon payments for a bond asset
 
@@ -420,9 +420,9 @@ Get coupon payments for a bond asset
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID id = new UUID(); // UUID | 
+UUID assetId = new UUID(); // UUID | 
 try {
-    ListCouponPaymentsResponse result = apiInstance.getCouponPaymentsByAssetId(id);
+    ListCouponPaymentsResponse result = apiInstance.getCouponPaymentsByAssetId(assetId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getCouponPaymentsByAssetId");
@@ -434,7 +434,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md)|  |
+ **assetId** | [**UUID**](.md)|  |
 
 ### Return type
 
@@ -1215,7 +1215,7 @@ No authorization required
 
 <a name="getTransactionById"></a>
 # **getTransactionById**
-> GetTransactionResponse getTransactionById(id)
+> GetTransactionResponse getTransactionById(transactionId)
 
 Get a transaction by ID
 
@@ -1227,9 +1227,9 @@ Get a transaction by ID
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID id = new UUID(); // UUID | 
+UUID transactionId = new UUID(); // UUID | 
 try {
-    GetTransactionResponse result = apiInstance.getTransactionById(id);
+    GetTransactionResponse result = apiInstance.getTransactionById(transactionId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getTransactionById");
@@ -1241,7 +1241,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md)|  |
+ **transactionId** | [**UUID**](.md)|  |
 
 ### Return type
 
@@ -1356,7 +1356,7 @@ No authorization required
 
 <a name="getUserLedgerStream"></a>
 # **getUserLedgerStream**
-> ListPositionsResponse getUserLedgerStream(userId, since)
+> StreamPositionsResponse getUserLedgerStream(userId, since)
 
 Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates
 
@@ -1371,7 +1371,7 @@ DefaultApi apiInstance = new DefaultApi();
 UUID userId = new UUID(); // UUID | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    ListPositionsResponse result = apiInstance.getUserLedgerStream(userId, since);
+    StreamPositionsResponse result = apiInstance.getUserLedgerStream(userId, since);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getUserLedgerStream");
@@ -1388,7 +1388,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListPositionsResponse**](ListPositionsResponse.md)
+[**StreamPositionsResponse**](StreamPositionsResponse.md)
 
 ### Authorization
 
@@ -1399,9 +1399,9 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getUserOrdersStream"></a>
-# **getUserOrdersStream**
-> ListOrdersResponse getUserOrdersStream(userId, orderBookId, since)
+<a name="getUserOrderUpdatesStream"></a>
+# **getUserOrderUpdatesStream**
+> StreamOrderUpdatesResponse getUserOrderUpdatesStream(userId, orderBookId, since)
 
 Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
 
@@ -1417,10 +1417,10 @@ UUID userId = new UUID(); // UUID |
 UUID orderBookId = new UUID(); // UUID | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    ListOrdersResponse result = apiInstance.getUserOrdersStream(userId, orderBookId, since);
+    StreamOrderUpdatesResponse result = apiInstance.getUserOrderUpdatesStream(userId, orderBookId, since);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getUserOrdersStream");
+    System.err.println("Exception when calling DefaultApi#getUserOrderUpdatesStream");
     e.printStackTrace();
 }
 ```
@@ -1435,7 +1435,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListOrdersResponse**](ListOrdersResponse.md)
+[**StreamOrderUpdatesResponse**](StreamOrderUpdatesResponse.md)
 
 ### Authorization
 
@@ -1446,9 +1446,9 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getUserOrdersStreamAll"></a>
-# **getUserOrdersStreamAll**
-> ListOrdersResponse getUserOrdersStreamAll(userId, orderBookId, since)
+<a name="getUserOrdersUpdatesStreamAll"></a>
+# **getUserOrdersUpdatesStreamAll**
+> StreamOrderUpdatesResponse getUserOrdersUpdatesStreamAll(userId, orderBookId, since)
 
 Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
 
@@ -1464,10 +1464,10 @@ UUID userId = new UUID(); // UUID |
 UUID orderBookId = new UUID(); // UUID | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    ListOrdersResponse result = apiInstance.getUserOrdersStreamAll(userId, orderBookId, since);
+    StreamOrderUpdatesResponse result = apiInstance.getUserOrdersUpdatesStreamAll(userId, orderBookId, since);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getUserOrdersStreamAll");
+    System.err.println("Exception when calling DefaultApi#getUserOrdersUpdatesStreamAll");
     e.printStackTrace();
 }
 ```
@@ -1482,7 +1482,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListOrdersResponse**](ListOrdersResponse.md)
+[**StreamOrderUpdatesResponse**](StreamOrderUpdatesResponse.md)
 
 ### Authorization
 
@@ -1534,7 +1534,7 @@ No authorization required
 
 <a name="getUserTransactionsStream"></a>
 # **getUserTransactionsStream**
-> ListTransactionsResponse getUserTransactionsStream(userId, since)
+> StreamTransactionsResponse getUserTransactionsStream(userId, since)
 
 Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
 
@@ -1549,7 +1549,7 @@ DefaultApi apiInstance = new DefaultApi();
 UUID userId = new UUID(); // UUID | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    ListTransactionsResponse result = apiInstance.getUserTransactionsStream(userId, since);
+    StreamTransactionsResponse result = apiInstance.getUserTransactionsStream(userId, since);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getUserTransactionsStream");
@@ -1566,7 +1566,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListTransactionsResponse**](ListTransactionsResponse.md)
+[**StreamTransactionsResponse**](StreamTransactionsResponse.md)
 
 ### Authorization
 
@@ -2277,8 +2277,8 @@ List all orders
 
 DefaultApi apiInstance = new DefaultApi();
 List<UUID> orderBookId = Arrays.asList(new UUID()); // List<UUID> | 
-OrderKind kind = new OrderKind(); // OrderKind | 
-OrderStatus status = new OrderStatus(); // OrderStatus | 
+List<OrderKind> kind = Arrays.asList(new OrderKind()); // List<OrderKind> | 
+List<OrderStatus> status = Arrays.asList(new OrderStatus()); // List<OrderStatus> | 
 Side side = new Side(); // Side | 
 OffsetDateTime from = new OffsetDateTime(); // OffsetDateTime | 
 OffsetDateTime to = new OffsetDateTime(); // OffsetDateTime | 
@@ -2298,8 +2298,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **orderBookId** | [**List&lt;UUID&gt;**](UUID.md)|  | [optional]
- **kind** | [**OrderKind**](.md)|  | [optional]
- **status** | [**OrderStatus**](.md)|  | [optional]
+ **kind** | [**List&lt;OrderKind&gt;**](OrderKind.md)|  | [optional]
+ **status** | [**List&lt;OrderStatus&gt;**](OrderStatus.md)|  | [optional]
  **side** | [**Side**](.md)|  | [optional]
  **from** | **OffsetDateTime**|  | [optional]
  **to** | **OffsetDateTime**|  | [optional]
@@ -2321,9 +2321,11 @@ No authorization required
 
 <a name="streamAssetPrices"></a>
 # **streamAssetPrices**
-> ListAssetPriceResponse streamAssetPrices(since)
+> StreamAssetPricesResponse streamAssetPrices(since)
 
-Get a snapshot of asset prices from a specific date and open a stream for real-time updates
+Stream real-time asset prices as map objects
+
+Opens a WebSocket stream for real-time asset price updates. First message contains all current prices, subsequent messages contain only changed prices. Data is sent as JSON objects keyed by asset ID.
 
 ### Example
 ```java
@@ -2335,7 +2337,7 @@ Get a snapshot of asset prices from a specific date and open a stream for real-t
 DefaultApi apiInstance = new DefaultApi();
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    ListAssetPriceResponse result = apiInstance.streamAssetPrices(since);
+    StreamAssetPricesResponse result = apiInstance.streamAssetPrices(since);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#streamAssetPrices");
@@ -2351,7 +2353,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListAssetPriceResponse**](ListAssetPriceResponse.md)
+[**StreamAssetPricesResponse**](StreamAssetPricesResponse.md)
 
 ### Authorization
 
@@ -2364,7 +2366,7 @@ No authorization required
 
 <a name="streamCandleData"></a>
 # **streamCandleData**
-> ListCandlesResponse streamCandleData(orderbook, since, resolution)
+> StreamCandlesResponse streamCandleData(orderBookId, since, resolution)
 
 Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
 
@@ -2376,11 +2378,11 @@ Get a snapshot of candlestick data from date provided, and open a stream for rea
 
 
 DefaultApi apiInstance = new DefaultApi();
-String orderbook = "orderbook_example"; // String | 
+String orderBookId = "orderBookId_example"; // String | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 CandleResolution resolution = new CandleResolution(); // CandleResolution | 
 try {
-    ListCandlesResponse result = apiInstance.streamCandleData(orderbook, since, resolution);
+    StreamCandlesResponse result = apiInstance.streamCandleData(orderBookId, since, resolution);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#streamCandleData");
@@ -2392,13 +2394,13 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderbook** | **String**|  |
+ **orderBookId** | **String**|  |
  **since** | **OffsetDateTime**|  | [optional]
  **resolution** | [**CandleResolution**](.md)|  | [optional]
 
 ### Return type
 
-[**ListCandlesResponse**](ListCandlesResponse.md)
+[**StreamCandlesResponse**](StreamCandlesResponse.md)
 
 ### Authorization
 
@@ -2411,7 +2413,7 @@ No authorization required
 
 <a name="streamOrderBookBalances"></a>
 # **streamOrderBookBalances**
-> OrderBookBalanceResponse streamOrderBookBalances(orderBookId, since)
+> StreamOrderBookBalancesResponse streamOrderBookBalances(orderBookId, since)
 
 Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
 
@@ -2426,7 +2428,7 @@ DefaultApi apiInstance = new DefaultApi();
 UUID orderBookId = new UUID(); // UUID | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    OrderBookBalanceResponse result = apiInstance.streamOrderBookBalances(orderBookId, since);
+    StreamOrderBookBalancesResponse result = apiInstance.streamOrderBookBalances(orderBookId, since);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#streamOrderBookBalances");
@@ -2443,7 +2445,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrderBookBalanceResponse**](OrderBookBalanceResponse.md)
+[**StreamOrderBookBalancesResponse**](StreamOrderBookBalancesResponse.md)
 
 ### Authorization
 
@@ -2456,7 +2458,7 @@ No authorization required
 
 <a name="streamOrderbookOpenOrders"></a>
 # **streamOrderbookOpenOrders**
-> ListOrdersResponse streamOrderbookOpenOrders(orderBookId, since)
+> LiveOrderbook streamOrderbookOpenOrders(orderBookId, since)
 
 Get a snapshot of open orders in an order book and open a stream for real-time updates
 
@@ -2471,7 +2473,7 @@ DefaultApi apiInstance = new DefaultApi();
 UUID orderBookId = new UUID(); // UUID | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    ListOrdersResponse result = apiInstance.streamOrderbookOpenOrders(orderBookId, since);
+    LiveOrderbook result = apiInstance.streamOrderbookOpenOrders(orderBookId, since);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#streamOrderbookOpenOrders");
@@ -2488,7 +2490,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListOrdersResponse**](ListOrdersResponse.md)
+[**LiveOrderbook**](LiveOrderbook.md)
 
 ### Authorization
 
@@ -2501,7 +2503,7 @@ No authorization required
 
 <a name="streamTrades"></a>
 # **streamTrades**
-> ListTradeResponse streamTrades(orderbookId, since)
+> StreamTradesResponse streamTrades(orderBookId, since)
 
 Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
 
@@ -2513,10 +2515,10 @@ Get a snapshot of trades executed on the given order book from a specific date a
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderbookId = new UUID(); // UUID | 
+UUID orderBookId = new UUID(); // UUID | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    ListTradeResponse result = apiInstance.streamTrades(orderbookId, since);
+    StreamTradesResponse result = apiInstance.streamTrades(orderBookId, since);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#streamTrades");
@@ -2528,12 +2530,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderbookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**UUID**](.md)|  |
  **since** | **OffsetDateTime**|  | [optional]
 
 ### Return type
 
-[**ListTradeResponse**](ListTradeResponse.md)
+[**StreamTradesResponse**](StreamTradesResponse.md)
 
 ### Authorization
 

@@ -30,6 +30,8 @@ public enum OrderStatus {
   OPEN("OPEN"),
   @SerializedName("FILLED")
   FILLED("FILLED"),
+  @SerializedName("PARTIAL_FILL")
+  PARTIAL_FILL("PARTIAL_FILL"),
   @SerializedName("CANCELLED")
   CANCELLED("CANCELLED");
 

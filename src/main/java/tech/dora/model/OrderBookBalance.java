@@ -26,17 +26,20 @@ import java.util.UUID;
  * OrderBookBalance
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
 
 public class OrderBookBalance {
   @SerializedName("order_book_id")
   private UUID orderBookId = null;
 
-  @SerializedName("base_balance")
-  private String baseBalance = null;
+  @SerializedName("base_quantity")
+  private Double baseQuantity = null;
 
-  @SerializedName("quote_balance")
-  private String quoteBalance = null;
+  @SerializedName("quote_quantity")
+  private Double quoteQuantity = null;
+
+  @SerializedName("shares_quantity")
+  private Double sharesQuantity = null;
 
   public OrderBookBalance orderBookId(UUID orderBookId) {
     this.orderBookId = orderBookId;
@@ -44,10 +47,10 @@ public class OrderBookBalance {
   }
 
    /**
-   * Get orderBookId
+   * The ID of the order book.
    * @return orderBookId
   **/
-  @Schema(description = "")
+  @Schema(description = "The ID of the order book.")
   public UUID getOrderBookId() {
     return orderBookId;
   }
@@ -56,40 +59,58 @@ public class OrderBookBalance {
     this.orderBookId = orderBookId;
   }
 
-  public OrderBookBalance baseBalance(String baseBalance) {
-    this.baseBalance = baseBalance;
+  public OrderBookBalance baseQuantity(Double baseQuantity) {
+    this.baseQuantity = baseQuantity;
     return this;
   }
 
    /**
-   * Get baseBalance
-   * @return baseBalance
+   * The quantity of the base asset.
+   * @return baseQuantity
   **/
-  @Schema(description = "")
-  public String getBaseBalance() {
-    return baseBalance;
+  @Schema(description = "The quantity of the base asset.")
+  public Double getBaseQuantity() {
+    return baseQuantity;
   }
 
-  public void setBaseBalance(String baseBalance) {
-    this.baseBalance = baseBalance;
+  public void setBaseQuantity(Double baseQuantity) {
+    this.baseQuantity = baseQuantity;
   }
 
-  public OrderBookBalance quoteBalance(String quoteBalance) {
-    this.quoteBalance = quoteBalance;
+  public OrderBookBalance quoteQuantity(Double quoteQuantity) {
+    this.quoteQuantity = quoteQuantity;
     return this;
   }
 
    /**
-   * Get quoteBalance
-   * @return quoteBalance
+   * The quantity of the quote asset.
+   * @return quoteQuantity
   **/
-  @Schema(description = "")
-  public String getQuoteBalance() {
-    return quoteBalance;
+  @Schema(description = "The quantity of the quote asset.")
+  public Double getQuoteQuantity() {
+    return quoteQuantity;
   }
 
-  public void setQuoteBalance(String quoteBalance) {
-    this.quoteBalance = quoteBalance;
+  public void setQuoteQuantity(Double quoteQuantity) {
+    this.quoteQuantity = quoteQuantity;
+  }
+
+  public OrderBookBalance sharesQuantity(Double sharesQuantity) {
+    this.sharesQuantity = sharesQuantity;
+    return this;
+  }
+
+   /**
+   * The quantity of pool shares.
+   * @return sharesQuantity
+  **/
+  @Schema(description = "The quantity of pool shares.")
+  public Double getSharesQuantity() {
+    return sharesQuantity;
+  }
+
+  public void setSharesQuantity(Double sharesQuantity) {
+    this.sharesQuantity = sharesQuantity;
   }
 
 
@@ -103,13 +124,14 @@ public class OrderBookBalance {
     }
     OrderBookBalance orderBookBalance = (OrderBookBalance) o;
     return Objects.equals(this.orderBookId, orderBookBalance.orderBookId) &&
-        Objects.equals(this.baseBalance, orderBookBalance.baseBalance) &&
-        Objects.equals(this.quoteBalance, orderBookBalance.quoteBalance);
+        Objects.equals(this.baseQuantity, orderBookBalance.baseQuantity) &&
+        Objects.equals(this.quoteQuantity, orderBookBalance.quoteQuantity) &&
+        Objects.equals(this.sharesQuantity, orderBookBalance.sharesQuantity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderBookId, baseBalance, quoteBalance);
+    return Objects.hash(orderBookId, baseQuantity, quoteQuantity, sharesQuantity);
   }
 
 
@@ -119,8 +141,9 @@ public class OrderBookBalance {
     sb.append("class OrderBookBalance {\n");
     
     sb.append("    orderBookId: ").append(toIndentedString(orderBookId)).append("\n");
-    sb.append("    baseBalance: ").append(toIndentedString(baseBalance)).append("\n");
-    sb.append("    quoteBalance: ").append(toIndentedString(quoteBalance)).append("\n");
+    sb.append("    baseQuantity: ").append(toIndentedString(baseQuantity)).append("\n");
+    sb.append("    quoteQuantity: ").append(toIndentedString(quoteQuantity)).append("\n");
+    sb.append("    sharesQuantity: ").append(toIndentedString(sharesQuantity)).append("\n");
     sb.append("}");
     return sb.toString();
   }

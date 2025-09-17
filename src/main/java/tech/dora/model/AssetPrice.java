@@ -27,7 +27,7 @@ import org.threeten.bp.OffsetDateTime;
  * AssetPrice
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
 
 public class AssetPrice {
   @SerializedName("asset_id")
@@ -36,8 +36,8 @@ public class AssetPrice {
   @SerializedName("price")
   private String price = null;
 
-  @SerializedName("timestamp")
-  private OffsetDateTime timestamp = null;
+  @SerializedName("time")
+  private OffsetDateTime time = null;
 
   public AssetPrice assetId(UUID assetId) {
     this.assetId = assetId;
@@ -75,22 +75,22 @@ public class AssetPrice {
     this.price = price;
   }
 
-  public AssetPrice timestamp(OffsetDateTime timestamp) {
-    this.timestamp = timestamp;
+  public AssetPrice time(OffsetDateTime time) {
+    this.time = time;
     return this;
   }
 
    /**
-   * Get timestamp
-   * @return timestamp
+   * Get time
+   * @return time
   **/
   @Schema(description = "")
-  public OffsetDateTime getTimestamp() {
-    return timestamp;
+  public OffsetDateTime getTime() {
+    return time;
   }
 
-  public void setTimestamp(OffsetDateTime timestamp) {
-    this.timestamp = timestamp;
+  public void setTime(OffsetDateTime time) {
+    this.time = time;
   }
 
 
@@ -105,12 +105,12 @@ public class AssetPrice {
     AssetPrice assetPrice = (AssetPrice) o;
     return Objects.equals(this.assetId, assetPrice.assetId) &&
         Objects.equals(this.price, assetPrice.price) &&
-        Objects.equals(this.timestamp, assetPrice.timestamp);
+        Objects.equals(this.time, assetPrice.time);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(assetId, price, timestamp);
+    return Objects.hash(assetId, price, time);
   }
 
 
@@ -121,7 +121,7 @@ public class AssetPrice {
     
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
-    sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
+    sb.append("    time: ").append(toIndentedString(time)).append("\n");
     sb.append("}");
     return sb.toString();
   }

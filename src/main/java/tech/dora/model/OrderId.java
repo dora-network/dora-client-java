@@ -26,28 +26,28 @@ import java.util.UUID;
  * OrderId
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
 
 public class OrderId {
-  @SerializedName("id")
-  private UUID id = null;
+  @SerializedName("order_id")
+  private UUID orderId = null;
 
-  public OrderId id(UUID id) {
-    this.id = id;
+  public OrderId orderId(UUID orderId) {
+    this.orderId = orderId;
     return this;
   }
 
    /**
-   * Get id
-   * @return id
+   * Get orderId
+   * @return orderId
   **/
   @Schema(description = "")
-  public UUID getId() {
-    return id;
+  public UUID getOrderId() {
+    return orderId;
   }
 
-  public void setId(UUID id) {
-    this.id = id;
+  public void setOrderId(UUID orderId) {
+    this.orderId = orderId;
   }
 
 
@@ -60,12 +60,12 @@ public class OrderId {
       return false;
     }
     OrderId orderId = (OrderId) o;
-    return Objects.equals(this.id, orderId.id);
+    return Objects.equals(this.orderId, orderId.orderId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id);
+    return Objects.hash(orderId);
   }
 
 
@@ -74,7 +74,7 @@ public class OrderId {
     StringBuilder sb = new StringBuilder();
     sb.append("class OrderId {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    orderId: ").append(toIndentedString(orderId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

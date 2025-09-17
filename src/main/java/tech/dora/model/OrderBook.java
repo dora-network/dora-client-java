@@ -29,17 +29,11 @@ import tech.dora.model.OrderBookStatus;
  * OrderBook
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
 
 public class OrderBook {
   @SerializedName("order_book_id")
   private UUID orderBookId = null;
-
-  @SerializedName("order_book_seq")
-  private Integer orderBookSeq = null;
-
-  @SerializedName("accumulated_fees_id")
-  private UUID accumulatedFeesId = null;
 
   @SerializedName("base_quantity")
   private BigDecimal baseQuantity = null;
@@ -61,9 +55,6 @@ public class OrderBook {
 
   @SerializedName("maturity_at")
   private OffsetDateTime maturityAt = null;
-
-  @SerializedName("price_display_multiplier")
-  private BigDecimal priceDisplayMultiplier = null;
 
   @SerializedName("quote_quantity")
   private BigDecimal quoteQuantity = null;
@@ -92,9 +83,6 @@ public class OrderBook {
   @SerializedName("pool_updated_at")
   private OffsetDateTime poolUpdatedAt = null;
 
-  @SerializedName("pool_seq")
-  private Integer poolSeq = null;
-
   @SerializedName("shares_asset_id")
   private UUID sharesAssetId = null;
 
@@ -114,42 +102,6 @@ public class OrderBook {
 
   public void setOrderBookId(UUID orderBookId) {
     this.orderBookId = orderBookId;
-  }
-
-  public OrderBook orderBookSeq(Integer orderBookSeq) {
-    this.orderBookSeq = orderBookSeq;
-    return this;
-  }
-
-   /**
-   * Get orderBookSeq
-   * @return orderBookSeq
-  **/
-  @Schema(description = "")
-  public Integer getOrderBookSeq() {
-    return orderBookSeq;
-  }
-
-  public void setOrderBookSeq(Integer orderBookSeq) {
-    this.orderBookSeq = orderBookSeq;
-  }
-
-  public OrderBook accumulatedFeesId(UUID accumulatedFeesId) {
-    this.accumulatedFeesId = accumulatedFeesId;
-    return this;
-  }
-
-   /**
-   * Get accumulatedFeesId
-   * @return accumulatedFeesId
-  **/
-  @Schema(description = "")
-  public UUID getAccumulatedFeesId() {
-    return accumulatedFeesId;
-  }
-
-  public void setAccumulatedFeesId(UUID accumulatedFeesId) {
-    this.accumulatedFeesId = accumulatedFeesId;
   }
 
   public OrderBook baseQuantity(BigDecimal baseQuantity) {
@@ -276,24 +228,6 @@ public class OrderBook {
 
   public void setMaturityAt(OffsetDateTime maturityAt) {
     this.maturityAt = maturityAt;
-  }
-
-  public OrderBook priceDisplayMultiplier(BigDecimal priceDisplayMultiplier) {
-    this.priceDisplayMultiplier = priceDisplayMultiplier;
-    return this;
-  }
-
-   /**
-   * Get priceDisplayMultiplier
-   * @return priceDisplayMultiplier
-  **/
-  @Schema(description = "")
-  public BigDecimal getPriceDisplayMultiplier() {
-    return priceDisplayMultiplier;
-  }
-
-  public void setPriceDisplayMultiplier(BigDecimal priceDisplayMultiplier) {
-    this.priceDisplayMultiplier = priceDisplayMultiplier;
   }
 
   public OrderBook quoteQuantity(BigDecimal quoteQuantity) {
@@ -458,24 +392,6 @@ public class OrderBook {
     this.poolUpdatedAt = poolUpdatedAt;
   }
 
-  public OrderBook poolSeq(Integer poolSeq) {
-    this.poolSeq = poolSeq;
-    return this;
-  }
-
-   /**
-   * Get poolSeq
-   * @return poolSeq
-  **/
-  @Schema(description = "")
-  public Integer getPoolSeq() {
-    return poolSeq;
-  }
-
-  public void setPoolSeq(Integer poolSeq) {
-    this.poolSeq = poolSeq;
-  }
-
   public OrderBook sharesAssetId(UUID sharesAssetId) {
     this.sharesAssetId = sharesAssetId;
     return this;
@@ -505,8 +421,6 @@ public class OrderBook {
     }
     OrderBook orderBook = (OrderBook) o;
     return Objects.equals(this.orderBookId, orderBook.orderBookId) &&
-        Objects.equals(this.orderBookSeq, orderBook.orderBookSeq) &&
-        Objects.equals(this.accumulatedFeesId, orderBook.accumulatedFeesId) &&
         Objects.equals(this.baseQuantity, orderBook.baseQuantity) &&
         Objects.equals(this.baseAssetId, orderBook.baseAssetId) &&
         Objects.equals(this.createdAt, orderBook.createdAt) &&
@@ -514,7 +428,6 @@ public class OrderBook {
         Objects.equals(this.feeFactor, orderBook.feeFactor) &&
         Objects.equals(this.initialAssetsRatio, orderBook.initialAssetsRatio) &&
         Objects.equals(this.maturityAt, orderBook.maturityAt) &&
-        Objects.equals(this.priceDisplayMultiplier, orderBook.priceDisplayMultiplier) &&
         Objects.equals(this.quoteQuantity, orderBook.quoteQuantity) &&
         Objects.equals(this.quoteAssetId, orderBook.quoteAssetId) &&
         Objects.equals(this.sharesQuantity, orderBook.sharesQuantity) &&
@@ -524,13 +437,12 @@ public class OrderBook {
         Objects.equals(this.haltedAt, orderBook.haltedAt) &&
         Objects.equals(this.terminatedAt, orderBook.terminatedAt) &&
         Objects.equals(this.poolUpdatedAt, orderBook.poolUpdatedAt) &&
-        Objects.equals(this.poolSeq, orderBook.poolSeq) &&
         Objects.equals(this.sharesAssetId, orderBook.sharesAssetId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderBookId, orderBookSeq, accumulatedFeesId, baseQuantity, baseAssetId, createdAt, displayName, feeFactor, initialAssetsRatio, maturityAt, priceDisplayMultiplier, quoteQuantity, quoteAssetId, sharesQuantity, status, tickSize, updatedAt, haltedAt, terminatedAt, poolUpdatedAt, poolSeq, sharesAssetId);
+    return Objects.hash(orderBookId, baseQuantity, baseAssetId, createdAt, displayName, feeFactor, initialAssetsRatio, maturityAt, quoteQuantity, quoteAssetId, sharesQuantity, status, tickSize, updatedAt, haltedAt, terminatedAt, poolUpdatedAt, sharesAssetId);
   }
 
 
@@ -540,8 +452,6 @@ public class OrderBook {
     sb.append("class OrderBook {\n");
     
     sb.append("    orderBookId: ").append(toIndentedString(orderBookId)).append("\n");
-    sb.append("    orderBookSeq: ").append(toIndentedString(orderBookSeq)).append("\n");
-    sb.append("    accumulatedFeesId: ").append(toIndentedString(accumulatedFeesId)).append("\n");
     sb.append("    baseQuantity: ").append(toIndentedString(baseQuantity)).append("\n");
     sb.append("    baseAssetId: ").append(toIndentedString(baseAssetId)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
@@ -549,7 +459,6 @@ public class OrderBook {
     sb.append("    feeFactor: ").append(toIndentedString(feeFactor)).append("\n");
     sb.append("    initialAssetsRatio: ").append(toIndentedString(initialAssetsRatio)).append("\n");
     sb.append("    maturityAt: ").append(toIndentedString(maturityAt)).append("\n");
-    sb.append("    priceDisplayMultiplier: ").append(toIndentedString(priceDisplayMultiplier)).append("\n");
     sb.append("    quoteQuantity: ").append(toIndentedString(quoteQuantity)).append("\n");
     sb.append("    quoteAssetId: ").append(toIndentedString(quoteAssetId)).append("\n");
     sb.append("    sharesQuantity: ").append(toIndentedString(sharesQuantity)).append("\n");
@@ -559,7 +468,6 @@ public class OrderBook {
     sb.append("    haltedAt: ").append(toIndentedString(haltedAt)).append("\n");
     sb.append("    terminatedAt: ").append(toIndentedString(terminatedAt)).append("\n");
     sb.append("    poolUpdatedAt: ").append(toIndentedString(poolUpdatedAt)).append("\n");
-    sb.append("    poolSeq: ").append(toIndentedString(poolSeq)).append("\n");
     sb.append("    sharesAssetId: ").append(toIndentedString(sharesAssetId)).append("\n");
     sb.append("}");
     return sb.toString();

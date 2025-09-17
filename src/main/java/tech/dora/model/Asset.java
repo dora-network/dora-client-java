@@ -30,7 +30,7 @@ import tech.dora.model.Bond;
  * Asset
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
 
 public class Asset {
   @SerializedName("id")
@@ -44,6 +44,9 @@ public class Asset {
 
   @SerializedName("decimals")
   private Integer decimals = null;
+
+  @SerializedName("fractionalized_units")
+  private Integer fractionalizedUnits = null;
 
   @SerializedName("description")
   private String description = null;
@@ -160,6 +163,24 @@ public class Asset {
 
   public void setDecimals(Integer decimals) {
     this.decimals = decimals;
+  }
+
+  public Asset fractionalizedUnits(Integer fractionalizedUnits) {
+    this.fractionalizedUnits = fractionalizedUnits;
+    return this;
+  }
+
+   /**
+   * Get fractionalizedUnits
+   * @return fractionalizedUnits
+  **/
+  @Schema(description = "")
+  public Integer getFractionalizedUnits() {
+    return fractionalizedUnits;
+  }
+
+  public void setFractionalizedUnits(Integer fractionalizedUnits) {
+    this.fractionalizedUnits = fractionalizedUnits;
   }
 
   public Asset description(String description) {
@@ -446,6 +467,7 @@ public class Asset {
         Objects.equals(this.collateralWeight, asset.collateralWeight) &&
         Objects.equals(this.createdAt, asset.createdAt) &&
         Objects.equals(this.decimals, asset.decimals) &&
+        Objects.equals(this.fractionalizedUnits, asset.fractionalizedUnits) &&
         Objects.equals(this.description, asset.description) &&
         Objects.equals(this.liquidationThreshold, asset.liquidationThreshold) &&
         Objects.equals(this.maturityId, asset.maturityId) &&
@@ -465,7 +487,7 @@ public class Asset {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, collateralWeight, createdAt, decimals, description, liquidationThreshold, maturityId, maxSupply, maxUtilization, name, symbol, kind, yield, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, bond);
+    return Objects.hash(id, collateralWeight, createdAt, decimals, fractionalizedUnits, description, liquidationThreshold, maturityId, maxSupply, maxUtilization, name, symbol, kind, yield, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, bond);
   }
 
 
@@ -478,6 +500,7 @@ public class Asset {
     sb.append("    collateralWeight: ").append(toIndentedString(collateralWeight)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    decimals: ").append(toIndentedString(decimals)).append("\n");
+    sb.append("    fractionalizedUnits: ").append(toIndentedString(fractionalizedUnits)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    liquidationThreshold: ").append(toIndentedString(liquidationThreshold)).append("\n");
     sb.append("    maturityId: ").append(toIndentedString(maturityId)).append("\n");

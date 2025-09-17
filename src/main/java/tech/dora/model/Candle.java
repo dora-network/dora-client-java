@@ -21,14 +21,13 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.UUID;
 import org.threeten.bp.OffsetDateTime;
 /**
  * Candle
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
 
 public class Candle {
   @SerializedName("order_book_id")
@@ -38,19 +37,19 @@ public class Candle {
   private OffsetDateTime startTimestamp = null;
 
   @SerializedName("open")
-  private BigDecimal open = null;
+  private String open = null;
 
   @SerializedName("high")
-  private BigDecimal high = null;
+  private String high = null;
 
   @SerializedName("low")
-  private BigDecimal low = null;
+  private String low = null;
 
   @SerializedName("close")
-  private BigDecimal close = null;
+  private String close = null;
 
   @SerializedName("volume")
-  private Integer volume = null;
+  private String volume = null;
 
   public Candle orderBookId(UUID orderBookId) {
     this.orderBookId = orderBookId;
@@ -88,7 +87,7 @@ public class Candle {
     this.startTimestamp = startTimestamp;
   }
 
-  public Candle open(BigDecimal open) {
+  public Candle open(String open) {
     this.open = open;
     return this;
   }
@@ -98,15 +97,15 @@ public class Candle {
    * @return open
   **/
   @Schema(description = "")
-  public BigDecimal getOpen() {
+  public String getOpen() {
     return open;
   }
 
-  public void setOpen(BigDecimal open) {
+  public void setOpen(String open) {
     this.open = open;
   }
 
-  public Candle high(BigDecimal high) {
+  public Candle high(String high) {
     this.high = high;
     return this;
   }
@@ -116,15 +115,15 @@ public class Candle {
    * @return high
   **/
   @Schema(description = "")
-  public BigDecimal getHigh() {
+  public String getHigh() {
     return high;
   }
 
-  public void setHigh(BigDecimal high) {
+  public void setHigh(String high) {
     this.high = high;
   }
 
-  public Candle low(BigDecimal low) {
+  public Candle low(String low) {
     this.low = low;
     return this;
   }
@@ -134,15 +133,15 @@ public class Candle {
    * @return low
   **/
   @Schema(description = "")
-  public BigDecimal getLow() {
+  public String getLow() {
     return low;
   }
 
-  public void setLow(BigDecimal low) {
+  public void setLow(String low) {
     this.low = low;
   }
 
-  public Candle close(BigDecimal close) {
+  public Candle close(String close) {
     this.close = close;
     return this;
   }
@@ -152,15 +151,15 @@ public class Candle {
    * @return close
   **/
   @Schema(description = "")
-  public BigDecimal getClose() {
+  public String getClose() {
     return close;
   }
 
-  public void setClose(BigDecimal close) {
+  public void setClose(String close) {
     this.close = close;
   }
 
-  public Candle volume(Integer volume) {
+  public Candle volume(String volume) {
     this.volume = volume;
     return this;
   }
@@ -170,11 +169,11 @@ public class Candle {
    * @return volume
   **/
   @Schema(description = "")
-  public Integer getVolume() {
+  public String getVolume() {
     return volume;
   }
 
-  public void setVolume(Integer volume) {
+  public void setVolume(String volume) {
     this.volume = volume;
   }
 

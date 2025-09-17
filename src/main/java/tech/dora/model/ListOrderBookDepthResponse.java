@@ -21,8 +21,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import tech.dora.model.Metadata;
 import tech.dora.model.OrderBookDepth;
 import tech.dora.model.ResponseEnvelope;
@@ -30,22 +28,14 @@ import tech.dora.model.ResponseEnvelope;
  * ListOrderBookDepthResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
 
 public class ListOrderBookDepthResponse extends ResponseEnvelope {
   @SerializedName("data")
-  private List<OrderBookDepth> listOrderBookDepthResponseData = null;
+  private OrderBookDepth listOrderBookDepthResponseData = null;
 
-  public ListOrderBookDepthResponse listOrderBookDepthResponseData(List<OrderBookDepth> listOrderBookDepthResponseData) {
+  public ListOrderBookDepthResponse listOrderBookDepthResponseData(OrderBookDepth listOrderBookDepthResponseData) {
     this.listOrderBookDepthResponseData = listOrderBookDepthResponseData;
-    return this;
-  }
-
-  public ListOrderBookDepthResponse addListOrderBookDepthResponseDataItem(OrderBookDepth listOrderBookDepthResponseDataItem) {
-    if (this.listOrderBookDepthResponseData == null) {
-      this.listOrderBookDepthResponseData = new ArrayList<OrderBookDepth>();
-    }
-    this.listOrderBookDepthResponseData.add(listOrderBookDepthResponseDataItem);
     return this;
   }
 
@@ -54,11 +44,11 @@ public class ListOrderBookDepthResponse extends ResponseEnvelope {
    * @return listOrderBookDepthResponseData
   **/
   @Schema(description = "")
-  public List<OrderBookDepth> getListOrderBookDepthResponseData() {
+  public OrderBookDepth getListOrderBookDepthResponseData() {
     return listOrderBookDepthResponseData;
   }
 
-  public void setListOrderBookDepthResponseData(List<OrderBookDepth> listOrderBookDepthResponseData) {
+  public void setListOrderBookDepthResponseData(OrderBookDepth listOrderBookDepthResponseData) {
     this.listOrderBookDepthResponseData = listOrderBookDepthResponseData;
   }
 

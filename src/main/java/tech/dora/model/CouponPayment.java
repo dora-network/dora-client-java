@@ -28,7 +28,7 @@ import org.threeten.bp.OffsetDateTime;
  * CouponPayment
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
 
 public class CouponPayment {
   @SerializedName("id")
@@ -37,20 +37,32 @@ public class CouponPayment {
   @SerializedName("asset_id")
   private UUID assetId = null;
 
+  @SerializedName("yield")
+  private BigDecimal yield = null;
+
   @SerializedName("start_at")
   private OffsetDateTime startAt = null;
+
+  @SerializedName("end_at")
+  private OffsetDateTime endAt = null;
 
   @SerializedName("pay_at")
   private OffsetDateTime payAt = null;
 
+  @SerializedName("available_to_pay")
+  private String availableToPay = null;
+
+  @SerializedName("completed_at")
+  private OffsetDateTime completedAt = null;
+
   @SerializedName("created_at")
   private OffsetDateTime createdAt = null;
 
-  @SerializedName("processed_at")
-  private OffsetDateTime processedAt = null;
+  @SerializedName("process_every")
+  private Integer processEvery = null;
 
-  @SerializedName("yield")
-  private BigDecimal yield = null;
+  @SerializedName("last_processed_at")
+  private OffsetDateTime lastProcessedAt = null;
 
   public CouponPayment id(UUID id) {
     this.id = id;
@@ -88,6 +100,24 @@ public class CouponPayment {
     this.assetId = assetId;
   }
 
+  public CouponPayment yield(BigDecimal yield) {
+    this.yield = yield;
+    return this;
+  }
+
+   /**
+   * Get yield
+   * @return yield
+  **/
+  @Schema(description = "")
+  public BigDecimal getYield() {
+    return yield;
+  }
+
+  public void setYield(BigDecimal yield) {
+    this.yield = yield;
+  }
+
   public CouponPayment startAt(OffsetDateTime startAt) {
     this.startAt = startAt;
     return this;
@@ -104,6 +134,24 @@ public class CouponPayment {
 
   public void setStartAt(OffsetDateTime startAt) {
     this.startAt = startAt;
+  }
+
+  public CouponPayment endAt(OffsetDateTime endAt) {
+    this.endAt = endAt;
+    return this;
+  }
+
+   /**
+   * Get endAt
+   * @return endAt
+  **/
+  @Schema(description = "")
+  public OffsetDateTime getEndAt() {
+    return endAt;
+  }
+
+  public void setEndAt(OffsetDateTime endAt) {
+    this.endAt = endAt;
   }
 
   public CouponPayment payAt(OffsetDateTime payAt) {
@@ -124,6 +172,42 @@ public class CouponPayment {
     this.payAt = payAt;
   }
 
+  public CouponPayment availableToPay(String availableToPay) {
+    this.availableToPay = availableToPay;
+    return this;
+  }
+
+   /**
+   * Get availableToPay
+   * @return availableToPay
+  **/
+  @Schema(description = "")
+  public String getAvailableToPay() {
+    return availableToPay;
+  }
+
+  public void setAvailableToPay(String availableToPay) {
+    this.availableToPay = availableToPay;
+  }
+
+  public CouponPayment completedAt(OffsetDateTime completedAt) {
+    this.completedAt = completedAt;
+    return this;
+  }
+
+   /**
+   * Get completedAt
+   * @return completedAt
+  **/
+  @Schema(description = "")
+  public OffsetDateTime getCompletedAt() {
+    return completedAt;
+  }
+
+  public void setCompletedAt(OffsetDateTime completedAt) {
+    this.completedAt = completedAt;
+  }
+
   public CouponPayment createdAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
     return this;
@@ -142,40 +226,41 @@ public class CouponPayment {
     this.createdAt = createdAt;
   }
 
-  public CouponPayment processedAt(OffsetDateTime processedAt) {
-    this.processedAt = processedAt;
+  public CouponPayment processEvery(Integer processEvery) {
+    this.processEvery = processEvery;
     return this;
   }
 
    /**
-   * Get processedAt
-   * @return processedAt
+   * Number of nanoseconds to wait between coupon payment processing, must be at least 1000 (1 microsecond)
+   * minimum: 1000
+   * @return processEvery
   **/
-  @Schema(description = "")
-  public OffsetDateTime getProcessedAt() {
-    return processedAt;
+  @Schema(description = "Number of nanoseconds to wait between coupon payment processing, must be at least 1000 (1 microsecond)")
+  public Integer getProcessEvery() {
+    return processEvery;
   }
 
-  public void setProcessedAt(OffsetDateTime processedAt) {
-    this.processedAt = processedAt;
+  public void setProcessEvery(Integer processEvery) {
+    this.processEvery = processEvery;
   }
 
-  public CouponPayment yield(BigDecimal yield) {
-    this.yield = yield;
+  public CouponPayment lastProcessedAt(OffsetDateTime lastProcessedAt) {
+    this.lastProcessedAt = lastProcessedAt;
     return this;
   }
 
    /**
-   * Get yield
-   * @return yield
+   * Get lastProcessedAt
+   * @return lastProcessedAt
   **/
   @Schema(description = "")
-  public BigDecimal getYield() {
-    return yield;
+  public OffsetDateTime getLastProcessedAt() {
+    return lastProcessedAt;
   }
 
-  public void setYield(BigDecimal yield) {
-    this.yield = yield;
+  public void setLastProcessedAt(OffsetDateTime lastProcessedAt) {
+    this.lastProcessedAt = lastProcessedAt;
   }
 
 
@@ -190,16 +275,20 @@ public class CouponPayment {
     CouponPayment couponPayment = (CouponPayment) o;
     return Objects.equals(this.id, couponPayment.id) &&
         Objects.equals(this.assetId, couponPayment.assetId) &&
+        Objects.equals(this.yield, couponPayment.yield) &&
         Objects.equals(this.startAt, couponPayment.startAt) &&
+        Objects.equals(this.endAt, couponPayment.endAt) &&
         Objects.equals(this.payAt, couponPayment.payAt) &&
+        Objects.equals(this.availableToPay, couponPayment.availableToPay) &&
+        Objects.equals(this.completedAt, couponPayment.completedAt) &&
         Objects.equals(this.createdAt, couponPayment.createdAt) &&
-        Objects.equals(this.processedAt, couponPayment.processedAt) &&
-        Objects.equals(this.yield, couponPayment.yield);
+        Objects.equals(this.processEvery, couponPayment.processEvery) &&
+        Objects.equals(this.lastProcessedAt, couponPayment.lastProcessedAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, assetId, startAt, payAt, createdAt, processedAt, yield);
+    return Objects.hash(id, assetId, yield, startAt, endAt, payAt, availableToPay, completedAt, createdAt, processEvery, lastProcessedAt);
   }
 
 
@@ -210,11 +299,15 @@ public class CouponPayment {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
-    sb.append("    startAt: ").append(toIndentedString(startAt)).append("\n");
-    sb.append("    payAt: ").append(toIndentedString(payAt)).append("\n");
-    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
-    sb.append("    processedAt: ").append(toIndentedString(processedAt)).append("\n");
     sb.append("    yield: ").append(toIndentedString(yield)).append("\n");
+    sb.append("    startAt: ").append(toIndentedString(startAt)).append("\n");
+    sb.append("    endAt: ").append(toIndentedString(endAt)).append("\n");
+    sb.append("    payAt: ").append(toIndentedString(payAt)).append("\n");
+    sb.append("    availableToPay: ").append(toIndentedString(availableToPay)).append("\n");
+    sb.append("    completedAt: ").append(toIndentedString(completedAt)).append("\n");
+    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    processEvery: ").append(toIndentedString(processEvery)).append("\n");
+    sb.append("    lastProcessedAt: ").append(toIndentedString(lastProcessedAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }

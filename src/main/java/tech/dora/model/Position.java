@@ -22,11 +22,12 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 import java.util.UUID;
+import org.threeten.bp.OffsetDateTime;
 /**
  * Position
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-08-04T12:54:46.097280838+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
 
 public class Position {
   @SerializedName("id")
@@ -61,6 +62,12 @@ public class Position {
 
   @SerializedName("impending_borrows")
   private String impendingBorrows = null;
+
+  @SerializedName("avg_entry_price")
+  private String avgEntryPrice = null;
+
+  @SerializedName("created_at")
+  private OffsetDateTime createdAt = null;
 
   public Position id(UUID id) {
     this.id = id;
@@ -260,6 +267,42 @@ public class Position {
     this.impendingBorrows = impendingBorrows;
   }
 
+  public Position avgEntryPrice(String avgEntryPrice) {
+    this.avgEntryPrice = avgEntryPrice;
+    return this;
+  }
+
+   /**
+   * average cost per unit quantity that was paid (long positions) or received (short positions) for this asset.
+   * @return avgEntryPrice
+  **/
+  @Schema(description = "average cost per unit quantity that was paid (long positions) or received (short positions) for this asset.")
+  public String getAvgEntryPrice() {
+    return avgEntryPrice;
+  }
+
+  public void setAvgEntryPrice(String avgEntryPrice) {
+    this.avgEntryPrice = avgEntryPrice;
+  }
+
+  public Position createdAt(OffsetDateTime createdAt) {
+    this.createdAt = createdAt;
+    return this;
+  }
+
+   /**
+   * Get createdAt
+   * @return createdAt
+  **/
+  @Schema(description = "")
+  public OffsetDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(OffsetDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -280,12 +323,14 @@ public class Position {
         Objects.equals(this.collateral, position.collateral) &&
         Objects.equals(this.suppliedCollateral, position.suppliedCollateral) &&
         Objects.equals(this.borrowed, position.borrowed) &&
-        Objects.equals(this.impendingBorrows, position.impendingBorrows);
+        Objects.equals(this.impendingBorrows, position.impendingBorrows) &&
+        Objects.equals(this.avgEntryPrice, position.avgEntryPrice) &&
+        Objects.equals(this.createdAt, position.createdAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, assetId, seq, isGlobal, available, locked, supplied, collateral, suppliedCollateral, borrowed, impendingBorrows);
+    return Objects.hash(id, assetId, seq, isGlobal, available, locked, supplied, collateral, suppliedCollateral, borrowed, impendingBorrows, avgEntryPrice, createdAt);
   }
 
 
@@ -305,6 +350,8 @@ public class Position {
     sb.append("    suppliedCollateral: ").append(toIndentedString(suppliedCollateral)).append("\n");
     sb.append("    borrowed: ").append(toIndentedString(borrowed)).append("\n");
     sb.append("    impendingBorrows: ").append(toIndentedString(impendingBorrows)).append("\n");
+    sb.append("    avgEntryPrice: ").append(toIndentedString(avgEntryPrice)).append("\n");
+    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }

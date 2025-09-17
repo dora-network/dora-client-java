@@ -6,5 +6,5 @@
 * `SELF` (value: `"SELF"`)
 * `ADMIN` (value: `"ADMIN"`)
 * `BOND_PROVIDER` (value: `"BOND_PROVIDER"`)
-* `LIQUIDY_PROVIDER` (value: `"LIQUIDY_PROVIDER"`)
+* `LIQUIDITY_PROVIDER` (value: `"LIQUIDITY_PROVIDER"`)
 * `TRADER` (value: `"TRADER"`)
