@@ -3990,13 +3990,12 @@ public class DefaultApi {
     /**
      * Build call for getUserLedgerStream
      * @param userId  (required)
-     * @param since  (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getUserLedgerStreamCall(UUID userId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getUserLedgerStreamCall(UUID userId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -4005,8 +4004,6 @@ public class DefaultApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (since != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("since", since));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -4044,13 +4041,13 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getUserLedgerStreamValidateBeforeCall(UUID userId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getUserLedgerStreamValidateBeforeCall(UUID userId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling getUserLedgerStream(Async)");
         }
         
-        com.squareup.okhttp.Call call = getUserLedgerStreamCall(userId, since, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getUserLedgerStreamCall(userId, progressListener, progressRequestListener);
         return call;
 
         
@@ -4063,12 +4060,11 @@ public class DefaultApi {
      * Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates
      * 
      * @param userId  (required)
-     * @param since  (optional)
      * @return StreamPositionsResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public StreamPositionsResponse getUserLedgerStream(UUID userId, OffsetDateTime since) throws ApiException {
-        ApiResponse<StreamPositionsResponse> resp = getUserLedgerStreamWithHttpInfo(userId, since);
+    public StreamPositionsResponse getUserLedgerStream(UUID userId) throws ApiException {
+        ApiResponse<StreamPositionsResponse> resp = getUserLedgerStreamWithHttpInfo(userId);
         return resp.getData();
     }
 
@@ -4076,12 +4072,11 @@ public class DefaultApi {
      * Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates
      * 
      * @param userId  (required)
-     * @param since  (optional)
      * @return ApiResponse&lt;StreamPositionsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<StreamPositionsResponse> getUserLedgerStreamWithHttpInfo(UUID userId, OffsetDateTime since) throws ApiException {
-        com.squareup.okhttp.Call call = getUserLedgerStreamValidateBeforeCall(userId, since, null, null);
+    public ApiResponse<StreamPositionsResponse> getUserLedgerStreamWithHttpInfo(UUID userId) throws ApiException {
+        com.squareup.okhttp.Call call = getUserLedgerStreamValidateBeforeCall(userId, null, null);
         Type localVarReturnType = new TypeToken<StreamPositionsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -4090,12 +4085,11 @@ public class DefaultApi {
      * Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates (asynchronously)
      * 
      * @param userId  (required)
-     * @param since  (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getUserLedgerStreamAsync(UUID userId, OffsetDateTime since, final ApiCallback<StreamPositionsResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call getUserLedgerStreamAsync(UUID userId, final ApiCallback<StreamPositionsResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -4116,7 +4110,7 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getUserLedgerStreamValidateBeforeCall(userId, since, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getUserLedgerStreamValidateBeforeCall(userId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<StreamPositionsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -6206,7 +6200,7 @@ public class DefaultApi {
         Object localVarPostBody = body;
         
         // create path and map variables
-        String localVarPath = "/v1/liquidity/pool/{pool_id}/subtract"
+        String localVarPath = "/v1/liquidity/pool/{pool_id}/remove"
             .replaceAll("\\{" + "pool_id" + "\\}", apiClient.escapeString(poolId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();

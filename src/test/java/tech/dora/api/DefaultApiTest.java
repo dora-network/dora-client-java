@@ -574,8 +574,7 @@ public class DefaultApiTest {
     @Test
     public void getUserLedgerStreamTest() throws Exception {
         UUID userId = null;
-        OffsetDateTime since = null;
-        StreamPositionsResponse response = api.getUserLedgerStream(userId, since);
+        StreamPositionsResponse response = api.getUserLedgerStream(userId);
 
         // TODO: test validations
     }

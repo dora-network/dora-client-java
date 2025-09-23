@@ -51,7 +51,7 @@ Method | HTTP request | Description
 [**leverageUnite**](DefaultApi.md#leverageUnite) | **POST** /v1/leverage/unite | Combines all isolated positions into a single global position
 [**leverageWithdraw**](DefaultApi.md#leverageWithdraw) | **POST** /v1/leverage/withdraw | Withdraw leverage for a specific asset
 [**liquidityAdd**](DefaultApi.md#liquidityAdd) | **POST** /v1/liquidity/pool/{pool_id}/add | Add liquidity to a pool
-[**liquiditySubtract**](DefaultApi.md#liquiditySubtract) | **POST** /v1/liquidity/pool/{pool_id}/subtract | Subtract liquidity from a pool
+[**liquiditySubtract**](DefaultApi.md#liquiditySubtract) | **POST** /v1/liquidity/pool/{pool_id}/remove | Subtract liquidity from a pool
 [**listAssets**](DefaultApi.md#listAssets) | **GET** /v1/assets | List assets
 [**listOrderBooks**](DefaultApi.md#listOrderBooks) | **GET** /v1/orderbooks | List order books
 [**listOrders**](DefaultApi.md#listOrders) | **GET** /v1/orders | List all orders
@@ -1356,7 +1356,7 @@ No authorization required
 
 <a name="getUserLedgerStream"></a>
 # **getUserLedgerStream**
-> StreamPositionsResponse getUserLedgerStream(userId, since)
+> StreamPositionsResponse getUserLedgerStream(userId)
 
 Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates
 
@@ -1369,9 +1369,8 @@ Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a 
 
 DefaultApi apiInstance = new DefaultApi();
 UUID userId = new UUID(); // UUID | 
-OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    StreamPositionsResponse result = apiInstance.getUserLedgerStream(userId, since);
+    StreamPositionsResponse result = apiInstance.getUserLedgerStream(userId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getUserLedgerStream");
@@ -1384,7 +1383,6 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userId** | [**UUID**](.md)|  |
- **since** | **OffsetDateTime**|  | [optional]
 
 ### Return type
 

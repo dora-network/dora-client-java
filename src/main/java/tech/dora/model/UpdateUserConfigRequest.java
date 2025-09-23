@@ -26,7 +26,7 @@ import tech.dora.model.UpdateFieldString;
  * Request body for PUT /user/{id}/config: update a user changeable details only. Other properties can only be changed by an admin following a manual request by the user.
  */
 @Schema(description = "Request body for PUT /user/{id}/config: update a user changeable details only. Other properties can only be changed by an admin following a manual request by the user.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-17T17:05:29.510905976+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-23T16:14:25.446198532+02:00[Europe/Paris]")
 
 public class UpdateUserConfigRequest {
   @SerializedName("photo_url")
