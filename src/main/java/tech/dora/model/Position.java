@@ -27,7 +27,7 @@ import org.threeten.bp.OffsetDateTime;
  * Position
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-23T16:14:25.446198532+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-24T06:35:34.410633599+02:00[Europe/Paris]")
 
 public class Position {
   @SerializedName("id")
@@ -65,6 +65,12 @@ public class Position {
 
   @SerializedName("avg_entry_price")
   private String avgEntryPrice = null;
+
+  @SerializedName("borrow_limit")
+  private String borrowLimit = null;
+
+  @SerializedName("liquidation_threshold")
+  private String liquidationThreshold = null;
 
   @SerializedName("created_at")
   private OffsetDateTime createdAt = null;
@@ -285,6 +291,42 @@ public class Position {
     this.avgEntryPrice = avgEntryPrice;
   }
 
+  public Position borrowLimit(String borrowLimit) {
+    this.borrowLimit = borrowLimit;
+    return this;
+  }
+
+   /**
+   * The borrow limit
+   * @return borrowLimit
+  **/
+  @Schema(description = "The borrow limit")
+  public String getBorrowLimit() {
+    return borrowLimit;
+  }
+
+  public void setBorrowLimit(String borrowLimit) {
+    this.borrowLimit = borrowLimit;
+  }
+
+  public Position liquidationThreshold(String liquidationThreshold) {
+    this.liquidationThreshold = liquidationThreshold;
+    return this;
+  }
+
+   /**
+   * The borrow limit
+   * @return liquidationThreshold
+  **/
+  @Schema(description = "The borrow limit")
+  public String getLiquidationThreshold() {
+    return liquidationThreshold;
+  }
+
+  public void setLiquidationThreshold(String liquidationThreshold) {
+    this.liquidationThreshold = liquidationThreshold;
+  }
+
   public Position createdAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
     return this;
@@ -325,12 +367,14 @@ public class Position {
         Objects.equals(this.borrowed, position.borrowed) &&
         Objects.equals(this.impendingBorrows, position.impendingBorrows) &&
         Objects.equals(this.avgEntryPrice, position.avgEntryPrice) &&
+        Objects.equals(this.borrowLimit, position.borrowLimit) &&
+        Objects.equals(this.liquidationThreshold, position.liquidationThreshold) &&
         Objects.equals(this.createdAt, position.createdAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, assetId, seq, isGlobal, available, locked, supplied, collateral, suppliedCollateral, borrowed, impendingBorrows, avgEntryPrice, createdAt);
+    return Objects.hash(id, assetId, seq, isGlobal, available, locked, supplied, collateral, suppliedCollateral, borrowed, impendingBorrows, avgEntryPrice, borrowLimit, liquidationThreshold, createdAt);
   }
 
 
@@ -351,6 +395,8 @@ public class Position {
     sb.append("    borrowed: ").append(toIndentedString(borrowed)).append("\n");
     sb.append("    impendingBorrows: ").append(toIndentedString(impendingBorrows)).append("\n");
     sb.append("    avgEntryPrice: ").append(toIndentedString(avgEntryPrice)).append("\n");
+    sb.append("    borrowLimit: ").append(toIndentedString(borrowLimit)).append("\n");
+    sb.append("    liquidationThreshold: ").append(toIndentedString(liquidationThreshold)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("}");
     return sb.toString();

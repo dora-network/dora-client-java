@@ -31,7 +31,7 @@ import tech.dora.model.Side;
  * CreateOrderRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-23T16:14:25.446198532+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-24T06:35:34.410633599+02:00[Europe/Paris]")
 
 public class CreateOrderRequest {
   @SerializedName("quantity")
@@ -54,9 +54,6 @@ public class CreateOrderRequest {
 
   @SerializedName("order_book_id")
   private UUID orderBookId = null;
-
-  @SerializedName("order_info")
-  private String orderInfo = null;
 
   @SerializedName("order_modifiers")
   private List<OrderModifierKind> orderModifiers = null;
@@ -187,24 +184,6 @@ public class CreateOrderRequest {
     this.orderBookId = orderBookId;
   }
 
-  public CreateOrderRequest orderInfo(String orderInfo) {
-    this.orderInfo = orderInfo;
-    return this;
-  }
-
-   /**
-   * Optional: User-defined text for the order, e.g., &#x27;buying dips&#x27;
-   * @return orderInfo
-  **/
-  @Schema(description = "Optional: User-defined text for the order, e.g., 'buying dips'")
-  public String getOrderInfo() {
-    return orderInfo;
-  }
-
-  public void setOrderInfo(String orderInfo) {
-    this.orderInfo = orderInfo;
-  }
-
   public CreateOrderRequest orderModifiers(List<OrderModifierKind> orderModifiers) {
     this.orderModifiers = orderModifiers;
     return this;
@@ -248,13 +227,12 @@ public class CreateOrderRequest {
         Objects.equals(this.side, createOrderRequest.side) &&
         Objects.equals(this.positionId, createOrderRequest.positionId) &&
         Objects.equals(this.orderBookId, createOrderRequest.orderBookId) &&
-        Objects.equals(this.orderInfo, createOrderRequest.orderInfo) &&
         Objects.equals(this.orderModifiers, createOrderRequest.orderModifiers);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(quantity, inverseLeverage, price, kind, side, positionId, orderBookId, orderInfo, orderModifiers);
+    return Objects.hash(quantity, inverseLeverage, price, kind, side, positionId, orderBookId, orderModifiers);
   }
 
 
@@ -270,7 +248,6 @@ public class CreateOrderRequest {
     sb.append("    side: ").append(toIndentedString(side)).append("\n");
     sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
     sb.append("    orderBookId: ").append(toIndentedString(orderBookId)).append("\n");
-    sb.append("    orderInfo: ").append(toIndentedString(orderInfo)).append("\n");
     sb.append("    orderModifiers: ").append(toIndentedString(orderModifiers)).append("\n");
     sb.append("}");
     return sb.toString();

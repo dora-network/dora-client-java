@@ -21,45 +21,35 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import tech.dora.model.Metadata;
-import tech.dora.model.Order;
-import tech.dora.model.ResponseEnvelope;
+import org.threeten.bp.OffsetDateTime;
+import tech.dora.model.Asset;
+import tech.dora.model.StreamEntry;
 /**
- * ListOrdersResponse
+ * StreamAssetsEntry
  */
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-24T06:35:34.410633599+02:00[Europe/Paris]")
 
-public class ListOrdersResponse extends ResponseEnvelope {
-  @SerializedName("data")
-  private List<Order> listOrdersResponseData = null;
+public class StreamAssetsEntry extends StreamEntry {
+  @SerializedName("Val")
+  private Asset streamAssetsEntryVal = null;
 
-  public ListOrdersResponse listOrdersResponseData(List<Order> listOrdersResponseData) {
-    this.listOrdersResponseData = listOrdersResponseData;
-    return this;
-  }
-
-  public ListOrdersResponse addListOrdersResponseDataItem(Order listOrdersResponseDataItem) {
-    if (this.listOrdersResponseData == null) {
-      this.listOrdersResponseData = new ArrayList<Order>();
-    }
-    this.listOrdersResponseData.add(listOrdersResponseDataItem);
+  public StreamAssetsEntry streamAssetsEntryVal(Asset streamAssetsEntryVal) {
+    this.streamAssetsEntryVal = streamAssetsEntryVal;
     return this;
   }
 
    /**
-   * Get listOrdersResponseData
-   * @return listOrdersResponseData
+   * Get streamAssetsEntryVal
+   * @return streamAssetsEntryVal
   **/
   @Schema(description = "")
-  public List<Order> getListOrdersResponseData() {
-    return listOrdersResponseData;
+  public Asset getStreamAssetsEntryVal() {
+    return streamAssetsEntryVal;
   }
 
-  public void setListOrdersResponseData(List<Order> listOrdersResponseData) {
-    this.listOrdersResponseData = listOrdersResponseData;
+  public void setStreamAssetsEntryVal(Asset streamAssetsEntryVal) {
+    this.streamAssetsEntryVal = streamAssetsEntryVal;
   }
 
 
@@ -71,23 +61,23 @@ public class ListOrdersResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ListOrdersResponse listOrdersResponse = (ListOrdersResponse) o;
-    return Objects.equals(this.listOrdersResponseData, listOrdersResponse.listOrdersResponseData) &&
+    StreamAssetsEntry streamAssetsEntry = (StreamAssetsEntry) o;
+    return Objects.equals(this.streamAssetsEntryVal, streamAssetsEntry.streamAssetsEntryVal) &&
         super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(listOrdersResponseData, super.hashCode());
+    return Objects.hash(streamAssetsEntryVal, super.hashCode());
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ListOrdersResponse {\n");
+    sb.append("class StreamAssetsEntry {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    listOrdersResponseData: ").append(toIndentedString(listOrdersResponseData)).append("\n");
+    sb.append("    streamAssetsEntryVal: ").append(toIndentedString(streamAssetsEntryVal)).append("\n");
     sb.append("}");
     return sb.toString();
   }

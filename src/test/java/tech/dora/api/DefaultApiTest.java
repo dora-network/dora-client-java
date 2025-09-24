@@ -14,8 +14,6 @@ package tech.dora.api;
 
 import tech.dora.model.AssetKind;
 import tech.dora.model.AssetRequestError;
-import tech.dora.model.BorrowRequest;
-import tech.dora.model.BorrowResponse;
 import tech.dora.model.CancelOrderResponse;
 import tech.dora.model.CandleResolution;
 import tech.dora.model.CollateralizeRequest;
@@ -59,11 +57,10 @@ import tech.dora.model.OrderBookStatus;
 import tech.dora.model.OrderKind;
 import tech.dora.model.OrderStatus;
 import tech.dora.model.PoolRequestError;
-import tech.dora.model.RepayRequest;
-import tech.dora.model.RepayResponse;
 import tech.dora.model.ResponseEnvelope;
 import tech.dora.model.Side;
 import tech.dora.model.StreamAssetPricesResponse;
+import tech.dora.model.StreamAssetsResponse;
 import tech.dora.model.StreamCandlesResponse;
 import tech.dora.model.StreamOrderBookBalancesResponse;
 import tech.dora.model.StreamOrderUpdatesResponse;
@@ -206,6 +203,22 @@ public class DefaultApiTest {
     public void getAssetPriceTest() throws Exception {
         UUID assetId = null;
         GetAssetPriceResponse response = api.getAssetPrice(assetId);
+
+        // TODO: test validations
+    }
+    /**
+     * Get all inserts or updates for assets
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void getAssetsStreamTest() throws Exception {
+        OffsetDateTime since = null;
+        OffsetDateTime until = null;
+        StreamAssetsResponse response = api.getAssetsStream(since, until);
 
         // TODO: test validations
     }
@@ -606,9 +619,8 @@ public class DefaultApiTest {
     @Test
     public void getUserOrdersUpdatesStreamAllTest() throws Exception {
         UUID userId = null;
-        UUID orderBookId = null;
         OffsetDateTime since = null;
-        StreamOrderUpdatesResponse response = api.getUserOrdersUpdatesStreamAll(userId, orderBookId, since);
+        StreamOrderUpdatesResponse response = api.getUserOrdersUpdatesStreamAll(userId, since);
 
         // TODO: test validations
     }
@@ -673,21 +685,6 @@ public class DefaultApiTest {
         // TODO: test validations
     }
     /**
-     * Directly borrow assets
-     *
-     * TODO: Finish this when implementation has been completed
-     *
-     * @throws Exception
-     *          if the Api call fails
-     */
-    @Test
-    public void leverageBorrowTest() throws Exception {
-        BorrowRequest body = null;
-        BorrowResponse response = api.leverageBorrow(body);
-
-        // TODO: test validations
-    }
-    /**
      * Move supplied and available to supplied_collateral and collateral, for a specified position
      *
      * 
@@ -748,21 +745,6 @@ public class DefaultApiTest {
         // TODO: test validations
     }
     /**
-     * Repay borrowed assets
-     *
-     * TODO: Finish this when implementation has been completed
-     *
-     * @throws Exception
-     *          if the Api call fails
-     */
-    @Test
-    public void leverageRepayTest() throws Exception {
-        RepayRequest body = null;
-        RepayResponse response = api.leverageRepay(body);
-
-        // TODO: test validations
-    }
-    /**
      * Supply leverage for a specific asset
      *
      * 
@@ -780,7 +762,7 @@ public class DefaultApiTest {
     /**
      * Combines all isolated positions into a single global position
      *
-     * TODO: Finish this when implementation has been completed
+     * Combines all isolated positions into a single global position
      *
      * @throws Exception
      *          if the Api call fails

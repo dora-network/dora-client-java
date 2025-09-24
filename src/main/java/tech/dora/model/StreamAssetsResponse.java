@@ -14,13 +14,16 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import tech.dora.model.StreamAssetsEntry;
 /**
- * RepayRequest
+ * StreamAssetsResponse
  */
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-24T06:35:34.410633599+02:00[Europe/Paris]")
 
-public class RepayRequest {
+public class StreamAssetsResponse extends ArrayList<StreamAssetsEntry> {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -30,20 +33,20 @@ public class RepayRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    return true;
+    return super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash();
+    return Objects.hash(super.hashCode());
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class RepayRequest {\n");
-    
+    sb.append("class StreamAssetsResponse {\n");
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("}");
     return sb.toString();
   }

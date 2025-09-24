@@ -28,8 +28,6 @@ import java.io.IOException;
 
 import tech.dora.model.AssetKind;
 import tech.dora.model.AssetRequestError;
-import tech.dora.model.BorrowRequest;
-import tech.dora.model.BorrowResponse;
 import tech.dora.model.CancelOrderResponse;
 import tech.dora.model.CandleResolution;
 import tech.dora.model.CollateralizeRequest;
@@ -73,11 +71,10 @@ import tech.dora.model.OrderBookStatus;
 import tech.dora.model.OrderKind;
 import tech.dora.model.OrderStatus;
 import tech.dora.model.PoolRequestError;
-import tech.dora.model.RepayRequest;
-import tech.dora.model.RepayResponse;
 import tech.dora.model.ResponseEnvelope;
 import tech.dora.model.Side;
 import tech.dora.model.StreamAssetPricesResponse;
+import tech.dora.model.StreamAssetsResponse;
 import tech.dora.model.StreamCandlesResponse;
 import tech.dora.model.StreamOrderBookBalancesResponse;
 import tech.dora.model.StreamOrderUpdatesResponse;
@@ -1007,6 +1004,137 @@ public class DefaultApi {
 
         com.squareup.okhttp.Call call = getAssetPriceValidateBeforeCall(assetId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetAssetPriceResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for getAssetsStream
+     * @param since  (optional)
+     * @param until  (optional)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call getAssetsStreamCall(OffsetDateTime since, OffsetDateTime until, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = null;
+        
+        // create path and map variables
+        String localVarPath = "/v1/assets/stream";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (since != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("since", since));
+        if (until != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("until", until));
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        if (headers != null) {
+            localVarHeaderParams.putAll(headers);
+        }
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call getAssetsStreamValidateBeforeCall(OffsetDateTime since, OffsetDateTime until, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        com.squareup.okhttp.Call call = getAssetsStreamCall(since, until, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
+
+    /**
+     * Get all inserts or updates for assets
+     * 
+     * @param since  (optional)
+     * @param until  (optional)
+     * @return StreamAssetsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public StreamAssetsResponse getAssetsStream(OffsetDateTime since, OffsetDateTime until) throws ApiException {
+        ApiResponse<StreamAssetsResponse> resp = getAssetsStreamWithHttpInfo(since, until);
+        return resp.getData();
+    }
+
+    /**
+     * Get all inserts or updates for assets
+     * 
+     * @param since  (optional)
+     * @param until  (optional)
+     * @return ApiResponse&lt;StreamAssetsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<StreamAssetsResponse> getAssetsStreamWithHttpInfo(OffsetDateTime since, OffsetDateTime until) throws ApiException {
+        com.squareup.okhttp.Call call = getAssetsStreamValidateBeforeCall(since, until, null, null);
+        Type localVarReturnType = new TypeToken<StreamAssetsResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Get all inserts or updates for assets (asynchronously)
+     * 
+     * @param since  (optional)
+     * @param until  (optional)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call getAssetsStreamAsync(OffsetDateTime since, OffsetDateTime until, final ApiCallback<StreamAssetsResponse> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = getAssetsStreamValidateBeforeCall(since, until, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<StreamAssetsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -4261,20 +4389,18 @@ public class DefaultApi {
     /**
      * Build call for getUserOrdersUpdatesStreamAll
      * @param userId  (required)
-     * @param orderBookId  (required)
      * @param since  (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getUserOrdersUpdatesStreamAllCall(UUID userId, UUID orderBookId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getUserOrdersUpdatesStreamAllCall(UUID userId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
         String localVarPath = "/v1/user/{user_id}/orders/all/updates/stream"
-            .replaceAll("\\{" + "user_id" + "\\}", apiClient.escapeString(userId.toString()))
-            .replaceAll("\\{" + "order_book_id" + "\\}", apiClient.escapeString(orderBookId.toString()));
+            .replaceAll("\\{" + "user_id" + "\\}", apiClient.escapeString(userId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -4317,17 +4443,13 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getUserOrdersUpdatesStreamAllValidateBeforeCall(UUID userId, UUID orderBookId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getUserOrdersUpdatesStreamAllValidateBeforeCall(UUID userId, OffsetDateTime since, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling getUserOrdersUpdatesStreamAll(Async)");
         }
-        // verify the required parameter 'orderBookId' is set
-        if (orderBookId == null) {
-            throw new ApiException("Missing the required parameter 'orderBookId' when calling getUserOrdersUpdatesStreamAll(Async)");
-        }
         
-        com.squareup.okhttp.Call call = getUserOrdersUpdatesStreamAllCall(userId, orderBookId, since, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getUserOrdersUpdatesStreamAllCall(userId, since, progressListener, progressRequestListener);
         return call;
 
         
@@ -4340,13 +4462,12 @@ public class DefaultApi {
      * Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
      * 
      * @param userId  (required)
-     * @param orderBookId  (required)
      * @param since  (optional)
      * @return StreamOrderUpdatesResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public StreamOrderUpdatesResponse getUserOrdersUpdatesStreamAll(UUID userId, UUID orderBookId, OffsetDateTime since) throws ApiException {
-        ApiResponse<StreamOrderUpdatesResponse> resp = getUserOrdersUpdatesStreamAllWithHttpInfo(userId, orderBookId, since);
+    public StreamOrderUpdatesResponse getUserOrdersUpdatesStreamAll(UUID userId, OffsetDateTime since) throws ApiException {
+        ApiResponse<StreamOrderUpdatesResponse> resp = getUserOrdersUpdatesStreamAllWithHttpInfo(userId, since);
         return resp.getData();
     }
 
@@ -4354,13 +4475,12 @@ public class DefaultApi {
      * Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
      * 
      * @param userId  (required)
-     * @param orderBookId  (required)
      * @param since  (optional)
      * @return ApiResponse&lt;StreamOrderUpdatesResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<StreamOrderUpdatesResponse> getUserOrdersUpdatesStreamAllWithHttpInfo(UUID userId, UUID orderBookId, OffsetDateTime since) throws ApiException {
-        com.squareup.okhttp.Call call = getUserOrdersUpdatesStreamAllValidateBeforeCall(userId, orderBookId, since, null, null);
+    public ApiResponse<StreamOrderUpdatesResponse> getUserOrdersUpdatesStreamAllWithHttpInfo(UUID userId, OffsetDateTime since) throws ApiException {
+        com.squareup.okhttp.Call call = getUserOrdersUpdatesStreamAllValidateBeforeCall(userId, since, null, null);
         Type localVarReturnType = new TypeToken<StreamOrderUpdatesResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -4369,13 +4489,12 @@ public class DefaultApi {
      * Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates (asynchronously)
      * 
      * @param userId  (required)
-     * @param orderBookId  (required)
      * @param since  (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getUserOrdersUpdatesStreamAllAsync(UUID userId, UUID orderBookId, OffsetDateTime since, final ApiCallback<StreamOrderUpdatesResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call getUserOrdersUpdatesStreamAllAsync(UUID userId, OffsetDateTime since, final ApiCallback<StreamOrderUpdatesResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -4396,7 +4515,7 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getUserOrdersUpdatesStreamAllValidateBeforeCall(userId, orderBookId, since, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getUserOrdersUpdatesStreamAllValidateBeforeCall(userId, since, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<StreamOrderUpdatesResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -4909,133 +5028,6 @@ public class DefaultApi {
         return call;
     }
     /**
-     * Build call for leverageBorrow
-     * @param body  (required)
-     * @param progressListener Progress listener
-     * @param progressRequestListener Progress request listener
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     */
-    public com.squareup.okhttp.Call leverageBorrowCall(BorrowRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        Object localVarPostBody = body;
-        
-        // create path and map variables
-        String localVarPath = "/v1/leverage/borrow";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
-
-        if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
-                @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
-                    return originalResponse.newBuilder()
-                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
-                    .build();
-                }
-            });
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        if (headers != null) {
-            localVarHeaderParams.putAll(headers);
-        }
-        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
-    }
-    
-    @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call leverageBorrowValidateBeforeCall(BorrowRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling leverageBorrow(Async)");
-        }
-        
-        com.squareup.okhttp.Call call = leverageBorrowCall(body, progressListener, progressRequestListener);
-        return call;
-
-        
-        
-        
-        
-    }
-
-    /**
-     * Directly borrow assets
-     * TODO: Finish this when implementation has been completed
-     * @param body  (required)
-     * @return BorrowResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     */
-    public BorrowResponse leverageBorrow(BorrowRequest body) throws ApiException {
-        ApiResponse<BorrowResponse> resp = leverageBorrowWithHttpInfo(body);
-        return resp.getData();
-    }
-
-    /**
-     * Directly borrow assets
-     * TODO: Finish this when implementation has been completed
-     * @param body  (required)
-     * @return ApiResponse&lt;BorrowResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     */
-    public ApiResponse<BorrowResponse> leverageBorrowWithHttpInfo(BorrowRequest body) throws ApiException {
-        com.squareup.okhttp.Call call = leverageBorrowValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<BorrowResponse>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
-    }
-
-    /**
-     * Directly borrow assets (asynchronously)
-     * TODO: Finish this when implementation has been completed
-     * @param body  (required)
-     * @param callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     */
-    public com.squareup.okhttp.Call leverageBorrowAsync(BorrowRequest body, final ApiCallback<BorrowResponse> callback) throws ApiException {
-
-        ProgressResponseBody.ProgressListener progressListener = null;
-        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
-
-        if (callback != null) {
-            progressListener = new ProgressResponseBody.ProgressListener() {
-                @Override
-                public void update(long bytesRead, long contentLength, boolean done) {
-                    callback.onDownloadProgress(bytesRead, contentLength, done);
-                }
-            };
-
-            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
-                @Override
-                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
-                    callback.onUploadProgress(bytesWritten, contentLength, done);
-                }
-            };
-        }
-
-        com.squareup.okhttp.Call call = leverageBorrowValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<BorrowResponse>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
-        return call;
-    }
-    /**
      * Build call for leverageCollateralize
      * @param body  (required)
      * @param progressListener Progress listener
@@ -5544,133 +5536,6 @@ public class DefaultApi {
         return call;
     }
     /**
-     * Build call for leverageRepay
-     * @param body  (required)
-     * @param progressListener Progress listener
-     * @param progressRequestListener Progress request listener
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     */
-    public com.squareup.okhttp.Call leverageRepayCall(RepayRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        Object localVarPostBody = body;
-        
-        // create path and map variables
-        String localVarPath = "/v1/leverage/repay";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
-
-        if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
-                @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
-                    return originalResponse.newBuilder()
-                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
-                    .build();
-                }
-            });
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        if (headers != null) {
-            localVarHeaderParams.putAll(headers);
-        }
-        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
-    }
-    
-    @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call leverageRepayValidateBeforeCall(RepayRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling leverageRepay(Async)");
-        }
-        
-        com.squareup.okhttp.Call call = leverageRepayCall(body, progressListener, progressRequestListener);
-        return call;
-
-        
-        
-        
-        
-    }
-
-    /**
-     * Repay borrowed assets
-     * TODO: Finish this when implementation has been completed
-     * @param body  (required)
-     * @return RepayResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     */
-    public RepayResponse leverageRepay(RepayRequest body) throws ApiException {
-        ApiResponse<RepayResponse> resp = leverageRepayWithHttpInfo(body);
-        return resp.getData();
-    }
-
-    /**
-     * Repay borrowed assets
-     * TODO: Finish this when implementation has been completed
-     * @param body  (required)
-     * @return ApiResponse&lt;RepayResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     */
-    public ApiResponse<RepayResponse> leverageRepayWithHttpInfo(RepayRequest body) throws ApiException {
-        com.squareup.okhttp.Call call = leverageRepayValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<RepayResponse>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
-    }
-
-    /**
-     * Repay borrowed assets (asynchronously)
-     * TODO: Finish this when implementation has been completed
-     * @param body  (required)
-     * @param callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     */
-    public com.squareup.okhttp.Call leverageRepayAsync(RepayRequest body, final ApiCallback<RepayResponse> callback) throws ApiException {
-
-        ProgressResponseBody.ProgressListener progressListener = null;
-        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
-
-        if (callback != null) {
-            progressListener = new ProgressResponseBody.ProgressListener() {
-                @Override
-                public void update(long bytesRead, long contentLength, boolean done) {
-                    callback.onDownloadProgress(bytesRead, contentLength, done);
-                }
-            };
-
-            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
-                @Override
-                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
-                    callback.onUploadProgress(bytesWritten, contentLength, done);
-                }
-            };
-        }
-
-        com.squareup.okhttp.Call call = leverageRepayValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<RepayResponse>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
-        return call;
-    }
-    /**
      * Build call for leverageSupply
      * @param body  (required)
      * @param progressListener Progress listener
@@ -5867,7 +5732,7 @@ public class DefaultApi {
 
     /**
      * Combines all isolated positions into a single global position
-     * TODO: Finish this when implementation has been completed
+     * Combines all isolated positions into a single global position
      * @param body  (required)
      * @return UnitePositionResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -5879,7 +5744,7 @@ public class DefaultApi {
 
     /**
      * Combines all isolated positions into a single global position
-     * TODO: Finish this when implementation has been completed
+     * Combines all isolated positions into a single global position
      * @param body  (required)
      * @return ApiResponse&lt;UnitePositionResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -5892,7 +5757,7 @@ public class DefaultApi {
 
     /**
      * Combines all isolated positions into a single global position (asynchronously)
-     * TODO: Finish this when implementation has been completed
+     * Combines all isolated positions into a single global position
      * @param body  (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call

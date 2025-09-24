@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**getAllAssetPrices**](DefaultApi.md#getAllAssetPrices) | **GET** /v1/price | Get the current price of all assets
 [**getAssetById**](DefaultApi.md#getAssetById) | **GET** /v1/assets/{asset_id} | Get asset by ID
 [**getAssetPrice**](DefaultApi.md#getAssetPrice) | **GET** /v1/price/asset/{asset_id} | Get the current price of an asset
+[**getAssetsStream**](DefaultApi.md#getAssetsStream) | **GET** /v1/assets/stream | Get all inserts or updates for assets
 [**getCandleData**](DefaultApi.md#getCandleData) | **GET** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
 [**getCouponPaymentsByAssetId**](DefaultApi.md#getCouponPaymentsByAssetId) | **GET** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
 [**getL1Depth**](DefaultApi.md#getL1Depth) | **GET** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
@@ -41,12 +42,10 @@ Method | HTTP request | Description
 [**getUserTransactionsStream**](DefaultApi.md#getUserTransactionsStream) | **GET** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
 [**ledgerDeposit**](DefaultApi.md#ledgerDeposit) | **POST** /v1/ledger/deposit | Deposit assets into your account from the outside world
 [**ledgerWithdraw**](DefaultApi.md#ledgerWithdraw) | **POST** /v1/ledger/withdraw | Withdraw assets from your account to the outside world
-[**leverageBorrow**](DefaultApi.md#leverageBorrow) | **POST** /v1/leverage/borrow | Directly borrow assets
 [**leverageCollateralize**](DefaultApi.md#leverageCollateralize) | **POST** /v1/leverage/collateralize | Move supplied and available to supplied_collateral and collateral, for a specified position
 [**leverageDeCollateralize**](DefaultApi.md#leverageDeCollateralize) | **POST** /v1/leverage/de-collateralize | Move collateral and supplied_collateral to available and supplied, for a specified position.
 [**leverageIsolateCollateral**](DefaultApi.md#leverageIsolateCollateral) | **POST** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#x27;s global collateral
 [**leverageIsolatePosition**](DefaultApi.md#leverageIsolatePosition) | **POST** /v1/leverage/isolate_position | Create an isolated position using all collateral, supplied_collateral, and borrows from the user&#x27;s global position
-[**leverageRepay**](DefaultApi.md#leverageRepay) | **POST** /v1/leverage/repay | Repay borrowed assets
 [**leverageSupply**](DefaultApi.md#leverageSupply) | **POST** /v1/leverage/supply | Supply leverage for a specific asset
 [**leverageUnite**](DefaultApi.md#leverageUnite) | **POST** /v1/leverage/unite | Combines all isolated positions into a single global position
 [**leverageWithdraw**](DefaultApi.md#leverageWithdraw) | **POST** /v1/leverage/withdraw | Withdraw leverage for a specific asset
@@ -347,6 +346,51 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetAssetPriceResponse**](GetAssetPriceResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="getAssetsStream"></a>
+# **getAssetsStream**
+> StreamAssetsResponse getAssetsStream(since, until)
+
+Get all inserts or updates for assets
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiException;
+//import tech.dora.api.DefaultApi;
+
+
+DefaultApi apiInstance = new DefaultApi();
+OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
+OffsetDateTime until = new OffsetDateTime(); // OffsetDateTime | 
+try {
+    StreamAssetsResponse result = apiInstance.getAssetsStream(since, until);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#getAssetsStream");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **since** | **OffsetDateTime**|  | [optional]
+ **until** | **OffsetDateTime**|  | [optional]
+
+### Return type
+
+[**StreamAssetsResponse**](StreamAssetsResponse.md)
 
 ### Authorization
 
@@ -1446,7 +1490,7 @@ No authorization required
 
 <a name="getUserOrdersUpdatesStreamAll"></a>
 # **getUserOrdersUpdatesStreamAll**
-> StreamOrderUpdatesResponse getUserOrdersUpdatesStreamAll(userId, orderBookId, since)
+> StreamOrderUpdatesResponse getUserOrdersUpdatesStreamAll(userId, since)
 
 Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
 
@@ -1459,10 +1503,9 @@ Get a snapshot of user&#x27;s order updates across all order books since a speci
 
 DefaultApi apiInstance = new DefaultApi();
 UUID userId = new UUID(); // UUID | 
-UUID orderBookId = new UUID(); // UUID | 
 OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
 try {
-    StreamOrderUpdatesResponse result = apiInstance.getUserOrdersUpdatesStreamAll(userId, orderBookId, since);
+    StreamOrderUpdatesResponse result = apiInstance.getUserOrdersUpdatesStreamAll(userId, since);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getUserOrdersUpdatesStreamAll");
@@ -1475,7 +1518,6 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userId** | [**UUID**](.md)|  |
- **orderBookId** | [**UUID**](.md)|  |
  **since** | **OffsetDateTime**|  | [optional]
 
 ### Return type
@@ -1665,51 +1707,6 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="leverageBorrow"></a>
-# **leverageBorrow**
-> BorrowResponse leverageBorrow(body)
-
-Directly borrow assets
-
-TODO: Finish this when implementation has been completed
-
-### Example
-```java
-// Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
-
-
-DefaultApi apiInstance = new DefaultApi();
-BorrowRequest body = new BorrowRequest(); // BorrowRequest | 
-try {
-    BorrowResponse result = apiInstance.leverageBorrow(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#leverageBorrow");
-    e.printStackTrace();
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**BorrowRequest**](BorrowRequest.md)|  |
-
-### Return type
-
-[**BorrowResponse**](BorrowResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="leverageCollateralize"></a>
 # **leverageCollateralize**
 > CollateralizeResponse leverageCollateralize(body)
@@ -1882,51 +1879,6 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="leverageRepay"></a>
-# **leverageRepay**
-> RepayResponse leverageRepay(body)
-
-Repay borrowed assets
-
-TODO: Finish this when implementation has been completed
-
-### Example
-```java
-// Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
-
-
-DefaultApi apiInstance = new DefaultApi();
-RepayRequest body = new RepayRequest(); // RepayRequest | 
-try {
-    RepayResponse result = apiInstance.leverageRepay(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#leverageRepay");
-    e.printStackTrace();
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**RepayRequest**](RepayRequest.md)|  |
-
-### Return type
-
-[**RepayResponse**](RepayResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="leverageSupply"></a>
 # **leverageSupply**
 > SupplyResponse leverageSupply(body)
@@ -1976,7 +1928,7 @@ No authorization required
 
 Combines all isolated positions into a single global position
 
-TODO: Finish this when implementation has been completed
+Combines all isolated positions into a single global position
 
 ### Example
 ```java
