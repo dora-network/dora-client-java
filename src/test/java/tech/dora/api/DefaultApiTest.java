@@ -16,14 +16,8 @@ import tech.dora.model.AssetKind;
 import tech.dora.model.AssetRequestError;
 import tech.dora.model.CancelOrderResponse;
 import tech.dora.model.CandleResolution;
-import tech.dora.model.CollateralizeRequest;
-import tech.dora.model.CollateralizeResponse;
 import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponse;
-import tech.dora.model.DeCollateralizeRequest;
-import tech.dora.model.DeCollateralizeResponse;
-import tech.dora.model.FundUserRequest;
-import tech.dora.model.FundUserResponse;
 import tech.dora.model.GetAssetByIDResponse;
 import tech.dora.model.GetAssetPriceResponse;
 import tech.dora.model.GetOrderBookResponse;
@@ -35,8 +29,6 @@ import tech.dora.model.GetTransactionResponse;
 import tech.dora.model.GetUserResponse;
 import tech.dora.model.IsolateCollateralRequest;
 import tech.dora.model.IsolateCollateralResponse;
-import tech.dora.model.IsolatePositionRequest;
-import tech.dora.model.IsolatePositionResponse;
 import tech.dora.model.LedgerModuleByAssetResponse;
 import tech.dora.model.LedgerModuleResponse;
 import tech.dora.model.LeverageRequestError;
@@ -52,6 +44,8 @@ import tech.dora.model.ListOrdersResponse;
 import tech.dora.model.ListTradeResponse;
 import tech.dora.model.ListTransactionsResponse;
 import tech.dora.model.LiveOrderbook;
+import tech.dora.model.NewIsolatedPositionRequest;
+import tech.dora.model.NewIsolatedPositionResponse;
 import org.threeten.bp.OffsetDateTime;
 import tech.dora.model.OrderBookStatus;
 import tech.dora.model.OrderKind;
@@ -73,6 +67,8 @@ import tech.dora.model.TradeRequestError;
 import tech.dora.model.TradeResponse;
 import tech.dora.model.TransactionKind;
 import tech.dora.model.TransactionRequestError;
+import tech.dora.model.TransferBalancesRequest;
+import tech.dora.model.TransferBalancesResponse;
 import java.util.UUID;
 import tech.dora.model.UnitePositionRequest;
 import tech.dora.model.UnitePositionResponse;
@@ -83,6 +79,8 @@ import tech.dora.model.UserInterestResponse;
 import tech.dora.model.UserPositionResponse;
 import tech.dora.model.UserUpdatedResponse;
 import tech.dora.model.UserValueResponse;
+import tech.dora.model.ValidateSubmitOrderRequest;
+import tech.dora.model.ValidateSubmitOrderResponse;
 import tech.dora.model.WithdrawRequest;
 import tech.dora.model.WithdrawResponse;
 import org.junit.Test;
@@ -104,7 +102,7 @@ public class DefaultApiTest {
     private final DefaultApi api = new DefaultApi();
 
     /**
-     * Cancel all open orders
+     * Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#x27;s orders on specific orderbook
      *
      * 
      *
@@ -113,7 +111,10 @@ public class DefaultApiTest {
      */
     @Test
     public void cancelAllOpenOrdersTest() throws Exception {
-        ListOrdersResponse response = api.cancelAllOpenOrders();
+        String orderBookId = null;
+        UUID userId = null;
+        OrderKind orderKind = null;
+        ListOrdersResponse response = api.cancelAllOpenOrders(orderBookId, userId, orderKind);
 
         // TODO: test validations
     }
@@ -129,6 +130,36 @@ public class DefaultApiTest {
     public void cancelOrderByIdTest() throws Exception {
         UUID orderId = null;
         CancelOrderResponse response = api.cancelOrderById(orderId);
+
+        // TODO: test validations
+    }
+    /**
+     * Check whether a user email exists
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void checkUserEmailExistsTest() throws Exception {
+        String email = null;
+        Boolean response = api.checkUserEmailExists(email);
+
+        // TODO: test validations
+    }
+    /**
+     * Create a new isolated position for a user transferring available assets into the position
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void createNewIsolatedPositionTest() throws Exception {
+        NewIsolatedPositionRequest body = null;
+        NewIsolatedPositionResponse response = api.createNewIsolatedPosition(body);
 
         // TODO: test validations
     }
@@ -515,13 +546,13 @@ public class DefaultApiTest {
      */
     @Test
     public void getTradesTest() throws Exception {
-        List<String> pools = null;
+        List<String> orderBookIds = null;
         List<UUID> userIds = null;
         OffsetDateTime start = null;
         OffsetDateTime end = null;
         Integer page = null;
         Integer limit = null;
-        ListTradeResponse response = api.getTrades(pools, userIds, start, end, page, limit);
+        ListTradeResponse response = api.getTrades(orderBookIds, userIds, start, end, page, limit);
 
         // TODO: test validations
     }
@@ -655,66 +686,6 @@ public class DefaultApiTest {
         // TODO: test validations
     }
     /**
-     * Deposit assets into your account from the outside world
-     *
-     * TODO: finish this when implementation has been completed
-     *
-     * @throws Exception
-     *          if the Api call fails
-     */
-    @Test
-    public void ledgerDepositTest() throws Exception {
-        FundUserRequest body = null;
-        FundUserResponse response = api.ledgerDeposit(body);
-
-        // TODO: test validations
-    }
-    /**
-     * Withdraw assets from your account to the outside world
-     *
-     * TODO: Finish this when implementation has been completed
-     *
-     * @throws Exception
-     *          if the Api call fails
-     */
-    @Test
-    public void ledgerWithdrawTest() throws Exception {
-        FundUserRequest body = null;
-        FundUserResponse response = api.ledgerWithdraw(body);
-
-        // TODO: test validations
-    }
-    /**
-     * Move supplied and available to supplied_collateral and collateral, for a specified position
-     *
-     * 
-     *
-     * @throws Exception
-     *          if the Api call fails
-     */
-    @Test
-    public void leverageCollateralizeTest() throws Exception {
-        CollateralizeRequest body = null;
-        CollateralizeResponse response = api.leverageCollateralize(body);
-
-        // TODO: test validations
-    }
-    /**
-     * Move collateral and supplied_collateral to available and supplied, for a specified position.
-     *
-     * 
-     *
-     * @throws Exception
-     *          if the Api call fails
-     */
-    @Test
-    public void leverageDeCollateralizeTest() throws Exception {
-        DeCollateralizeRequest body = null;
-        DeCollateralizeResponse response = api.leverageDeCollateralize(body);
-
-        // TODO: test validations
-    }
-    /**
      * Create an isolated position by transferring collateral to the position from the user&#x27;s global collateral
      *
      * 
@@ -726,21 +697,6 @@ public class DefaultApiTest {
     public void leverageIsolateCollateralTest() throws Exception {
         IsolateCollateralRequest body = null;
         IsolateCollateralResponse response = api.leverageIsolateCollateral(body);
-
-        // TODO: test validations
-    }
-    /**
-     * Create an isolated position using all collateral, supplied_collateral, and borrows from the user&#x27;s global position
-     *
-     * 
-     *
-     * @throws Exception
-     *          if the Api call fails
-     */
-    @Test
-    public void leverageIsolatePositionTest() throws Exception {
-        IsolatePositionRequest body = null;
-        IsolatePositionResponse response = api.leverageIsolatePosition(body);
 
         // TODO: test validations
     }
@@ -967,6 +923,21 @@ public class DefaultApiTest {
         // TODO: test validations
     }
     /**
+     * Transfer available balance between a user&#x27;s accounts (e.g. global to isolated position)
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void transferAvailableBalancesTest() throws Exception {
+        TransferBalancesRequest body = null;
+        TransferBalancesResponse response = api.transferAvailableBalances(body);
+
+        // TODO: test validations
+    }
+    /**
      * Update user configuration by ID
      *
      * 
@@ -994,6 +965,21 @@ public class DefaultApiTest {
     public void updateUserConfigSelfTest() throws Exception {
         UpdateUserConfigRequest body = null;
         UserUpdatedResponse response = api.updateUserConfigSelf(body);
+
+        // TODO: test validations
+    }
+    /**
+     * Validate submit order request data
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void validateSubmitOrderTest() throws Exception {
+        ValidateSubmitOrderRequest body = null;
+        ValidateSubmitOrderResponse response = api.validateSubmitOrder(body);
 
         // TODO: test validations
     }

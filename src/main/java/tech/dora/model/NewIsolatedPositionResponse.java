@@ -21,35 +21,35 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import tech.dora.model.IsolatedPosition;
 import tech.dora.model.Metadata;
+import tech.dora.model.Position;
 import tech.dora.model.ResponseEnvelope;
 /**
- * IsolatePositionResponse
+ * NewIsolatedPositionResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-24T06:35:34.410633599+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
 
-public class IsolatePositionResponse extends ResponseEnvelope {
+public class NewIsolatedPositionResponse extends ResponseEnvelope {
   @SerializedName("data")
-  private IsolatedPosition isolatePositionResponseData = null;
+  private Position newIsolatedPositionResponseData = null;
 
-  public IsolatePositionResponse isolatePositionResponseData(IsolatedPosition isolatePositionResponseData) {
-    this.isolatePositionResponseData = isolatePositionResponseData;
+  public NewIsolatedPositionResponse newIsolatedPositionResponseData(Position newIsolatedPositionResponseData) {
+    this.newIsolatedPositionResponseData = newIsolatedPositionResponseData;
     return this;
   }
 
    /**
-   * Get isolatePositionResponseData
-   * @return isolatePositionResponseData
+   * Get newIsolatedPositionResponseData
+   * @return newIsolatedPositionResponseData
   **/
   @Schema(description = "")
-  public IsolatedPosition getIsolatePositionResponseData() {
-    return isolatePositionResponseData;
+  public Position getNewIsolatedPositionResponseData() {
+    return newIsolatedPositionResponseData;
   }
 
-  public void setIsolatePositionResponseData(IsolatedPosition isolatePositionResponseData) {
-    this.isolatePositionResponseData = isolatePositionResponseData;
+  public void setNewIsolatedPositionResponseData(Position newIsolatedPositionResponseData) {
+    this.newIsolatedPositionResponseData = newIsolatedPositionResponseData;
   }
 
 
@@ -61,23 +61,23 @@ public class IsolatePositionResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    IsolatePositionResponse isolatePositionResponse = (IsolatePositionResponse) o;
-    return Objects.equals(this.isolatePositionResponseData, isolatePositionResponse.isolatePositionResponseData) &&
+    NewIsolatedPositionResponse newIsolatedPositionResponse = (NewIsolatedPositionResponse) o;
+    return Objects.equals(this.newIsolatedPositionResponseData, newIsolatedPositionResponse.newIsolatedPositionResponseData) &&
         super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(isolatePositionResponseData, super.hashCode());
+    return Objects.hash(newIsolatedPositionResponseData, super.hashCode());
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class IsolatePositionResponse {\n");
+    sb.append("class NewIsolatedPositionResponse {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    isolatePositionResponseData: ").append(toIndentedString(isolatePositionResponseData)).append("\n");
+    sb.append("    newIsolatedPositionResponseData: ").append(toIndentedString(newIsolatedPositionResponseData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

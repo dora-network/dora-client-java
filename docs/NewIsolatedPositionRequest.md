@@ -1,8 +1,9 @@
-# DeCollateralizeRequest
+# NewIsolatedPositionRequest
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**positionId** | [**UUID**](UUID.md) |  | 
+**globalPositionId** | [**UUID**](UUID.md) |  | 
 **assetId** | [**UUID**](UUID.md) |  | 
 **quantity** | **String** |  | 
+**positionName** | **String** |  |  [optional]

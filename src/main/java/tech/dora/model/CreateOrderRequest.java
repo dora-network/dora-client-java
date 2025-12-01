@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import org.threeten.bp.OffsetDateTime;
 import tech.dora.model.OrderKind;
 import tech.dora.model.OrderModifierKind;
 import tech.dora.model.Side;
@@ -31,7 +32,7 @@ import tech.dora.model.Side;
  * CreateOrderRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-24T06:35:34.410633599+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
 
 public class CreateOrderRequest {
   @SerializedName("quantity")
@@ -57,6 +58,12 @@ public class CreateOrderRequest {
 
   @SerializedName("order_modifiers")
   private List<OrderModifierKind> orderModifiers = null;
+
+  @SerializedName("good_till_date")
+  private OffsetDateTime goodTillDate = null;
+
+  @SerializedName("trigger_price")
+  private String triggerPrice = null;
 
   public CreateOrderRequest quantity(String quantity) {
     this.quantity = quantity;
@@ -210,6 +217,42 @@ public class CreateOrderRequest {
     this.orderModifiers = orderModifiers;
   }
 
+  public CreateOrderRequest goodTillDate(OffsetDateTime goodTillDate) {
+    this.goodTillDate = goodTillDate;
+    return this;
+  }
+
+   /**
+   * Get goodTillDate
+   * @return goodTillDate
+  **/
+  @Schema(description = "")
+  public OffsetDateTime getGoodTillDate() {
+    return goodTillDate;
+  }
+
+  public void setGoodTillDate(OffsetDateTime goodTillDate) {
+    this.goodTillDate = goodTillDate;
+  }
+
+  public CreateOrderRequest triggerPrice(String triggerPrice) {
+    this.triggerPrice = triggerPrice;
+    return this;
+  }
+
+   /**
+   * Get triggerPrice
+   * @return triggerPrice
+  **/
+  @Schema(description = "")
+  public String getTriggerPrice() {
+    return triggerPrice;
+  }
+
+  public void setTriggerPrice(String triggerPrice) {
+    this.triggerPrice = triggerPrice;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -227,12 +270,14 @@ public class CreateOrderRequest {
         Objects.equals(this.side, createOrderRequest.side) &&
         Objects.equals(this.positionId, createOrderRequest.positionId) &&
         Objects.equals(this.orderBookId, createOrderRequest.orderBookId) &&
-        Objects.equals(this.orderModifiers, createOrderRequest.orderModifiers);
+        Objects.equals(this.orderModifiers, createOrderRequest.orderModifiers) &&
+        Objects.equals(this.goodTillDate, createOrderRequest.goodTillDate) &&
+        Objects.equals(this.triggerPrice, createOrderRequest.triggerPrice);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(quantity, inverseLeverage, price, kind, side, positionId, orderBookId, orderModifiers);
+    return Objects.hash(quantity, inverseLeverage, price, kind, side, positionId, orderBookId, orderModifiers, goodTillDate, triggerPrice);
   }
 
 
@@ -249,6 +294,8 @@ public class CreateOrderRequest {
     sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
     sb.append("    orderBookId: ").append(toIndentedString(orderBookId)).append("\n");
     sb.append("    orderModifiers: ").append(toIndentedString(orderModifiers)).append("\n");
+    sb.append("    goodTillDate: ").append(toIndentedString(goodTillDate)).append("\n");
+    sb.append("    triggerPrice: ").append(toIndentedString(triggerPrice)).append("\n");
     sb.append("}");
     return sb.toString();
   }

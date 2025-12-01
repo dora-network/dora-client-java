@@ -11,3 +11,5 @@ Name | Type | Description | Notes
 **positionId** | [**UUID**](UUID.md) | position ID to use for the order. required. | 
 **orderBookId** | [**UUID**](UUID.md) | Required: the order book to submit the order to | 
 **orderModifiers** | [**List&lt;OrderModifierKind&gt;**](OrderModifierKind.md) |  |  [optional]
+**goodTillDate** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
+**triggerPrice** | **String** |  |  [optional]

@@ -21,35 +21,35 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import tech.dora.model.Collateral;
+import tech.dora.model.BalanceTransfer;
 import tech.dora.model.Metadata;
 import tech.dora.model.ResponseEnvelope;
 /**
- * DeCollateralizeResponse
+ * TransferBalancesResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-24T06:35:34.410633599+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
 
-public class DeCollateralizeResponse extends ResponseEnvelope {
+public class TransferBalancesResponse extends ResponseEnvelope {
   @SerializedName("data")
-  private Collateral deCollateralizeResponseData = null;
+  private BalanceTransfer transferBalancesResponseData = null;
 
-  public DeCollateralizeResponse deCollateralizeResponseData(Collateral deCollateralizeResponseData) {
-    this.deCollateralizeResponseData = deCollateralizeResponseData;
+  public TransferBalancesResponse transferBalancesResponseData(BalanceTransfer transferBalancesResponseData) {
+    this.transferBalancesResponseData = transferBalancesResponseData;
     return this;
   }
 
    /**
-   * Get deCollateralizeResponseData
-   * @return deCollateralizeResponseData
+   * Get transferBalancesResponseData
+   * @return transferBalancesResponseData
   **/
   @Schema(description = "")
-  public Collateral getDeCollateralizeResponseData() {
-    return deCollateralizeResponseData;
+  public BalanceTransfer getTransferBalancesResponseData() {
+    return transferBalancesResponseData;
   }
 
-  public void setDeCollateralizeResponseData(Collateral deCollateralizeResponseData) {
-    this.deCollateralizeResponseData = deCollateralizeResponseData;
+  public void setTransferBalancesResponseData(BalanceTransfer transferBalancesResponseData) {
+    this.transferBalancesResponseData = transferBalancesResponseData;
   }
 
 
@@ -61,23 +61,23 @@ public class DeCollateralizeResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DeCollateralizeResponse deCollateralizeResponse = (DeCollateralizeResponse) o;
-    return Objects.equals(this.deCollateralizeResponseData, deCollateralizeResponse.deCollateralizeResponseData) &&
+    TransferBalancesResponse transferBalancesResponse = (TransferBalancesResponse) o;
+    return Objects.equals(this.transferBalancesResponseData, transferBalancesResponse.transferBalancesResponseData) &&
         super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(deCollateralizeResponseData, super.hashCode());
+    return Objects.hash(transferBalancesResponseData, super.hashCode());
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DeCollateralizeResponse {\n");
+    sb.append("class TransferBalancesResponse {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    deCollateralizeResponseData: ").append(toIndentedString(deCollateralizeResponseData)).append("\n");
+    sb.append("    transferBalancesResponseData: ").append(toIndentedString(transferBalancesResponseData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

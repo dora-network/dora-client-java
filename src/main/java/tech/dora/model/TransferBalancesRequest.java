@@ -23,14 +23,17 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 import java.util.UUID;
 /**
- * CollateralizeRequest
+ * TransferBalancesRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-24T06:35:34.410633599+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
 
-public class CollateralizeRequest {
-  @SerializedName("position_id")
-  private UUID positionId = null;
+public class TransferBalancesRequest {
+  @SerializedName("from_position_id")
+  private UUID fromPositionId = null;
+
+  @SerializedName("to_position_id")
+  private UUID toPositionId = null;
 
   @SerializedName("asset_id")
   private UUID assetId = null;
@@ -38,25 +41,43 @@ public class CollateralizeRequest {
   @SerializedName("quantity")
   private String quantity = null;
 
-  public CollateralizeRequest positionId(UUID positionId) {
-    this.positionId = positionId;
+  public TransferBalancesRequest fromPositionId(UUID fromPositionId) {
+    this.fromPositionId = fromPositionId;
     return this;
   }
 
    /**
-   * Get positionId
-   * @return positionId
+   * Get fromPositionId
+   * @return fromPositionId
   **/
   @Schema(required = true, description = "")
-  public UUID getPositionId() {
-    return positionId;
+  public UUID getFromPositionId() {
+    return fromPositionId;
   }
 
-  public void setPositionId(UUID positionId) {
-    this.positionId = positionId;
+  public void setFromPositionId(UUID fromPositionId) {
+    this.fromPositionId = fromPositionId;
   }
 
-  public CollateralizeRequest assetId(UUID assetId) {
+  public TransferBalancesRequest toPositionId(UUID toPositionId) {
+    this.toPositionId = toPositionId;
+    return this;
+  }
+
+   /**
+   * Get toPositionId
+   * @return toPositionId
+  **/
+  @Schema(required = true, description = "")
+  public UUID getToPositionId() {
+    return toPositionId;
+  }
+
+  public void setToPositionId(UUID toPositionId) {
+    this.toPositionId = toPositionId;
+  }
+
+  public TransferBalancesRequest assetId(UUID assetId) {
     this.assetId = assetId;
     return this;
   }
@@ -74,7 +95,7 @@ public class CollateralizeRequest {
     this.assetId = assetId;
   }
 
-  public CollateralizeRequest quantity(String quantity) {
+  public TransferBalancesRequest quantity(String quantity) {
     this.quantity = quantity;
     return this;
   }
@@ -101,24 +122,26 @@ public class CollateralizeRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CollateralizeRequest collateralizeRequest = (CollateralizeRequest) o;
-    return Objects.equals(this.positionId, collateralizeRequest.positionId) &&
-        Objects.equals(this.assetId, collateralizeRequest.assetId) &&
-        Objects.equals(this.quantity, collateralizeRequest.quantity);
+    TransferBalancesRequest transferBalancesRequest = (TransferBalancesRequest) o;
+    return Objects.equals(this.fromPositionId, transferBalancesRequest.fromPositionId) &&
+        Objects.equals(this.toPositionId, transferBalancesRequest.toPositionId) &&
+        Objects.equals(this.assetId, transferBalancesRequest.assetId) &&
+        Objects.equals(this.quantity, transferBalancesRequest.quantity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(positionId, assetId, quantity);
+    return Objects.hash(fromPositionId, toPositionId, assetId, quantity);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CollateralizeRequest {\n");
+    sb.append("class TransferBalancesRequest {\n");
     
-    sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
+    sb.append("    fromPositionId: ").append(toIndentedString(fromPositionId)).append("\n");
+    sb.append("    toPositionId: ").append(toIndentedString(toPositionId)).append("\n");
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("}");

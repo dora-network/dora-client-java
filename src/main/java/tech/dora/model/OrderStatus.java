@@ -33,7 +33,9 @@ public enum OrderStatus {
   @SerializedName("PARTIAL_FILL")
   PARTIAL_FILL("PARTIAL_FILL"),
   @SerializedName("CANCELLED")
-  CANCELLED("CANCELLED");
+  CANCELLED("CANCELLED"),
+  @SerializedName("PENDING")
+  PENDING("PENDING");
 
   private String value;
 

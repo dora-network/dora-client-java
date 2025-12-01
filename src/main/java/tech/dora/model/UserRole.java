@@ -37,7 +37,9 @@ public enum UserRole {
   @SerializedName("LIQUIDITY_PROVIDER")
   LIQUIDITY_PROVIDER("LIQUIDITY_PROVIDER"),
   @SerializedName("TRADER")
-  TRADER("TRADER");
+  TRADER("TRADER"),
+  @SerializedName("INTEGRATOR")
+  INTEGRATOR("INTEGRATOR");
 
   private String value;
 

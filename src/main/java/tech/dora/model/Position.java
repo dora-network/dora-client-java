@@ -27,7 +27,7 @@ import org.threeten.bp.OffsetDateTime;
  * Position
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-24T06:35:34.410633599+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
 
 public class Position {
   @SerializedName("id")
@@ -74,6 +74,9 @@ public class Position {
 
   @SerializedName("created_at")
   private OffsetDateTime createdAt = null;
+
+  @SerializedName("position_name")
+  private String positionName = null;
 
   public Position id(UUID id) {
     this.id = id;
@@ -345,6 +348,24 @@ public class Position {
     this.createdAt = createdAt;
   }
 
+  public Position positionName(String positionName) {
+    this.positionName = positionName;
+    return this;
+  }
+
+   /**
+   * Get positionName
+   * @return positionName
+  **/
+  @Schema(description = "")
+  public String getPositionName() {
+    return positionName;
+  }
+
+  public void setPositionName(String positionName) {
+    this.positionName = positionName;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -369,12 +390,13 @@ public class Position {
         Objects.equals(this.avgEntryPrice, position.avgEntryPrice) &&
         Objects.equals(this.borrowLimit, position.borrowLimit) &&
         Objects.equals(this.liquidationThreshold, position.liquidationThreshold) &&
-        Objects.equals(this.createdAt, position.createdAt);
+        Objects.equals(this.createdAt, position.createdAt) &&
+        Objects.equals(this.positionName, position.positionName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, assetId, seq, isGlobal, available, locked, supplied, collateral, suppliedCollateral, borrowed, impendingBorrows, avgEntryPrice, borrowLimit, liquidationThreshold, createdAt);
+    return Objects.hash(id, assetId, seq, isGlobal, available, locked, supplied, collateral, suppliedCollateral, borrowed, impendingBorrows, avgEntryPrice, borrowLimit, liquidationThreshold, createdAt, positionName);
   }
 
 
@@ -398,6 +420,7 @@ public class Position {
     sb.append("    borrowLimit: ").append(toIndentedString(borrowLimit)).append("\n");
     sb.append("    liquidationThreshold: ").append(toIndentedString(liquidationThreshold)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    positionName: ").append(toIndentedString(positionName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -21,35 +21,32 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import tech.dora.model.FundUser;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
- * FundUserResponse
+ * ValidateSubmitOrderResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-24T06:35:34.410633599+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
 
-public class FundUserResponse extends ResponseEnvelope {
+public class ValidateSubmitOrderResponse {
   @SerializedName("data")
-  private FundUser fundUserResponseData = null;
+  private Boolean data = null;
 
-  public FundUserResponse fundUserResponseData(FundUser fundUserResponseData) {
-    this.fundUserResponseData = fundUserResponseData;
+  public ValidateSubmitOrderResponse data(Boolean data) {
+    this.data = data;
     return this;
   }
 
    /**
-   * Get fundUserResponseData
-   * @return fundUserResponseData
+   * Get data
+   * @return data
   **/
   @Schema(description = "")
-  public FundUser getFundUserResponseData() {
-    return fundUserResponseData;
+  public Boolean isData() {
+    return data;
   }
 
-  public void setFundUserResponseData(FundUser fundUserResponseData) {
-    this.fundUserResponseData = fundUserResponseData;
+  public void setData(Boolean data) {
+    this.data = data;
   }
 
 
@@ -61,23 +58,22 @@ public class FundUserResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    FundUserResponse fundUserResponse = (FundUserResponse) o;
-    return Objects.equals(this.fundUserResponseData, fundUserResponse.fundUserResponseData) &&
-        super.equals(o);
+    ValidateSubmitOrderResponse validateSubmitOrderResponse = (ValidateSubmitOrderResponse) o;
+    return Objects.equals(this.data, validateSubmitOrderResponse.data);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(fundUserResponseData, super.hashCode());
+    return Objects.hash(data);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class FundUserResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    fundUserResponseData: ").append(toIndentedString(fundUserResponseData)).append("\n");
+    sb.append("class ValidateSubmitOrderResponse {\n");
+    
+    sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
   }

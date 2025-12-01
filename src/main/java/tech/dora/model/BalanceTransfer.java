@@ -23,58 +23,58 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 import java.util.UUID;
 /**
- * IsolatedPosition
+ * BalanceTransfer
  */
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
 
-public class IsolatedPosition {
-  @SerializedName("global_position_id")
-  private UUID globalPositionId = null;
+public class BalanceTransfer {
+  @SerializedName("from_position_id")
+  private UUID fromPositionId = null;
 
-  @SerializedName("isolated_position_id")
-  private UUID isolatedPositionId = null;
+  @SerializedName("to_position_id")
+  private UUID toPositionId = null;
 
   @SerializedName("transaction_id")
   private UUID transactionId = null;
 
-  public IsolatedPosition globalPositionId(UUID globalPositionId) {
-    this.globalPositionId = globalPositionId;
+  public BalanceTransfer fromPositionId(UUID fromPositionId) {
+    this.fromPositionId = fromPositionId;
     return this;
   }
 
    /**
-   * Get globalPositionId
-   * @return globalPositionId
+   * Get fromPositionId
+   * @return fromPositionId
   **/
   @Schema(description = "")
-  public UUID getGlobalPositionId() {
-    return globalPositionId;
+  public UUID getFromPositionId() {
+    return fromPositionId;
   }
 
-  public void setGlobalPositionId(UUID globalPositionId) {
-    this.globalPositionId = globalPositionId;
+  public void setFromPositionId(UUID fromPositionId) {
+    this.fromPositionId = fromPositionId;
   }
 
-  public IsolatedPosition isolatedPositionId(UUID isolatedPositionId) {
-    this.isolatedPositionId = isolatedPositionId;
+  public BalanceTransfer toPositionId(UUID toPositionId) {
+    this.toPositionId = toPositionId;
     return this;
   }
 
    /**
-   * Get isolatedPositionId
-   * @return isolatedPositionId
+   * Get toPositionId
+   * @return toPositionId
   **/
   @Schema(description = "")
-  public UUID getIsolatedPositionId() {
-    return isolatedPositionId;
+  public UUID getToPositionId() {
+    return toPositionId;
   }
 
-  public void setIsolatedPositionId(UUID isolatedPositionId) {
-    this.isolatedPositionId = isolatedPositionId;
+  public void setToPositionId(UUID toPositionId) {
+    this.toPositionId = toPositionId;
   }
 
-  public IsolatedPosition transactionId(UUID transactionId) {
+  public BalanceTransfer transactionId(UUID transactionId) {
     this.transactionId = transactionId;
     return this;
   }
@@ -101,25 +101,25 @@ public class IsolatedPosition {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    IsolatedPosition isolatedPosition = (IsolatedPosition) o;
-    return Objects.equals(this.globalPositionId, isolatedPosition.globalPositionId) &&
-        Objects.equals(this.isolatedPositionId, isolatedPosition.isolatedPositionId) &&
-        Objects.equals(this.transactionId, isolatedPosition.transactionId);
+    BalanceTransfer balanceTransfer = (BalanceTransfer) o;
+    return Objects.equals(this.fromPositionId, balanceTransfer.fromPositionId) &&
+        Objects.equals(this.toPositionId, balanceTransfer.toPositionId) &&
+        Objects.equals(this.transactionId, balanceTransfer.transactionId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(globalPositionId, isolatedPositionId, transactionId);
+    return Objects.hash(fromPositionId, toPositionId, transactionId);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class IsolatedPosition {\n");
+    sb.append("class BalanceTransfer {\n");
     
-    sb.append("    globalPositionId: ").append(toIndentedString(globalPositionId)).append("\n");
-    sb.append("    isolatedPositionId: ").append(toIndentedString(isolatedPositionId)).append("\n");
+    sb.append("    fromPositionId: ").append(toIndentedString(fromPositionId)).append("\n");
+    sb.append("    toPositionId: ").append(toIndentedString(toPositionId)).append("\n");
     sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
     sb.append("}");
     return sb.toString();

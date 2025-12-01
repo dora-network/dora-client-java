@@ -1,6 +1,6 @@
-# FundUserResponse
+# ValidateSubmitOrderResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**fundUserResponseData** | [**FundUser**](FundUser.md) |  |  [optional]
+**data** | **Boolean** |  |  [optional]

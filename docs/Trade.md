@@ -14,3 +14,5 @@ Name | Type | Description | Notes
 **price** | **String** |  |  [optional]
 **quantity0** | **String** |  |  [optional]
 **userId** | [**UUID**](UUID.md) |  |  [optional]
+**side** | [**Side**](Side.md) |  |  [optional]
+**aggressorIndicator** | **Boolean** | If true, then this order is the aggressor (taker); otherwise it is the maker. |  [optional]

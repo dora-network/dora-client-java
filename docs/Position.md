@@ -18,3 +18,4 @@ Name | Type | Description | Notes
 **borrowLimit** | **String** | The borrow limit |  [optional]
 **liquidationThreshold** | **String** | The borrow limit |  [optional]
 **createdAt** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
+**positionName** | **String** |  |  [optional]

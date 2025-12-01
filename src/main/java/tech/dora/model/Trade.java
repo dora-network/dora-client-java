@@ -23,11 +23,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 import java.util.UUID;
 import org.threeten.bp.OffsetDateTime;
+import tech.dora.model.Side;
 /**
  * Trade
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-24T06:35:34.410633599+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
 
 public class Trade {
   @SerializedName("transaction_id")
@@ -62,6 +63,12 @@ public class Trade {
 
   @SerializedName("user_id")
   private UUID userId = null;
+
+  @SerializedName("side")
+  private Side side = null;
+
+  @SerializedName("aggressor_indicator")
+  private Boolean aggressorIndicator = null;
 
   public Trade transactionId(UUID transactionId) {
     this.transactionId = transactionId;
@@ -261,6 +268,42 @@ public class Trade {
     this.userId = userId;
   }
 
+  public Trade side(Side side) {
+    this.side = side;
+    return this;
+  }
+
+   /**
+   * Get side
+   * @return side
+  **/
+  @Schema(description = "")
+  public Side getSide() {
+    return side;
+  }
+
+  public void setSide(Side side) {
+    this.side = side;
+  }
+
+  public Trade aggressorIndicator(Boolean aggressorIndicator) {
+    this.aggressorIndicator = aggressorIndicator;
+    return this;
+  }
+
+   /**
+   * If true, then this order is the aggressor (taker); otherwise it is the maker.
+   * @return aggressorIndicator
+  **/
+  @Schema(description = "If true, then this order is the aggressor (taker); otherwise it is the maker.")
+  public Boolean isAggressorIndicator() {
+    return aggressorIndicator;
+  }
+
+  public void setAggressorIndicator(Boolean aggressorIndicator) {
+    this.aggressorIndicator = aggressorIndicator;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -281,12 +324,14 @@ public class Trade {
         Objects.equals(this.orderSeq, trade.orderSeq) &&
         Objects.equals(this.price, trade.price) &&
         Objects.equals(this.quantity0, trade.quantity0) &&
-        Objects.equals(this.userId, trade.userId);
+        Objects.equals(this.userId, trade.userId) &&
+        Objects.equals(this.side, trade.side) &&
+        Objects.equals(this.aggressorIndicator, trade.aggressorIndicator);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(transactionId, asset0, createdAt, feeAssetId, feeQuantity, orderBookId, orderId, orderSeq, price, quantity0, userId);
+    return Objects.hash(transactionId, asset0, createdAt, feeAssetId, feeQuantity, orderBookId, orderId, orderSeq, price, quantity0, userId, side, aggressorIndicator);
   }
 
 
@@ -306,6 +351,8 @@ public class Trade {
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    quantity0: ").append(toIndentedString(quantity0)).append("\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("    side: ").append(toIndentedString(side)).append("\n");
+    sb.append("    aggressorIndicator: ").append(toIndentedString(aggressorIndicator)).append("\n");
     sb.append("}");
     return sb.toString();
   }

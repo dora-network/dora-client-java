@@ -4,8 +4,10 @@ All URIs are relative to *https://localhost:8084*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**cancelAllOpenOrders**](DefaultApi.md#cancelAllOpenOrders) | **DELETE** /v1/orders | Cancel all open orders
+[**cancelAllOpenOrders**](DefaultApi.md#cancelAllOpenOrders) | **DELETE** /v1/orders | Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#x27;s orders on specific orderbook
 [**cancelOrderById**](DefaultApi.md#cancelOrderById) | **DELETE** /v1/orders/{order_id} | Cancel an order by ID
+[**checkUserEmailExists**](DefaultApi.md#checkUserEmailExists) | **GET** /v1/user/{email}/exists | Check whether a user email exists
+[**createNewIsolatedPosition**](DefaultApi.md#createNewIsolatedPosition) | **POST** /v1/positions/new_isolated | Create a new isolated position for a user transferring available assets into the position
 [**createOrder**](DefaultApi.md#createOrder) | **POST** /v1/orders | Create a new order
 [**deleteUser**](DefaultApi.md#deleteUser) | **DELETE** /v1/user/{user_id} | Delete user by ID
 [**getAllAssetPrices**](DefaultApi.md#getAllAssetPrices) | **GET** /v1/price | Get the current price of all assets
@@ -40,12 +42,7 @@ Method | HTTP request | Description
 [**getUserOrdersUpdatesStreamAll**](DefaultApi.md#getUserOrdersUpdatesStreamAll) | **GET** /v1/user/{user_id}/orders/all/updates/stream | Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
 [**getUserSelf**](DefaultApi.md#getUserSelf) | **GET** /v1/user/self | Get user details for the authenticated user
 [**getUserTransactionsStream**](DefaultApi.md#getUserTransactionsStream) | **GET** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
-[**ledgerDeposit**](DefaultApi.md#ledgerDeposit) | **POST** /v1/ledger/deposit | Deposit assets into your account from the outside world
-[**ledgerWithdraw**](DefaultApi.md#ledgerWithdraw) | **POST** /v1/ledger/withdraw | Withdraw assets from your account to the outside world
-[**leverageCollateralize**](DefaultApi.md#leverageCollateralize) | **POST** /v1/leverage/collateralize | Move supplied and available to supplied_collateral and collateral, for a specified position
-[**leverageDeCollateralize**](DefaultApi.md#leverageDeCollateralize) | **POST** /v1/leverage/de-collateralize | Move collateral and supplied_collateral to available and supplied, for a specified position.
 [**leverageIsolateCollateral**](DefaultApi.md#leverageIsolateCollateral) | **POST** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#x27;s global collateral
-[**leverageIsolatePosition**](DefaultApi.md#leverageIsolatePosition) | **POST** /v1/leverage/isolate_position | Create an isolated position using all collateral, supplied_collateral, and borrows from the user&#x27;s global position
 [**leverageSupply**](DefaultApi.md#leverageSupply) | **POST** /v1/leverage/supply | Supply leverage for a specific asset
 [**leverageUnite**](DefaultApi.md#leverageUnite) | **POST** /v1/leverage/unite | Combines all isolated positions into a single global position
 [**leverageWithdraw**](DefaultApi.md#leverageWithdraw) | **POST** /v1/leverage/withdraw | Withdraw leverage for a specific asset
@@ -59,15 +56,17 @@ Method | HTTP request | Description
 [**streamOrderBookBalances**](DefaultApi.md#streamOrderBookBalances) | **GET** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
 [**streamOrderbookOpenOrders**](DefaultApi.md#streamOrderbookOpenOrders) | **GET** /v1/orderbooks/{order_book_id}/open/stream | Get a snapshot of open orders in an order book and open a stream for real-time updates
 [**streamTrades**](DefaultApi.md#streamTrades) | **GET** /v1/trades/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
+[**transferAvailableBalances**](DefaultApi.md#transferAvailableBalances) | **POST** /v1/positions/transfer_balances | Transfer available balance between a user&#x27;s accounts (e.g. global to isolated position)
 [**updateUserConfig**](DefaultApi.md#updateUserConfig) | **PUT** /v1/user/{user_id}/config | Update user configuration by ID
 [**updateUserConfigSelf**](DefaultApi.md#updateUserConfigSelf) | **PUT** /v1/user/config/self | Update user configuration for the authenticated user
+[**validateSubmitOrder**](DefaultApi.md#validateSubmitOrder) | **POST** /v1/orders/validate | Validate submit order request data
 [**verifyUser**](DefaultApi.md#verifyUser) | **PUT** /v1/user/{user_id}/verify | Verify a user by ID
 
 <a name="cancelAllOpenOrders"></a>
 # **cancelAllOpenOrders**
-> ListOrdersResponse cancelAllOpenOrders()
+> ListOrdersResponse cancelAllOpenOrders(orderBookId, userId, orderKind)
 
-Cancel all open orders
+Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#x27;s orders on specific orderbook
 
 ### Example
 ```java
@@ -77,8 +76,11 @@ Cancel all open orders
 
 
 DefaultApi apiInstance = new DefaultApi();
+String orderBookId = "orderBookId_example"; // String | 
+UUID userId = new UUID(); // UUID | 
+OrderKind orderKind = new OrderKind(); // OrderKind | 
 try {
-    ListOrdersResponse result = apiInstance.cancelAllOpenOrders();
+    ListOrdersResponse result = apiInstance.cancelAllOpenOrders(orderBookId, userId, orderKind);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#cancelAllOpenOrders");
@@ -87,7 +89,12 @@ try {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **orderBookId** | **String**|  | [optional]
+ **userId** | [**UUID**](.md)|  | [optional]
+ **orderKind** | [**OrderKind**](.md)|  | [optional]
 
 ### Return type
 
@@ -143,6 +150,92 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="checkUserEmailExists"></a>
+# **checkUserEmailExists**
+> Boolean checkUserEmailExists(email)
+
+Check whether a user email exists
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiException;
+//import tech.dora.api.DefaultApi;
+
+
+DefaultApi apiInstance = new DefaultApi();
+String email = "email_example"; // String | 
+try {
+    Boolean result = apiInstance.checkUserEmailExists(email);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#checkUserEmailExists");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **email** | **String**|  |
+
+### Return type
+
+**Boolean**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="createNewIsolatedPosition"></a>
+# **createNewIsolatedPosition**
+> NewIsolatedPositionResponse createNewIsolatedPosition(body)
+
+Create a new isolated position for a user transferring available assets into the position
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiException;
+//import tech.dora.api.DefaultApi;
+
+
+DefaultApi apiInstance = new DefaultApi();
+NewIsolatedPositionRequest body = new NewIsolatedPositionRequest(); // NewIsolatedPositionRequest | 
+try {
+    NewIsolatedPositionResponse result = apiInstance.createNewIsolatedPosition(body);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#createNewIsolatedPosition");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**NewIsolatedPositionRequest**](NewIsolatedPositionRequest.md)|  |
+
+### Return type
+
+[**NewIsolatedPositionResponse**](NewIsolatedPositionResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 <a name="createOrder"></a>
@@ -1206,7 +1299,7 @@ No authorization required
 
 <a name="getTrades"></a>
 # **getTrades**
-> ListTradeResponse getTrades(pools, userIds, start, end, page, limit)
+> ListTradeResponse getTrades(orderBookIds, userIds, start, end, page, limit)
 
 Get a filtered, paginated list of trades
 
@@ -1218,14 +1311,14 @@ Get a filtered, paginated list of trades
 
 
 DefaultApi apiInstance = new DefaultApi();
-List<String> pools = Arrays.asList("pools_example"); // List<String> | 
+List<String> orderBookIds = Arrays.asList("orderBookIds_example"); // List<String> | 
 List<UUID> userIds = Arrays.asList(new UUID()); // List<UUID> | 
 OffsetDateTime start = new OffsetDateTime(); // OffsetDateTime | 
 OffsetDateTime end = new OffsetDateTime(); // OffsetDateTime | 
 Integer page = 1; // Integer | 
 Integer limit = 100; // Integer | 
 try {
-    ListTradeResponse result = apiInstance.getTrades(pools, userIds, start, end, page, limit);
+    ListTradeResponse result = apiInstance.getTrades(orderBookIds, userIds, start, end, page, limit);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#getTrades");
@@ -1237,7 +1330,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pools** | [**List&lt;String&gt;**](String.md)|  | [optional]
+ **orderBookIds** | [**List&lt;String&gt;**](String.md)|  | [optional]
  **userIds** | [**List&lt;UUID&gt;**](UUID.md)|  | [optional]
  **start** | **OffsetDateTime**|  | [optional]
  **end** | **OffsetDateTime**|  | [optional]
@@ -1617,182 +1710,6 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="ledgerDeposit"></a>
-# **ledgerDeposit**
-> FundUserResponse ledgerDeposit(body)
-
-Deposit assets into your account from the outside world
-
-TODO: finish this when implementation has been completed
-
-### Example
-```java
-// Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
-
-
-DefaultApi apiInstance = new DefaultApi();
-FundUserRequest body = new FundUserRequest(); // FundUserRequest | 
-try {
-    FundUserResponse result = apiInstance.ledgerDeposit(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#ledgerDeposit");
-    e.printStackTrace();
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**FundUserRequest**](FundUserRequest.md)|  |
-
-### Return type
-
-[**FundUserResponse**](FundUserResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-<a name="ledgerWithdraw"></a>
-# **ledgerWithdraw**
-> FundUserResponse ledgerWithdraw(body)
-
-Withdraw assets from your account to the outside world
-
-TODO: Finish this when implementation has been completed
-
-### Example
-```java
-// Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
-
-
-DefaultApi apiInstance = new DefaultApi();
-FundUserRequest body = new FundUserRequest(); // FundUserRequest | 
-try {
-    FundUserResponse result = apiInstance.ledgerWithdraw(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#ledgerWithdraw");
-    e.printStackTrace();
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**FundUserRequest**](FundUserRequest.md)|  |
-
-### Return type
-
-[**FundUserResponse**](FundUserResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-<a name="leverageCollateralize"></a>
-# **leverageCollateralize**
-> CollateralizeResponse leverageCollateralize(body)
-
-Move supplied and available to supplied_collateral and collateral, for a specified position
-
-### Example
-```java
-// Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
-
-
-DefaultApi apiInstance = new DefaultApi();
-CollateralizeRequest body = new CollateralizeRequest(); // CollateralizeRequest | 
-try {
-    CollateralizeResponse result = apiInstance.leverageCollateralize(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#leverageCollateralize");
-    e.printStackTrace();
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**CollateralizeRequest**](CollateralizeRequest.md)|  |
-
-### Return type
-
-[**CollateralizeResponse**](CollateralizeResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-<a name="leverageDeCollateralize"></a>
-# **leverageDeCollateralize**
-> DeCollateralizeResponse leverageDeCollateralize(body)
-
-Move collateral and supplied_collateral to available and supplied, for a specified position.
-
-### Example
-```java
-// Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
-
-
-DefaultApi apiInstance = new DefaultApi();
-DeCollateralizeRequest body = new DeCollateralizeRequest(); // DeCollateralizeRequest | 
-try {
-    DeCollateralizeResponse result = apiInstance.leverageDeCollateralize(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#leverageDeCollateralize");
-    e.printStackTrace();
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**DeCollateralizeRequest**](DeCollateralizeRequest.md)|  |
-
-### Return type
-
-[**DeCollateralizeResponse**](DeCollateralizeResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="leverageIsolateCollateral"></a>
 # **leverageIsolateCollateral**
 > IsolateCollateralResponse leverageIsolateCollateral(body)
@@ -1826,49 +1743,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**IsolateCollateralResponse**](IsolateCollateralResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-<a name="leverageIsolatePosition"></a>
-# **leverageIsolatePosition**
-> IsolatePositionResponse leverageIsolatePosition(body)
-
-Create an isolated position using all collateral, supplied_collateral, and borrows from the user&#x27;s global position
-
-### Example
-```java
-// Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
-
-
-DefaultApi apiInstance = new DefaultApi();
-IsolatePositionRequest body = new IsolatePositionRequest(); // IsolatePositionRequest | 
-try {
-    IsolatePositionResponse result = apiInstance.leverageIsolatePosition(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#leverageIsolatePosition");
-    e.printStackTrace();
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**IsolatePositionRequest**](IsolatePositionRequest.md)|  |
-
-### Return type
-
-[**IsolatePositionResponse**](IsolatePositionResponse.md)
 
 ### Authorization
 
@@ -2496,6 +2370,49 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="transferAvailableBalances"></a>
+# **transferAvailableBalances**
+> TransferBalancesResponse transferAvailableBalances(body)
+
+Transfer available balance between a user&#x27;s accounts (e.g. global to isolated position)
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiException;
+//import tech.dora.api.DefaultApi;
+
+
+DefaultApi apiInstance = new DefaultApi();
+TransferBalancesRequest body = new TransferBalancesRequest(); // TransferBalancesRequest | 
+try {
+    TransferBalancesResponse result = apiInstance.transferAvailableBalances(body);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#transferAvailableBalances");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**TransferBalancesRequest**](TransferBalancesRequest.md)|  |
+
+### Return type
+
+[**TransferBalancesResponse**](TransferBalancesResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="updateUserConfig"></a>
 # **updateUserConfig**
 > UserUpdatedResponse updateUserConfig(body, userId)
@@ -2574,6 +2491,49 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UserUpdatedResponse**](UserUpdatedResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="validateSubmitOrder"></a>
+# **validateSubmitOrder**
+> ValidateSubmitOrderResponse validateSubmitOrder(body)
+
+Validate submit order request data
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiException;
+//import tech.dora.api.DefaultApi;
+
+
+DefaultApi apiInstance = new DefaultApi();
+ValidateSubmitOrderRequest body = new ValidateSubmitOrderRequest(); // ValidateSubmitOrderRequest | 
+try {
+    ValidateSubmitOrderResponse result = apiInstance.validateSubmitOrder(body);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#validateSubmitOrder");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**ValidateSubmitOrderRequest**](ValidateSubmitOrderRequest.md)|  |
+
+### Return type
+
+[**ValidateSubmitOrderResponse**](ValidateSubmitOrderResponse.md)
 
 ### Authorization
 

@@ -33,7 +33,7 @@ import tech.dora.model.Side;
  * Order
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-09-24T06:35:34.410633599+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
 
 public class Order {
   @SerializedName("order_id")
@@ -63,6 +63,9 @@ public class Order {
   @SerializedName("filled_quantity")
   private String filledQuantity = null;
 
+  @SerializedName("filled_notional")
+  private String filledNotional = null;
+
   @SerializedName("last_update_at")
   private OffsetDateTime lastUpdateAt = null;
 
@@ -86,6 +89,15 @@ public class Order {
 
   @SerializedName("position_id")
   private UUID positionId = null;
+
+  @SerializedName("order_info")
+  private String orderInfo = null;
+
+  @SerializedName("good_till_date")
+  private OffsetDateTime goodTillDate = null;
+
+  @SerializedName("trigger_price")
+  private String triggerPrice = null;
 
   public Order orderId(UUID orderId) {
     this.orderId = orderId;
@@ -249,6 +261,24 @@ public class Order {
     this.filledQuantity = filledQuantity;
   }
 
+  public Order filledNotional(String filledNotional) {
+    this.filledNotional = filledNotional;
+    return this;
+  }
+
+   /**
+   * Quote quantity that has been filled so far.
+   * @return filledNotional
+  **/
+  @Schema(description = "Quote quantity that has been filled so far.")
+  public String getFilledNotional() {
+    return filledNotional;
+  }
+
+  public void setFilledNotional(String filledNotional) {
+    this.filledNotional = filledNotional;
+  }
+
   public Order lastUpdateAt(OffsetDateTime lastUpdateAt) {
     this.lastUpdateAt = lastUpdateAt;
     return this;
@@ -401,6 +431,60 @@ public class Order {
     this.positionId = positionId;
   }
 
+  public Order orderInfo(String orderInfo) {
+    this.orderInfo = orderInfo;
+    return this;
+  }
+
+   /**
+   * Get orderInfo
+   * @return orderInfo
+  **/
+  @Schema(description = "")
+  public String getOrderInfo() {
+    return orderInfo;
+  }
+
+  public void setOrderInfo(String orderInfo) {
+    this.orderInfo = orderInfo;
+  }
+
+  public Order goodTillDate(OffsetDateTime goodTillDate) {
+    this.goodTillDate = goodTillDate;
+    return this;
+  }
+
+   /**
+   * Get goodTillDate
+   * @return goodTillDate
+  **/
+  @Schema(description = "")
+  public OffsetDateTime getGoodTillDate() {
+    return goodTillDate;
+  }
+
+  public void setGoodTillDate(OffsetDateTime goodTillDate) {
+    this.goodTillDate = goodTillDate;
+  }
+
+  public Order triggerPrice(String triggerPrice) {
+    this.triggerPrice = triggerPrice;
+    return this;
+  }
+
+   /**
+   * Get triggerPrice
+   * @return triggerPrice
+  **/
+  @Schema(description = "")
+  public String getTriggerPrice() {
+    return triggerPrice;
+  }
+
+  public void setTriggerPrice(String triggerPrice) {
+    this.triggerPrice = triggerPrice;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -420,6 +504,7 @@ public class Order {
         Objects.equals(this.openQuantity, order.openQuantity) &&
         Objects.equals(this.originalQuantity, order.originalQuantity) &&
         Objects.equals(this.filledQuantity, order.filledQuantity) &&
+        Objects.equals(this.filledNotional, order.filledNotional) &&
         Objects.equals(this.lastUpdateAt, order.lastUpdateAt) &&
         Objects.equals(this.openedAt, order.openedAt) &&
         Objects.equals(this.inverseLeverage, order.inverseLeverage) &&
@@ -427,12 +512,15 @@ public class Order {
         Objects.equals(this.status, order.status) &&
         Objects.equals(this.userId, order.userId) &&
         Objects.equals(this.orderModifiers, order.orderModifiers) &&
-        Objects.equals(this.positionId, order.positionId);
+        Objects.equals(this.positionId, order.positionId) &&
+        Objects.equals(this.orderInfo, order.orderInfo) &&
+        Objects.equals(this.goodTillDate, order.goodTillDate) &&
+        Objects.equals(this.triggerPrice, order.triggerPrice);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderId, orderBookId, kind, originalPrice, avgFillPrice, cancelledQuantity, openQuantity, originalQuantity, filledQuantity, lastUpdateAt, openedAt, inverseLeverage, side, status, userId, orderModifiers, positionId);
+    return Objects.hash(orderId, orderBookId, kind, originalPrice, avgFillPrice, cancelledQuantity, openQuantity, originalQuantity, filledQuantity, filledNotional, lastUpdateAt, openedAt, inverseLeverage, side, status, userId, orderModifiers, positionId, orderInfo, goodTillDate, triggerPrice);
   }
 
 
@@ -450,6 +538,7 @@ public class Order {
     sb.append("    openQuantity: ").append(toIndentedString(openQuantity)).append("\n");
     sb.append("    originalQuantity: ").append(toIndentedString(originalQuantity)).append("\n");
     sb.append("    filledQuantity: ").append(toIndentedString(filledQuantity)).append("\n");
+    sb.append("    filledNotional: ").append(toIndentedString(filledNotional)).append("\n");
     sb.append("    lastUpdateAt: ").append(toIndentedString(lastUpdateAt)).append("\n");
     sb.append("    openedAt: ").append(toIndentedString(openedAt)).append("\n");
     sb.append("    inverseLeverage: ").append(toIndentedString(inverseLeverage)).append("\n");
@@ -458,6 +547,9 @@ public class Order {
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    orderModifiers: ").append(toIndentedString(orderModifiers)).append("\n");
     sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
+    sb.append("    orderInfo: ").append(toIndentedString(orderInfo)).append("\n");
+    sb.append("    goodTillDate: ").append(toIndentedString(goodTillDate)).append("\n");
+    sb.append("    triggerPrice: ").append(toIndentedString(triggerPrice)).append("\n");
     sb.append("}");
     return sb.toString();
   }
