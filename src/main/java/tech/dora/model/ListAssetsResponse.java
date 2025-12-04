@@ -14,54 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import tech.dora.model.Asset;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
  * ListAssetsResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-04T15:02:54.825758248+01:00[Europe/Paris]")
 
-public class ListAssetsResponse extends ResponseEnvelope {
-  @SerializedName("data")
-  private List<Asset> listAssetsResponseData = null;
-
-  public ListAssetsResponse listAssetsResponseData(List<Asset> listAssetsResponseData) {
-    this.listAssetsResponseData = listAssetsResponseData;
-    return this;
-  }
-
-  public ListAssetsResponse addListAssetsResponseDataItem(Asset listAssetsResponseDataItem) {
-    if (this.listAssetsResponseData == null) {
-      this.listAssetsResponseData = new ArrayList<Asset>();
-    }
-    this.listAssetsResponseData.add(listAssetsResponseDataItem);
-    return this;
-  }
-
-   /**
-   * Get listAssetsResponseData
-   * @return listAssetsResponseData
-  **/
-  @Schema(description = "")
-  public List<Asset> getListAssetsResponseData() {
-    return listAssetsResponseData;
-  }
-
-  public void setListAssetsResponseData(List<Asset> listAssetsResponseData) {
-    this.listAssetsResponseData = listAssetsResponseData;
-  }
-
+public class ListAssetsResponse {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -71,14 +30,12 @@ public class ListAssetsResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ListAssetsResponse listAssetsResponse = (ListAssetsResponse) o;
-    return Objects.equals(this.listAssetsResponseData, listAssetsResponse.listAssetsResponseData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(listAssetsResponseData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -86,8 +43,7 @@ public class ListAssetsResponse extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ListAssetsResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    listAssetsResponseData: ").append(toIndentedString(listAssetsResponseData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

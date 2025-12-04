@@ -18,6 +18,7 @@ import tech.dora.model.CancelOrderResponse;
 import tech.dora.model.CandleResolution;
 import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponse;
+import tech.dora.model.EmailExistsResponse;
 import tech.dora.model.GetAssetByIDResponse;
 import tech.dora.model.GetAssetPriceResponse;
 import tech.dora.model.GetOrderBookResponse;
@@ -144,7 +145,7 @@ public class DefaultApiTest {
     @Test
     public void checkUserEmailExistsTest() throws Exception {
         String email = null;
-        Boolean response = api.checkUserEmailExists(email);
+        EmailExistsResponse response = api.checkUserEmailExists(email);
 
         // TODO: test validations
     }

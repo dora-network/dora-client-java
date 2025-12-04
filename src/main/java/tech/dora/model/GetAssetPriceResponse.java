@@ -14,44 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import tech.dora.model.AssetPrice;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
  * GetAssetPriceResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-04T15:02:54.825758248+01:00[Europe/Paris]")
 
-public class GetAssetPriceResponse extends ResponseEnvelope {
-  @SerializedName("data")
-  private AssetPrice getAssetPriceResponseData = null;
-
-  public GetAssetPriceResponse getAssetPriceResponseData(AssetPrice getAssetPriceResponseData) {
-    this.getAssetPriceResponseData = getAssetPriceResponseData;
-    return this;
-  }
-
-   /**
-   * Get getAssetPriceResponseData
-   * @return getAssetPriceResponseData
-  **/
-  @Schema(description = "")
-  public AssetPrice getGetAssetPriceResponseData() {
-    return getAssetPriceResponseData;
-  }
-
-  public void setGetAssetPriceResponseData(AssetPrice getAssetPriceResponseData) {
-    this.getAssetPriceResponseData = getAssetPriceResponseData;
-  }
-
+public class GetAssetPriceResponse {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -61,14 +30,12 @@ public class GetAssetPriceResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    GetAssetPriceResponse getAssetPriceResponse = (GetAssetPriceResponse) o;
-    return Objects.equals(this.getAssetPriceResponseData, getAssetPriceResponse.getAssetPriceResponseData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getAssetPriceResponseData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -76,8 +43,7 @@ public class GetAssetPriceResponse extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class GetAssetPriceResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    getAssetPriceResponseData: ").append(toIndentedString(getAssetPriceResponseData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

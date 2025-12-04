@@ -32,6 +32,7 @@ import tech.dora.model.CancelOrderResponse;
 import tech.dora.model.CandleResolution;
 import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponse;
+import tech.dora.model.EmailExistsResponse;
 import tech.dora.model.GetAssetByIDResponse;
 import tech.dora.model.GetAssetPriceResponse;
 import tech.dora.model.GetOrderBookResponse;
@@ -466,11 +467,11 @@ public class DefaultApi {
      * Check whether a user email exists
      * 
      * @param email  (required)
-     * @return Boolean
+     * @return EmailExistsResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public Boolean checkUserEmailExists(String email) throws ApiException {
-        ApiResponse<Boolean> resp = checkUserEmailExistsWithHttpInfo(email);
+    public EmailExistsResponse checkUserEmailExists(String email) throws ApiException {
+        ApiResponse<EmailExistsResponse> resp = checkUserEmailExistsWithHttpInfo(email);
         return resp.getData();
     }
 
@@ -478,12 +479,12 @@ public class DefaultApi {
      * Check whether a user email exists
      * 
      * @param email  (required)
-     * @return ApiResponse&lt;Boolean&gt;
+     * @return ApiResponse&lt;EmailExistsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Boolean> checkUserEmailExistsWithHttpInfo(String email) throws ApiException {
+    public ApiResponse<EmailExistsResponse> checkUserEmailExistsWithHttpInfo(String email) throws ApiException {
         com.squareup.okhttp.Call call = checkUserEmailExistsValidateBeforeCall(email, null, null);
-        Type localVarReturnType = new TypeToken<Boolean>(){}.getType();
+        Type localVarReturnType = new TypeToken<EmailExistsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -495,7 +496,7 @@ public class DefaultApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call checkUserEmailExistsAsync(String email, final ApiCallback<Boolean> callback) throws ApiException {
+    public com.squareup.okhttp.Call checkUserEmailExistsAsync(String email, final ApiCallback<EmailExistsResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -517,7 +518,7 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = checkUserEmailExistsValidateBeforeCall(email, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<Boolean>(){}.getType();
+        Type localVarReturnType = new TypeToken<EmailExistsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

@@ -14,54 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import tech.dora.model.AssetPrice;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
  * ListAssetPriceResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-04T15:02:54.825758248+01:00[Europe/Paris]")
 
-public class ListAssetPriceResponse extends ResponseEnvelope {
-  @SerializedName("data")
-  private List<AssetPrice> listAssetPriceResponseData = null;
-
-  public ListAssetPriceResponse listAssetPriceResponseData(List<AssetPrice> listAssetPriceResponseData) {
-    this.listAssetPriceResponseData = listAssetPriceResponseData;
-    return this;
-  }
-
-  public ListAssetPriceResponse addListAssetPriceResponseDataItem(AssetPrice listAssetPriceResponseDataItem) {
-    if (this.listAssetPriceResponseData == null) {
-      this.listAssetPriceResponseData = new ArrayList<AssetPrice>();
-    }
-    this.listAssetPriceResponseData.add(listAssetPriceResponseDataItem);
-    return this;
-  }
-
-   /**
-   * Get listAssetPriceResponseData
-   * @return listAssetPriceResponseData
-  **/
-  @Schema(description = "")
-  public List<AssetPrice> getListAssetPriceResponseData() {
-    return listAssetPriceResponseData;
-  }
-
-  public void setListAssetPriceResponseData(List<AssetPrice> listAssetPriceResponseData) {
-    this.listAssetPriceResponseData = listAssetPriceResponseData;
-  }
-
+public class ListAssetPriceResponse {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -71,14 +30,12 @@ public class ListAssetPriceResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ListAssetPriceResponse listAssetPriceResponse = (ListAssetPriceResponse) o;
-    return Objects.equals(this.listAssetPriceResponseData, listAssetPriceResponse.listAssetPriceResponseData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(listAssetPriceResponseData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -86,8 +43,7 @@ public class ListAssetPriceResponse extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ListAssetPriceResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    listAssetPriceResponseData: ").append(toIndentedString(listAssetPriceResponseData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

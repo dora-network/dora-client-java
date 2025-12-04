@@ -14,54 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
  * LiquidationTargetsResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-04T15:02:54.825758248+01:00[Europe/Paris]")
 
-public class LiquidationTargetsResponse extends ResponseEnvelope {
-  @SerializedName("data")
-  private List<UUID> liquidationTargetsResponseData = null;
-
-  public LiquidationTargetsResponse liquidationTargetsResponseData(List<UUID> liquidationTargetsResponseData) {
-    this.liquidationTargetsResponseData = liquidationTargetsResponseData;
-    return this;
-  }
-
-  public LiquidationTargetsResponse addLiquidationTargetsResponseDataItem(UUID liquidationTargetsResponseDataItem) {
-    if (this.liquidationTargetsResponseData == null) {
-      this.liquidationTargetsResponseData = new ArrayList<UUID>();
-    }
-    this.liquidationTargetsResponseData.add(liquidationTargetsResponseDataItem);
-    return this;
-  }
-
-   /**
-   * Get liquidationTargetsResponseData
-   * @return liquidationTargetsResponseData
-  **/
-  @Schema(description = "")
-  public List<UUID> getLiquidationTargetsResponseData() {
-    return liquidationTargetsResponseData;
-  }
-
-  public void setLiquidationTargetsResponseData(List<UUID> liquidationTargetsResponseData) {
-    this.liquidationTargetsResponseData = liquidationTargetsResponseData;
-  }
-
+public class LiquidationTargetsResponse {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -71,14 +30,12 @@ public class LiquidationTargetsResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LiquidationTargetsResponse liquidationTargetsResponse = (LiquidationTargetsResponse) o;
-    return Objects.equals(this.liquidationTargetsResponseData, liquidationTargetsResponse.liquidationTargetsResponseData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(liquidationTargetsResponseData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -86,8 +43,7 @@ public class LiquidationTargetsResponse extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class LiquidationTargetsResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    liquidationTargetsResponseData: ").append(toIndentedString(liquidationTargetsResponseData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

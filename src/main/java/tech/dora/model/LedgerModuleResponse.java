@@ -14,54 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import tech.dora.model.LeverageModuleResponse;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
  * LedgerModuleResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-04T15:02:54.825758248+01:00[Europe/Paris]")
 
-public class LedgerModuleResponse extends ResponseEnvelope {
-  @SerializedName("data")
-  private List<LeverageModuleResponse> ledgerModuleResponseData = null;
-
-  public LedgerModuleResponse ledgerModuleResponseData(List<LeverageModuleResponse> ledgerModuleResponseData) {
-    this.ledgerModuleResponseData = ledgerModuleResponseData;
-    return this;
-  }
-
-  public LedgerModuleResponse addLedgerModuleResponseDataItem(LeverageModuleResponse ledgerModuleResponseDataItem) {
-    if (this.ledgerModuleResponseData == null) {
-      this.ledgerModuleResponseData = new ArrayList<LeverageModuleResponse>();
-    }
-    this.ledgerModuleResponseData.add(ledgerModuleResponseDataItem);
-    return this;
-  }
-
-   /**
-   * Get ledgerModuleResponseData
-   * @return ledgerModuleResponseData
-  **/
-  @Schema(description = "")
-  public List<LeverageModuleResponse> getLedgerModuleResponseData() {
-    return ledgerModuleResponseData;
-  }
-
-  public void setLedgerModuleResponseData(List<LeverageModuleResponse> ledgerModuleResponseData) {
-    this.ledgerModuleResponseData = ledgerModuleResponseData;
-  }
-
+public class LedgerModuleResponse {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -71,14 +30,12 @@ public class LedgerModuleResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LedgerModuleResponse ledgerModuleResponse = (LedgerModuleResponse) o;
-    return Objects.equals(this.ledgerModuleResponseData, ledgerModuleResponse.ledgerModuleResponseData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(ledgerModuleResponseData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -86,8 +43,7 @@ public class LedgerModuleResponse extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class LedgerModuleResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    ledgerModuleResponseData: ").append(toIndentedString(ledgerModuleResponseData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

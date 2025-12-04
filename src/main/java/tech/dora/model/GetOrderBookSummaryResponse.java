@@ -14,44 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import tech.dora.model.Metadata;
-import tech.dora.model.OrderBookSummary;
-import tech.dora.model.ResponseEnvelope;
 /**
  * GetOrderBookSummaryResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-04T15:02:54.825758248+01:00[Europe/Paris]")
 
-public class GetOrderBookSummaryResponse extends ResponseEnvelope {
-  @SerializedName("data")
-  private OrderBookSummary getOrderBookSummaryResponseData = null;
-
-  public GetOrderBookSummaryResponse getOrderBookSummaryResponseData(OrderBookSummary getOrderBookSummaryResponseData) {
-    this.getOrderBookSummaryResponseData = getOrderBookSummaryResponseData;
-    return this;
-  }
-
-   /**
-   * Get getOrderBookSummaryResponseData
-   * @return getOrderBookSummaryResponseData
-  **/
-  @Schema(description = "")
-  public OrderBookSummary getGetOrderBookSummaryResponseData() {
-    return getOrderBookSummaryResponseData;
-  }
-
-  public void setGetOrderBookSummaryResponseData(OrderBookSummary getOrderBookSummaryResponseData) {
-    this.getOrderBookSummaryResponseData = getOrderBookSummaryResponseData;
-  }
-
+public class GetOrderBookSummaryResponse {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -61,14 +30,12 @@ public class GetOrderBookSummaryResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    GetOrderBookSummaryResponse getOrderBookSummaryResponse = (GetOrderBookSummaryResponse) o;
-    return Objects.equals(this.getOrderBookSummaryResponseData, getOrderBookSummaryResponse.getOrderBookSummaryResponseData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getOrderBookSummaryResponseData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -76,8 +43,7 @@ public class GetOrderBookSummaryResponse extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class GetOrderBookSummaryResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    getOrderBookSummaryResponseData: ").append(toIndentedString(getOrderBookSummaryResponseData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

@@ -154,7 +154,7 @@ No authorization required
 
 <a name="checkUserEmailExists"></a>
 # **checkUserEmailExists**
-> Boolean checkUserEmailExists(email)
+> EmailExistsResponse checkUserEmailExists(email)
 
 Check whether a user email exists
 
@@ -168,7 +168,7 @@ Check whether a user email exists
 DefaultApi apiInstance = new DefaultApi();
 String email = "email_example"; // String | 
 try {
-    Boolean result = apiInstance.checkUserEmailExists(email);
+    EmailExistsResponse result = apiInstance.checkUserEmailExists(email);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#checkUserEmailExists");
@@ -184,7 +184,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Boolean**
+[**EmailExistsResponse**](EmailExistsResponse.md)
 
 ### Authorization
 

@@ -14,44 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
-import tech.dora.model.UnitedPosition;
 /**
  * UnitePositionResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-04T15:02:54.825758248+01:00[Europe/Paris]")
 
-public class UnitePositionResponse extends ResponseEnvelope {
-  @SerializedName("data")
-  private UnitedPosition unitePositionResponseData = null;
-
-  public UnitePositionResponse unitePositionResponseData(UnitedPosition unitePositionResponseData) {
-    this.unitePositionResponseData = unitePositionResponseData;
-    return this;
-  }
-
-   /**
-   * Get unitePositionResponseData
-   * @return unitePositionResponseData
-  **/
-  @Schema(description = "")
-  public UnitedPosition getUnitePositionResponseData() {
-    return unitePositionResponseData;
-  }
-
-  public void setUnitePositionResponseData(UnitedPosition unitePositionResponseData) {
-    this.unitePositionResponseData = unitePositionResponseData;
-  }
-
+public class UnitePositionResponse {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -61,14 +30,12 @@ public class UnitePositionResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UnitePositionResponse unitePositionResponse = (UnitePositionResponse) o;
-    return Objects.equals(this.unitePositionResponseData, unitePositionResponse.unitePositionResponseData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(unitePositionResponseData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -76,8 +43,7 @@ public class UnitePositionResponse extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class UnitePositionResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    unitePositionResponseData: ").append(toIndentedString(unitePositionResponseData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

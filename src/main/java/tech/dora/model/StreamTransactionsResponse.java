@@ -21,7 +21,7 @@ import tech.dora.model.StreamTransactionsEntry;
  * StreamTransactionsResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-04T15:02:54.825758248+01:00[Europe/Paris]")
 
 public class StreamTransactionsResponse extends ArrayList<StreamTransactionsEntry> {
 

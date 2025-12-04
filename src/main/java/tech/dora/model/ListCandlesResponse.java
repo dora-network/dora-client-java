@@ -14,54 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import tech.dora.model.Candle;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
  * ListCandlesResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-04T15:02:54.825758248+01:00[Europe/Paris]")
 
-public class ListCandlesResponse extends ResponseEnvelope {
-  @SerializedName("data")
-  private List<Candle> listCandlesResponseData = null;
-
-  public ListCandlesResponse listCandlesResponseData(List<Candle> listCandlesResponseData) {
-    this.listCandlesResponseData = listCandlesResponseData;
-    return this;
-  }
-
-  public ListCandlesResponse addListCandlesResponseDataItem(Candle listCandlesResponseDataItem) {
-    if (this.listCandlesResponseData == null) {
-      this.listCandlesResponseData = new ArrayList<Candle>();
-    }
-    this.listCandlesResponseData.add(listCandlesResponseDataItem);
-    return this;
-  }
-
-   /**
-   * Get listCandlesResponseData
-   * @return listCandlesResponseData
-  **/
-  @Schema(description = "")
-  public List<Candle> getListCandlesResponseData() {
-    return listCandlesResponseData;
-  }
-
-  public void setListCandlesResponseData(List<Candle> listCandlesResponseData) {
-    this.listCandlesResponseData = listCandlesResponseData;
-  }
-
+public class ListCandlesResponse {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -71,14 +30,12 @@ public class ListCandlesResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ListCandlesResponse listCandlesResponse = (ListCandlesResponse) o;
-    return Objects.equals(this.listCandlesResponseData, listCandlesResponse.listCandlesResponseData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(listCandlesResponseData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -86,8 +43,7 @@ public class ListCandlesResponse extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ListCandlesResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    listCandlesResponseData: ").append(toIndentedString(listCandlesResponseData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

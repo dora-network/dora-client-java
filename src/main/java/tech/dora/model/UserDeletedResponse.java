@@ -14,44 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import java.util.UUID;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
  * UserDeletedResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-04T15:02:54.825758248+01:00[Europe/Paris]")
 
-public class UserDeletedResponse extends ResponseEnvelope {
-  @SerializedName("data")
-  private UUID userDeletedResponseData = null;
-
-  public UserDeletedResponse userDeletedResponseData(UUID userDeletedResponseData) {
-    this.userDeletedResponseData = userDeletedResponseData;
-    return this;
-  }
-
-   /**
-   * Get userDeletedResponseData
-   * @return userDeletedResponseData
-  **/
-  @Schema(description = "")
-  public UUID getUserDeletedResponseData() {
-    return userDeletedResponseData;
-  }
-
-  public void setUserDeletedResponseData(UUID userDeletedResponseData) {
-    this.userDeletedResponseData = userDeletedResponseData;
-  }
-
+public class UserDeletedResponse {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -61,14 +30,12 @@ public class UserDeletedResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserDeletedResponse userDeletedResponse = (UserDeletedResponse) o;
-    return Objects.equals(this.userDeletedResponseData, userDeletedResponse.userDeletedResponseData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userDeletedResponseData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -76,8 +43,7 @@ public class UserDeletedResponse extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserDeletedResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    userDeletedResponseData: ").append(toIndentedString(userDeletedResponseData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

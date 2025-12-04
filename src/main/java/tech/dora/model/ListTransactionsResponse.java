@@ -14,54 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
-import tech.dora.model.Transaction;
 /**
  * ListTransactionsResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-04T15:02:54.825758248+01:00[Europe/Paris]")
 
-public class ListTransactionsResponse extends ResponseEnvelope {
-  @SerializedName("data")
-  private List<Transaction> listTransactionsResponseData = null;
-
-  public ListTransactionsResponse listTransactionsResponseData(List<Transaction> listTransactionsResponseData) {
-    this.listTransactionsResponseData = listTransactionsResponseData;
-    return this;
-  }
-
-  public ListTransactionsResponse addListTransactionsResponseDataItem(Transaction listTransactionsResponseDataItem) {
-    if (this.listTransactionsResponseData == null) {
-      this.listTransactionsResponseData = new ArrayList<Transaction>();
-    }
-    this.listTransactionsResponseData.add(listTransactionsResponseDataItem);
-    return this;
-  }
-
-   /**
-   * Get listTransactionsResponseData
-   * @return listTransactionsResponseData
-  **/
-  @Schema(description = "")
-  public List<Transaction> getListTransactionsResponseData() {
-    return listTransactionsResponseData;
-  }
-
-  public void setListTransactionsResponseData(List<Transaction> listTransactionsResponseData) {
-    this.listTransactionsResponseData = listTransactionsResponseData;
-  }
-
+public class ListTransactionsResponse {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -71,14 +30,12 @@ public class ListTransactionsResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ListTransactionsResponse listTransactionsResponse = (ListTransactionsResponse) o;
-    return Objects.equals(this.listTransactionsResponseData, listTransactionsResponse.listTransactionsResponseData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(listTransactionsResponseData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -86,8 +43,7 @@ public class ListTransactionsResponse extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ListTransactionsResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    listTransactionsResponseData: ").append(toIndentedString(listTransactionsResponseData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

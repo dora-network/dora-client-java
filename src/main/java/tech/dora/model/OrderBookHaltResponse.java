@@ -14,43 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
  * OrderBookHaltResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-04T15:02:54.825758248+01:00[Europe/Paris]")
 
-public class OrderBookHaltResponse extends ResponseEnvelope {
-  @SerializedName("data")
-  private Boolean orderBookHaltResponseData = null;
-
-  public OrderBookHaltResponse orderBookHaltResponseData(Boolean orderBookHaltResponseData) {
-    this.orderBookHaltResponseData = orderBookHaltResponseData;
-    return this;
-  }
-
-   /**
-   * Get orderBookHaltResponseData
-   * @return orderBookHaltResponseData
-  **/
-  @Schema(description = "")
-  public Boolean getOrderBookHaltResponseData() {
-    return orderBookHaltResponseData;
-  }
-
-  public void setOrderBookHaltResponseData(Boolean orderBookHaltResponseData) {
-    this.orderBookHaltResponseData = orderBookHaltResponseData;
-  }
-
+public class OrderBookHaltResponse {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -60,14 +30,12 @@ public class OrderBookHaltResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    OrderBookHaltResponse orderBookHaltResponse = (OrderBookHaltResponse) o;
-    return Objects.equals(this.orderBookHaltResponseData, orderBookHaltResponse.orderBookHaltResponseData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderBookHaltResponseData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -75,8 +43,7 @@ public class OrderBookHaltResponse extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class OrderBookHaltResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    orderBookHaltResponseData: ").append(toIndentedString(orderBookHaltResponseData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

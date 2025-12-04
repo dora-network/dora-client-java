@@ -14,44 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
-import tech.dora.model.Withdraw;
 /**
  * WithdrawResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-01T08:31:24.544725310+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-04T15:02:54.825758248+01:00[Europe/Paris]")
 
-public class WithdrawResponse extends ResponseEnvelope {
-  @SerializedName("data")
-  private Withdraw withdrawResponseData = null;
-
-  public WithdrawResponse withdrawResponseData(Withdraw withdrawResponseData) {
-    this.withdrawResponseData = withdrawResponseData;
-    return this;
-  }
-
-   /**
-   * Get withdrawResponseData
-   * @return withdrawResponseData
-  **/
-  @Schema(description = "")
-  public Withdraw getWithdrawResponseData() {
-    return withdrawResponseData;
-  }
-
-  public void setWithdrawResponseData(Withdraw withdrawResponseData) {
-    this.withdrawResponseData = withdrawResponseData;
-  }
-
+public class WithdrawResponse {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -61,14 +30,12 @@ public class WithdrawResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    WithdrawResponse withdrawResponse = (WithdrawResponse) o;
-    return Objects.equals(this.withdrawResponseData, withdrawResponse.withdrawResponseData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(withdrawResponseData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -76,8 +43,7 @@ public class WithdrawResponse extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class WithdrawResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    withdrawResponseData: ").append(toIndentedString(withdrawResponseData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }
