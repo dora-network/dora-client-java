@@ -21,7 +21,7 @@ import java.util.Map;
  * Map of asset prices keyed by asset ID. Format: {\&quot;asset_id\&quot;: {\&quot;asset_id\&quot;: \&quot;uuid\&quot;, \&quot;price\&quot;: \&quot;decimal\&quot;, \&quot;time\&quot;: \&quot;date-time\&quot;}}
  */
 @Schema(description = "Map of asset prices keyed by asset ID. Format: {\"asset_id\": {\"asset_id\": \"uuid\", \"price\": \"decimal\", \"time\": \"date-time\"}}")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T19:18:13.257064646+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
 
 public class StreamAssetPricesResponse extends HashMap<String, Object> {
 

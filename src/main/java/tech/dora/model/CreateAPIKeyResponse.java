@@ -14,83 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
 /**
  * CreateAPIKeyResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T19:18:13.257064646+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
 
 public class CreateAPIKeyResponse {
-  @SerializedName("key_id")
-  private String keyId = null;
-
-  @SerializedName("api_key")
-  private String apiKey = null;
-
-  @SerializedName("label")
-  private String label = null;
-
-  public CreateAPIKeyResponse keyId(String keyId) {
-    this.keyId = keyId;
-    return this;
-  }
-
-   /**
-   * Get keyId
-   * @return keyId
-  **/
-  @Schema(description = "")
-  public String getKeyId() {
-    return keyId;
-  }
-
-  public void setKeyId(String keyId) {
-    this.keyId = keyId;
-  }
-
-  public CreateAPIKeyResponse apiKey(String apiKey) {
-    this.apiKey = apiKey;
-    return this;
-  }
-
-   /**
-   * Get apiKey
-   * @return apiKey
-  **/
-  @Schema(description = "")
-  public String getApiKey() {
-    return apiKey;
-  }
-
-  public void setApiKey(String apiKey) {
-    this.apiKey = apiKey;
-  }
-
-  public CreateAPIKeyResponse label(String label) {
-    this.label = label;
-    return this;
-  }
-
-   /**
-   * Get label
-   * @return label
-  **/
-  @Schema(description = "")
-  public String getLabel() {
-    return label;
-  }
-
-  public void setLabel(String label) {
-    this.label = label;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -100,15 +30,12 @@ public class CreateAPIKeyResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CreateAPIKeyResponse createAPIKeyResponse = (CreateAPIKeyResponse) o;
-    return Objects.equals(this.keyId, createAPIKeyResponse.keyId) &&
-        Objects.equals(this.apiKey, createAPIKeyResponse.apiKey) &&
-        Objects.equals(this.label, createAPIKeyResponse.label);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(keyId, apiKey, label);
+    return Objects.hash();
   }
 
 
@@ -117,9 +44,6 @@ public class CreateAPIKeyResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateAPIKeyResponse {\n");
     
-    sb.append("    keyId: ").append(toIndentedString(keyId)).append("\n");
-    sb.append("    apiKey: ").append(toIndentedString(apiKey)).append("\n");
-    sb.append("    label: ").append(toIndentedString(label)).append("\n");
     sb.append("}");
     return sb.toString();
   }

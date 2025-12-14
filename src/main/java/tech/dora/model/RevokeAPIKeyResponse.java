@@ -14,105 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import java.util.UUID;
 /**
  * RevokeAPIKeyResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T19:18:13.257064646+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
 
 public class RevokeAPIKeyResponse {
-  @SerializedName("user_id")
-  private UUID userId = null;
-
-  @SerializedName("key_id")
-  private String keyId = null;
-
-  @SerializedName("label")
-  private String label = null;
-
-  @SerializedName("is_active")
-  private Boolean isActive = null;
-
-  public RevokeAPIKeyResponse userId(UUID userId) {
-    this.userId = userId;
-    return this;
-  }
-
-   /**
-   * Get userId
-   * @return userId
-  **/
-  @Schema(description = "")
-  public UUID getUserId() {
-    return userId;
-  }
-
-  public void setUserId(UUID userId) {
-    this.userId = userId;
-  }
-
-  public RevokeAPIKeyResponse keyId(String keyId) {
-    this.keyId = keyId;
-    return this;
-  }
-
-   /**
-   * Get keyId
-   * @return keyId
-  **/
-  @Schema(description = "")
-  public String getKeyId() {
-    return keyId;
-  }
-
-  public void setKeyId(String keyId) {
-    this.keyId = keyId;
-  }
-
-  public RevokeAPIKeyResponse label(String label) {
-    this.label = label;
-    return this;
-  }
-
-   /**
-   * Get label
-   * @return label
-  **/
-  @Schema(description = "")
-  public String getLabel() {
-    return label;
-  }
-
-  public void setLabel(String label) {
-    this.label = label;
-  }
-
-  public RevokeAPIKeyResponse isActive(Boolean isActive) {
-    this.isActive = isActive;
-    return this;
-  }
-
-   /**
-   * Get isActive
-   * @return isActive
-  **/
-  @Schema(description = "")
-  public Boolean isIsActive() {
-    return isActive;
-  }
-
-  public void setIsActive(Boolean isActive) {
-    this.isActive = isActive;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -122,16 +30,12 @@ public class RevokeAPIKeyResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    RevokeAPIKeyResponse revokeAPIKeyResponse = (RevokeAPIKeyResponse) o;
-    return Objects.equals(this.userId, revokeAPIKeyResponse.userId) &&
-        Objects.equals(this.keyId, revokeAPIKeyResponse.keyId) &&
-        Objects.equals(this.label, revokeAPIKeyResponse.label) &&
-        Objects.equals(this.isActive, revokeAPIKeyResponse.isActive);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, keyId, label, isActive);
+    return Objects.hash();
   }
 
 
@@ -140,10 +44,6 @@ public class RevokeAPIKeyResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class RevokeAPIKeyResponse {\n");
     
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
-    sb.append("    keyId: ").append(toIndentedString(keyId)).append("\n");
-    sb.append("    label: ").append(toIndentedString(label)).append("\n");
-    sb.append("    isActive: ").append(toIndentedString(isActive)).append("\n");
     sb.append("}");
     return sb.toString();
   }
