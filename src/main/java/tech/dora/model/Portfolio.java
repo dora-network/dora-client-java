@@ -31,7 +31,7 @@ import tech.dora.model.TransformedAssets;
  * Portfolio
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T17:31:47.069436198+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T19:18:13.257064646+01:00[Europe/Paris]")
 
 public class Portfolio {
   @SerializedName("user_id")

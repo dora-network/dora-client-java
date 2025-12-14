@@ -16,9 +16,12 @@ import tech.dora.model.AssetKind;
 import tech.dora.model.AssetRequestError;
 import tech.dora.model.CancelOrderResponse;
 import tech.dora.model.CandleResolution;
+import tech.dora.model.CreateAPIKeyRequest;
+import tech.dora.model.CreateAPIKeyResponse;
 import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponse;
 import tech.dora.model.EmailExistsResponse;
+import tech.dora.model.GetAPIKeyResponse;
 import tech.dora.model.GetAssetByIDResponse;
 import tech.dora.model.GetAssetPriceResponse;
 import tech.dora.model.GetOrderBookResponse;
@@ -54,6 +57,7 @@ import tech.dora.model.OrderKind;
 import tech.dora.model.OrderStatus;
 import tech.dora.model.PoolRequestError;
 import tech.dora.model.ResponseEnvelope;
+import tech.dora.model.RevokeAPIKeyResponse;
 import tech.dora.model.Side;
 import tech.dora.model.StreamAssetPricesResponse;
 import tech.dora.model.StreamAssetsResponse;
@@ -147,6 +151,21 @@ public class DefaultApiTest {
     public void checkUserEmailExistsTest() throws Exception {
         String email = null;
         EmailExistsResponse response = api.checkUserEmailExists(email);
+
+        // TODO: test validations
+    }
+    /**
+     * Create apikey for a user
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void createAPIKeyForUserTest() throws Exception {
+        CreateAPIKeyRequest body = null;
+        CreateAPIKeyResponse response = api.createAPIKeyForUser(body);
 
         // TODO: test validations
     }
@@ -688,6 +707,20 @@ public class DefaultApiTest {
         // TODO: test validations
     }
     /**
+     * Get user&#x27;s api keys
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void getUsersAPIKeysTest() throws Exception {
+        GetAPIKeyResponse response = api.getUsersAPIKeys();
+
+        // TODO: test validations
+    }
+    /**
      * Create an isolated position by transferring collateral to the position from the user&#x27;s global collateral
      *
      * 
@@ -855,6 +888,21 @@ public class DefaultApiTest {
     @Test
     public void listPositionAccountsSelfTest() throws Exception {
         ListPositionAccountsResponse response = api.listPositionAccountsSelf();
+
+        // TODO: test validations
+    }
+    /**
+     * Revoke apikey for a user
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void revokeAPIKeyForUserTest() throws Exception {
+        String keyId = null;
+        RevokeAPIKeyResponse response = api.revokeAPIKeyForUser(keyId);
 
         // TODO: test validations
     }
