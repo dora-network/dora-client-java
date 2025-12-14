@@ -30,7 +30,7 @@ import tech.dora.model.Bond;
  * Asset
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-04T15:02:54.825758248+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T17:31:47.069436198+01:00[Europe/Paris]")
 
 public class Asset {
   @SerializedName("id")
@@ -89,6 +89,9 @@ public class Asset {
 
   @SerializedName("can_virtual_borrow")
   private Boolean canVirtualBorrow = null;
+
+  @SerializedName("max_leverage")
+  private BigDecimal maxLeverage = null;
 
   @SerializedName("bond")
   private Bond bond = null;
@@ -435,6 +438,24 @@ public class Asset {
     this.canVirtualBorrow = canVirtualBorrow;
   }
 
+  public Asset maxLeverage(BigDecimal maxLeverage) {
+    this.maxLeverage = maxLeverage;
+    return this;
+  }
+
+   /**
+   * Get maxLeverage
+   * @return maxLeverage
+  **/
+  @Schema(description = "")
+  public BigDecimal getMaxLeverage() {
+    return maxLeverage;
+  }
+
+  public void setMaxLeverage(BigDecimal maxLeverage) {
+    this.maxLeverage = maxLeverage;
+  }
+
   public Asset bond(Bond bond) {
     this.bond = bond;
     return this;
@@ -482,12 +503,13 @@ public class Asset {
         Objects.equals(this.canOnboard, asset.canOnboard) &&
         Objects.equals(this.canTrade, asset.canTrade) &&
         Objects.equals(this.canVirtualBorrow, asset.canVirtualBorrow) &&
+        Objects.equals(this.maxLeverage, asset.maxLeverage) &&
         Objects.equals(this.bond, asset.bond);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, collateralWeight, createdAt, decimals, fractionalizedUnits, description, liquidationThreshold, maturityId, maxSupply, maxUtilization, name, symbol, kind, yield, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, bond);
+    return Objects.hash(id, collateralWeight, createdAt, decimals, fractionalizedUnits, description, liquidationThreshold, maturityId, maxSupply, maxUtilization, name, symbol, kind, yield, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, maxLeverage, bond);
   }
 
 
@@ -515,6 +537,7 @@ public class Asset {
     sb.append("    canOnboard: ").append(toIndentedString(canOnboard)).append("\n");
     sb.append("    canTrade: ").append(toIndentedString(canTrade)).append("\n");
     sb.append("    canVirtualBorrow: ").append(toIndentedString(canVirtualBorrow)).append("\n");
+    sb.append("    maxLeverage: ").append(toIndentedString(maxLeverage)).append("\n");
     sb.append("    bond: ").append(toIndentedString(bond)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -56,6 +56,7 @@ import tech.dora.model.ListCouponPaymentsResponse;
 import tech.dora.model.ListOrderBookDepthResponse;
 import tech.dora.model.ListOrderBooksResponse;
 import tech.dora.model.ListOrdersResponse;
+import tech.dora.model.ListPositionAccountsResponse;
 import tech.dora.model.ListTradeResponse;
 import tech.dora.model.ListTransactionsResponse;
 import tech.dora.model.LiveOrderbook;
@@ -406,11 +407,12 @@ public class DefaultApi {
         Object localVarPostBody = null;
         
         // create path and map variables
-        String localVarPath = "/v1/user/{email}/exists"
-            .replaceAll("\\{" + "email" + "\\}", apiClient.escapeString(email.toString()));
+        String localVarPath = "/v1/user/exists";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (email != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("email", email));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -6317,6 +6319,125 @@ public class DefaultApi {
 
         com.squareup.okhttp.Call call = listOrdersValidateBeforeCall(orderBookId, kind, status, side, from, to, page, limit, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<ListOrdersResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for listPositionAccountsSelf
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call listPositionAccountsSelfCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = null;
+        
+        // create path and map variables
+        String localVarPath = "/v1/user/self/position_accounts";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        if (headers != null) {
+            localVarHeaderParams.putAll(headers);
+        }
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call listPositionAccountsSelfValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        com.squareup.okhttp.Call call = listPositionAccountsSelfCall(progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
+
+    /**
+     * List all position accounts for the authenticated user
+     * 
+     * @return ListPositionAccountsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ListPositionAccountsResponse listPositionAccountsSelf() throws ApiException {
+        ApiResponse<ListPositionAccountsResponse> resp = listPositionAccountsSelfWithHttpInfo();
+        return resp.getData();
+    }
+
+    /**
+     * List all position accounts for the authenticated user
+     * 
+     * @return ApiResponse&lt;ListPositionAccountsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<ListPositionAccountsResponse> listPositionAccountsSelfWithHttpInfo() throws ApiException {
+        com.squareup.okhttp.Call call = listPositionAccountsSelfValidateBeforeCall(null, null);
+        Type localVarReturnType = new TypeToken<ListPositionAccountsResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * List all position accounts for the authenticated user (asynchronously)
+     * 
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call listPositionAccountsSelfAsync(final ApiCallback<ListPositionAccountsResponse> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = listPositionAccountsSelfValidateBeforeCall(progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ListPositionAccountsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

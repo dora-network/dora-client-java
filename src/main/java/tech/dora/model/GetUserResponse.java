@@ -18,7 +18,7 @@ import java.util.Arrays;
  * GetUserResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-04T15:02:54.825758248+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T17:31:47.069436198+01:00[Europe/Paris]")
 
 public class GetUserResponse {
 

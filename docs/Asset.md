@@ -22,4 +22,5 @@ Name | Type | Description | Notes
 **canOnboard** | **Boolean** |  |  [optional]
 **canTrade** | **Boolean** |  |  [optional]
 **canVirtualBorrow** | **Boolean** |  |  [optional]
+**maxLeverage** | [**BigDecimal**](BigDecimal.md) |  |  [optional]
 **bond** | [**Bond**](Bond.md) |  |  [optional]

@@ -42,6 +42,7 @@ import tech.dora.model.ListCouponPaymentsResponse;
 import tech.dora.model.ListOrderBookDepthResponse;
 import tech.dora.model.ListOrderBooksResponse;
 import tech.dora.model.ListOrdersResponse;
+import tech.dora.model.ListPositionAccountsResponse;
 import tech.dora.model.ListTradeResponse;
 import tech.dora.model.ListTransactionsResponse;
 import tech.dora.model.LiveOrderbook;
@@ -840,6 +841,20 @@ public class DefaultApiTest {
         Integer page = null;
         Integer limit = null;
         ListOrdersResponse response = api.listOrders(orderBookId, kind, status, side, from, to, page, limit);
+
+        // TODO: test validations
+    }
+    /**
+     * List all position accounts for the authenticated user
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void listPositionAccountsSelfTest() throws Exception {
+        ListPositionAccountsResponse response = api.listPositionAccountsSelf();
 
         // TODO: test validations
     }

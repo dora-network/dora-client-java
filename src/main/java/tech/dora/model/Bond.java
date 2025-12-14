@@ -28,7 +28,7 @@ import tech.dora.model.BondKind;
  * Bond
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-04T15:02:54.825758248+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T17:31:47.069436198+01:00[Europe/Paris]")
 
 public class Bond {
   @SerializedName("id")
@@ -66,6 +66,9 @@ public class Bond {
 
   @SerializedName("payments_every")
   private Integer paymentsEvery = null;
+
+  @SerializedName("next_coupon_payment")
+  private OffsetDateTime nextCouponPayment = null;
 
   public Bond id(UUID id) {
     this.id = id;
@@ -284,6 +287,24 @@ public class Bond {
     this.paymentsEvery = paymentsEvery;
   }
 
+  public Bond nextCouponPayment(OffsetDateTime nextCouponPayment) {
+    this.nextCouponPayment = nextCouponPayment;
+    return this;
+  }
+
+   /**
+   * Get nextCouponPayment
+   * @return nextCouponPayment
+  **/
+  @Schema(description = "")
+  public OffsetDateTime getNextCouponPayment() {
+    return nextCouponPayment;
+  }
+
+  public void setNextCouponPayment(OffsetDateTime nextCouponPayment) {
+    this.nextCouponPayment = nextCouponPayment;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -305,12 +326,13 @@ public class Bond {
         Objects.equals(this.maturityAt, bond.maturityAt) &&
         Objects.equals(this.principalValue, bond.principalValue) &&
         Objects.equals(this.paymentsPerYear, bond.paymentsPerYear) &&
-        Objects.equals(this.paymentsEvery, bond.paymentsEvery);
+        Objects.equals(this.paymentsEvery, bond.paymentsEvery) &&
+        Objects.equals(this.nextCouponPayment, bond.nextCouponPayment);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, kind, couponStartAt, createdAt, finalCouponAt, isin, issuedAt, issuer, maturityAt, principalValue, paymentsPerYear, paymentsEvery);
+    return Objects.hash(id, kind, couponStartAt, createdAt, finalCouponAt, isin, issuedAt, issuer, maturityAt, principalValue, paymentsPerYear, paymentsEvery, nextCouponPayment);
   }
 
 
@@ -331,6 +353,7 @@ public class Bond {
     sb.append("    principalValue: ").append(toIndentedString(principalValue)).append("\n");
     sb.append("    paymentsPerYear: ").append(toIndentedString(paymentsPerYear)).append("\n");
     sb.append("    paymentsEvery: ").append(toIndentedString(paymentsEvery)).append("\n");
+    sb.append("    nextCouponPayment: ").append(toIndentedString(nextCouponPayment)).append("\n");
     sb.append("}");
     return sb.toString();
   }
