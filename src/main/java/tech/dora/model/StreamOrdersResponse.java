@@ -14,41 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
 /**
  * StreamOrdersResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T17:57:43.564954621+01:00[Europe/Paris]")
 
 public class StreamOrdersResponse {
-  @SerializedName("stream_orders_entry")
-  private Object streamOrdersEntry = null;
-
-  public StreamOrdersResponse streamOrdersEntry(Object streamOrdersEntry) {
-    this.streamOrdersEntry = streamOrdersEntry;
-    return this;
-  }
-
-   /**
-   * Get streamOrdersEntry
-   * @return streamOrdersEntry
-  **/
-  @Schema(description = "")
-  public Object getStreamOrdersEntry() {
-    return streamOrdersEntry;
-  }
-
-  public void setStreamOrdersEntry(Object streamOrdersEntry) {
-    this.streamOrdersEntry = streamOrdersEntry;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -58,13 +30,12 @@ public class StreamOrdersResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StreamOrdersResponse streamOrdersResponse = (StreamOrdersResponse) o;
-    return Objects.equals(this.streamOrdersEntry, streamOrdersResponse.streamOrdersEntry);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(streamOrdersEntry);
+    return Objects.hash();
   }
 
 
@@ -73,7 +44,6 @@ public class StreamOrdersResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class StreamOrdersResponse {\n");
     
-    sb.append("    streamOrdersEntry: ").append(toIndentedString(streamOrdersEntry)).append("\n");
     sb.append("}");
     return sb.toString();
   }

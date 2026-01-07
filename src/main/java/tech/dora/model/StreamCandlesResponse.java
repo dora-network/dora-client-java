@@ -14,41 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
 /**
  * StreamCandlesResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T17:57:43.564954621+01:00[Europe/Paris]")
 
 public class StreamCandlesResponse {
-  @SerializedName("stream_candles_entries")
-  private Object streamCandlesEntries = null;
-
-  public StreamCandlesResponse streamCandlesEntries(Object streamCandlesEntries) {
-    this.streamCandlesEntries = streamCandlesEntries;
-    return this;
-  }
-
-   /**
-   * Get streamCandlesEntries
-   * @return streamCandlesEntries
-  **/
-  @Schema(description = "")
-  public Object getStreamCandlesEntries() {
-    return streamCandlesEntries;
-  }
-
-  public void setStreamCandlesEntries(Object streamCandlesEntries) {
-    this.streamCandlesEntries = streamCandlesEntries;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -58,13 +30,12 @@ public class StreamCandlesResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StreamCandlesResponse streamCandlesResponse = (StreamCandlesResponse) o;
-    return Objects.equals(this.streamCandlesEntries, streamCandlesResponse.streamCandlesEntries);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(streamCandlesEntries);
+    return Objects.hash();
   }
 
 
@@ -73,7 +44,6 @@ public class StreamCandlesResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class StreamCandlesResponse {\n");
     
-    sb.append("    streamCandlesEntries: ").append(toIndentedString(streamCandlesEntries)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -25,7 +25,7 @@ import java.io.IOException;
  * Metadata about the response, including status code and tracing information.
  */
 @Schema(description = "Metadata about the response, including status code and tracing information.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T17:57:43.564954621+01:00[Europe/Paris]")
 
 public class Metadata {
   @SerializedName("status_code")

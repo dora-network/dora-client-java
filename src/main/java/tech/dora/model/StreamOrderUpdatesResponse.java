@@ -14,41 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
 /**
  * StreamOrderUpdatesResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T17:57:43.564954621+01:00[Europe/Paris]")
 
 public class StreamOrderUpdatesResponse {
-  @SerializedName("stream_order_update_entries")
-  private Object streamOrderUpdateEntries = null;
-
-  public StreamOrderUpdatesResponse streamOrderUpdateEntries(Object streamOrderUpdateEntries) {
-    this.streamOrderUpdateEntries = streamOrderUpdateEntries;
-    return this;
-  }
-
-   /**
-   * Get streamOrderUpdateEntries
-   * @return streamOrderUpdateEntries
-  **/
-  @Schema(description = "")
-  public Object getStreamOrderUpdateEntries() {
-    return streamOrderUpdateEntries;
-  }
-
-  public void setStreamOrderUpdateEntries(Object streamOrderUpdateEntries) {
-    this.streamOrderUpdateEntries = streamOrderUpdateEntries;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -58,13 +30,12 @@ public class StreamOrderUpdatesResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StreamOrderUpdatesResponse streamOrderUpdatesResponse = (StreamOrderUpdatesResponse) o;
-    return Objects.equals(this.streamOrderUpdateEntries, streamOrderUpdatesResponse.streamOrderUpdateEntries);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(streamOrderUpdateEntries);
+    return Objects.hash();
   }
 
 
@@ -73,7 +44,6 @@ public class StreamOrderUpdatesResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class StreamOrderUpdatesResponse {\n");
     
-    sb.append("    streamOrderUpdateEntries: ").append(toIndentedString(streamOrderUpdateEntries)).append("\n");
     sb.append("}");
     return sb.toString();
   }

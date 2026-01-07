@@ -14,41 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
 /**
  * StreamTransactionsResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T17:57:43.564954621+01:00[Europe/Paris]")
 
 public class StreamTransactionsResponse {
-  @SerializedName("stream_transactions_entries")
-  private Object streamTransactionsEntries = null;
-
-  public StreamTransactionsResponse streamTransactionsEntries(Object streamTransactionsEntries) {
-    this.streamTransactionsEntries = streamTransactionsEntries;
-    return this;
-  }
-
-   /**
-   * Get streamTransactionsEntries
-   * @return streamTransactionsEntries
-  **/
-  @Schema(description = "")
-  public Object getStreamTransactionsEntries() {
-    return streamTransactionsEntries;
-  }
-
-  public void setStreamTransactionsEntries(Object streamTransactionsEntries) {
-    this.streamTransactionsEntries = streamTransactionsEntries;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -58,13 +30,12 @@ public class StreamTransactionsResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StreamTransactionsResponse streamTransactionsResponse = (StreamTransactionsResponse) o;
-    return Objects.equals(this.streamTransactionsEntries, streamTransactionsResponse.streamTransactionsEntries);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(streamTransactionsEntries);
+    return Objects.hash();
   }
 
 
@@ -73,7 +44,6 @@ public class StreamTransactionsResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class StreamTransactionsResponse {\n");
     
-    sb.append("    streamTransactionsEntries: ").append(toIndentedString(streamTransactionsEntries)).append("\n");
     sb.append("}");
     return sb.toString();
   }

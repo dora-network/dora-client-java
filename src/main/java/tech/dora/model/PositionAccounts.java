@@ -14,41 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
 /**
  * PositionAccounts
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T17:57:43.564954621+01:00[Europe/Paris]")
 
 public class PositionAccounts {
-  @SerializedName("position_accounts")
-  private Object positionAccounts = null;
-
-  public PositionAccounts positionAccounts(Object positionAccounts) {
-    this.positionAccounts = positionAccounts;
-    return this;
-  }
-
-   /**
-   * Get positionAccounts
-   * @return positionAccounts
-  **/
-  @Schema(description = "")
-  public Object getPositionAccounts() {
-    return positionAccounts;
-  }
-
-  public void setPositionAccounts(Object positionAccounts) {
-    this.positionAccounts = positionAccounts;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -58,13 +30,12 @@ public class PositionAccounts {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PositionAccounts positionAccounts = (PositionAccounts) o;
-    return Objects.equals(this.positionAccounts, positionAccounts.positionAccounts);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(positionAccounts);
+    return Objects.hash();
   }
 
 
@@ -73,7 +44,6 @@ public class PositionAccounts {
     StringBuilder sb = new StringBuilder();
     sb.append("class PositionAccounts {\n");
     
-    sb.append("    positionAccounts: ").append(toIndentedString(positionAccounts)).append("\n");
     sb.append("}");
     return sb.toString();
   }

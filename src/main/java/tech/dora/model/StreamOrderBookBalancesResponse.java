@@ -14,41 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
 /**
  * StreamOrderBookBalancesResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T17:57:43.564954621+01:00[Europe/Paris]")
 
 public class StreamOrderBookBalancesResponse {
-  @SerializedName("stream_order_book_balances")
-  private Object streamOrderBookBalances = null;
-
-  public StreamOrderBookBalancesResponse streamOrderBookBalances(Object streamOrderBookBalances) {
-    this.streamOrderBookBalances = streamOrderBookBalances;
-    return this;
-  }
-
-   /**
-   * Get streamOrderBookBalances
-   * @return streamOrderBookBalances
-  **/
-  @Schema(description = "")
-  public Object getStreamOrderBookBalances() {
-    return streamOrderBookBalances;
-  }
-
-  public void setStreamOrderBookBalances(Object streamOrderBookBalances) {
-    this.streamOrderBookBalances = streamOrderBookBalances;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -58,13 +30,12 @@ public class StreamOrderBookBalancesResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StreamOrderBookBalancesResponse streamOrderBookBalancesResponse = (StreamOrderBookBalancesResponse) o;
-    return Objects.equals(this.streamOrderBookBalances, streamOrderBookBalancesResponse.streamOrderBookBalances);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(streamOrderBookBalances);
+    return Objects.hash();
   }
 
 
@@ -73,7 +44,6 @@ public class StreamOrderBookBalancesResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class StreamOrderBookBalancesResponse {\n");
     
-    sb.append("    streamOrderBookBalances: ").append(toIndentedString(streamOrderBookBalances)).append("\n");
     sb.append("}");
     return sb.toString();
   }
