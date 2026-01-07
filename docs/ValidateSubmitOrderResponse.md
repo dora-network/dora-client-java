@@ -3,4 +3,4 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | **Boolean** |  |  [optional]
+**data** | **Object** |  |  [optional]

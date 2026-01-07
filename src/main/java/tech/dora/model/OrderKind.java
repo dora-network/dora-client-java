@@ -31,13 +31,13 @@ public enum OrderKind {
   @SerializedName("MARKET")
   MARKET("MARKET");
 
-  private String value;
+  private Object value;
 
-  OrderKind(String value) {
+  OrderKind(Object value) {
     this.value = value;
   }
 
-  public String getValue() {
+  public Object getValue() {
     return value;
   }
 
@@ -46,7 +46,7 @@ public enum OrderKind {
     return String.valueOf(value);
   }
 
-  public static OrderKind fromValue(String input) {
+  public static OrderKind fromValue(Object input) {
     for (OrderKind b : OrderKind.values()) {
       if (b.value.equals(input)) {
         return b;
@@ -64,7 +64,7 @@ public enum OrderKind {
     @Override
     public OrderKind read(final JsonReader jsonReader) throws IOException {
       Object value = jsonReader.nextString();
-      return OrderKind.fromValue((String)(value));
+      return OrderKind.fromValue((Object)(value));
     }
   }
 }

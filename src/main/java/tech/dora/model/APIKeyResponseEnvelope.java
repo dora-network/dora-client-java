@@ -14,54 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import tech.dora.model.APIKeyResponse;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
  * APIKeyResponseEnvelope
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
-public class APIKeyResponseEnvelope extends ResponseEnvelope {
-  @SerializedName("data")
-  private List<APIKeyResponse> apIKeyResponseEnvelopeData = null;
-
-  public APIKeyResponseEnvelope apIKeyResponseEnvelopeData(List<APIKeyResponse> apIKeyResponseEnvelopeData) {
-    this.apIKeyResponseEnvelopeData = apIKeyResponseEnvelopeData;
-    return this;
-  }
-
-  public APIKeyResponseEnvelope addApIKeyResponseEnvelopeDataItem(APIKeyResponse apIKeyResponseEnvelopeDataItem) {
-    if (this.apIKeyResponseEnvelopeData == null) {
-      this.apIKeyResponseEnvelopeData = new ArrayList<APIKeyResponse>();
-    }
-    this.apIKeyResponseEnvelopeData.add(apIKeyResponseEnvelopeDataItem);
-    return this;
-  }
-
-   /**
-   * Get apIKeyResponseEnvelopeData
-   * @return apIKeyResponseEnvelopeData
-  **/
-  @Schema(description = "")
-  public List<APIKeyResponse> getApIKeyResponseEnvelopeData() {
-    return apIKeyResponseEnvelopeData;
-  }
-
-  public void setApIKeyResponseEnvelopeData(List<APIKeyResponse> apIKeyResponseEnvelopeData) {
-    this.apIKeyResponseEnvelopeData = apIKeyResponseEnvelopeData;
-  }
-
+public class APIKeyResponseEnvelope {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -71,14 +30,12 @@ public class APIKeyResponseEnvelope extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    APIKeyResponseEnvelope apIKeyResponseEnvelope = (APIKeyResponseEnvelope) o;
-    return Objects.equals(this.apIKeyResponseEnvelopeData, apIKeyResponseEnvelope.apIKeyResponseEnvelopeData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(apIKeyResponseEnvelopeData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -86,8 +43,7 @@ public class APIKeyResponseEnvelope extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class APIKeyResponseEnvelope {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    apIKeyResponseEnvelopeData: ").append(toIndentedString(apIKeyResponseEnvelopeData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

@@ -14,44 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import java.util.UUID;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
  * UserDeletedResponseEnvelope
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
-public class UserDeletedResponseEnvelope extends ResponseEnvelope {
-  @SerializedName("data")
-  private UUID userDeletedResponseEnvelopeData = null;
-
-  public UserDeletedResponseEnvelope userDeletedResponseEnvelopeData(UUID userDeletedResponseEnvelopeData) {
-    this.userDeletedResponseEnvelopeData = userDeletedResponseEnvelopeData;
-    return this;
-  }
-
-   /**
-   * Get userDeletedResponseEnvelopeData
-   * @return userDeletedResponseEnvelopeData
-  **/
-  @Schema(description = "")
-  public UUID getUserDeletedResponseEnvelopeData() {
-    return userDeletedResponseEnvelopeData;
-  }
-
-  public void setUserDeletedResponseEnvelopeData(UUID userDeletedResponseEnvelopeData) {
-    this.userDeletedResponseEnvelopeData = userDeletedResponseEnvelopeData;
-  }
-
+public class UserDeletedResponseEnvelope {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -61,14 +30,12 @@ public class UserDeletedResponseEnvelope extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserDeletedResponseEnvelope userDeletedResponseEnvelope = (UserDeletedResponseEnvelope) o;
-    return Objects.equals(this.userDeletedResponseEnvelopeData, userDeletedResponseEnvelope.userDeletedResponseEnvelopeData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userDeletedResponseEnvelopeData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -76,8 +43,7 @@ public class UserDeletedResponseEnvelope extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserDeletedResponseEnvelope {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    userDeletedResponseEnvelopeData: ").append(toIndentedString(userDeletedResponseEnvelopeData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

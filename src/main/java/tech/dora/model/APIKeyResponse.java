@@ -21,31 +21,29 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
-import org.threeten.bp.OffsetDateTime;
 /**
  * APIKeyResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class APIKeyResponse {
   @SerializedName("user_id")
-  private UUID userId = null;
+  private Object userId = null;
 
   @SerializedName("key_id")
-  private String keyId = null;
+  private Object keyId = null;
 
   @SerializedName("label")
-  private String label = null;
+  private Object label = null;
 
   @SerializedName("expires_at")
-  private OffsetDateTime expiresAt = null;
+  private Object expiresAt = null;
 
   @SerializedName("is_active")
-  private Boolean isActive = null;
+  private Object isActive = null;
 
-  public APIKeyResponse userId(UUID userId) {
+  public APIKeyResponse userId(Object userId) {
     this.userId = userId;
     return this;
   }
@@ -55,15 +53,15 @@ public class APIKeyResponse {
    * @return userId
   **/
   @Schema(description = "")
-  public UUID getUserId() {
+  public Object getUserId() {
     return userId;
   }
 
-  public void setUserId(UUID userId) {
+  public void setUserId(Object userId) {
     this.userId = userId;
   }
 
-  public APIKeyResponse keyId(String keyId) {
+  public APIKeyResponse keyId(Object keyId) {
     this.keyId = keyId;
     return this;
   }
@@ -73,15 +71,15 @@ public class APIKeyResponse {
    * @return keyId
   **/
   @Schema(description = "")
-  public String getKeyId() {
+  public Object getKeyId() {
     return keyId;
   }
 
-  public void setKeyId(String keyId) {
+  public void setKeyId(Object keyId) {
     this.keyId = keyId;
   }
 
-  public APIKeyResponse label(String label) {
+  public APIKeyResponse label(Object label) {
     this.label = label;
     return this;
   }
@@ -91,15 +89,15 @@ public class APIKeyResponse {
    * @return label
   **/
   @Schema(description = "")
-  public String getLabel() {
+  public Object getLabel() {
     return label;
   }
 
-  public void setLabel(String label) {
+  public void setLabel(Object label) {
     this.label = label;
   }
 
-  public APIKeyResponse expiresAt(OffsetDateTime expiresAt) {
+  public APIKeyResponse expiresAt(Object expiresAt) {
     this.expiresAt = expiresAt;
     return this;
   }
@@ -109,15 +107,15 @@ public class APIKeyResponse {
    * @return expiresAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getExpiresAt() {
+  public Object getExpiresAt() {
     return expiresAt;
   }
 
-  public void setExpiresAt(OffsetDateTime expiresAt) {
+  public void setExpiresAt(Object expiresAt) {
     this.expiresAt = expiresAt;
   }
 
-  public APIKeyResponse isActive(Boolean isActive) {
+  public APIKeyResponse isActive(Object isActive) {
     this.isActive = isActive;
     return this;
   }
@@ -127,11 +125,11 @@ public class APIKeyResponse {
    * @return isActive
   **/
   @Schema(description = "")
-  public Boolean isIsActive() {
+  public Object getIsActive() {
     return isActive;
   }
 
-  public void setIsActive(Boolean isActive) {
+  public void setIsActive(Object isActive) {
     this.isActive = isActive;
   }
 

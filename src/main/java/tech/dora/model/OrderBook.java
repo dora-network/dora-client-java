@@ -21,72 +21,69 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.UUID;
-import org.threeten.bp.OffsetDateTime;
 import tech.dora.model.OrderBookStatus;
 /**
  * OrderBook
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class OrderBook {
   @SerializedName("order_book_id")
-  private UUID orderBookId = null;
+  private Object orderBookId = null;
 
   @SerializedName("base_quantity")
-  private BigDecimal baseQuantity = null;
+  private Object baseQuantity = null;
 
   @SerializedName("base_asset_id")
-  private UUID baseAssetId = null;
+  private Object baseAssetId = null;
 
   @SerializedName("created_at")
-  private OffsetDateTime createdAt = null;
+  private Object createdAt = null;
 
   @SerializedName("display_name")
-  private String displayName = null;
+  private Object displayName = null;
 
   @SerializedName("fee_factor")
-  private BigDecimal feeFactor = null;
+  private Object feeFactor = null;
 
   @SerializedName("initial_assets_ratio")
-  private BigDecimal initialAssetsRatio = null;
+  private Object initialAssetsRatio = null;
 
   @SerializedName("maturity_at")
-  private OffsetDateTime maturityAt = null;
+  private Object maturityAt = null;
 
   @SerializedName("quote_quantity")
-  private BigDecimal quoteQuantity = null;
+  private Object quoteQuantity = null;
 
   @SerializedName("quote_asset_id")
-  private UUID quoteAssetId = null;
+  private Object quoteAssetId = null;
 
   @SerializedName("shares_quantity")
-  private BigDecimal sharesQuantity = null;
+  private Object sharesQuantity = null;
 
   @SerializedName("status")
   private OrderBookStatus status = null;
 
   @SerializedName("tick_size")
-  private BigDecimal tickSize = null;
+  private Object tickSize = null;
 
   @SerializedName("updated_at")
-  private OffsetDateTime updatedAt = null;
+  private Object updatedAt = null;
 
   @SerializedName("halted_at")
-  private OffsetDateTime haltedAt = null;
+  private Object haltedAt = null;
 
   @SerializedName("terminated_at")
-  private OffsetDateTime terminatedAt = null;
+  private Object terminatedAt = null;
 
   @SerializedName("pool_updated_at")
-  private OffsetDateTime poolUpdatedAt = null;
+  private Object poolUpdatedAt = null;
 
   @SerializedName("shares_asset_id")
-  private UUID sharesAssetId = null;
+  private Object sharesAssetId = null;
 
-  public OrderBook orderBookId(UUID orderBookId) {
+  public OrderBook orderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
     return this;
   }
@@ -96,15 +93,15 @@ public class OrderBook {
    * @return orderBookId
   **/
   @Schema(description = "")
-  public UUID getOrderBookId() {
+  public Object getOrderBookId() {
     return orderBookId;
   }
 
-  public void setOrderBookId(UUID orderBookId) {
+  public void setOrderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
   }
 
-  public OrderBook baseQuantity(BigDecimal baseQuantity) {
+  public OrderBook baseQuantity(Object baseQuantity) {
     this.baseQuantity = baseQuantity;
     return this;
   }
@@ -114,15 +111,15 @@ public class OrderBook {
    * @return baseQuantity
   **/
   @Schema(description = "")
-  public BigDecimal getBaseQuantity() {
+  public Object getBaseQuantity() {
     return baseQuantity;
   }
 
-  public void setBaseQuantity(BigDecimal baseQuantity) {
+  public void setBaseQuantity(Object baseQuantity) {
     this.baseQuantity = baseQuantity;
   }
 
-  public OrderBook baseAssetId(UUID baseAssetId) {
+  public OrderBook baseAssetId(Object baseAssetId) {
     this.baseAssetId = baseAssetId;
     return this;
   }
@@ -132,15 +129,15 @@ public class OrderBook {
    * @return baseAssetId
   **/
   @Schema(description = "")
-  public UUID getBaseAssetId() {
+  public Object getBaseAssetId() {
     return baseAssetId;
   }
 
-  public void setBaseAssetId(UUID baseAssetId) {
+  public void setBaseAssetId(Object baseAssetId) {
     this.baseAssetId = baseAssetId;
   }
 
-  public OrderBook createdAt(OffsetDateTime createdAt) {
+  public OrderBook createdAt(Object createdAt) {
     this.createdAt = createdAt;
     return this;
   }
@@ -150,15 +147,15 @@ public class OrderBook {
    * @return createdAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getCreatedAt() {
+  public Object getCreatedAt() {
     return createdAt;
   }
 
-  public void setCreatedAt(OffsetDateTime createdAt) {
+  public void setCreatedAt(Object createdAt) {
     this.createdAt = createdAt;
   }
 
-  public OrderBook displayName(String displayName) {
+  public OrderBook displayName(Object displayName) {
     this.displayName = displayName;
     return this;
   }
@@ -168,15 +165,15 @@ public class OrderBook {
    * @return displayName
   **/
   @Schema(description = "")
-  public String getDisplayName() {
+  public Object getDisplayName() {
     return displayName;
   }
 
-  public void setDisplayName(String displayName) {
+  public void setDisplayName(Object displayName) {
     this.displayName = displayName;
   }
 
-  public OrderBook feeFactor(BigDecimal feeFactor) {
+  public OrderBook feeFactor(Object feeFactor) {
     this.feeFactor = feeFactor;
     return this;
   }
@@ -186,15 +183,15 @@ public class OrderBook {
    * @return feeFactor
   **/
   @Schema(description = "")
-  public BigDecimal getFeeFactor() {
+  public Object getFeeFactor() {
     return feeFactor;
   }
 
-  public void setFeeFactor(BigDecimal feeFactor) {
+  public void setFeeFactor(Object feeFactor) {
     this.feeFactor = feeFactor;
   }
 
-  public OrderBook initialAssetsRatio(BigDecimal initialAssetsRatio) {
+  public OrderBook initialAssetsRatio(Object initialAssetsRatio) {
     this.initialAssetsRatio = initialAssetsRatio;
     return this;
   }
@@ -204,15 +201,15 @@ public class OrderBook {
    * @return initialAssetsRatio
   **/
   @Schema(description = "")
-  public BigDecimal getInitialAssetsRatio() {
+  public Object getInitialAssetsRatio() {
     return initialAssetsRatio;
   }
 
-  public void setInitialAssetsRatio(BigDecimal initialAssetsRatio) {
+  public void setInitialAssetsRatio(Object initialAssetsRatio) {
     this.initialAssetsRatio = initialAssetsRatio;
   }
 
-  public OrderBook maturityAt(OffsetDateTime maturityAt) {
+  public OrderBook maturityAt(Object maturityAt) {
     this.maturityAt = maturityAt;
     return this;
   }
@@ -222,15 +219,15 @@ public class OrderBook {
    * @return maturityAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getMaturityAt() {
+  public Object getMaturityAt() {
     return maturityAt;
   }
 
-  public void setMaturityAt(OffsetDateTime maturityAt) {
+  public void setMaturityAt(Object maturityAt) {
     this.maturityAt = maturityAt;
   }
 
-  public OrderBook quoteQuantity(BigDecimal quoteQuantity) {
+  public OrderBook quoteQuantity(Object quoteQuantity) {
     this.quoteQuantity = quoteQuantity;
     return this;
   }
@@ -240,15 +237,15 @@ public class OrderBook {
    * @return quoteQuantity
   **/
   @Schema(description = "")
-  public BigDecimal getQuoteQuantity() {
+  public Object getQuoteQuantity() {
     return quoteQuantity;
   }
 
-  public void setQuoteQuantity(BigDecimal quoteQuantity) {
+  public void setQuoteQuantity(Object quoteQuantity) {
     this.quoteQuantity = quoteQuantity;
   }
 
-  public OrderBook quoteAssetId(UUID quoteAssetId) {
+  public OrderBook quoteAssetId(Object quoteAssetId) {
     this.quoteAssetId = quoteAssetId;
     return this;
   }
@@ -258,15 +255,15 @@ public class OrderBook {
    * @return quoteAssetId
   **/
   @Schema(description = "")
-  public UUID getQuoteAssetId() {
+  public Object getQuoteAssetId() {
     return quoteAssetId;
   }
 
-  public void setQuoteAssetId(UUID quoteAssetId) {
+  public void setQuoteAssetId(Object quoteAssetId) {
     this.quoteAssetId = quoteAssetId;
   }
 
-  public OrderBook sharesQuantity(BigDecimal sharesQuantity) {
+  public OrderBook sharesQuantity(Object sharesQuantity) {
     this.sharesQuantity = sharesQuantity;
     return this;
   }
@@ -276,11 +273,11 @@ public class OrderBook {
    * @return sharesQuantity
   **/
   @Schema(description = "")
-  public BigDecimal getSharesQuantity() {
+  public Object getSharesQuantity() {
     return sharesQuantity;
   }
 
-  public void setSharesQuantity(BigDecimal sharesQuantity) {
+  public void setSharesQuantity(Object sharesQuantity) {
     this.sharesQuantity = sharesQuantity;
   }
 
@@ -302,7 +299,7 @@ public class OrderBook {
     this.status = status;
   }
 
-  public OrderBook tickSize(BigDecimal tickSize) {
+  public OrderBook tickSize(Object tickSize) {
     this.tickSize = tickSize;
     return this;
   }
@@ -312,15 +309,15 @@ public class OrderBook {
    * @return tickSize
   **/
   @Schema(description = "")
-  public BigDecimal getTickSize() {
+  public Object getTickSize() {
     return tickSize;
   }
 
-  public void setTickSize(BigDecimal tickSize) {
+  public void setTickSize(Object tickSize) {
     this.tickSize = tickSize;
   }
 
-  public OrderBook updatedAt(OffsetDateTime updatedAt) {
+  public OrderBook updatedAt(Object updatedAt) {
     this.updatedAt = updatedAt;
     return this;
   }
@@ -330,15 +327,15 @@ public class OrderBook {
    * @return updatedAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getUpdatedAt() {
+  public Object getUpdatedAt() {
     return updatedAt;
   }
 
-  public void setUpdatedAt(OffsetDateTime updatedAt) {
+  public void setUpdatedAt(Object updatedAt) {
     this.updatedAt = updatedAt;
   }
 
-  public OrderBook haltedAt(OffsetDateTime haltedAt) {
+  public OrderBook haltedAt(Object haltedAt) {
     this.haltedAt = haltedAt;
     return this;
   }
@@ -348,15 +345,15 @@ public class OrderBook {
    * @return haltedAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getHaltedAt() {
+  public Object getHaltedAt() {
     return haltedAt;
   }
 
-  public void setHaltedAt(OffsetDateTime haltedAt) {
+  public void setHaltedAt(Object haltedAt) {
     this.haltedAt = haltedAt;
   }
 
-  public OrderBook terminatedAt(OffsetDateTime terminatedAt) {
+  public OrderBook terminatedAt(Object terminatedAt) {
     this.terminatedAt = terminatedAt;
     return this;
   }
@@ -366,15 +363,15 @@ public class OrderBook {
    * @return terminatedAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getTerminatedAt() {
+  public Object getTerminatedAt() {
     return terminatedAt;
   }
 
-  public void setTerminatedAt(OffsetDateTime terminatedAt) {
+  public void setTerminatedAt(Object terminatedAt) {
     this.terminatedAt = terminatedAt;
   }
 
-  public OrderBook poolUpdatedAt(OffsetDateTime poolUpdatedAt) {
+  public OrderBook poolUpdatedAt(Object poolUpdatedAt) {
     this.poolUpdatedAt = poolUpdatedAt;
     return this;
   }
@@ -384,15 +381,15 @@ public class OrderBook {
    * @return poolUpdatedAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getPoolUpdatedAt() {
+  public Object getPoolUpdatedAt() {
     return poolUpdatedAt;
   }
 
-  public void setPoolUpdatedAt(OffsetDateTime poolUpdatedAt) {
+  public void setPoolUpdatedAt(Object poolUpdatedAt) {
     this.poolUpdatedAt = poolUpdatedAt;
   }
 
-  public OrderBook sharesAssetId(UUID sharesAssetId) {
+  public OrderBook sharesAssetId(Object sharesAssetId) {
     this.sharesAssetId = sharesAssetId;
     return this;
   }
@@ -402,11 +399,11 @@ public class OrderBook {
    * @return sharesAssetId
   **/
   @Schema(description = "")
-  public UUID getSharesAssetId() {
+  public Object getSharesAssetId() {
     return sharesAssetId;
   }
 
-  public void setSharesAssetId(UUID sharesAssetId) {
+  public void setSharesAssetId(Object sharesAssetId) {
     this.sharesAssetId = sharesAssetId;
   }
 

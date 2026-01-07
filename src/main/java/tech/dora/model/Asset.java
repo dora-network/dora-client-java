@@ -21,82 +21,79 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.UUID;
-import org.threeten.bp.OffsetDateTime;
 import tech.dora.model.AssetKind;
 import tech.dora.model.Bond;
 /**
  * Asset
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class Asset {
   @SerializedName("id")
-  private UUID id = null;
+  private Object id = null;
 
   @SerializedName("collateral_weight")
-  private BigDecimal collateralWeight = null;
+  private Object collateralWeight = null;
 
   @SerializedName("created_at")
-  private OffsetDateTime createdAt = null;
+  private Object createdAt = null;
 
   @SerializedName("decimals")
-  private Integer decimals = null;
+  private Object decimals = null;
 
   @SerializedName("fractionalized_units")
-  private Integer fractionalizedUnits = null;
+  private Object fractionalizedUnits = null;
 
   @SerializedName("description")
-  private String description = null;
+  private Object description = null;
 
   @SerializedName("liquidation_threshold")
-  private BigDecimal liquidationThreshold = null;
+  private Object liquidationThreshold = null;
 
   @SerializedName("maturity_id")
-  private UUID maturityId = null;
+  private Object maturityId = null;
 
   @SerializedName("max_supply")
-  private Integer maxSupply = null;
+  private Object maxSupply = null;
 
   @SerializedName("max_utilization")
-  private Integer maxUtilization = null;
+  private Object maxUtilization = null;
 
   @SerializedName("name")
-  private String name = null;
+  private Object name = null;
 
   @SerializedName("symbol")
-  private String symbol = null;
+  private Object symbol = null;
 
   @SerializedName("kind")
   private AssetKind kind = null;
 
   @SerializedName("yield")
-  private BigDecimal yield = null;
+  private Object yield = null;
 
   @SerializedName("can_add_liquidity")
-  private Boolean canAddLiquidity = null;
+  private Object canAddLiquidity = null;
 
   @SerializedName("can_direct_borrow")
-  private Boolean canDirectBorrow = null;
+  private Object canDirectBorrow = null;
 
   @SerializedName("can_onboard")
-  private Boolean canOnboard = null;
+  private Object canOnboard = null;
 
   @SerializedName("can_trade")
-  private Boolean canTrade = null;
+  private Object canTrade = null;
 
   @SerializedName("can_virtual_borrow")
-  private Boolean canVirtualBorrow = null;
+  private Object canVirtualBorrow = null;
 
   @SerializedName("max_leverage")
-  private BigDecimal maxLeverage = null;
+  private Object maxLeverage = null;
 
   @SerializedName("bond")
   private Bond bond = null;
 
-  public Asset id(UUID id) {
+  public Asset id(Object id) {
     this.id = id;
     return this;
   }
@@ -106,15 +103,15 @@ public class Asset {
    * @return id
   **/
   @Schema(description = "")
-  public UUID getId() {
+  public Object getId() {
     return id;
   }
 
-  public void setId(UUID id) {
+  public void setId(Object id) {
     this.id = id;
   }
 
-  public Asset collateralWeight(BigDecimal collateralWeight) {
+  public Asset collateralWeight(Object collateralWeight) {
     this.collateralWeight = collateralWeight;
     return this;
   }
@@ -124,15 +121,15 @@ public class Asset {
    * @return collateralWeight
   **/
   @Schema(description = "")
-  public BigDecimal getCollateralWeight() {
+  public Object getCollateralWeight() {
     return collateralWeight;
   }
 
-  public void setCollateralWeight(BigDecimal collateralWeight) {
+  public void setCollateralWeight(Object collateralWeight) {
     this.collateralWeight = collateralWeight;
   }
 
-  public Asset createdAt(OffsetDateTime createdAt) {
+  public Asset createdAt(Object createdAt) {
     this.createdAt = createdAt;
     return this;
   }
@@ -142,15 +139,15 @@ public class Asset {
    * @return createdAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getCreatedAt() {
+  public Object getCreatedAt() {
     return createdAt;
   }
 
-  public void setCreatedAt(OffsetDateTime createdAt) {
+  public void setCreatedAt(Object createdAt) {
     this.createdAt = createdAt;
   }
 
-  public Asset decimals(Integer decimals) {
+  public Asset decimals(Object decimals) {
     this.decimals = decimals;
     return this;
   }
@@ -160,15 +157,15 @@ public class Asset {
    * @return decimals
   **/
   @Schema(description = "")
-  public Integer getDecimals() {
+  public Object getDecimals() {
     return decimals;
   }
 
-  public void setDecimals(Integer decimals) {
+  public void setDecimals(Object decimals) {
     this.decimals = decimals;
   }
 
-  public Asset fractionalizedUnits(Integer fractionalizedUnits) {
+  public Asset fractionalizedUnits(Object fractionalizedUnits) {
     this.fractionalizedUnits = fractionalizedUnits;
     return this;
   }
@@ -178,15 +175,15 @@ public class Asset {
    * @return fractionalizedUnits
   **/
   @Schema(description = "")
-  public Integer getFractionalizedUnits() {
+  public Object getFractionalizedUnits() {
     return fractionalizedUnits;
   }
 
-  public void setFractionalizedUnits(Integer fractionalizedUnits) {
+  public void setFractionalizedUnits(Object fractionalizedUnits) {
     this.fractionalizedUnits = fractionalizedUnits;
   }
 
-  public Asset description(String description) {
+  public Asset description(Object description) {
     this.description = description;
     return this;
   }
@@ -196,15 +193,15 @@ public class Asset {
    * @return description
   **/
   @Schema(description = "")
-  public String getDescription() {
+  public Object getDescription() {
     return description;
   }
 
-  public void setDescription(String description) {
+  public void setDescription(Object description) {
     this.description = description;
   }
 
-  public Asset liquidationThreshold(BigDecimal liquidationThreshold) {
+  public Asset liquidationThreshold(Object liquidationThreshold) {
     this.liquidationThreshold = liquidationThreshold;
     return this;
   }
@@ -214,15 +211,15 @@ public class Asset {
    * @return liquidationThreshold
   **/
   @Schema(description = "")
-  public BigDecimal getLiquidationThreshold() {
+  public Object getLiquidationThreshold() {
     return liquidationThreshold;
   }
 
-  public void setLiquidationThreshold(BigDecimal liquidationThreshold) {
+  public void setLiquidationThreshold(Object liquidationThreshold) {
     this.liquidationThreshold = liquidationThreshold;
   }
 
-  public Asset maturityId(UUID maturityId) {
+  public Asset maturityId(Object maturityId) {
     this.maturityId = maturityId;
     return this;
   }
@@ -232,15 +229,15 @@ public class Asset {
    * @return maturityId
   **/
   @Schema(description = "")
-  public UUID getMaturityId() {
+  public Object getMaturityId() {
     return maturityId;
   }
 
-  public void setMaturityId(UUID maturityId) {
+  public void setMaturityId(Object maturityId) {
     this.maturityId = maturityId;
   }
 
-  public Asset maxSupply(Integer maxSupply) {
+  public Asset maxSupply(Object maxSupply) {
     this.maxSupply = maxSupply;
     return this;
   }
@@ -250,15 +247,15 @@ public class Asset {
    * @return maxSupply
   **/
   @Schema(description = "")
-  public Integer getMaxSupply() {
+  public Object getMaxSupply() {
     return maxSupply;
   }
 
-  public void setMaxSupply(Integer maxSupply) {
+  public void setMaxSupply(Object maxSupply) {
     this.maxSupply = maxSupply;
   }
 
-  public Asset maxUtilization(Integer maxUtilization) {
+  public Asset maxUtilization(Object maxUtilization) {
     this.maxUtilization = maxUtilization;
     return this;
   }
@@ -268,15 +265,15 @@ public class Asset {
    * @return maxUtilization
   **/
   @Schema(description = "")
-  public Integer getMaxUtilization() {
+  public Object getMaxUtilization() {
     return maxUtilization;
   }
 
-  public void setMaxUtilization(Integer maxUtilization) {
+  public void setMaxUtilization(Object maxUtilization) {
     this.maxUtilization = maxUtilization;
   }
 
-  public Asset name(String name) {
+  public Asset name(Object name) {
     this.name = name;
     return this;
   }
@@ -286,15 +283,15 @@ public class Asset {
    * @return name
   **/
   @Schema(description = "")
-  public String getName() {
+  public Object getName() {
     return name;
   }
 
-  public void setName(String name) {
+  public void setName(Object name) {
     this.name = name;
   }
 
-  public Asset symbol(String symbol) {
+  public Asset symbol(Object symbol) {
     this.symbol = symbol;
     return this;
   }
@@ -304,11 +301,11 @@ public class Asset {
    * @return symbol
   **/
   @Schema(description = "")
-  public String getSymbol() {
+  public Object getSymbol() {
     return symbol;
   }
 
-  public void setSymbol(String symbol) {
+  public void setSymbol(Object symbol) {
     this.symbol = symbol;
   }
 
@@ -330,7 +327,7 @@ public class Asset {
     this.kind = kind;
   }
 
-  public Asset yield(BigDecimal yield) {
+  public Asset yield(Object yield) {
     this.yield = yield;
     return this;
   }
@@ -340,15 +337,15 @@ public class Asset {
    * @return yield
   **/
   @Schema(description = "")
-  public BigDecimal getYield() {
+  public Object getYield() {
     return yield;
   }
 
-  public void setYield(BigDecimal yield) {
+  public void setYield(Object yield) {
     this.yield = yield;
   }
 
-  public Asset canAddLiquidity(Boolean canAddLiquidity) {
+  public Asset canAddLiquidity(Object canAddLiquidity) {
     this.canAddLiquidity = canAddLiquidity;
     return this;
   }
@@ -358,15 +355,15 @@ public class Asset {
    * @return canAddLiquidity
   **/
   @Schema(description = "")
-  public Boolean isCanAddLiquidity() {
+  public Object getCanAddLiquidity() {
     return canAddLiquidity;
   }
 
-  public void setCanAddLiquidity(Boolean canAddLiquidity) {
+  public void setCanAddLiquidity(Object canAddLiquidity) {
     this.canAddLiquidity = canAddLiquidity;
   }
 
-  public Asset canDirectBorrow(Boolean canDirectBorrow) {
+  public Asset canDirectBorrow(Object canDirectBorrow) {
     this.canDirectBorrow = canDirectBorrow;
     return this;
   }
@@ -376,15 +373,15 @@ public class Asset {
    * @return canDirectBorrow
   **/
   @Schema(description = "")
-  public Boolean isCanDirectBorrow() {
+  public Object getCanDirectBorrow() {
     return canDirectBorrow;
   }
 
-  public void setCanDirectBorrow(Boolean canDirectBorrow) {
+  public void setCanDirectBorrow(Object canDirectBorrow) {
     this.canDirectBorrow = canDirectBorrow;
   }
 
-  public Asset canOnboard(Boolean canOnboard) {
+  public Asset canOnboard(Object canOnboard) {
     this.canOnboard = canOnboard;
     return this;
   }
@@ -394,15 +391,15 @@ public class Asset {
    * @return canOnboard
   **/
   @Schema(description = "")
-  public Boolean isCanOnboard() {
+  public Object getCanOnboard() {
     return canOnboard;
   }
 
-  public void setCanOnboard(Boolean canOnboard) {
+  public void setCanOnboard(Object canOnboard) {
     this.canOnboard = canOnboard;
   }
 
-  public Asset canTrade(Boolean canTrade) {
+  public Asset canTrade(Object canTrade) {
     this.canTrade = canTrade;
     return this;
   }
@@ -412,15 +409,15 @@ public class Asset {
    * @return canTrade
   **/
   @Schema(description = "")
-  public Boolean isCanTrade() {
+  public Object getCanTrade() {
     return canTrade;
   }
 
-  public void setCanTrade(Boolean canTrade) {
+  public void setCanTrade(Object canTrade) {
     this.canTrade = canTrade;
   }
 
-  public Asset canVirtualBorrow(Boolean canVirtualBorrow) {
+  public Asset canVirtualBorrow(Object canVirtualBorrow) {
     this.canVirtualBorrow = canVirtualBorrow;
     return this;
   }
@@ -430,15 +427,15 @@ public class Asset {
    * @return canVirtualBorrow
   **/
   @Schema(description = "")
-  public Boolean isCanVirtualBorrow() {
+  public Object getCanVirtualBorrow() {
     return canVirtualBorrow;
   }
 
-  public void setCanVirtualBorrow(Boolean canVirtualBorrow) {
+  public void setCanVirtualBorrow(Object canVirtualBorrow) {
     this.canVirtualBorrow = canVirtualBorrow;
   }
 
-  public Asset maxLeverage(BigDecimal maxLeverage) {
+  public Asset maxLeverage(Object maxLeverage) {
     this.maxLeverage = maxLeverage;
     return this;
   }
@@ -448,11 +445,11 @@ public class Asset {
    * @return maxLeverage
   **/
   @Schema(description = "")
-  public BigDecimal getMaxLeverage() {
+  public Object getMaxLeverage() {
     return maxLeverage;
   }
 
-  public void setMaxLeverage(BigDecimal maxLeverage) {
+  public void setMaxLeverage(Object maxLeverage) {
     this.maxLeverage = maxLeverage;
   }
 

@@ -14,44 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import tech.dora.model.IsolatedCollateral;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
  * IsolateCollateralResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
-public class IsolateCollateralResponse extends ResponseEnvelope {
-  @SerializedName("data")
-  private IsolatedCollateral isolateCollateralResponseData = null;
-
-  public IsolateCollateralResponse isolateCollateralResponseData(IsolatedCollateral isolateCollateralResponseData) {
-    this.isolateCollateralResponseData = isolateCollateralResponseData;
-    return this;
-  }
-
-   /**
-   * Get isolateCollateralResponseData
-   * @return isolateCollateralResponseData
-  **/
-  @Schema(description = "")
-  public IsolatedCollateral getIsolateCollateralResponseData() {
-    return isolateCollateralResponseData;
-  }
-
-  public void setIsolateCollateralResponseData(IsolatedCollateral isolateCollateralResponseData) {
-    this.isolateCollateralResponseData = isolateCollateralResponseData;
-  }
-
+public class IsolateCollateralResponse {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -61,14 +30,12 @@ public class IsolateCollateralResponse extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    IsolateCollateralResponse isolateCollateralResponse = (IsolateCollateralResponse) o;
-    return Objects.equals(this.isolateCollateralResponseData, isolateCollateralResponse.isolateCollateralResponseData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(isolateCollateralResponseData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -76,8 +43,7 @@ public class IsolateCollateralResponse extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class IsolateCollateralResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    isolateCollateralResponseData: ").append(toIndentedString(isolateCollateralResponseData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

@@ -21,58 +21,53 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import org.threeten.bp.OffsetDateTime;
-import tech.dora.model.UserRole;
 /**
  * User
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class User {
   @SerializedName("id")
-  private UUID id = null;
+  private Object id = null;
 
   @SerializedName("closed_at")
-  private OffsetDateTime closedAt = null;
+  private Object closedAt = null;
 
   @SerializedName("disabled_at")
-  private OffsetDateTime disabledAt = null;
+  private Object disabledAt = null;
 
   @SerializedName("email")
-  private String email = null;
+  private Object email = null;
 
   @SerializedName("name")
-  private String name = null;
+  private Object name = null;
 
   @SerializedName("native_asset_id")
-  private UUID nativeAssetId = null;
+  private Object nativeAssetId = null;
 
   @SerializedName("photo_url")
-  private String photoUrl = null;
+  private Object photoUrl = null;
 
   @SerializedName("provider")
-  private String provider = null;
+  private Object provider = null;
 
   @SerializedName("provider_id")
-  private UUID providerId = null;
+  private Object providerId = null;
 
   @SerializedName("roles")
-  private List<UserRole> roles = null;
+  private Object roles = null;
 
   @SerializedName("timezone")
-  private String timezone = null;
+  private Object timezone = null;
 
   @SerializedName("timezone_offset")
-  private Integer timezoneOffset = null;
+  private Object timezoneOffset = null;
 
   @SerializedName("verified_at")
-  private OffsetDateTime verifiedAt = null;
+  private Object verifiedAt = null;
 
-  public User id(UUID id) {
+  public User id(Object id) {
     this.id = id;
     return this;
   }
@@ -82,15 +77,15 @@ public class User {
    * @return id
   **/
   @Schema(description = "")
-  public UUID getId() {
+  public Object getId() {
     return id;
   }
 
-  public void setId(UUID id) {
+  public void setId(Object id) {
     this.id = id;
   }
 
-  public User closedAt(OffsetDateTime closedAt) {
+  public User closedAt(Object closedAt) {
     this.closedAt = closedAt;
     return this;
   }
@@ -100,15 +95,15 @@ public class User {
    * @return closedAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getClosedAt() {
+  public Object getClosedAt() {
     return closedAt;
   }
 
-  public void setClosedAt(OffsetDateTime closedAt) {
+  public void setClosedAt(Object closedAt) {
     this.closedAt = closedAt;
   }
 
-  public User disabledAt(OffsetDateTime disabledAt) {
+  public User disabledAt(Object disabledAt) {
     this.disabledAt = disabledAt;
     return this;
   }
@@ -118,15 +113,15 @@ public class User {
    * @return disabledAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getDisabledAt() {
+  public Object getDisabledAt() {
     return disabledAt;
   }
 
-  public void setDisabledAt(OffsetDateTime disabledAt) {
+  public void setDisabledAt(Object disabledAt) {
     this.disabledAt = disabledAt;
   }
 
-  public User email(String email) {
+  public User email(Object email) {
     this.email = email;
     return this;
   }
@@ -136,15 +131,15 @@ public class User {
    * @return email
   **/
   @Schema(description = "")
-  public String getEmail() {
+  public Object getEmail() {
     return email;
   }
 
-  public void setEmail(String email) {
+  public void setEmail(Object email) {
     this.email = email;
   }
 
-  public User name(String name) {
+  public User name(Object name) {
     this.name = name;
     return this;
   }
@@ -154,15 +149,15 @@ public class User {
    * @return name
   **/
   @Schema(description = "")
-  public String getName() {
+  public Object getName() {
     return name;
   }
 
-  public void setName(String name) {
+  public void setName(Object name) {
     this.name = name;
   }
 
-  public User nativeAssetId(UUID nativeAssetId) {
+  public User nativeAssetId(Object nativeAssetId) {
     this.nativeAssetId = nativeAssetId;
     return this;
   }
@@ -172,15 +167,15 @@ public class User {
    * @return nativeAssetId
   **/
   @Schema(description = "")
-  public UUID getNativeAssetId() {
+  public Object getNativeAssetId() {
     return nativeAssetId;
   }
 
-  public void setNativeAssetId(UUID nativeAssetId) {
+  public void setNativeAssetId(Object nativeAssetId) {
     this.nativeAssetId = nativeAssetId;
   }
 
-  public User photoUrl(String photoUrl) {
+  public User photoUrl(Object photoUrl) {
     this.photoUrl = photoUrl;
     return this;
   }
@@ -190,15 +185,15 @@ public class User {
    * @return photoUrl
   **/
   @Schema(description = "")
-  public String getPhotoUrl() {
+  public Object getPhotoUrl() {
     return photoUrl;
   }
 
-  public void setPhotoUrl(String photoUrl) {
+  public void setPhotoUrl(Object photoUrl) {
     this.photoUrl = photoUrl;
   }
 
-  public User provider(String provider) {
+  public User provider(Object provider) {
     this.provider = provider;
     return this;
   }
@@ -208,15 +203,15 @@ public class User {
    * @return provider
   **/
   @Schema(description = "")
-  public String getProvider() {
+  public Object getProvider() {
     return provider;
   }
 
-  public void setProvider(String provider) {
+  public void setProvider(Object provider) {
     this.provider = provider;
   }
 
-  public User providerId(UUID providerId) {
+  public User providerId(Object providerId) {
     this.providerId = providerId;
     return this;
   }
@@ -226,24 +221,16 @@ public class User {
    * @return providerId
   **/
   @Schema(description = "")
-  public UUID getProviderId() {
+  public Object getProviderId() {
     return providerId;
   }
 
-  public void setProviderId(UUID providerId) {
+  public void setProviderId(Object providerId) {
     this.providerId = providerId;
   }
 
-  public User roles(List<UserRole> roles) {
+  public User roles(Object roles) {
     this.roles = roles;
-    return this;
-  }
-
-  public User addRolesItem(UserRole rolesItem) {
-    if (this.roles == null) {
-      this.roles = new ArrayList<UserRole>();
-    }
-    this.roles.add(rolesItem);
     return this;
   }
 
@@ -252,15 +239,15 @@ public class User {
    * @return roles
   **/
   @Schema(description = "")
-  public List<UserRole> getRoles() {
+  public Object getRoles() {
     return roles;
   }
 
-  public void setRoles(List<UserRole> roles) {
+  public void setRoles(Object roles) {
     this.roles = roles;
   }
 
-  public User timezone(String timezone) {
+  public User timezone(Object timezone) {
     this.timezone = timezone;
     return this;
   }
@@ -270,15 +257,15 @@ public class User {
    * @return timezone
   **/
   @Schema(description = "User's timezone, e.g., 'America/New_York', or an offset.")
-  public String getTimezone() {
+  public Object getTimezone() {
     return timezone;
   }
 
-  public void setTimezone(String timezone) {
+  public void setTimezone(Object timezone) {
     this.timezone = timezone;
   }
 
-  public User timezoneOffset(Integer timezoneOffset) {
+  public User timezoneOffset(Object timezoneOffset) {
     this.timezoneOffset = timezoneOffset;
     return this;
   }
@@ -288,15 +275,15 @@ public class User {
    * @return timezoneOffset
   **/
   @Schema(description = "timezone offset in seconds")
-  public Integer getTimezoneOffset() {
+  public Object getTimezoneOffset() {
     return timezoneOffset;
   }
 
-  public void setTimezoneOffset(Integer timezoneOffset) {
+  public void setTimezoneOffset(Object timezoneOffset) {
     this.timezoneOffset = timezoneOffset;
   }
 
-  public User verifiedAt(OffsetDateTime verifiedAt) {
+  public User verifiedAt(Object verifiedAt) {
     this.verifiedAt = verifiedAt;
     return this;
   }
@@ -306,11 +293,11 @@ public class User {
    * @return verifiedAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getVerifiedAt() {
+  public Object getVerifiedAt() {
     return verifiedAt;
   }
 
-  public void setVerifiedAt(OffsetDateTime verifiedAt) {
+  public void setVerifiedAt(Object verifiedAt) {
     this.verifiedAt = verifiedAt;
   }
 

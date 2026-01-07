@@ -21,64 +21,56 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
-import org.threeten.bp.OffsetDateTime;
 /**
  * Position
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class Position {
   @SerializedName("id")
-  private UUID id = null;
+  private Object id = null;
 
   @SerializedName("asset_id")
-  private UUID assetId = null;
+  private Object assetId = null;
 
   @SerializedName("seq")
-  private Integer seq = null;
+  private Object seq = null;
 
   @SerializedName("is_global")
-  private Boolean isGlobal = null;
+  private Object isGlobal = null;
 
   @SerializedName("available")
-  private String available = null;
+  private Object available = null;
 
   @SerializedName("locked")
-  private String locked = null;
+  private Object locked = null;
 
   @SerializedName("supplied")
-  private String supplied = null;
-
-  @SerializedName("collateral")
-  private String collateral = null;
-
-  @SerializedName("supplied_collateral")
-  private String suppliedCollateral = null;
+  private Object supplied = null;
 
   @SerializedName("borrowed")
-  private String borrowed = null;
+  private Object borrowed = null;
 
   @SerializedName("impending_borrows")
-  private String impendingBorrows = null;
+  private Object impendingBorrows = null;
 
   @SerializedName("avg_entry_price")
-  private String avgEntryPrice = null;
+  private Object avgEntryPrice = null;
 
   @SerializedName("borrow_limit")
-  private String borrowLimit = null;
+  private Object borrowLimit = null;
 
   @SerializedName("liquidation_threshold")
-  private String liquidationThreshold = null;
+  private Object liquidationThreshold = null;
 
   @SerializedName("created_at")
-  private OffsetDateTime createdAt = null;
+  private Object createdAt = null;
 
   @SerializedName("position_name")
-  private String positionName = null;
+  private Object positionName = null;
 
-  public Position id(UUID id) {
+  public Position id(Object id) {
     this.id = id;
     return this;
   }
@@ -88,15 +80,15 @@ public class Position {
    * @return id
   **/
   @Schema(description = "The unique identifier for the position. Used, for example, when creating an order from a position, or deciding collateral should be transferred from position A to position B.")
-  public UUID getId() {
+  public Object getId() {
     return id;
   }
 
-  public void setId(UUID id) {
+  public void setId(Object id) {
     this.id = id;
   }
 
-  public Position assetId(UUID assetId) {
+  public Position assetId(Object assetId) {
     this.assetId = assetId;
     return this;
   }
@@ -106,15 +98,15 @@ public class Position {
    * @return assetId
   **/
   @Schema(description = "")
-  public UUID getAssetId() {
+  public Object getAssetId() {
     return assetId;
   }
 
-  public void setAssetId(UUID assetId) {
+  public void setAssetId(Object assetId) {
     this.assetId = assetId;
   }
 
-  public Position seq(Integer seq) {
+  public Position seq(Object seq) {
     this.seq = seq;
     return this;
   }
@@ -124,15 +116,15 @@ public class Position {
    * @return seq
   **/
   @Schema(description = "")
-  public Integer getSeq() {
+  public Object getSeq() {
     return seq;
   }
 
-  public void setSeq(Integer seq) {
+  public void setSeq(Object seq) {
     this.seq = seq;
   }
 
-  public Position isGlobal(Boolean isGlobal) {
+  public Position isGlobal(Object isGlobal) {
     this.isGlobal = isGlobal;
     return this;
   }
@@ -142,15 +134,15 @@ public class Position {
    * @return isGlobal
   **/
   @Schema(description = "")
-  public Boolean isIsGlobal() {
+  public Object getIsGlobal() {
     return isGlobal;
   }
 
-  public void setIsGlobal(Boolean isGlobal) {
+  public void setIsGlobal(Object isGlobal) {
     this.isGlobal = isGlobal;
   }
 
-  public Position available(String available) {
+  public Position available(Object available) {
     this.available = available;
     return this;
   }
@@ -160,15 +152,15 @@ public class Position {
    * @return available
   **/
   @Schema(description = "The available balance in the position for this asset that are not locked, supplied, or used as collateral")
-  public String getAvailable() {
+  public Object getAvailable() {
     return available;
   }
 
-  public void setAvailable(String available) {
+  public void setAvailable(Object available) {
     this.available = available;
   }
 
-  public Position locked(String locked) {
+  public Position locked(Object locked) {
     this.locked = locked;
     return this;
   }
@@ -178,15 +170,15 @@ public class Position {
    * @return locked
   **/
   @Schema(description = "The balance that has been reserved for a current order. If spent by the order, they are removed. If the order is cancelled, they are returned to the position's available balance.")
-  public String getLocked() {
+  public Object getLocked() {
     return locked;
   }
 
-  public void setLocked(String locked) {
+  public void setLocked(Object locked) {
     this.locked = locked;
   }
 
-  public Position supplied(String supplied) {
+  public Position supplied(Object supplied) {
     this.supplied = supplied;
     return this;
   }
@@ -196,69 +188,33 @@ public class Position {
    * @return supplied
   **/
   @Schema(description = "The balance that user has supplied to the leverage module. The user remains entitled to these assets and can withdraw them into their available balance.")
-  public String getSupplied() {
+  public Object getSupplied() {
     return supplied;
   }
 
-  public void setSupplied(String supplied) {
+  public void setSupplied(Object supplied) {
     this.supplied = supplied;
   }
 
-  public Position collateral(String collateral) {
-    this.collateral = collateral;
-    return this;
-  }
-
-   /**
-   * The balance that has been locked or supplied, but are marked as collateral to support borrow limits and can be consumed in case of liquidation. When unmarked as collateral, the balance returns to the available balance.
-   * @return collateral
-  **/
-  @Schema(description = "The balance that has been locked or supplied, but are marked as collateral to support borrow limits and can be consumed in case of liquidation. When unmarked as collateral, the balance returns to the available balance.")
-  public String getCollateral() {
-    return collateral;
-  }
-
-  public void setCollateral(String collateral) {
-    this.collateral = collateral;
-  }
-
-  public Position suppliedCollateral(String suppliedCollateral) {
-    this.suppliedCollateral = suppliedCollateral;
-    return this;
-  }
-
-   /**
-   * The balance that have been supplied to the leverage module and marked as collateral. The user remains entitled to this balance and can withdraw it into the collateral balance, or unmark them as collateral and move them to the supplied balance.
-   * @return suppliedCollateral
-  **/
-  @Schema(description = "The balance that have been supplied to the leverage module and marked as collateral. The user remains entitled to this balance and can withdraw it into the collateral balance, or unmark them as collateral and move them to the supplied balance.")
-  public String getSuppliedCollateral() {
-    return suppliedCollateral;
-  }
-
-  public void setSuppliedCollateral(String suppliedCollateral) {
-    this.suppliedCollateral = suppliedCollateral;
-  }
-
-  public Position borrowed(String borrowed) {
+  public Position borrowed(Object borrowed) {
     this.borrowed = borrowed;
     return this;
   }
 
    /**
-   * The total amount of debt outstanding for this position. The position&#x27;s collateral + supplied_collateral must support a borrow limit sufficient to cover all borrowed assets. This position cannot be closed until all debt is fully repaid, i.e. borrowed &#x3D; 0.
+   * The total amount of debt outstanding for this position. This position cannot be closed until all debt is fully repaid, i.e. borrowed &#x3D; 0.
    * @return borrowed
   **/
-  @Schema(description = "The total amount of debt outstanding for this position. The position's collateral + supplied_collateral must support a borrow limit sufficient to cover all borrowed assets. This position cannot be closed until all debt is fully repaid, i.e. borrowed = 0.")
-  public String getBorrowed() {
+  @Schema(description = "The total amount of debt outstanding for this position. This position cannot be closed until all debt is fully repaid, i.e. borrowed = 0.")
+  public Object getBorrowed() {
     return borrowed;
   }
 
-  public void setBorrowed(String borrowed) {
+  public void setBorrowed(Object borrowed) {
     this.borrowed = borrowed;
   }
 
-  public Position impendingBorrows(String impendingBorrows) {
+  public Position impendingBorrows(Object impendingBorrows) {
     this.impendingBorrows = impendingBorrows;
     return this;
   }
@@ -268,15 +224,15 @@ public class Position {
    * @return impendingBorrows
   **/
   @Schema(description = "The equivalent of locked balances, but for leveraged orders. If a user has an active order that would borrow assets as part of its input, then their borrow limit must be reduced until the order is executed or cancelled.")
-  public String getImpendingBorrows() {
+  public Object getImpendingBorrows() {
     return impendingBorrows;
   }
 
-  public void setImpendingBorrows(String impendingBorrows) {
+  public void setImpendingBorrows(Object impendingBorrows) {
     this.impendingBorrows = impendingBorrows;
   }
 
-  public Position avgEntryPrice(String avgEntryPrice) {
+  public Position avgEntryPrice(Object avgEntryPrice) {
     this.avgEntryPrice = avgEntryPrice;
     return this;
   }
@@ -286,15 +242,15 @@ public class Position {
    * @return avgEntryPrice
   **/
   @Schema(description = "average cost per unit quantity that was paid (long positions) or received (short positions) for this asset.")
-  public String getAvgEntryPrice() {
+  public Object getAvgEntryPrice() {
     return avgEntryPrice;
   }
 
-  public void setAvgEntryPrice(String avgEntryPrice) {
+  public void setAvgEntryPrice(Object avgEntryPrice) {
     this.avgEntryPrice = avgEntryPrice;
   }
 
-  public Position borrowLimit(String borrowLimit) {
+  public Position borrowLimit(Object borrowLimit) {
     this.borrowLimit = borrowLimit;
     return this;
   }
@@ -304,15 +260,15 @@ public class Position {
    * @return borrowLimit
   **/
   @Schema(description = "The borrow limit")
-  public String getBorrowLimit() {
+  public Object getBorrowLimit() {
     return borrowLimit;
   }
 
-  public void setBorrowLimit(String borrowLimit) {
+  public void setBorrowLimit(Object borrowLimit) {
     this.borrowLimit = borrowLimit;
   }
 
-  public Position liquidationThreshold(String liquidationThreshold) {
+  public Position liquidationThreshold(Object liquidationThreshold) {
     this.liquidationThreshold = liquidationThreshold;
     return this;
   }
@@ -322,15 +278,15 @@ public class Position {
    * @return liquidationThreshold
   **/
   @Schema(description = "The borrow limit")
-  public String getLiquidationThreshold() {
+  public Object getLiquidationThreshold() {
     return liquidationThreshold;
   }
 
-  public void setLiquidationThreshold(String liquidationThreshold) {
+  public void setLiquidationThreshold(Object liquidationThreshold) {
     this.liquidationThreshold = liquidationThreshold;
   }
 
-  public Position createdAt(OffsetDateTime createdAt) {
+  public Position createdAt(Object createdAt) {
     this.createdAt = createdAt;
     return this;
   }
@@ -340,15 +296,15 @@ public class Position {
    * @return createdAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getCreatedAt() {
+  public Object getCreatedAt() {
     return createdAt;
   }
 
-  public void setCreatedAt(OffsetDateTime createdAt) {
+  public void setCreatedAt(Object createdAt) {
     this.createdAt = createdAt;
   }
 
-  public Position positionName(String positionName) {
+  public Position positionName(Object positionName) {
     this.positionName = positionName;
     return this;
   }
@@ -358,11 +314,11 @@ public class Position {
    * @return positionName
   **/
   @Schema(description = "")
-  public String getPositionName() {
+  public Object getPositionName() {
     return positionName;
   }
 
-  public void setPositionName(String positionName) {
+  public void setPositionName(Object positionName) {
     this.positionName = positionName;
   }
 
@@ -383,8 +339,6 @@ public class Position {
         Objects.equals(this.available, position.available) &&
         Objects.equals(this.locked, position.locked) &&
         Objects.equals(this.supplied, position.supplied) &&
-        Objects.equals(this.collateral, position.collateral) &&
-        Objects.equals(this.suppliedCollateral, position.suppliedCollateral) &&
         Objects.equals(this.borrowed, position.borrowed) &&
         Objects.equals(this.impendingBorrows, position.impendingBorrows) &&
         Objects.equals(this.avgEntryPrice, position.avgEntryPrice) &&
@@ -396,7 +350,7 @@ public class Position {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, assetId, seq, isGlobal, available, locked, supplied, collateral, suppliedCollateral, borrowed, impendingBorrows, avgEntryPrice, borrowLimit, liquidationThreshold, createdAt, positionName);
+    return Objects.hash(id, assetId, seq, isGlobal, available, locked, supplied, borrowed, impendingBorrows, avgEntryPrice, borrowLimit, liquidationThreshold, createdAt, positionName);
   }
 
 
@@ -412,8 +366,6 @@ public class Position {
     sb.append("    available: ").append(toIndentedString(available)).append("\n");
     sb.append("    locked: ").append(toIndentedString(locked)).append("\n");
     sb.append("    supplied: ").append(toIndentedString(supplied)).append("\n");
-    sb.append("    collateral: ").append(toIndentedString(collateral)).append("\n");
-    sb.append("    suppliedCollateral: ").append(toIndentedString(suppliedCollateral)).append("\n");
     sb.append("    borrowed: ").append(toIndentedString(borrowed)).append("\n");
     sb.append("    impendingBorrows: ").append(toIndentedString(impendingBorrows)).append("\n");
     sb.append("    avgEntryPrice: ").append(toIndentedString(avgEntryPrice)).append("\n");

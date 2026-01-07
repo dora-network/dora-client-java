@@ -21,32 +21,21 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 /**
  * UserInterest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class UserInterest {
   @SerializedName("available")
-  private Map<String, Integer> available = null;
+  private Object available = null;
 
   @SerializedName("value")
-  private Map<String, String> value = null;
+  private Object value = null;
 
-  public UserInterest available(Map<String, Integer> available) {
+  public UserInterest available(Object available) {
     this.available = available;
-    return this;
-  }
-
-  public UserInterest putAvailableItem(String key, Integer availableItem) {
-    if (this.available == null) {
-      this.available = new HashMap<String, Integer>();
-    }
-    this.available.put(key, availableItem);
     return this;
   }
 
@@ -55,24 +44,16 @@ public class UserInterest {
    * @return available
   **/
   @Schema(description = "")
-  public Map<String, Integer> getAvailable() {
+  public Object getAvailable() {
     return available;
   }
 
-  public void setAvailable(Map<String, Integer> available) {
+  public void setAvailable(Object available) {
     this.available = available;
   }
 
-  public UserInterest value(Map<String, String> value) {
+  public UserInterest value(Object value) {
     this.value = value;
-    return this;
-  }
-
-  public UserInterest putValueItem(String key, String valueItem) {
-    if (this.value == null) {
-      this.value = new HashMap<String, String>();
-    }
-    this.value.put(key, valueItem);
     return this;
   }
 
@@ -81,11 +62,11 @@ public class UserInterest {
    * @return value
   **/
   @Schema(description = "")
-  public Map<String, String> getValue() {
+  public Object getValue() {
     return value;
   }
 
-  public void setValue(Map<String, String> value) {
+  public void setValue(Object value) {
     this.value = value;
   }
 

@@ -26,7 +26,7 @@ import tech.dora.model.UpdateFieldString;
  * Request body for PUT /user/{id}/config: update a user changeable details only. Other properties can only be changed by an admin following a manual request by the user.
  */
 @Schema(description = "Request body for PUT /user/{id}/config: update a user changeable details only. Other properties can only be changed by an admin following a manual request by the user.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class UpdateUserConfigRequest {
   @SerializedName("photo_url")
@@ -41,10 +41,10 @@ public class UpdateUserConfigRequest {
   }
 
    /**
-   * Get photoUrl
+   * Optional: URL of the user&#x27;s profile photo, optional.
    * @return photoUrl
   **/
-  @Schema(required = true, description = "")
+  @Schema(description = "Optional: URL of the user's profile photo, optional.")
   public UpdateFieldString getPhotoUrl() {
     return photoUrl;
   }
@@ -59,10 +59,10 @@ public class UpdateUserConfigRequest {
   }
 
    /**
-   * Get timezone
+   * User&#x27;s timezone, e.g., &#x27;America/New_York&#x27;, or an offset.
    * @return timezone
   **/
-  @Schema(required = true, description = "")
+  @Schema(required = true, description = "User's timezone, e.g., 'America/New_York', or an offset.")
   public UpdateFieldString getTimezone() {
     return timezone;
   }

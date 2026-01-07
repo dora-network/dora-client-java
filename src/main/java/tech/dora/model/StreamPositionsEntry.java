@@ -14,44 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import org.threeten.bp.OffsetDateTime;
-import tech.dora.model.Position;
-import tech.dora.model.StreamEntry;
 /**
  * StreamPositionsEntry
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
-public class StreamPositionsEntry extends StreamEntry {
-  @SerializedName("Val")
-  private Position streamPositionsEntryVal = null;
-
-  public StreamPositionsEntry streamPositionsEntryVal(Position streamPositionsEntryVal) {
-    this.streamPositionsEntryVal = streamPositionsEntryVal;
-    return this;
-  }
-
-   /**
-   * Get streamPositionsEntryVal
-   * @return streamPositionsEntryVal
-  **/
-  @Schema(description = "")
-  public Position getStreamPositionsEntryVal() {
-    return streamPositionsEntryVal;
-  }
-
-  public void setStreamPositionsEntryVal(Position streamPositionsEntryVal) {
-    this.streamPositionsEntryVal = streamPositionsEntryVal;
-  }
-
+public class StreamPositionsEntry {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -61,14 +30,12 @@ public class StreamPositionsEntry extends StreamEntry {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StreamPositionsEntry streamPositionsEntry = (StreamPositionsEntry) o;
-    return Objects.equals(this.streamPositionsEntryVal, streamPositionsEntry.streamPositionsEntryVal) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(streamPositionsEntryVal, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -76,8 +43,7 @@ public class StreamPositionsEntry extends StreamEntry {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class StreamPositionsEntry {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    streamPositionsEntryVal: ").append(toIndentedString(streamPositionsEntryVal)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

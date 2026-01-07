@@ -21,30 +21,29 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * IsolatedCollateral
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class IsolatedCollateral {
   @SerializedName("global_position_id")
-  private UUID globalPositionId = null;
+  private Object globalPositionId = null;
 
   @SerializedName("isolated_position_id")
-  private UUID isolatedPositionId = null;
+  private Object isolatedPositionId = null;
 
   @SerializedName("transaction_id")
-  private UUID transactionId = null;
+  private Object transactionId = null;
 
   @SerializedName("asset_id")
-  private UUID assetId = null;
+  private Object assetId = null;
 
   @SerializedName("quantity")
-  private String quantity = null;
+  private Object quantity = null;
 
-  public IsolatedCollateral globalPositionId(UUID globalPositionId) {
+  public IsolatedCollateral globalPositionId(Object globalPositionId) {
     this.globalPositionId = globalPositionId;
     return this;
   }
@@ -54,15 +53,15 @@ public class IsolatedCollateral {
    * @return globalPositionId
   **/
   @Schema(description = "")
-  public UUID getGlobalPositionId() {
+  public Object getGlobalPositionId() {
     return globalPositionId;
   }
 
-  public void setGlobalPositionId(UUID globalPositionId) {
+  public void setGlobalPositionId(Object globalPositionId) {
     this.globalPositionId = globalPositionId;
   }
 
-  public IsolatedCollateral isolatedPositionId(UUID isolatedPositionId) {
+  public IsolatedCollateral isolatedPositionId(Object isolatedPositionId) {
     this.isolatedPositionId = isolatedPositionId;
     return this;
   }
@@ -72,15 +71,15 @@ public class IsolatedCollateral {
    * @return isolatedPositionId
   **/
   @Schema(description = "")
-  public UUID getIsolatedPositionId() {
+  public Object getIsolatedPositionId() {
     return isolatedPositionId;
   }
 
-  public void setIsolatedPositionId(UUID isolatedPositionId) {
+  public void setIsolatedPositionId(Object isolatedPositionId) {
     this.isolatedPositionId = isolatedPositionId;
   }
 
-  public IsolatedCollateral transactionId(UUID transactionId) {
+  public IsolatedCollateral transactionId(Object transactionId) {
     this.transactionId = transactionId;
     return this;
   }
@@ -90,15 +89,15 @@ public class IsolatedCollateral {
    * @return transactionId
   **/
   @Schema(description = "")
-  public UUID getTransactionId() {
+  public Object getTransactionId() {
     return transactionId;
   }
 
-  public void setTransactionId(UUID transactionId) {
+  public void setTransactionId(Object transactionId) {
     this.transactionId = transactionId;
   }
 
-  public IsolatedCollateral assetId(UUID assetId) {
+  public IsolatedCollateral assetId(Object assetId) {
     this.assetId = assetId;
     return this;
   }
@@ -108,15 +107,15 @@ public class IsolatedCollateral {
    * @return assetId
   **/
   @Schema(description = "")
-  public UUID getAssetId() {
+  public Object getAssetId() {
     return assetId;
   }
 
-  public void setAssetId(UUID assetId) {
+  public void setAssetId(Object assetId) {
     this.assetId = assetId;
   }
 
-  public IsolatedCollateral quantity(String quantity) {
+  public IsolatedCollateral quantity(Object quantity) {
     this.quantity = quantity;
     return this;
   }
@@ -126,11 +125,11 @@ public class IsolatedCollateral {
    * @return quantity
   **/
   @Schema(description = "")
-  public String getQuantity() {
+  public Object getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(String quantity) {
+  public void setQuantity(Object quantity) {
     this.quantity = quantity;
   }
 

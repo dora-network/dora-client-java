@@ -3,4 +3,4 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**orderId** | [**UUID**](UUID.md) |  |  [optional]
+**orderId** | **Object** |  |  [optional]

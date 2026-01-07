@@ -21,32 +21,21 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import tech.dora.model.PriceLevel;
 /**
  * LiveOrderbook
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class LiveOrderbook {
   @SerializedName("bids")
-  private List<PriceLevel> bids = null;
+  private Object bids = null;
 
   @SerializedName("asks")
-  private List<PriceLevel> asks = null;
+  private Object asks = null;
 
-  public LiveOrderbook bids(List<PriceLevel> bids) {
+  public LiveOrderbook bids(Object bids) {
     this.bids = bids;
-    return this;
-  }
-
-  public LiveOrderbook addBidsItem(PriceLevel bidsItem) {
-    if (this.bids == null) {
-      this.bids = new ArrayList<PriceLevel>();
-    }
-    this.bids.add(bidsItem);
     return this;
   }
 
@@ -55,24 +44,16 @@ public class LiveOrderbook {
    * @return bids
   **/
   @Schema(description = "sorted in desc order by price")
-  public List<PriceLevel> getBids() {
+  public Object getBids() {
     return bids;
   }
 
-  public void setBids(List<PriceLevel> bids) {
+  public void setBids(Object bids) {
     this.bids = bids;
   }
 
-  public LiveOrderbook asks(List<PriceLevel> asks) {
+  public LiveOrderbook asks(Object asks) {
     this.asks = asks;
-    return this;
-  }
-
-  public LiveOrderbook addAsksItem(PriceLevel asksItem) {
-    if (this.asks == null) {
-      this.asks = new ArrayList<PriceLevel>();
-    }
-    this.asks.add(asksItem);
     return this;
   }
 
@@ -81,11 +62,11 @@ public class LiveOrderbook {
    * @return asks
   **/
   @Schema(description = "sorted in asc order by price")
-  public List<PriceLevel> getAsks() {
+  public Object getAsks() {
     return asks;
   }
 
-  public void setAsks(List<PriceLevel> asks) {
+  public void setAsks(Object asks) {
     this.asks = asks;
   }
 

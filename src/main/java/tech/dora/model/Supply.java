@@ -21,27 +21,26 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * Supply
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class Supply {
   @SerializedName("position_id")
-  private UUID positionId = null;
+  private Object positionId = null;
 
   @SerializedName("transaction_id")
-  private UUID transactionId = null;
+  private Object transactionId = null;
 
   @SerializedName("asset_id")
-  private UUID assetId = null;
+  private Object assetId = null;
 
   @SerializedName("quantity")
-  private String quantity = null;
+  private Object quantity = null;
 
-  public Supply positionId(UUID positionId) {
+  public Supply positionId(Object positionId) {
     this.positionId = positionId;
     return this;
   }
@@ -51,15 +50,15 @@ public class Supply {
    * @return positionId
   **/
   @Schema(description = "")
-  public UUID getPositionId() {
+  public Object getPositionId() {
     return positionId;
   }
 
-  public void setPositionId(UUID positionId) {
+  public void setPositionId(Object positionId) {
     this.positionId = positionId;
   }
 
-  public Supply transactionId(UUID transactionId) {
+  public Supply transactionId(Object transactionId) {
     this.transactionId = transactionId;
     return this;
   }
@@ -69,15 +68,15 @@ public class Supply {
    * @return transactionId
   **/
   @Schema(description = "")
-  public UUID getTransactionId() {
+  public Object getTransactionId() {
     return transactionId;
   }
 
-  public void setTransactionId(UUID transactionId) {
+  public void setTransactionId(Object transactionId) {
     this.transactionId = transactionId;
   }
 
-  public Supply assetId(UUID assetId) {
+  public Supply assetId(Object assetId) {
     this.assetId = assetId;
     return this;
   }
@@ -87,15 +86,15 @@ public class Supply {
    * @return assetId
   **/
   @Schema(description = "")
-  public UUID getAssetId() {
+  public Object getAssetId() {
     return assetId;
   }
 
-  public void setAssetId(UUID assetId) {
+  public void setAssetId(Object assetId) {
     this.assetId = assetId;
   }
 
-  public Supply quantity(String quantity) {
+  public Supply quantity(Object quantity) {
     this.quantity = quantity;
     return this;
   }
@@ -105,11 +104,11 @@ public class Supply {
    * @return quantity
   **/
   @Schema(description = "")
-  public String getQuantity() {
+  public Object getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(String quantity) {
+  public void setQuantity(Object quantity) {
     this.quantity = quantity;
   }
 

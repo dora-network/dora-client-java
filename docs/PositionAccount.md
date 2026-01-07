@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**positionId** | [**UUID**](UUID.md) | The ID of the position account |  [optional]
-**positionName** | **String** | The name of the position account |  [optional]
-**isGlobal** | **Boolean** | Whether the position account is the global or an isolated account |  [optional]
+**positionId** | **Object** | The ID of the position account |  [optional]
+**positionName** | **Object** | The name of the position account |  [optional]
+**isGlobal** | **Object** | Whether the position account is the global or an isolated account |  [optional]

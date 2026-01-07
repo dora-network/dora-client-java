@@ -14,16 +14,41 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
-import tech.dora.model.StreamAssetsEntry;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 /**
  * StreamAssetsResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
-public class StreamAssetsResponse extends ArrayList<StreamAssetsEntry> {
+public class StreamAssetsResponse {
+  @SerializedName("stream_assets_entries")
+  private Object streamAssetsEntries = null;
+
+  public StreamAssetsResponse streamAssetsEntries(Object streamAssetsEntries) {
+    this.streamAssetsEntries = streamAssetsEntries;
+    return this;
+  }
+
+   /**
+   * Get streamAssetsEntries
+   * @return streamAssetsEntries
+  **/
+  @Schema(description = "")
+  public Object getStreamAssetsEntries() {
+    return streamAssetsEntries;
+  }
+
+  public void setStreamAssetsEntries(Object streamAssetsEntries) {
+    this.streamAssetsEntries = streamAssetsEntries;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -33,12 +58,13 @@ public class StreamAssetsResponse extends ArrayList<StreamAssetsEntry> {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    return super.equals(o);
+    StreamAssetsResponse streamAssetsResponse = (StreamAssetsResponse) o;
+    return Objects.equals(this.streamAssetsEntries, streamAssetsResponse.streamAssetsEntries);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode());
+    return Objects.hash(streamAssetsEntries);
   }
 
 
@@ -46,7 +72,8 @@ public class StreamAssetsResponse extends ArrayList<StreamAssetsEntry> {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class StreamAssetsResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    
+    sb.append("    streamAssetsEntries: ").append(toIndentedString(streamAssetsEntries)).append("\n");
     sb.append("}");
     return sb.toString();
   }

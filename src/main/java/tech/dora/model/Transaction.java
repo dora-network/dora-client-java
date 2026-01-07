@@ -21,41 +21,39 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
-import org.threeten.bp.OffsetDateTime;
 import tech.dora.model.TransactionKind;
 /**
  * Transaction
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class Transaction {
   @SerializedName("id")
-  private UUID id = null;
+  private Object id = null;
 
   @SerializedName("created_at")
-  private OffsetDateTime createdAt = null;
+  private Object createdAt = null;
 
   @SerializedName("kind")
   private TransactionKind kind = null;
 
   @SerializedName("asset0")
-  private UUID asset0 = null;
+  private Object asset0 = null;
 
   @SerializedName("quantity0")
-  private String quantity0 = null;
+  private Object quantity0 = null;
 
   @SerializedName("quantity1")
-  private String quantity1 = null;
+  private Object quantity1 = null;
 
   @SerializedName("asset1")
-  private UUID asset1 = null;
+  private Object asset1 = null;
 
   @SerializedName("user_id")
-  private UUID userId = null;
+  private Object userId = null;
 
-  public Transaction id(UUID id) {
+  public Transaction id(Object id) {
     this.id = id;
     return this;
   }
@@ -65,15 +63,15 @@ public class Transaction {
    * @return id
   **/
   @Schema(description = "")
-  public UUID getId() {
+  public Object getId() {
     return id;
   }
 
-  public void setId(UUID id) {
+  public void setId(Object id) {
     this.id = id;
   }
 
-  public Transaction createdAt(OffsetDateTime createdAt) {
+  public Transaction createdAt(Object createdAt) {
     this.createdAt = createdAt;
     return this;
   }
@@ -83,11 +81,11 @@ public class Transaction {
    * @return createdAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getCreatedAt() {
+  public Object getCreatedAt() {
     return createdAt;
   }
 
-  public void setCreatedAt(OffsetDateTime createdAt) {
+  public void setCreatedAt(Object createdAt) {
     this.createdAt = createdAt;
   }
 
@@ -109,7 +107,7 @@ public class Transaction {
     this.kind = kind;
   }
 
-  public Transaction asset0(UUID asset0) {
+  public Transaction asset0(Object asset0) {
     this.asset0 = asset0;
     return this;
   }
@@ -119,15 +117,15 @@ public class Transaction {
    * @return asset0
   **/
   @Schema(description = "")
-  public UUID getAsset0() {
+  public Object getAsset0() {
     return asset0;
   }
 
-  public void setAsset0(UUID asset0) {
+  public void setAsset0(Object asset0) {
     this.asset0 = asset0;
   }
 
-  public Transaction quantity0(String quantity0) {
+  public Transaction quantity0(Object quantity0) {
     this.quantity0 = quantity0;
     return this;
   }
@@ -137,15 +135,15 @@ public class Transaction {
    * @return quantity0
   **/
   @Schema(description = "")
-  public String getQuantity0() {
+  public Object getQuantity0() {
     return quantity0;
   }
 
-  public void setQuantity0(String quantity0) {
+  public void setQuantity0(Object quantity0) {
     this.quantity0 = quantity0;
   }
 
-  public Transaction quantity1(String quantity1) {
+  public Transaction quantity1(Object quantity1) {
     this.quantity1 = quantity1;
     return this;
   }
@@ -155,15 +153,15 @@ public class Transaction {
    * @return quantity1
   **/
   @Schema(description = "")
-  public String getQuantity1() {
+  public Object getQuantity1() {
     return quantity1;
   }
 
-  public void setQuantity1(String quantity1) {
+  public void setQuantity1(Object quantity1) {
     this.quantity1 = quantity1;
   }
 
-  public Transaction asset1(UUID asset1) {
+  public Transaction asset1(Object asset1) {
     this.asset1 = asset1;
     return this;
   }
@@ -173,15 +171,15 @@ public class Transaction {
    * @return asset1
   **/
   @Schema(description = "")
-  public UUID getAsset1() {
+  public Object getAsset1() {
     return asset1;
   }
 
-  public void setAsset1(UUID asset1) {
+  public void setAsset1(Object asset1) {
     this.asset1 = asset1;
   }
 
-  public Transaction userId(UUID userId) {
+  public Transaction userId(Object userId) {
     this.userId = userId;
     return this;
   }
@@ -191,11 +189,11 @@ public class Transaction {
    * @return userId
   **/
   @Schema(description = "")
-  public UUID getUserId() {
+  public Object getUserId() {
     return userId;
   }
 
-  public void setUserId(UUID userId) {
+  public void setUserId(Object userId) {
     this.userId = userId;
   }
 

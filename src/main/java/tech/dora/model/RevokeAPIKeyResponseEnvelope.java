@@ -14,44 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
-import tech.dora.model.RevokeAPIKeyData;
 /**
  * RevokeAPIKeyResponseEnvelope
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
-public class RevokeAPIKeyResponseEnvelope extends ResponseEnvelope {
-  @SerializedName("data")
-  private RevokeAPIKeyData revokeAPIKeyResponseEnvelopeData = null;
-
-  public RevokeAPIKeyResponseEnvelope revokeAPIKeyResponseEnvelopeData(RevokeAPIKeyData revokeAPIKeyResponseEnvelopeData) {
-    this.revokeAPIKeyResponseEnvelopeData = revokeAPIKeyResponseEnvelopeData;
-    return this;
-  }
-
-   /**
-   * Get revokeAPIKeyResponseEnvelopeData
-   * @return revokeAPIKeyResponseEnvelopeData
-  **/
-  @Schema(description = "")
-  public RevokeAPIKeyData getRevokeAPIKeyResponseEnvelopeData() {
-    return revokeAPIKeyResponseEnvelopeData;
-  }
-
-  public void setRevokeAPIKeyResponseEnvelopeData(RevokeAPIKeyData revokeAPIKeyResponseEnvelopeData) {
-    this.revokeAPIKeyResponseEnvelopeData = revokeAPIKeyResponseEnvelopeData;
-  }
-
+public class RevokeAPIKeyResponseEnvelope {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -61,14 +30,12 @@ public class RevokeAPIKeyResponseEnvelope extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    RevokeAPIKeyResponseEnvelope revokeAPIKeyResponseEnvelope = (RevokeAPIKeyResponseEnvelope) o;
-    return Objects.equals(this.revokeAPIKeyResponseEnvelopeData, revokeAPIKeyResponseEnvelope.revokeAPIKeyResponseEnvelopeData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(revokeAPIKeyResponseEnvelopeData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -76,8 +43,7 @@ public class RevokeAPIKeyResponseEnvelope extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class RevokeAPIKeyResponseEnvelope {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    revokeAPIKeyResponseEnvelopeData: ").append(toIndentedString(revokeAPIKeyResponseEnvelopeData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

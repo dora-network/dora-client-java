@@ -21,27 +21,26 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * TransferBalancesRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class TransferBalancesRequest {
   @SerializedName("from_position_id")
-  private UUID fromPositionId = null;
+  private Object fromPositionId = null;
 
   @SerializedName("to_position_id")
-  private UUID toPositionId = null;
+  private Object toPositionId = null;
 
   @SerializedName("asset_id")
-  private UUID assetId = null;
+  private Object assetId = null;
 
   @SerializedName("quantity")
-  private String quantity = null;
+  private Object quantity = null;
 
-  public TransferBalancesRequest fromPositionId(UUID fromPositionId) {
+  public TransferBalancesRequest fromPositionId(Object fromPositionId) {
     this.fromPositionId = fromPositionId;
     return this;
   }
@@ -51,15 +50,15 @@ public class TransferBalancesRequest {
    * @return fromPositionId
   **/
   @Schema(required = true, description = "")
-  public UUID getFromPositionId() {
+  public Object getFromPositionId() {
     return fromPositionId;
   }
 
-  public void setFromPositionId(UUID fromPositionId) {
+  public void setFromPositionId(Object fromPositionId) {
     this.fromPositionId = fromPositionId;
   }
 
-  public TransferBalancesRequest toPositionId(UUID toPositionId) {
+  public TransferBalancesRequest toPositionId(Object toPositionId) {
     this.toPositionId = toPositionId;
     return this;
   }
@@ -69,15 +68,15 @@ public class TransferBalancesRequest {
    * @return toPositionId
   **/
   @Schema(required = true, description = "")
-  public UUID getToPositionId() {
+  public Object getToPositionId() {
     return toPositionId;
   }
 
-  public void setToPositionId(UUID toPositionId) {
+  public void setToPositionId(Object toPositionId) {
     this.toPositionId = toPositionId;
   }
 
-  public TransferBalancesRequest assetId(UUID assetId) {
+  public TransferBalancesRequest assetId(Object assetId) {
     this.assetId = assetId;
     return this;
   }
@@ -87,15 +86,15 @@ public class TransferBalancesRequest {
    * @return assetId
   **/
   @Schema(required = true, description = "")
-  public UUID getAssetId() {
+  public Object getAssetId() {
     return assetId;
   }
 
-  public void setAssetId(UUID assetId) {
+  public void setAssetId(Object assetId) {
     this.assetId = assetId;
   }
 
-  public TransferBalancesRequest quantity(String quantity) {
+  public TransferBalancesRequest quantity(Object quantity) {
     this.quantity = quantity;
     return this;
   }
@@ -105,11 +104,11 @@ public class TransferBalancesRequest {
    * @return quantity
   **/
   @Schema(required = true, description = "")
-  public String getQuantity() {
+  public Object getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(String quantity) {
+  public void setQuantity(Object quantity) {
     this.quantity = quantity;
   }
 

@@ -21,29 +21,18 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import tech.dora.model.Position;
 /**
  * BalancesResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class BalancesResponse {
   @SerializedName("balances")
-  private List<Position> balances = null;
+  private Object balances = null;
 
-  public BalancesResponse balances(List<Position> balances) {
+  public BalancesResponse balances(Object balances) {
     this.balances = balances;
-    return this;
-  }
-
-  public BalancesResponse addBalancesItem(Position balancesItem) {
-    if (this.balances == null) {
-      this.balances = new ArrayList<Position>();
-    }
-    this.balances.add(balancesItem);
     return this;
   }
 
@@ -52,11 +41,11 @@ public class BalancesResponse {
    * @return balances
   **/
   @Schema(description = "")
-  public List<Position> getBalances() {
+  public Object getBalances() {
     return balances;
   }
 
-  public void setBalances(List<Position> balances) {
+  public void setBalances(Object balances) {
     this.balances = balances;
   }
 

@@ -21,59 +21,55 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import org.threeten.bp.OffsetDateTime;
 import tech.dora.model.OrderKind;
-import tech.dora.model.OrderModifierKind;
 import tech.dora.model.OrderStatus;
 import tech.dora.model.Side;
+import tech.dora.model.TriggerType;
 /**
  * Order
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class Order {
   @SerializedName("order_id")
-  private UUID orderId = null;
+  private Object orderId = null;
 
   @SerializedName("order_book_id")
-  private UUID orderBookId = null;
+  private Object orderBookId = null;
 
   @SerializedName("kind")
   private OrderKind kind = null;
 
   @SerializedName("original_price")
-  private String originalPrice = null;
+  private Object originalPrice = null;
 
   @SerializedName("avg_fill_price")
-  private String avgFillPrice = null;
+  private Object avgFillPrice = null;
 
   @SerializedName("cancelled_quantity")
-  private String cancelledQuantity = null;
+  private Object cancelledQuantity = null;
 
   @SerializedName("open_quantity")
-  private String openQuantity = null;
+  private Object openQuantity = null;
 
   @SerializedName("original_quantity")
-  private String originalQuantity = null;
+  private Object originalQuantity = null;
 
   @SerializedName("filled_quantity")
-  private String filledQuantity = null;
+  private Object filledQuantity = null;
 
   @SerializedName("filled_notional")
-  private String filledNotional = null;
+  private Object filledNotional = null;
 
   @SerializedName("last_update_at")
-  private OffsetDateTime lastUpdateAt = null;
+  private Object lastUpdateAt = null;
 
   @SerializedName("opened_at")
-  private OffsetDateTime openedAt = null;
+  private Object openedAt = null;
 
   @SerializedName("inverse_leverage")
-  private String inverseLeverage = null;
+  private Object inverseLeverage = null;
 
   @SerializedName("side")
   private Side side = null;
@@ -82,24 +78,27 @@ public class Order {
   private OrderStatus status = null;
 
   @SerializedName("user_id")
-  private UUID userId = null;
+  private Object userId = null;
 
   @SerializedName("order_modifiers")
-  private List<OrderModifierKind> orderModifiers = null;
+  private Object orderModifiers = null;
 
   @SerializedName("position_id")
-  private UUID positionId = null;
+  private Object positionId = null;
 
   @SerializedName("order_info")
-  private String orderInfo = null;
+  private Object orderInfo = null;
 
   @SerializedName("good_till_date")
-  private OffsetDateTime goodTillDate = null;
+  private Object goodTillDate = null;
 
   @SerializedName("trigger_price")
-  private String triggerPrice = null;
+  private Object triggerPrice = null;
 
-  public Order orderId(UUID orderId) {
+  @SerializedName("trigger_type")
+  private TriggerType triggerType = null;
+
+  public Order orderId(Object orderId) {
     this.orderId = orderId;
     return this;
   }
@@ -109,15 +108,15 @@ public class Order {
    * @return orderId
   **/
   @Schema(description = "")
-  public UUID getOrderId() {
+  public Object getOrderId() {
     return orderId;
   }
 
-  public void setOrderId(UUID orderId) {
+  public void setOrderId(Object orderId) {
     this.orderId = orderId;
   }
 
-  public Order orderBookId(UUID orderBookId) {
+  public Order orderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
     return this;
   }
@@ -127,11 +126,11 @@ public class Order {
    * @return orderBookId
   **/
   @Schema(description = "")
-  public UUID getOrderBookId() {
+  public Object getOrderBookId() {
     return orderBookId;
   }
 
-  public void setOrderBookId(UUID orderBookId) {
+  public void setOrderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
   }
 
@@ -153,7 +152,7 @@ public class Order {
     this.kind = kind;
   }
 
-  public Order originalPrice(String originalPrice) {
+  public Order originalPrice(Object originalPrice) {
     this.originalPrice = originalPrice;
     return this;
   }
@@ -163,15 +162,15 @@ public class Order {
    * @return originalPrice
   **/
   @Schema(description = "If Kind is LIMIT, this is the original limit price. If Kind is MARKET, this may be 0 or omitted.")
-  public String getOriginalPrice() {
+  public Object getOriginalPrice() {
     return originalPrice;
   }
 
-  public void setOriginalPrice(String originalPrice) {
+  public void setOriginalPrice(Object originalPrice) {
     this.originalPrice = originalPrice;
   }
 
-  public Order avgFillPrice(String avgFillPrice) {
+  public Order avgFillPrice(Object avgFillPrice) {
     this.avgFillPrice = avgFillPrice;
     return this;
   }
@@ -181,15 +180,15 @@ public class Order {
    * @return avgFillPrice
   **/
   @Schema(description = "")
-  public String getAvgFillPrice() {
+  public Object getAvgFillPrice() {
     return avgFillPrice;
   }
 
-  public void setAvgFillPrice(String avgFillPrice) {
+  public void setAvgFillPrice(Object avgFillPrice) {
     this.avgFillPrice = avgFillPrice;
   }
 
-  public Order cancelledQuantity(String cancelledQuantity) {
+  public Order cancelledQuantity(Object cancelledQuantity) {
     this.cancelledQuantity = cancelledQuantity;
     return this;
   }
@@ -199,15 +198,15 @@ public class Order {
    * @return cancelledQuantity
   **/
   @Schema(description = "Quantity that was cancelled, if any.")
-  public String getCancelledQuantity() {
+  public Object getCancelledQuantity() {
     return cancelledQuantity;
   }
 
-  public void setCancelledQuantity(String cancelledQuantity) {
+  public void setCancelledQuantity(Object cancelledQuantity) {
     this.cancelledQuantity = cancelledQuantity;
   }
 
-  public Order openQuantity(String openQuantity) {
+  public Order openQuantity(Object openQuantity) {
     this.openQuantity = openQuantity;
     return this;
   }
@@ -217,15 +216,15 @@ public class Order {
    * @return openQuantity
   **/
   @Schema(description = "Quantity that is still open, i.e., not filled or cancelled.")
-  public String getOpenQuantity() {
+  public Object getOpenQuantity() {
     return openQuantity;
   }
 
-  public void setOpenQuantity(String openQuantity) {
+  public void setOpenQuantity(Object openQuantity) {
     this.openQuantity = openQuantity;
   }
 
-  public Order originalQuantity(String originalQuantity) {
+  public Order originalQuantity(Object originalQuantity) {
     this.originalQuantity = originalQuantity;
     return this;
   }
@@ -235,15 +234,15 @@ public class Order {
    * @return originalQuantity
   **/
   @Schema(description = "The original quantity of the order when it was created.")
-  public String getOriginalQuantity() {
+  public Object getOriginalQuantity() {
     return originalQuantity;
   }
 
-  public void setOriginalQuantity(String originalQuantity) {
+  public void setOriginalQuantity(Object originalQuantity) {
     this.originalQuantity = originalQuantity;
   }
 
-  public Order filledQuantity(String filledQuantity) {
+  public Order filledQuantity(Object filledQuantity) {
     this.filledQuantity = filledQuantity;
     return this;
   }
@@ -253,15 +252,15 @@ public class Order {
    * @return filledQuantity
   **/
   @Schema(description = "Quantity that has been filled so far.")
-  public String getFilledQuantity() {
+  public Object getFilledQuantity() {
     return filledQuantity;
   }
 
-  public void setFilledQuantity(String filledQuantity) {
+  public void setFilledQuantity(Object filledQuantity) {
     this.filledQuantity = filledQuantity;
   }
 
-  public Order filledNotional(String filledNotional) {
+  public Order filledNotional(Object filledNotional) {
     this.filledNotional = filledNotional;
     return this;
   }
@@ -271,15 +270,15 @@ public class Order {
    * @return filledNotional
   **/
   @Schema(description = "Quote quantity that has been filled so far.")
-  public String getFilledNotional() {
+  public Object getFilledNotional() {
     return filledNotional;
   }
 
-  public void setFilledNotional(String filledNotional) {
+  public void setFilledNotional(Object filledNotional) {
     this.filledNotional = filledNotional;
   }
 
-  public Order lastUpdateAt(OffsetDateTime lastUpdateAt) {
+  public Order lastUpdateAt(Object lastUpdateAt) {
     this.lastUpdateAt = lastUpdateAt;
     return this;
   }
@@ -289,15 +288,15 @@ public class Order {
    * @return lastUpdateAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getLastUpdateAt() {
+  public Object getLastUpdateAt() {
     return lastUpdateAt;
   }
 
-  public void setLastUpdateAt(OffsetDateTime lastUpdateAt) {
+  public void setLastUpdateAt(Object lastUpdateAt) {
     this.lastUpdateAt = lastUpdateAt;
   }
 
-  public Order openedAt(OffsetDateTime openedAt) {
+  public Order openedAt(Object openedAt) {
     this.openedAt = openedAt;
     return this;
   }
@@ -307,15 +306,15 @@ public class Order {
    * @return openedAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getOpenedAt() {
+  public Object getOpenedAt() {
     return openedAt;
   }
 
-  public void setOpenedAt(OffsetDateTime openedAt) {
+  public void setOpenedAt(Object openedAt) {
     this.openedAt = openedAt;
   }
 
-  public Order inverseLeverage(String inverseLeverage) {
+  public Order inverseLeverage(Object inverseLeverage) {
     this.inverseLeverage = inverseLeverage;
     return this;
   }
@@ -325,11 +324,11 @@ public class Order {
    * @return inverseLeverage
   **/
   @Schema(description = "")
-  public String getInverseLeverage() {
+  public Object getInverseLeverage() {
     return inverseLeverage;
   }
 
-  public void setInverseLeverage(String inverseLeverage) {
+  public void setInverseLeverage(Object inverseLeverage) {
     this.inverseLeverage = inverseLeverage;
   }
 
@@ -369,7 +368,7 @@ public class Order {
     this.status = status;
   }
 
-  public Order userId(UUID userId) {
+  public Order userId(Object userId) {
     this.userId = userId;
     return this;
   }
@@ -379,24 +378,16 @@ public class Order {
    * @return userId
   **/
   @Schema(description = "")
-  public UUID getUserId() {
+  public Object getUserId() {
     return userId;
   }
 
-  public void setUserId(UUID userId) {
+  public void setUserId(Object userId) {
     this.userId = userId;
   }
 
-  public Order orderModifiers(List<OrderModifierKind> orderModifiers) {
+  public Order orderModifiers(Object orderModifiers) {
     this.orderModifiers = orderModifiers;
-    return this;
-  }
-
-  public Order addOrderModifiersItem(OrderModifierKind orderModifiersItem) {
-    if (this.orderModifiers == null) {
-      this.orderModifiers = new ArrayList<OrderModifierKind>();
-    }
-    this.orderModifiers.add(orderModifiersItem);
     return this;
   }
 
@@ -405,15 +396,15 @@ public class Order {
    * @return orderModifiers
   **/
   @Schema(description = "")
-  public List<OrderModifierKind> getOrderModifiers() {
+  public Object getOrderModifiers() {
     return orderModifiers;
   }
 
-  public void setOrderModifiers(List<OrderModifierKind> orderModifiers) {
+  public void setOrderModifiers(Object orderModifiers) {
     this.orderModifiers = orderModifiers;
   }
 
-  public Order positionId(UUID positionId) {
+  public Order positionId(Object positionId) {
     this.positionId = positionId;
     return this;
   }
@@ -423,15 +414,15 @@ public class Order {
    * @return positionId
   **/
   @Schema(description = "")
-  public UUID getPositionId() {
+  public Object getPositionId() {
     return positionId;
   }
 
-  public void setPositionId(UUID positionId) {
+  public void setPositionId(Object positionId) {
     this.positionId = positionId;
   }
 
-  public Order orderInfo(String orderInfo) {
+  public Order orderInfo(Object orderInfo) {
     this.orderInfo = orderInfo;
     return this;
   }
@@ -441,15 +432,15 @@ public class Order {
    * @return orderInfo
   **/
   @Schema(description = "")
-  public String getOrderInfo() {
+  public Object getOrderInfo() {
     return orderInfo;
   }
 
-  public void setOrderInfo(String orderInfo) {
+  public void setOrderInfo(Object orderInfo) {
     this.orderInfo = orderInfo;
   }
 
-  public Order goodTillDate(OffsetDateTime goodTillDate) {
+  public Order goodTillDate(Object goodTillDate) {
     this.goodTillDate = goodTillDate;
     return this;
   }
@@ -459,15 +450,15 @@ public class Order {
    * @return goodTillDate
   **/
   @Schema(description = "")
-  public OffsetDateTime getGoodTillDate() {
+  public Object getGoodTillDate() {
     return goodTillDate;
   }
 
-  public void setGoodTillDate(OffsetDateTime goodTillDate) {
+  public void setGoodTillDate(Object goodTillDate) {
     this.goodTillDate = goodTillDate;
   }
 
-  public Order triggerPrice(String triggerPrice) {
+  public Order triggerPrice(Object triggerPrice) {
     this.triggerPrice = triggerPrice;
     return this;
   }
@@ -477,12 +468,30 @@ public class Order {
    * @return triggerPrice
   **/
   @Schema(description = "")
-  public String getTriggerPrice() {
+  public Object getTriggerPrice() {
     return triggerPrice;
   }
 
-  public void setTriggerPrice(String triggerPrice) {
+  public void setTriggerPrice(Object triggerPrice) {
     this.triggerPrice = triggerPrice;
+  }
+
+  public Order triggerType(TriggerType triggerType) {
+    this.triggerType = triggerType;
+    return this;
+  }
+
+   /**
+   * Get triggerType
+   * @return triggerType
+  **/
+  @Schema(description = "")
+  public TriggerType getTriggerType() {
+    return triggerType;
+  }
+
+  public void setTriggerType(TriggerType triggerType) {
+    this.triggerType = triggerType;
   }
 
 
@@ -515,12 +524,13 @@ public class Order {
         Objects.equals(this.positionId, order.positionId) &&
         Objects.equals(this.orderInfo, order.orderInfo) &&
         Objects.equals(this.goodTillDate, order.goodTillDate) &&
-        Objects.equals(this.triggerPrice, order.triggerPrice);
+        Objects.equals(this.triggerPrice, order.triggerPrice) &&
+        Objects.equals(this.triggerType, order.triggerType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderId, orderBookId, kind, originalPrice, avgFillPrice, cancelledQuantity, openQuantity, originalQuantity, filledQuantity, filledNotional, lastUpdateAt, openedAt, inverseLeverage, side, status, userId, orderModifiers, positionId, orderInfo, goodTillDate, triggerPrice);
+    return Objects.hash(orderId, orderBookId, kind, originalPrice, avgFillPrice, cancelledQuantity, openQuantity, originalQuantity, filledQuantity, filledNotional, lastUpdateAt, openedAt, inverseLeverage, side, status, userId, orderModifiers, positionId, orderInfo, goodTillDate, triggerPrice, triggerType);
   }
 
 
@@ -550,6 +560,7 @@ public class Order {
     sb.append("    orderInfo: ").append(toIndentedString(orderInfo)).append("\n");
     sb.append("    goodTillDate: ").append(toIndentedString(goodTillDate)).append("\n");
     sb.append("    triggerPrice: ").append(toIndentedString(triggerPrice)).append("\n");
+    sb.append("    triggerType: ").append(toIndentedString(triggerType)).append("\n");
     sb.append("}");
     return sb.toString();
   }

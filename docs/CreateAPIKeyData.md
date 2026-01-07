@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**keyId** | **String** |  |  [optional]
-**apiKey** | **String** |  |  [optional]
-**label** | **String** |  |  [optional]
+**keyId** | **Object** |  |  [optional]
+**apiKey** | **Object** |  |  [optional]
+**label** | **Object** |  |  [optional]

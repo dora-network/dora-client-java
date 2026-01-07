@@ -16,10 +16,15 @@ import tech.dora.model.AssetKind;
 import tech.dora.model.AssetRequestError;
 import tech.dora.model.CancelOrderResponse;
 import tech.dora.model.CandleResolution;
+import tech.dora.model.ClaimLeverageAccruedInterestRequest;
+import tech.dora.model.ClaimLeverageAccruedInterestResponse;
+import tech.dora.model.ClosePositionRequest;
+import tech.dora.model.ClosePositionResponse;
 import tech.dora.model.CreateAPIKeyRequest;
 import tech.dora.model.CreateAPIKeyResponse;
 import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponse;
+import tech.dora.model.CurrentLeverageAccruedInterestResponse;
 import tech.dora.model.EmailExistsResponse;
 import tech.dora.model.GetAPIKeyResponse;
 import tech.dora.model.GetAssetByIDResponse;
@@ -27,6 +32,7 @@ import tech.dora.model.GetAssetPriceResponse;
 import tech.dora.model.GetOrderBookResponse;
 import tech.dora.model.GetOrderBookSummaryResponse;
 import tech.dora.model.GetOrderResponse;
+import tech.dora.model.GetOrderbookStatsResponse;
 import tech.dora.model.GetPoolPriceResponse;
 import tech.dora.model.GetTopOfBookResponse;
 import tech.dora.model.GetTransactionResponse;
@@ -51,10 +57,11 @@ import tech.dora.model.ListTransactionsResponse;
 import tech.dora.model.LiveOrderbook;
 import tech.dora.model.NewIsolatedPositionRequest;
 import tech.dora.model.NewIsolatedPositionResponse;
-import org.threeten.bp.OffsetDateTime;
 import tech.dora.model.OrderBookStatus;
 import tech.dora.model.OrderKind;
-import tech.dora.model.OrderStatus;
+import tech.dora.model.OrderbookStats;
+import tech.dora.model.PayLeverageAccruedInterestRequest;
+import tech.dora.model.PayLeverageAccruedInterestResponse;
 import tech.dora.model.PoolRequestError;
 import tech.dora.model.ResponseEnvelope;
 import tech.dora.model.RevokeAPIKeyResponse;
@@ -71,11 +78,9 @@ import tech.dora.model.SupplyRequest;
 import tech.dora.model.SupplyResponse;
 import tech.dora.model.TradeRequestError;
 import tech.dora.model.TradeResponse;
-import tech.dora.model.TransactionKind;
 import tech.dora.model.TransactionRequestError;
 import tech.dora.model.TransferBalancesRequest;
 import tech.dora.model.TransferBalancesResponse;
-import java.util.UUID;
 import tech.dora.model.UnitePositionRequest;
 import tech.dora.model.UnitePositionResponse;
 import tech.dora.model.UpdateUserConfigRequest;
@@ -117,8 +122,8 @@ public class DefaultApiTest {
      */
     @Test
     public void cancelAllOpenOrdersTest() throws Exception {
-        String orderBookId = null;
-        UUID userId = null;
+        Object orderBookId = null;
+        Object userId = null;
         OrderKind orderKind = null;
         ListOrdersResponse response = api.cancelAllOpenOrders(orderBookId, userId, orderKind);
 
@@ -134,7 +139,7 @@ public class DefaultApiTest {
      */
     @Test
     public void cancelOrderByIdTest() throws Exception {
-        UUID orderId = null;
+        Object orderId = null;
         CancelOrderResponse response = api.cancelOrderById(orderId);
 
         // TODO: test validations
@@ -149,8 +154,38 @@ public class DefaultApiTest {
      */
     @Test
     public void checkUserEmailExistsTest() throws Exception {
-        String email = null;
+        Object email = null;
         EmailExistsResponse response = api.checkUserEmailExists(email);
+
+        // TODO: test validations
+    }
+    /**
+     * Claim current accrued leverage interest for a specific user
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void claimLeverageGetAccruedInterestTest() throws Exception {
+        ClaimLeverageAccruedInterestRequest body = null;
+        ClaimLeverageAccruedInterestResponse response = api.claimLeverageGetAccruedInterest(body);
+
+        // TODO: test validations
+    }
+    /**
+     * Close isolated positions, repaying the borrowed
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void closeIsolatedPositionTest() throws Exception {
+        ClosePositionRequest body = null;
+        ClosePositionResponse response = api.closeIsolatedPosition(body);
 
         // TODO: test validations
     }
@@ -209,7 +244,7 @@ public class DefaultApiTest {
      */
     @Test
     public void deleteUserTest() throws Exception {
-        UUID userId = null;
+        Object userId = null;
         UserDeletedResponse response = api.deleteUser(userId);
 
         // TODO: test validations
@@ -238,7 +273,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getAssetByIdTest() throws Exception {
-        UUID assetId = null;
+        Object assetId = null;
         GetAssetByIDResponse response = api.getAssetById(assetId);
 
         // TODO: test validations
@@ -253,7 +288,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getAssetPriceTest() throws Exception {
-        UUID assetId = null;
+        Object assetId = null;
         GetAssetPriceResponse response = api.getAssetPrice(assetId);
 
         // TODO: test validations
@@ -268,8 +303,8 @@ public class DefaultApiTest {
      */
     @Test
     public void getAssetsStreamTest() throws Exception {
-        OffsetDateTime since = null;
-        OffsetDateTime until = null;
+        Object since = null;
+        Object until = null;
         StreamAssetsResponse response = api.getAssetsStream(since, until);
 
         // TODO: test validations
@@ -284,9 +319,9 @@ public class DefaultApiTest {
      */
     @Test
     public void getCandleDataTest() throws Exception {
-        String orderBookId = null;
-        OffsetDateTime start = null;
-        OffsetDateTime end = null;
+        Object orderBookId = null;
+        Object start = null;
+        Object end = null;
         CandleResolution resolution = null;
         ListCandlesResponse response = api.getCandleData(orderBookId, start, end, resolution);
 
@@ -302,7 +337,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getCouponPaymentsByAssetIdTest() throws Exception {
-        UUID assetId = null;
+        Object assetId = null;
         ListCouponPaymentsResponse response = api.getCouponPaymentsByAssetId(assetId);
 
         // TODO: test validations
@@ -317,7 +352,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getL1DepthTest() throws Exception {
-        UUID orderBookId = null;
+        Object orderBookId = null;
         GetTopOfBookResponse response = api.getL1Depth(orderBookId);
 
         // TODO: test validations
@@ -332,7 +367,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getL2DepthTest() throws Exception {
-        UUID orderBookId = null;
+        Object orderBookId = null;
         ListOrderBookDepthResponse response = api.getL2Depth(orderBookId);
 
         // TODO: test validations
@@ -347,7 +382,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getL3DepthTest() throws Exception {
-        UUID orderBookId = null;
+        Object orderBookId = null;
         ListOrdersResponse response = api.getL3Depth(orderBookId);
 
         // TODO: test validations
@@ -404,7 +439,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getLedgerModuleByAssetTest() throws Exception {
-        UUID assetId = null;
+        Object assetId = null;
         LedgerModuleByAssetResponse response = api.getLedgerModuleByAsset(assetId);
 
         // TODO: test validations
@@ -447,7 +482,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getOrderByIdTest() throws Exception {
-        UUID orderId = null;
+        Object orderId = null;
         GetOrderResponse response = api.getOrderById(orderId);
 
         // TODO: test validations
@@ -462,7 +497,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getOrderbookByIdTest() throws Exception {
-        UUID orderBookId = null;
+        Object orderBookId = null;
         GetOrderBookResponse response = api.getOrderbookById(orderBookId);
 
         // TODO: test validations
@@ -477,7 +512,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getOrderbookDepthTest() throws Exception {
-        UUID orderBookId = null;
+        Object orderBookId = null;
         ListOrderBookDepthResponse response = api.getOrderbookDepth(orderBookId);
 
         // TODO: test validations
@@ -492,8 +527,38 @@ public class DefaultApiTest {
      */
     @Test
     public void getOrderbookOrdersTest() throws Exception {
-        UUID orderBookId = null;
+        Object orderBookId = null;
         ListOrdersResponse response = api.getOrderbookOrders(orderBookId);
+
+        // TODO: test validations
+    }
+    /**
+     * Get orderbook stats
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void getOrderbookStatsTest() throws Exception {
+        Object orderBookId = null;
+        GetOrderbookStatsResponse response = api.getOrderbookStats(orderBookId);
+
+        // TODO: test validations
+    }
+    /**
+     * Orderbook stats stream
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void getOrderbookStatsStreamTest() throws Exception {
+        Object orderBookId = null;
+        OrderbookStats response = api.getOrderbookStatsStream(orderBookId);
 
         // TODO: test validations
     }
@@ -507,7 +572,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getOrderbookSummaryTest() throws Exception {
-        UUID orderBookId = null;
+        Object orderBookId = null;
         GetOrderBookSummaryResponse response = api.getOrderbookSummary(orderBookId);
 
         // TODO: test validations
@@ -522,7 +587,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getOrderbookTopTest() throws Exception {
-        UUID orderBookId = null;
+        Object orderBookId = null;
         GetTopOfBookResponse response = api.getOrderbookTop(orderBookId);
 
         // TODO: test validations
@@ -537,7 +602,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getPoolPriceTest() throws Exception {
-        UUID poolId = null;
+        Object poolId = null;
         GetPoolPriceResponse response = api.getPoolPrice(poolId);
 
         // TODO: test validations
@@ -552,7 +617,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getTradeByIdTest() throws Exception {
-        UUID tradeId = null;
+        Object tradeId = null;
         TradeResponse response = api.getTradeById(tradeId);
 
         // TODO: test validations
@@ -567,12 +632,12 @@ public class DefaultApiTest {
      */
     @Test
     public void getTradesTest() throws Exception {
-        List<String> orderBookIds = null;
-        List<UUID> userIds = null;
-        OffsetDateTime start = null;
-        OffsetDateTime end = null;
-        Integer page = null;
-        Integer limit = null;
+        Object orderBookIds = null;
+        Object userIds = null;
+        Object start = null;
+        Object end = null;
+        Object page = null;
+        Object limit = null;
         ListTradeResponse response = api.getTrades(orderBookIds, userIds, start, end, page, limit);
 
         // TODO: test validations
@@ -587,7 +652,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getTransactionByIdTest() throws Exception {
-        UUID transactionId = null;
+        Object transactionId = null;
         GetTransactionResponse response = api.getTransactionById(transactionId);
 
         // TODO: test validations
@@ -602,13 +667,13 @@ public class DefaultApiTest {
      */
     @Test
     public void getTransactionsTest() throws Exception {
-        List<String> pools = null;
-        List<UUID> userIds = null;
-        List<TransactionKind> txKinds = null;
-        OffsetDateTime start = null;
-        OffsetDateTime end = null;
-        Integer page = null;
-        Integer limit = null;
+        Object pools = null;
+        Object userIds = null;
+        Object txKinds = null;
+        Object start = null;
+        Object end = null;
+        Object page = null;
+        Object limit = null;
         ListTransactionsResponse response = api.getTransactions(pools, userIds, txKinds, start, end, page, limit);
 
         // TODO: test validations
@@ -623,7 +688,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getUserByIdTest() throws Exception {
-        UUID userId = null;
+        Object userId = null;
         GetUserResponse response = api.getUserById(userId);
 
         // TODO: test validations
@@ -638,7 +703,7 @@ public class DefaultApiTest {
      */
     @Test
     public void getUserLedgerStreamTest() throws Exception {
-        UUID userId = null;
+        Object userId = null;
         StreamPositionsResponse response = api.getUserLedgerStream(userId);
 
         // TODO: test validations
@@ -653,9 +718,9 @@ public class DefaultApiTest {
      */
     @Test
     public void getUserOrderUpdatesStreamTest() throws Exception {
-        UUID userId = null;
-        UUID orderBookId = null;
-        OffsetDateTime since = null;
+        Object userId = null;
+        Object orderBookId = null;
+        Object since = null;
         StreamOrderUpdatesResponse response = api.getUserOrderUpdatesStream(userId, orderBookId, since);
 
         // TODO: test validations
@@ -670,8 +735,8 @@ public class DefaultApiTest {
      */
     @Test
     public void getUserOrdersUpdatesStreamAllTest() throws Exception {
-        UUID userId = null;
-        OffsetDateTime since = null;
+        Object userId = null;
+        Object since = null;
         StreamOrderUpdatesResponse response = api.getUserOrdersUpdatesStreamAll(userId, since);
 
         // TODO: test validations
@@ -700,8 +765,8 @@ public class DefaultApiTest {
      */
     @Test
     public void getUserTransactionsStreamTest() throws Exception {
-        UUID userId = null;
-        OffsetDateTime since = null;
+        Object userId = null;
+        Object since = null;
         StreamTransactionsResponse response = api.getUserTransactionsStream(userId, since);
 
         // TODO: test validations
@@ -717,6 +782,22 @@ public class DefaultApiTest {
     @Test
     public void getUsersAPIKeysTest() throws Exception {
         GetAPIKeyResponse response = api.getUsersAPIKeys();
+
+        // TODO: test validations
+    }
+    /**
+     * Get current accrued leverage interest for the user
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void leverageGetAccruedInterestByUserTest() throws Exception {
+        Object positionId = null;
+        Object assetId = null;
+        CurrentLeverageAccruedInterestResponse response = api.leverageGetAccruedInterestByUser(positionId, assetId);
 
         // TODO: test validations
     }
@@ -791,7 +872,7 @@ public class DefaultApiTest {
     @Test
     public void liquidityAddTest() throws Exception {
         LiquidityRequest body = null;
-        UUID poolId = null;
+        Object poolId = null;
         LiquidityResponse response = api.liquidityAdd(body, poolId);
 
         // TODO: test validations
@@ -807,7 +888,7 @@ public class DefaultApiTest {
     @Test
     public void liquiditySubtractTest() throws Exception {
         LiquidityRequest body = null;
-        UUID poolId = null;
+        Object poolId = null;
         LiquidityResponse response = api.liquiditySubtract(body, poolId);
 
         // TODO: test validations
@@ -822,16 +903,16 @@ public class DefaultApiTest {
      */
     @Test
     public void listAssetsTest() throws Exception {
-        OffsetDateTime createdAfter = null;
-        OffsetDateTime createdBefore = null;
+        Object createdAfter = null;
+        Object createdBefore = null;
         AssetKind assetKind = null;
-        Boolean canAddLiquidity = null;
-        Boolean canDirectBorrow = null;
-        Boolean canOnboard = null;
-        Boolean canTrade = null;
-        Boolean canVirtualBorrow = null;
-        Integer page = null;
-        Integer limit = null;
+        Object canAddLiquidity = null;
+        Object canDirectBorrow = null;
+        Object canOnboard = null;
+        Object canTrade = null;
+        Object canVirtualBorrow = null;
+        Object page = null;
+        Object limit = null;
         ListAssetsResponse response = api.listAssets(createdAfter, createdBefore, assetKind, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, page, limit);
 
         // TODO: test validations
@@ -847,10 +928,10 @@ public class DefaultApiTest {
     @Test
     public void listOrderBooksTest() throws Exception {
         OrderBookStatus status = null;
-        UUID baseAssetId = null;
-        UUID quoteAssetId = null;
-        Integer page = null;
-        Integer limit = null;
+        Object baseAssetId = null;
+        Object quoteAssetId = null;
+        Object page = null;
+        Object limit = null;
         ListOrderBooksResponse response = api.listOrderBooks(status, baseAssetId, quoteAssetId, page, limit);
 
         // TODO: test validations
@@ -865,14 +946,14 @@ public class DefaultApiTest {
      */
     @Test
     public void listOrdersTest() throws Exception {
-        List<UUID> orderBookId = null;
-        List<OrderKind> kind = null;
-        List<OrderStatus> status = null;
+        Object orderBookId = null;
+        Object kind = null;
+        Object status = null;
         Side side = null;
-        OffsetDateTime from = null;
-        OffsetDateTime to = null;
-        Integer page = null;
-        Integer limit = null;
+        Object from = null;
+        Object to = null;
+        Object page = null;
+        Object limit = null;
         ListOrdersResponse response = api.listOrders(orderBookId, kind, status, side, from, to, page, limit);
 
         // TODO: test validations
@@ -892,6 +973,21 @@ public class DefaultApiTest {
         // TODO: test validations
     }
     /**
+     * Pay current accrued leverage interest for a specific user
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void payLeverageGetAccruedInterestTest() throws Exception {
+        PayLeverageAccruedInterestRequest body = null;
+        PayLeverageAccruedInterestResponse response = api.payLeverageGetAccruedInterest(body);
+
+        // TODO: test validations
+    }
+    /**
      * Revoke apikey for a user
      *
      * 
@@ -901,7 +997,7 @@ public class DefaultApiTest {
      */
     @Test
     public void revokeAPIKeyForUserTest() throws Exception {
-        String keyId = null;
+        Object keyId = null;
         RevokeAPIKeyResponse response = api.revokeAPIKeyForUser(keyId);
 
         // TODO: test validations
@@ -916,8 +1012,9 @@ public class DefaultApiTest {
      */
     @Test
     public void streamAssetPricesTest() throws Exception {
-        OffsetDateTime since = null;
-        StreamAssetPricesResponse response = api.streamAssetPrices(since);
+        Object since = null;
+        Object assetId = null;
+        StreamAssetPricesResponse response = api.streamAssetPrices(since, assetId);
 
         // TODO: test validations
     }
@@ -931,8 +1028,8 @@ public class DefaultApiTest {
      */
     @Test
     public void streamCandleDataTest() throws Exception {
-        String orderBookId = null;
-        OffsetDateTime since = null;
+        Object orderBookId = null;
+        Object since = null;
         CandleResolution resolution = null;
         StreamCandlesResponse response = api.streamCandleData(orderBookId, since, resolution);
 
@@ -948,8 +1045,8 @@ public class DefaultApiTest {
      */
     @Test
     public void streamOrderBookBalancesTest() throws Exception {
-        UUID orderBookId = null;
-        OffsetDateTime since = null;
+        Object orderBookId = null;
+        Object since = null;
         StreamOrderBookBalancesResponse response = api.streamOrderBookBalances(orderBookId, since);
 
         // TODO: test validations
@@ -964,8 +1061,8 @@ public class DefaultApiTest {
      */
     @Test
     public void streamOrderbookOpenOrdersTest() throws Exception {
-        UUID orderBookId = null;
-        OffsetDateTime since = null;
+        Object orderBookId = null;
+        Object since = null;
         LiveOrderbook response = api.streamOrderbookOpenOrders(orderBookId, since);
 
         // TODO: test validations
@@ -980,8 +1077,8 @@ public class DefaultApiTest {
      */
     @Test
     public void streamTradesTest() throws Exception {
-        UUID orderBookId = null;
-        OffsetDateTime since = null;
+        Object orderBookId = null;
+        Object since = null;
         StreamTradesResponse response = api.streamTrades(orderBookId, since);
 
         // TODO: test validations
@@ -1012,7 +1109,7 @@ public class DefaultApiTest {
     @Test
     public void updateUserConfigTest() throws Exception {
         UpdateUserConfigRequest body = null;
-        UUID userId = null;
+        Object userId = null;
         UserUpdatedResponse response = api.updateUserConfig(body, userId);
 
         // TODO: test validations
@@ -1057,7 +1154,7 @@ public class DefaultApiTest {
      */
     @Test
     public void verifyUserTest() throws Exception {
-        UUID userId = null;
+        Object userId = null;
         UserUpdatedResponse response = api.verifyUser(userId);
 
         // TODO: test validations

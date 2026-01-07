@@ -25,16 +25,16 @@ import java.io.IOException;
  * PriceLevel
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class PriceLevel {
   @SerializedName("price")
-  private String price = null;
+  private Object price = null;
 
   @SerializedName("quantity")
-  private String quantity = null;
+  private Object quantity = null;
 
-  public PriceLevel price(String price) {
+  public PriceLevel price(Object price) {
     this.price = price;
     return this;
   }
@@ -44,15 +44,15 @@ public class PriceLevel {
    * @return price
   **/
   @Schema(description = "")
-  public String getPrice() {
+  public Object getPrice() {
     return price;
   }
 
-  public void setPrice(String price) {
+  public void setPrice(Object price) {
     this.price = price;
   }
 
-  public PriceLevel quantity(String quantity) {
+  public PriceLevel quantity(Object quantity) {
     this.quantity = quantity;
     return this;
   }
@@ -62,11 +62,11 @@ public class PriceLevel {
    * @return quantity
   **/
   @Schema(description = "")
-  public String getQuantity() {
+  public Object getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(String quantity) {
+  public void setQuantity(Object quantity) {
     this.quantity = quantity;
   }
 

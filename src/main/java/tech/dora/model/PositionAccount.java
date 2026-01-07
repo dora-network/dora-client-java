@@ -21,24 +21,23 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * PositionAccount
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class PositionAccount {
   @SerializedName("position_id")
-  private UUID positionId = null;
+  private Object positionId = null;
 
   @SerializedName("position_name")
-  private String positionName = null;
+  private Object positionName = null;
 
   @SerializedName("is_global")
-  private Boolean isGlobal = null;
+  private Object isGlobal = null;
 
-  public PositionAccount positionId(UUID positionId) {
+  public PositionAccount positionId(Object positionId) {
     this.positionId = positionId;
     return this;
   }
@@ -48,15 +47,15 @@ public class PositionAccount {
    * @return positionId
   **/
   @Schema(description = "The ID of the position account")
-  public UUID getPositionId() {
+  public Object getPositionId() {
     return positionId;
   }
 
-  public void setPositionId(UUID positionId) {
+  public void setPositionId(Object positionId) {
     this.positionId = positionId;
   }
 
-  public PositionAccount positionName(String positionName) {
+  public PositionAccount positionName(Object positionName) {
     this.positionName = positionName;
     return this;
   }
@@ -66,15 +65,15 @@ public class PositionAccount {
    * @return positionName
   **/
   @Schema(description = "The name of the position account")
-  public String getPositionName() {
+  public Object getPositionName() {
     return positionName;
   }
 
-  public void setPositionName(String positionName) {
+  public void setPositionName(Object positionName) {
     this.positionName = positionName;
   }
 
-  public PositionAccount isGlobal(Boolean isGlobal) {
+  public PositionAccount isGlobal(Object isGlobal) {
     this.isGlobal = isGlobal;
     return this;
   }
@@ -84,11 +83,11 @@ public class PositionAccount {
    * @return isGlobal
   **/
   @Schema(description = "Whether the position account is the global or an isolated account")
-  public Boolean isIsGlobal() {
+  public Object getIsGlobal() {
     return isGlobal;
   }
 
-  public void setIsGlobal(Boolean isGlobal) {
+  public void setIsGlobal(Object isGlobal) {
     this.isGlobal = isGlobal;
   }
 

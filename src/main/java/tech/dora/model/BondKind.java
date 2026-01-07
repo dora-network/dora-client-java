@@ -31,13 +31,13 @@ public enum BondKind {
   @SerializedName("PRINCIPAL-ONLY")
   PRINCIPAL_ONLY("PRINCIPAL-ONLY");
 
-  private String value;
+  private Object value;
 
-  BondKind(String value) {
+  BondKind(Object value) {
     this.value = value;
   }
 
-  public String getValue() {
+  public Object getValue() {
     return value;
   }
 
@@ -46,7 +46,7 @@ public enum BondKind {
     return String.valueOf(value);
   }
 
-  public static BondKind fromValue(String input) {
+  public static BondKind fromValue(Object input) {
     for (BondKind b : BondKind.values()) {
       if (b.value.equals(input)) {
         return b;
@@ -64,7 +64,7 @@ public enum BondKind {
     @Override
     public BondKind read(final JsonReader jsonReader) throws IOException {
       Object value = jsonReader.nextString();
-      return BondKind.fromValue((String)(value));
+      return BondKind.fromValue((Object)(value));
     }
   }
 }

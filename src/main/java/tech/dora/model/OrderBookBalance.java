@@ -21,27 +21,26 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * OrderBookBalance
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class OrderBookBalance {
   @SerializedName("order_book_id")
-  private UUID orderBookId = null;
+  private Object orderBookId = null;
 
   @SerializedName("base_quantity")
-  private Double baseQuantity = null;
+  private Object baseQuantity = null;
 
   @SerializedName("quote_quantity")
-  private Double quoteQuantity = null;
+  private Object quoteQuantity = null;
 
   @SerializedName("shares_quantity")
-  private Double sharesQuantity = null;
+  private Object sharesQuantity = null;
 
-  public OrderBookBalance orderBookId(UUID orderBookId) {
+  public OrderBookBalance orderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
     return this;
   }
@@ -51,15 +50,15 @@ public class OrderBookBalance {
    * @return orderBookId
   **/
   @Schema(description = "The ID of the order book.")
-  public UUID getOrderBookId() {
+  public Object getOrderBookId() {
     return orderBookId;
   }
 
-  public void setOrderBookId(UUID orderBookId) {
+  public void setOrderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
   }
 
-  public OrderBookBalance baseQuantity(Double baseQuantity) {
+  public OrderBookBalance baseQuantity(Object baseQuantity) {
     this.baseQuantity = baseQuantity;
     return this;
   }
@@ -69,15 +68,15 @@ public class OrderBookBalance {
    * @return baseQuantity
   **/
   @Schema(description = "The quantity of the base asset.")
-  public Double getBaseQuantity() {
+  public Object getBaseQuantity() {
     return baseQuantity;
   }
 
-  public void setBaseQuantity(Double baseQuantity) {
+  public void setBaseQuantity(Object baseQuantity) {
     this.baseQuantity = baseQuantity;
   }
 
-  public OrderBookBalance quoteQuantity(Double quoteQuantity) {
+  public OrderBookBalance quoteQuantity(Object quoteQuantity) {
     this.quoteQuantity = quoteQuantity;
     return this;
   }
@@ -87,15 +86,15 @@ public class OrderBookBalance {
    * @return quoteQuantity
   **/
   @Schema(description = "The quantity of the quote asset.")
-  public Double getQuoteQuantity() {
+  public Object getQuoteQuantity() {
     return quoteQuantity;
   }
 
-  public void setQuoteQuantity(Double quoteQuantity) {
+  public void setQuoteQuantity(Object quoteQuantity) {
     this.quoteQuantity = quoteQuantity;
   }
 
-  public OrderBookBalance sharesQuantity(Double sharesQuantity) {
+  public OrderBookBalance sharesQuantity(Object sharesQuantity) {
     this.sharesQuantity = sharesQuantity;
     return this;
   }
@@ -105,11 +104,11 @@ public class OrderBookBalance {
    * @return sharesQuantity
   **/
   @Schema(description = "The quantity of pool shares.")
-  public Double getSharesQuantity() {
+  public Object getSharesQuantity() {
     return sharesQuantity;
   }
 
-  public void setSharesQuantity(Double sharesQuantity) {
+  public void setSharesQuantity(Object sharesQuantity) {
     this.sharesQuantity = sharesQuantity;
   }
 

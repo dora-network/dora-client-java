@@ -21,21 +21,20 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import org.threeten.bp.OffsetDateTime;
 /**
  * CreateAPIKeyRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class CreateAPIKeyRequest {
   @SerializedName("label")
-  private String label = null;
+  private Object label = null;
 
   @SerializedName("expires")
-  private OffsetDateTime expires = null;
+  private Object expires = null;
 
-  public CreateAPIKeyRequest label(String label) {
+  public CreateAPIKeyRequest label(Object label) {
     this.label = label;
     return this;
   }
@@ -45,15 +44,15 @@ public class CreateAPIKeyRequest {
    * @return label
   **/
   @Schema(description = "")
-  public String getLabel() {
+  public Object getLabel() {
     return label;
   }
 
-  public void setLabel(String label) {
+  public void setLabel(Object label) {
     this.label = label;
   }
 
-  public CreateAPIKeyRequest expires(OffsetDateTime expires) {
+  public CreateAPIKeyRequest expires(Object expires) {
     this.expires = expires;
     return this;
   }
@@ -63,11 +62,11 @@ public class CreateAPIKeyRequest {
    * @return expires
   **/
   @Schema(description = "Date at which the api-key will expire")
-  public OffsetDateTime getExpires() {
+  public Object getExpires() {
     return expires;
   }
 
-  public void setExpires(OffsetDateTime expires) {
+  public void setExpires(Object expires) {
     this.expires = expires;
   }
 

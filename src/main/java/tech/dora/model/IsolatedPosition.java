@@ -21,24 +21,23 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * IsolatedPosition
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class IsolatedPosition {
   @SerializedName("global_position_id")
-  private UUID globalPositionId = null;
+  private Object globalPositionId = null;
 
   @SerializedName("isolated_position_id")
-  private UUID isolatedPositionId = null;
+  private Object isolatedPositionId = null;
 
   @SerializedName("transaction_id")
-  private UUID transactionId = null;
+  private Object transactionId = null;
 
-  public IsolatedPosition globalPositionId(UUID globalPositionId) {
+  public IsolatedPosition globalPositionId(Object globalPositionId) {
     this.globalPositionId = globalPositionId;
     return this;
   }
@@ -48,15 +47,15 @@ public class IsolatedPosition {
    * @return globalPositionId
   **/
   @Schema(description = "")
-  public UUID getGlobalPositionId() {
+  public Object getGlobalPositionId() {
     return globalPositionId;
   }
 
-  public void setGlobalPositionId(UUID globalPositionId) {
+  public void setGlobalPositionId(Object globalPositionId) {
     this.globalPositionId = globalPositionId;
   }
 
-  public IsolatedPosition isolatedPositionId(UUID isolatedPositionId) {
+  public IsolatedPosition isolatedPositionId(Object isolatedPositionId) {
     this.isolatedPositionId = isolatedPositionId;
     return this;
   }
@@ -66,15 +65,15 @@ public class IsolatedPosition {
    * @return isolatedPositionId
   **/
   @Schema(description = "")
-  public UUID getIsolatedPositionId() {
+  public Object getIsolatedPositionId() {
     return isolatedPositionId;
   }
 
-  public void setIsolatedPositionId(UUID isolatedPositionId) {
+  public void setIsolatedPositionId(Object isolatedPositionId) {
     this.isolatedPositionId = isolatedPositionId;
   }
 
-  public IsolatedPosition transactionId(UUID transactionId) {
+  public IsolatedPosition transactionId(Object transactionId) {
     this.transactionId = transactionId;
     return this;
   }
@@ -84,11 +83,11 @@ public class IsolatedPosition {
    * @return transactionId
   **/
   @Schema(description = "")
-  public UUID getTransactionId() {
+  public Object getTransactionId() {
     return transactionId;
   }
 
-  public void setTransactionId(UUID transactionId) {
+  public void setTransactionId(Object transactionId) {
     this.transactionId = transactionId;
   }
 

@@ -31,13 +31,13 @@ public enum OrderModifierKind {
   @SerializedName("MAX_BUY")
   MAX_BUY("MAX_BUY");
 
-  private String value;
+  private Object value;
 
-  OrderModifierKind(String value) {
+  OrderModifierKind(Object value) {
     this.value = value;
   }
 
-  public String getValue() {
+  public Object getValue() {
     return value;
   }
 
@@ -46,7 +46,7 @@ public enum OrderModifierKind {
     return String.valueOf(value);
   }
 
-  public static OrderModifierKind fromValue(String input) {
+  public static OrderModifierKind fromValue(Object input) {
     for (OrderModifierKind b : OrderModifierKind.values()) {
       if (b.value.equals(input)) {
         return b;
@@ -64,7 +64,7 @@ public enum OrderModifierKind {
     @Override
     public OrderModifierKind read(final JsonReader jsonReader) throws IOException {
       Object value = jsonReader.nextString();
-      return OrderModifierKind.fromValue((String)(value));
+      return OrderModifierKind.fromValue((Object)(value));
     }
   }
 }

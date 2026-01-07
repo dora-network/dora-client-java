@@ -14,54 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import tech.dora.model.CouponPayment;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
  * ListCouponPaymentsResponseEnvelope
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
-public class ListCouponPaymentsResponseEnvelope extends ResponseEnvelope {
-  @SerializedName("data")
-  private List<CouponPayment> listCouponPaymentsResponseEnvelopeData = null;
-
-  public ListCouponPaymentsResponseEnvelope listCouponPaymentsResponseEnvelopeData(List<CouponPayment> listCouponPaymentsResponseEnvelopeData) {
-    this.listCouponPaymentsResponseEnvelopeData = listCouponPaymentsResponseEnvelopeData;
-    return this;
-  }
-
-  public ListCouponPaymentsResponseEnvelope addListCouponPaymentsResponseEnvelopeDataItem(CouponPayment listCouponPaymentsResponseEnvelopeDataItem) {
-    if (this.listCouponPaymentsResponseEnvelopeData == null) {
-      this.listCouponPaymentsResponseEnvelopeData = new ArrayList<CouponPayment>();
-    }
-    this.listCouponPaymentsResponseEnvelopeData.add(listCouponPaymentsResponseEnvelopeDataItem);
-    return this;
-  }
-
-   /**
-   * Get listCouponPaymentsResponseEnvelopeData
-   * @return listCouponPaymentsResponseEnvelopeData
-  **/
-  @Schema(description = "")
-  public List<CouponPayment> getListCouponPaymentsResponseEnvelopeData() {
-    return listCouponPaymentsResponseEnvelopeData;
-  }
-
-  public void setListCouponPaymentsResponseEnvelopeData(List<CouponPayment> listCouponPaymentsResponseEnvelopeData) {
-    this.listCouponPaymentsResponseEnvelopeData = listCouponPaymentsResponseEnvelopeData;
-  }
-
+public class ListCouponPaymentsResponseEnvelope {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -71,14 +30,12 @@ public class ListCouponPaymentsResponseEnvelope extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ListCouponPaymentsResponseEnvelope listCouponPaymentsResponseEnvelope = (ListCouponPaymentsResponseEnvelope) o;
-    return Objects.equals(this.listCouponPaymentsResponseEnvelopeData, listCouponPaymentsResponseEnvelope.listCouponPaymentsResponseEnvelopeData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(listCouponPaymentsResponseEnvelopeData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -86,8 +43,7 @@ public class ListCouponPaymentsResponseEnvelope extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ListCouponPaymentsResponseEnvelope {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    listCouponPaymentsResponseEnvelopeData: ").append(toIndentedString(listCouponPaymentsResponseEnvelopeData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

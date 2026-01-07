@@ -41,13 +41,13 @@ public enum UserRole {
   @SerializedName("INTEGRATOR")
   INTEGRATOR("INTEGRATOR");
 
-  private String value;
+  private Object value;
 
-  UserRole(String value) {
+  UserRole(Object value) {
     this.value = value;
   }
 
-  public String getValue() {
+  public Object getValue() {
     return value;
   }
 
@@ -56,7 +56,7 @@ public enum UserRole {
     return String.valueOf(value);
   }
 
-  public static UserRole fromValue(String input) {
+  public static UserRole fromValue(Object input) {
     for (UserRole b : UserRole.values()) {
       if (b.value.equals(input)) {
         return b;
@@ -74,7 +74,7 @@ public enum UserRole {
     @Override
     public UserRole read(final JsonReader jsonReader) throws IOException {
       Object value = jsonReader.nextString();
-      return UserRole.fromValue((String)(value));
+      return UserRole.fromValue((Object)(value));
     }
   }
 }

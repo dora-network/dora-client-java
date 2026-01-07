@@ -21,24 +21,23 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * WithdrawRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class WithdrawRequest {
   @SerializedName("position_id")
-  private UUID positionId = null;
+  private Object positionId = null;
 
   @SerializedName("asset_id")
-  private UUID assetId = null;
+  private Object assetId = null;
 
   @SerializedName("quantity")
-  private String quantity = null;
+  private Object quantity = null;
 
-  public WithdrawRequest positionId(UUID positionId) {
+  public WithdrawRequest positionId(Object positionId) {
     this.positionId = positionId;
     return this;
   }
@@ -48,15 +47,15 @@ public class WithdrawRequest {
    * @return positionId
   **/
   @Schema(required = true, description = "")
-  public UUID getPositionId() {
+  public Object getPositionId() {
     return positionId;
   }
 
-  public void setPositionId(UUID positionId) {
+  public void setPositionId(Object positionId) {
     this.positionId = positionId;
   }
 
-  public WithdrawRequest assetId(UUID assetId) {
+  public WithdrawRequest assetId(Object assetId) {
     this.assetId = assetId;
     return this;
   }
@@ -66,15 +65,15 @@ public class WithdrawRequest {
    * @return assetId
   **/
   @Schema(required = true, description = "")
-  public UUID getAssetId() {
+  public Object getAssetId() {
     return assetId;
   }
 
-  public void setAssetId(UUID assetId) {
+  public void setAssetId(Object assetId) {
     this.assetId = assetId;
   }
 
-  public WithdrawRequest quantity(String quantity) {
+  public WithdrawRequest quantity(Object quantity) {
     this.quantity = quantity;
     return this;
   }
@@ -84,11 +83,11 @@ public class WithdrawRequest {
    * @return quantity
   **/
   @Schema(required = true, description = "")
-  public String getQuantity() {
+  public Object getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(String quantity) {
+  public void setQuantity(Object quantity) {
     this.quantity = quantity;
   }
 

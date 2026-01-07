@@ -21,28 +21,24 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import org.threeten.bp.OffsetDateTime;
 import tech.dora.model.OrderKind;
-import tech.dora.model.OrderModifierKind;
 import tech.dora.model.Side;
+import tech.dora.model.TriggerType;
 /**
  * CreateOrderRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class CreateOrderRequest {
   @SerializedName("quantity")
-  private String quantity = null;
+  private Object quantity = null;
 
   @SerializedName("inverse_leverage")
-  private String inverseLeverage = null;
+  private Object inverseLeverage = null;
 
   @SerializedName("price")
-  private String price = null;
+  private Object price = null;
 
   @SerializedName("kind")
   private OrderKind kind = null;
@@ -50,22 +46,25 @@ public class CreateOrderRequest {
   @SerializedName("side")
   private Side side = null;
 
-  @SerializedName("position_id")
-  private UUID positionId = null;
+  @SerializedName("from_global_position")
+  private Object fromGlobalPosition = null;
 
   @SerializedName("order_book_id")
-  private UUID orderBookId = null;
+  private Object orderBookId = null;
 
   @SerializedName("order_modifiers")
-  private List<OrderModifierKind> orderModifiers = null;
+  private Object orderModifiers = null;
 
   @SerializedName("good_till_date")
-  private OffsetDateTime goodTillDate = null;
+  private Object goodTillDate = null;
 
   @SerializedName("trigger_price")
-  private String triggerPrice = null;
+  private Object triggerPrice = null;
 
-  public CreateOrderRequest quantity(String quantity) {
+  @SerializedName("trigger_type")
+  private TriggerType triggerType = null;
+
+  public CreateOrderRequest quantity(Object quantity) {
     this.quantity = quantity;
     return this;
   }
@@ -75,15 +74,15 @@ public class CreateOrderRequest {
    * @return quantity
   **/
   @Schema(required = true, description = "")
-  public String getQuantity() {
+  public Object getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(String quantity) {
+  public void setQuantity(Object quantity) {
     this.quantity = quantity;
   }
 
-  public CreateOrderRequest inverseLeverage(String inverseLeverage) {
+  public CreateOrderRequest inverseLeverage(Object inverseLeverage) {
     this.inverseLeverage = inverseLeverage;
     return this;
   }
@@ -93,15 +92,15 @@ public class CreateOrderRequest {
    * @return inverseLeverage
   **/
   @Schema(required = true, description = "")
-  public String getInverseLeverage() {
+  public Object getInverseLeverage() {
     return inverseLeverage;
   }
 
-  public void setInverseLeverage(String inverseLeverage) {
+  public void setInverseLeverage(Object inverseLeverage) {
     this.inverseLeverage = inverseLeverage;
   }
 
-  public CreateOrderRequest price(String price) {
+  public CreateOrderRequest price(Object price) {
     this.price = price;
     return this;
   }
@@ -111,11 +110,11 @@ public class CreateOrderRequest {
    * @return price
   **/
   @Schema(description = "")
-  public String getPrice() {
+  public Object getPrice() {
     return price;
   }
 
-  public void setPrice(String price) {
+  public void setPrice(Object price) {
     this.price = price;
   }
 
@@ -143,10 +142,10 @@ public class CreateOrderRequest {
   }
 
    /**
-   * Get side
+   * Required: Must be either &#x27;BUY&#x27; or &#x27;SELL&#x27;
    * @return side
   **/
-  @Schema(required = true, description = "")
+  @Schema(required = true, description = "Required: Must be either 'BUY' or 'SELL'")
   public Side getSide() {
     return side;
   }
@@ -155,25 +154,25 @@ public class CreateOrderRequest {
     this.side = side;
   }
 
-  public CreateOrderRequest positionId(UUID positionId) {
-    this.positionId = positionId;
+  public CreateOrderRequest fromGlobalPosition(Object fromGlobalPosition) {
+    this.fromGlobalPosition = fromGlobalPosition;
     return this;
   }
 
    /**
-   * position ID to use for the order. required.
-   * @return positionId
+   * use global position for the order or isolated. required.
+   * @return fromGlobalPosition
   **/
-  @Schema(required = true, description = "position ID to use for the order. required.")
-  public UUID getPositionId() {
-    return positionId;
+  @Schema(required = true, description = "use global position for the order or isolated. required.")
+  public Object getFromGlobalPosition() {
+    return fromGlobalPosition;
   }
 
-  public void setPositionId(UUID positionId) {
-    this.positionId = positionId;
+  public void setFromGlobalPosition(Object fromGlobalPosition) {
+    this.fromGlobalPosition = fromGlobalPosition;
   }
 
-  public CreateOrderRequest orderBookId(UUID orderBookId) {
+  public CreateOrderRequest orderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
     return this;
   }
@@ -183,24 +182,16 @@ public class CreateOrderRequest {
    * @return orderBookId
   **/
   @Schema(required = true, description = "Required: the order book to submit the order to")
-  public UUID getOrderBookId() {
+  public Object getOrderBookId() {
     return orderBookId;
   }
 
-  public void setOrderBookId(UUID orderBookId) {
+  public void setOrderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
   }
 
-  public CreateOrderRequest orderModifiers(List<OrderModifierKind> orderModifiers) {
+  public CreateOrderRequest orderModifiers(Object orderModifiers) {
     this.orderModifiers = orderModifiers;
-    return this;
-  }
-
-  public CreateOrderRequest addOrderModifiersItem(OrderModifierKind orderModifiersItem) {
-    if (this.orderModifiers == null) {
-      this.orderModifiers = new ArrayList<OrderModifierKind>();
-    }
-    this.orderModifiers.add(orderModifiersItem);
     return this;
   }
 
@@ -209,15 +200,15 @@ public class CreateOrderRequest {
    * @return orderModifiers
   **/
   @Schema(description = "")
-  public List<OrderModifierKind> getOrderModifiers() {
+  public Object getOrderModifiers() {
     return orderModifiers;
   }
 
-  public void setOrderModifiers(List<OrderModifierKind> orderModifiers) {
+  public void setOrderModifiers(Object orderModifiers) {
     this.orderModifiers = orderModifiers;
   }
 
-  public CreateOrderRequest goodTillDate(OffsetDateTime goodTillDate) {
+  public CreateOrderRequest goodTillDate(Object goodTillDate) {
     this.goodTillDate = goodTillDate;
     return this;
   }
@@ -227,15 +218,15 @@ public class CreateOrderRequest {
    * @return goodTillDate
   **/
   @Schema(description = "")
-  public OffsetDateTime getGoodTillDate() {
+  public Object getGoodTillDate() {
     return goodTillDate;
   }
 
-  public void setGoodTillDate(OffsetDateTime goodTillDate) {
+  public void setGoodTillDate(Object goodTillDate) {
     this.goodTillDate = goodTillDate;
   }
 
-  public CreateOrderRequest triggerPrice(String triggerPrice) {
+  public CreateOrderRequest triggerPrice(Object triggerPrice) {
     this.triggerPrice = triggerPrice;
     return this;
   }
@@ -245,12 +236,30 @@ public class CreateOrderRequest {
    * @return triggerPrice
   **/
   @Schema(description = "")
-  public String getTriggerPrice() {
+  public Object getTriggerPrice() {
     return triggerPrice;
   }
 
-  public void setTriggerPrice(String triggerPrice) {
+  public void setTriggerPrice(Object triggerPrice) {
     this.triggerPrice = triggerPrice;
+  }
+
+  public CreateOrderRequest triggerType(TriggerType triggerType) {
+    this.triggerType = triggerType;
+    return this;
+  }
+
+   /**
+   * Get triggerType
+   * @return triggerType
+  **/
+  @Schema(description = "")
+  public TriggerType getTriggerType() {
+    return triggerType;
+  }
+
+  public void setTriggerType(TriggerType triggerType) {
+    this.triggerType = triggerType;
   }
 
 
@@ -268,16 +277,17 @@ public class CreateOrderRequest {
         Objects.equals(this.price, createOrderRequest.price) &&
         Objects.equals(this.kind, createOrderRequest.kind) &&
         Objects.equals(this.side, createOrderRequest.side) &&
-        Objects.equals(this.positionId, createOrderRequest.positionId) &&
+        Objects.equals(this.fromGlobalPosition, createOrderRequest.fromGlobalPosition) &&
         Objects.equals(this.orderBookId, createOrderRequest.orderBookId) &&
         Objects.equals(this.orderModifiers, createOrderRequest.orderModifiers) &&
         Objects.equals(this.goodTillDate, createOrderRequest.goodTillDate) &&
-        Objects.equals(this.triggerPrice, createOrderRequest.triggerPrice);
+        Objects.equals(this.triggerPrice, createOrderRequest.triggerPrice) &&
+        Objects.equals(this.triggerType, createOrderRequest.triggerType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(quantity, inverseLeverage, price, kind, side, positionId, orderBookId, orderModifiers, goodTillDate, triggerPrice);
+    return Objects.hash(quantity, inverseLeverage, price, kind, side, fromGlobalPosition, orderBookId, orderModifiers, goodTillDate, triggerPrice, triggerType);
   }
 
 
@@ -291,11 +301,12 @@ public class CreateOrderRequest {
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    kind: ").append(toIndentedString(kind)).append("\n");
     sb.append("    side: ").append(toIndentedString(side)).append("\n");
-    sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
+    sb.append("    fromGlobalPosition: ").append(toIndentedString(fromGlobalPosition)).append("\n");
     sb.append("    orderBookId: ").append(toIndentedString(orderBookId)).append("\n");
     sb.append("    orderModifiers: ").append(toIndentedString(orderModifiers)).append("\n");
     sb.append("    goodTillDate: ").append(toIndentedString(goodTillDate)).append("\n");
     sb.append("    triggerPrice: ").append(toIndentedString(triggerPrice)).append("\n");
+    sb.append("    triggerType: ").append(toIndentedString(triggerType)).append("\n");
     sb.append("}");
     return sb.toString();
   }

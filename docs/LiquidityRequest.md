@@ -3,5 +3,5 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**positionId** | [**UUID**](UUID.md) |  | 
-**quantity** | **String** |  | 
+**positionId** | **Object** |  | 
+**quantity** | **Object** |  | 

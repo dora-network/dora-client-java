@@ -73,13 +73,13 @@ public enum TransactionKind {
   @SerializedName("COUPON_PAYMENT")
   COUPON_PAYMENT("COUPON_PAYMENT");
 
-  private String value;
+  private Object value;
 
-  TransactionKind(String value) {
+  TransactionKind(Object value) {
     this.value = value;
   }
 
-  public String getValue() {
+  public Object getValue() {
     return value;
   }
 
@@ -88,7 +88,7 @@ public enum TransactionKind {
     return String.valueOf(value);
   }
 
-  public static TransactionKind fromValue(String input) {
+  public static TransactionKind fromValue(Object input) {
     for (TransactionKind b : TransactionKind.values()) {
       if (b.value.equals(input)) {
         return b;
@@ -106,7 +106,7 @@ public enum TransactionKind {
     @Override
     public TransactionKind read(final JsonReader jsonReader) throws IOException {
       Object value = jsonReader.nextString();
-      return TransactionKind.fromValue((String)(value));
+      return TransactionKind.fromValue((Object)(value));
     }
   }
 }

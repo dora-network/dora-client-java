@@ -21,31 +21,29 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
-import org.threeten.bp.OffsetDateTime;
 /**
  * UserConfig
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class UserConfig {
   @SerializedName("id")
-  private UUID id = null;
+  private Object id = null;
 
   @SerializedName("photo_url")
-  private String photoUrl = null;
+  private Object photoUrl = null;
 
   @SerializedName("timezone")
-  private String timezone = null;
+  private Object timezone = null;
 
   @SerializedName("created_at")
-  private OffsetDateTime createdAt = null;
+  private Object createdAt = null;
 
   @SerializedName("updated_at")
-  private OffsetDateTime updatedAt = null;
+  private Object updatedAt = null;
 
-  public UserConfig id(UUID id) {
+  public UserConfig id(Object id) {
     this.id = id;
     return this;
   }
@@ -55,15 +53,15 @@ public class UserConfig {
    * @return id
   **/
   @Schema(description = "")
-  public UUID getId() {
+  public Object getId() {
     return id;
   }
 
-  public void setId(UUID id) {
+  public void setId(Object id) {
     this.id = id;
   }
 
-  public UserConfig photoUrl(String photoUrl) {
+  public UserConfig photoUrl(Object photoUrl) {
     this.photoUrl = photoUrl;
     return this;
   }
@@ -73,15 +71,15 @@ public class UserConfig {
    * @return photoUrl
   **/
   @Schema(description = "")
-  public String getPhotoUrl() {
+  public Object getPhotoUrl() {
     return photoUrl;
   }
 
-  public void setPhotoUrl(String photoUrl) {
+  public void setPhotoUrl(Object photoUrl) {
     this.photoUrl = photoUrl;
   }
 
-  public UserConfig timezone(String timezone) {
+  public UserConfig timezone(Object timezone) {
     this.timezone = timezone;
     return this;
   }
@@ -91,15 +89,15 @@ public class UserConfig {
    * @return timezone
   **/
   @Schema(description = "User's timezone, e.g., 'America/New_York', or an offset.")
-  public String getTimezone() {
+  public Object getTimezone() {
     return timezone;
   }
 
-  public void setTimezone(String timezone) {
+  public void setTimezone(Object timezone) {
     this.timezone = timezone;
   }
 
-  public UserConfig createdAt(OffsetDateTime createdAt) {
+  public UserConfig createdAt(Object createdAt) {
     this.createdAt = createdAt;
     return this;
   }
@@ -109,15 +107,15 @@ public class UserConfig {
    * @return createdAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getCreatedAt() {
+  public Object getCreatedAt() {
     return createdAt;
   }
 
-  public void setCreatedAt(OffsetDateTime createdAt) {
+  public void setCreatedAt(Object createdAt) {
     this.createdAt = createdAt;
   }
 
-  public UserConfig updatedAt(OffsetDateTime updatedAt) {
+  public UserConfig updatedAt(Object updatedAt) {
     this.updatedAt = updatedAt;
     return this;
   }
@@ -127,11 +125,11 @@ public class UserConfig {
    * @return updatedAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getUpdatedAt() {
+  public Object getUpdatedAt() {
     return updatedAt;
   }
 
-  public void setUpdatedAt(OffsetDateTime updatedAt) {
+  public void setUpdatedAt(Object updatedAt) {
     this.updatedAt = updatedAt;
   }
 

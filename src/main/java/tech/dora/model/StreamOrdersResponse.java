@@ -14,16 +14,41 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
-import tech.dora.model.StreamOrdersEntry;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 /**
  * StreamOrdersResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
-public class StreamOrdersResponse extends ArrayList<StreamOrdersEntry> {
+public class StreamOrdersResponse {
+  @SerializedName("stream_orders_entry")
+  private Object streamOrdersEntry = null;
+
+  public StreamOrdersResponse streamOrdersEntry(Object streamOrdersEntry) {
+    this.streamOrdersEntry = streamOrdersEntry;
+    return this;
+  }
+
+   /**
+   * Get streamOrdersEntry
+   * @return streamOrdersEntry
+  **/
+  @Schema(description = "")
+  public Object getStreamOrdersEntry() {
+    return streamOrdersEntry;
+  }
+
+  public void setStreamOrdersEntry(Object streamOrdersEntry) {
+    this.streamOrdersEntry = streamOrdersEntry;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -33,12 +58,13 @@ public class StreamOrdersResponse extends ArrayList<StreamOrdersEntry> {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    return super.equals(o);
+    StreamOrdersResponse streamOrdersResponse = (StreamOrdersResponse) o;
+    return Objects.equals(this.streamOrdersEntry, streamOrdersResponse.streamOrdersEntry);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode());
+    return Objects.hash(streamOrdersEntry);
   }
 
 
@@ -46,7 +72,8 @@ public class StreamOrdersResponse extends ArrayList<StreamOrdersEntry> {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class StreamOrdersResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    
+    sb.append("    streamOrdersEntry: ").append(toIndentedString(streamOrdersEntry)).append("\n");
     sb.append("}");
     return sb.toString();
   }

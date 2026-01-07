@@ -21,24 +21,23 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * SupplyRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class SupplyRequest {
   @SerializedName("position_id")
-  private UUID positionId = null;
+  private Object positionId = null;
 
   @SerializedName("asset_id")
-  private UUID assetId = null;
+  private Object assetId = null;
 
   @SerializedName("quantity")
-  private String quantity = null;
+  private Object quantity = null;
 
-  public SupplyRequest positionId(UUID positionId) {
+  public SupplyRequest positionId(Object positionId) {
     this.positionId = positionId;
     return this;
   }
@@ -48,15 +47,15 @@ public class SupplyRequest {
    * @return positionId
   **/
   @Schema(required = true, description = "")
-  public UUID getPositionId() {
+  public Object getPositionId() {
     return positionId;
   }
 
-  public void setPositionId(UUID positionId) {
+  public void setPositionId(Object positionId) {
     this.positionId = positionId;
   }
 
-  public SupplyRequest assetId(UUID assetId) {
+  public SupplyRequest assetId(Object assetId) {
     this.assetId = assetId;
     return this;
   }
@@ -66,15 +65,15 @@ public class SupplyRequest {
    * @return assetId
   **/
   @Schema(required = true, description = "")
-  public UUID getAssetId() {
+  public Object getAssetId() {
     return assetId;
   }
 
-  public void setAssetId(UUID assetId) {
+  public void setAssetId(Object assetId) {
     this.assetId = assetId;
   }
 
-  public SupplyRequest quantity(String quantity) {
+  public SupplyRequest quantity(Object quantity) {
     this.quantity = quantity;
     return this;
   }
@@ -84,11 +83,11 @@ public class SupplyRequest {
    * @return quantity
   **/
   @Schema(required = true, description = "")
-  public String getQuantity() {
+  public Object getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(String quantity) {
+  public void setQuantity(Object quantity) {
     this.quantity = quantity;
   }
 

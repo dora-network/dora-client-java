@@ -15,15 +15,13 @@ package tech.dora.model;
 import java.util.Objects;
 import java.util.Arrays;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.HashMap;
-import java.util.Map;
 /**
  * Map of asset prices keyed by asset ID. Format: {\&quot;asset_id\&quot;: {\&quot;asset_id\&quot;: \&quot;uuid\&quot;, \&quot;price\&quot;: \&quot;decimal\&quot;, \&quot;time\&quot;: \&quot;date-time\&quot;}}
  */
 @Schema(description = "Map of asset prices keyed by asset ID. Format: {\"asset_id\": {\"asset_id\": \"uuid\", \"price\": \"decimal\", \"time\": \"date-time\"}}")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
-public class StreamAssetPricesResponse extends HashMap<String, Object> {
+public class StreamAssetPricesResponse {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -33,12 +31,12 @@ public class StreamAssetPricesResponse extends HashMap<String, Object> {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    return super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -46,7 +44,7 @@ public class StreamAssetPricesResponse extends HashMap<String, Object> {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class StreamAssetPricesResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

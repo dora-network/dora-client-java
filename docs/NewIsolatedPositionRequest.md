@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**globalPositionId** | [**UUID**](UUID.md) |  | 
-**assetId** | [**UUID**](UUID.md) |  | 
-**quantity** | **String** |  | 
-**positionName** | **String** |  |  [optional]
+**globalPositionId** | **Object** |  | 
+**assetId** | **Object** |  | 
+**quantity** | **Object** |  | 
+**positionName** | **Object** |  |  [optional]

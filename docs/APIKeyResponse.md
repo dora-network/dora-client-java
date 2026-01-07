@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**userId** | [**UUID**](UUID.md) |  |  [optional]
-**keyId** | **String** |  |  [optional]
-**label** | **String** |  |  [optional]
-**expiresAt** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
-**isActive** | **Boolean** |  |  [optional]
+**userId** | **Object** |  |  [optional]
+**keyId** | **Object** |  |  [optional]
+**label** | **Object** |  |  [optional]
+**expiresAt** | **Object** |  |  [optional]
+**isActive** | **Object** |  |  [optional]

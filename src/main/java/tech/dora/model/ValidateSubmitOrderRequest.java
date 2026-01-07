@@ -21,21 +21,20 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import org.threeten.bp.OffsetDateTime;
 import tech.dora.model.OrderKind;
 import tech.dora.model.Side;
 /**
  * ValidateSubmitOrderRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class ValidateSubmitOrderRequest {
   @SerializedName("quantity")
-  private String quantity = null;
+  private Object quantity = null;
 
   @SerializedName("tick")
-  private String tick = null;
+  private Object tick = null;
 
   @SerializedName("kind")
   private OrderKind kind = null;
@@ -44,18 +43,30 @@ public class ValidateSubmitOrderRequest {
   private Side side = null;
 
   @SerializedName("price")
-  private String price = null;
+  private Object price = null;
 
   @SerializedName("good_till_date")
-  private OffsetDateTime goodTillDate = null;
+  private Object goodTillDate = null;
 
   @SerializedName("inverse_leverage")
-  private String inverseLeverage = null;
+  private Object inverseLeverage = null;
 
   @SerializedName("user_balance")
-  private String userBalance = null;
+  private Object userBalance = null;
 
-  public ValidateSubmitOrderRequest quantity(String quantity) {
+  @SerializedName("base_asset_id")
+  private Object baseAssetId = null;
+
+  @SerializedName("quote_asset_id")
+  private Object quoteAssetId = null;
+
+  @SerializedName("position_assets")
+  private Object positionAssets = null;
+
+  @SerializedName("assets_config")
+  private Object assetsConfig = null;
+
+  public ValidateSubmitOrderRequest quantity(Object quantity) {
     this.quantity = quantity;
     return this;
   }
@@ -65,15 +76,15 @@ public class ValidateSubmitOrderRequest {
    * @return quantity
   **/
   @Schema(required = true, description = "")
-  public String getQuantity() {
+  public Object getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(String quantity) {
+  public void setQuantity(Object quantity) {
     this.quantity = quantity;
   }
 
-  public ValidateSubmitOrderRequest tick(String tick) {
+  public ValidateSubmitOrderRequest tick(Object tick) {
     this.tick = tick;
     return this;
   }
@@ -83,11 +94,11 @@ public class ValidateSubmitOrderRequest {
    * @return tick
   **/
   @Schema(required = true, description = "Minimum tradable increment for the selected order book")
-  public String getTick() {
+  public Object getTick() {
     return tick;
   }
 
-  public void setTick(String tick) {
+  public void setTick(Object tick) {
     this.tick = tick;
   }
 
@@ -97,10 +108,10 @@ public class ValidateSubmitOrderRequest {
   }
 
    /**
-   * Get kind
+   * Must be LIMIT or MARKET
    * @return kind
   **/
-  @Schema(required = true, description = "")
+  @Schema(required = true, description = "Must be LIMIT or MARKET")
   public OrderKind getKind() {
     return kind;
   }
@@ -115,10 +126,10 @@ public class ValidateSubmitOrderRequest {
   }
 
    /**
-   * Get side
+   * Must be BUY or SELL
    * @return side
   **/
-  @Schema(description = "")
+  @Schema(description = "Must be BUY or SELL")
   public Side getSide() {
     return side;
   }
@@ -127,7 +138,7 @@ public class ValidateSubmitOrderRequest {
     this.side = side;
   }
 
-  public ValidateSubmitOrderRequest price(String price) {
+  public ValidateSubmitOrderRequest price(Object price) {
     this.price = price;
     return this;
   }
@@ -137,15 +148,15 @@ public class ValidateSubmitOrderRequest {
    * @return price
   **/
   @Schema(required = true, description = "If kind is LIMIT, must be > 0; if MARKET it must be 0 or omitted")
-  public String getPrice() {
+  public Object getPrice() {
     return price;
   }
 
-  public void setPrice(String price) {
+  public void setPrice(Object price) {
     this.price = price;
   }
 
-  public ValidateSubmitOrderRequest goodTillDate(OffsetDateTime goodTillDate) {
+  public ValidateSubmitOrderRequest goodTillDate(Object goodTillDate) {
     this.goodTillDate = goodTillDate;
     return this;
   }
@@ -155,15 +166,15 @@ public class ValidateSubmitOrderRequest {
    * @return goodTillDate
   **/
   @Schema(description = "")
-  public OffsetDateTime getGoodTillDate() {
+  public Object getGoodTillDate() {
     return goodTillDate;
   }
 
-  public void setGoodTillDate(OffsetDateTime goodTillDate) {
+  public void setGoodTillDate(Object goodTillDate) {
     this.goodTillDate = goodTillDate;
   }
 
-  public ValidateSubmitOrderRequest inverseLeverage(String inverseLeverage) {
+  public ValidateSubmitOrderRequest inverseLeverage(Object inverseLeverage) {
     this.inverseLeverage = inverseLeverage;
     return this;
   }
@@ -173,15 +184,15 @@ public class ValidateSubmitOrderRequest {
    * @return inverseLeverage
   **/
   @Schema(required = true, description = "")
-  public String getInverseLeverage() {
+  public Object getInverseLeverage() {
     return inverseLeverage;
   }
 
-  public void setInverseLeverage(String inverseLeverage) {
+  public void setInverseLeverage(Object inverseLeverage) {
     this.inverseLeverage = inverseLeverage;
   }
 
-  public ValidateSubmitOrderRequest userBalance(String userBalance) {
+  public ValidateSubmitOrderRequest userBalance(Object userBalance) {
     this.userBalance = userBalance;
     return this;
   }
@@ -191,12 +202,84 @@ public class ValidateSubmitOrderRequest {
    * @return userBalance
   **/
   @Schema(required = true, description = "User balance used to ensure they can afford the requested quantity")
-  public String getUserBalance() {
+  public Object getUserBalance() {
     return userBalance;
   }
 
-  public void setUserBalance(String userBalance) {
+  public void setUserBalance(Object userBalance) {
     this.userBalance = userBalance;
+  }
+
+  public ValidateSubmitOrderRequest baseAssetId(Object baseAssetId) {
+    this.baseAssetId = baseAssetId;
+    return this;
+  }
+
+   /**
+   * base asset of orderbook
+   * @return baseAssetId
+  **/
+  @Schema(description = "base asset of orderbook")
+  public Object getBaseAssetId() {
+    return baseAssetId;
+  }
+
+  public void setBaseAssetId(Object baseAssetId) {
+    this.baseAssetId = baseAssetId;
+  }
+
+  public ValidateSubmitOrderRequest quoteAssetId(Object quoteAssetId) {
+    this.quoteAssetId = quoteAssetId;
+    return this;
+  }
+
+   /**
+   * quote asset of orderbook
+   * @return quoteAssetId
+  **/
+  @Schema(description = "quote asset of orderbook")
+  public Object getQuoteAssetId() {
+    return quoteAssetId;
+  }
+
+  public void setQuoteAssetId(Object quoteAssetId) {
+    this.quoteAssetId = quoteAssetId;
+  }
+
+  public ValidateSubmitOrderRequest positionAssets(Object positionAssets) {
+    this.positionAssets = positionAssets;
+    return this;
+  }
+
+   /**
+   * Full list of assets in the position with their price and collateral weight, required when inverse_leverage &lt; 1 for leverage health checks
+   * @return positionAssets
+  **/
+  @Schema(description = "Full list of assets in the position with their price and collateral weight, required when inverse_leverage < 1 for leverage health checks")
+  public Object getPositionAssets() {
+    return positionAssets;
+  }
+
+  public void setPositionAssets(Object positionAssets) {
+    this.positionAssets = positionAssets;
+  }
+
+  public ValidateSubmitOrderRequest assetsConfig(Object assetsConfig) {
+    this.assetsConfig = assetsConfig;
+    return this;
+  }
+
+   /**
+   * Configuration for the assets in the order
+   * @return assetsConfig
+  **/
+  @Schema(description = "Configuration for the assets in the order")
+  public Object getAssetsConfig() {
+    return assetsConfig;
+  }
+
+  public void setAssetsConfig(Object assetsConfig) {
+    this.assetsConfig = assetsConfig;
   }
 
 
@@ -216,12 +299,16 @@ public class ValidateSubmitOrderRequest {
         Objects.equals(this.price, validateSubmitOrderRequest.price) &&
         Objects.equals(this.goodTillDate, validateSubmitOrderRequest.goodTillDate) &&
         Objects.equals(this.inverseLeverage, validateSubmitOrderRequest.inverseLeverage) &&
-        Objects.equals(this.userBalance, validateSubmitOrderRequest.userBalance);
+        Objects.equals(this.userBalance, validateSubmitOrderRequest.userBalance) &&
+        Objects.equals(this.baseAssetId, validateSubmitOrderRequest.baseAssetId) &&
+        Objects.equals(this.quoteAssetId, validateSubmitOrderRequest.quoteAssetId) &&
+        Objects.equals(this.positionAssets, validateSubmitOrderRequest.positionAssets) &&
+        Objects.equals(this.assetsConfig, validateSubmitOrderRequest.assetsConfig);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(quantity, tick, kind, side, price, goodTillDate, inverseLeverage, userBalance);
+    return Objects.hash(quantity, tick, kind, side, price, goodTillDate, inverseLeverage, userBalance, baseAssetId, quoteAssetId, positionAssets, assetsConfig);
   }
 
 
@@ -238,6 +325,10 @@ public class ValidateSubmitOrderRequest {
     sb.append("    goodTillDate: ").append(toIndentedString(goodTillDate)).append("\n");
     sb.append("    inverseLeverage: ").append(toIndentedString(inverseLeverage)).append("\n");
     sb.append("    userBalance: ").append(toIndentedString(userBalance)).append("\n");
+    sb.append("    baseAssetId: ").append(toIndentedString(baseAssetId)).append("\n");
+    sb.append("    quoteAssetId: ").append(toIndentedString(quoteAssetId)).append("\n");
+    sb.append("    positionAssets: ").append(toIndentedString(positionAssets)).append("\n");
+    sb.append("    assetsConfig: ").append(toIndentedString(assetsConfig)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -25,13 +25,13 @@ import java.io.IOException;
  * ValidateSubmitOrderResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class ValidateSubmitOrderResponse {
   @SerializedName("data")
-  private Boolean data = null;
+  private Object data = null;
 
-  public ValidateSubmitOrderResponse data(Boolean data) {
+  public ValidateSubmitOrderResponse data(Object data) {
     this.data = data;
     return this;
   }
@@ -41,11 +41,11 @@ public class ValidateSubmitOrderResponse {
    * @return data
   **/
   @Schema(description = "")
-  public Boolean isData() {
+  public Object getData() {
     return data;
   }
 
-  public void setData(Boolean data) {
+  public void setData(Object data) {
     this.data = data;
   }
 

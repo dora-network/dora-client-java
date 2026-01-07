@@ -41,13 +41,13 @@ public enum LeverageType {
   @SerializedName("Snapshots")
   SNAPSHOTS("Snapshots");
 
-  private String value;
+  private Object value;
 
-  LeverageType(String value) {
+  LeverageType(Object value) {
     this.value = value;
   }
 
-  public String getValue() {
+  public Object getValue() {
     return value;
   }
 
@@ -56,7 +56,7 @@ public enum LeverageType {
     return String.valueOf(value);
   }
 
-  public static LeverageType fromValue(String input) {
+  public static LeverageType fromValue(Object input) {
     for (LeverageType b : LeverageType.values()) {
       if (b.value.equals(input)) {
         return b;
@@ -74,7 +74,7 @@ public enum LeverageType {
     @Override
     public LeverageType read(final JsonReader jsonReader) throws IOException {
       Object value = jsonReader.nextString();
-      return LeverageType.fromValue((String)(value));
+      return LeverageType.fromValue((Object)(value));
     }
   }
 }

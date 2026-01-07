@@ -21,28 +21,26 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
-import org.threeten.bp.OffsetDateTime;
 /**
  * OrderBookTop
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class OrderBookTop {
   @SerializedName("order_book_id")
-  private UUID orderBookId = null;
+  private Object orderBookId = null;
 
   @SerializedName("best_bid")
-  private String bestBid = null;
+  private Object bestBid = null;
 
   @SerializedName("best_ask")
-  private String bestAsk = null;
+  private Object bestAsk = null;
 
   @SerializedName("timestamp")
-  private OffsetDateTime timestamp = null;
+  private Object timestamp = null;
 
-  public OrderBookTop orderBookId(UUID orderBookId) {
+  public OrderBookTop orderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
     return this;
   }
@@ -52,15 +50,15 @@ public class OrderBookTop {
    * @return orderBookId
   **/
   @Schema(description = "")
-  public UUID getOrderBookId() {
+  public Object getOrderBookId() {
     return orderBookId;
   }
 
-  public void setOrderBookId(UUID orderBookId) {
+  public void setOrderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
   }
 
-  public OrderBookTop bestBid(String bestBid) {
+  public OrderBookTop bestBid(Object bestBid) {
     this.bestBid = bestBid;
     return this;
   }
@@ -70,15 +68,15 @@ public class OrderBookTop {
    * @return bestBid
   **/
   @Schema(description = "")
-  public String getBestBid() {
+  public Object getBestBid() {
     return bestBid;
   }
 
-  public void setBestBid(String bestBid) {
+  public void setBestBid(Object bestBid) {
     this.bestBid = bestBid;
   }
 
-  public OrderBookTop bestAsk(String bestAsk) {
+  public OrderBookTop bestAsk(Object bestAsk) {
     this.bestAsk = bestAsk;
     return this;
   }
@@ -88,15 +86,15 @@ public class OrderBookTop {
    * @return bestAsk
   **/
   @Schema(description = "")
-  public String getBestAsk() {
+  public Object getBestAsk() {
     return bestAsk;
   }
 
-  public void setBestAsk(String bestAsk) {
+  public void setBestAsk(Object bestAsk) {
     this.bestAsk = bestAsk;
   }
 
-  public OrderBookTop timestamp(OffsetDateTime timestamp) {
+  public OrderBookTop timestamp(Object timestamp) {
     this.timestamp = timestamp;
     return this;
   }
@@ -106,11 +104,11 @@ public class OrderBookTop {
    * @return timestamp
   **/
   @Schema(description = "")
-  public OffsetDateTime getTimestamp() {
+  public Object getTimestamp() {
     return timestamp;
   }
 
-  public void setTimestamp(OffsetDateTime timestamp) {
+  public void setTimestamp(Object timestamp) {
     this.timestamp = timestamp;
   }
 

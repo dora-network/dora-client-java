@@ -39,13 +39,13 @@ public enum CandleResolution {
   @SerializedName("1d")
   _1D("1d");
 
-  private String value;
+  private Object value;
 
-  CandleResolution(String value) {
+  CandleResolution(Object value) {
     this.value = value;
   }
 
-  public String getValue() {
+  public Object getValue() {
     return value;
   }
 
@@ -54,7 +54,7 @@ public enum CandleResolution {
     return String.valueOf(value);
   }
 
-  public static CandleResolution fromValue(String input) {
+  public static CandleResolution fromValue(Object input) {
     for (CandleResolution b : CandleResolution.values()) {
       if (b.value.equals(input)) {
         return b;
@@ -72,7 +72,7 @@ public enum CandleResolution {
     @Override
     public CandleResolution read(final JsonReader jsonReader) throws IOException {
       Object value = jsonReader.nextString();
-      return CandleResolution.fromValue((String)(value));
+      return CandleResolution.fromValue((Object)(value));
     }
   }
 }

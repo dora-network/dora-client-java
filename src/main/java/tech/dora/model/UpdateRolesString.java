@@ -26,16 +26,16 @@ import tech.dora.model.UserRole;
  * A generic struct to handle optional updates for roles fields in user requests.
  */
 @Schema(description = "A generic struct to handle optional updates for roles fields in user requests.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class UpdateRolesString {
   @SerializedName("update")
-  private Boolean update = null;
+  private Object update = null;
 
   @SerializedName("value")
   private UserRole value = null;
 
-  public UpdateRolesString update(Boolean update) {
+  public UpdateRolesString update(Object update) {
     this.update = update;
     return this;
   }
@@ -45,11 +45,11 @@ public class UpdateRolesString {
    * @return update
   **/
   @Schema(required = true, description = "Whether to update the field.")
-  public Boolean isUpdate() {
+  public Object getUpdate() {
     return update;
   }
 
-  public void setUpdate(Boolean update) {
+  public void setUpdate(Object update) {
     this.update = update;
   }
 
@@ -59,10 +59,10 @@ public class UpdateRolesString {
   }
 
    /**
-   * Get value
+   * The new value to set for the field.
    * @return value
   **/
-  @Schema(description = "")
+  @Schema(description = "The new value to set for the field.")
   public UserRole getValue() {
     return value;
   }

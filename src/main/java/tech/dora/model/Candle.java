@@ -21,37 +21,35 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
-import org.threeten.bp.OffsetDateTime;
 /**
  * Candle
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class Candle {
   @SerializedName("order_book_id")
-  private UUID orderBookId = null;
+  private Object orderBookId = null;
 
   @SerializedName("start_timestamp")
-  private OffsetDateTime startTimestamp = null;
+  private Object startTimestamp = null;
 
   @SerializedName("open")
-  private String open = null;
+  private Object open = null;
 
   @SerializedName("high")
-  private String high = null;
+  private Object high = null;
 
   @SerializedName("low")
-  private String low = null;
+  private Object low = null;
 
   @SerializedName("close")
-  private String close = null;
+  private Object close = null;
 
   @SerializedName("volume")
-  private String volume = null;
+  private Object volume = null;
 
-  public Candle orderBookId(UUID orderBookId) {
+  public Candle orderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
     return this;
   }
@@ -61,15 +59,15 @@ public class Candle {
    * @return orderBookId
   **/
   @Schema(description = "")
-  public UUID getOrderBookId() {
+  public Object getOrderBookId() {
     return orderBookId;
   }
 
-  public void setOrderBookId(UUID orderBookId) {
+  public void setOrderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
   }
 
-  public Candle startTimestamp(OffsetDateTime startTimestamp) {
+  public Candle startTimestamp(Object startTimestamp) {
     this.startTimestamp = startTimestamp;
     return this;
   }
@@ -79,15 +77,15 @@ public class Candle {
    * @return startTimestamp
   **/
   @Schema(description = "")
-  public OffsetDateTime getStartTimestamp() {
+  public Object getStartTimestamp() {
     return startTimestamp;
   }
 
-  public void setStartTimestamp(OffsetDateTime startTimestamp) {
+  public void setStartTimestamp(Object startTimestamp) {
     this.startTimestamp = startTimestamp;
   }
 
-  public Candle open(String open) {
+  public Candle open(Object open) {
     this.open = open;
     return this;
   }
@@ -97,15 +95,15 @@ public class Candle {
    * @return open
   **/
   @Schema(description = "")
-  public String getOpen() {
+  public Object getOpen() {
     return open;
   }
 
-  public void setOpen(String open) {
+  public void setOpen(Object open) {
     this.open = open;
   }
 
-  public Candle high(String high) {
+  public Candle high(Object high) {
     this.high = high;
     return this;
   }
@@ -115,15 +113,15 @@ public class Candle {
    * @return high
   **/
   @Schema(description = "")
-  public String getHigh() {
+  public Object getHigh() {
     return high;
   }
 
-  public void setHigh(String high) {
+  public void setHigh(Object high) {
     this.high = high;
   }
 
-  public Candle low(String low) {
+  public Candle low(Object low) {
     this.low = low;
     return this;
   }
@@ -133,15 +131,15 @@ public class Candle {
    * @return low
   **/
   @Schema(description = "")
-  public String getLow() {
+  public Object getLow() {
     return low;
   }
 
-  public void setLow(String low) {
+  public void setLow(Object low) {
     this.low = low;
   }
 
-  public Candle close(String close) {
+  public Candle close(Object close) {
     this.close = close;
     return this;
   }
@@ -151,15 +149,15 @@ public class Candle {
    * @return close
   **/
   @Schema(description = "")
-  public String getClose() {
+  public Object getClose() {
     return close;
   }
 
-  public void setClose(String close) {
+  public void setClose(Object close) {
     this.close = close;
   }
 
-  public Candle volume(String volume) {
+  public Candle volume(Object volume) {
     this.volume = volume;
     return this;
   }
@@ -169,11 +167,11 @@ public class Candle {
    * @return volume
   **/
   @Schema(description = "")
-  public String getVolume() {
+  public Object getVolume() {
     return volume;
   }
 
-  public void setVolume(String volume) {
+  public void setVolume(Object volume) {
     this.volume = volume;
   }
 

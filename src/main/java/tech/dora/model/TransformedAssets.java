@@ -21,32 +21,21 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 /**
  * TransformedAssets
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class TransformedAssets {
   @SerializedName("gained")
-  private Map<String, String> gained = null;
+  private Object gained = null;
 
   @SerializedName("lost")
-  private Map<String, String> lost = null;
+  private Object lost = null;
 
-  public TransformedAssets gained(Map<String, String> gained) {
+  public TransformedAssets gained(Object gained) {
     this.gained = gained;
-    return this;
-  }
-
-  public TransformedAssets putGainedItem(String key, String gainedItem) {
-    if (this.gained == null) {
-      this.gained = new HashMap<String, String>();
-    }
-    this.gained.put(key, gainedItem);
     return this;
   }
 
@@ -55,24 +44,16 @@ public class TransformedAssets {
    * @return gained
   **/
   @Schema(description = "Assets that have been gained by stablecoin equivalence transformations. They cannot be withdrawn from the platform until converted back to the original asset.")
-  public Map<String, String> getGained() {
+  public Object getGained() {
     return gained;
   }
 
-  public void setGained(Map<String, String> gained) {
+  public void setGained(Object gained) {
     this.gained = gained;
   }
 
-  public TransformedAssets lost(Map<String, String> lost) {
+  public TransformedAssets lost(Object lost) {
     this.lost = lost;
-    return this;
-  }
-
-  public TransformedAssets putLostItem(String key, String lostItem) {
-    if (this.lost == null) {
-      this.lost = new HashMap<String, String>();
-    }
-    this.lost.put(key, lostItem);
     return this;
   }
 
@@ -81,11 +62,11 @@ public class TransformedAssets {
    * @return lost
   **/
   @Schema(description = "Assets that have been lost by stablecoin equivalence transformations. They can be recovered by converting back any assets gained by stablecoin equivalence transformations.")
-  public Map<String, String> getLost() {
+  public Object getLost() {
     return lost;
   }
 
-  public void setLost(Map<String, String> lost) {
+  public void setLost(Object lost) {
     this.lost = lost;
   }
 

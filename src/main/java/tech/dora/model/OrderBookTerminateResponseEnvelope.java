@@ -14,43 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
  * OrderBookTerminateResponseEnvelope
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
-public class OrderBookTerminateResponseEnvelope extends ResponseEnvelope {
-  @SerializedName("data")
-  private Boolean orderBookTerminateResponseEnvelopeData = null;
-
-  public OrderBookTerminateResponseEnvelope orderBookTerminateResponseEnvelopeData(Boolean orderBookTerminateResponseEnvelopeData) {
-    this.orderBookTerminateResponseEnvelopeData = orderBookTerminateResponseEnvelopeData;
-    return this;
-  }
-
-   /**
-   * Get orderBookTerminateResponseEnvelopeData
-   * @return orderBookTerminateResponseEnvelopeData
-  **/
-  @Schema(description = "")
-  public Boolean getOrderBookTerminateResponseEnvelopeData() {
-    return orderBookTerminateResponseEnvelopeData;
-  }
-
-  public void setOrderBookTerminateResponseEnvelopeData(Boolean orderBookTerminateResponseEnvelopeData) {
-    this.orderBookTerminateResponseEnvelopeData = orderBookTerminateResponseEnvelopeData;
-  }
-
+public class OrderBookTerminateResponseEnvelope {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -60,14 +30,12 @@ public class OrderBookTerminateResponseEnvelope extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    OrderBookTerminateResponseEnvelope orderBookTerminateResponseEnvelope = (OrderBookTerminateResponseEnvelope) o;
-    return Objects.equals(this.orderBookTerminateResponseEnvelopeData, orderBookTerminateResponseEnvelope.orderBookTerminateResponseEnvelopeData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderBookTerminateResponseEnvelopeData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -75,8 +43,7 @@ public class OrderBookTerminateResponseEnvelope extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class OrderBookTerminateResponseEnvelope {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    orderBookTerminateResponseEnvelopeData: ").append(toIndentedString(orderBookTerminateResponseEnvelopeData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

@@ -21,33 +21,32 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * Liquidity
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class Liquidity {
   @SerializedName("order_book_id")
-  private UUID orderBookId = null;
+  private Object orderBookId = null;
 
   @SerializedName("position_id")
-  private UUID positionId = null;
+  private Object positionId = null;
 
   @SerializedName("transaction_id")
-  private UUID transactionId = null;
+  private Object transactionId = null;
 
   @SerializedName("base_quantity")
-  private String baseQuantity = null;
+  private Object baseQuantity = null;
 
   @SerializedName("quote_quantity")
-  private String quoteQuantity = null;
+  private Object quoteQuantity = null;
 
   @SerializedName("shares_quantity")
-  private String sharesQuantity = null;
+  private Object sharesQuantity = null;
 
-  public Liquidity orderBookId(UUID orderBookId) {
+  public Liquidity orderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
     return this;
   }
@@ -57,15 +56,15 @@ public class Liquidity {
    * @return orderBookId
   **/
   @Schema(description = "")
-  public UUID getOrderBookId() {
+  public Object getOrderBookId() {
     return orderBookId;
   }
 
-  public void setOrderBookId(UUID orderBookId) {
+  public void setOrderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
   }
 
-  public Liquidity positionId(UUID positionId) {
+  public Liquidity positionId(Object positionId) {
     this.positionId = positionId;
     return this;
   }
@@ -75,15 +74,15 @@ public class Liquidity {
    * @return positionId
   **/
   @Schema(description = "")
-  public UUID getPositionId() {
+  public Object getPositionId() {
     return positionId;
   }
 
-  public void setPositionId(UUID positionId) {
+  public void setPositionId(Object positionId) {
     this.positionId = positionId;
   }
 
-  public Liquidity transactionId(UUID transactionId) {
+  public Liquidity transactionId(Object transactionId) {
     this.transactionId = transactionId;
     return this;
   }
@@ -93,15 +92,15 @@ public class Liquidity {
    * @return transactionId
   **/
   @Schema(description = "")
-  public UUID getTransactionId() {
+  public Object getTransactionId() {
     return transactionId;
   }
 
-  public void setTransactionId(UUID transactionId) {
+  public void setTransactionId(Object transactionId) {
     this.transactionId = transactionId;
   }
 
-  public Liquidity baseQuantity(String baseQuantity) {
+  public Liquidity baseQuantity(Object baseQuantity) {
     this.baseQuantity = baseQuantity;
     return this;
   }
@@ -111,15 +110,15 @@ public class Liquidity {
    * @return baseQuantity
   **/
   @Schema(description = "")
-  public String getBaseQuantity() {
+  public Object getBaseQuantity() {
     return baseQuantity;
   }
 
-  public void setBaseQuantity(String baseQuantity) {
+  public void setBaseQuantity(Object baseQuantity) {
     this.baseQuantity = baseQuantity;
   }
 
-  public Liquidity quoteQuantity(String quoteQuantity) {
+  public Liquidity quoteQuantity(Object quoteQuantity) {
     this.quoteQuantity = quoteQuantity;
     return this;
   }
@@ -129,15 +128,15 @@ public class Liquidity {
    * @return quoteQuantity
   **/
   @Schema(description = "")
-  public String getQuoteQuantity() {
+  public Object getQuoteQuantity() {
     return quoteQuantity;
   }
 
-  public void setQuoteQuantity(String quoteQuantity) {
+  public void setQuoteQuantity(Object quoteQuantity) {
     this.quoteQuantity = quoteQuantity;
   }
 
-  public Liquidity sharesQuantity(String sharesQuantity) {
+  public Liquidity sharesQuantity(Object sharesQuantity) {
     this.sharesQuantity = sharesQuantity;
     return this;
   }
@@ -147,11 +146,11 @@ public class Liquidity {
    * @return sharesQuantity
   **/
   @Schema(description = "")
-  public String getSharesQuantity() {
+  public Object getSharesQuantity() {
     return sharesQuantity;
   }
 
-  public void setSharesQuantity(String sharesQuantity) {
+  public void setSharesQuantity(Object sharesQuantity) {
     this.sharesQuantity = sharesQuantity;
   }
 

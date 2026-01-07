@@ -21,18 +21,17 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * UnitePositionRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class UnitePositionRequest {
   @SerializedName("global_position_id")
-  private UUID globalPositionId = null;
+  private Object globalPositionId = null;
 
-  public UnitePositionRequest globalPositionId(UUID globalPositionId) {
+  public UnitePositionRequest globalPositionId(Object globalPositionId) {
     this.globalPositionId = globalPositionId;
     return this;
   }
@@ -42,11 +41,11 @@ public class UnitePositionRequest {
    * @return globalPositionId
   **/
   @Schema(required = true, description = "")
-  public UUID getGlobalPositionId() {
+  public Object getGlobalPositionId() {
     return globalPositionId;
   }
 
-  public void setGlobalPositionId(UUID globalPositionId) {
+  public void setGlobalPositionId(Object globalPositionId) {
     this.globalPositionId = globalPositionId;
   }
 

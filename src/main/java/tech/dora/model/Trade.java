@@ -21,56 +21,54 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
-import org.threeten.bp.OffsetDateTime;
 import tech.dora.model.Side;
 /**
  * Trade
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class Trade {
   @SerializedName("transaction_id")
-  private UUID transactionId = null;
+  private Object transactionId = null;
 
   @SerializedName("asset_0")
-  private UUID asset0 = null;
+  private Object asset0 = null;
 
   @SerializedName("created_at")
-  private OffsetDateTime createdAt = null;
+  private Object createdAt = null;
 
   @SerializedName("fee_asset_id")
-  private UUID feeAssetId = null;
+  private Object feeAssetId = null;
 
   @SerializedName("fee_quantity")
-  private String feeQuantity = null;
+  private Object feeQuantity = null;
 
   @SerializedName("order_book_id")
-  private UUID orderBookId = null;
+  private Object orderBookId = null;
 
   @SerializedName("order_id")
-  private UUID orderId = null;
+  private Object orderId = null;
 
   @SerializedName("order_seq")
-  private Integer orderSeq = null;
+  private Object orderSeq = null;
 
   @SerializedName("price")
-  private String price = null;
+  private Object price = null;
 
   @SerializedName("quantity_0")
-  private String quantity0 = null;
+  private Object quantity0 = null;
 
   @SerializedName("user_id")
-  private UUID userId = null;
+  private Object userId = null;
 
   @SerializedName("side")
   private Side side = null;
 
   @SerializedName("aggressor_indicator")
-  private Boolean aggressorIndicator = null;
+  private Object aggressorIndicator = null;
 
-  public Trade transactionId(UUID transactionId) {
+  public Trade transactionId(Object transactionId) {
     this.transactionId = transactionId;
     return this;
   }
@@ -80,15 +78,15 @@ public class Trade {
    * @return transactionId
   **/
   @Schema(description = "")
-  public UUID getTransactionId() {
+  public Object getTransactionId() {
     return transactionId;
   }
 
-  public void setTransactionId(UUID transactionId) {
+  public void setTransactionId(Object transactionId) {
     this.transactionId = transactionId;
   }
 
-  public Trade asset0(UUID asset0) {
+  public Trade asset0(Object asset0) {
     this.asset0 = asset0;
     return this;
   }
@@ -98,15 +96,15 @@ public class Trade {
    * @return asset0
   **/
   @Schema(description = "")
-  public UUID getAsset0() {
+  public Object getAsset0() {
     return asset0;
   }
 
-  public void setAsset0(UUID asset0) {
+  public void setAsset0(Object asset0) {
     this.asset0 = asset0;
   }
 
-  public Trade createdAt(OffsetDateTime createdAt) {
+  public Trade createdAt(Object createdAt) {
     this.createdAt = createdAt;
     return this;
   }
@@ -116,15 +114,15 @@ public class Trade {
    * @return createdAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getCreatedAt() {
+  public Object getCreatedAt() {
     return createdAt;
   }
 
-  public void setCreatedAt(OffsetDateTime createdAt) {
+  public void setCreatedAt(Object createdAt) {
     this.createdAt = createdAt;
   }
 
-  public Trade feeAssetId(UUID feeAssetId) {
+  public Trade feeAssetId(Object feeAssetId) {
     this.feeAssetId = feeAssetId;
     return this;
   }
@@ -134,15 +132,15 @@ public class Trade {
    * @return feeAssetId
   **/
   @Schema(description = "")
-  public UUID getFeeAssetId() {
+  public Object getFeeAssetId() {
     return feeAssetId;
   }
 
-  public void setFeeAssetId(UUID feeAssetId) {
+  public void setFeeAssetId(Object feeAssetId) {
     this.feeAssetId = feeAssetId;
   }
 
-  public Trade feeQuantity(String feeQuantity) {
+  public Trade feeQuantity(Object feeQuantity) {
     this.feeQuantity = feeQuantity;
     return this;
   }
@@ -152,15 +150,15 @@ public class Trade {
    * @return feeQuantity
   **/
   @Schema(description = "")
-  public String getFeeQuantity() {
+  public Object getFeeQuantity() {
     return feeQuantity;
   }
 
-  public void setFeeQuantity(String feeQuantity) {
+  public void setFeeQuantity(Object feeQuantity) {
     this.feeQuantity = feeQuantity;
   }
 
-  public Trade orderBookId(UUID orderBookId) {
+  public Trade orderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
     return this;
   }
@@ -170,15 +168,15 @@ public class Trade {
    * @return orderBookId
   **/
   @Schema(description = "")
-  public UUID getOrderBookId() {
+  public Object getOrderBookId() {
     return orderBookId;
   }
 
-  public void setOrderBookId(UUID orderBookId) {
+  public void setOrderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
   }
 
-  public Trade orderId(UUID orderId) {
+  public Trade orderId(Object orderId) {
     this.orderId = orderId;
     return this;
   }
@@ -188,15 +186,15 @@ public class Trade {
    * @return orderId
   **/
   @Schema(description = "")
-  public UUID getOrderId() {
+  public Object getOrderId() {
     return orderId;
   }
 
-  public void setOrderId(UUID orderId) {
+  public void setOrderId(Object orderId) {
     this.orderId = orderId;
   }
 
-  public Trade orderSeq(Integer orderSeq) {
+  public Trade orderSeq(Object orderSeq) {
     this.orderSeq = orderSeq;
     return this;
   }
@@ -206,15 +204,15 @@ public class Trade {
    * @return orderSeq
   **/
   @Schema(description = "")
-  public Integer getOrderSeq() {
+  public Object getOrderSeq() {
     return orderSeq;
   }
 
-  public void setOrderSeq(Integer orderSeq) {
+  public void setOrderSeq(Object orderSeq) {
     this.orderSeq = orderSeq;
   }
 
-  public Trade price(String price) {
+  public Trade price(Object price) {
     this.price = price;
     return this;
   }
@@ -224,15 +222,15 @@ public class Trade {
    * @return price
   **/
   @Schema(description = "")
-  public String getPrice() {
+  public Object getPrice() {
     return price;
   }
 
-  public void setPrice(String price) {
+  public void setPrice(Object price) {
     this.price = price;
   }
 
-  public Trade quantity0(String quantity0) {
+  public Trade quantity0(Object quantity0) {
     this.quantity0 = quantity0;
     return this;
   }
@@ -242,15 +240,15 @@ public class Trade {
    * @return quantity0
   **/
   @Schema(description = "")
-  public String getQuantity0() {
+  public Object getQuantity0() {
     return quantity0;
   }
 
-  public void setQuantity0(String quantity0) {
+  public void setQuantity0(Object quantity0) {
     this.quantity0 = quantity0;
   }
 
-  public Trade userId(UUID userId) {
+  public Trade userId(Object userId) {
     this.userId = userId;
     return this;
   }
@@ -260,11 +258,11 @@ public class Trade {
    * @return userId
   **/
   @Schema(description = "")
-  public UUID getUserId() {
+  public Object getUserId() {
     return userId;
   }
 
-  public void setUserId(UUID userId) {
+  public void setUserId(Object userId) {
     this.userId = userId;
   }
 
@@ -286,7 +284,7 @@ public class Trade {
     this.side = side;
   }
 
-  public Trade aggressorIndicator(Boolean aggressorIndicator) {
+  public Trade aggressorIndicator(Object aggressorIndicator) {
     this.aggressorIndicator = aggressorIndicator;
     return this;
   }
@@ -296,11 +294,11 @@ public class Trade {
    * @return aggressorIndicator
   **/
   @Schema(description = "If true, then this order is the aggressor (taker); otherwise it is the maker.")
-  public Boolean isAggressorIndicator() {
+  public Object getAggressorIndicator() {
     return aggressorIndicator;
   }
 
-  public void setAggressorIndicator(Boolean aggressorIndicator) {
+  public void setAggressorIndicator(Object aggressorIndicator) {
     this.aggressorIndicator = aggressorIndicator;
   }
 

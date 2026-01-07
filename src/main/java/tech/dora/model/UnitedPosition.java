@@ -21,23 +21,20 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 /**
  * UnitedPosition
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class UnitedPosition {
   @SerializedName("global_position_id")
-  private UUID globalPositionId = null;
+  private Object globalPositionId = null;
 
   @SerializedName("transaction_ids")
-  private List<UUID> transactionIds = null;
+  private Object transactionIds = null;
 
-  public UnitedPosition globalPositionId(UUID globalPositionId) {
+  public UnitedPosition globalPositionId(Object globalPositionId) {
     this.globalPositionId = globalPositionId;
     return this;
   }
@@ -47,24 +44,16 @@ public class UnitedPosition {
    * @return globalPositionId
   **/
   @Schema(description = "")
-  public UUID getGlobalPositionId() {
+  public Object getGlobalPositionId() {
     return globalPositionId;
   }
 
-  public void setGlobalPositionId(UUID globalPositionId) {
+  public void setGlobalPositionId(Object globalPositionId) {
     this.globalPositionId = globalPositionId;
   }
 
-  public UnitedPosition transactionIds(List<UUID> transactionIds) {
+  public UnitedPosition transactionIds(Object transactionIds) {
     this.transactionIds = transactionIds;
-    return this;
-  }
-
-  public UnitedPosition addTransactionIdsItem(UUID transactionIdsItem) {
-    if (this.transactionIds == null) {
-      this.transactionIds = new ArrayList<UUID>();
-    }
-    this.transactionIds.add(transactionIdsItem);
     return this;
   }
 
@@ -73,11 +62,11 @@ public class UnitedPosition {
    * @return transactionIds
   **/
   @Schema(description = "")
-  public List<UUID> getTransactionIds() {
+  public Object getTransactionIds() {
     return transactionIds;
   }
 
-  public void setTransactionIds(List<UUID> transactionIds) {
+  public void setTransactionIds(Object transactionIds) {
     this.transactionIds = transactionIds;
   }
 

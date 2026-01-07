@@ -21,71 +21,54 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 /**
  * UserValue
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class UserValue {
   @SerializedName("available")
-  private Map<String, String> available = null;
+  private Object available = null;
 
   @SerializedName("locked")
-  private Map<String, String> locked = null;
+  private Object locked = null;
 
   @SerializedName("borrowed")
-  private Map<String, String> borrowed = null;
+  private Object borrowed = null;
 
   @SerializedName("supplied")
-  private Map<String, String> supplied = null;
-
-  @SerializedName("collateral")
-  private Map<String, String> collateral = null;
-
-  @SerializedName("supplied_collateral")
-  private Map<String, String> suppliedCollateral = null;
+  private Object supplied = null;
 
   @SerializedName("impending_borrows")
-  private Map<String, String> impendingBorrows = null;
+  private Object impendingBorrows = null;
 
   @SerializedName("borrow_limit")
-  private Map<String, String> borrowLimit = null;
+  private Object borrowLimit = null;
 
   @SerializedName("liquidation_threshold")
-  private Map<String, String> liquidationThreshold = null;
+  private Object liquidationThreshold = null;
 
   @SerializedName("notional_long")
-  private Map<String, String> notionalLong = null;
+  private Object notionalLong = null;
 
   @SerializedName("notional_short")
-  private Map<String, String> notionalShort = null;
+  private Object notionalShort = null;
 
   @SerializedName("portfolio_value")
-  private Map<String, String> portfolioValue = null;
+  private Object portfolioValue = null;
 
   @SerializedName("net_liquidation_value")
-  private Map<String, String> netLiquidationValue = null;
+  private Object netLiquidationValue = null;
 
   @SerializedName("unrealized_pnl")
-  private Map<String, String> unrealizedPnl = null;
+  private Object unrealizedPnl = null;
 
   @SerializedName("realized_pnl")
-  private Map<String, String> realizedPnl = null;
+  private Object realizedPnl = null;
 
-  public UserValue available(Map<String, String> available) {
+  public UserValue available(Object available) {
     this.available = available;
-    return this;
-  }
-
-  public UserValue putAvailableItem(String key, String availableItem) {
-    if (this.available == null) {
-      this.available = new HashMap<String, String>();
-    }
-    this.available.put(key, availableItem);
     return this;
   }
 
@@ -94,24 +77,16 @@ public class UserValue {
    * @return available
   **/
   @Schema(description = "")
-  public Map<String, String> getAvailable() {
+  public Object getAvailable() {
     return available;
   }
 
-  public void setAvailable(Map<String, String> available) {
+  public void setAvailable(Object available) {
     this.available = available;
   }
 
-  public UserValue locked(Map<String, String> locked) {
+  public UserValue locked(Object locked) {
     this.locked = locked;
-    return this;
-  }
-
-  public UserValue putLockedItem(String key, String lockedItem) {
-    if (this.locked == null) {
-      this.locked = new HashMap<String, String>();
-    }
-    this.locked.put(key, lockedItem);
     return this;
   }
 
@@ -120,24 +95,16 @@ public class UserValue {
    * @return locked
   **/
   @Schema(description = "")
-  public Map<String, String> getLocked() {
+  public Object getLocked() {
     return locked;
   }
 
-  public void setLocked(Map<String, String> locked) {
+  public void setLocked(Object locked) {
     this.locked = locked;
   }
 
-  public UserValue borrowed(Map<String, String> borrowed) {
+  public UserValue borrowed(Object borrowed) {
     this.borrowed = borrowed;
-    return this;
-  }
-
-  public UserValue putBorrowedItem(String key, String borrowedItem) {
-    if (this.borrowed == null) {
-      this.borrowed = new HashMap<String, String>();
-    }
-    this.borrowed.put(key, borrowedItem);
     return this;
   }
 
@@ -146,24 +113,16 @@ public class UserValue {
    * @return borrowed
   **/
   @Schema(description = "")
-  public Map<String, String> getBorrowed() {
+  public Object getBorrowed() {
     return borrowed;
   }
 
-  public void setBorrowed(Map<String, String> borrowed) {
+  public void setBorrowed(Object borrowed) {
     this.borrowed = borrowed;
   }
 
-  public UserValue supplied(Map<String, String> supplied) {
+  public UserValue supplied(Object supplied) {
     this.supplied = supplied;
-    return this;
-  }
-
-  public UserValue putSuppliedItem(String key, String suppliedItem) {
-    if (this.supplied == null) {
-      this.supplied = new HashMap<String, String>();
-    }
-    this.supplied.put(key, suppliedItem);
     return this;
   }
 
@@ -172,76 +131,16 @@ public class UserValue {
    * @return supplied
   **/
   @Schema(description = "")
-  public Map<String, String> getSupplied() {
+  public Object getSupplied() {
     return supplied;
   }
 
-  public void setSupplied(Map<String, String> supplied) {
+  public void setSupplied(Object supplied) {
     this.supplied = supplied;
   }
 
-  public UserValue collateral(Map<String, String> collateral) {
-    this.collateral = collateral;
-    return this;
-  }
-
-  public UserValue putCollateralItem(String key, String collateralItem) {
-    if (this.collateral == null) {
-      this.collateral = new HashMap<String, String>();
-    }
-    this.collateral.put(key, collateralItem);
-    return this;
-  }
-
-   /**
-   * Get collateral
-   * @return collateral
-  **/
-  @Schema(description = "")
-  public Map<String, String> getCollateral() {
-    return collateral;
-  }
-
-  public void setCollateral(Map<String, String> collateral) {
-    this.collateral = collateral;
-  }
-
-  public UserValue suppliedCollateral(Map<String, String> suppliedCollateral) {
-    this.suppliedCollateral = suppliedCollateral;
-    return this;
-  }
-
-  public UserValue putSuppliedCollateralItem(String key, String suppliedCollateralItem) {
-    if (this.suppliedCollateral == null) {
-      this.suppliedCollateral = new HashMap<String, String>();
-    }
-    this.suppliedCollateral.put(key, suppliedCollateralItem);
-    return this;
-  }
-
-   /**
-   * Get suppliedCollateral
-   * @return suppliedCollateral
-  **/
-  @Schema(description = "")
-  public Map<String, String> getSuppliedCollateral() {
-    return suppliedCollateral;
-  }
-
-  public void setSuppliedCollateral(Map<String, String> suppliedCollateral) {
-    this.suppliedCollateral = suppliedCollateral;
-  }
-
-  public UserValue impendingBorrows(Map<String, String> impendingBorrows) {
+  public UserValue impendingBorrows(Object impendingBorrows) {
     this.impendingBorrows = impendingBorrows;
-    return this;
-  }
-
-  public UserValue putImpendingBorrowsItem(String key, String impendingBorrowsItem) {
-    if (this.impendingBorrows == null) {
-      this.impendingBorrows = new HashMap<String, String>();
-    }
-    this.impendingBorrows.put(key, impendingBorrowsItem);
     return this;
   }
 
@@ -250,24 +149,16 @@ public class UserValue {
    * @return impendingBorrows
   **/
   @Schema(description = "")
-  public Map<String, String> getImpendingBorrows() {
+  public Object getImpendingBorrows() {
     return impendingBorrows;
   }
 
-  public void setImpendingBorrows(Map<String, String> impendingBorrows) {
+  public void setImpendingBorrows(Object impendingBorrows) {
     this.impendingBorrows = impendingBorrows;
   }
 
-  public UserValue borrowLimit(Map<String, String> borrowLimit) {
+  public UserValue borrowLimit(Object borrowLimit) {
     this.borrowLimit = borrowLimit;
-    return this;
-  }
-
-  public UserValue putBorrowLimitItem(String key, String borrowLimitItem) {
-    if (this.borrowLimit == null) {
-      this.borrowLimit = new HashMap<String, String>();
-    }
-    this.borrowLimit.put(key, borrowLimitItem);
     return this;
   }
 
@@ -276,24 +167,16 @@ public class UserValue {
    * @return borrowLimit
   **/
   @Schema(description = "")
-  public Map<String, String> getBorrowLimit() {
+  public Object getBorrowLimit() {
     return borrowLimit;
   }
 
-  public void setBorrowLimit(Map<String, String> borrowLimit) {
+  public void setBorrowLimit(Object borrowLimit) {
     this.borrowLimit = borrowLimit;
   }
 
-  public UserValue liquidationThreshold(Map<String, String> liquidationThreshold) {
+  public UserValue liquidationThreshold(Object liquidationThreshold) {
     this.liquidationThreshold = liquidationThreshold;
-    return this;
-  }
-
-  public UserValue putLiquidationThresholdItem(String key, String liquidationThresholdItem) {
-    if (this.liquidationThreshold == null) {
-      this.liquidationThreshold = new HashMap<String, String>();
-    }
-    this.liquidationThreshold.put(key, liquidationThresholdItem);
     return this;
   }
 
@@ -302,24 +185,16 @@ public class UserValue {
    * @return liquidationThreshold
   **/
   @Schema(description = "")
-  public Map<String, String> getLiquidationThreshold() {
+  public Object getLiquidationThreshold() {
     return liquidationThreshold;
   }
 
-  public void setLiquidationThreshold(Map<String, String> liquidationThreshold) {
+  public void setLiquidationThreshold(Object liquidationThreshold) {
     this.liquidationThreshold = liquidationThreshold;
   }
 
-  public UserValue notionalLong(Map<String, String> notionalLong) {
+  public UserValue notionalLong(Object notionalLong) {
     this.notionalLong = notionalLong;
-    return this;
-  }
-
-  public UserValue putNotionalLongItem(String key, String notionalLongItem) {
-    if (this.notionalLong == null) {
-      this.notionalLong = new HashMap<String, String>();
-    }
-    this.notionalLong.put(key, notionalLongItem);
     return this;
   }
 
@@ -328,24 +203,16 @@ public class UserValue {
    * @return notionalLong
   **/
   @Schema(description = "")
-  public Map<String, String> getNotionalLong() {
+  public Object getNotionalLong() {
     return notionalLong;
   }
 
-  public void setNotionalLong(Map<String, String> notionalLong) {
+  public void setNotionalLong(Object notionalLong) {
     this.notionalLong = notionalLong;
   }
 
-  public UserValue notionalShort(Map<String, String> notionalShort) {
+  public UserValue notionalShort(Object notionalShort) {
     this.notionalShort = notionalShort;
-    return this;
-  }
-
-  public UserValue putNotionalShortItem(String key, String notionalShortItem) {
-    if (this.notionalShort == null) {
-      this.notionalShort = new HashMap<String, String>();
-    }
-    this.notionalShort.put(key, notionalShortItem);
     return this;
   }
 
@@ -354,24 +221,16 @@ public class UserValue {
    * @return notionalShort
   **/
   @Schema(description = "")
-  public Map<String, String> getNotionalShort() {
+  public Object getNotionalShort() {
     return notionalShort;
   }
 
-  public void setNotionalShort(Map<String, String> notionalShort) {
+  public void setNotionalShort(Object notionalShort) {
     this.notionalShort = notionalShort;
   }
 
-  public UserValue portfolioValue(Map<String, String> portfolioValue) {
+  public UserValue portfolioValue(Object portfolioValue) {
     this.portfolioValue = portfolioValue;
-    return this;
-  }
-
-  public UserValue putPortfolioValueItem(String key, String portfolioValueItem) {
-    if (this.portfolioValue == null) {
-      this.portfolioValue = new HashMap<String, String>();
-    }
-    this.portfolioValue.put(key, portfolioValueItem);
     return this;
   }
 
@@ -380,24 +239,16 @@ public class UserValue {
    * @return portfolioValue
   **/
   @Schema(description = "")
-  public Map<String, String> getPortfolioValue() {
+  public Object getPortfolioValue() {
     return portfolioValue;
   }
 
-  public void setPortfolioValue(Map<String, String> portfolioValue) {
+  public void setPortfolioValue(Object portfolioValue) {
     this.portfolioValue = portfolioValue;
   }
 
-  public UserValue netLiquidationValue(Map<String, String> netLiquidationValue) {
+  public UserValue netLiquidationValue(Object netLiquidationValue) {
     this.netLiquidationValue = netLiquidationValue;
-    return this;
-  }
-
-  public UserValue putNetLiquidationValueItem(String key, String netLiquidationValueItem) {
-    if (this.netLiquidationValue == null) {
-      this.netLiquidationValue = new HashMap<String, String>();
-    }
-    this.netLiquidationValue.put(key, netLiquidationValueItem);
     return this;
   }
 
@@ -406,24 +257,16 @@ public class UserValue {
    * @return netLiquidationValue
   **/
   @Schema(description = "")
-  public Map<String, String> getNetLiquidationValue() {
+  public Object getNetLiquidationValue() {
     return netLiquidationValue;
   }
 
-  public void setNetLiquidationValue(Map<String, String> netLiquidationValue) {
+  public void setNetLiquidationValue(Object netLiquidationValue) {
     this.netLiquidationValue = netLiquidationValue;
   }
 
-  public UserValue unrealizedPnl(Map<String, String> unrealizedPnl) {
+  public UserValue unrealizedPnl(Object unrealizedPnl) {
     this.unrealizedPnl = unrealizedPnl;
-    return this;
-  }
-
-  public UserValue putUnrealizedPnlItem(String key, String unrealizedPnlItem) {
-    if (this.unrealizedPnl == null) {
-      this.unrealizedPnl = new HashMap<String, String>();
-    }
-    this.unrealizedPnl.put(key, unrealizedPnlItem);
     return this;
   }
 
@@ -432,24 +275,16 @@ public class UserValue {
    * @return unrealizedPnl
   **/
   @Schema(description = "")
-  public Map<String, String> getUnrealizedPnl() {
+  public Object getUnrealizedPnl() {
     return unrealizedPnl;
   }
 
-  public void setUnrealizedPnl(Map<String, String> unrealizedPnl) {
+  public void setUnrealizedPnl(Object unrealizedPnl) {
     this.unrealizedPnl = unrealizedPnl;
   }
 
-  public UserValue realizedPnl(Map<String, String> realizedPnl) {
+  public UserValue realizedPnl(Object realizedPnl) {
     this.realizedPnl = realizedPnl;
-    return this;
-  }
-
-  public UserValue putRealizedPnlItem(String key, String realizedPnlItem) {
-    if (this.realizedPnl == null) {
-      this.realizedPnl = new HashMap<String, String>();
-    }
-    this.realizedPnl.put(key, realizedPnlItem);
     return this;
   }
 
@@ -458,11 +293,11 @@ public class UserValue {
    * @return realizedPnl
   **/
   @Schema(description = "")
-  public Map<String, String> getRealizedPnl() {
+  public Object getRealizedPnl() {
     return realizedPnl;
   }
 
-  public void setRealizedPnl(Map<String, String> realizedPnl) {
+  public void setRealizedPnl(Object realizedPnl) {
     this.realizedPnl = realizedPnl;
   }
 
@@ -480,8 +315,6 @@ public class UserValue {
         Objects.equals(this.locked, userValue.locked) &&
         Objects.equals(this.borrowed, userValue.borrowed) &&
         Objects.equals(this.supplied, userValue.supplied) &&
-        Objects.equals(this.collateral, userValue.collateral) &&
-        Objects.equals(this.suppliedCollateral, userValue.suppliedCollateral) &&
         Objects.equals(this.impendingBorrows, userValue.impendingBorrows) &&
         Objects.equals(this.borrowLimit, userValue.borrowLimit) &&
         Objects.equals(this.liquidationThreshold, userValue.liquidationThreshold) &&
@@ -495,7 +328,7 @@ public class UserValue {
 
   @Override
   public int hashCode() {
-    return Objects.hash(available, locked, borrowed, supplied, collateral, suppliedCollateral, impendingBorrows, borrowLimit, liquidationThreshold, notionalLong, notionalShort, portfolioValue, netLiquidationValue, unrealizedPnl, realizedPnl);
+    return Objects.hash(available, locked, borrowed, supplied, impendingBorrows, borrowLimit, liquidationThreshold, notionalLong, notionalShort, portfolioValue, netLiquidationValue, unrealizedPnl, realizedPnl);
   }
 
 
@@ -508,8 +341,6 @@ public class UserValue {
     sb.append("    locked: ").append(toIndentedString(locked)).append("\n");
     sb.append("    borrowed: ").append(toIndentedString(borrowed)).append("\n");
     sb.append("    supplied: ").append(toIndentedString(supplied)).append("\n");
-    sb.append("    collateral: ").append(toIndentedString(collateral)).append("\n");
-    sb.append("    suppliedCollateral: ").append(toIndentedString(suppliedCollateral)).append("\n");
     sb.append("    impendingBorrows: ").append(toIndentedString(impendingBorrows)).append("\n");
     sb.append("    borrowLimit: ").append(toIndentedString(borrowLimit)).append("\n");
     sb.append("    liquidationThreshold: ").append(toIndentedString(liquidationThreshold)).append("\n");

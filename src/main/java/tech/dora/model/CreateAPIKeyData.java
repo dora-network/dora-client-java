@@ -25,19 +25,19 @@ import java.io.IOException;
  * CreateAPIKeyData
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class CreateAPIKeyData {
   @SerializedName("key_id")
-  private String keyId = null;
+  private Object keyId = null;
 
   @SerializedName("api_key")
-  private String apiKey = null;
+  private Object apiKey = null;
 
   @SerializedName("label")
-  private String label = null;
+  private Object label = null;
 
-  public CreateAPIKeyData keyId(String keyId) {
+  public CreateAPIKeyData keyId(Object keyId) {
     this.keyId = keyId;
     return this;
   }
@@ -47,15 +47,15 @@ public class CreateAPIKeyData {
    * @return keyId
   **/
   @Schema(description = "")
-  public String getKeyId() {
+  public Object getKeyId() {
     return keyId;
   }
 
-  public void setKeyId(String keyId) {
+  public void setKeyId(Object keyId) {
     this.keyId = keyId;
   }
 
-  public CreateAPIKeyData apiKey(String apiKey) {
+  public CreateAPIKeyData apiKey(Object apiKey) {
     this.apiKey = apiKey;
     return this;
   }
@@ -65,15 +65,15 @@ public class CreateAPIKeyData {
    * @return apiKey
   **/
   @Schema(description = "")
-  public String getApiKey() {
+  public Object getApiKey() {
     return apiKey;
   }
 
-  public void setApiKey(String apiKey) {
+  public void setApiKey(Object apiKey) {
     this.apiKey = apiKey;
   }
 
-  public CreateAPIKeyData label(String label) {
+  public CreateAPIKeyData label(Object label) {
     this.label = label;
     return this;
   }
@@ -83,11 +83,11 @@ public class CreateAPIKeyData {
    * @return label
   **/
   @Schema(description = "")
-  public String getLabel() {
+  public Object getLabel() {
     return label;
   }
 
-  public void setLabel(String label) {
+  public void setLabel(Object label) {
     this.label = label;
   }
 

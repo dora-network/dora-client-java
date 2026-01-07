@@ -7,6 +7,8 @@ Method | HTTP request | Description
 [**cancelAllOpenOrders**](DefaultApi.md#cancelAllOpenOrders) | **DELETE** /v1/orders | Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#x27;s orders on specific orderbook
 [**cancelOrderById**](DefaultApi.md#cancelOrderById) | **DELETE** /v1/orders/{order_id} | Cancel an order by ID
 [**checkUserEmailExists**](DefaultApi.md#checkUserEmailExists) | **GET** /v1/user/exists | Check whether a user email exists
+[**claimLeverageGetAccruedInterest**](DefaultApi.md#claimLeverageGetAccruedInterest) | **POST** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user
+[**closeIsolatedPosition**](DefaultApi.md#closeIsolatedPosition) | **POST** /v1/positions/close | Close isolated positions, repaying the borrowed
 [**createAPIKeyForUser**](DefaultApi.md#createAPIKeyForUser) | **POST** /v1/user/apikey | Create apikey for a user
 [**createNewIsolatedPosition**](DefaultApi.md#createNewIsolatedPosition) | **POST** /v1/positions/new_isolated | Create a new isolated position for a user transferring available assets into the position
 [**createOrder**](DefaultApi.md#createOrder) | **POST** /v1/orders | Create a new order
@@ -30,6 +32,8 @@ Method | HTTP request | Description
 [**getOrderbookById**](DefaultApi.md#getOrderbookById) | **GET** /v1/orderbooks/{order_book_id} | Get orderbook by ID
 [**getOrderbookDepth**](DefaultApi.md#getOrderbookDepth) | **GET** /v1/orderbooks/{order_book_id}/depth | Get the aggregated price levels for a specific orderbook (L2 market depth)
 [**getOrderbookOrders**](DefaultApi.md#getOrderbookOrders) | **GET** /v1/orderbooks/{order_book_id}/orders | Get all open orders for a specific orderbook (L3 market depth)
+[**getOrderbookStats**](DefaultApi.md#getOrderbookStats) | **GET** /v1/orderbooks/{order_book_id}/stats | Get orderbook stats
+[**getOrderbookStatsStream**](DefaultApi.md#getOrderbookStatsStream) | **GET** /v1/orderbooks/{order_book_id}/stats/stream | Orderbook stats stream
 [**getOrderbookSummary**](DefaultApi.md#getOrderbookSummary) | **GET** /v1/orderbooks/{order_book_id}/summary | Get summary of an orderbook
 [**getOrderbookTop**](DefaultApi.md#getOrderbookTop) | **GET** /v1/orderbooks/{order_book_id}/top | Get the top price levels for a specific orderbook (L1 market depth)
 [**getPoolPrice**](DefaultApi.md#getPoolPrice) | **GET** /v1/price/pool/{pool_id} | Get the current price of a pool
@@ -44,6 +48,7 @@ Method | HTTP request | Description
 [**getUserSelf**](DefaultApi.md#getUserSelf) | **GET** /v1/user/self | Get user details for the authenticated user
 [**getUserTransactionsStream**](DefaultApi.md#getUserTransactionsStream) | **GET** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
 [**getUsersAPIKeys**](DefaultApi.md#getUsersAPIKeys) | **GET** /v1/user/apikey | Get user&#x27;s api keys
+[**leverageGetAccruedInterestByUser**](DefaultApi.md#leverageGetAccruedInterestByUser) | **GET** /v1/leverage/accrued_interest/self | Get current accrued leverage interest for the user
 [**leverageIsolateCollateral**](DefaultApi.md#leverageIsolateCollateral) | **POST** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#x27;s global collateral
 [**leverageSupply**](DefaultApi.md#leverageSupply) | **POST** /v1/leverage/supply | Supply leverage for a specific asset
 [**leverageUnite**](DefaultApi.md#leverageUnite) | **POST** /v1/leverage/unite | Combines all isolated positions into a single global position
@@ -54,6 +59,7 @@ Method | HTTP request | Description
 [**listOrderBooks**](DefaultApi.md#listOrderBooks) | **GET** /v1/orderbooks | List order books
 [**listOrders**](DefaultApi.md#listOrders) | **GET** /v1/orders | List all orders
 [**listPositionAccountsSelf**](DefaultApi.md#listPositionAccountsSelf) | **GET** /v1/user/self/position_accounts | List all position accounts for the authenticated user
+[**payLeverageGetAccruedInterest**](DefaultApi.md#payLeverageGetAccruedInterest) | **POST** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user
 [**revokeAPIKeyForUser**](DefaultApi.md#revokeAPIKeyForUser) | **PUT** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user
 [**streamAssetPrices**](DefaultApi.md#streamAssetPrices) | **GET** /v1/prices/stream | Stream real-time asset prices as map objects
 [**streamCandleData**](DefaultApi.md#streamCandleData) | **GET** /v1/charts/{order_book_id}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
@@ -75,13 +81,24 @@ Cancel all open orders, if user passes orderbook on query param it will cancel a
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
-String orderBookId = "orderBookId_example"; // String | 
-UUID userId = new UUID(); // UUID | 
+Object orderBookId = null; // Object | 
+Object userId = null; // Object | 
 OrderKind orderKind = new OrderKind(); // OrderKind | 
 try {
     ListOrdersResponse result = apiInstance.cancelAllOpenOrders(orderBookId, userId, orderKind);
@@ -96,8 +113,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderBookId** | **String**|  | [optional]
- **userId** | [**UUID**](.md)|  | [optional]
+ **orderBookId** | [**Object**](.md)|  | [optional]
+ **userId** | [**Object**](.md)|  | [optional]
  **orderKind** | [**OrderKind**](.md)|  | [optional]
 
 ### Return type
@@ -106,7 +123,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -122,12 +139,23 @@ Cancel an order by ID
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderId = new UUID(); // UUID | 
+Object orderId = null; // Object | 
 try {
     CancelOrderResponse result = apiInstance.cancelOrderById(orderId);
     System.out.println(result);
@@ -141,7 +169,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderId** | [**UUID**](.md)|  |
+ **orderId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -149,7 +177,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -165,12 +193,23 @@ Check whether a user email exists
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
-String email = "email_example"; // String | 
+Object email = null; // Object | 
 try {
     EmailExistsResponse result = apiInstance.checkUserEmailExists(email);
     System.out.println(result);
@@ -184,7 +223,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **email** | **String**|  |
+ **email** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -192,11 +231,119 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="claimLeverageGetAccruedInterest"></a>
+# **claimLeverageGetAccruedInterest**
+> ClaimLeverageAccruedInterestResponse claimLeverageGetAccruedInterest(body)
+
+Claim current accrued leverage interest for a specific user
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiClient;
+//import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
+//import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+
+DefaultApi apiInstance = new DefaultApi();
+ClaimLeverageAccruedInterestRequest body = new ClaimLeverageAccruedInterestRequest(); // ClaimLeverageAccruedInterestRequest | 
+try {
+    ClaimLeverageAccruedInterestResponse result = apiInstance.claimLeverageGetAccruedInterest(body);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#claimLeverageGetAccruedInterest");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**ClaimLeverageAccruedInterestRequest**](ClaimLeverageAccruedInterestRequest.md)|  |
+
+### Return type
+
+[**ClaimLeverageAccruedInterestResponse**](ClaimLeverageAccruedInterestResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="closeIsolatedPosition"></a>
+# **closeIsolatedPosition**
+> ClosePositionResponse closeIsolatedPosition(body)
+
+Close isolated positions, repaying the borrowed
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiClient;
+//import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
+//import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+
+DefaultApi apiInstance = new DefaultApi();
+ClosePositionRequest body = new ClosePositionRequest(); // ClosePositionRequest | 
+try {
+    ClosePositionResponse result = apiInstance.closeIsolatedPosition(body);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#closeIsolatedPosition");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**ClosePositionRequest**](ClosePositionRequest.md)|  |
+
+### Return type
+
+[**ClosePositionResponse**](ClosePositionResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 <a name="createAPIKeyForUser"></a>
@@ -208,8 +355,19 @@ Create apikey for a user
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -235,7 +393,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -251,8 +409,19 @@ Create a new isolated position for a user transferring available assets into the
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -278,7 +447,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -294,8 +463,19 @@ Create a new order
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -321,7 +501,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -337,12 +517,23 @@ Delete user by ID
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID userId = new UUID(); // UUID | 
+Object userId = null; // Object | 
 try {
     UserDeletedResponse result = apiInstance.deleteUser(userId);
     System.out.println(result);
@@ -356,7 +547,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | [**UUID**](.md)|  |
+ **userId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -364,7 +555,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -380,8 +571,19 @@ Get the current price of all assets
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -403,7 +605,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -424,7 +626,7 @@ Get asset by ID
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID assetId = new UUID(); // UUID | 
+Object assetId = null; // Object | 
 try {
     GetAssetByIDResponse result = apiInstance.getAssetById(assetId);
     System.out.println(result);
@@ -438,7 +640,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **assetId** | [**UUID**](.md)|  |
+ **assetId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -462,12 +664,23 @@ Get the current price of an asset
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID assetId = new UUID(); // UUID | 
+Object assetId = null; // Object | 
 try {
     GetAssetPriceResponse result = apiInstance.getAssetPrice(assetId);
     System.out.println(result);
@@ -481,7 +694,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **assetId** | [**UUID**](.md)|  |
+ **assetId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -489,7 +702,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -510,8 +723,8 @@ Get all inserts or updates for assets
 
 
 DefaultApi apiInstance = new DefaultApi();
-OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
-OffsetDateTime until = new OffsetDateTime(); // OffsetDateTime | 
+Object since = null; // Object | 
+Object until = null; // Object | 
 try {
     StreamAssetsResponse result = apiInstance.getAssetsStream(since, until);
     System.out.println(result);
@@ -525,8 +738,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **since** | **OffsetDateTime**|  | [optional]
- **until** | **OffsetDateTime**|  | [optional]
+ **since** | [**Object**](.md)|  | [optional]
+ **until** | [**Object**](.md)|  | [optional]
 
 ### Return type
 
@@ -555,9 +768,9 @@ Get candlestick data for an orderbook
 
 
 DefaultApi apiInstance = new DefaultApi();
-String orderBookId = "orderBookId_example"; // String | 
-OffsetDateTime start = new OffsetDateTime(); // OffsetDateTime | 
-OffsetDateTime end = new OffsetDateTime(); // OffsetDateTime | 
+Object orderBookId = null; // Object | 
+Object start = null; // Object | 
+Object end = null; // Object | 
 CandleResolution resolution = new CandleResolution(); // CandleResolution | 
 try {
     ListCandlesResponse result = apiInstance.getCandleData(orderBookId, start, end, resolution);
@@ -572,9 +785,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderBookId** | **String**|  |
- **start** | **OffsetDateTime**|  | [optional]
- **end** | **OffsetDateTime**|  | [optional]
+ **orderBookId** | [**Object**](.md)|  |
+ **start** | [**Object**](.md)|  | [optional]
+ **end** | [**Object**](.md)|  | [optional]
  **resolution** | [**CandleResolution**](.md)|  | [optional]
 
 ### Return type
@@ -604,7 +817,7 @@ Get coupon payments for a bond asset
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID assetId = new UUID(); // UUID | 
+Object assetId = null; // Object | 
 try {
     ListCouponPaymentsResponse result = apiInstance.getCouponPaymentsByAssetId(assetId);
     System.out.println(result);
@@ -618,7 +831,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **assetId** | [**UUID**](.md)|  |
+ **assetId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -647,7 +860,7 @@ Get the top price levels for a specific orderbook (L1 market depth)
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderBookId = new UUID(); // UUID | 
+Object orderBookId = null; // Object | 
 try {
     GetTopOfBookResponse result = apiInstance.getL1Depth(orderBookId);
     System.out.println(result);
@@ -661,7 +874,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderBookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -690,7 +903,7 @@ Get the aggregated price levels for a specific orderbook (L2 market depth)
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderBookId = new UUID(); // UUID | 
+Object orderBookId = null; // Object | 
 try {
     ListOrderBookDepthResponse result = apiInstance.getL2Depth(orderBookId);
     System.out.println(result);
@@ -704,7 +917,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderBookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -733,7 +946,7 @@ Get all open orders for a specific orderbook (L3 market depth)
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderBookId = new UUID(); // UUID | 
+Object orderBookId = null; // Object | 
 try {
     ListOrdersResponse result = apiInstance.getL3Depth(orderBookId);
     System.out.println(result);
@@ -747,7 +960,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderBookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -771,8 +984,19 @@ Get your own available, locked, and borrowed assets
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -794,7 +1018,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -810,8 +1034,19 @@ Get your own interest
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -833,7 +1068,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -849,8 +1084,19 @@ Get the entire module object, including unborrowed leverage assets and total lev
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -872,7 +1118,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -888,12 +1134,23 @@ Get the module object for a single asset ID
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID assetId = new UUID(); // UUID | 
+Object assetId = null; // Object | 
 try {
     LedgerModuleByAssetResponse result = apiInstance.getLedgerModuleByAsset(assetId);
     System.out.println(result);
@@ -907,7 +1164,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **assetId** | [**UUID**](.md)|  |
+ **assetId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -915,7 +1172,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -931,8 +1188,19 @@ Get your own positions
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -954,7 +1222,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -970,8 +1238,19 @@ Get your own available, locked, and borrowed USD value; and realized and unreali
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -993,7 +1272,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1009,12 +1288,23 @@ Get order by ID
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderId = new UUID(); // UUID | 
+Object orderId = null; // Object | 
 try {
     GetOrderResponse result = apiInstance.getOrderById(orderId);
     System.out.println(result);
@@ -1028,7 +1318,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderId** | [**UUID**](.md)|  |
+ **orderId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -1036,7 +1326,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1052,12 +1342,23 @@ Get orderbook by ID
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderBookId = new UUID(); // UUID | 
+Object orderBookId = null; // Object | 
 try {
     GetOrderBookResponse result = apiInstance.getOrderbookById(orderBookId);
     System.out.println(result);
@@ -1071,7 +1372,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderBookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -1079,7 +1380,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1100,7 +1401,7 @@ Get the aggregated price levels for a specific orderbook (L2 market depth)
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderBookId = new UUID(); // UUID | 
+Object orderBookId = null; // Object | 
 try {
     ListOrderBookDepthResponse result = apiInstance.getOrderbookDepth(orderBookId);
     System.out.println(result);
@@ -1114,7 +1415,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderBookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -1143,7 +1444,7 @@ Get all open orders for a specific orderbook (L3 market depth)
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderBookId = new UUID(); // UUID | 
+Object orderBookId = null; // Object | 
 try {
     ListOrdersResponse result = apiInstance.getOrderbookOrders(orderBookId);
     System.out.println(result);
@@ -1157,7 +1458,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderBookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -1166,6 +1467,103 @@ Name | Type | Description  | Notes
 ### Authorization
 
 No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="getOrderbookStats"></a>
+# **getOrderbookStats**
+> GetOrderbookStatsResponse getOrderbookStats(orderBookId)
+
+Get orderbook stats
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiException;
+//import tech.dora.api.DefaultApi;
+
+
+DefaultApi apiInstance = new DefaultApi();
+Object orderBookId = null; // Object | 
+try {
+    GetOrderbookStatsResponse result = apiInstance.getOrderbookStats(orderBookId);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#getOrderbookStats");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **orderBookId** | [**Object**](.md)|  |
+
+### Return type
+
+[**GetOrderbookStatsResponse**](GetOrderbookStatsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="getOrderbookStatsStream"></a>
+# **getOrderbookStatsStream**
+> OrderbookStats getOrderbookStatsStream(orderBookId)
+
+Orderbook stats stream
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiClient;
+//import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
+//import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+
+DefaultApi apiInstance = new DefaultApi();
+Object orderBookId = null; // Object | 
+try {
+    OrderbookStats result = apiInstance.getOrderbookStatsStream(orderBookId);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#getOrderbookStatsStream");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **orderBookId** | [**Object**](.md)|  |
+
+### Return type
+
+[**OrderbookStats**](OrderbookStats.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1181,12 +1579,23 @@ Get summary of an orderbook
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderBookId = new UUID(); // UUID | 
+Object orderBookId = null; // Object | 
 try {
     GetOrderBookSummaryResponse result = apiInstance.getOrderbookSummary(orderBookId);
     System.out.println(result);
@@ -1200,7 +1609,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderBookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -1208,7 +1617,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1229,7 +1638,7 @@ Get the top price levels for a specific orderbook (L1 market depth)
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderBookId = new UUID(); // UUID | 
+Object orderBookId = null; // Object | 
 try {
     GetTopOfBookResponse result = apiInstance.getOrderbookTop(orderBookId);
     System.out.println(result);
@@ -1243,7 +1652,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderBookId** | [**UUID**](.md)|  |
+ **orderBookId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -1267,12 +1676,23 @@ Get the current price of a pool
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID poolId = new UUID(); // UUID | 
+Object poolId = null; // Object | 
 try {
     GetPoolPriceResponse result = apiInstance.getPoolPrice(poolId);
     System.out.println(result);
@@ -1286,7 +1706,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **poolId** | [**UUID**](.md)|  |
+ **poolId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -1294,7 +1714,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1315,7 +1735,7 @@ Get a trade by ID
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID tradeId = new UUID(); // UUID | 
+Object tradeId = null; // Object | 
 try {
     TradeResponse result = apiInstance.getTradeById(tradeId);
     System.out.println(result);
@@ -1329,7 +1749,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tradeId** | [**UUID**](.md)|  |
+ **tradeId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -1353,17 +1773,28 @@ Get a filtered, paginated list of trades
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
-List<String> orderBookIds = Arrays.asList("orderBookIds_example"); // List<String> | 
-List<UUID> userIds = Arrays.asList(new UUID()); // List<UUID> | 
-OffsetDateTime start = new OffsetDateTime(); // OffsetDateTime | 
-OffsetDateTime end = new OffsetDateTime(); // OffsetDateTime | 
-Integer page = 1; // Integer | 
-Integer limit = 100; // Integer | 
+Object orderBookIds = null; // Object | 
+Object userIds = null; // Object | 
+Object start = null; // Object | 
+Object end = null; // Object | 
+Object page = 1; // Object | 
+Object limit = 100; // Object | 
 try {
     ListTradeResponse result = apiInstance.getTrades(orderBookIds, userIds, start, end, page, limit);
     System.out.println(result);
@@ -1377,12 +1808,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderBookIds** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **userIds** | [**List&lt;UUID&gt;**](UUID.md)|  | [optional]
- **start** | **OffsetDateTime**|  | [optional]
- **end** | **OffsetDateTime**|  | [optional]
- **page** | **Integer**|  | [optional] [default to 1]
- **limit** | **Integer**|  | [optional] [default to 100]
+ **orderBookIds** | [**Object**](.md)|  | [optional]
+ **userIds** | [**Object**](.md)|  | [optional]
+ **start** | [**Object**](.md)|  | [optional]
+ **end** | [**Object**](.md)|  | [optional]
+ **page** | [**Object**](.md)|  | [optional] [default to 1]
+ **limit** | [**Object**](.md)|  | [optional] [default to 100]
 
 ### Return type
 
@@ -1390,7 +1821,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1411,7 +1842,7 @@ Get a transaction by ID
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID transactionId = new UUID(); // UUID | 
+Object transactionId = null; // Object | 
 try {
     GetTransactionResponse result = apiInstance.getTransactionById(transactionId);
     System.out.println(result);
@@ -1425,7 +1856,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **transactionId** | [**UUID**](.md)|  |
+ **transactionId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -1454,13 +1885,13 @@ Get a filtered, paginated list of transactions
 
 
 DefaultApi apiInstance = new DefaultApi();
-List<String> pools = Arrays.asList("pools_example"); // List<String> | 
-List<UUID> userIds = Arrays.asList(new UUID()); // List<UUID> | 
-List<TransactionKind> txKinds = Arrays.asList(new TransactionKind()); // List<TransactionKind> | 
-OffsetDateTime start = new OffsetDateTime(); // OffsetDateTime | 
-OffsetDateTime end = new OffsetDateTime(); // OffsetDateTime | 
-Integer page = 1; // Integer | 
-Integer limit = 100; // Integer | 
+Object pools = null; // Object | 
+Object userIds = null; // Object | 
+Object txKinds = null; // Object | 
+Object start = null; // Object | 
+Object end = null; // Object | 
+Object page = 1; // Object | 
+Object limit = 100; // Object | 
 try {
     ListTransactionsResponse result = apiInstance.getTransactions(pools, userIds, txKinds, start, end, page, limit);
     System.out.println(result);
@@ -1474,13 +1905,13 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pools** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **userIds** | [**List&lt;UUID&gt;**](UUID.md)|  | [optional]
- **txKinds** | [**List&lt;TransactionKind&gt;**](TransactionKind.md)|  | [optional]
- **start** | **OffsetDateTime**|  | [optional]
- **end** | **OffsetDateTime**|  | [optional]
- **page** | **Integer**|  | [optional] [default to 1]
- **limit** | **Integer**|  | [optional] [default to 100]
+ **pools** | [**Object**](.md)|  | [optional]
+ **userIds** | [**Object**](.md)|  | [optional]
+ **txKinds** | [**Object**](.md)|  | [optional]
+ **start** | [**Object**](.md)|  | [optional]
+ **end** | [**Object**](.md)|  | [optional]
+ **page** | [**Object**](.md)|  | [optional] [default to 1]
+ **limit** | [**Object**](.md)|  | [optional] [default to 100]
 
 ### Return type
 
@@ -1504,12 +1935,23 @@ Get user by ID (admin only)
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID userId = new UUID(); // UUID | 
+Object userId = null; // Object | 
 try {
     GetUserResponse result = apiInstance.getUserById(userId);
     System.out.println(result);
@@ -1523,7 +1965,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | [**UUID**](.md)|  |
+ **userId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -1531,7 +1973,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1547,12 +1989,22 @@ Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a 
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
 
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthQuery
+ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
+apiKeyAuthQuery.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthQuery.setApiKeyPrefix("Token");
 
 DefaultApi apiInstance = new DefaultApi();
-UUID userId = new UUID(); // UUID | 
+Object userId = null; // Object | 
 try {
     StreamPositionsResponse result = apiInstance.getUserLedgerStream(userId);
     System.out.println(result);
@@ -1566,7 +2018,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | [**UUID**](.md)|  |
+ **userId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -1574,7 +2026,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
 
 ### HTTP request headers
 
@@ -1590,14 +2042,24 @@ Get a snapshot of user&#x27;s order updates for the given order book since a spe
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
 
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthQuery
+ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
+apiKeyAuthQuery.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthQuery.setApiKeyPrefix("Token");
 
 DefaultApi apiInstance = new DefaultApi();
-UUID userId = new UUID(); // UUID | 
-UUID orderBookId = new UUID(); // UUID | 
-OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
+Object userId = null; // Object | 
+Object orderBookId = null; // Object | 
+Object since = null; // Object | 
 try {
     StreamOrderUpdatesResponse result = apiInstance.getUserOrderUpdatesStream(userId, orderBookId, since);
     System.out.println(result);
@@ -1611,9 +2073,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | [**UUID**](.md)|  |
- **orderBookId** | [**UUID**](.md)|  |
- **since** | **OffsetDateTime**|  | [optional]
+ **userId** | [**Object**](.md)|  |
+ **orderBookId** | [**Object**](.md)|  |
+ **since** | [**Object**](.md)|  | [optional]
 
 ### Return type
 
@@ -1621,7 +2083,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
 
 ### HTTP request headers
 
@@ -1637,13 +2099,23 @@ Get a snapshot of user&#x27;s order updates across all order books since a speci
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
 
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthQuery
+ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
+apiKeyAuthQuery.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthQuery.setApiKeyPrefix("Token");
 
 DefaultApi apiInstance = new DefaultApi();
-UUID userId = new UUID(); // UUID | 
-OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
+Object userId = null; // Object | 
+Object since = null; // Object | 
 try {
     StreamOrderUpdatesResponse result = apiInstance.getUserOrdersUpdatesStreamAll(userId, since);
     System.out.println(result);
@@ -1657,8 +2129,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | [**UUID**](.md)|  |
- **since** | **OffsetDateTime**|  | [optional]
+ **userId** | [**Object**](.md)|  |
+ **since** | [**Object**](.md)|  | [optional]
 
 ### Return type
 
@@ -1666,7 +2138,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
 
 ### HTTP request headers
 
@@ -1682,8 +2154,19 @@ Get user details for the authenticated user
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -1705,7 +2188,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1721,13 +2204,23 @@ Get a snapshot of user&#x27;s executed transactions since a specific time, and o
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
 
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthQuery
+ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
+apiKeyAuthQuery.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthQuery.setApiKeyPrefix("Token");
 
 DefaultApi apiInstance = new DefaultApi();
-UUID userId = new UUID(); // UUID | 
-OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
+Object userId = null; // Object | 
+Object since = null; // Object | 
 try {
     StreamTransactionsResponse result = apiInstance.getUserTransactionsStream(userId, since);
     System.out.println(result);
@@ -1741,8 +2234,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | [**UUID**](.md)|  |
- **since** | **OffsetDateTime**|  | [optional]
+ **userId** | [**Object**](.md)|  |
+ **since** | [**Object**](.md)|  | [optional]
 
 ### Return type
 
@@ -1750,7 +2243,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
 
 ### HTTP request headers
 
@@ -1766,8 +2259,19 @@ Get user&#x27;s api keys
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -1789,7 +2293,63 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="leverageGetAccruedInterestByUser"></a>
+# **leverageGetAccruedInterestByUser**
+> CurrentLeverageAccruedInterestResponse leverageGetAccruedInterestByUser(positionId, assetId)
+
+Get current accrued leverage interest for the user
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiClient;
+//import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
+//import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+
+DefaultApi apiInstance = new DefaultApi();
+Object positionId = null; // Object | 
+Object assetId = null; // Object | 
+try {
+    CurrentLeverageAccruedInterestResponse result = apiInstance.leverageGetAccruedInterestByUser(positionId, assetId);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#leverageGetAccruedInterestByUser");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **positionId** | [**Object**](.md)|  | [optional]
+ **assetId** | [**Object**](.md)|  | [optional]
+
+### Return type
+
+[**CurrentLeverageAccruedInterestResponse**](CurrentLeverageAccruedInterestResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1805,8 +2365,19 @@ Create an isolated position by transferring collateral to the position from the 
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -1832,7 +2403,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1848,8 +2419,19 @@ Supply leverage for a specific asset
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -1875,7 +2457,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1893,8 +2475,19 @@ Combines all isolated positions into a single global position
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -1920,7 +2513,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1936,8 +2529,19 @@ Withdraw leverage for a specific asset
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -1963,7 +2567,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1979,13 +2583,24 @@ Add liquidity to a pool
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
 LiquidityRequest body = new LiquidityRequest(); // LiquidityRequest | 
-UUID poolId = new UUID(); // UUID | 
+Object poolId = null; // Object | 
 try {
     LiquidityResponse result = apiInstance.liquidityAdd(body, poolId);
     System.out.println(result);
@@ -2000,7 +2615,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**LiquidityRequest**](LiquidityRequest.md)|  |
- **poolId** | [**UUID**](.md)|  |
+ **poolId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -2008,7 +2623,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2024,13 +2639,24 @@ Subtract liquidity from a pool
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
 LiquidityRequest body = new LiquidityRequest(); // LiquidityRequest | 
-UUID poolId = new UUID(); // UUID | 
+Object poolId = null; // Object | 
 try {
     LiquidityResponse result = apiInstance.liquiditySubtract(body, poolId);
     System.out.println(result);
@@ -2045,7 +2671,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**LiquidityRequest**](LiquidityRequest.md)|  |
- **poolId** | [**UUID**](.md)|  |
+ **poolId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -2053,7 +2679,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2074,16 +2700,16 @@ List assets
 
 
 DefaultApi apiInstance = new DefaultApi();
-OffsetDateTime createdAfter = new OffsetDateTime(); // OffsetDateTime | 
-OffsetDateTime createdBefore = new OffsetDateTime(); // OffsetDateTime | 
+Object createdAfter = null; // Object | 
+Object createdBefore = null; // Object | 
 AssetKind assetKind = new AssetKind(); // AssetKind | Asset kind (BOND, CURRENCY, INTEREST, POOL_SHARE)
-Boolean canAddLiquidity = true; // Boolean | 
-Boolean canDirectBorrow = true; // Boolean | 
-Boolean canOnboard = true; // Boolean | 
-Boolean canTrade = true; // Boolean | 
-Boolean canVirtualBorrow = true; // Boolean | 
-Integer page = 1; // Integer | 
-Integer limit = 100; // Integer | 
+Object canAddLiquidity = null; // Object | 
+Object canDirectBorrow = null; // Object | 
+Object canOnboard = null; // Object | 
+Object canTrade = null; // Object | 
+Object canVirtualBorrow = null; // Object | 
+Object page = 1; // Object | 
+Object limit = 100; // Object | 
 try {
     ListAssetsResponse result = apiInstance.listAssets(createdAfter, createdBefore, assetKind, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, page, limit);
     System.out.println(result);
@@ -2097,16 +2723,16 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createdAfter** | **OffsetDateTime**|  | [optional]
- **createdBefore** | **OffsetDateTime**|  | [optional]
+ **createdAfter** | [**Object**](.md)|  | [optional]
+ **createdBefore** | [**Object**](.md)|  | [optional]
  **assetKind** | [**AssetKind**](.md)| Asset kind (BOND, CURRENCY, INTEREST, POOL_SHARE) | [optional]
- **canAddLiquidity** | **Boolean**|  | [optional]
- **canDirectBorrow** | **Boolean**|  | [optional]
- **canOnboard** | **Boolean**|  | [optional]
- **canTrade** | **Boolean**|  | [optional]
- **canVirtualBorrow** | **Boolean**|  | [optional]
- **page** | **Integer**|  | [optional] [default to 1]
- **limit** | **Integer**|  | [optional] [default to 100]
+ **canAddLiquidity** | [**Object**](.md)|  | [optional]
+ **canDirectBorrow** | [**Object**](.md)|  | [optional]
+ **canOnboard** | [**Object**](.md)|  | [optional]
+ **canTrade** | [**Object**](.md)|  | [optional]
+ **canVirtualBorrow** | [**Object**](.md)|  | [optional]
+ **page** | [**Object**](.md)|  | [optional] [default to 1]
+ **limit** | [**Object**](.md)|  | [optional] [default to 100]
 
 ### Return type
 
@@ -2130,16 +2756,27 @@ List order books
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
 OrderBookStatus status = new OrderBookStatus(); // OrderBookStatus | 
-UUID baseAssetId = new UUID(); // UUID | 
-UUID quoteAssetId = new UUID(); // UUID | 
-Integer page = 1; // Integer | 
-Integer limit = 100; // Integer | 
+Object baseAssetId = null; // Object | 
+Object quoteAssetId = null; // Object | 
+Object page = 1; // Object | 
+Object limit = 100; // Object | 
 try {
     ListOrderBooksResponse result = apiInstance.listOrderBooks(status, baseAssetId, quoteAssetId, page, limit);
     System.out.println(result);
@@ -2154,10 +2791,10 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **status** | [**OrderBookStatus**](.md)|  | [optional]
- **baseAssetId** | [**UUID**](.md)|  | [optional]
- **quoteAssetId** | [**UUID**](.md)|  | [optional]
- **page** | **Integer**|  | [optional] [default to 1]
- **limit** | **Integer**|  | [optional] [default to 100]
+ **baseAssetId** | [**Object**](.md)|  | [optional]
+ **quoteAssetId** | [**Object**](.md)|  | [optional]
+ **page** | [**Object**](.md)|  | [optional] [default to 1]
+ **limit** | [**Object**](.md)|  | [optional] [default to 100]
 
 ### Return type
 
@@ -2165,7 +2802,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2181,19 +2818,30 @@ List all orders
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
-List<UUID> orderBookId = Arrays.asList(new UUID()); // List<UUID> | 
-List<OrderKind> kind = Arrays.asList(new OrderKind()); // List<OrderKind> | 
-List<OrderStatus> status = Arrays.asList(new OrderStatus()); // List<OrderStatus> | 
+Object orderBookId = null; // Object | 
+Object kind = null; // Object | 
+Object status = null; // Object | 
 Side side = new Side(); // Side | 
-OffsetDateTime from = new OffsetDateTime(); // OffsetDateTime | 
-OffsetDateTime to = new OffsetDateTime(); // OffsetDateTime | 
-Integer page = 1; // Integer | 
-Integer limit = 100; // Integer | 
+Object from = null; // Object | 
+Object to = null; // Object | 
+Object page = 1; // Object | 
+Object limit = 100; // Object | 
 try {
     ListOrdersResponse result = apiInstance.listOrders(orderBookId, kind, status, side, from, to, page, limit);
     System.out.println(result);
@@ -2207,14 +2855,14 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderBookId** | [**List&lt;UUID&gt;**](UUID.md)|  | [optional]
- **kind** | [**List&lt;OrderKind&gt;**](OrderKind.md)|  | [optional]
- **status** | [**List&lt;OrderStatus&gt;**](OrderStatus.md)|  | [optional]
+ **orderBookId** | [**Object**](.md)|  | [optional]
+ **kind** | [**Object**](.md)|  | [optional]
+ **status** | [**Object**](.md)|  | [optional]
  **side** | [**Side**](.md)|  | [optional]
- **from** | **OffsetDateTime**|  | [optional]
- **to** | **OffsetDateTime**|  | [optional]
- **page** | **Integer**|  | [optional] [default to 1]
- **limit** | **Integer**|  | [optional] [default to 100]
+ **from** | [**Object**](.md)|  | [optional]
+ **to** | [**Object**](.md)|  | [optional]
+ **page** | [**Object**](.md)|  | [optional] [default to 1]
+ **limit** | [**Object**](.md)|  | [optional] [default to 100]
 
 ### Return type
 
@@ -2222,7 +2870,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2238,8 +2886,19 @@ List all position accounts for the authenticated user
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -2261,11 +2920,65 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="payLeverageGetAccruedInterest"></a>
+# **payLeverageGetAccruedInterest**
+> PayLeverageAccruedInterestResponse payLeverageGetAccruedInterest(body)
+
+Pay current accrued leverage interest for a specific user
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiClient;
+//import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
+//import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+
+DefaultApi apiInstance = new DefaultApi();
+PayLeverageAccruedInterestRequest body = new PayLeverageAccruedInterestRequest(); // PayLeverageAccruedInterestRequest | 
+try {
+    PayLeverageAccruedInterestResponse result = apiInstance.payLeverageGetAccruedInterest(body);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#payLeverageGetAccruedInterest");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**PayLeverageAccruedInterestRequest**](PayLeverageAccruedInterestRequest.md)|  |
+
+### Return type
+
+[**PayLeverageAccruedInterestResponse**](PayLeverageAccruedInterestResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 <a name="revokeAPIKeyForUser"></a>
@@ -2277,12 +2990,23 @@ Revoke apikey for a user
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
-String keyId = "keyId_example"; // String | 
+Object keyId = null; // Object | 
 try {
     RevokeAPIKeyResponse result = apiInstance.revokeAPIKeyForUser(keyId);
     System.out.println(result);
@@ -2296,7 +3020,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **keyId** | **String**|  |
+ **keyId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -2304,7 +3028,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2313,7 +3037,7 @@ No authorization required
 
 <a name="streamAssetPrices"></a>
 # **streamAssetPrices**
-> StreamAssetPricesResponse streamAssetPrices(since)
+> StreamAssetPricesResponse streamAssetPrices(since, assetId)
 
 Stream real-time asset prices as map objects
 
@@ -2327,9 +3051,10 @@ Opens a WebSocket stream for real-time asset price updates. First message contai
 
 
 DefaultApi apiInstance = new DefaultApi();
-OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
+Object since = null; // Object | 
+Object assetId = null; // Object | 
 try {
-    StreamAssetPricesResponse result = apiInstance.streamAssetPrices(since);
+    StreamAssetPricesResponse result = apiInstance.streamAssetPrices(since, assetId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DefaultApi#streamAssetPrices");
@@ -2341,7 +3066,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **since** | **OffsetDateTime**|  | [optional]
+ **since** | [**Object**](.md)|  | [optional]
+ **assetId** | [**Object**](.md)|  | [optional]
 
 ### Return type
 
@@ -2370,8 +3096,8 @@ Get a snapshot of candlestick data from date provided, and open a stream for rea
 
 
 DefaultApi apiInstance = new DefaultApi();
-String orderBookId = "orderBookId_example"; // String | 
-OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
+Object orderBookId = null; // Object | 
+Object since = null; // Object | 
 CandleResolution resolution = new CandleResolution(); // CandleResolution | 
 try {
     StreamCandlesResponse result = apiInstance.streamCandleData(orderBookId, since, resolution);
@@ -2386,8 +3112,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderBookId** | **String**|  |
- **since** | **OffsetDateTime**|  | [optional]
+ **orderBookId** | [**Object**](.md)|  |
+ **since** | [**Object**](.md)|  | [optional]
  **resolution** | [**CandleResolution**](.md)|  | [optional]
 
 ### Return type
@@ -2417,8 +3143,8 @@ Get a snapshot of base and quote balances for an order book and open a stream fo
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderBookId = new UUID(); // UUID | 
-OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
+Object orderBookId = null; // Object | 
+Object since = null; // Object | 
 try {
     StreamOrderBookBalancesResponse result = apiInstance.streamOrderBookBalances(orderBookId, since);
     System.out.println(result);
@@ -2432,8 +3158,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderBookId** | [**UUID**](.md)|  |
- **since** | **OffsetDateTime**|  | [optional]
+ **orderBookId** | [**Object**](.md)|  |
+ **since** | [**Object**](.md)|  | [optional]
 
 ### Return type
 
@@ -2462,8 +3188,8 @@ Get a snapshot of open orders in an order book and open a stream for real-time u
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderBookId = new UUID(); // UUID | 
-OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
+Object orderBookId = null; // Object | 
+Object since = null; // Object | 
 try {
     LiveOrderbook result = apiInstance.streamOrderbookOpenOrders(orderBookId, since);
     System.out.println(result);
@@ -2477,8 +3203,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderBookId** | [**UUID**](.md)|  |
- **since** | **OffsetDateTime**|  | [optional]
+ **orderBookId** | [**Object**](.md)|  |
+ **since** | [**Object**](.md)|  | [optional]
 
 ### Return type
 
@@ -2507,8 +3233,8 @@ Get a snapshot of trades executed on the given order book from a specific date a
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID orderBookId = new UUID(); // UUID | 
-OffsetDateTime since = new OffsetDateTime(); // OffsetDateTime | 
+Object orderBookId = null; // Object | 
+Object since = null; // Object | 
 try {
     StreamTradesResponse result = apiInstance.streamTrades(orderBookId, since);
     System.out.println(result);
@@ -2522,8 +3248,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orderBookId** | [**UUID**](.md)|  |
- **since** | **OffsetDateTime**|  | [optional]
+ **orderBookId** | [**Object**](.md)|  |
+ **since** | [**Object**](.md)|  | [optional]
 
 ### Return type
 
@@ -2547,8 +3273,19 @@ Transfer available balance between a user&#x27;s accounts (e.g. global to isolat
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -2574,7 +3311,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2590,13 +3327,24 @@ Update user configuration by ID
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
 UpdateUserConfigRequest body = new UpdateUserConfigRequest(); // UpdateUserConfigRequest | 
-UUID userId = new UUID(); // UUID | 
+Object userId = null; // Object | 
 try {
     UserUpdatedResponse result = apiInstance.updateUserConfig(body, userId);
     System.out.println(result);
@@ -2611,7 +3359,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**UpdateUserConfigRequest**](UpdateUserConfigRequest.md)|  |
- **userId** | [**UUID**](.md)|  |
+ **userId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -2619,7 +3367,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2635,8 +3383,19 @@ Update user configuration for the authenticated user
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -2662,7 +3421,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2678,8 +3437,19 @@ Validate submit order request data
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
@@ -2705,7 +3475,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2721,12 +3491,23 @@ Verify a user by ID
 ### Example
 ```java
 // Import classes:
+//import tech.dora.ApiClient;
 //import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
 //import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
 
 
 DefaultApi apiInstance = new DefaultApi();
-UUID userId = new UUID(); // UUID | 
+Object userId = null; // Object | 
 try {
     UserUpdatedResponse result = apiInstance.verifyUser(userId);
     System.out.println(result);
@@ -2740,7 +3521,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | [**UUID**](.md)|  |
+ **userId** | [**Object**](.md)|  |
 
 ### Return type
 
@@ -2748,7 +3529,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

@@ -21,30 +21,18 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import tech.dora.model.ModuleBalance;
 /**
  * LeverageModuleResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class LeverageModuleResponse {
   @SerializedName("balances")
-  private Map<String, ModuleBalance> balances = null;
+  private Object balances = null;
 
-  public LeverageModuleResponse balances(Map<String, ModuleBalance> balances) {
+  public LeverageModuleResponse balances(Object balances) {
     this.balances = balances;
-    return this;
-  }
-
-  public LeverageModuleResponse putBalancesItem(String key, ModuleBalance balancesItem) {
-    if (this.balances == null) {
-      this.balances = new HashMap<String, ModuleBalance>();
-    }
-    this.balances.put(key, balancesItem);
     return this;
   }
 
@@ -53,11 +41,11 @@ public class LeverageModuleResponse {
    * @return balances
   **/
   @Schema(description = "A map of asset IDs to their module balances")
-  public Map<String, ModuleBalance> getBalances() {
+  public Object getBalances() {
     return balances;
   }
 
-  public void setBalances(Map<String, ModuleBalance> balances) {
+  public void setBalances(Object balances) {
     this.balances = balances;
   }
 

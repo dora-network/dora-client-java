@@ -39,13 +39,13 @@ public enum PositionType {
   @SerializedName("Interest Sources")
   INTEREST_SOURCES("Interest Sources");
 
-  private String value;
+  private Object value;
 
-  PositionType(String value) {
+  PositionType(Object value) {
     this.value = value;
   }
 
-  public String getValue() {
+  public Object getValue() {
     return value;
   }
 
@@ -54,7 +54,7 @@ public enum PositionType {
     return String.valueOf(value);
   }
 
-  public static PositionType fromValue(String input) {
+  public static PositionType fromValue(Object input) {
     for (PositionType b : PositionType.values()) {
       if (b.value.equals(input)) {
         return b;
@@ -72,7 +72,7 @@ public enum PositionType {
     @Override
     public PositionType read(final JsonReader jsonReader) throws IOException {
       Object value = jsonReader.nextString();
-      return PositionType.fromValue((String)(value));
+      return PositionType.fromValue((Object)(value));
     }
   }
 }

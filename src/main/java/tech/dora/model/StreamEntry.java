@@ -21,19 +21,18 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import org.threeten.bp.OffsetDateTime;
 /**
  * StreamEntry
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class StreamEntry {
   @SerializedName("Val")
   private Object val = null;
 
   @SerializedName("Time")
-  private OffsetDateTime time = null;
+  private Object time = null;
 
   public StreamEntry val(Object val) {
     this.val = val;
@@ -53,7 +52,7 @@ public class StreamEntry {
     this.val = val;
   }
 
-  public StreamEntry time(OffsetDateTime time) {
+  public StreamEntry time(Object time) {
     this.time = time;
     return this;
   }
@@ -63,11 +62,11 @@ public class StreamEntry {
    * @return time
   **/
   @Schema(description = "The timestamp when the data was created")
-  public OffsetDateTime getTime() {
+  public Object getTime() {
     return time;
   }
 
-  public void setTime(OffsetDateTime time) {
+  public void setTime(Object time) {
     this.time = time;
   }
 

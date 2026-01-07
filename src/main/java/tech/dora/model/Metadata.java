@@ -25,19 +25,19 @@ import java.io.IOException;
  * Metadata about the response, including status code and tracing information.
  */
 @Schema(description = "Metadata about the response, including status code and tracing information.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class Metadata {
   @SerializedName("status_code")
-  private Integer statusCode = null;
+  private Object statusCode = null;
 
   @SerializedName("trace_id")
-  private String traceId = null;
+  private Object traceId = null;
 
   @SerializedName("request_id")
-  private String requestId = null;
+  private Object requestId = null;
 
-  public Metadata statusCode(Integer statusCode) {
+  public Metadata statusCode(Object statusCode) {
     this.statusCode = statusCode;
     return this;
   }
@@ -47,15 +47,15 @@ public class Metadata {
    * @return statusCode
   **/
   @Schema(description = "HTTP status code for the response.")
-  public Integer getStatusCode() {
+  public Object getStatusCode() {
     return statusCode;
   }
 
-  public void setStatusCode(Integer statusCode) {
+  public void setStatusCode(Object statusCode) {
     this.statusCode = statusCode;
   }
 
-  public Metadata traceId(String traceId) {
+  public Metadata traceId(Object traceId) {
     this.traceId = traceId;
     return this;
   }
@@ -65,15 +65,15 @@ public class Metadata {
    * @return traceId
   **/
   @Schema(description = "Trace ID for distributed tracing.")
-  public String getTraceId() {
+  public Object getTraceId() {
     return traceId;
   }
 
-  public void setTraceId(String traceId) {
+  public void setTraceId(Object traceId) {
     this.traceId = traceId;
   }
 
-  public Metadata requestId(String requestId) {
+  public Metadata requestId(Object requestId) {
     this.requestId = requestId;
     return this;
   }
@@ -83,11 +83,11 @@ public class Metadata {
    * @return requestId
   **/
   @Schema(description = "Request ID for correlating logs and debugging.")
-  public String getRequestId() {
+  public Object getRequestId() {
     return requestId;
   }
 
-  public void setRequestId(String requestId) {
+  public void setRequestId(Object requestId) {
     this.requestId = requestId;
   }
 

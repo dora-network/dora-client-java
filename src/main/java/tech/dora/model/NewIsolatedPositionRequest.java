@@ -21,27 +21,26 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * NewIsolatedPositionRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class NewIsolatedPositionRequest {
   @SerializedName("global_position_id")
-  private UUID globalPositionId = null;
+  private Object globalPositionId = null;
 
   @SerializedName("asset_id")
-  private UUID assetId = null;
+  private Object assetId = null;
 
   @SerializedName("quantity")
-  private String quantity = null;
+  private Object quantity = null;
 
   @SerializedName("position_name")
-  private String positionName = null;
+  private Object positionName = null;
 
-  public NewIsolatedPositionRequest globalPositionId(UUID globalPositionId) {
+  public NewIsolatedPositionRequest globalPositionId(Object globalPositionId) {
     this.globalPositionId = globalPositionId;
     return this;
   }
@@ -51,15 +50,15 @@ public class NewIsolatedPositionRequest {
    * @return globalPositionId
   **/
   @Schema(required = true, description = "")
-  public UUID getGlobalPositionId() {
+  public Object getGlobalPositionId() {
     return globalPositionId;
   }
 
-  public void setGlobalPositionId(UUID globalPositionId) {
+  public void setGlobalPositionId(Object globalPositionId) {
     this.globalPositionId = globalPositionId;
   }
 
-  public NewIsolatedPositionRequest assetId(UUID assetId) {
+  public NewIsolatedPositionRequest assetId(Object assetId) {
     this.assetId = assetId;
     return this;
   }
@@ -69,15 +68,15 @@ public class NewIsolatedPositionRequest {
    * @return assetId
   **/
   @Schema(required = true, description = "")
-  public UUID getAssetId() {
+  public Object getAssetId() {
     return assetId;
   }
 
-  public void setAssetId(UUID assetId) {
+  public void setAssetId(Object assetId) {
     this.assetId = assetId;
   }
 
-  public NewIsolatedPositionRequest quantity(String quantity) {
+  public NewIsolatedPositionRequest quantity(Object quantity) {
     this.quantity = quantity;
     return this;
   }
@@ -87,15 +86,15 @@ public class NewIsolatedPositionRequest {
    * @return quantity
   **/
   @Schema(required = true, description = "")
-  public String getQuantity() {
+  public Object getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(String quantity) {
+  public void setQuantity(Object quantity) {
     this.quantity = quantity;
   }
 
-  public NewIsolatedPositionRequest positionName(String positionName) {
+  public NewIsolatedPositionRequest positionName(Object positionName) {
     this.positionName = positionName;
     return this;
   }
@@ -105,11 +104,11 @@ public class NewIsolatedPositionRequest {
    * @return positionName
   **/
   @Schema(description = "")
-  public String getPositionName() {
+  public Object getPositionName() {
     return positionName;
   }
 
-  public void setPositionName(String positionName) {
+  public void setPositionName(Object positionName) {
     this.positionName = positionName;
   }
 

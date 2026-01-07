@@ -14,54 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
-import tech.dora.model.Trade;
 /**
  * ListTradeResponseEnvelope
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
-public class ListTradeResponseEnvelope extends ResponseEnvelope {
-  @SerializedName("data")
-  private List<Trade> listTradeResponseEnvelopeData = null;
-
-  public ListTradeResponseEnvelope listTradeResponseEnvelopeData(List<Trade> listTradeResponseEnvelopeData) {
-    this.listTradeResponseEnvelopeData = listTradeResponseEnvelopeData;
-    return this;
-  }
-
-  public ListTradeResponseEnvelope addListTradeResponseEnvelopeDataItem(Trade listTradeResponseEnvelopeDataItem) {
-    if (this.listTradeResponseEnvelopeData == null) {
-      this.listTradeResponseEnvelopeData = new ArrayList<Trade>();
-    }
-    this.listTradeResponseEnvelopeData.add(listTradeResponseEnvelopeDataItem);
-    return this;
-  }
-
-   /**
-   * Get listTradeResponseEnvelopeData
-   * @return listTradeResponseEnvelopeData
-  **/
-  @Schema(description = "")
-  public List<Trade> getListTradeResponseEnvelopeData() {
-    return listTradeResponseEnvelopeData;
-  }
-
-  public void setListTradeResponseEnvelopeData(List<Trade> listTradeResponseEnvelopeData) {
-    this.listTradeResponseEnvelopeData = listTradeResponseEnvelopeData;
-  }
-
+public class ListTradeResponseEnvelope {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -71,14 +30,12 @@ public class ListTradeResponseEnvelope extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ListTradeResponseEnvelope listTradeResponseEnvelope = (ListTradeResponseEnvelope) o;
-    return Objects.equals(this.listTradeResponseEnvelopeData, listTradeResponseEnvelope.listTradeResponseEnvelopeData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(listTradeResponseEnvelopeData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -86,8 +43,7 @@ public class ListTradeResponseEnvelope extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ListTradeResponseEnvelope {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    listTradeResponseEnvelopeData: ").append(toIndentedString(listTradeResponseEnvelopeData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

@@ -14,16 +14,41 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
-import tech.dora.model.StreamCandlesEntry;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 /**
  * StreamCandlesResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
-public class StreamCandlesResponse extends ArrayList<StreamCandlesEntry> {
+public class StreamCandlesResponse {
+  @SerializedName("stream_candles_entries")
+  private Object streamCandlesEntries = null;
+
+  public StreamCandlesResponse streamCandlesEntries(Object streamCandlesEntries) {
+    this.streamCandlesEntries = streamCandlesEntries;
+    return this;
+  }
+
+   /**
+   * Get streamCandlesEntries
+   * @return streamCandlesEntries
+  **/
+  @Schema(description = "")
+  public Object getStreamCandlesEntries() {
+    return streamCandlesEntries;
+  }
+
+  public void setStreamCandlesEntries(Object streamCandlesEntries) {
+    this.streamCandlesEntries = streamCandlesEntries;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -33,12 +58,13 @@ public class StreamCandlesResponse extends ArrayList<StreamCandlesEntry> {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    return super.equals(o);
+    StreamCandlesResponse streamCandlesResponse = (StreamCandlesResponse) o;
+    return Objects.equals(this.streamCandlesEntries, streamCandlesResponse.streamCandlesEntries);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode());
+    return Objects.hash(streamCandlesEntries);
   }
 
 
@@ -46,7 +72,8 @@ public class StreamCandlesResponse extends ArrayList<StreamCandlesEntry> {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class StreamCandlesResponse {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    
+    sb.append("    streamCandlesEntries: ").append(toIndentedString(streamCandlesEntries)).append("\n");
     sb.append("}");
     return sb.toString();
   }

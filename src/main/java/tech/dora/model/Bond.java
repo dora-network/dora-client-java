@@ -21,56 +21,54 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
-import org.threeten.bp.OffsetDateTime;
 import tech.dora.model.BondKind;
 /**
  * Bond
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class Bond {
   @SerializedName("id")
-  private UUID id = null;
+  private Object id = null;
 
   @SerializedName("kind")
   private BondKind kind = null;
 
   @SerializedName("coupon_start_at")
-  private OffsetDateTime couponStartAt = null;
+  private Object couponStartAt = null;
 
   @SerializedName("created_at")
-  private OffsetDateTime createdAt = null;
+  private Object createdAt = null;
 
   @SerializedName("final_coupon_at")
-  private OffsetDateTime finalCouponAt = null;
+  private Object finalCouponAt = null;
 
   @SerializedName("isin")
-  private String isin = null;
+  private Object isin = null;
 
   @SerializedName("issued_at")
-  private OffsetDateTime issuedAt = null;
+  private Object issuedAt = null;
 
   @SerializedName("issuer")
-  private String issuer = null;
+  private Object issuer = null;
 
   @SerializedName("maturity_at")
-  private OffsetDateTime maturityAt = null;
+  private Object maturityAt = null;
 
   @SerializedName("principal_value")
-  private String principalValue = null;
+  private Object principalValue = null;
 
   @SerializedName("payments_per_year")
-  private Integer paymentsPerYear = null;
+  private Object paymentsPerYear = null;
 
   @SerializedName("payments_every")
-  private Integer paymentsEvery = null;
+  private Object paymentsEvery = null;
 
   @SerializedName("next_coupon_payment")
-  private OffsetDateTime nextCouponPayment = null;
+  private Object nextCouponPayment = null;
 
-  public Bond id(UUID id) {
+  public Bond id(Object id) {
     this.id = id;
     return this;
   }
@@ -80,11 +78,11 @@ public class Bond {
    * @return id
   **/
   @Schema(description = "")
-  public UUID getId() {
+  public Object getId() {
     return id;
   }
 
-  public void setId(UUID id) {
+  public void setId(Object id) {
     this.id = id;
   }
 
@@ -106,7 +104,7 @@ public class Bond {
     this.kind = kind;
   }
 
-  public Bond couponStartAt(OffsetDateTime couponStartAt) {
+  public Bond couponStartAt(Object couponStartAt) {
     this.couponStartAt = couponStartAt;
     return this;
   }
@@ -116,15 +114,15 @@ public class Bond {
    * @return couponStartAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getCouponStartAt() {
+  public Object getCouponStartAt() {
     return couponStartAt;
   }
 
-  public void setCouponStartAt(OffsetDateTime couponStartAt) {
+  public void setCouponStartAt(Object couponStartAt) {
     this.couponStartAt = couponStartAt;
   }
 
-  public Bond createdAt(OffsetDateTime createdAt) {
+  public Bond createdAt(Object createdAt) {
     this.createdAt = createdAt;
     return this;
   }
@@ -134,15 +132,15 @@ public class Bond {
    * @return createdAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getCreatedAt() {
+  public Object getCreatedAt() {
     return createdAt;
   }
 
-  public void setCreatedAt(OffsetDateTime createdAt) {
+  public void setCreatedAt(Object createdAt) {
     this.createdAt = createdAt;
   }
 
-  public Bond finalCouponAt(OffsetDateTime finalCouponAt) {
+  public Bond finalCouponAt(Object finalCouponAt) {
     this.finalCouponAt = finalCouponAt;
     return this;
   }
@@ -152,15 +150,15 @@ public class Bond {
    * @return finalCouponAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getFinalCouponAt() {
+  public Object getFinalCouponAt() {
     return finalCouponAt;
   }
 
-  public void setFinalCouponAt(OffsetDateTime finalCouponAt) {
+  public void setFinalCouponAt(Object finalCouponAt) {
     this.finalCouponAt = finalCouponAt;
   }
 
-  public Bond isin(String isin) {
+  public Bond isin(Object isin) {
     this.isin = isin;
     return this;
   }
@@ -170,15 +168,15 @@ public class Bond {
    * @return isin
   **/
   @Schema(description = "")
-  public String getIsin() {
+  public Object getIsin() {
     return isin;
   }
 
-  public void setIsin(String isin) {
+  public void setIsin(Object isin) {
     this.isin = isin;
   }
 
-  public Bond issuedAt(OffsetDateTime issuedAt) {
+  public Bond issuedAt(Object issuedAt) {
     this.issuedAt = issuedAt;
     return this;
   }
@@ -188,15 +186,15 @@ public class Bond {
    * @return issuedAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getIssuedAt() {
+  public Object getIssuedAt() {
     return issuedAt;
   }
 
-  public void setIssuedAt(OffsetDateTime issuedAt) {
+  public void setIssuedAt(Object issuedAt) {
     this.issuedAt = issuedAt;
   }
 
-  public Bond issuer(String issuer) {
+  public Bond issuer(Object issuer) {
     this.issuer = issuer;
     return this;
   }
@@ -206,15 +204,15 @@ public class Bond {
    * @return issuer
   **/
   @Schema(description = "")
-  public String getIssuer() {
+  public Object getIssuer() {
     return issuer;
   }
 
-  public void setIssuer(String issuer) {
+  public void setIssuer(Object issuer) {
     this.issuer = issuer;
   }
 
-  public Bond maturityAt(OffsetDateTime maturityAt) {
+  public Bond maturityAt(Object maturityAt) {
     this.maturityAt = maturityAt;
     return this;
   }
@@ -224,15 +222,15 @@ public class Bond {
    * @return maturityAt
   **/
   @Schema(description = "")
-  public OffsetDateTime getMaturityAt() {
+  public Object getMaturityAt() {
     return maturityAt;
   }
 
-  public void setMaturityAt(OffsetDateTime maturityAt) {
+  public void setMaturityAt(Object maturityAt) {
     this.maturityAt = maturityAt;
   }
 
-  public Bond principalValue(String principalValue) {
+  public Bond principalValue(Object principalValue) {
     this.principalValue = principalValue;
     return this;
   }
@@ -242,15 +240,15 @@ public class Bond {
    * @return principalValue
   **/
   @Schema(description = "")
-  public String getPrincipalValue() {
+  public Object getPrincipalValue() {
     return principalValue;
   }
 
-  public void setPrincipalValue(String principalValue) {
+  public void setPrincipalValue(Object principalValue) {
     this.principalValue = principalValue;
   }
 
-  public Bond paymentsPerYear(Integer paymentsPerYear) {
+  public Bond paymentsPerYear(Object paymentsPerYear) {
     this.paymentsPerYear = paymentsPerYear;
     return this;
   }
@@ -260,34 +258,33 @@ public class Bond {
    * @return paymentsPerYear
   **/
   @Schema(description = "")
-  public Integer getPaymentsPerYear() {
+  public Object getPaymentsPerYear() {
     return paymentsPerYear;
   }
 
-  public void setPaymentsPerYear(Integer paymentsPerYear) {
+  public void setPaymentsPerYear(Object paymentsPerYear) {
     this.paymentsPerYear = paymentsPerYear;
   }
 
-  public Bond paymentsEvery(Integer paymentsEvery) {
+  public Bond paymentsEvery(Object paymentsEvery) {
     this.paymentsEvery = paymentsEvery;
     return this;
   }
 
    /**
    * Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond)
-   * minimum: 1000
    * @return paymentsEvery
   **/
   @Schema(description = "Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond)")
-  public Integer getPaymentsEvery() {
+  public Object getPaymentsEvery() {
     return paymentsEvery;
   }
 
-  public void setPaymentsEvery(Integer paymentsEvery) {
+  public void setPaymentsEvery(Object paymentsEvery) {
     this.paymentsEvery = paymentsEvery;
   }
 
-  public Bond nextCouponPayment(OffsetDateTime nextCouponPayment) {
+  public Bond nextCouponPayment(Object nextCouponPayment) {
     this.nextCouponPayment = nextCouponPayment;
     return this;
   }
@@ -297,11 +294,11 @@ public class Bond {
    * @return nextCouponPayment
   **/
   @Schema(description = "")
-  public OffsetDateTime getNextCouponPayment() {
+  public Object getNextCouponPayment() {
     return nextCouponPayment;
   }
 
-  public void setNextCouponPayment(OffsetDateTime nextCouponPayment) {
+  public void setNextCouponPayment(Object nextCouponPayment) {
     this.nextCouponPayment = nextCouponPayment;
   }
 

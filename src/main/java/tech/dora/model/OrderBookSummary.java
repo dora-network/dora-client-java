@@ -21,30 +21,29 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * OrderBookSummary
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class OrderBookSummary {
   @SerializedName("order_book_id")
-  private UUID orderBookId = null;
+  private Object orderBookId = null;
 
   @SerializedName("mid_price")
-  private String midPrice = null;
+  private Object midPrice = null;
 
   @SerializedName("spread")
-  private String spread = null;
+  private Object spread = null;
 
   @SerializedName("best_bid")
-  private String bestBid = null;
+  private Object bestBid = null;
 
   @SerializedName("best_ask")
-  private String bestAsk = null;
+  private Object bestAsk = null;
 
-  public OrderBookSummary orderBookId(UUID orderBookId) {
+  public OrderBookSummary orderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
     return this;
   }
@@ -54,15 +53,15 @@ public class OrderBookSummary {
    * @return orderBookId
   **/
   @Schema(description = "")
-  public UUID getOrderBookId() {
+  public Object getOrderBookId() {
     return orderBookId;
   }
 
-  public void setOrderBookId(UUID orderBookId) {
+  public void setOrderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
   }
 
-  public OrderBookSummary midPrice(String midPrice) {
+  public OrderBookSummary midPrice(Object midPrice) {
     this.midPrice = midPrice;
     return this;
   }
@@ -72,15 +71,15 @@ public class OrderBookSummary {
    * @return midPrice
   **/
   @Schema(description = "")
-  public String getMidPrice() {
+  public Object getMidPrice() {
     return midPrice;
   }
 
-  public void setMidPrice(String midPrice) {
+  public void setMidPrice(Object midPrice) {
     this.midPrice = midPrice;
   }
 
-  public OrderBookSummary spread(String spread) {
+  public OrderBookSummary spread(Object spread) {
     this.spread = spread;
     return this;
   }
@@ -90,15 +89,15 @@ public class OrderBookSummary {
    * @return spread
   **/
   @Schema(description = "")
-  public String getSpread() {
+  public Object getSpread() {
     return spread;
   }
 
-  public void setSpread(String spread) {
+  public void setSpread(Object spread) {
     this.spread = spread;
   }
 
-  public OrderBookSummary bestBid(String bestBid) {
+  public OrderBookSummary bestBid(Object bestBid) {
     this.bestBid = bestBid;
     return this;
   }
@@ -108,15 +107,15 @@ public class OrderBookSummary {
    * @return bestBid
   **/
   @Schema(description = "")
-  public String getBestBid() {
+  public Object getBestBid() {
     return bestBid;
   }
 
-  public void setBestBid(String bestBid) {
+  public void setBestBid(Object bestBid) {
     this.bestBid = bestBid;
   }
 
-  public OrderBookSummary bestAsk(String bestAsk) {
+  public OrderBookSummary bestAsk(Object bestAsk) {
     this.bestAsk = bestAsk;
     return this;
   }
@@ -126,11 +125,11 @@ public class OrderBookSummary {
    * @return bestAsk
   **/
   @Schema(description = "")
-  public String getBestAsk() {
+  public Object getBestAsk() {
     return bestAsk;
   }
 
-  public void setBestAsk(String bestAsk) {
+  public void setBestAsk(Object bestAsk) {
     this.bestAsk = bestAsk;
   }
 

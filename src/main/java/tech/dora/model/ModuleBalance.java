@@ -21,36 +21,32 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * ModuleBalance
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class ModuleBalance {
   @SerializedName("asset_id")
-  private UUID assetId = null;
+  private Object assetId = null;
 
   @SerializedName("seq")
-  private Integer seq = null;
+  private Object seq = null;
 
   @SerializedName("available")
-  private String available = null;
+  private Object available = null;
 
   @SerializedName("supplied")
-  private String supplied = null;
-
-  @SerializedName("supplied_collateral")
-  private String suppliedCollateral = null;
+  private Object supplied = null;
 
   @SerializedName("virtual")
-  private String virtual = null;
+  private Object virtual = null;
 
   @SerializedName("borrowed")
-  private String borrowed = null;
+  private Object borrowed = null;
 
-  public ModuleBalance assetId(UUID assetId) {
+  public ModuleBalance assetId(Object assetId) {
     this.assetId = assetId;
     return this;
   }
@@ -60,15 +56,15 @@ public class ModuleBalance {
    * @return assetId
   **/
   @Schema(description = "")
-  public UUID getAssetId() {
+  public Object getAssetId() {
     return assetId;
   }
 
-  public void setAssetId(UUID assetId) {
+  public void setAssetId(Object assetId) {
     this.assetId = assetId;
   }
 
-  public ModuleBalance seq(Integer seq) {
+  public ModuleBalance seq(Object seq) {
     this.seq = seq;
     return this;
   }
@@ -78,15 +74,15 @@ public class ModuleBalance {
    * @return seq
   **/
   @Schema(description = "")
-  public Integer getSeq() {
+  public Object getSeq() {
     return seq;
   }
 
-  public void setSeq(Integer seq) {
+  public void setSeq(Object seq) {
     this.seq = seq;
   }
 
-  public ModuleBalance available(String available) {
+  public ModuleBalance available(Object available) {
     this.available = available;
     return this;
   }
@@ -96,15 +92,15 @@ public class ModuleBalance {
    * @return available
   **/
   @Schema(description = "The available balance in the module for this asset")
-  public String getAvailable() {
+  public Object getAvailable() {
     return available;
   }
 
-  public void setAvailable(String available) {
+  public void setAvailable(Object available) {
     this.available = available;
   }
 
-  public ModuleBalance supplied(String supplied) {
+  public ModuleBalance supplied(Object supplied) {
     this.supplied = supplied;
     return this;
   }
@@ -114,33 +110,15 @@ public class ModuleBalance {
    * @return supplied
   **/
   @Schema(description = "The total amount supplied to the module for this asset")
-  public String getSupplied() {
+  public Object getSupplied() {
     return supplied;
   }
 
-  public void setSupplied(String supplied) {
+  public void setSupplied(Object supplied) {
     this.supplied = supplied;
   }
 
-  public ModuleBalance suppliedCollateral(String suppliedCollateral) {
-    this.suppliedCollateral = suppliedCollateral;
-    return this;
-  }
-
-   /**
-   * The amount supplied as collateral from user balances in the module for this asset
-   * @return suppliedCollateral
-  **/
-  @Schema(description = "The amount supplied as collateral from user balances in the module for this asset")
-  public String getSuppliedCollateral() {
-    return suppliedCollateral;
-  }
-
-  public void setSuppliedCollateral(String suppliedCollateral) {
-    this.suppliedCollateral = suppliedCollateral;
-  }
-
-  public ModuleBalance virtual(String virtual) {
+  public ModuleBalance virtual(Object virtual) {
     this.virtual = virtual;
     return this;
   }
@@ -150,15 +128,15 @@ public class ModuleBalance {
    * @return virtual
   **/
   @Schema(description = "Assets minted by virtual-borrowing, but not yet repaid")
-  public String getVirtual() {
+  public Object getVirtual() {
     return virtual;
   }
 
-  public void setVirtual(String virtual) {
+  public void setVirtual(Object virtual) {
     this.virtual = virtual;
   }
 
-  public ModuleBalance borrowed(String borrowed) {
+  public ModuleBalance borrowed(Object borrowed) {
     this.borrowed = borrowed;
     return this;
   }
@@ -168,11 +146,11 @@ public class ModuleBalance {
    * @return borrowed
   **/
   @Schema(description = "The total amount borrowed from the supplied but not yet repaid")
-  public String getBorrowed() {
+  public Object getBorrowed() {
     return borrowed;
   }
 
-  public void setBorrowed(String borrowed) {
+  public void setBorrowed(Object borrowed) {
     this.borrowed = borrowed;
   }
 
@@ -190,14 +168,13 @@ public class ModuleBalance {
         Objects.equals(this.seq, moduleBalance.seq) &&
         Objects.equals(this.available, moduleBalance.available) &&
         Objects.equals(this.supplied, moduleBalance.supplied) &&
-        Objects.equals(this.suppliedCollateral, moduleBalance.suppliedCollateral) &&
         Objects.equals(this.virtual, moduleBalance.virtual) &&
         Objects.equals(this.borrowed, moduleBalance.borrowed);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(assetId, seq, available, supplied, suppliedCollateral, virtual, borrowed);
+    return Objects.hash(assetId, seq, available, supplied, virtual, borrowed);
   }
 
 
@@ -210,7 +187,6 @@ public class ModuleBalance {
     sb.append("    seq: ").append(toIndentedString(seq)).append("\n");
     sb.append("    available: ").append(toIndentedString(available)).append("\n");
     sb.append("    supplied: ").append(toIndentedString(supplied)).append("\n");
-    sb.append("    suppliedCollateral: ").append(toIndentedString(suppliedCollateral)).append("\n");
     sb.append("    virtual: ").append(toIndentedString(virtual)).append("\n");
     sb.append("    borrowed: ").append(toIndentedString(borrowed)).append("\n");
     sb.append("}");

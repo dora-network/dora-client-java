@@ -33,13 +33,13 @@ public enum OrderBookStatus {
   @SerializedName("SUSPENDED")
   SUSPENDED("SUSPENDED");
 
-  private String value;
+  private Object value;
 
-  OrderBookStatus(String value) {
+  OrderBookStatus(Object value) {
     this.value = value;
   }
 
-  public String getValue() {
+  public Object getValue() {
     return value;
   }
 
@@ -48,7 +48,7 @@ public enum OrderBookStatus {
     return String.valueOf(value);
   }
 
-  public static OrderBookStatus fromValue(String input) {
+  public static OrderBookStatus fromValue(Object input) {
     for (OrderBookStatus b : OrderBookStatus.values()) {
       if (b.value.equals(input)) {
         return b;
@@ -66,7 +66,7 @@ public enum OrderBookStatus {
     @Override
     public OrderBookStatus read(final JsonReader jsonReader) throws IOException {
       Object value = jsonReader.nextString();
-      return OrderBookStatus.fromValue((String)(value));
+      return OrderBookStatus.fromValue((Object)(value));
     }
   }
 }

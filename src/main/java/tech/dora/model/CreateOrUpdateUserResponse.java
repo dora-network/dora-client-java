@@ -21,18 +21,17 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * Response body for POST /user or PUT /user/{id}: contains the ID of the created or updated user.
  */
 @Schema(description = "Response body for POST /user or PUT /user/{id}: contains the ID of the created or updated user.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class CreateOrUpdateUserResponse {
   @SerializedName("id")
-  private UUID id = null;
+  private Object id = null;
 
-  public CreateOrUpdateUserResponse id(UUID id) {
+  public CreateOrUpdateUserResponse id(Object id) {
     this.id = id;
     return this;
   }
@@ -42,11 +41,11 @@ public class CreateOrUpdateUserResponse {
    * @return id
   **/
   @Schema(description = "The ID of the created or updated user.")
-  public UUID getId() {
+  public Object getId() {
     return id;
   }
 
-  public void setId(UUID id) {
+  public void setId(Object id) {
     this.id = id;
   }
 

@@ -14,44 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import org.threeten.bp.OffsetDateTime;
-import tech.dora.model.StreamEntry;
-import tech.dora.model.Transaction;
 /**
  * StreamTransactionsEntry
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
-public class StreamTransactionsEntry extends StreamEntry {
-  @SerializedName("Val")
-  private Transaction streamTransactionsEntryVal = null;
-
-  public StreamTransactionsEntry streamTransactionsEntryVal(Transaction streamTransactionsEntryVal) {
-    this.streamTransactionsEntryVal = streamTransactionsEntryVal;
-    return this;
-  }
-
-   /**
-   * Get streamTransactionsEntryVal
-   * @return streamTransactionsEntryVal
-  **/
-  @Schema(description = "")
-  public Transaction getStreamTransactionsEntryVal() {
-    return streamTransactionsEntryVal;
-  }
-
-  public void setStreamTransactionsEntryVal(Transaction streamTransactionsEntryVal) {
-    this.streamTransactionsEntryVal = streamTransactionsEntryVal;
-  }
-
+public class StreamTransactionsEntry {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -61,14 +30,12 @@ public class StreamTransactionsEntry extends StreamEntry {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StreamTransactionsEntry streamTransactionsEntry = (StreamTransactionsEntry) o;
-    return Objects.equals(this.streamTransactionsEntryVal, streamTransactionsEntry.streamTransactionsEntryVal) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(streamTransactionsEntryVal, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -76,8 +43,7 @@ public class StreamTransactionsEntry extends StreamEntry {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class StreamTransactionsEntry {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    streamTransactionsEntryVal: ").append(toIndentedString(streamTransactionsEntryVal)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

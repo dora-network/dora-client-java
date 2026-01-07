@@ -37,13 +37,13 @@ public enum OrderStatus {
   @SerializedName("PENDING")
   PENDING("PENDING");
 
-  private String value;
+  private Object value;
 
-  OrderStatus(String value) {
+  OrderStatus(Object value) {
     this.value = value;
   }
 
-  public String getValue() {
+  public Object getValue() {
     return value;
   }
 
@@ -52,7 +52,7 @@ public enum OrderStatus {
     return String.valueOf(value);
   }
 
-  public static OrderStatus fromValue(String input) {
+  public static OrderStatus fromValue(Object input) {
     for (OrderStatus b : OrderStatus.values()) {
       if (b.value.equals(input)) {
         return b;
@@ -70,7 +70,7 @@ public enum OrderStatus {
     @Override
     public OrderStatus read(final JsonReader jsonReader) throws IOException {
       Object value = jsonReader.nextString();
-      return OrderStatus.fromValue((String)(value));
+      return OrderStatus.fromValue((Object)(value));
     }
   }
 }

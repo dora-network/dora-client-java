@@ -31,13 +31,13 @@ public enum Side {
   @SerializedName("SELL")
   SELL("SELL");
 
-  private String value;
+  private Object value;
 
-  Side(String value) {
+  Side(Object value) {
     this.value = value;
   }
 
-  public String getValue() {
+  public Object getValue() {
     return value;
   }
 
@@ -46,7 +46,7 @@ public enum Side {
     return String.valueOf(value);
   }
 
-  public static Side fromValue(String input) {
+  public static Side fromValue(Object input) {
     for (Side b : Side.values()) {
       if (b.value.equals(input)) {
         return b;
@@ -64,7 +64,7 @@ public enum Side {
     @Override
     public Side read(final JsonReader jsonReader) throws IOException {
       Object value = jsonReader.nextString();
-      return Side.fromValue((String)(value));
+      return Side.fromValue((Object)(value));
     }
   }
 }

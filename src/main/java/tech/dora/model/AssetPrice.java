@@ -21,25 +21,23 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
-import org.threeten.bp.OffsetDateTime;
 /**
  * AssetPrice
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class AssetPrice {
   @SerializedName("asset_id")
-  private UUID assetId = null;
+  private Object assetId = null;
 
   @SerializedName("price")
-  private String price = null;
+  private Object price = null;
 
   @SerializedName("time")
-  private OffsetDateTime time = null;
+  private Object time = null;
 
-  public AssetPrice assetId(UUID assetId) {
+  public AssetPrice assetId(Object assetId) {
     this.assetId = assetId;
     return this;
   }
@@ -49,15 +47,15 @@ public class AssetPrice {
    * @return assetId
   **/
   @Schema(description = "")
-  public UUID getAssetId() {
+  public Object getAssetId() {
     return assetId;
   }
 
-  public void setAssetId(UUID assetId) {
+  public void setAssetId(Object assetId) {
     this.assetId = assetId;
   }
 
-  public AssetPrice price(String price) {
+  public AssetPrice price(Object price) {
     this.price = price;
     return this;
   }
@@ -67,15 +65,15 @@ public class AssetPrice {
    * @return price
   **/
   @Schema(description = "")
-  public String getPrice() {
+  public Object getPrice() {
     return price;
   }
 
-  public void setPrice(String price) {
+  public void setPrice(Object price) {
     this.price = price;
   }
 
-  public AssetPrice time(OffsetDateTime time) {
+  public AssetPrice time(Object time) {
     this.time = time;
     return this;
   }
@@ -85,11 +83,11 @@ public class AssetPrice {
    * @return time
   **/
   @Schema(description = "")
-  public OffsetDateTime getTime() {
+  public Object getTime() {
     return time;
   }
 
-  public void setTime(OffsetDateTime time) {
+  public void setTime(Object time) {
     this.time = time;
   }
 

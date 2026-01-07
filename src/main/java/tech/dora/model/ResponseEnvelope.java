@@ -26,14 +26,14 @@ import tech.dora.model.Metadata;
  * Standard response envelope. For 2xx responses, &#x27;data&#x27; is set. For errors, &#x27;error&#x27; is set.
  */
 @Schema(description = "Standard response envelope. For 2xx responses, 'data' is set. For errors, 'error' is set.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class ResponseEnvelope {
   @SerializedName("data")
   private Object data = null;
 
   @SerializedName("error")
-  private String error = null;
+  private Object error = null;
 
   @SerializedName("metadata")
   private Metadata metadata = null;
@@ -56,7 +56,7 @@ public class ResponseEnvelope {
     this.data = data;
   }
 
-  public ResponseEnvelope error(String error) {
+  public ResponseEnvelope error(Object error) {
     this.error = error;
     return this;
   }
@@ -66,11 +66,11 @@ public class ResponseEnvelope {
    * @return error
   **/
   @Schema(description = "The error message. Present for error (non-2xx) responses.")
-  public String getError() {
+  public Object getError() {
     return error;
   }
 
-  public void setError(String error) {
+  public void setError(Object error) {
     this.error = error;
   }
 
@@ -80,10 +80,10 @@ public class ResponseEnvelope {
   }
 
    /**
-   * Get metadata
+   * Metadata about the response, including status code and trace information.
    * @return metadata
   **/
-  @Schema(description = "")
+  @Schema(description = "Metadata about the response, including status code and trace information.")
   public Metadata getMetadata() {
     return metadata;
   }

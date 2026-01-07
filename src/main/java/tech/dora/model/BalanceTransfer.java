@@ -21,24 +21,23 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * BalanceTransfer
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class BalanceTransfer {
   @SerializedName("from_position_id")
-  private UUID fromPositionId = null;
+  private Object fromPositionId = null;
 
   @SerializedName("to_position_id")
-  private UUID toPositionId = null;
+  private Object toPositionId = null;
 
   @SerializedName("transaction_id")
-  private UUID transactionId = null;
+  private Object transactionId = null;
 
-  public BalanceTransfer fromPositionId(UUID fromPositionId) {
+  public BalanceTransfer fromPositionId(Object fromPositionId) {
     this.fromPositionId = fromPositionId;
     return this;
   }
@@ -48,15 +47,15 @@ public class BalanceTransfer {
    * @return fromPositionId
   **/
   @Schema(description = "")
-  public UUID getFromPositionId() {
+  public Object getFromPositionId() {
     return fromPositionId;
   }
 
-  public void setFromPositionId(UUID fromPositionId) {
+  public void setFromPositionId(Object fromPositionId) {
     this.fromPositionId = fromPositionId;
   }
 
-  public BalanceTransfer toPositionId(UUID toPositionId) {
+  public BalanceTransfer toPositionId(Object toPositionId) {
     this.toPositionId = toPositionId;
     return this;
   }
@@ -66,15 +65,15 @@ public class BalanceTransfer {
    * @return toPositionId
   **/
   @Schema(description = "")
-  public UUID getToPositionId() {
+  public Object getToPositionId() {
     return toPositionId;
   }
 
-  public void setToPositionId(UUID toPositionId) {
+  public void setToPositionId(Object toPositionId) {
     this.toPositionId = toPositionId;
   }
 
-  public BalanceTransfer transactionId(UUID transactionId) {
+  public BalanceTransfer transactionId(Object transactionId) {
     this.transactionId = transactionId;
     return this;
   }
@@ -84,11 +83,11 @@ public class BalanceTransfer {
    * @return transactionId
   **/
   @Schema(description = "")
-  public UUID getTransactionId() {
+  public Object getTransactionId() {
     return transactionId;
   }
 
-  public void setTransactionId(UUID transactionId) {
+  public void setTransactionId(Object transactionId) {
     this.transactionId = transactionId;
   }
 

@@ -14,54 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import tech.dora.model.Candle;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
  * ListCandlesResponseEnvelope
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
-public class ListCandlesResponseEnvelope extends ResponseEnvelope {
-  @SerializedName("data")
-  private List<Candle> listCandlesResponseEnvelopeData = null;
-
-  public ListCandlesResponseEnvelope listCandlesResponseEnvelopeData(List<Candle> listCandlesResponseEnvelopeData) {
-    this.listCandlesResponseEnvelopeData = listCandlesResponseEnvelopeData;
-    return this;
-  }
-
-  public ListCandlesResponseEnvelope addListCandlesResponseEnvelopeDataItem(Candle listCandlesResponseEnvelopeDataItem) {
-    if (this.listCandlesResponseEnvelopeData == null) {
-      this.listCandlesResponseEnvelopeData = new ArrayList<Candle>();
-    }
-    this.listCandlesResponseEnvelopeData.add(listCandlesResponseEnvelopeDataItem);
-    return this;
-  }
-
-   /**
-   * Get listCandlesResponseEnvelopeData
-   * @return listCandlesResponseEnvelopeData
-  **/
-  @Schema(description = "")
-  public List<Candle> getListCandlesResponseEnvelopeData() {
-    return listCandlesResponseEnvelopeData;
-  }
-
-  public void setListCandlesResponseEnvelopeData(List<Candle> listCandlesResponseEnvelopeData) {
-    this.listCandlesResponseEnvelopeData = listCandlesResponseEnvelopeData;
-  }
-
+public class ListCandlesResponseEnvelope {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -71,14 +30,12 @@ public class ListCandlesResponseEnvelope extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ListCandlesResponseEnvelope listCandlesResponseEnvelope = (ListCandlesResponseEnvelope) o;
-    return Objects.equals(this.listCandlesResponseEnvelopeData, listCandlesResponseEnvelope.listCandlesResponseEnvelopeData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(listCandlesResponseEnvelopeData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -86,8 +43,7 @@ public class ListCandlesResponseEnvelope extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ListCandlesResponseEnvelope {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    listCandlesResponseEnvelopeData: ").append(toIndentedString(listCandlesResponseEnvelopeData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

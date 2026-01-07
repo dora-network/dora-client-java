@@ -25,16 +25,16 @@ import java.io.IOException;
  * A generic struct to handle optional updates for string fields in user requests.
  */
 @Schema(description = "A generic struct to handle optional updates for string fields in user requests.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class UpdateFieldString {
   @SerializedName("update")
-  private Boolean update = null;
+  private Object update = null;
 
   @SerializedName("value")
-  private String value = null;
+  private Object value = null;
 
-  public UpdateFieldString update(Boolean update) {
+  public UpdateFieldString update(Object update) {
     this.update = update;
     return this;
   }
@@ -44,15 +44,15 @@ public class UpdateFieldString {
    * @return update
   **/
   @Schema(required = true, description = "Whether to update the field.")
-  public Boolean isUpdate() {
+  public Object getUpdate() {
     return update;
   }
 
-  public void setUpdate(Boolean update) {
+  public void setUpdate(Object update) {
     this.update = update;
   }
 
-  public UpdateFieldString value(String value) {
+  public UpdateFieldString value(Object value) {
     this.value = value;
     return this;
   }
@@ -62,11 +62,11 @@ public class UpdateFieldString {
    * @return value
   **/
   @Schema(description = "The new value to set for the field.")
-  public String getValue() {
+  public Object getValue() {
     return value;
   }
 
-  public void setValue(String value) {
+  public void setValue(Object value) {
     this.value = value;
   }
 

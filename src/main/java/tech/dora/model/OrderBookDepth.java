@@ -21,31 +21,26 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import org.threeten.bp.OffsetDateTime;
-import tech.dora.model.PriceLevel;
 /**
  * OrderBookDepth
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class OrderBookDepth {
   @SerializedName("order_book_id")
-  private UUID orderBookId = null;
+  private Object orderBookId = null;
 
   @SerializedName("bids")
-  private List<PriceLevel> bids = null;
+  private Object bids = null;
 
   @SerializedName("asks")
-  private List<PriceLevel> asks = null;
+  private Object asks = null;
 
   @SerializedName("timestamp")
-  private OffsetDateTime timestamp = null;
+  private Object timestamp = null;
 
-  public OrderBookDepth orderBookId(UUID orderBookId) {
+  public OrderBookDepth orderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
     return this;
   }
@@ -55,24 +50,16 @@ public class OrderBookDepth {
    * @return orderBookId
   **/
   @Schema(description = "")
-  public UUID getOrderBookId() {
+  public Object getOrderBookId() {
     return orderBookId;
   }
 
-  public void setOrderBookId(UUID orderBookId) {
+  public void setOrderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
   }
 
-  public OrderBookDepth bids(List<PriceLevel> bids) {
+  public OrderBookDepth bids(Object bids) {
     this.bids = bids;
-    return this;
-  }
-
-  public OrderBookDepth addBidsItem(PriceLevel bidsItem) {
-    if (this.bids == null) {
-      this.bids = new ArrayList<PriceLevel>();
-    }
-    this.bids.add(bidsItem);
     return this;
   }
 
@@ -81,24 +68,16 @@ public class OrderBookDepth {
    * @return bids
   **/
   @Schema(description = "")
-  public List<PriceLevel> getBids() {
+  public Object getBids() {
     return bids;
   }
 
-  public void setBids(List<PriceLevel> bids) {
+  public void setBids(Object bids) {
     this.bids = bids;
   }
 
-  public OrderBookDepth asks(List<PriceLevel> asks) {
+  public OrderBookDepth asks(Object asks) {
     this.asks = asks;
-    return this;
-  }
-
-  public OrderBookDepth addAsksItem(PriceLevel asksItem) {
-    if (this.asks == null) {
-      this.asks = new ArrayList<PriceLevel>();
-    }
-    this.asks.add(asksItem);
     return this;
   }
 
@@ -107,15 +86,15 @@ public class OrderBookDepth {
    * @return asks
   **/
   @Schema(description = "")
-  public List<PriceLevel> getAsks() {
+  public Object getAsks() {
     return asks;
   }
 
-  public void setAsks(List<PriceLevel> asks) {
+  public void setAsks(Object asks) {
     this.asks = asks;
   }
 
-  public OrderBookDepth timestamp(OffsetDateTime timestamp) {
+  public OrderBookDepth timestamp(Object timestamp) {
     this.timestamp = timestamp;
     return this;
   }
@@ -125,11 +104,11 @@ public class OrderBookDepth {
    * @return timestamp
   **/
   @Schema(description = "")
-  public OffsetDateTime getTimestamp() {
+  public Object getTimestamp() {
     return timestamp;
   }
 
-  public void setTimestamp(OffsetDateTime timestamp) {
+  public void setTimestamp(Object timestamp) {
     this.timestamp = timestamp;
   }
 

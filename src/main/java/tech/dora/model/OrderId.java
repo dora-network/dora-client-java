@@ -21,18 +21,17 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * OrderId
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class OrderId {
   @SerializedName("order_id")
-  private UUID orderId = null;
+  private Object orderId = null;
 
-  public OrderId orderId(UUID orderId) {
+  public OrderId orderId(Object orderId) {
     this.orderId = orderId;
     return this;
   }
@@ -42,11 +41,11 @@ public class OrderId {
    * @return orderId
   **/
   @Schema(description = "")
-  public UUID getOrderId() {
+  public Object getOrderId() {
     return orderId;
   }
 
-  public void setOrderId(UUID orderId) {
+  public void setOrderId(Object orderId) {
     this.orderId = orderId;
   }
 

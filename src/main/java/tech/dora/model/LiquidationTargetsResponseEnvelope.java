@@ -14,54 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
  * LiquidationTargetsResponseEnvelope
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
-public class LiquidationTargetsResponseEnvelope extends ResponseEnvelope {
-  @SerializedName("data")
-  private List<UUID> liquidationTargetsResponseEnvelopeData = null;
-
-  public LiquidationTargetsResponseEnvelope liquidationTargetsResponseEnvelopeData(List<UUID> liquidationTargetsResponseEnvelopeData) {
-    this.liquidationTargetsResponseEnvelopeData = liquidationTargetsResponseEnvelopeData;
-    return this;
-  }
-
-  public LiquidationTargetsResponseEnvelope addLiquidationTargetsResponseEnvelopeDataItem(UUID liquidationTargetsResponseEnvelopeDataItem) {
-    if (this.liquidationTargetsResponseEnvelopeData == null) {
-      this.liquidationTargetsResponseEnvelopeData = new ArrayList<UUID>();
-    }
-    this.liquidationTargetsResponseEnvelopeData.add(liquidationTargetsResponseEnvelopeDataItem);
-    return this;
-  }
-
-   /**
-   * Get liquidationTargetsResponseEnvelopeData
-   * @return liquidationTargetsResponseEnvelopeData
-  **/
-  @Schema(description = "")
-  public List<UUID> getLiquidationTargetsResponseEnvelopeData() {
-    return liquidationTargetsResponseEnvelopeData;
-  }
-
-  public void setLiquidationTargetsResponseEnvelopeData(List<UUID> liquidationTargetsResponseEnvelopeData) {
-    this.liquidationTargetsResponseEnvelopeData = liquidationTargetsResponseEnvelopeData;
-  }
-
+public class LiquidationTargetsResponseEnvelope {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -71,14 +30,12 @@ public class LiquidationTargetsResponseEnvelope extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LiquidationTargetsResponseEnvelope liquidationTargetsResponseEnvelope = (LiquidationTargetsResponseEnvelope) o;
-    return Objects.equals(this.liquidationTargetsResponseEnvelopeData, liquidationTargetsResponseEnvelope.liquidationTargetsResponseEnvelopeData) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(liquidationTargetsResponseEnvelopeData, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -86,8 +43,7 @@ public class LiquidationTargetsResponseEnvelope extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class LiquidationTargetsResponseEnvelope {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    liquidationTargetsResponseEnvelopeData: ").append(toIndentedString(liquidationTargetsResponseEnvelopeData)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

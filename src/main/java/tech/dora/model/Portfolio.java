@@ -21,29 +21,24 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import tech.dora.model.Position;
 import tech.dora.model.TransformedAssets;
 /**
  * Portfolio
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class Portfolio {
   @SerializedName("user_id")
-  private UUID userId = null;
+  private Object userId = null;
 
   @SerializedName("position")
-  private Map<String, Map<String, Position>> position = null;
+  private Object position = null;
 
   @SerializedName("net_stablecoin_equivalence")
   private TransformedAssets netStablecoinEquivalence = null;
 
-  public Portfolio userId(UUID userId) {
+  public Portfolio userId(Object userId) {
     this.userId = userId;
     return this;
   }
@@ -53,24 +48,16 @@ public class Portfolio {
    * @return userId
   **/
   @Schema(description = "")
-  public UUID getUserId() {
+  public Object getUserId() {
     return userId;
   }
 
-  public void setUserId(UUID userId) {
+  public void setUserId(Object userId) {
     this.userId = userId;
   }
 
-  public Portfolio position(Map<String, Map<String, Position>> position) {
+  public Portfolio position(Object position) {
     this.position = position;
-    return this;
-  }
-
-  public Portfolio putPositionItem(String key, Map<String, Position> positionItem) {
-    if (this.position == null) {
-      this.position = new HashMap<String, Map<String, Position>>();
-    }
-    this.position.put(key, positionItem);
     return this;
   }
 
@@ -79,11 +66,11 @@ public class Portfolio {
    * @return position
   **/
   @Schema(description = "")
-  public Map<String, Map<String, Position>> getPosition() {
+  public Object getPosition() {
     return position;
   }
 
-  public void setPosition(Map<String, Map<String, Position>> position) {
+  public void setPosition(Object position) {
     this.position = position;
   }
 

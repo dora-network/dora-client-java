@@ -14,43 +14,13 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.IOException;
-import tech.dora.model.Metadata;
-import tech.dora.model.ResponseEnvelope;
 /**
  * PoolRequestError
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
-public class PoolRequestError extends ResponseEnvelope {
-  @SerializedName("error")
-  private String poolRequestErrorError = null;
-
-  public PoolRequestError poolRequestErrorError(String poolRequestErrorError) {
-    this.poolRequestErrorError = poolRequestErrorError;
-    return this;
-  }
-
-   /**
-   * Get poolRequestErrorError
-   * @return poolRequestErrorError
-  **/
-  @Schema(description = "")
-  public String getPoolRequestErrorError() {
-    return poolRequestErrorError;
-  }
-
-  public void setPoolRequestErrorError(String poolRequestErrorError) {
-    this.poolRequestErrorError = poolRequestErrorError;
-  }
-
+public class PoolRequestError {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -60,14 +30,12 @@ public class PoolRequestError extends ResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PoolRequestError poolRequestError = (PoolRequestError) o;
-    return Objects.equals(this.poolRequestErrorError, poolRequestError.poolRequestErrorError) &&
-        super.equals(o);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(poolRequestErrorError, super.hashCode());
+    return Objects.hash();
   }
 
 
@@ -75,8 +43,7 @@ public class PoolRequestError extends ResponseEnvelope {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class PoolRequestError {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    poolRequestErrorError: ").append(toIndentedString(poolRequestErrorError)).append("\n");
+    
     sb.append("}");
     return sb.toString();
   }

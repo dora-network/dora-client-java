@@ -35,13 +35,13 @@ public enum AssetKind {
   @SerializedName("POOL_SHARE")
   POOL_SHARE("POOL_SHARE");
 
-  private String value;
+  private Object value;
 
-  AssetKind(String value) {
+  AssetKind(Object value) {
     this.value = value;
   }
 
-  public String getValue() {
+  public Object getValue() {
     return value;
   }
 
@@ -50,7 +50,7 @@ public enum AssetKind {
     return String.valueOf(value);
   }
 
-  public static AssetKind fromValue(String input) {
+  public static AssetKind fromValue(Object input) {
     for (AssetKind b : AssetKind.values()) {
       if (b.value.equals(input)) {
         return b;
@@ -68,7 +68,7 @@ public enum AssetKind {
     @Override
     public AssetKind read(final JsonReader jsonReader) throws IOException {
       Object value = jsonReader.nextString();
-      return AssetKind.fromValue((String)(value));
+      return AssetKind.fromValue((Object)(value));
     }
   }
 }

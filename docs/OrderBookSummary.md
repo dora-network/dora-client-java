@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**orderBookId** | [**UUID**](UUID.md) |  |  [optional]
-**midPrice** | **String** |  |  [optional]
-**spread** | **String** |  |  [optional]
-**bestBid** | **String** |  |  [optional]
-**bestAsk** | **String** |  |  [optional]
+**orderBookId** | **Object** |  |  [optional]
+**midPrice** | **Object** |  |  [optional]
+**spread** | **Object** |  |  [optional]
+**bestBid** | **Object** |  |  [optional]
+**bestAsk** | **Object** |  |  [optional]

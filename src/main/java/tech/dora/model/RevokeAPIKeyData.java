@@ -21,27 +21,26 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import java.util.UUID;
 /**
  * RevokeAPIKeyData
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2025-12-14T20:37:48.762145180+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T14:32:58.731305576+01:00[Europe/Paris]")
 
 public class RevokeAPIKeyData {
   @SerializedName("user_id")
-  private UUID userId = null;
+  private Object userId = null;
 
   @SerializedName("key_id")
-  private String keyId = null;
+  private Object keyId = null;
 
   @SerializedName("label")
-  private String label = null;
+  private Object label = null;
 
   @SerializedName("is_active")
-  private Boolean isActive = null;
+  private Object isActive = null;
 
-  public RevokeAPIKeyData userId(UUID userId) {
+  public RevokeAPIKeyData userId(Object userId) {
     this.userId = userId;
     return this;
   }
@@ -51,15 +50,15 @@ public class RevokeAPIKeyData {
    * @return userId
   **/
   @Schema(description = "")
-  public UUID getUserId() {
+  public Object getUserId() {
     return userId;
   }
 
-  public void setUserId(UUID userId) {
+  public void setUserId(Object userId) {
     this.userId = userId;
   }
 
-  public RevokeAPIKeyData keyId(String keyId) {
+  public RevokeAPIKeyData keyId(Object keyId) {
     this.keyId = keyId;
     return this;
   }
@@ -69,15 +68,15 @@ public class RevokeAPIKeyData {
    * @return keyId
   **/
   @Schema(description = "")
-  public String getKeyId() {
+  public Object getKeyId() {
     return keyId;
   }
 
-  public void setKeyId(String keyId) {
+  public void setKeyId(Object keyId) {
     this.keyId = keyId;
   }
 
-  public RevokeAPIKeyData label(String label) {
+  public RevokeAPIKeyData label(Object label) {
     this.label = label;
     return this;
   }
@@ -87,15 +86,15 @@ public class RevokeAPIKeyData {
    * @return label
   **/
   @Schema(description = "")
-  public String getLabel() {
+  public Object getLabel() {
     return label;
   }
 
-  public void setLabel(String label) {
+  public void setLabel(Object label) {
     this.label = label;
   }
 
-  public RevokeAPIKeyData isActive(Boolean isActive) {
+  public RevokeAPIKeyData isActive(Object isActive) {
     this.isActive = isActive;
     return this;
   }
@@ -105,11 +104,11 @@ public class RevokeAPIKeyData {
    * @return isActive
   **/
   @Schema(description = "")
-  public Boolean isIsActive() {
+  public Object getIsActive() {
     return isActive;
   }
 
-  public void setIsActive(Boolean isActive) {
+  public void setIsActive(Object isActive) {
     this.isActive = isActive;
   }
 
