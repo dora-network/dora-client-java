@@ -25,7 +25,7 @@ import java.io.IOException;
  * CurrentLeverageAccruedInterest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T17:57:43.564954621+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-20T10:55:39.903484329+01:00[Europe/Paris]")
 
 public class CurrentLeverageAccruedInterest {
   @SerializedName("user_id")
@@ -37,8 +37,8 @@ public class CurrentLeverageAccruedInterest {
   @SerializedName("position_id")
   private Object positionId = null;
 
-  @SerializedName("current_accrued_interest")
-  private Object currentAccruedInterest = null;
+  @SerializedName("current_accrued_interest_usd")
+  private Object currentAccruedInterestUsd = null;
 
   public CurrentLeverageAccruedInterest userId(Object userId) {
     this.userId = userId;
@@ -94,22 +94,22 @@ public class CurrentLeverageAccruedInterest {
     this.positionId = positionId;
   }
 
-  public CurrentLeverageAccruedInterest currentAccruedInterest(Object currentAccruedInterest) {
-    this.currentAccruedInterest = currentAccruedInterest;
+  public CurrentLeverageAccruedInterest currentAccruedInterestUsd(Object currentAccruedInterestUsd) {
+    this.currentAccruedInterestUsd = currentAccruedInterestUsd;
     return this;
   }
 
    /**
-   * Get currentAccruedInterest
-   * @return currentAccruedInterest
+   * Get currentAccruedInterestUsd
+   * @return currentAccruedInterestUsd
   **/
   @Schema(description = "")
-  public Object getCurrentAccruedInterest() {
-    return currentAccruedInterest;
+  public Object getCurrentAccruedInterestUsd() {
+    return currentAccruedInterestUsd;
   }
 
-  public void setCurrentAccruedInterest(Object currentAccruedInterest) {
-    this.currentAccruedInterest = currentAccruedInterest;
+  public void setCurrentAccruedInterestUsd(Object currentAccruedInterestUsd) {
+    this.currentAccruedInterestUsd = currentAccruedInterestUsd;
   }
 
 
@@ -125,12 +125,12 @@ public class CurrentLeverageAccruedInterest {
     return Objects.equals(this.userId, currentLeverageAccruedInterest.userId) &&
         Objects.equals(this.assetId, currentLeverageAccruedInterest.assetId) &&
         Objects.equals(this.positionId, currentLeverageAccruedInterest.positionId) &&
-        Objects.equals(this.currentAccruedInterest, currentLeverageAccruedInterest.currentAccruedInterest);
+        Objects.equals(this.currentAccruedInterestUsd, currentLeverageAccruedInterest.currentAccruedInterestUsd);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, assetId, positionId, currentAccruedInterest);
+    return Objects.hash(userId, assetId, positionId, currentAccruedInterestUsd);
   }
 
 
@@ -142,7 +142,7 @@ public class CurrentLeverageAccruedInterest {
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
     sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
-    sb.append("    currentAccruedInterest: ").append(toIndentedString(currentAccruedInterest)).append("\n");
+    sb.append("    currentAccruedInterestUsd: ").append(toIndentedString(currentAccruedInterestUsd)).append("\n");
     sb.append("}");
     return sb.toString();
   }

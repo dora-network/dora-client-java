@@ -22,40 +22,19 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 /**
- * PayLeverageAccruedInterestReq
+ * DefundUserRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T17:57:43.564954621+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-20T10:55:39.903484329+01:00[Europe/Paris]")
 
-public class PayLeverageAccruedInterestReq {
-  @SerializedName("position_id")
-  private Object positionId = null;
-
+public class DefundUserRequest {
   @SerializedName("asset_id")
   private Object assetId = null;
 
   @SerializedName("quantity")
   private Object quantity = null;
 
-  public PayLeverageAccruedInterestReq positionId(Object positionId) {
-    this.positionId = positionId;
-    return this;
-  }
-
-   /**
-   * Get positionId
-   * @return positionId
-  **/
-  @Schema(required = true, description = "")
-  public Object getPositionId() {
-    return positionId;
-  }
-
-  public void setPositionId(Object positionId) {
-    this.positionId = positionId;
-  }
-
-  public PayLeverageAccruedInterestReq assetId(Object assetId) {
+  public DefundUserRequest assetId(Object assetId) {
     this.assetId = assetId;
     return this;
   }
@@ -73,7 +52,7 @@ public class PayLeverageAccruedInterestReq {
     this.assetId = assetId;
   }
 
-  public PayLeverageAccruedInterestReq quantity(Object quantity) {
+  public DefundUserRequest quantity(Object quantity) {
     this.quantity = quantity;
     return this;
   }
@@ -100,24 +79,22 @@ public class PayLeverageAccruedInterestReq {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PayLeverageAccruedInterestReq payLeverageAccruedInterestReq = (PayLeverageAccruedInterestReq) o;
-    return Objects.equals(this.positionId, payLeverageAccruedInterestReq.positionId) &&
-        Objects.equals(this.assetId, payLeverageAccruedInterestReq.assetId) &&
-        Objects.equals(this.quantity, payLeverageAccruedInterestReq.quantity);
+    DefundUserRequest defundUserRequest = (DefundUserRequest) o;
+    return Objects.equals(this.assetId, defundUserRequest.assetId) &&
+        Objects.equals(this.quantity, defundUserRequest.quantity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(positionId, assetId, quantity);
+    return Objects.hash(assetId, quantity);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PayLeverageAccruedInterestReq {\n");
+    sb.append("class DefundUserRequest {\n");
     
-    sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("}");

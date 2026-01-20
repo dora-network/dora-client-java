@@ -22,10 +22,14 @@ import tech.dora.model.ClosePositionRequest;
 import tech.dora.model.ClosePositionResponse;
 import tech.dora.model.CreateAPIKeyRequest;
 import tech.dora.model.CreateAPIKeyResponse;
+import tech.dora.model.CreateIntegratorUserRequest;
 import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponse;
 import tech.dora.model.CurrentLeverageAccruedInterestResponse;
+import tech.dora.model.DefundUserRequest;
 import tech.dora.model.EmailExistsResponse;
+import tech.dora.model.FundUserRequest;
+import tech.dora.model.FundUserResponse;
 import tech.dora.model.GetAPIKeyResponse;
 import tech.dora.model.GetAssetByIDResponse;
 import tech.dora.model.GetAssetPriceResponse;
@@ -55,16 +59,17 @@ import tech.dora.model.ListPositionAccountsResponse;
 import tech.dora.model.ListTradeResponse;
 import tech.dora.model.ListTransactionsResponse;
 import tech.dora.model.LiveOrderbook;
-import tech.dora.model.NewIsolatedPositionRequest;
-import tech.dora.model.NewIsolatedPositionResponse;
 import tech.dora.model.OrderBookStatus;
 import tech.dora.model.OrderKind;
 import tech.dora.model.OrderbookStats;
+import tech.dora.model.PLResponse;
 import tech.dora.model.PayLeverageAccruedInterestRequest;
 import tech.dora.model.PayLeverageAccruedInterestResponse;
 import tech.dora.model.PoolRequestError;
 import tech.dora.model.ResponseEnvelope;
 import tech.dora.model.RevokeAPIKeyResponse;
+import tech.dora.model.SettleLeverageAccruedInterestRequest;
+import tech.dora.model.SettleLeverageAccruedInterestResponse;
 import tech.dora.model.Side;
 import tech.dora.model.StreamAssetPricesResponse;
 import tech.dora.model.StreamAssetsResponse;
@@ -74,6 +79,7 @@ import tech.dora.model.StreamOrderUpdatesResponse;
 import tech.dora.model.StreamPositionsResponse;
 import tech.dora.model.StreamTradesResponse;
 import tech.dora.model.StreamTransactionsResponse;
+import tech.dora.model.StreamUserCouponPaymentsResponse;
 import tech.dora.model.SupplyRequest;
 import tech.dora.model.SupplyResponse;
 import tech.dora.model.TradeRequestError;
@@ -85,6 +91,7 @@ import tech.dora.model.UnitePositionRequest;
 import tech.dora.model.UnitePositionResponse;
 import tech.dora.model.UpdateUserConfigRequest;
 import tech.dora.model.UserBalanceResponse;
+import tech.dora.model.UserCreatedResponse;
 import tech.dora.model.UserDeletedResponse;
 import tech.dora.model.UserInterestResponse;
 import tech.dora.model.UserPositionResponse;
@@ -205,7 +212,7 @@ public class DefaultApiTest {
         // TODO: test validations
     }
     /**
-     * Create a new isolated position for a user transferring available assets into the position
+     * Create apikey for a user
      *
      * 
      *
@@ -213,9 +220,10 @@ public class DefaultApiTest {
      *          if the Api call fails
      */
     @Test
-    public void createNewIsolatedPositionTest() throws Exception {
-        NewIsolatedPositionRequest body = null;
-        NewIsolatedPositionResponse response = api.createNewIsolatedPosition(body);
+    public void createAPIKeyForUserIDTest() throws Exception {
+        CreateAPIKeyRequest body = null;
+        Object userId = null;
+        CreateAPIKeyResponse response = api.createAPIKeyForUserID(body, userId);
 
         // TODO: test validations
     }
@@ -235,6 +243,21 @@ public class DefaultApiTest {
         // TODO: test validations
     }
     /**
+     * Create a new user
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void createUserTest() throws Exception {
+        CreateIntegratorUserRequest body = null;
+        UserCreatedResponse response = api.createUser(body);
+
+        // TODO: test validations
+    }
+    /**
      * Delete user by ID
      *
      * 
@@ -246,6 +269,21 @@ public class DefaultApiTest {
     public void deleteUserTest() throws Exception {
         Object userId = null;
         UserDeletedResponse response = api.deleteUser(userId);
+
+        // TODO: test validations
+    }
+    /**
+     * Get user&#x27;s api keys: admin or integrator only
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void getAPIKeysForUserIDTest() throws Exception {
+        Object userId = null;
+        GetAPIKeyResponse response = api.getAPIKeysForUserID(userId);
 
         // TODO: test validations
     }
@@ -593,6 +631,20 @@ public class DefaultApiTest {
         // TODO: test validations
     }
     /**
+     * Get account-by-account PL breakdown for the logged in user
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void getPLForSelfByAccountTest() throws Exception {
+        PLResponse response = api.getPLForSelfByAccount();
+
+        // TODO: test validations
+    }
+    /**
      * Get the current price of a pool
      *
      * 
@@ -694,6 +746,21 @@ public class DefaultApiTest {
         // TODO: test validations
     }
     /**
+     * Stream user&#x27;s coupon payment accruals in real time
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void getUserCouponPaymentsStreamTest() throws Exception {
+        Object userId = null;
+        StreamUserCouponPaymentsResponse response = api.getUserCouponPaymentsStream(userId);
+
+        // TODO: test validations
+    }
+    /**
      * Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates
      *
      * 
@@ -782,6 +849,38 @@ public class DefaultApiTest {
     @Test
     public void getUsersAPIKeysTest() throws Exception {
         GetAPIKeyResponse response = api.getUsersAPIKeys();
+
+        // TODO: test validations
+    }
+    /**
+     * Deposit assets into this user&#x27;s account from the outside world
+     *
+     * Deposit assets into this user&#x27;s account from the outside world. Note that this does not interact with any external systems; it simply adds the amount to the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void ledgerDepositTest() throws Exception {
+        FundUserRequest body = null;
+        Object userId = null;
+        FundUserResponse response = api.ledgerDeposit(body, userId);
+
+        // TODO: test validations
+    }
+    /**
+     * Withdraw assets from this user to the outside world
+     *
+     * Withdraw assets from this user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void ledgerWithdrawTest() throws Exception {
+        DefundUserRequest body = null;
+        Object userId = null;
+        FundUserResponse response = api.ledgerWithdraw(body, userId);
 
         // TODO: test validations
     }
@@ -999,6 +1098,37 @@ public class DefaultApiTest {
     public void revokeAPIKeyForUserTest() throws Exception {
         Object keyId = null;
         RevokeAPIKeyResponse response = api.revokeAPIKeyForUser(keyId);
+
+        // TODO: test validations
+    }
+    /**
+     * Revoke apikey for a user: admin or integrator only
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void revokeAPIKeyForUserIDTest() throws Exception {
+        Object userId = null;
+        Object keyId = null;
+        RevokeAPIKeyResponse response = api.revokeAPIKeyForUserID(userId, keyId);
+
+        // TODO: test validations
+    }
+    /**
+     * Settle current accrued leverage interest for a specific user
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void settleLeverageAccruedInterestTest() throws Exception {
+        SettleLeverageAccruedInterestRequest body = null;
+        SettleLeverageAccruedInterestResponse response = api.settleLeverageAccruedInterest(body);
 
         // TODO: test validations
     }

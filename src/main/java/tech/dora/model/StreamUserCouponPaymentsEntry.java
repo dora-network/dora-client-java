@@ -15,12 +15,12 @@ package tech.dora.model;
 import java.util.Objects;
 import java.util.Arrays;
 /**
- * NewIsolatedPositionResponseEnvelope
+ * StreamUserCouponPaymentsEntry
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T17:57:43.564954621+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-20T10:55:39.903484329+01:00[Europe/Paris]")
 
-public class NewIsolatedPositionResponseEnvelope {
+public class StreamUserCouponPaymentsEntry {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -42,7 +42,7 @@ public class NewIsolatedPositionResponseEnvelope {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class NewIsolatedPositionResponseEnvelope {\n");
+    sb.append("class StreamUserCouponPaymentsEntry {\n");
     
     sb.append("}");
     return sb.toString();

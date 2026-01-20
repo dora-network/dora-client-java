@@ -25,7 +25,7 @@ import java.io.IOException;
  * User
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T17:57:43.564954621+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-20T10:55:39.903484329+01:00[Europe/Paris]")
 
 public class User {
   @SerializedName("id")
@@ -66,6 +66,12 @@ public class User {
 
   @SerializedName("verified_at")
   private Object verifiedAt = null;
+
+  @SerializedName("show_tutorial_cards")
+  private Object showTutorialCards = null;
+
+  @SerializedName("notifications_enabled")
+  private Object notificationsEnabled = null;
 
   public User id(Object id) {
     this.id = id;
@@ -301,6 +307,42 @@ public class User {
     this.verifiedAt = verifiedAt;
   }
 
+  public User showTutorialCards(Object showTutorialCards) {
+    this.showTutorialCards = showTutorialCards;
+    return this;
+  }
+
+   /**
+   * Get showTutorialCards
+   * @return showTutorialCards
+  **/
+  @Schema(description = "")
+  public Object getShowTutorialCards() {
+    return showTutorialCards;
+  }
+
+  public void setShowTutorialCards(Object showTutorialCards) {
+    this.showTutorialCards = showTutorialCards;
+  }
+
+  public User notificationsEnabled(Object notificationsEnabled) {
+    this.notificationsEnabled = notificationsEnabled;
+    return this;
+  }
+
+   /**
+   * Get notificationsEnabled
+   * @return notificationsEnabled
+  **/
+  @Schema(description = "")
+  public Object getNotificationsEnabled() {
+    return notificationsEnabled;
+  }
+
+  public void setNotificationsEnabled(Object notificationsEnabled) {
+    this.notificationsEnabled = notificationsEnabled;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -323,12 +365,14 @@ public class User {
         Objects.equals(this.roles, user.roles) &&
         Objects.equals(this.timezone, user.timezone) &&
         Objects.equals(this.timezoneOffset, user.timezoneOffset) &&
-        Objects.equals(this.verifiedAt, user.verifiedAt);
+        Objects.equals(this.verifiedAt, user.verifiedAt) &&
+        Objects.equals(this.showTutorialCards, user.showTutorialCards) &&
+        Objects.equals(this.notificationsEnabled, user.notificationsEnabled);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, closedAt, disabledAt, email, name, nativeAssetId, photoUrl, provider, providerId, roles, timezone, timezoneOffset, verifiedAt);
+    return Objects.hash(id, closedAt, disabledAt, email, name, nativeAssetId, photoUrl, provider, providerId, roles, timezone, timezoneOffset, verifiedAt, showTutorialCards, notificationsEnabled);
   }
 
 
@@ -350,6 +394,8 @@ public class User {
     sb.append("    timezone: ").append(toIndentedString(timezone)).append("\n");
     sb.append("    timezoneOffset: ").append(toIndentedString(timezoneOffset)).append("\n");
     sb.append("    verifiedAt: ").append(toIndentedString(verifiedAt)).append("\n");
+    sb.append("    showTutorialCards: ").append(toIndentedString(showTutorialCards)).append("\n");
+    sb.append("    notificationsEnabled: ").append(toIndentedString(notificationsEnabled)).append("\n");
     sb.append("}");
     return sb.toString();
   }

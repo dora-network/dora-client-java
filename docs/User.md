@@ -16,3 +16,5 @@ Name | Type | Description | Notes
 **timezone** | **Object** | User&#x27;s timezone, e.g., &#x27;America/New_York&#x27;, or an offset. |  [optional]
 **timezoneOffset** | **Object** | timezone offset in seconds |  [optional]
 **verifiedAt** | **Object** |  |  [optional]
+**showTutorialCards** | **Object** |  |  [optional]
+**notificationsEnabled** | **Object** |  |  [optional]

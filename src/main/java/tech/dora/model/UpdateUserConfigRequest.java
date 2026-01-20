@@ -21,12 +21,13 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
+import tech.dora.model.UpdateFieldBoolean;
 import tech.dora.model.UpdateFieldString;
 /**
  * Request body for PUT /user/{id}/config: update a user changeable details only. Other properties can only be changed by an admin following a manual request by the user.
  */
 @Schema(description = "Request body for PUT /user/{id}/config: update a user changeable details only. Other properties can only be changed by an admin following a manual request by the user.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T17:57:43.564954621+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-20T10:55:39.903484329+01:00[Europe/Paris]")
 
 public class UpdateUserConfigRequest {
   @SerializedName("photo_url")
@@ -34,6 +35,12 @@ public class UpdateUserConfigRequest {
 
   @SerializedName("timezone")
   private UpdateFieldString timezone = null;
+
+  @SerializedName("show_tutorial_cards")
+  private UpdateFieldBoolean showTutorialCards = null;
+
+  @SerializedName("notifications_enabled")
+  private UpdateFieldBoolean notificationsEnabled = null;
 
   public UpdateUserConfigRequest photoUrl(UpdateFieldString photoUrl) {
     this.photoUrl = photoUrl;
@@ -71,6 +78,42 @@ public class UpdateUserConfigRequest {
     this.timezone = timezone;
   }
 
+  public UpdateUserConfigRequest showTutorialCards(UpdateFieldBoolean showTutorialCards) {
+    this.showTutorialCards = showTutorialCards;
+    return this;
+  }
+
+   /**
+   * Optional: Whether to show the tutorial.
+   * @return showTutorialCards
+  **/
+  @Schema(description = "Optional: Whether to show the tutorial.")
+  public UpdateFieldBoolean getShowTutorialCards() {
+    return showTutorialCards;
+  }
+
+  public void setShowTutorialCards(UpdateFieldBoolean showTutorialCards) {
+    this.showTutorialCards = showTutorialCards;
+  }
+
+  public UpdateUserConfigRequest notificationsEnabled(UpdateFieldBoolean notificationsEnabled) {
+    this.notificationsEnabled = notificationsEnabled;
+    return this;
+  }
+
+   /**
+   * Optional: Whether to show the notifications.
+   * @return notificationsEnabled
+  **/
+  @Schema(description = "Optional: Whether to show the notifications.")
+  public UpdateFieldBoolean getNotificationsEnabled() {
+    return notificationsEnabled;
+  }
+
+  public void setNotificationsEnabled(UpdateFieldBoolean notificationsEnabled) {
+    this.notificationsEnabled = notificationsEnabled;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -82,12 +125,14 @@ public class UpdateUserConfigRequest {
     }
     UpdateUserConfigRequest updateUserConfigRequest = (UpdateUserConfigRequest) o;
     return Objects.equals(this.photoUrl, updateUserConfigRequest.photoUrl) &&
-        Objects.equals(this.timezone, updateUserConfigRequest.timezone);
+        Objects.equals(this.timezone, updateUserConfigRequest.timezone) &&
+        Objects.equals(this.showTutorialCards, updateUserConfigRequest.showTutorialCards) &&
+        Objects.equals(this.notificationsEnabled, updateUserConfigRequest.notificationsEnabled);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(photoUrl, timezone);
+    return Objects.hash(photoUrl, timezone, showTutorialCards, notificationsEnabled);
   }
 
 
@@ -98,6 +143,8 @@ public class UpdateUserConfigRequest {
     
     sb.append("    photoUrl: ").append(toIndentedString(photoUrl)).append("\n");
     sb.append("    timezone: ").append(toIndentedString(timezone)).append("\n");
+    sb.append("    showTutorialCards: ").append(toIndentedString(showTutorialCards)).append("\n");
+    sb.append("    notificationsEnabled: ").append(toIndentedString(notificationsEnabled)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -1,8 +1,7 @@
-# ClaimLeverageAccruedInterestReq
+# DefundUserRequest
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**positionId** | **Object** |  | 
 **assetId** | **Object** |  | 
 **quantity** | **Object** |  | 

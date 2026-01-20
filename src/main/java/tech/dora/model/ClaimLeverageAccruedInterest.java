@@ -25,7 +25,7 @@ import java.io.IOException;
  * ClaimLeverageAccruedInterest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T17:57:43.564954621+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-20T10:55:39.903484329+01:00[Europe/Paris]")
 
 public class ClaimLeverageAccruedInterest {
   @SerializedName("transaction_id")
@@ -37,8 +37,8 @@ public class ClaimLeverageAccruedInterest {
   @SerializedName("position_id")
   private Object positionId = null;
 
-  @SerializedName("current_accrued_interest")
-  private Object currentAccruedInterest = null;
+  @SerializedName("current_accrued_interest_usd")
+  private Object currentAccruedInterestUsd = null;
 
   public ClaimLeverageAccruedInterest transactionId(Object transactionId) {
     this.transactionId = transactionId;
@@ -94,22 +94,22 @@ public class ClaimLeverageAccruedInterest {
     this.positionId = positionId;
   }
 
-  public ClaimLeverageAccruedInterest currentAccruedInterest(Object currentAccruedInterest) {
-    this.currentAccruedInterest = currentAccruedInterest;
+  public ClaimLeverageAccruedInterest currentAccruedInterestUsd(Object currentAccruedInterestUsd) {
+    this.currentAccruedInterestUsd = currentAccruedInterestUsd;
     return this;
   }
 
    /**
-   * Get currentAccruedInterest
-   * @return currentAccruedInterest
+   * Get currentAccruedInterestUsd
+   * @return currentAccruedInterestUsd
   **/
   @Schema(description = "")
-  public Object getCurrentAccruedInterest() {
-    return currentAccruedInterest;
+  public Object getCurrentAccruedInterestUsd() {
+    return currentAccruedInterestUsd;
   }
 
-  public void setCurrentAccruedInterest(Object currentAccruedInterest) {
-    this.currentAccruedInterest = currentAccruedInterest;
+  public void setCurrentAccruedInterestUsd(Object currentAccruedInterestUsd) {
+    this.currentAccruedInterestUsd = currentAccruedInterestUsd;
   }
 
 
@@ -125,12 +125,12 @@ public class ClaimLeverageAccruedInterest {
     return Objects.equals(this.transactionId, claimLeverageAccruedInterest.transactionId) &&
         Objects.equals(this.assetId, claimLeverageAccruedInterest.assetId) &&
         Objects.equals(this.positionId, claimLeverageAccruedInterest.positionId) &&
-        Objects.equals(this.currentAccruedInterest, claimLeverageAccruedInterest.currentAccruedInterest);
+        Objects.equals(this.currentAccruedInterestUsd, claimLeverageAccruedInterest.currentAccruedInterestUsd);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(transactionId, assetId, positionId, currentAccruedInterest);
+    return Objects.hash(transactionId, assetId, positionId, currentAccruedInterestUsd);
   }
 
 
@@ -142,7 +142,7 @@ public class ClaimLeverageAccruedInterest {
     sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
     sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
-    sb.append("    currentAccruedInterest: ").append(toIndentedString(currentAccruedInterest)).append("\n");
+    sb.append("    currentAccruedInterestUsd: ").append(toIndentedString(currentAccruedInterestUsd)).append("\n");
     sb.append("}");
     return sb.toString();
   }

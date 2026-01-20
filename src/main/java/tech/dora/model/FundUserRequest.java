@@ -22,43 +22,19 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 /**
- * NewIsolatedPositionRequest
+ * FundUserRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T17:57:43.564954621+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-20T10:55:39.903484329+01:00[Europe/Paris]")
 
-public class NewIsolatedPositionRequest {
-  @SerializedName("global_position_id")
-  private Object globalPositionId = null;
-
+public class FundUserRequest {
   @SerializedName("asset_id")
   private Object assetId = null;
 
   @SerializedName("quantity")
   private Object quantity = null;
 
-  @SerializedName("position_name")
-  private Object positionName = null;
-
-  public NewIsolatedPositionRequest globalPositionId(Object globalPositionId) {
-    this.globalPositionId = globalPositionId;
-    return this;
-  }
-
-   /**
-   * Get globalPositionId
-   * @return globalPositionId
-  **/
-  @Schema(required = true, description = "")
-  public Object getGlobalPositionId() {
-    return globalPositionId;
-  }
-
-  public void setGlobalPositionId(Object globalPositionId) {
-    this.globalPositionId = globalPositionId;
-  }
-
-  public NewIsolatedPositionRequest assetId(Object assetId) {
+  public FundUserRequest assetId(Object assetId) {
     this.assetId = assetId;
     return this;
   }
@@ -76,7 +52,7 @@ public class NewIsolatedPositionRequest {
     this.assetId = assetId;
   }
 
-  public NewIsolatedPositionRequest quantity(Object quantity) {
+  public FundUserRequest quantity(Object quantity) {
     this.quantity = quantity;
     return this;
   }
@@ -94,24 +70,6 @@ public class NewIsolatedPositionRequest {
     this.quantity = quantity;
   }
 
-  public NewIsolatedPositionRequest positionName(Object positionName) {
-    this.positionName = positionName;
-    return this;
-  }
-
-   /**
-   * Get positionName
-   * @return positionName
-  **/
-  @Schema(description = "")
-  public Object getPositionName() {
-    return positionName;
-  }
-
-  public void setPositionName(Object positionName) {
-    this.positionName = positionName;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -121,28 +79,24 @@ public class NewIsolatedPositionRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    NewIsolatedPositionRequest newIsolatedPositionRequest = (NewIsolatedPositionRequest) o;
-    return Objects.equals(this.globalPositionId, newIsolatedPositionRequest.globalPositionId) &&
-        Objects.equals(this.assetId, newIsolatedPositionRequest.assetId) &&
-        Objects.equals(this.quantity, newIsolatedPositionRequest.quantity) &&
-        Objects.equals(this.positionName, newIsolatedPositionRequest.positionName);
+    FundUserRequest fundUserRequest = (FundUserRequest) o;
+    return Objects.equals(this.assetId, fundUserRequest.assetId) &&
+        Objects.equals(this.quantity, fundUserRequest.quantity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(globalPositionId, assetId, quantity, positionName);
+    return Objects.hash(assetId, quantity);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class NewIsolatedPositionRequest {\n");
+    sb.append("class FundUserRequest {\n");
     
-    sb.append("    globalPositionId: ").append(toIndentedString(globalPositionId)).append("\n");
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
-    sb.append("    positionName: ").append(toIndentedString(positionName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

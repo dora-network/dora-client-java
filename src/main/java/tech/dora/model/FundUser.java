@@ -22,22 +22,46 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 /**
- * ClaimLeverageAccruedInterestReq
+ * FundUser
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-07T17:57:43.564954621+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-20T10:55:39.903484329+01:00[Europe/Paris]")
 
-public class ClaimLeverageAccruedInterestReq {
+public class FundUser {
+  @SerializedName("user_id")
+  private Object userId = null;
+
   @SerializedName("position_id")
   private Object positionId = null;
 
   @SerializedName("asset_id")
   private Object assetId = null;
 
-  @SerializedName("quantity")
-  private Object quantity = null;
+  @SerializedName("final_quantity")
+  private Object finalQuantity = null;
 
-  public ClaimLeverageAccruedInterestReq positionId(Object positionId) {
+  @SerializedName("amount")
+  private Object amount = null;
+
+  public FundUser userId(Object userId) {
+    this.userId = userId;
+    return this;
+  }
+
+   /**
+   * Get userId
+   * @return userId
+  **/
+  @Schema(description = "")
+  public Object getUserId() {
+    return userId;
+  }
+
+  public void setUserId(Object userId) {
+    this.userId = userId;
+  }
+
+  public FundUser positionId(Object positionId) {
     this.positionId = positionId;
     return this;
   }
@@ -46,7 +70,7 @@ public class ClaimLeverageAccruedInterestReq {
    * Get positionId
    * @return positionId
   **/
-  @Schema(required = true, description = "")
+  @Schema(description = "")
   public Object getPositionId() {
     return positionId;
   }
@@ -55,7 +79,7 @@ public class ClaimLeverageAccruedInterestReq {
     this.positionId = positionId;
   }
 
-  public ClaimLeverageAccruedInterestReq assetId(Object assetId) {
+  public FundUser assetId(Object assetId) {
     this.assetId = assetId;
     return this;
   }
@@ -64,7 +88,7 @@ public class ClaimLeverageAccruedInterestReq {
    * Get assetId
    * @return assetId
   **/
-  @Schema(required = true, description = "")
+  @Schema(description = "")
   public Object getAssetId() {
     return assetId;
   }
@@ -73,22 +97,40 @@ public class ClaimLeverageAccruedInterestReq {
     this.assetId = assetId;
   }
 
-  public ClaimLeverageAccruedInterestReq quantity(Object quantity) {
-    this.quantity = quantity;
+  public FundUser finalQuantity(Object finalQuantity) {
+    this.finalQuantity = finalQuantity;
     return this;
   }
 
    /**
-   * Get quantity
-   * @return quantity
+   * Get finalQuantity
+   * @return finalQuantity
   **/
-  @Schema(required = true, description = "")
-  public Object getQuantity() {
-    return quantity;
+  @Schema(description = "")
+  public Object getFinalQuantity() {
+    return finalQuantity;
   }
 
-  public void setQuantity(Object quantity) {
-    this.quantity = quantity;
+  public void setFinalQuantity(Object finalQuantity) {
+    this.finalQuantity = finalQuantity;
+  }
+
+  public FundUser amount(Object amount) {
+    this.amount = amount;
+    return this;
+  }
+
+   /**
+   * Get amount
+   * @return amount
+  **/
+  @Schema(description = "")
+  public Object getAmount() {
+    return amount;
+  }
+
+  public void setAmount(Object amount) {
+    this.amount = amount;
   }
 
 
@@ -100,26 +142,30 @@ public class ClaimLeverageAccruedInterestReq {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ClaimLeverageAccruedInterestReq claimLeverageAccruedInterestReq = (ClaimLeverageAccruedInterestReq) o;
-    return Objects.equals(this.positionId, claimLeverageAccruedInterestReq.positionId) &&
-        Objects.equals(this.assetId, claimLeverageAccruedInterestReq.assetId) &&
-        Objects.equals(this.quantity, claimLeverageAccruedInterestReq.quantity);
+    FundUser fundUser = (FundUser) o;
+    return Objects.equals(this.userId, fundUser.userId) &&
+        Objects.equals(this.positionId, fundUser.positionId) &&
+        Objects.equals(this.assetId, fundUser.assetId) &&
+        Objects.equals(this.finalQuantity, fundUser.finalQuantity) &&
+        Objects.equals(this.amount, fundUser.amount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(positionId, assetId, quantity);
+    return Objects.hash(userId, positionId, assetId, finalQuantity, amount);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ClaimLeverageAccruedInterestReq {\n");
+    sb.append("class FundUser {\n");
     
+    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
-    sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
+    sb.append("    finalQuantity: ").append(toIndentedString(finalQuantity)).append("\n");
+    sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("}");
     return sb.toString();
   }

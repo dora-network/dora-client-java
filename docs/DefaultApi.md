@@ -10,9 +10,11 @@ Method | HTTP request | Description
 [**claimLeverageGetAccruedInterest**](DefaultApi.md#claimLeverageGetAccruedInterest) | **POST** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user
 [**closeIsolatedPosition**](DefaultApi.md#closeIsolatedPosition) | **POST** /v1/positions/close | Close isolated positions, repaying the borrowed
 [**createAPIKeyForUser**](DefaultApi.md#createAPIKeyForUser) | **POST** /v1/user/apikey | Create apikey for a user
-[**createNewIsolatedPosition**](DefaultApi.md#createNewIsolatedPosition) | **POST** /v1/positions/new_isolated | Create a new isolated position for a user transferring available assets into the position
+[**createAPIKeyForUserID**](DefaultApi.md#createAPIKeyForUserID) | **POST** /v1/user/{user_id}/apikey | Create apikey for a user
 [**createOrder**](DefaultApi.md#createOrder) | **POST** /v1/orders | Create a new order
+[**createUser**](DefaultApi.md#createUser) | **POST** /v1/integrators/user | Create a new user
 [**deleteUser**](DefaultApi.md#deleteUser) | **DELETE** /v1/user/{user_id} | Delete user by ID
+[**getAPIKeysForUserID**](DefaultApi.md#getAPIKeysForUserID) | **GET** /v1/user/{user_id}/apikey | Get user&#x27;s api keys: admin or integrator only
 [**getAllAssetPrices**](DefaultApi.md#getAllAssetPrices) | **GET** /v1/price | Get the current price of all assets
 [**getAssetById**](DefaultApi.md#getAssetById) | **GET** /v1/assets/{asset_id} | Get asset by ID
 [**getAssetPrice**](DefaultApi.md#getAssetPrice) | **GET** /v1/price/asset/{asset_id} | Get the current price of an asset
@@ -36,18 +38,22 @@ Method | HTTP request | Description
 [**getOrderbookStatsStream**](DefaultApi.md#getOrderbookStatsStream) | **GET** /v1/orderbooks/{order_book_id}/stats/stream | Orderbook stats stream
 [**getOrderbookSummary**](DefaultApi.md#getOrderbookSummary) | **GET** /v1/orderbooks/{order_book_id}/summary | Get summary of an orderbook
 [**getOrderbookTop**](DefaultApi.md#getOrderbookTop) | **GET** /v1/orderbooks/{order_book_id}/top | Get the top price levels for a specific orderbook (L1 market depth)
+[**getPLForSelfByAccount**](DefaultApi.md#getPLForSelfByAccount) | **GET** /v1/pl/self | Get account-by-account PL breakdown for the logged in user
 [**getPoolPrice**](DefaultApi.md#getPoolPrice) | **GET** /v1/price/pool/{pool_id} | Get the current price of a pool
 [**getTradeById**](DefaultApi.md#getTradeById) | **GET** /v1/trades/{trade_id} | Get a trade by ID
 [**getTrades**](DefaultApi.md#getTrades) | **GET** /v1/trades | Get a filtered, paginated list of trades
 [**getTransactionById**](DefaultApi.md#getTransactionById) | **GET** /v1/transactions/{transaction_id} | Get a transaction by ID
 [**getTransactions**](DefaultApi.md#getTransactions) | **GET** /v1/transactions | Get a filtered, paginated list of transactions
 [**getUserById**](DefaultApi.md#getUserById) | **GET** /v1/user/{user_id} | Get user by ID (admin only)
+[**getUserCouponPaymentsStream**](DefaultApi.md#getUserCouponPaymentsStream) | **GET** /v1/user/{user_id}/coupon_payments/stream | Stream user&#x27;s coupon payment accruals in real time
 [**getUserLedgerStream**](DefaultApi.md#getUserLedgerStream) | **GET** /v1/user/{user_id}/ledger/stream | Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates
 [**getUserOrderUpdatesStream**](DefaultApi.md#getUserOrderUpdatesStream) | **GET** /v1/user/{user_id}/orders/{order_book_id}/updates/stream | Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
 [**getUserOrdersUpdatesStreamAll**](DefaultApi.md#getUserOrdersUpdatesStreamAll) | **GET** /v1/user/{user_id}/orders/all/updates/stream | Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
 [**getUserSelf**](DefaultApi.md#getUserSelf) | **GET** /v1/user/self | Get user details for the authenticated user
 [**getUserTransactionsStream**](DefaultApi.md#getUserTransactionsStream) | **GET** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
 [**getUsersAPIKeys**](DefaultApi.md#getUsersAPIKeys) | **GET** /v1/user/apikey | Get user&#x27;s api keys
+[**ledgerDeposit**](DefaultApi.md#ledgerDeposit) | **POST** /v1/ledger/deposit/{user_id} | Deposit assets into this user&#x27;s account from the outside world
+[**ledgerWithdraw**](DefaultApi.md#ledgerWithdraw) | **POST** /v1/ledger/withdraw/{user_id} | Withdraw assets from this user to the outside world
 [**leverageGetAccruedInterestByUser**](DefaultApi.md#leverageGetAccruedInterestByUser) | **GET** /v1/leverage/accrued_interest/self | Get current accrued leverage interest for the user
 [**leverageIsolateCollateral**](DefaultApi.md#leverageIsolateCollateral) | **POST** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#x27;s global collateral
 [**leverageSupply**](DefaultApi.md#leverageSupply) | **POST** /v1/leverage/supply | Supply leverage for a specific asset
@@ -61,6 +67,8 @@ Method | HTTP request | Description
 [**listPositionAccountsSelf**](DefaultApi.md#listPositionAccountsSelf) | **GET** /v1/user/self/position_accounts | List all position accounts for the authenticated user
 [**payLeverageGetAccruedInterest**](DefaultApi.md#payLeverageGetAccruedInterest) | **POST** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user
 [**revokeAPIKeyForUser**](DefaultApi.md#revokeAPIKeyForUser) | **PUT** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user
+[**revokeAPIKeyForUserID**](DefaultApi.md#revokeAPIKeyForUserID) | **PUT** /v1/user/{user_id}/apikey/{key_id}/revoke | Revoke apikey for a user: admin or integrator only
+[**settleLeverageAccruedInterest**](DefaultApi.md#settleLeverageAccruedInterest) | **POST** /v1/leverage/accrued_interest/settle | Settle current accrued leverage interest for a specific user
 [**streamAssetPrices**](DefaultApi.md#streamAssetPrices) | **GET** /v1/prices/stream | Stream real-time asset prices as map objects
 [**streamCandleData**](DefaultApi.md#streamCandleData) | **GET** /v1/charts/{order_book_id}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
 [**streamOrderBookBalances**](DefaultApi.md#streamOrderBookBalances) | **GET** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
@@ -400,11 +408,11 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="createNewIsolatedPosition"></a>
-# **createNewIsolatedPosition**
-> NewIsolatedPositionResponse createNewIsolatedPosition(body)
+<a name="createAPIKeyForUserID"></a>
+# **createAPIKeyForUserID**
+> CreateAPIKeyResponse createAPIKeyForUserID(body, userId)
 
-Create a new isolated position for a user transferring available assets into the position
+Create apikey for a user
 
 ### Example
 ```java
@@ -425,12 +433,13 @@ apiKeyAuthHeader.setApiKey("YOUR API KEY");
 
 
 DefaultApi apiInstance = new DefaultApi();
-NewIsolatedPositionRequest body = new NewIsolatedPositionRequest(); // NewIsolatedPositionRequest | 
+CreateAPIKeyRequest body = new CreateAPIKeyRequest(); // CreateAPIKeyRequest | 
+Object userId = null; // Object | 
 try {
-    NewIsolatedPositionResponse result = apiInstance.createNewIsolatedPosition(body);
+    CreateAPIKeyResponse result = apiInstance.createAPIKeyForUserID(body, userId);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#createNewIsolatedPosition");
+    System.err.println("Exception when calling DefaultApi#createAPIKeyForUserID");
     e.printStackTrace();
 }
 ```
@@ -439,11 +448,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**NewIsolatedPositionRequest**](NewIsolatedPositionRequest.md)|  |
+ **body** | [**CreateAPIKeyRequest**](CreateAPIKeyRequest.md)|  |
+ **userId** | [**Object**](.md)|  |
 
 ### Return type
 
-[**NewIsolatedPositionResponse**](NewIsolatedPositionResponse.md)
+[**CreateAPIKeyResponse**](CreateAPIKeyResponse.md)
 
 ### Authorization
 
@@ -508,6 +518,60 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="createUser"></a>
+# **createUser**
+> UserCreatedResponse createUser(body)
+
+Create a new user
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiClient;
+//import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
+//import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+
+DefaultApi apiInstance = new DefaultApi();
+CreateIntegratorUserRequest body = new CreateIntegratorUserRequest(); // CreateIntegratorUserRequest | 
+try {
+    UserCreatedResponse result = apiInstance.createUser(body);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#createUser");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**CreateIntegratorUserRequest**](CreateIntegratorUserRequest.md)|  |
+
+### Return type
+
+[**UserCreatedResponse**](UserCreatedResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="deleteUser"></a>
 # **deleteUser**
 > UserDeletedResponse deleteUser(userId)
@@ -552,6 +616,60 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UserDeletedResponse**](UserDeletedResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="getAPIKeysForUserID"></a>
+# **getAPIKeysForUserID**
+> GetAPIKeyResponse getAPIKeysForUserID(userId)
+
+Get user&#x27;s api keys: admin or integrator only
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiClient;
+//import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
+//import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+
+DefaultApi apiInstance = new DefaultApi();
+Object userId = null; // Object | 
+try {
+    GetAPIKeyResponse result = apiInstance.getAPIKeysForUserID(userId);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#getAPIKeysForUserID");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | [**Object**](.md)|  |
+
+### Return type
+
+[**GetAPIKeyResponse**](GetAPIKeyResponse.md)
 
 ### Authorization
 
@@ -1667,6 +1785,56 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="getPLForSelfByAccount"></a>
+# **getPLForSelfByAccount**
+> PLResponse getPLForSelfByAccount()
+
+Get account-by-account PL breakdown for the logged in user
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiClient;
+//import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
+//import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+
+DefaultApi apiInstance = new DefaultApi();
+try {
+    PLResponse result = apiInstance.getPLForSelfByAccount();
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#getPLForSelfByAccount");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**PLResponse**](PLResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 <a name="getPoolPrice"></a>
 # **getPoolPrice**
 > GetPoolPriceResponse getPoolPrice(poolId)
@@ -1974,6 +2142,59 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="getUserCouponPaymentsStream"></a>
+# **getUserCouponPaymentsStream**
+> StreamUserCouponPaymentsResponse getUserCouponPaymentsStream(userId)
+
+Stream user&#x27;s coupon payment accruals in real time
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiClient;
+//import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
+//import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthQuery
+ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
+apiKeyAuthQuery.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthQuery.setApiKeyPrefix("Token");
+
+DefaultApi apiInstance = new DefaultApi();
+Object userId = null; // Object | 
+try {
+    StreamUserCouponPaymentsResponse result = apiInstance.getUserCouponPaymentsStream(userId);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#getUserCouponPaymentsStream");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | [**Object**](.md)|  |
+
+### Return type
+
+[**StreamUserCouponPaymentsResponse**](StreamUserCouponPaymentsResponse.md)
+
+### Authorization
+
+[apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
 
 ### HTTP request headers
 
@@ -2298,6 +2519,122 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="ledgerDeposit"></a>
+# **ledgerDeposit**
+> FundUserResponse ledgerDeposit(body, userId)
+
+Deposit assets into this user&#x27;s account from the outside world
+
+Deposit assets into this user&#x27;s account from the outside world. Note that this does not interact with any external systems; it simply adds the amount to the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiClient;
+//import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
+//import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+
+DefaultApi apiInstance = new DefaultApi();
+FundUserRequest body = new FundUserRequest(); // FundUserRequest | 
+Object userId = null; // Object | 
+try {
+    FundUserResponse result = apiInstance.ledgerDeposit(body, userId);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#ledgerDeposit");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**FundUserRequest**](FundUserRequest.md)|  |
+ **userId** | [**Object**](.md)|  |
+
+### Return type
+
+[**FundUserResponse**](FundUserResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="ledgerWithdraw"></a>
+# **ledgerWithdraw**
+> FundUserResponse ledgerWithdraw(body, userId)
+
+Withdraw assets from this user to the outside world
+
+Withdraw assets from this user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiClient;
+//import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
+//import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+
+DefaultApi apiInstance = new DefaultApi();
+DefundUserRequest body = new DefundUserRequest(); // DefundUserRequest | 
+Object userId = null; // Object | 
+try {
+    FundUserResponse result = apiInstance.ledgerWithdraw(body, userId);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#ledgerWithdraw");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**DefundUserRequest**](DefundUserRequest.md)|  |
+ **userId** | [**Object**](.md)|  |
+
+### Return type
+
+[**FundUserResponse**](FundUserResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 <a name="leverageGetAccruedInterestByUser"></a>
@@ -3033,6 +3370,116 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="revokeAPIKeyForUserID"></a>
+# **revokeAPIKeyForUserID**
+> RevokeAPIKeyResponse revokeAPIKeyForUserID(userId, keyId)
+
+Revoke apikey for a user: admin or integrator only
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiClient;
+//import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
+//import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+
+DefaultApi apiInstance = new DefaultApi();
+Object userId = null; // Object | 
+Object keyId = null; // Object | 
+try {
+    RevokeAPIKeyResponse result = apiInstance.revokeAPIKeyForUserID(userId, keyId);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#revokeAPIKeyForUserID");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | [**Object**](.md)|  |
+ **keyId** | [**Object**](.md)|  |
+
+### Return type
+
+[**RevokeAPIKeyResponse**](RevokeAPIKeyResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="settleLeverageAccruedInterest"></a>
+# **settleLeverageAccruedInterest**
+> SettleLeverageAccruedInterestResponse settleLeverageAccruedInterest(body)
+
+Settle current accrued leverage interest for a specific user
+
+### Example
+```java
+// Import classes:
+//import tech.dora.ApiClient;
+//import tech.dora.ApiException;
+//import tech.dora.Configuration;
+//import tech.dora.auth.*;
+//import tech.dora.api.DefaultApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: apiKeyAuthHeader
+ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+apiKeyAuthHeader.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+
+DefaultApi apiInstance = new DefaultApi();
+SettleLeverageAccruedInterestRequest body = new SettleLeverageAccruedInterestRequest(); // SettleLeverageAccruedInterestRequest | 
+try {
+    SettleLeverageAccruedInterestResponse result = apiInstance.settleLeverageAccruedInterest(body);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#settleLeverageAccruedInterest");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**SettleLeverageAccruedInterestRequest**](SettleLeverageAccruedInterestRequest.md)|  |
+
+### Return type
+
+[**SettleLeverageAccruedInterestResponse**](SettleLeverageAccruedInterestResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 <a name="streamAssetPrices"></a>
