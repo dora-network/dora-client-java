@@ -26,7 +26,7 @@ import tech.dora.model.Margin;
  * PLAsset
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-20T10:55:39.903484329+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-21T15:09:57.829710943+01:00[Europe/Paris]")
 
 public class PLAsset {
   @SerializedName("symbol")
@@ -64,6 +64,18 @@ public class PLAsset {
 
   @SerializedName("sl")
   private Object sl = null;
+
+  @SerializedName("initial_capital")
+  private Object initialCapital = null;
+
+  @SerializedName("impending_borrows")
+  private Object impendingBorrows = null;
+
+  @SerializedName("locked")
+  private Object locked = null;
+
+  @SerializedName("unused_collateral")
+  private Object unusedCollateral = null;
 
   public PLAsset symbol(Object symbol) {
     this.symbol = symbol;
@@ -281,6 +293,78 @@ public class PLAsset {
     this.sl = sl;
   }
 
+  public PLAsset initialCapital(Object initialCapital) {
+    this.initialCapital = initialCapital;
+    return this;
+  }
+
+   /**
+   * The initial capital of the position
+   * @return initialCapital
+  **/
+  @Schema(description = "The initial capital of the position")
+  public Object getInitialCapital() {
+    return initialCapital;
+  }
+
+  public void setInitialCapital(Object initialCapital) {
+    this.initialCapital = initialCapital;
+  }
+
+  public PLAsset impendingBorrows(Object impendingBorrows) {
+    this.impendingBorrows = impendingBorrows;
+    return this;
+  }
+
+   /**
+   * The impending borrows of the position
+   * @return impendingBorrows
+  **/
+  @Schema(description = "The impending borrows of the position")
+  public Object getImpendingBorrows() {
+    return impendingBorrows;
+  }
+
+  public void setImpendingBorrows(Object impendingBorrows) {
+    this.impendingBorrows = impendingBorrows;
+  }
+
+  public PLAsset locked(Object locked) {
+    this.locked = locked;
+    return this;
+  }
+
+   /**
+   * The locked amount of the position
+   * @return locked
+  **/
+  @Schema(description = "The locked amount of the position")
+  public Object getLocked() {
+    return locked;
+  }
+
+  public void setLocked(Object locked) {
+    this.locked = locked;
+  }
+
+  public PLAsset unusedCollateral(Object unusedCollateral) {
+    this.unusedCollateral = unusedCollateral;
+    return this;
+  }
+
+   /**
+   * The unused collateral of the position
+   * @return unusedCollateral
+  **/
+  @Schema(description = "The unused collateral of the position")
+  public Object getUnusedCollateral() {
+    return unusedCollateral;
+  }
+
+  public void setUnusedCollateral(Object unusedCollateral) {
+    this.unusedCollateral = unusedCollateral;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -302,12 +386,16 @@ public class PLAsset {
         Objects.equals(this.unrealizedPl, plAsset.unrealizedPl) &&
         Objects.equals(this.leverageLimit, plAsset.leverageLimit) &&
         Objects.equals(this.tp, plAsset.tp) &&
-        Objects.equals(this.sl, plAsset.sl);
+        Objects.equals(this.sl, plAsset.sl) &&
+        Objects.equals(this.initialCapital, plAsset.initialCapital) &&
+        Objects.equals(this.impendingBorrows, plAsset.impendingBorrows) &&
+        Objects.equals(this.locked, plAsset.locked) &&
+        Objects.equals(this.unusedCollateral, plAsset.unusedCollateral);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(symbol, side, avgEntryPrice, markPrice, liquidationPrice, available, borrowed, margin, unrealizedPl, leverageLimit, tp, sl);
+    return Objects.hash(symbol, side, avgEntryPrice, markPrice, liquidationPrice, available, borrowed, margin, unrealizedPl, leverageLimit, tp, sl, initialCapital, impendingBorrows, locked, unusedCollateral);
   }
 
 
@@ -328,6 +416,10 @@ public class PLAsset {
     sb.append("    leverageLimit: ").append(toIndentedString(leverageLimit)).append("\n");
     sb.append("    tp: ").append(toIndentedString(tp)).append("\n");
     sb.append("    sl: ").append(toIndentedString(sl)).append("\n");
+    sb.append("    initialCapital: ").append(toIndentedString(initialCapital)).append("\n");
+    sb.append("    impendingBorrows: ").append(toIndentedString(impendingBorrows)).append("\n");
+    sb.append("    locked: ").append(toIndentedString(locked)).append("\n");
+    sb.append("    unusedCollateral: ").append(toIndentedString(unusedCollateral)).append("\n");
     sb.append("}");
     return sb.toString();
   }

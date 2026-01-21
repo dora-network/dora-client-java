@@ -47,6 +47,7 @@ import tech.dora.model.FundUserResponse;
 import tech.dora.model.GetAPIKeyResponse;
 import tech.dora.model.GetAssetByIDResponse;
 import tech.dora.model.GetAssetPriceResponse;
+import tech.dora.model.GetAssetYTMByIDResponse;
 import tech.dora.model.GetOrderBookResponse;
 import tech.dora.model.GetOrderBookSummaryResponse;
 import tech.dora.model.GetOrderResponse;
@@ -1939,6 +1940,134 @@ public class DefaultApi {
 
         com.squareup.okhttp.Call call = getAssetPriceValidateBeforeCall(assetId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetAssetPriceResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for getAssetYTMById
+     * @param assetId  (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call getAssetYTMByIdCall(Object assetId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = null;
+        
+        // create path and map variables
+        String localVarPath = "/v1/assets/{asset_id}/ytm"
+            .replaceAll("\\{" + "asset_id" + "\\}", apiClient.escapeString(assetId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        if (headers != null) {
+            localVarHeaderParams.putAll(headers);
+        }
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call getAssetYTMByIdValidateBeforeCall(Object assetId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'assetId' is set
+        if (assetId == null) {
+            throw new ApiException("Missing the required parameter 'assetId' when calling getAssetYTMById(Async)");
+        }
+        
+        com.squareup.okhttp.Call call = getAssetYTMByIdCall(assetId, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
+
+    /**
+     * Get annualized yield to maturity for a bond asset
+     * 
+     * @param assetId  (required)
+     * @return GetAssetYTMByIDResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public GetAssetYTMByIDResponse getAssetYTMById(Object assetId) throws ApiException {
+        ApiResponse<GetAssetYTMByIDResponse> resp = getAssetYTMByIdWithHttpInfo(assetId);
+        return resp.getData();
+    }
+
+    /**
+     * Get annualized yield to maturity for a bond asset
+     * 
+     * @param assetId  (required)
+     * @return ApiResponse&lt;GetAssetYTMByIDResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<GetAssetYTMByIDResponse> getAssetYTMByIdWithHttpInfo(Object assetId) throws ApiException {
+        com.squareup.okhttp.Call call = getAssetYTMByIdValidateBeforeCall(assetId, null, null);
+        Type localVarReturnType = new TypeToken<GetAssetYTMByIDResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Get annualized yield to maturity for a bond asset (asynchronously)
+     * 
+     * @param assetId  (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call getAssetYTMByIdAsync(Object assetId, final ApiCallback<GetAssetYTMByIDResponse> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = getAssetYTMByIdValidateBeforeCall(assetId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<GetAssetYTMByIDResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

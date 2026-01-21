@@ -33,6 +33,7 @@ import tech.dora.model.FundUserResponse;
 import tech.dora.model.GetAPIKeyResponse;
 import tech.dora.model.GetAssetByIDResponse;
 import tech.dora.model.GetAssetPriceResponse;
+import tech.dora.model.GetAssetYTMByIDResponse;
 import tech.dora.model.GetOrderBookResponse;
 import tech.dora.model.GetOrderBookSummaryResponse;
 import tech.dora.model.GetOrderResponse;
@@ -328,6 +329,21 @@ public class DefaultApiTest {
     public void getAssetPriceTest() throws Exception {
         Object assetId = null;
         GetAssetPriceResponse response = api.getAssetPrice(assetId);
+
+        // TODO: test validations
+    }
+    /**
+     * Get annualized yield to maturity for a bond asset
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void getAssetYTMByIdTest() throws Exception {
+        Object assetId = null;
+        GetAssetYTMByIDResponse response = api.getAssetYTMById(assetId);
 
         // TODO: test validations
     }

@@ -26,7 +26,7 @@ import tech.dora.model.PLSummary;
  * PLAccount
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-20T10:55:39.903484329+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-21T15:09:57.829710943+01:00[Europe/Paris]")
 
 public class PLAccount {
   @SerializedName("account_id")
@@ -38,8 +38,8 @@ public class PLAccount {
   @SerializedName("is_global")
   private Object isGlobal = null;
 
-  @SerializedName("rows")
-  private Object rows = null;
+  @SerializedName("assets")
+  private Object assets = null;
 
   @SerializedName("summary")
   private PLSummary summary = null;
@@ -98,22 +98,22 @@ public class PLAccount {
     this.isGlobal = isGlobal;
   }
 
-  public PLAccount rows(Object rows) {
-    this.rows = rows;
+  public PLAccount assets(Object assets) {
+    this.assets = assets;
     return this;
   }
 
    /**
-   * Get rows
-   * @return rows
+   * Get assets
+   * @return assets
   **/
   @Schema(description = "")
-  public Object getRows() {
-    return rows;
+  public Object getAssets() {
+    return assets;
   }
 
-  public void setRows(Object rows) {
-    this.rows = rows;
+  public void setAssets(Object assets) {
+    this.assets = assets;
   }
 
   public PLAccount summary(PLSummary summary) {
@@ -147,13 +147,13 @@ public class PLAccount {
     return Objects.equals(this.accountId, plAccount.accountId) &&
         Objects.equals(this.accountName, plAccount.accountName) &&
         Objects.equals(this.isGlobal, plAccount.isGlobal) &&
-        Objects.equals(this.rows, plAccount.rows) &&
+        Objects.equals(this.assets, plAccount.assets) &&
         Objects.equals(this.summary, plAccount.summary);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountId, accountName, isGlobal, rows, summary);
+    return Objects.hash(accountId, accountName, isGlobal, assets, summary);
   }
 
 
@@ -165,7 +165,7 @@ public class PLAccount {
     sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
     sb.append("    accountName: ").append(toIndentedString(accountName)).append("\n");
     sb.append("    isGlobal: ").append(toIndentedString(isGlobal)).append("\n");
-    sb.append("    rows: ").append(toIndentedString(rows)).append("\n");
+    sb.append("    assets: ").append(toIndentedString(assets)).append("\n");
     sb.append("    summary: ").append(toIndentedString(summary)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -15,3 +15,7 @@ Name | Type | Description | Notes
 **leverageLimit** | **Object** | The leverage limit for the position |  [optional]
 **tp** | **Object** | The take profit price set for the position, if any |  [optional]
 **sl** | **Object** | The stop loss price set for the position, if any |  [optional]
+**initialCapital** | **Object** | The initial capital of the position |  [optional]
+**impendingBorrows** | **Object** | The impending borrows of the position |  [optional]
+**locked** | **Object** | The locked amount of the position |  [optional]
+**unusedCollateral** | **Object** | The unused collateral of the position |  [optional]

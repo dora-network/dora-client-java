@@ -26,7 +26,7 @@ import tech.dora.model.UserRole;
  * A generic struct to handle optional updates for roles fields in user requests.
  */
 @Schema(description = "A generic struct to handle optional updates for roles fields in user requests.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-20T10:55:39.903484329+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-21T15:09:57.829710943+01:00[Europe/Paris]")
 
 public class UpdateRolesString {
   @SerializedName("update")
