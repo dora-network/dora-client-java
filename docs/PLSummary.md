@@ -7,3 +7,4 @@ Name | Type | Description | Notes
 **accountEquity** | **Object** |  |  [optional]
 **available** | **Object** |  |  [optional]
 **health** | **Object** |  |  [optional]
+**ltv** | **Object** |  |  [optional]

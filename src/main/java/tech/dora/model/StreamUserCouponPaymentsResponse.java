@@ -14,13 +14,62 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 /**
  * StreamUserCouponPaymentsResponse
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-21T15:09:57.829710943+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
 
 public class StreamUserCouponPaymentsResponse {
+  @SerializedName("entries")
+  private Object entries = null;
+
+  @SerializedName("summary_by_asset")
+  private Object summaryByAsset = null;
+
+  public StreamUserCouponPaymentsResponse entries(Object entries) {
+    this.entries = entries;
+    return this;
+  }
+
+   /**
+   * Get entries
+   * @return entries
+  **/
+  @Schema(description = "")
+  public Object getEntries() {
+    return entries;
+  }
+
+  public void setEntries(Object entries) {
+    this.entries = entries;
+  }
+
+  public StreamUserCouponPaymentsResponse summaryByAsset(Object summaryByAsset) {
+    this.summaryByAsset = summaryByAsset;
+    return this;
+  }
+
+   /**
+   * Get summaryByAsset
+   * @return summaryByAsset
+  **/
+  @Schema(description = "")
+  public Object getSummaryByAsset() {
+    return summaryByAsset;
+  }
+
+  public void setSummaryByAsset(Object summaryByAsset) {
+    this.summaryByAsset = summaryByAsset;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -30,12 +79,14 @@ public class StreamUserCouponPaymentsResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    return true;
+    StreamUserCouponPaymentsResponse streamUserCouponPaymentsResponse = (StreamUserCouponPaymentsResponse) o;
+    return Objects.equals(this.entries, streamUserCouponPaymentsResponse.entries) &&
+        Objects.equals(this.summaryByAsset, streamUserCouponPaymentsResponse.summaryByAsset);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash();
+    return Objects.hash(entries, summaryByAsset);
   }
 
 
@@ -44,6 +95,8 @@ public class StreamUserCouponPaymentsResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class StreamUserCouponPaymentsResponse {\n");
     
+    sb.append("    entries: ").append(toIndentedString(entries)).append("\n");
+    sb.append("    summaryByAsset: ").append(toIndentedString(summaryByAsset)).append("\n");
     sb.append("}");
     return sb.toString();
   }

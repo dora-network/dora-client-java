@@ -27,7 +27,7 @@ import tech.dora.model.Bond;
  * Asset
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-21T15:09:57.829710943+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
 
 public class Asset {
   @SerializedName("id")
@@ -48,8 +48,8 @@ public class Asset {
   @SerializedName("description")
   private Object description = null;
 
-  @SerializedName("liquidation_threshold")
-  private Object liquidationThreshold = null;
+  @SerializedName("liquidation_weight")
+  private Object liquidationWeight = null;
 
   @SerializedName("maturity_id")
   private Object maturityId = null;
@@ -201,22 +201,22 @@ public class Asset {
     this.description = description;
   }
 
-  public Asset liquidationThreshold(Object liquidationThreshold) {
-    this.liquidationThreshold = liquidationThreshold;
+  public Asset liquidationWeight(Object liquidationWeight) {
+    this.liquidationWeight = liquidationWeight;
     return this;
   }
 
    /**
-   * Get liquidationThreshold
-   * @return liquidationThreshold
+   * Get liquidationWeight
+   * @return liquidationWeight
   **/
   @Schema(description = "")
-  public Object getLiquidationThreshold() {
-    return liquidationThreshold;
+  public Object getLiquidationWeight() {
+    return liquidationWeight;
   }
 
-  public void setLiquidationThreshold(Object liquidationThreshold) {
-    this.liquidationThreshold = liquidationThreshold;
+  public void setLiquidationWeight(Object liquidationWeight) {
+    this.liquidationWeight = liquidationWeight;
   }
 
   public Asset maturityId(Object maturityId) {
@@ -487,7 +487,7 @@ public class Asset {
         Objects.equals(this.decimals, asset.decimals) &&
         Objects.equals(this.fractionalizedUnits, asset.fractionalizedUnits) &&
         Objects.equals(this.description, asset.description) &&
-        Objects.equals(this.liquidationThreshold, asset.liquidationThreshold) &&
+        Objects.equals(this.liquidationWeight, asset.liquidationWeight) &&
         Objects.equals(this.maturityId, asset.maturityId) &&
         Objects.equals(this.maxSupply, asset.maxSupply) &&
         Objects.equals(this.maxUtilization, asset.maxUtilization) &&
@@ -506,7 +506,7 @@ public class Asset {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, collateralWeight, createdAt, decimals, fractionalizedUnits, description, liquidationThreshold, maturityId, maxSupply, maxUtilization, name, symbol, kind, yield, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, maxLeverage, bond);
+    return Objects.hash(id, collateralWeight, createdAt, decimals, fractionalizedUnits, description, liquidationWeight, maturityId, maxSupply, maxUtilization, name, symbol, kind, yield, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, maxLeverage, bond);
   }
 
 
@@ -521,7 +521,7 @@ public class Asset {
     sb.append("    decimals: ").append(toIndentedString(decimals)).append("\n");
     sb.append("    fractionalizedUnits: ").append(toIndentedString(fractionalizedUnits)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    liquidationThreshold: ").append(toIndentedString(liquidationThreshold)).append("\n");
+    sb.append("    liquidationWeight: ").append(toIndentedString(liquidationWeight)).append("\n");
     sb.append("    maturityId: ").append(toIndentedString(maturityId)).append("\n");
     sb.append("    maxSupply: ").append(toIndentedString(maxSupply)).append("\n");
     sb.append("    maxUtilization: ").append(toIndentedString(maxUtilization)).append("\n");

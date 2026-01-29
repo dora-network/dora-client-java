@@ -25,7 +25,7 @@ import java.io.IOException;
  * PLSummary
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-21T15:09:57.829710943+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
 
 public class PLSummary {
   @SerializedName("leverage")
@@ -39,6 +39,9 @@ public class PLSummary {
 
   @SerializedName("health")
   private Object health = null;
+
+  @SerializedName("ltv")
+  private Object ltv = null;
 
   public PLSummary leverage(Object leverage) {
     this.leverage = leverage;
@@ -112,6 +115,24 @@ public class PLSummary {
     this.health = health;
   }
 
+  public PLSummary ltv(Object ltv) {
+    this.ltv = ltv;
+    return this;
+  }
+
+   /**
+   * Get ltv
+   * @return ltv
+  **/
+  @Schema(description = "")
+  public Object getLtv() {
+    return ltv;
+  }
+
+  public void setLtv(Object ltv) {
+    this.ltv = ltv;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -125,12 +146,13 @@ public class PLSummary {
     return Objects.equals(this.leverage, plSummary.leverage) &&
         Objects.equals(this.accountEquity, plSummary.accountEquity) &&
         Objects.equals(this.available, plSummary.available) &&
-        Objects.equals(this.health, plSummary.health);
+        Objects.equals(this.health, plSummary.health) &&
+        Objects.equals(this.ltv, plSummary.ltv);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(leverage, accountEquity, available, health);
+    return Objects.hash(leverage, accountEquity, available, health, ltv);
   }
 
 
@@ -143,6 +165,7 @@ public class PLSummary {
     sb.append("    accountEquity: ").append(toIndentedString(accountEquity)).append("\n");
     sb.append("    available: ").append(toIndentedString(available)).append("\n");
     sb.append("    health: ").append(toIndentedString(health)).append("\n");
+    sb.append("    ltv: ").append(toIndentedString(ltv)).append("\n");
     sb.append("}");
     return sb.toString();
   }

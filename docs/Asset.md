@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **decimals** | **Object** |  |  [optional]
 **fractionalizedUnits** | **Object** |  |  [optional]
 **description** | **Object** |  |  [optional]
-**liquidationThreshold** | **Object** |  |  [optional]
+**liquidationWeight** | **Object** |  |  [optional]
 **maturityId** | **Object** |  |  [optional]
 **maxSupply** | **Object** |  |  [optional]
 **maxUtilization** | **Object** |  |  [optional]
