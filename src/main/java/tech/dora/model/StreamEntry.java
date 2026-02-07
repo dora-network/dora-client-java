@@ -25,7 +25,7 @@ import java.io.IOException;
  * StreamEntry
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class StreamEntry {
   @SerializedName("Val")
@@ -43,7 +43,7 @@ public class StreamEntry {
    * The data being streamed
    * @return val
   **/
-  @Schema(description = "The data being streamed")
+  @Schema(required = true, description = "The data being streamed")
   public Object getVal() {
     return val;
   }
@@ -61,7 +61,7 @@ public class StreamEntry {
    * The timestamp when the data was created
    * @return time
   **/
-  @Schema(description = "The timestamp when the data was created")
+  @Schema(required = true, description = "The timestamp when the data was created")
   public Object getTime() {
     return time;
   }

@@ -26,7 +26,7 @@ import tech.dora.model.OrderBookStatus;
  * OrderBook
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class OrderBook {
   @SerializedName("order_book_id")
@@ -92,7 +92,7 @@ public class OrderBook {
    * Get orderBookId
    * @return orderBookId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getOrderBookId() {
     return orderBookId;
   }
@@ -110,7 +110,7 @@ public class OrderBook {
    * Get baseQuantity
    * @return baseQuantity
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getBaseQuantity() {
     return baseQuantity;
   }
@@ -128,7 +128,7 @@ public class OrderBook {
    * Get baseAssetId
    * @return baseAssetId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getBaseAssetId() {
     return baseAssetId;
   }
@@ -146,7 +146,7 @@ public class OrderBook {
    * Get createdAt
    * @return createdAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCreatedAt() {
     return createdAt;
   }
@@ -164,7 +164,7 @@ public class OrderBook {
    * Get displayName
    * @return displayName
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getDisplayName() {
     return displayName;
   }
@@ -182,7 +182,7 @@ public class OrderBook {
    * Get feeFactor
    * @return feeFactor
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getFeeFactor() {
     return feeFactor;
   }
@@ -200,7 +200,7 @@ public class OrderBook {
    * Get initialAssetsRatio
    * @return initialAssetsRatio
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getInitialAssetsRatio() {
     return initialAssetsRatio;
   }
@@ -218,7 +218,7 @@ public class OrderBook {
    * Get maturityAt
    * @return maturityAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getMaturityAt() {
     return maturityAt;
   }
@@ -236,7 +236,7 @@ public class OrderBook {
    * Get quoteQuantity
    * @return quoteQuantity
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getQuoteQuantity() {
     return quoteQuantity;
   }
@@ -254,7 +254,7 @@ public class OrderBook {
    * Get quoteAssetId
    * @return quoteAssetId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getQuoteAssetId() {
     return quoteAssetId;
   }
@@ -272,7 +272,7 @@ public class OrderBook {
    * Get sharesQuantity
    * @return sharesQuantity
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getSharesQuantity() {
     return sharesQuantity;
   }
@@ -290,7 +290,7 @@ public class OrderBook {
    * Get status
    * @return status
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public OrderBookStatus getStatus() {
     return status;
   }
@@ -308,7 +308,7 @@ public class OrderBook {
    * Get tickSize
    * @return tickSize
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getTickSize() {
     return tickSize;
   }
@@ -326,7 +326,7 @@ public class OrderBook {
    * Get updatedAt
    * @return updatedAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getUpdatedAt() {
     return updatedAt;
   }
@@ -398,7 +398,7 @@ public class OrderBook {
    * Get sharesAssetId
    * @return sharesAssetId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getSharesAssetId() {
     return sharesAssetId;
   }

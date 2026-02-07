@@ -25,7 +25,7 @@ import java.io.IOException;
  * OrderBookBalance
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class OrderBookBalance {
   @SerializedName("order_book_id")
@@ -49,7 +49,7 @@ public class OrderBookBalance {
    * The ID of the order book.
    * @return orderBookId
   **/
-  @Schema(description = "The ID of the order book.")
+  @Schema(required = true, description = "The ID of the order book.")
   public Object getOrderBookId() {
     return orderBookId;
   }
@@ -67,7 +67,7 @@ public class OrderBookBalance {
    * The quantity of the base asset.
    * @return baseQuantity
   **/
-  @Schema(description = "The quantity of the base asset.")
+  @Schema(required = true, description = "The quantity of the base asset.")
   public Object getBaseQuantity() {
     return baseQuantity;
   }
@@ -85,7 +85,7 @@ public class OrderBookBalance {
    * The quantity of the quote asset.
    * @return quoteQuantity
   **/
-  @Schema(description = "The quantity of the quote asset.")
+  @Schema(required = true, description = "The quantity of the quote asset.")
   public Object getQuoteQuantity() {
     return quoteQuantity;
   }
@@ -103,7 +103,7 @@ public class OrderBookBalance {
    * The quantity of pool shares.
    * @return sharesQuantity
   **/
-  @Schema(description = "The quantity of pool shares.")
+  @Schema(required = true, description = "The quantity of pool shares.")
   public Object getSharesQuantity() {
     return sharesQuantity;
   }

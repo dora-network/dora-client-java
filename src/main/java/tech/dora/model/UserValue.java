@@ -25,7 +25,7 @@ import java.io.IOException;
  * UserValue
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class UserValue {
   @SerializedName("available")
@@ -49,24 +49,6 @@ public class UserValue {
   @SerializedName("liquidation_threshold")
   private Object liquidationThreshold = null;
 
-  @SerializedName("notional_long")
-  private Object notionalLong = null;
-
-  @SerializedName("notional_short")
-  private Object notionalShort = null;
-
-  @SerializedName("portfolio_value")
-  private Object portfolioValue = null;
-
-  @SerializedName("net_liquidation_value")
-  private Object netLiquidationValue = null;
-
-  @SerializedName("unrealized_pnl")
-  private Object unrealizedPnl = null;
-
-  @SerializedName("realized_pnl")
-  private Object realizedPnl = null;
-
   public UserValue available(Object available) {
     this.available = available;
     return this;
@@ -76,7 +58,7 @@ public class UserValue {
    * Get available
    * @return available
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getAvailable() {
     return available;
   }
@@ -94,7 +76,7 @@ public class UserValue {
    * Get locked
    * @return locked
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getLocked() {
     return locked;
   }
@@ -112,7 +94,7 @@ public class UserValue {
    * Get borrowed
    * @return borrowed
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getBorrowed() {
     return borrowed;
   }
@@ -130,7 +112,7 @@ public class UserValue {
    * Get supplied
    * @return supplied
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getSupplied() {
     return supplied;
   }
@@ -148,7 +130,7 @@ public class UserValue {
    * Get impendingBorrows
    * @return impendingBorrows
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getImpendingBorrows() {
     return impendingBorrows;
   }
@@ -166,7 +148,7 @@ public class UserValue {
    * Get borrowLimit
    * @return borrowLimit
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getBorrowLimit() {
     return borrowLimit;
   }
@@ -184,121 +166,13 @@ public class UserValue {
    * Get liquidationThreshold
    * @return liquidationThreshold
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getLiquidationThreshold() {
     return liquidationThreshold;
   }
 
   public void setLiquidationThreshold(Object liquidationThreshold) {
     this.liquidationThreshold = liquidationThreshold;
-  }
-
-  public UserValue notionalLong(Object notionalLong) {
-    this.notionalLong = notionalLong;
-    return this;
-  }
-
-   /**
-   * Get notionalLong
-   * @return notionalLong
-  **/
-  @Schema(description = "")
-  public Object getNotionalLong() {
-    return notionalLong;
-  }
-
-  public void setNotionalLong(Object notionalLong) {
-    this.notionalLong = notionalLong;
-  }
-
-  public UserValue notionalShort(Object notionalShort) {
-    this.notionalShort = notionalShort;
-    return this;
-  }
-
-   /**
-   * Get notionalShort
-   * @return notionalShort
-  **/
-  @Schema(description = "")
-  public Object getNotionalShort() {
-    return notionalShort;
-  }
-
-  public void setNotionalShort(Object notionalShort) {
-    this.notionalShort = notionalShort;
-  }
-
-  public UserValue portfolioValue(Object portfolioValue) {
-    this.portfolioValue = portfolioValue;
-    return this;
-  }
-
-   /**
-   * Get portfolioValue
-   * @return portfolioValue
-  **/
-  @Schema(description = "")
-  public Object getPortfolioValue() {
-    return portfolioValue;
-  }
-
-  public void setPortfolioValue(Object portfolioValue) {
-    this.portfolioValue = portfolioValue;
-  }
-
-  public UserValue netLiquidationValue(Object netLiquidationValue) {
-    this.netLiquidationValue = netLiquidationValue;
-    return this;
-  }
-
-   /**
-   * Get netLiquidationValue
-   * @return netLiquidationValue
-  **/
-  @Schema(description = "")
-  public Object getNetLiquidationValue() {
-    return netLiquidationValue;
-  }
-
-  public void setNetLiquidationValue(Object netLiquidationValue) {
-    this.netLiquidationValue = netLiquidationValue;
-  }
-
-  public UserValue unrealizedPnl(Object unrealizedPnl) {
-    this.unrealizedPnl = unrealizedPnl;
-    return this;
-  }
-
-   /**
-   * Get unrealizedPnl
-   * @return unrealizedPnl
-  **/
-  @Schema(description = "")
-  public Object getUnrealizedPnl() {
-    return unrealizedPnl;
-  }
-
-  public void setUnrealizedPnl(Object unrealizedPnl) {
-    this.unrealizedPnl = unrealizedPnl;
-  }
-
-  public UserValue realizedPnl(Object realizedPnl) {
-    this.realizedPnl = realizedPnl;
-    return this;
-  }
-
-   /**
-   * Get realizedPnl
-   * @return realizedPnl
-  **/
-  @Schema(description = "")
-  public Object getRealizedPnl() {
-    return realizedPnl;
-  }
-
-  public void setRealizedPnl(Object realizedPnl) {
-    this.realizedPnl = realizedPnl;
   }
 
 
@@ -317,18 +191,12 @@ public class UserValue {
         Objects.equals(this.supplied, userValue.supplied) &&
         Objects.equals(this.impendingBorrows, userValue.impendingBorrows) &&
         Objects.equals(this.borrowLimit, userValue.borrowLimit) &&
-        Objects.equals(this.liquidationThreshold, userValue.liquidationThreshold) &&
-        Objects.equals(this.notionalLong, userValue.notionalLong) &&
-        Objects.equals(this.notionalShort, userValue.notionalShort) &&
-        Objects.equals(this.portfolioValue, userValue.portfolioValue) &&
-        Objects.equals(this.netLiquidationValue, userValue.netLiquidationValue) &&
-        Objects.equals(this.unrealizedPnl, userValue.unrealizedPnl) &&
-        Objects.equals(this.realizedPnl, userValue.realizedPnl);
+        Objects.equals(this.liquidationThreshold, userValue.liquidationThreshold);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(available, locked, borrowed, supplied, impendingBorrows, borrowLimit, liquidationThreshold, notionalLong, notionalShort, portfolioValue, netLiquidationValue, unrealizedPnl, realizedPnl);
+    return Objects.hash(available, locked, borrowed, supplied, impendingBorrows, borrowLimit, liquidationThreshold);
   }
 
 
@@ -344,12 +212,6 @@ public class UserValue {
     sb.append("    impendingBorrows: ").append(toIndentedString(impendingBorrows)).append("\n");
     sb.append("    borrowLimit: ").append(toIndentedString(borrowLimit)).append("\n");
     sb.append("    liquidationThreshold: ").append(toIndentedString(liquidationThreshold)).append("\n");
-    sb.append("    notionalLong: ").append(toIndentedString(notionalLong)).append("\n");
-    sb.append("    notionalShort: ").append(toIndentedString(notionalShort)).append("\n");
-    sb.append("    portfolioValue: ").append(toIndentedString(portfolioValue)).append("\n");
-    sb.append("    netLiquidationValue: ").append(toIndentedString(netLiquidationValue)).append("\n");
-    sb.append("    unrealizedPnl: ").append(toIndentedString(unrealizedPnl)).append("\n");
-    sb.append("    realizedPnl: ").append(toIndentedString(realizedPnl)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**userId** | **Object** |  |  [optional]
-**keyId** | **Object** |  |  [optional]
-**label** | **Object** |  |  [optional]
+**userId** | **Object** |  | 
+**keyId** | **Object** |  | 
+**label** | **Object** |  | 
 **expiresAt** | **Object** |  |  [optional]
-**isActive** | **Object** |  |  [optional]
+**isActive** | **Object** |  | 

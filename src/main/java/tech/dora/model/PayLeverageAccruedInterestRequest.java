@@ -25,35 +25,17 @@ import java.io.IOException;
  * PayLeverageAccruedInterestRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class PayLeverageAccruedInterestRequest {
-  @SerializedName("asset_id")
-  private Object assetId = null;
-
   @SerializedName("position_id")
   private Object positionId = null;
 
+  @SerializedName("asset_id")
+  private Object assetId = null;
+
   @SerializedName("quantity")
   private Object quantity = null;
-
-  public PayLeverageAccruedInterestRequest assetId(Object assetId) {
-    this.assetId = assetId;
-    return this;
-  }
-
-   /**
-   * Get assetId
-   * @return assetId
-  **/
-  @Schema(description = "")
-  public Object getAssetId() {
-    return assetId;
-  }
-
-  public void setAssetId(Object assetId) {
-    this.assetId = assetId;
-  }
 
   public PayLeverageAccruedInterestRequest positionId(Object positionId) {
     this.positionId = positionId;
@@ -64,13 +46,31 @@ public class PayLeverageAccruedInterestRequest {
    * Get positionId
    * @return positionId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getPositionId() {
     return positionId;
   }
 
   public void setPositionId(Object positionId) {
     this.positionId = positionId;
+  }
+
+  public PayLeverageAccruedInterestRequest assetId(Object assetId) {
+    this.assetId = assetId;
+    return this;
+  }
+
+   /**
+   * Get assetId
+   * @return assetId
+  **/
+  @Schema(required = true, description = "")
+  public Object getAssetId() {
+    return assetId;
+  }
+
+  public void setAssetId(Object assetId) {
+    this.assetId = assetId;
   }
 
   public PayLeverageAccruedInterestRequest quantity(Object quantity) {
@@ -82,7 +82,7 @@ public class PayLeverageAccruedInterestRequest {
    * Get quantity
    * @return quantity
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getQuantity() {
     return quantity;
   }
@@ -101,14 +101,14 @@ public class PayLeverageAccruedInterestRequest {
       return false;
     }
     PayLeverageAccruedInterestRequest payLeverageAccruedInterestRequest = (PayLeverageAccruedInterestRequest) o;
-    return Objects.equals(this.assetId, payLeverageAccruedInterestRequest.assetId) &&
-        Objects.equals(this.positionId, payLeverageAccruedInterestRequest.positionId) &&
+    return Objects.equals(this.positionId, payLeverageAccruedInterestRequest.positionId) &&
+        Objects.equals(this.assetId, payLeverageAccruedInterestRequest.assetId) &&
         Objects.equals(this.quantity, payLeverageAccruedInterestRequest.quantity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(assetId, positionId, quantity);
+    return Objects.hash(positionId, assetId, quantity);
   }
 
 
@@ -117,8 +117,8 @@ public class PayLeverageAccruedInterestRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class PayLeverageAccruedInterestRequest {\n");
     
-    sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
     sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
+    sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("}");
     return sb.toString();

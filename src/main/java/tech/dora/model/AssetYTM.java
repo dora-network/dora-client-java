@@ -25,7 +25,7 @@ import java.io.IOException;
  * AssetYTM
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class AssetYTM {
   @SerializedName("asset_id")
@@ -49,7 +49,7 @@ public class AssetYTM {
    * Get assetId
    * @return assetId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getAssetId() {
     return assetId;
   }
@@ -67,7 +67,7 @@ public class AssetYTM {
    * Get currentTime
    * @return currentTime
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCurrentTime() {
     return currentTime;
   }
@@ -85,7 +85,7 @@ public class AssetYTM {
    * Get currentPrice
    * @return currentPrice
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCurrentPrice() {
     return currentPrice;
   }
@@ -103,7 +103,7 @@ public class AssetYTM {
    * Get yieldToMaturity
    * @return yieldToMaturity
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getYieldToMaturity() {
     return yieldToMaturity;
   }

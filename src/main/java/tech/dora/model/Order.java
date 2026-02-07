@@ -29,7 +29,7 @@ import tech.dora.model.TriggerType;
  * Order
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class Order {
   @SerializedName("order_id")
@@ -98,6 +98,9 @@ public class Order {
   @SerializedName("trigger_type")
   private TriggerType triggerType = null;
 
+  @SerializedName("client_order_id")
+  private Object clientOrderId = null;
+
   public Order orderId(Object orderId) {
     this.orderId = orderId;
     return this;
@@ -107,7 +110,7 @@ public class Order {
    * Get orderId
    * @return orderId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getOrderId() {
     return orderId;
   }
@@ -125,7 +128,7 @@ public class Order {
    * Get orderBookId
    * @return orderBookId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getOrderBookId() {
     return orderBookId;
   }
@@ -143,7 +146,7 @@ public class Order {
    * Get kind
    * @return kind
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public OrderKind getKind() {
     return kind;
   }
@@ -161,7 +164,7 @@ public class Order {
    * If Kind is LIMIT, this is the original limit price. If Kind is MARKET, this may be 0 or omitted.
    * @return originalPrice
   **/
-  @Schema(description = "If Kind is LIMIT, this is the original limit price. If Kind is MARKET, this may be 0 or omitted.")
+  @Schema(required = true, description = "If Kind is LIMIT, this is the original limit price. If Kind is MARKET, this may be 0 or omitted.")
   public Object getOriginalPrice() {
     return originalPrice;
   }
@@ -179,7 +182,7 @@ public class Order {
    * Get avgFillPrice
    * @return avgFillPrice
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getAvgFillPrice() {
     return avgFillPrice;
   }
@@ -197,7 +200,7 @@ public class Order {
    * Quantity that was cancelled, if any.
    * @return cancelledQuantity
   **/
-  @Schema(description = "Quantity that was cancelled, if any.")
+  @Schema(required = true, description = "Quantity that was cancelled, if any.")
   public Object getCancelledQuantity() {
     return cancelledQuantity;
   }
@@ -215,7 +218,7 @@ public class Order {
    * Quantity that is still open, i.e., not filled or cancelled.
    * @return openQuantity
   **/
-  @Schema(description = "Quantity that is still open, i.e., not filled or cancelled.")
+  @Schema(required = true, description = "Quantity that is still open, i.e., not filled or cancelled.")
   public Object getOpenQuantity() {
     return openQuantity;
   }
@@ -233,7 +236,7 @@ public class Order {
    * The original quantity of the order when it was created.
    * @return originalQuantity
   **/
-  @Schema(description = "The original quantity of the order when it was created.")
+  @Schema(required = true, description = "The original quantity of the order when it was created.")
   public Object getOriginalQuantity() {
     return originalQuantity;
   }
@@ -251,7 +254,7 @@ public class Order {
    * Quantity that has been filled so far.
    * @return filledQuantity
   **/
-  @Schema(description = "Quantity that has been filled so far.")
+  @Schema(required = true, description = "Quantity that has been filled so far.")
   public Object getFilledQuantity() {
     return filledQuantity;
   }
@@ -269,7 +272,7 @@ public class Order {
    * Quote quantity that has been filled so far.
    * @return filledNotional
   **/
-  @Schema(description = "Quote quantity that has been filled so far.")
+  @Schema(required = true, description = "Quote quantity that has been filled so far.")
   public Object getFilledNotional() {
     return filledNotional;
   }
@@ -305,7 +308,7 @@ public class Order {
    * Get openedAt
    * @return openedAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getOpenedAt() {
     return openedAt;
   }
@@ -323,7 +326,7 @@ public class Order {
    * Get inverseLeverage
    * @return inverseLeverage
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getInverseLeverage() {
     return inverseLeverage;
   }
@@ -341,7 +344,7 @@ public class Order {
    * Get side
    * @return side
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Side getSide() {
     return side;
   }
@@ -359,7 +362,7 @@ public class Order {
    * Get status
    * @return status
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public OrderStatus getStatus() {
     return status;
   }
@@ -377,7 +380,7 @@ public class Order {
    * Get userId
    * @return userId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getUserId() {
     return userId;
   }
@@ -413,7 +416,7 @@ public class Order {
    * Get positionId
    * @return positionId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getPositionId() {
     return positionId;
   }
@@ -494,6 +497,24 @@ public class Order {
     this.triggerType = triggerType;
   }
 
+  public Order clientOrderId(Object clientOrderId) {
+    this.clientOrderId = clientOrderId;
+    return this;
+  }
+
+   /**
+   * An optional client-provided identifier for the order.
+   * @return clientOrderId
+  **/
+  @Schema(description = "An optional client-provided identifier for the order.")
+  public Object getClientOrderId() {
+    return clientOrderId;
+  }
+
+  public void setClientOrderId(Object clientOrderId) {
+    this.clientOrderId = clientOrderId;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -525,12 +546,13 @@ public class Order {
         Objects.equals(this.orderInfo, order.orderInfo) &&
         Objects.equals(this.goodTillDate, order.goodTillDate) &&
         Objects.equals(this.triggerPrice, order.triggerPrice) &&
-        Objects.equals(this.triggerType, order.triggerType);
+        Objects.equals(this.triggerType, order.triggerType) &&
+        Objects.equals(this.clientOrderId, order.clientOrderId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderId, orderBookId, kind, originalPrice, avgFillPrice, cancelledQuantity, openQuantity, originalQuantity, filledQuantity, filledNotional, lastUpdateAt, openedAt, inverseLeverage, side, status, userId, orderModifiers, positionId, orderInfo, goodTillDate, triggerPrice, triggerType);
+    return Objects.hash(orderId, orderBookId, kind, originalPrice, avgFillPrice, cancelledQuantity, openQuantity, originalQuantity, filledQuantity, filledNotional, lastUpdateAt, openedAt, inverseLeverage, side, status, userId, orderModifiers, positionId, orderInfo, goodTillDate, triggerPrice, triggerType, clientOrderId);
   }
 
 
@@ -561,6 +583,7 @@ public class Order {
     sb.append("    goodTillDate: ").append(toIndentedString(goodTillDate)).append("\n");
     sb.append("    triggerPrice: ").append(toIndentedString(triggerPrice)).append("\n");
     sb.append("    triggerType: ").append(toIndentedString(triggerType)).append("\n");
+    sb.append("    clientOrderId: ").append(toIndentedString(clientOrderId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

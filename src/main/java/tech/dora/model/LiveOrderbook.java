@@ -25,7 +25,7 @@ import java.io.IOException;
  * LiveOrderbook
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class LiveOrderbook {
   @SerializedName("bids")
@@ -43,7 +43,7 @@ public class LiveOrderbook {
    * sorted in desc order by price
    * @return bids
   **/
-  @Schema(description = "sorted in desc order by price")
+  @Schema(required = true, description = "sorted in desc order by price")
   public Object getBids() {
     return bids;
   }
@@ -61,7 +61,7 @@ public class LiveOrderbook {
    * sorted in asc order by price
    * @return asks
   **/
-  @Schema(description = "sorted in asc order by price")
+  @Schema(required = true, description = "sorted in asc order by price")
   public Object getAsks() {
     return asks;
   }

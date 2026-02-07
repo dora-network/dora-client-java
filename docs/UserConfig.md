@@ -3,10 +3,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Object** |  |  [optional]
+**id** | **Object** |  | 
 **photoUrl** | **Object** |  |  [optional]
 **timezone** | **Object** | User&#x27;s timezone, e.g., &#x27;America/New_York&#x27;, or an offset. |  [optional]
-**createdAt** | **Object** |  |  [optional]
-**updatedAt** | **Object** |  |  [optional]
-**showTutorialCards** | **Object** |  |  [optional]
-**notificationsEnabled** | **Object** |  |  [optional]
+**createdAt** | **Object** |  | 
+**updatedAt** | **Object** |  | 
+**showTutorialCards** | **Object** |  | 
+**notificationsEnabled** | **Object** |  | 

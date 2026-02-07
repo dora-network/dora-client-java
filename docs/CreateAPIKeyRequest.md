@@ -3,5 +3,5 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**label** | **Object** |  |  [optional]
+**label** | **Object** |  | 
 **expires** | **Object** | Date at which the api-key will expire |  [optional]

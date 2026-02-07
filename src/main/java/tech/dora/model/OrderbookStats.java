@@ -25,7 +25,7 @@ import java.io.IOException;
  * OrderbookStats
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class OrderbookStats {
   @SerializedName("order_book_id")
@@ -64,7 +64,7 @@ public class OrderbookStats {
    * Get orderBookId
    * @return orderBookId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getOrderBookId() {
     return orderBookId;
   }
@@ -82,7 +82,7 @@ public class OrderbookStats {
    * Open price of the orderbook
    * @return openPrice
   **/
-  @Schema(description = "Open price of the orderbook")
+  @Schema(required = true, description = "Open price of the orderbook")
   public Object getOpenPrice() {
     return openPrice;
   }
@@ -100,7 +100,7 @@ public class OrderbookStats {
    * Price of the most recent executed trade.
    * @return lastPrice
   **/
-  @Schema(description = "Price of the most recent executed trade.")
+  @Schema(required = true, description = "Price of the most recent executed trade.")
   public Object getLastPrice() {
     return lastPrice;
   }
@@ -118,7 +118,7 @@ public class OrderbookStats {
    * Highest price of the orderbook in the last 24 hours.
    * @return high24h
   **/
-  @Schema(description = "Highest price of the orderbook in the last 24 hours.")
+  @Schema(required = true, description = "Highest price of the orderbook in the last 24 hours.")
   public Object getHigh24h() {
     return high24h;
   }
@@ -136,7 +136,7 @@ public class OrderbookStats {
    * Lowest price of the orderbook in the last 24 hours.
    * @return low24h
   **/
-  @Schema(description = "Lowest price of the orderbook in the last 24 hours.")
+  @Schema(required = true, description = "Lowest price of the orderbook in the last 24 hours.")
   public Object getLow24h() {
     return low24h;
   }
@@ -154,7 +154,7 @@ public class OrderbookStats {
    * Change in price of the orderbook in the last 24 hours.
    * @return change24h
   **/
-  @Schema(description = "Change in price of the orderbook in the last 24 hours.")
+  @Schema(required = true, description = "Change in price of the orderbook in the last 24 hours.")
   public Object getChange24h() {
     return change24h;
   }
@@ -172,7 +172,7 @@ public class OrderbookStats {
    * Change percentage in price of the orderbook in the last 24 hours.
    * @return changePct24h
   **/
-  @Schema(description = "Change percentage in price of the orderbook in the last 24 hours.")
+  @Schema(required = true, description = "Change percentage in price of the orderbook in the last 24 hours.")
   public Object getChangePct24h() {
     return changePct24h;
   }
@@ -190,7 +190,7 @@ public class OrderbookStats {
    * Total volume of the orderbook in the last 24 hours.
    * @return volume24hBase
   **/
-  @Schema(description = "Total volume of the orderbook in the last 24 hours.")
+  @Schema(required = true, description = "Total volume of the orderbook in the last 24 hours.")
   public Object getVolume24hBase() {
     return volume24hBase;
   }
@@ -208,7 +208,7 @@ public class OrderbookStats {
    * Total volume of the orderbook in the last 24 hours in USD.
    * @return volume24hUsd
   **/
-  @Schema(description = "Total volume of the orderbook in the last 24 hours in USD.")
+  @Schema(required = true, description = "Total volume of the orderbook in the last 24 hours in USD.")
   public Object getVolume24hUsd() {
     return volume24hUsd;
   }

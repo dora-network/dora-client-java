@@ -26,7 +26,7 @@ import tech.dora.model.Metadata;
  * Standard response envelope. For 2xx responses, &#x27;data&#x27; is set. For errors, &#x27;error&#x27; is set.
  */
 @Schema(description = "Standard response envelope. For 2xx responses, 'data' is set. For errors, 'error' is set.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class ResponseEnvelope {
   @SerializedName("data")
@@ -83,7 +83,7 @@ public class ResponseEnvelope {
    * Metadata about the response, including status code and trace information.
    * @return metadata
   **/
-  @Schema(description = "Metadata about the response, including status code and trace information.")
+  @Schema(required = true, description = "Metadata about the response, including status code and trace information.")
   public Metadata getMetadata() {
     return metadata;
   }

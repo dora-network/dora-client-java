@@ -25,7 +25,7 @@ import java.io.IOException;
  * Candle
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class Candle {
   @SerializedName("order_book_id")
@@ -58,7 +58,7 @@ public class Candle {
    * Get orderBookId
    * @return orderBookId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getOrderBookId() {
     return orderBookId;
   }
@@ -76,7 +76,7 @@ public class Candle {
    * Get startTimestamp
    * @return startTimestamp
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getStartTimestamp() {
     return startTimestamp;
   }
@@ -94,7 +94,7 @@ public class Candle {
    * Get open
    * @return open
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getOpen() {
     return open;
   }
@@ -112,7 +112,7 @@ public class Candle {
    * Get high
    * @return high
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getHigh() {
     return high;
   }
@@ -130,7 +130,7 @@ public class Candle {
    * Get low
    * @return low
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getLow() {
     return low;
   }
@@ -148,7 +148,7 @@ public class Candle {
    * Get close
    * @return close
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getClose() {
     return close;
   }
@@ -166,7 +166,7 @@ public class Candle {
    * Get volume
    * @return volume
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getVolume() {
     return volume;
   }

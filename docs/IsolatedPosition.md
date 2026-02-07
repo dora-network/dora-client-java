@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**globalPositionId** | **Object** |  |  [optional]
-**isolatedPositionId** | **Object** |  |  [optional]
-**transactionId** | **Object** |  |  [optional]
+**globalPositionId** | **Object** |  | 
+**isolatedPositionId** | **Object** |  | 
+**transactionId** | **Object** |  | 

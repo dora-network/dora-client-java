@@ -25,7 +25,7 @@ import java.io.IOException;
  * UserConfig
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class UserConfig {
   @SerializedName("id")
@@ -58,7 +58,7 @@ public class UserConfig {
    * Get id
    * @return id
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getId() {
     return id;
   }
@@ -112,7 +112,7 @@ public class UserConfig {
    * Get createdAt
    * @return createdAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCreatedAt() {
     return createdAt;
   }
@@ -130,7 +130,7 @@ public class UserConfig {
    * Get updatedAt
    * @return updatedAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getUpdatedAt() {
     return updatedAt;
   }
@@ -148,7 +148,7 @@ public class UserConfig {
    * Get showTutorialCards
    * @return showTutorialCards
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getShowTutorialCards() {
     return showTutorialCards;
   }
@@ -166,7 +166,7 @@ public class UserConfig {
    * Get notificationsEnabled
    * @return notificationsEnabled
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getNotificationsEnabled() {
     return notificationsEnabled;
   }

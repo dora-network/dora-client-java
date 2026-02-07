@@ -25,7 +25,7 @@ import java.io.IOException;
  * AssetPrice
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class AssetPrice {
   @SerializedName("asset_id")
@@ -46,7 +46,7 @@ public class AssetPrice {
    * Get assetId
    * @return assetId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getAssetId() {
     return assetId;
   }
@@ -64,7 +64,7 @@ public class AssetPrice {
    * Get price
    * @return price
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getPrice() {
     return price;
   }
@@ -82,7 +82,7 @@ public class AssetPrice {
    * Get time
    * @return time
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getTime() {
     return time;
   }

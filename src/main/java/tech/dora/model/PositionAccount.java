@@ -25,7 +25,7 @@ import java.io.IOException;
  * PositionAccount
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class PositionAccount {
   @SerializedName("position_id")
@@ -46,7 +46,7 @@ public class PositionAccount {
    * The ID of the position account
    * @return positionId
   **/
-  @Schema(description = "The ID of the position account")
+  @Schema(required = true, description = "The ID of the position account")
   public Object getPositionId() {
     return positionId;
   }
@@ -64,7 +64,7 @@ public class PositionAccount {
    * The name of the position account
    * @return positionName
   **/
-  @Schema(description = "The name of the position account")
+  @Schema(required = true, description = "The name of the position account")
   public Object getPositionName() {
     return positionName;
   }
@@ -82,7 +82,7 @@ public class PositionAccount {
    * Whether the position account is the global or an isolated account
    * @return isGlobal
   **/
-  @Schema(description = "Whether the position account is the global or an isolated account")
+  @Schema(required = true, description = "Whether the position account is the global or an isolated account")
   public Object getIsGlobal() {
     return isGlobal;
   }

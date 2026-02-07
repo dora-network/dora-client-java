@@ -25,7 +25,7 @@ import java.io.IOException;
  * OrderBookTop
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class OrderBookTop {
   @SerializedName("order_book_id")
@@ -49,7 +49,7 @@ public class OrderBookTop {
    * Get orderBookId
    * @return orderBookId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getOrderBookId() {
     return orderBookId;
   }
@@ -67,7 +67,7 @@ public class OrderBookTop {
    * Get bestBid
    * @return bestBid
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getBestBid() {
     return bestBid;
   }
@@ -85,7 +85,7 @@ public class OrderBookTop {
    * Get bestAsk
    * @return bestAsk
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getBestAsk() {
     return bestAsk;
   }
@@ -103,7 +103,7 @@ public class OrderBookTop {
    * Get timestamp
    * @return timestamp
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getTimestamp() {
     return timestamp;
   }

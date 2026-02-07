@@ -25,7 +25,7 @@ import java.io.IOException;
  * User
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class User {
   @SerializedName("id")
@@ -82,7 +82,7 @@ public class User {
    * Get id
    * @return id
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getId() {
     return id;
   }
@@ -136,7 +136,7 @@ public class User {
    * Get email
    * @return email
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getEmail() {
     return email;
   }
@@ -154,7 +154,7 @@ public class User {
    * Get name
    * @return name
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getName() {
     return name;
   }
@@ -172,7 +172,7 @@ public class User {
    * Get nativeAssetId
    * @return nativeAssetId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getNativeAssetId() {
     return nativeAssetId;
   }
@@ -244,7 +244,7 @@ public class User {
    * Get roles
    * @return roles
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getRoles() {
     return roles;
   }
@@ -316,7 +316,7 @@ public class User {
    * Get showTutorialCards
    * @return showTutorialCards
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getShowTutorialCards() {
     return showTutorialCards;
   }
@@ -334,7 +334,7 @@ public class User {
    * Get notificationsEnabled
    * @return notificationsEnabled
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getNotificationsEnabled() {
     return notificationsEnabled;
   }

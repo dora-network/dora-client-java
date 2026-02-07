@@ -25,7 +25,7 @@ import java.io.IOException;
  * PLSummary
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class PLSummary {
   @SerializedName("leverage")
@@ -52,7 +52,7 @@ public class PLSummary {
    * The leverage used to obtain the position on the isolated account
    * @return leverage
   **/
-  @Schema(description = "The leverage used to obtain the position on the isolated account")
+  @Schema(required = true, description = "The leverage used to obtain the position on the isolated account")
   public Object getLeverage() {
     return leverage;
   }
@@ -70,7 +70,7 @@ public class PLSummary {
    * Get accountEquity
    * @return accountEquity
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getAccountEquity() {
     return accountEquity;
   }
@@ -88,7 +88,7 @@ public class PLSummary {
    * Get available
    * @return available
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getAvailable() {
     return available;
   }
@@ -106,7 +106,7 @@ public class PLSummary {
    * Get health
    * @return health
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getHealth() {
     return health;
   }
@@ -124,7 +124,7 @@ public class PLSummary {
    * Get ltv
    * @return ltv
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getLtv() {
     return ltv;
   }

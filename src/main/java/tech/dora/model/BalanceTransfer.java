@@ -25,7 +25,7 @@ import java.io.IOException;
  * BalanceTransfer
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class BalanceTransfer {
   @SerializedName("from_position_id")
@@ -46,7 +46,7 @@ public class BalanceTransfer {
    * Get fromPositionId
    * @return fromPositionId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getFromPositionId() {
     return fromPositionId;
   }
@@ -64,7 +64,7 @@ public class BalanceTransfer {
    * Get toPositionId
    * @return toPositionId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getToPositionId() {
     return toPositionId;
   }
@@ -82,7 +82,7 @@ public class BalanceTransfer {
    * Get transactionId
    * @return transactionId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getTransactionId() {
     return transactionId;
   }

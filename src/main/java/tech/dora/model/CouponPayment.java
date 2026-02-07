@@ -25,7 +25,7 @@ import java.io.IOException;
  * CouponPayment
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class CouponPayment {
   @SerializedName("id")
@@ -70,7 +70,7 @@ public class CouponPayment {
    * Get id
    * @return id
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getId() {
     return id;
   }
@@ -88,7 +88,7 @@ public class CouponPayment {
    * Get assetId
    * @return assetId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getAssetId() {
     return assetId;
   }
@@ -106,7 +106,7 @@ public class CouponPayment {
    * Get yield
    * @return yield
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getYield() {
     return yield;
   }
@@ -124,7 +124,7 @@ public class CouponPayment {
    * Get startAt
    * @return startAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getStartAt() {
     return startAt;
   }
@@ -142,7 +142,7 @@ public class CouponPayment {
    * Get endAt
    * @return endAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getEndAt() {
     return endAt;
   }
@@ -160,7 +160,7 @@ public class CouponPayment {
    * Get payAt
    * @return payAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getPayAt() {
     return payAt;
   }
@@ -178,7 +178,7 @@ public class CouponPayment {
    * Get availableToPay
    * @return availableToPay
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getAvailableToPay() {
     return availableToPay;
   }
@@ -196,7 +196,7 @@ public class CouponPayment {
    * Get completedAt
    * @return completedAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCompletedAt() {
     return completedAt;
   }
@@ -214,7 +214,7 @@ public class CouponPayment {
    * Get createdAt
    * @return createdAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCreatedAt() {
     return createdAt;
   }
@@ -232,7 +232,7 @@ public class CouponPayment {
    * Number of nanoseconds to wait between coupon payment processing, must be at least 1000 (1 microsecond)
    * @return processEvery
   **/
-  @Schema(description = "Number of nanoseconds to wait between coupon payment processing, must be at least 1000 (1 microsecond)")
+  @Schema(required = true, description = "Number of nanoseconds to wait between coupon payment processing, must be at least 1000 (1 microsecond)")
   public Object getProcessEvery() {
     return processEvery;
   }
@@ -250,7 +250,7 @@ public class CouponPayment {
    * Get lastProcessedAt
    * @return lastProcessedAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getLastProcessedAt() {
     return lastProcessedAt;
   }

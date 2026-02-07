@@ -27,7 +27,7 @@ import tech.dora.model.Side;
  * ValidateSubmitOrderRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class ValidateSubmitOrderRequest {
   @SerializedName("quantity")
@@ -59,6 +59,9 @@ public class ValidateSubmitOrderRequest {
 
   @SerializedName("quote_asset_id")
   private Object quoteAssetId = null;
+
+  @SerializedName("client_order_id")
+  private Object clientOrderId = null;
 
   @SerializedName("position_assets")
   private Object positionAssets = null;
@@ -246,6 +249,24 @@ public class ValidateSubmitOrderRequest {
     this.quoteAssetId = quoteAssetId;
   }
 
+  public ValidateSubmitOrderRequest clientOrderId(Object clientOrderId) {
+    this.clientOrderId = clientOrderId;
+    return this;
+  }
+
+   /**
+   * An optional client-provided identifier for the order.
+   * @return clientOrderId
+  **/
+  @Schema(description = "An optional client-provided identifier for the order.")
+  public Object getClientOrderId() {
+    return clientOrderId;
+  }
+
+  public void setClientOrderId(Object clientOrderId) {
+    this.clientOrderId = clientOrderId;
+  }
+
   public ValidateSubmitOrderRequest positionAssets(Object positionAssets) {
     this.positionAssets = positionAssets;
     return this;
@@ -302,13 +323,14 @@ public class ValidateSubmitOrderRequest {
         Objects.equals(this.userBalance, validateSubmitOrderRequest.userBalance) &&
         Objects.equals(this.baseAssetId, validateSubmitOrderRequest.baseAssetId) &&
         Objects.equals(this.quoteAssetId, validateSubmitOrderRequest.quoteAssetId) &&
+        Objects.equals(this.clientOrderId, validateSubmitOrderRequest.clientOrderId) &&
         Objects.equals(this.positionAssets, validateSubmitOrderRequest.positionAssets) &&
         Objects.equals(this.assetsConfig, validateSubmitOrderRequest.assetsConfig);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(quantity, tick, kind, side, price, goodTillDate, inverseLeverage, userBalance, baseAssetId, quoteAssetId, positionAssets, assetsConfig);
+    return Objects.hash(quantity, tick, kind, side, price, goodTillDate, inverseLeverage, userBalance, baseAssetId, quoteAssetId, clientOrderId, positionAssets, assetsConfig);
   }
 
 
@@ -327,6 +349,7 @@ public class ValidateSubmitOrderRequest {
     sb.append("    userBalance: ").append(toIndentedString(userBalance)).append("\n");
     sb.append("    baseAssetId: ").append(toIndentedString(baseAssetId)).append("\n");
     sb.append("    quoteAssetId: ").append(toIndentedString(quoteAssetId)).append("\n");
+    sb.append("    clientOrderId: ").append(toIndentedString(clientOrderId)).append("\n");
     sb.append("    positionAssets: ").append(toIndentedString(positionAssets)).append("\n");
     sb.append("    assetsConfig: ").append(toIndentedString(assetsConfig)).append("\n");
     sb.append("}");

@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**transactionId** | **Object** |  |  [optional]
-**assetId** | **Object** |  |  [optional]
-**positionId** | **Object** |  |  [optional]
-**currentAccruedInterestUsd** | **Object** |  |  [optional]
+**transactionId** | **Object** |  | 
+**assetId** | **Object** |  | 
+**positionId** | **Object** |  | 
+**currentAccruedInterestUsd** | **Object** |  | 

@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**userId** | **Object** |  |  [optional]
-**keyId** | **Object** |  |  [optional]
-**label** | **Object** |  |  [optional]
-**isActive** | **Object** |  |  [optional]
+**userId** | **Object** |  | 
+**keyId** | **Object** |  | 
+**label** | **Object** |  | 
+**isActive** | **Object** |  | 

@@ -14,3 +14,4 @@ Name | Type | Description | Notes
 **goodTillDate** | **Object** |  |  [optional]
 **triggerPrice** | **Object** |  |  [optional]
 **triggerType** | [**TriggerType**](TriggerType.md) |  |  [optional]
+**clientOrderId** | **Object** | An optional client-provided identifier for the order. |  [optional]

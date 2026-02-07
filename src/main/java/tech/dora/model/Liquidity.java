@@ -25,7 +25,7 @@ import java.io.IOException;
  * Liquidity
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class Liquidity {
   @SerializedName("order_book_id")
@@ -55,7 +55,7 @@ public class Liquidity {
    * Get orderBookId
    * @return orderBookId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getOrderBookId() {
     return orderBookId;
   }
@@ -73,7 +73,7 @@ public class Liquidity {
    * Get positionId
    * @return positionId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getPositionId() {
     return positionId;
   }
@@ -91,7 +91,7 @@ public class Liquidity {
    * Get transactionId
    * @return transactionId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getTransactionId() {
     return transactionId;
   }
@@ -109,7 +109,7 @@ public class Liquidity {
    * Get baseQuantity
    * @return baseQuantity
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getBaseQuantity() {
     return baseQuantity;
   }
@@ -127,7 +127,7 @@ public class Liquidity {
    * Get quoteQuantity
    * @return quoteQuantity
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getQuoteQuantity() {
     return quoteQuantity;
   }
@@ -145,7 +145,7 @@ public class Liquidity {
    * Get sharesQuantity
    * @return sharesQuantity
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getSharesQuantity() {
     return sharesQuantity;
   }

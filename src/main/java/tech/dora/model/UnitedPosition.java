@@ -25,7 +25,7 @@ import java.io.IOException;
  * UnitedPosition
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class UnitedPosition {
   @SerializedName("global_position_id")
@@ -43,7 +43,7 @@ public class UnitedPosition {
    * Get globalPositionId
    * @return globalPositionId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getGlobalPositionId() {
     return globalPositionId;
   }

@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**orderBookId** | **Object** | The ID of the order book. |  [optional]
-**baseQuantity** | **Object** | The quantity of the base asset. |  [optional]
-**quoteQuantity** | **Object** | The quantity of the quote asset. |  [optional]
-**sharesQuantity** | **Object** | The quantity of pool shares. |  [optional]
+**orderBookId** | **Object** | The ID of the order book. | 
+**baseQuantity** | **Object** | The quantity of the base asset. | 
+**quoteQuantity** | **Object** | The quantity of the quote asset. | 
+**sharesQuantity** | **Object** | The quantity of pool shares. | 

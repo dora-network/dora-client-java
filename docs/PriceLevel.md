@@ -3,5 +3,5 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**price** | **Object** |  |  [optional]
-**quantity** | **Object** |  |  [optional]
+**price** | **Object** |  | 
+**quantity** | **Object** |  | 

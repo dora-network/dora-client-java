@@ -25,7 +25,7 @@ import java.io.IOException;
  * PriceLevel
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class PriceLevel {
   @SerializedName("price")
@@ -43,7 +43,7 @@ public class PriceLevel {
    * Get price
    * @return price
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getPrice() {
     return price;
   }
@@ -61,7 +61,7 @@ public class PriceLevel {
    * Get quantity
    * @return quantity
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getQuantity() {
     return quantity;
   }

@@ -26,7 +26,7 @@ import tech.dora.model.BondKind;
  * Bond
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class Bond {
   @SerializedName("id")
@@ -77,7 +77,7 @@ public class Bond {
    * Get id
    * @return id
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getId() {
     return id;
   }
@@ -95,7 +95,7 @@ public class Bond {
    * Get kind
    * @return kind
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public BondKind getKind() {
     return kind;
   }
@@ -131,7 +131,7 @@ public class Bond {
    * Get createdAt
    * @return createdAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCreatedAt() {
     return createdAt;
   }
@@ -167,7 +167,7 @@ public class Bond {
    * Get isin
    * @return isin
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getIsin() {
     return isin;
   }
@@ -185,7 +185,7 @@ public class Bond {
    * Get issuedAt
    * @return issuedAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getIssuedAt() {
     return issuedAt;
   }
@@ -203,7 +203,7 @@ public class Bond {
    * Get issuer
    * @return issuer
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getIssuer() {
     return issuer;
   }
@@ -221,7 +221,7 @@ public class Bond {
    * Get maturityAt
    * @return maturityAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getMaturityAt() {
     return maturityAt;
   }
@@ -239,7 +239,7 @@ public class Bond {
    * Get principalValue
    * @return principalValue
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getPrincipalValue() {
     return principalValue;
   }
@@ -257,7 +257,7 @@ public class Bond {
    * Get paymentsPerYear
    * @return paymentsPerYear
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getPaymentsPerYear() {
     return paymentsPerYear;
   }
@@ -275,7 +275,7 @@ public class Bond {
    * Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond)
    * @return paymentsEvery
   **/
-  @Schema(description = "Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond)")
+  @Schema(required = true, description = "Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond)")
   public Object getPaymentsEvery() {
     return paymentsEvery;
   }

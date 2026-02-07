@@ -28,7 +28,7 @@ import tech.dora.model.TriggerType;
  * CreateOrderRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class CreateOrderRequest {
   @SerializedName("quantity")
@@ -63,6 +63,9 @@ public class CreateOrderRequest {
 
   @SerializedName("trigger_type")
   private TriggerType triggerType = null;
+
+  @SerializedName("client_order_id")
+  private Object clientOrderId = null;
 
   public CreateOrderRequest quantity(Object quantity) {
     this.quantity = quantity;
@@ -262,6 +265,24 @@ public class CreateOrderRequest {
     this.triggerType = triggerType;
   }
 
+  public CreateOrderRequest clientOrderId(Object clientOrderId) {
+    this.clientOrderId = clientOrderId;
+    return this;
+  }
+
+   /**
+   * An optional client-provided identifier for the order.
+   * @return clientOrderId
+  **/
+  @Schema(description = "An optional client-provided identifier for the order.")
+  public Object getClientOrderId() {
+    return clientOrderId;
+  }
+
+  public void setClientOrderId(Object clientOrderId) {
+    this.clientOrderId = clientOrderId;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -282,12 +303,13 @@ public class CreateOrderRequest {
         Objects.equals(this.orderModifiers, createOrderRequest.orderModifiers) &&
         Objects.equals(this.goodTillDate, createOrderRequest.goodTillDate) &&
         Objects.equals(this.triggerPrice, createOrderRequest.triggerPrice) &&
-        Objects.equals(this.triggerType, createOrderRequest.triggerType);
+        Objects.equals(this.triggerType, createOrderRequest.triggerType) &&
+        Objects.equals(this.clientOrderId, createOrderRequest.clientOrderId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(quantity, inverseLeverage, price, kind, side, fromGlobalPosition, orderBookId, orderModifiers, goodTillDate, triggerPrice, triggerType);
+    return Objects.hash(quantity, inverseLeverage, price, kind, side, fromGlobalPosition, orderBookId, orderModifiers, goodTillDate, triggerPrice, triggerType, clientOrderId);
   }
 
 
@@ -307,6 +329,7 @@ public class CreateOrderRequest {
     sb.append("    goodTillDate: ").append(toIndentedString(goodTillDate)).append("\n");
     sb.append("    triggerPrice: ").append(toIndentedString(triggerPrice)).append("\n");
     sb.append("    triggerType: ").append(toIndentedString(triggerType)).append("\n");
+    sb.append("    clientOrderId: ").append(toIndentedString(clientOrderId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -25,7 +25,7 @@ import java.io.IOException;
  * Metadata about the response, including status code and tracing information.
  */
 @Schema(description = "Metadata about the response, including status code and tracing information.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class Metadata {
   @SerializedName("status_code")
@@ -46,7 +46,7 @@ public class Metadata {
    * HTTP status code for the response.
    * @return statusCode
   **/
-  @Schema(description = "HTTP status code for the response.")
+  @Schema(required = true, description = "HTTP status code for the response.")
   public Object getStatusCode() {
     return statusCode;
   }
@@ -64,7 +64,7 @@ public class Metadata {
    * Trace ID for distributed tracing.
    * @return traceId
   **/
-  @Schema(description = "Trace ID for distributed tracing.")
+  @Schema(required = true, description = "Trace ID for distributed tracing.")
   public Object getTraceId() {
     return traceId;
   }
@@ -82,7 +82,7 @@ public class Metadata {
    * Request ID for correlating logs and debugging.
    * @return requestId
   **/
-  @Schema(description = "Request ID for correlating logs and debugging.")
+  @Schema(required = true, description = "Request ID for correlating logs and debugging.")
   public Object getRequestId() {
     return requestId;
   }

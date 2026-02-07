@@ -3,12 +3,12 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**userId** | **Object** |  |  [optional]
-**positionId** | **Object** |  |  [optional]
-**assetId** | **Object** |  |  [optional]
-**couponPaymentId** | **Object** |  |  [optional]
-**seq** | **Object** |  |  [optional]
-**pending** | **Object** |  |  [optional]
-**completed** | **Object** |  |  [optional]
-**startedAt** | **Object** |  |  [optional]
-**endedAt** | **Object** |  |  [optional]
+**userId** | **Object** |  | 
+**positionId** | **Object** |  | 
+**assetId** | **Object** |  | 
+**couponPaymentId** | **Object** |  | 
+**seq** | **Object** |  | 
+**pending** | **Object** |  | 
+**completed** | **Object** |  | 
+**startedAt** | **Object** |  | 
+**endedAt** | **Object** |  | 

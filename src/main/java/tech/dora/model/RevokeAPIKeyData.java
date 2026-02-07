@@ -25,7 +25,7 @@ import java.io.IOException;
  * RevokeAPIKeyData
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class RevokeAPIKeyData {
   @SerializedName("user_id")
@@ -49,7 +49,7 @@ public class RevokeAPIKeyData {
    * Get userId
    * @return userId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getUserId() {
     return userId;
   }
@@ -67,7 +67,7 @@ public class RevokeAPIKeyData {
    * Get keyId
    * @return keyId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getKeyId() {
     return keyId;
   }
@@ -85,7 +85,7 @@ public class RevokeAPIKeyData {
    * Get label
    * @return label
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getLabel() {
     return label;
   }
@@ -103,7 +103,7 @@ public class RevokeAPIKeyData {
    * Get isActive
    * @return isActive
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getIsActive() {
     return isActive;
   }

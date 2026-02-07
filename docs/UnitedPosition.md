@@ -3,5 +3,5 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**globalPositionId** | **Object** |  |  [optional]
+**globalPositionId** | **Object** |  | 
 **transactionIds** | **Object** |  |  [optional]

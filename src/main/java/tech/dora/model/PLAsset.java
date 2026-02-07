@@ -26,7 +26,7 @@ import tech.dora.model.Margin;
  * PLAsset
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class PLAsset {
   @SerializedName("symbol")
@@ -86,7 +86,7 @@ public class PLAsset {
    * The symbol of the asset
    * @return symbol
   **/
-  @Schema(description = "The symbol of the asset")
+  @Schema(required = true, description = "The symbol of the asset")
   public Object getSymbol() {
     return symbol;
   }
@@ -104,7 +104,7 @@ public class PLAsset {
    * The side of the position (LONG or SHORT)
    * @return side
   **/
-  @Schema(description = "The side of the position (LONG or SHORT)")
+  @Schema(required = true, description = "The side of the position (LONG or SHORT)")
   public Object getSide() {
     return side;
   }
@@ -122,7 +122,7 @@ public class PLAsset {
    * The average entry price of the position
    * @return avgEntryPrice
   **/
-  @Schema(description = "The average entry price of the position")
+  @Schema(required = true, description = "The average entry price of the position")
   public Object getAvgEntryPrice() {
     return avgEntryPrice;
   }
@@ -140,7 +140,7 @@ public class PLAsset {
    * The current mark price for the asset to calculate daily PL. This is usually the close price of the previous day
    * @return markPrice
   **/
-  @Schema(description = "The current mark price for the asset to calculate daily PL. This is usually the close price of the previous day")
+  @Schema(required = true, description = "The current mark price for the asset to calculate daily PL. This is usually the close price of the previous day")
   public Object getMarkPrice() {
     return markPrice;
   }
@@ -158,7 +158,7 @@ public class PLAsset {
    * The liquidation price of the position
    * @return liquidationPrice
   **/
-  @Schema(description = "The liquidation price of the position")
+  @Schema(required = true, description = "The liquidation price of the position")
   public Object getLiquidationPrice() {
     return liquidationPrice;
   }
@@ -176,7 +176,7 @@ public class PLAsset {
    * The available quantity in units of the asset
    * @return available
   **/
-  @Schema(description = "The available quantity in units of the asset")
+  @Schema(required = true, description = "The available quantity in units of the asset")
   public Object getAvailable() {
     return available;
   }
@@ -194,7 +194,7 @@ public class PLAsset {
    * The borrowed quantity in units of the asset
    * @return borrowed
   **/
-  @Schema(description = "The borrowed quantity in units of the asset")
+  @Schema(required = true, description = "The borrowed quantity in units of the asset")
   public Object getBorrowed() {
     return borrowed;
   }
@@ -212,7 +212,7 @@ public class PLAsset {
    * Get margin
    * @return margin
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Margin getMargin() {
     return margin;
   }
@@ -230,7 +230,7 @@ public class PLAsset {
    * The unrealized profit or loss of the position
    * @return unrealizedPl
   **/
-  @Schema(description = "The unrealized profit or loss of the position")
+  @Schema(required = true, description = "The unrealized profit or loss of the position")
   public Object getUnrealizedPl() {
     return unrealizedPl;
   }
@@ -248,7 +248,7 @@ public class PLAsset {
    * The leverage limit for the position
    * @return leverageLimit
   **/
-  @Schema(description = "The leverage limit for the position")
+  @Schema(required = true, description = "The leverage limit for the position")
   public Object getLeverageLimit() {
     return leverageLimit;
   }
@@ -302,7 +302,7 @@ public class PLAsset {
    * The initial capital of the position
    * @return initialCapital
   **/
-  @Schema(description = "The initial capital of the position")
+  @Schema(required = true, description = "The initial capital of the position")
   public Object getInitialCapital() {
     return initialCapital;
   }
@@ -338,7 +338,7 @@ public class PLAsset {
    * The locked amount of the position
    * @return locked
   **/
-  @Schema(description = "The locked amount of the position")
+  @Schema(required = true, description = "The locked amount of the position")
   public Object getLocked() {
     return locked;
   }
@@ -356,7 +356,7 @@ public class PLAsset {
    * The unused collateral of the position
    * @return unusedCollateral
   **/
-  @Schema(description = "The unused collateral of the position")
+  @Schema(required = true, description = "The unused collateral of the position")
   public Object getUnusedCollateral() {
     return unusedCollateral;
   }

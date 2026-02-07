@@ -25,7 +25,7 @@ import java.io.IOException;
  * ModuleBalance
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class ModuleBalance {
   @SerializedName("asset_id")
@@ -55,7 +55,7 @@ public class ModuleBalance {
    * Get assetId
    * @return assetId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getAssetId() {
     return assetId;
   }
@@ -73,7 +73,7 @@ public class ModuleBalance {
    * Get seq
    * @return seq
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getSeq() {
     return seq;
   }
@@ -91,7 +91,7 @@ public class ModuleBalance {
    * The available balance in the module for this asset
    * @return available
   **/
-  @Schema(description = "The available balance in the module for this asset")
+  @Schema(required = true, description = "The available balance in the module for this asset")
   public Object getAvailable() {
     return available;
   }
@@ -109,7 +109,7 @@ public class ModuleBalance {
    * The total amount supplied to the module for this asset
    * @return supplied
   **/
-  @Schema(description = "The total amount supplied to the module for this asset")
+  @Schema(required = true, description = "The total amount supplied to the module for this asset")
   public Object getSupplied() {
     return supplied;
   }
@@ -127,7 +127,7 @@ public class ModuleBalance {
    * Assets minted by virtual-borrowing, but not yet repaid
    * @return virtual
   **/
-  @Schema(description = "Assets minted by virtual-borrowing, but not yet repaid")
+  @Schema(required = true, description = "Assets minted by virtual-borrowing, but not yet repaid")
   public Object getVirtual() {
     return virtual;
   }
@@ -145,7 +145,7 @@ public class ModuleBalance {
    * The total amount borrowed from the supplied but not yet repaid
    * @return borrowed
   **/
-  @Schema(description = "The total amount borrowed from the supplied but not yet repaid")
+  @Schema(required = true, description = "The total amount borrowed from the supplied but not yet repaid")
   public Object getBorrowed() {
     return borrowed;
   }

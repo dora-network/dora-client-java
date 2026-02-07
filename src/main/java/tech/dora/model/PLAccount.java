@@ -26,7 +26,7 @@ import tech.dora.model.PLSummary;
  * PLAccount
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class PLAccount {
   @SerializedName("account_id")
@@ -53,7 +53,7 @@ public class PLAccount {
    * The ID of the account holding the position
    * @return accountId
   **/
-  @Schema(description = "The ID of the account holding the position")
+  @Schema(required = true, description = "The ID of the account holding the position")
   public Object getAccountId() {
     return accountId;
   }
@@ -71,7 +71,7 @@ public class PLAccount {
    * The name of the account holding the position
    * @return accountName
   **/
-  @Schema(description = "The name of the account holding the position")
+  @Schema(required = true, description = "The name of the account holding the position")
   public Object getAccountName() {
     return accountName;
   }
@@ -89,7 +89,7 @@ public class PLAccount {
    * Whether the account is the global or an isolated account
    * @return isGlobal
   **/
-  @Schema(description = "Whether the account is the global or an isolated account")
+  @Schema(required = true, description = "Whether the account is the global or an isolated account")
   public Object getIsGlobal() {
     return isGlobal;
   }
@@ -107,7 +107,7 @@ public class PLAccount {
    * Get assets
    * @return assets
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getAssets() {
     return assets;
   }
@@ -125,7 +125,7 @@ public class PLAccount {
    * Get summary
    * @return summary
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public PLSummary getSummary() {
     return summary;
   }

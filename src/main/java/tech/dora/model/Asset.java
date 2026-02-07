@@ -27,7 +27,7 @@ import tech.dora.model.Bond;
  * Asset
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class Asset {
   @SerializedName("id")
@@ -50,9 +50,6 @@ public class Asset {
 
   @SerializedName("liquidation_weight")
   private Object liquidationWeight = null;
-
-  @SerializedName("maturity_id")
-  private Object maturityId = null;
 
   @SerializedName("max_supply")
   private Object maxSupply = null;
@@ -90,6 +87,9 @@ public class Asset {
   @SerializedName("max_leverage")
   private Object maxLeverage = null;
 
+  @SerializedName("leverage_interest_rate")
+  private Object leverageInterestRate = 0;
+
   @SerializedName("bond")
   private Bond bond = null;
 
@@ -102,7 +102,7 @@ public class Asset {
    * Get id
    * @return id
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getId() {
     return id;
   }
@@ -120,7 +120,7 @@ public class Asset {
    * Get collateralWeight
    * @return collateralWeight
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCollateralWeight() {
     return collateralWeight;
   }
@@ -138,7 +138,7 @@ public class Asset {
    * Get createdAt
    * @return createdAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCreatedAt() {
     return createdAt;
   }
@@ -156,7 +156,7 @@ public class Asset {
    * Get decimals
    * @return decimals
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getDecimals() {
     return decimals;
   }
@@ -174,7 +174,7 @@ public class Asset {
    * Get fractionalizedUnits
    * @return fractionalizedUnits
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getFractionalizedUnits() {
     return fractionalizedUnits;
   }
@@ -192,7 +192,7 @@ public class Asset {
    * Get description
    * @return description
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getDescription() {
     return description;
   }
@@ -210,31 +210,13 @@ public class Asset {
    * Get liquidationWeight
    * @return liquidationWeight
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getLiquidationWeight() {
     return liquidationWeight;
   }
 
   public void setLiquidationWeight(Object liquidationWeight) {
     this.liquidationWeight = liquidationWeight;
-  }
-
-  public Asset maturityId(Object maturityId) {
-    this.maturityId = maturityId;
-    return this;
-  }
-
-   /**
-   * Get maturityId
-   * @return maturityId
-  **/
-  @Schema(description = "")
-  public Object getMaturityId() {
-    return maturityId;
-  }
-
-  public void setMaturityId(Object maturityId) {
-    this.maturityId = maturityId;
   }
 
   public Asset maxSupply(Object maxSupply) {
@@ -246,7 +228,7 @@ public class Asset {
    * Get maxSupply
    * @return maxSupply
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getMaxSupply() {
     return maxSupply;
   }
@@ -264,7 +246,7 @@ public class Asset {
    * Get maxUtilization
    * @return maxUtilization
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getMaxUtilization() {
     return maxUtilization;
   }
@@ -282,7 +264,7 @@ public class Asset {
    * Get name
    * @return name
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getName() {
     return name;
   }
@@ -300,7 +282,7 @@ public class Asset {
    * Get symbol
    * @return symbol
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getSymbol() {
     return symbol;
   }
@@ -318,7 +300,7 @@ public class Asset {
    * Get kind
    * @return kind
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public AssetKind getKind() {
     return kind;
   }
@@ -336,7 +318,7 @@ public class Asset {
    * Get yield
    * @return yield
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getYield() {
     return yield;
   }
@@ -354,7 +336,7 @@ public class Asset {
    * Get canAddLiquidity
    * @return canAddLiquidity
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCanAddLiquidity() {
     return canAddLiquidity;
   }
@@ -372,7 +354,7 @@ public class Asset {
    * Get canDirectBorrow
    * @return canDirectBorrow
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCanDirectBorrow() {
     return canDirectBorrow;
   }
@@ -390,7 +372,7 @@ public class Asset {
    * Get canOnboard
    * @return canOnboard
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCanOnboard() {
     return canOnboard;
   }
@@ -408,7 +390,7 @@ public class Asset {
    * Get canTrade
    * @return canTrade
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCanTrade() {
     return canTrade;
   }
@@ -426,7 +408,7 @@ public class Asset {
    * Get canVirtualBorrow
    * @return canVirtualBorrow
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCanVirtualBorrow() {
     return canVirtualBorrow;
   }
@@ -444,13 +426,31 @@ public class Asset {
    * Get maxLeverage
    * @return maxLeverage
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getMaxLeverage() {
     return maxLeverage;
   }
 
   public void setMaxLeverage(Object maxLeverage) {
     this.maxLeverage = maxLeverage;
+  }
+
+  public Asset leverageInterestRate(Object leverageInterestRate) {
+    this.leverageInterestRate = leverageInterestRate;
+    return this;
+  }
+
+   /**
+   * Get leverageInterestRate
+   * @return leverageInterestRate
+  **/
+  @Schema(required = true, description = "")
+  public Object getLeverageInterestRate() {
+    return leverageInterestRate;
+  }
+
+  public void setLeverageInterestRate(Object leverageInterestRate) {
+    this.leverageInterestRate = leverageInterestRate;
   }
 
   public Asset bond(Bond bond) {
@@ -488,7 +488,6 @@ public class Asset {
         Objects.equals(this.fractionalizedUnits, asset.fractionalizedUnits) &&
         Objects.equals(this.description, asset.description) &&
         Objects.equals(this.liquidationWeight, asset.liquidationWeight) &&
-        Objects.equals(this.maturityId, asset.maturityId) &&
         Objects.equals(this.maxSupply, asset.maxSupply) &&
         Objects.equals(this.maxUtilization, asset.maxUtilization) &&
         Objects.equals(this.name, asset.name) &&
@@ -501,12 +500,13 @@ public class Asset {
         Objects.equals(this.canTrade, asset.canTrade) &&
         Objects.equals(this.canVirtualBorrow, asset.canVirtualBorrow) &&
         Objects.equals(this.maxLeverage, asset.maxLeverage) &&
+        Objects.equals(this.leverageInterestRate, asset.leverageInterestRate) &&
         Objects.equals(this.bond, asset.bond);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, collateralWeight, createdAt, decimals, fractionalizedUnits, description, liquidationWeight, maturityId, maxSupply, maxUtilization, name, symbol, kind, yield, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, maxLeverage, bond);
+    return Objects.hash(id, collateralWeight, createdAt, decimals, fractionalizedUnits, description, liquidationWeight, maxSupply, maxUtilization, name, symbol, kind, yield, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, maxLeverage, leverageInterestRate, bond);
   }
 
 
@@ -522,7 +522,6 @@ public class Asset {
     sb.append("    fractionalizedUnits: ").append(toIndentedString(fractionalizedUnits)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    liquidationWeight: ").append(toIndentedString(liquidationWeight)).append("\n");
-    sb.append("    maturityId: ").append(toIndentedString(maturityId)).append("\n");
     sb.append("    maxSupply: ").append(toIndentedString(maxSupply)).append("\n");
     sb.append("    maxUtilization: ").append(toIndentedString(maxUtilization)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
@@ -535,6 +534,7 @@ public class Asset {
     sb.append("    canTrade: ").append(toIndentedString(canTrade)).append("\n");
     sb.append("    canVirtualBorrow: ").append(toIndentedString(canVirtualBorrow)).append("\n");
     sb.append("    maxLeverage: ").append(toIndentedString(maxLeverage)).append("\n");
+    sb.append("    leverageInterestRate: ").append(toIndentedString(leverageInterestRate)).append("\n");
     sb.append("    bond: ").append(toIndentedString(bond)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -26,7 +26,7 @@ import tech.dora.model.Side;
  * Trade
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class Trade {
   @SerializedName("transaction_id")
@@ -37,12 +37,6 @@ public class Trade {
 
   @SerializedName("created_at")
   private Object createdAt = null;
-
-  @SerializedName("fee_asset_id")
-  private Object feeAssetId = null;
-
-  @SerializedName("fee_quantity")
-  private Object feeQuantity = null;
 
   @SerializedName("order_book_id")
   private Object orderBookId = null;
@@ -77,7 +71,7 @@ public class Trade {
    * Get transactionId
    * @return transactionId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getTransactionId() {
     return transactionId;
   }
@@ -95,7 +89,7 @@ public class Trade {
    * Get asset0
    * @return asset0
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getAsset0() {
     return asset0;
   }
@@ -113,49 +107,13 @@ public class Trade {
    * Get createdAt
    * @return createdAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCreatedAt() {
     return createdAt;
   }
 
   public void setCreatedAt(Object createdAt) {
     this.createdAt = createdAt;
-  }
-
-  public Trade feeAssetId(Object feeAssetId) {
-    this.feeAssetId = feeAssetId;
-    return this;
-  }
-
-   /**
-   * Get feeAssetId
-   * @return feeAssetId
-  **/
-  @Schema(description = "")
-  public Object getFeeAssetId() {
-    return feeAssetId;
-  }
-
-  public void setFeeAssetId(Object feeAssetId) {
-    this.feeAssetId = feeAssetId;
-  }
-
-  public Trade feeQuantity(Object feeQuantity) {
-    this.feeQuantity = feeQuantity;
-    return this;
-  }
-
-   /**
-   * Get feeQuantity
-   * @return feeQuantity
-  **/
-  @Schema(description = "")
-  public Object getFeeQuantity() {
-    return feeQuantity;
-  }
-
-  public void setFeeQuantity(Object feeQuantity) {
-    this.feeQuantity = feeQuantity;
   }
 
   public Trade orderBookId(Object orderBookId) {
@@ -167,7 +125,7 @@ public class Trade {
    * Get orderBookId
    * @return orderBookId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getOrderBookId() {
     return orderBookId;
   }
@@ -185,7 +143,7 @@ public class Trade {
    * Get orderId
    * @return orderId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getOrderId() {
     return orderId;
   }
@@ -203,7 +161,7 @@ public class Trade {
    * Get orderSeq
    * @return orderSeq
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getOrderSeq() {
     return orderSeq;
   }
@@ -221,7 +179,7 @@ public class Trade {
    * Get price
    * @return price
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getPrice() {
     return price;
   }
@@ -239,7 +197,7 @@ public class Trade {
    * Get quantity0
    * @return quantity0
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getQuantity0() {
     return quantity0;
   }
@@ -257,7 +215,7 @@ public class Trade {
    * Get userId
    * @return userId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getUserId() {
     return userId;
   }
@@ -275,7 +233,7 @@ public class Trade {
    * Get side
    * @return side
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Side getSide() {
     return side;
   }
@@ -293,7 +251,7 @@ public class Trade {
    * If true, then this order is the aggressor (taker); otherwise it is the maker.
    * @return aggressorIndicator
   **/
-  @Schema(description = "If true, then this order is the aggressor (taker); otherwise it is the maker.")
+  @Schema(required = true, description = "If true, then this order is the aggressor (taker); otherwise it is the maker.")
   public Object getAggressorIndicator() {
     return aggressorIndicator;
   }
@@ -315,8 +273,6 @@ public class Trade {
     return Objects.equals(this.transactionId, trade.transactionId) &&
         Objects.equals(this.asset0, trade.asset0) &&
         Objects.equals(this.createdAt, trade.createdAt) &&
-        Objects.equals(this.feeAssetId, trade.feeAssetId) &&
-        Objects.equals(this.feeQuantity, trade.feeQuantity) &&
         Objects.equals(this.orderBookId, trade.orderBookId) &&
         Objects.equals(this.orderId, trade.orderId) &&
         Objects.equals(this.orderSeq, trade.orderSeq) &&
@@ -329,7 +285,7 @@ public class Trade {
 
   @Override
   public int hashCode() {
-    return Objects.hash(transactionId, asset0, createdAt, feeAssetId, feeQuantity, orderBookId, orderId, orderSeq, price, quantity0, userId, side, aggressorIndicator);
+    return Objects.hash(transactionId, asset0, createdAt, orderBookId, orderId, orderSeq, price, quantity0, userId, side, aggressorIndicator);
   }
 
 
@@ -341,8 +297,6 @@ public class Trade {
     sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
     sb.append("    asset0: ").append(toIndentedString(asset0)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
-    sb.append("    feeAssetId: ").append(toIndentedString(feeAssetId)).append("\n");
-    sb.append("    feeQuantity: ").append(toIndentedString(feeQuantity)).append("\n");
     sb.append("    orderBookId: ").append(toIndentedString(orderBookId)).append("\n");
     sb.append("    orderId: ").append(toIndentedString(orderId)).append("\n");
     sb.append("    orderSeq: ").append(toIndentedString(orderSeq)).append("\n");

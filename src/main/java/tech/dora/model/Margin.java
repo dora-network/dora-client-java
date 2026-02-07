@@ -25,7 +25,7 @@ import java.io.IOException;
  * Margin
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class Margin {
   @SerializedName("available")
@@ -46,7 +46,7 @@ public class Margin {
    * The total margin available from this position.
    * @return available
   **/
-  @Schema(description = "The total margin available from this position.")
+  @Schema(required = true, description = "The total margin available from this position.")
   public Object getAvailable() {
     return available;
   }
@@ -64,7 +64,7 @@ public class Margin {
    * The amount of margin used from this position.
    * @return used
   **/
-  @Schema(description = "The amount of margin used from this position.")
+  @Schema(required = true, description = "The amount of margin used from this position.")
   public Object getUsed() {
     return used;
   }
@@ -82,7 +82,7 @@ public class Margin {
    * The margin remaining available from this position.
    * @return remaining
   **/
-  @Schema(description = "The margin remaining available from this position.")
+  @Schema(required = true, description = "The margin remaining available from this position.")
   public Object getRemaining() {
     return remaining;
   }

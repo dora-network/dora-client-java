@@ -25,7 +25,7 @@ import java.io.IOException;
  * CurrentLeverageAccruedInterest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class CurrentLeverageAccruedInterest {
   @SerializedName("user_id")
@@ -49,7 +49,7 @@ public class CurrentLeverageAccruedInterest {
    * Get userId
    * @return userId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getUserId() {
     return userId;
   }
@@ -67,7 +67,7 @@ public class CurrentLeverageAccruedInterest {
    * Get assetId
    * @return assetId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getAssetId() {
     return assetId;
   }
@@ -85,7 +85,7 @@ public class CurrentLeverageAccruedInterest {
    * Get positionId
    * @return positionId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getPositionId() {
     return positionId;
   }
@@ -103,7 +103,7 @@ public class CurrentLeverageAccruedInterest {
    * Get currentAccruedInterestUsd
    * @return currentAccruedInterestUsd
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCurrentAccruedInterestUsd() {
     return currentAccruedInterestUsd;
   }

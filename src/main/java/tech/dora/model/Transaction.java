@@ -21,12 +21,13 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
+import tech.dora.model.Side;
 import tech.dora.model.TransactionKind;
 /**
  * Transaction
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class Transaction {
   @SerializedName("id")
@@ -53,6 +54,12 @@ public class Transaction {
   @SerializedName("user_id")
   private Object userId = null;
 
+  @SerializedName("admin_user_id")
+  private Object adminUserId = null;
+
+  @SerializedName("order_side")
+  private Side orderSide = null;
+
   public Transaction id(Object id) {
     this.id = id;
     return this;
@@ -62,7 +69,7 @@ public class Transaction {
    * Get id
    * @return id
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getId() {
     return id;
   }
@@ -80,7 +87,7 @@ public class Transaction {
    * Get createdAt
    * @return createdAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCreatedAt() {
     return createdAt;
   }
@@ -98,7 +105,7 @@ public class Transaction {
    * Get kind
    * @return kind
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public TransactionKind getKind() {
     return kind;
   }
@@ -116,7 +123,7 @@ public class Transaction {
    * Get asset0
    * @return asset0
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getAsset0() {
     return asset0;
   }
@@ -134,7 +141,7 @@ public class Transaction {
    * Get quantity0
    * @return quantity0
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getQuantity0() {
     return quantity0;
   }
@@ -152,7 +159,7 @@ public class Transaction {
    * Get quantity1
    * @return quantity1
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getQuantity1() {
     return quantity1;
   }
@@ -170,7 +177,7 @@ public class Transaction {
    * Get asset1
    * @return asset1
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getAsset1() {
     return asset1;
   }
@@ -188,13 +195,49 @@ public class Transaction {
    * Get userId
    * @return userId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getUserId() {
     return userId;
   }
 
   public void setUserId(Object userId) {
     this.userId = userId;
+  }
+
+  public Transaction adminUserId(Object adminUserId) {
+    this.adminUserId = adminUserId;
+    return this;
+  }
+
+   /**
+   * Get adminUserId
+   * @return adminUserId
+  **/
+  @Schema(required = true, description = "")
+  public Object getAdminUserId() {
+    return adminUserId;
+  }
+
+  public void setAdminUserId(Object adminUserId) {
+    this.adminUserId = adminUserId;
+  }
+
+  public Transaction orderSide(Side orderSide) {
+    this.orderSide = orderSide;
+    return this;
+  }
+
+   /**
+   * Get orderSide
+   * @return orderSide
+  **/
+  @Schema(required = true, description = "")
+  public Side getOrderSide() {
+    return orderSide;
+  }
+
+  public void setOrderSide(Side orderSide) {
+    this.orderSide = orderSide;
   }
 
 
@@ -214,12 +257,14 @@ public class Transaction {
         Objects.equals(this.quantity0, transaction.quantity0) &&
         Objects.equals(this.quantity1, transaction.quantity1) &&
         Objects.equals(this.asset1, transaction.asset1) &&
-        Objects.equals(this.userId, transaction.userId);
+        Objects.equals(this.userId, transaction.userId) &&
+        Objects.equals(this.adminUserId, transaction.adminUserId) &&
+        Objects.equals(this.orderSide, transaction.orderSide);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, createdAt, kind, asset0, quantity0, quantity1, asset1, userId);
+    return Objects.hash(id, createdAt, kind, asset0, quantity0, quantity1, asset1, userId, adminUserId, orderSide);
   }
 
 
@@ -236,6 +281,8 @@ public class Transaction {
     sb.append("    quantity1: ").append(toIndentedString(quantity1)).append("\n");
     sb.append("    asset1: ").append(toIndentedString(asset1)).append("\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("    adminUserId: ").append(toIndentedString(adminUserId)).append("\n");
+    sb.append("    orderSide: ").append(toIndentedString(orderSide)).append("\n");
     sb.append("}");
     return sb.toString();
   }

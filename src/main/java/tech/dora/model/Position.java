@@ -25,7 +25,7 @@ import java.io.IOException;
  * Position
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class Position {
   @SerializedName("id")
@@ -79,7 +79,7 @@ public class Position {
    * The unique identifier for the position. Used, for example, when creating an order from a position, or deciding collateral should be transferred from position A to position B.
    * @return id
   **/
-  @Schema(description = "The unique identifier for the position. Used, for example, when creating an order from a position, or deciding collateral should be transferred from position A to position B.")
+  @Schema(required = true, description = "The unique identifier for the position. Used, for example, when creating an order from a position, or deciding collateral should be transferred from position A to position B.")
   public Object getId() {
     return id;
   }
@@ -97,7 +97,7 @@ public class Position {
    * Get assetId
    * @return assetId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getAssetId() {
     return assetId;
   }
@@ -115,7 +115,7 @@ public class Position {
    * Get seq
    * @return seq
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getSeq() {
     return seq;
   }
@@ -151,7 +151,7 @@ public class Position {
    * The available balance in the position for this asset that are not locked, supplied, or used as collateral
    * @return available
   **/
-  @Schema(description = "The available balance in the position for this asset that are not locked, supplied, or used as collateral")
+  @Schema(required = true, description = "The available balance in the position for this asset that are not locked, supplied, or used as collateral")
   public Object getAvailable() {
     return available;
   }
@@ -169,7 +169,7 @@ public class Position {
    * The balance that has been reserved for a current order. If spent by the order, they are removed. If the order is cancelled, they are returned to the position&#x27;s available balance.
    * @return locked
   **/
-  @Schema(description = "The balance that has been reserved for a current order. If spent by the order, they are removed. If the order is cancelled, they are returned to the position's available balance.")
+  @Schema(required = true, description = "The balance that has been reserved for a current order. If spent by the order, they are removed. If the order is cancelled, they are returned to the position's available balance.")
   public Object getLocked() {
     return locked;
   }
@@ -187,7 +187,7 @@ public class Position {
    * The balance that user has supplied to the leverage module. The user remains entitled to these assets and can withdraw them into their available balance.
    * @return supplied
   **/
-  @Schema(description = "The balance that user has supplied to the leverage module. The user remains entitled to these assets and can withdraw them into their available balance.")
+  @Schema(required = true, description = "The balance that user has supplied to the leverage module. The user remains entitled to these assets and can withdraw them into their available balance.")
   public Object getSupplied() {
     return supplied;
   }
@@ -205,7 +205,7 @@ public class Position {
    * The total amount of debt outstanding for this position. This position cannot be closed until all debt is fully repaid, i.e. borrowed &#x3D; 0.
    * @return borrowed
   **/
-  @Schema(description = "The total amount of debt outstanding for this position. This position cannot be closed until all debt is fully repaid, i.e. borrowed = 0.")
+  @Schema(required = true, description = "The total amount of debt outstanding for this position. This position cannot be closed until all debt is fully repaid, i.e. borrowed = 0.")
   public Object getBorrowed() {
     return borrowed;
   }
@@ -223,7 +223,7 @@ public class Position {
    * The equivalent of locked balances, but for leveraged orders. If a user has an active order that would borrow assets as part of its input, then their borrow limit must be reduced until the order is executed or cancelled.
    * @return impendingBorrows
   **/
-  @Schema(description = "The equivalent of locked balances, but for leveraged orders. If a user has an active order that would borrow assets as part of its input, then their borrow limit must be reduced until the order is executed or cancelled.")
+  @Schema(required = true, description = "The equivalent of locked balances, but for leveraged orders. If a user has an active order that would borrow assets as part of its input, then their borrow limit must be reduced until the order is executed or cancelled.")
   public Object getImpendingBorrows() {
     return impendingBorrows;
   }
@@ -241,7 +241,7 @@ public class Position {
    * average cost per unit quantity that was paid (long positions) or received (short positions) for this asset.
    * @return avgEntryPrice
   **/
-  @Schema(description = "average cost per unit quantity that was paid (long positions) or received (short positions) for this asset.")
+  @Schema(required = true, description = "average cost per unit quantity that was paid (long positions) or received (short positions) for this asset.")
   public Object getAvgEntryPrice() {
     return avgEntryPrice;
   }
@@ -259,7 +259,7 @@ public class Position {
    * The borrow limit
    * @return borrowLimit
   **/
-  @Schema(description = "The borrow limit")
+  @Schema(required = true, description = "The borrow limit")
   public Object getBorrowLimit() {
     return borrowLimit;
   }
@@ -277,7 +277,7 @@ public class Position {
    * The borrow limit
    * @return liquidationThreshold
   **/
-  @Schema(description = "The borrow limit")
+  @Schema(required = true, description = "The borrow limit")
   public Object getLiquidationThreshold() {
     return liquidationThreshold;
   }
@@ -295,7 +295,7 @@ public class Position {
    * Get createdAt
    * @return createdAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCreatedAt() {
     return createdAt;
   }
@@ -313,7 +313,7 @@ public class Position {
    * Get positionName
    * @return positionName
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getPositionName() {
     return positionName;
   }

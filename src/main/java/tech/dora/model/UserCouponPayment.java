@@ -25,7 +25,7 @@ import java.io.IOException;
  * UserCouponPayment
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-01-29T16:07:19.698407205+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
 
 public class UserCouponPayment {
   @SerializedName("user_id")
@@ -64,7 +64,7 @@ public class UserCouponPayment {
    * Get userId
    * @return userId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getUserId() {
     return userId;
   }
@@ -82,7 +82,7 @@ public class UserCouponPayment {
    * Get positionId
    * @return positionId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getPositionId() {
     return positionId;
   }
@@ -100,7 +100,7 @@ public class UserCouponPayment {
    * Get assetId
    * @return assetId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getAssetId() {
     return assetId;
   }
@@ -118,7 +118,7 @@ public class UserCouponPayment {
    * Get couponPaymentId
    * @return couponPaymentId
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCouponPaymentId() {
     return couponPaymentId;
   }
@@ -136,7 +136,7 @@ public class UserCouponPayment {
    * Get seq
    * @return seq
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getSeq() {
     return seq;
   }
@@ -154,7 +154,7 @@ public class UserCouponPayment {
    * Get pending
    * @return pending
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getPending() {
     return pending;
   }
@@ -172,7 +172,7 @@ public class UserCouponPayment {
    * Get completed
    * @return completed
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getCompleted() {
     return completed;
   }
@@ -190,7 +190,7 @@ public class UserCouponPayment {
    * Get startedAt
    * @return startedAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getStartedAt() {
     return startedAt;
   }
@@ -208,7 +208,7 @@ public class UserCouponPayment {
    * Get endedAt
    * @return endedAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getEndedAt() {
     return endedAt;
   }
