@@ -14,5 +14,5 @@ Name | Type | Description | Notes
 **maturityAt** | **Object** |  | 
 **principalValue** | **Object** |  | 
 **paymentsPerYear** | **Object** |  | 
-**paymentsEvery** | **Object** | Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond) | 
+**paymentsEvery** | **Object** | Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond) |  [optional]
 **nextCouponPayment** | **Object** |  |  [optional]

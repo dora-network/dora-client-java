@@ -26,7 +26,7 @@ import tech.dora.model.BondKind;
  * Bond
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-10T12:50:53.476312659+01:00[Europe/Paris]")
 
 public class Bond {
   @SerializedName("id")
@@ -275,7 +275,7 @@ public class Bond {
    * Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond)
    * @return paymentsEvery
   **/
-  @Schema(required = true, description = "Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond)")
+  @Schema(description = "Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond)")
   public Object getPaymentsEvery() {
     return paymentsEvery;
   }

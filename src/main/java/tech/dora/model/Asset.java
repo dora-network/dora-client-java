@@ -27,7 +27,7 @@ import tech.dora.model.Bond;
  * Asset
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-10T12:50:53.476312659+01:00[Europe/Paris]")
 
 public class Asset {
   @SerializedName("id")
@@ -318,7 +318,7 @@ public class Asset {
    * Get yield
    * @return yield
   **/
-  @Schema(required = true, description = "")
+  @Schema(description = "")
   public Object getYield() {
     return yield;
   }
@@ -444,7 +444,7 @@ public class Asset {
    * Get leverageInterestRate
    * @return leverageInterestRate
   **/
-  @Schema(required = true, description = "")
+  @Schema(description = "")
   public Object getLeverageInterestRate() {
     return leverageInterestRate;
   }

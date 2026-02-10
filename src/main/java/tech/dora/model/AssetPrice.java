@@ -25,7 +25,7 @@ import java.io.IOException;
  * AssetPrice
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-10T12:50:53.476312659+01:00[Europe/Paris]")
 
 public class AssetPrice {
   @SerializedName("asset_id")
@@ -33,6 +33,9 @@ public class AssetPrice {
 
   @SerializedName("price")
   private Object price = null;
+
+  @SerializedName("ytm")
+  private Object ytm = null;
 
   @SerializedName("time")
   private Object time = null;
@@ -73,6 +76,24 @@ public class AssetPrice {
     this.price = price;
   }
 
+  public AssetPrice ytm(Object ytm) {
+    this.ytm = ytm;
+    return this;
+  }
+
+   /**
+   * Get ytm
+   * @return ytm
+  **/
+  @Schema(description = "")
+  public Object getYtm() {
+    return ytm;
+  }
+
+  public void setYtm(Object ytm) {
+    this.ytm = ytm;
+  }
+
   public AssetPrice time(Object time) {
     this.time = time;
     return this;
@@ -103,12 +124,13 @@ public class AssetPrice {
     AssetPrice assetPrice = (AssetPrice) o;
     return Objects.equals(this.assetId, assetPrice.assetId) &&
         Objects.equals(this.price, assetPrice.price) &&
+        Objects.equals(this.ytm, assetPrice.ytm) &&
         Objects.equals(this.time, assetPrice.time);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(assetId, price, time);
+    return Objects.hash(assetId, price, ytm, time);
   }
 
 
@@ -119,6 +141,7 @@ public class AssetPrice {
     
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
+    sb.append("    ytm: ").append(toIndentedString(ytm)).append("\n");
     sb.append("    time: ").append(toIndentedString(time)).append("\n");
     sb.append("}");
     return sb.toString();

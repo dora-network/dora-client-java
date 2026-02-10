@@ -26,7 +26,7 @@ import tech.dora.model.OrderBookStatus;
  * OrderBook
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-07T05:57:24.560050423+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-10T12:50:53.476312659+01:00[Europe/Paris]")
 
 public class OrderBook {
   @SerializedName("order_book_id")
@@ -43,6 +43,12 @@ public class OrderBook {
 
   @SerializedName("display_name")
   private Object displayName = null;
+
+  @SerializedName("base_asset_fractionalized_units")
+  private Object baseAssetFractionalizedUnits = null;
+
+  @SerializedName("quote_asset_fractionalized_units")
+  private Object quoteAssetFractionalizedUnits = null;
 
   @SerializedName("fee_factor")
   private Object feeFactor = null;
@@ -171,6 +177,42 @@ public class OrderBook {
 
   public void setDisplayName(Object displayName) {
     this.displayName = displayName;
+  }
+
+  public OrderBook baseAssetFractionalizedUnits(Object baseAssetFractionalizedUnits) {
+    this.baseAssetFractionalizedUnits = baseAssetFractionalizedUnits;
+    return this;
+  }
+
+   /**
+   * Get baseAssetFractionalizedUnits
+   * @return baseAssetFractionalizedUnits
+  **/
+  @Schema(required = true, description = "")
+  public Object getBaseAssetFractionalizedUnits() {
+    return baseAssetFractionalizedUnits;
+  }
+
+  public void setBaseAssetFractionalizedUnits(Object baseAssetFractionalizedUnits) {
+    this.baseAssetFractionalizedUnits = baseAssetFractionalizedUnits;
+  }
+
+  public OrderBook quoteAssetFractionalizedUnits(Object quoteAssetFractionalizedUnits) {
+    this.quoteAssetFractionalizedUnits = quoteAssetFractionalizedUnits;
+    return this;
+  }
+
+   /**
+   * Get quoteAssetFractionalizedUnits
+   * @return quoteAssetFractionalizedUnits
+  **/
+  @Schema(required = true, description = "")
+  public Object getQuoteAssetFractionalizedUnits() {
+    return quoteAssetFractionalizedUnits;
+  }
+
+  public void setQuoteAssetFractionalizedUnits(Object quoteAssetFractionalizedUnits) {
+    this.quoteAssetFractionalizedUnits = quoteAssetFractionalizedUnits;
   }
 
   public OrderBook feeFactor(Object feeFactor) {
@@ -422,6 +464,8 @@ public class OrderBook {
         Objects.equals(this.baseAssetId, orderBook.baseAssetId) &&
         Objects.equals(this.createdAt, orderBook.createdAt) &&
         Objects.equals(this.displayName, orderBook.displayName) &&
+        Objects.equals(this.baseAssetFractionalizedUnits, orderBook.baseAssetFractionalizedUnits) &&
+        Objects.equals(this.quoteAssetFractionalizedUnits, orderBook.quoteAssetFractionalizedUnits) &&
         Objects.equals(this.feeFactor, orderBook.feeFactor) &&
         Objects.equals(this.initialAssetsRatio, orderBook.initialAssetsRatio) &&
         Objects.equals(this.maturityAt, orderBook.maturityAt) &&
@@ -439,7 +483,7 @@ public class OrderBook {
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderBookId, baseQuantity, baseAssetId, createdAt, displayName, feeFactor, initialAssetsRatio, maturityAt, quoteQuantity, quoteAssetId, sharesQuantity, status, tickSize, updatedAt, haltedAt, terminatedAt, poolUpdatedAt, sharesAssetId);
+    return Objects.hash(orderBookId, baseQuantity, baseAssetId, createdAt, displayName, baseAssetFractionalizedUnits, quoteAssetFractionalizedUnits, feeFactor, initialAssetsRatio, maturityAt, quoteQuantity, quoteAssetId, sharesQuantity, status, tickSize, updatedAt, haltedAt, terminatedAt, poolUpdatedAt, sharesAssetId);
   }
 
 
@@ -453,6 +497,8 @@ public class OrderBook {
     sb.append("    baseAssetId: ").append(toIndentedString(baseAssetId)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
+    sb.append("    baseAssetFractionalizedUnits: ").append(toIndentedString(baseAssetFractionalizedUnits)).append("\n");
+    sb.append("    quoteAssetFractionalizedUnits: ").append(toIndentedString(quoteAssetFractionalizedUnits)).append("\n");
     sb.append("    feeFactor: ").append(toIndentedString(feeFactor)).append("\n");
     sb.append("    initialAssetsRatio: ").append(toIndentedString(initialAssetsRatio)).append("\n");
     sb.append("    maturityAt: ").append(toIndentedString(maturityAt)).append("\n");

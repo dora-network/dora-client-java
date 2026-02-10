@@ -15,12 +15,12 @@ Name | Type | Description | Notes
 **name** | **Object** |  | 
 **symbol** | **Object** |  | 
 **kind** | [**AssetKind**](AssetKind.md) |  | 
-**yield** | **Object** |  | 
+**yield** | **Object** |  |  [optional]
 **canAddLiquidity** | **Object** |  | 
 **canDirectBorrow** | **Object** |  | 
 **canOnboard** | **Object** |  | 
 **canTrade** | **Object** |  | 
 **canVirtualBorrow** | **Object** |  | 
 **maxLeverage** | **Object** |  | 
-**leverageInterestRate** | **Object** |  | 
+**leverageInterestRate** | **Object** |  |  [optional]
 **bond** | [**Bond**](Bond.md) |  |  [optional]

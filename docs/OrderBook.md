@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **baseAssetId** | **Object** |  | 
 **createdAt** | **Object** |  | 
 **displayName** | **Object** |  | 
+**baseAssetFractionalizedUnits** | **Object** |  | 
+**quoteAssetFractionalizedUnits** | **Object** |  | 
 **feeFactor** | **Object** |  | 
 **initialAssetsRatio** | **Object** |  | 
 **maturityAt** | **Object** |  | 
