@@ -18,3 +18,4 @@ Name | Type | Description | Notes
 **verifiedAt** | **Object** |  |  [optional]
 **showTutorialCards** | **Object** |  | 
 **notificationsEnabled** | **Object** |  | 
+**tenantId** | **Object** |  | 

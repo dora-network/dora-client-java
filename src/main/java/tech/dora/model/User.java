@@ -25,7 +25,7 @@ import java.io.IOException;
  * User
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-10T12:50:53.476312659+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-10T18:34:45.531134594+01:00[Europe/Paris]")
 
 public class User {
   @SerializedName("id")
@@ -72,6 +72,9 @@ public class User {
 
   @SerializedName("notifications_enabled")
   private Object notificationsEnabled = null;
+
+  @SerializedName("tenant_id")
+  private Object tenantId = null;
 
   public User id(Object id) {
     this.id = id;
@@ -343,6 +346,24 @@ public class User {
     this.notificationsEnabled = notificationsEnabled;
   }
 
+  public User tenantId(Object tenantId) {
+    this.tenantId = tenantId;
+    return this;
+  }
+
+   /**
+   * Get tenantId
+   * @return tenantId
+  **/
+  @Schema(required = true, description = "")
+  public Object getTenantId() {
+    return tenantId;
+  }
+
+  public void setTenantId(Object tenantId) {
+    this.tenantId = tenantId;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -367,12 +388,13 @@ public class User {
         Objects.equals(this.timezoneOffset, user.timezoneOffset) &&
         Objects.equals(this.verifiedAt, user.verifiedAt) &&
         Objects.equals(this.showTutorialCards, user.showTutorialCards) &&
-        Objects.equals(this.notificationsEnabled, user.notificationsEnabled);
+        Objects.equals(this.notificationsEnabled, user.notificationsEnabled) &&
+        Objects.equals(this.tenantId, user.tenantId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, closedAt, disabledAt, email, name, nativeAssetId, photoUrl, provider, providerId, roles, timezone, timezoneOffset, verifiedAt, showTutorialCards, notificationsEnabled);
+    return Objects.hash(id, closedAt, disabledAt, email, name, nativeAssetId, photoUrl, provider, providerId, roles, timezone, timezoneOffset, verifiedAt, showTutorialCards, notificationsEnabled, tenantId);
   }
 
 
@@ -396,6 +418,7 @@ public class User {
     sb.append("    verifiedAt: ").append(toIndentedString(verifiedAt)).append("\n");
     sb.append("    showTutorialCards: ").append(toIndentedString(showTutorialCards)).append("\n");
     sb.append("    notificationsEnabled: ").append(toIndentedString(notificationsEnabled)).append("\n");
+    sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

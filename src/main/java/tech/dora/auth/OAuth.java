@@ -17,7 +17,7 @@ import tech.dora.Pair;
 import java.util.Map;
 import java.util.List;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-10T12:50:53.476312659+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-10T18:34:45.531134594+01:00[Europe/Paris]")
 public class OAuth implements Authentication {
   private String accessToken;
 
