@@ -18,7 +18,7 @@ import java.util.Arrays;
  * ListUserCouponPaymentsResponseEnvelope
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-10T18:34:45.531134594+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-12T12:28:29.703540146+01:00[Europe/Paris]")
 
 public class ListUserCouponPaymentsResponseEnvelope {
 

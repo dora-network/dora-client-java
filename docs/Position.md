@@ -17,3 +17,4 @@ Name | Type | Description | Notes
 **liquidationThreshold** | **Object** | The borrow limit | 
 **createdAt** | **Object** |  | 
 **positionName** | **Object** |  | 
+**pendingWithdrawal** | **Object** | The amount of asset that is pending withdrawal from the position. | 

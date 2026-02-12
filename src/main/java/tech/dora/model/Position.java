@@ -25,7 +25,7 @@ import java.io.IOException;
  * Position
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-10T18:34:45.531134594+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-12T12:28:29.703540146+01:00[Europe/Paris]")
 
 public class Position {
   @SerializedName("id")
@@ -69,6 +69,9 @@ public class Position {
 
   @SerializedName("position_name")
   private Object positionName = null;
+
+  @SerializedName("pending_withdrawal")
+  private Object pendingWithdrawal = null;
 
   public Position id(Object id) {
     this.id = id;
@@ -322,6 +325,24 @@ public class Position {
     this.positionName = positionName;
   }
 
+  public Position pendingWithdrawal(Object pendingWithdrawal) {
+    this.pendingWithdrawal = pendingWithdrawal;
+    return this;
+  }
+
+   /**
+   * The amount of asset that is pending withdrawal from the position.
+   * @return pendingWithdrawal
+  **/
+  @Schema(required = true, description = "The amount of asset that is pending withdrawal from the position.")
+  public Object getPendingWithdrawal() {
+    return pendingWithdrawal;
+  }
+
+  public void setPendingWithdrawal(Object pendingWithdrawal) {
+    this.pendingWithdrawal = pendingWithdrawal;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -345,12 +366,13 @@ public class Position {
         Objects.equals(this.borrowLimit, position.borrowLimit) &&
         Objects.equals(this.liquidationThreshold, position.liquidationThreshold) &&
         Objects.equals(this.createdAt, position.createdAt) &&
-        Objects.equals(this.positionName, position.positionName);
+        Objects.equals(this.positionName, position.positionName) &&
+        Objects.equals(this.pendingWithdrawal, position.pendingWithdrawal);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, assetId, seq, isGlobal, available, locked, supplied, borrowed, impendingBorrows, avgEntryPrice, borrowLimit, liquidationThreshold, createdAt, positionName);
+    return Objects.hash(id, assetId, seq, isGlobal, available, locked, supplied, borrowed, impendingBorrows, avgEntryPrice, borrowLimit, liquidationThreshold, createdAt, positionName, pendingWithdrawal);
   }
 
 
@@ -373,6 +395,7 @@ public class Position {
     sb.append("    liquidationThreshold: ").append(toIndentedString(liquidationThreshold)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    positionName: ").append(toIndentedString(positionName)).append("\n");
+    sb.append("    pendingWithdrawal: ").append(toIndentedString(pendingWithdrawal)).append("\n");
     sb.append("}");
     return sb.toString();
   }
