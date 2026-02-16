@@ -26,11 +26,14 @@ import tech.dora.model.OrderBookStatus;
  * OrderBook
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-12T12:28:29.703540146+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-16T09:45:54.663794137+01:00[Europe/Paris]")
 
 public class OrderBook {
   @SerializedName("order_book_id")
   private Object orderBookId = null;
+
+  @SerializedName("order_book_seq")
+  private Object orderBookSeq = null;
 
   @SerializedName("base_quantity")
   private Object baseQuantity = null;
@@ -105,6 +108,24 @@ public class OrderBook {
 
   public void setOrderBookId(Object orderBookId) {
     this.orderBookId = orderBookId;
+  }
+
+  public OrderBook orderBookSeq(Object orderBookSeq) {
+    this.orderBookSeq = orderBookSeq;
+    return this;
+  }
+
+   /**
+   * Get orderBookSeq
+   * @return orderBookSeq
+  **/
+  @Schema(description = "")
+  public Object getOrderBookSeq() {
+    return orderBookSeq;
+  }
+
+  public void setOrderBookSeq(Object orderBookSeq) {
+    this.orderBookSeq = orderBookSeq;
   }
 
   public OrderBook baseQuantity(Object baseQuantity) {
@@ -460,6 +481,7 @@ public class OrderBook {
     }
     OrderBook orderBook = (OrderBook) o;
     return Objects.equals(this.orderBookId, orderBook.orderBookId) &&
+        Objects.equals(this.orderBookSeq, orderBook.orderBookSeq) &&
         Objects.equals(this.baseQuantity, orderBook.baseQuantity) &&
         Objects.equals(this.baseAssetId, orderBook.baseAssetId) &&
         Objects.equals(this.createdAt, orderBook.createdAt) &&
@@ -483,7 +505,7 @@ public class OrderBook {
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderBookId, baseQuantity, baseAssetId, createdAt, displayName, baseAssetFractionalizedUnits, quoteAssetFractionalizedUnits, feeFactor, initialAssetsRatio, maturityAt, quoteQuantity, quoteAssetId, sharesQuantity, status, tickSize, updatedAt, haltedAt, terminatedAt, poolUpdatedAt, sharesAssetId);
+    return Objects.hash(orderBookId, orderBookSeq, baseQuantity, baseAssetId, createdAt, displayName, baseAssetFractionalizedUnits, quoteAssetFractionalizedUnits, feeFactor, initialAssetsRatio, maturityAt, quoteQuantity, quoteAssetId, sharesQuantity, status, tickSize, updatedAt, haltedAt, terminatedAt, poolUpdatedAt, sharesAssetId);
   }
 
 
@@ -493,6 +515,7 @@ public class OrderBook {
     sb.append("class OrderBook {\n");
     
     sb.append("    orderBookId: ").append(toIndentedString(orderBookId)).append("\n");
+    sb.append("    orderBookSeq: ").append(toIndentedString(orderBookSeq)).append("\n");
     sb.append("    baseQuantity: ").append(toIndentedString(baseQuantity)).append("\n");
     sb.append("    baseAssetId: ").append(toIndentedString(baseAssetId)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");

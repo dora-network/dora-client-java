@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **orderBookId** | **Object** |  | 
+**orderBookSeq** | **Object** |  |  [optional]
 **baseQuantity** | **Object** |  | 
 **baseAssetId** | **Object** |  | 
 **createdAt** | **Object** |  | 

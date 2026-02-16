@@ -25,7 +25,7 @@ import java.io.IOException;
  * OrderBookDepth
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-12T12:28:29.703540146+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-16T09:45:54.663794137+01:00[Europe/Paris]")
 
 public class OrderBookDepth {
   @SerializedName("order_book_id")

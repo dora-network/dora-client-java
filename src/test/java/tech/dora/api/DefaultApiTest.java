@@ -12,6 +12,7 @@
 
 package tech.dora.api;
 
+import tech.dora.model.AllWithdrawalInitiationsResponse;
 import tech.dora.model.AssetKind;
 import tech.dora.model.AssetRequestError;
 import tech.dora.model.CancelOrderResponse;
@@ -102,6 +103,7 @@ import tech.dora.model.ValidateSubmitOrderRequest;
 import tech.dora.model.ValidateSubmitOrderResponse;
 import tech.dora.model.WithdrawRequest;
 import tech.dora.model.WithdrawResponse;
+import tech.dora.model.WithdrawalInitiationResponse;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -527,6 +529,20 @@ public class DefaultApiTest {
         // TODO: test validations
     }
     /**
+     * Get all pending withdrawal requests for the logged in user
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void getLedgerWithdrawRequestsBySelfTest() throws Exception {
+        AllWithdrawalInitiationsResponse response = api.getLedgerWithdrawRequestsBySelf();
+
+        // TODO: test validations
+    }
+    /**
      * Get order by ID
      *
      * 
@@ -897,6 +913,22 @@ public class DefaultApiTest {
         DefundUserRequest body = null;
         Object userId = null;
         FundUserResponse response = api.ledgerWithdraw(body, userId);
+
+        // TODO: test validations
+    }
+    /**
+     * Initiate a withdrawal request for the logged in user to the outside world
+     *
+     * Withdraw assets from the logged in user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void ledgerWithdrawRequestTest() throws Exception {
+        DefundUserRequest body = null;
+        Object userId = null;
+        WithdrawalInitiationResponse response = api.ledgerWithdrawRequest(body, userId);
 
         // TODO: test validations
     }
