@@ -21,11 +21,12 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
+import tech.dora.model.WithdrawalStatus;
 /**
  * WithdrawalInitiation
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-16T09:45:54.663794137+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-25T19:11:03.957235479+01:00[Europe/Paris]")
 
 public class WithdrawalInitiation {
   @SerializedName("withdrawal_id")
@@ -44,13 +45,22 @@ public class WithdrawalInitiation {
   private Object quantity = null;
 
   @SerializedName("status")
-  private Object status = null;
+  private WithdrawalStatus status = null;
 
   @SerializedName("created_at")
   private Object createdAt = null;
 
+  @SerializedName("created_by")
+  private Object createdBy = null;
+
   @SerializedName("updated_at")
   private Object updatedAt = null;
+
+  @SerializedName("updated_by")
+  private Object updatedBy = null;
+
+  @SerializedName("reason")
+  private Object reason = null;
 
   public WithdrawalInitiation withdrawalId(Object withdrawalId) {
     this.withdrawalId = withdrawalId;
@@ -142,7 +152,7 @@ public class WithdrawalInitiation {
     this.quantity = quantity;
   }
 
-  public WithdrawalInitiation status(Object status) {
+  public WithdrawalInitiation status(WithdrawalStatus status) {
     this.status = status;
     return this;
   }
@@ -152,11 +162,11 @@ public class WithdrawalInitiation {
    * @return status
   **/
   @Schema(required = true, description = "")
-  public Object getStatus() {
+  public WithdrawalStatus getStatus() {
     return status;
   }
 
-  public void setStatus(Object status) {
+  public void setStatus(WithdrawalStatus status) {
     this.status = status;
   }
 
@@ -178,6 +188,24 @@ public class WithdrawalInitiation {
     this.createdAt = createdAt;
   }
 
+  public WithdrawalInitiation createdBy(Object createdBy) {
+    this.createdBy = createdBy;
+    return this;
+  }
+
+   /**
+   * Get createdBy
+   * @return createdBy
+  **/
+  @Schema(required = true, description = "")
+  public Object getCreatedBy() {
+    return createdBy;
+  }
+
+  public void setCreatedBy(Object createdBy) {
+    this.createdBy = createdBy;
+  }
+
   public WithdrawalInitiation updatedAt(Object updatedAt) {
     this.updatedAt = updatedAt;
     return this;
@@ -194,6 +222,42 @@ public class WithdrawalInitiation {
 
   public void setUpdatedAt(Object updatedAt) {
     this.updatedAt = updatedAt;
+  }
+
+  public WithdrawalInitiation updatedBy(Object updatedBy) {
+    this.updatedBy = updatedBy;
+    return this;
+  }
+
+   /**
+   * Get updatedBy
+   * @return updatedBy
+  **/
+  @Schema(required = true, description = "")
+  public Object getUpdatedBy() {
+    return updatedBy;
+  }
+
+  public void setUpdatedBy(Object updatedBy) {
+    this.updatedBy = updatedBy;
+  }
+
+  public WithdrawalInitiation reason(Object reason) {
+    this.reason = reason;
+    return this;
+  }
+
+   /**
+   * Get reason
+   * @return reason
+  **/
+  @Schema(required = true, description = "")
+  public Object getReason() {
+    return reason;
+  }
+
+  public void setReason(Object reason) {
+    this.reason = reason;
   }
 
 
@@ -213,12 +277,15 @@ public class WithdrawalInitiation {
         Objects.equals(this.quantity, withdrawalInitiation.quantity) &&
         Objects.equals(this.status, withdrawalInitiation.status) &&
         Objects.equals(this.createdAt, withdrawalInitiation.createdAt) &&
-        Objects.equals(this.updatedAt, withdrawalInitiation.updatedAt);
+        Objects.equals(this.createdBy, withdrawalInitiation.createdBy) &&
+        Objects.equals(this.updatedAt, withdrawalInitiation.updatedAt) &&
+        Objects.equals(this.updatedBy, withdrawalInitiation.updatedBy) &&
+        Objects.equals(this.reason, withdrawalInitiation.reason);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(withdrawalId, userId, positionId, assetId, quantity, status, createdAt, updatedAt);
+    return Objects.hash(withdrawalId, userId, positionId, assetId, quantity, status, createdAt, createdBy, updatedAt, updatedBy, reason);
   }
 
 
@@ -234,7 +301,10 @@ public class WithdrawalInitiation {
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
+    sb.append("    updatedBy: ").append(toIndentedString(updatedBy)).append("\n");
+    sb.append("    reason: ").append(toIndentedString(reason)).append("\n");
     sb.append("}");
     return sb.toString();
   }

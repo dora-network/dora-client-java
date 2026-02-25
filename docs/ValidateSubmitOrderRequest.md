@@ -16,3 +16,5 @@ Name | Type | Description | Notes
 **clientOrderId** | **Object** | An optional client-provided identifier for the order. |  [optional]
 **positionAssets** | **Object** | Full list of assets in the position with their price and collateral weight, required when inverse_leverage &lt; 1 for leverage health checks |  [optional]
 **assetsConfig** | **Object** | Configuration for the assets in the order |  [optional]
+**stopLossPrice** | **Object** | Stop loss price |  [optional]
+**takeProfitPrice** | **Object** | Take profit price |  [optional]

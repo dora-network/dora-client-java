@@ -26,3 +26,4 @@ Name | Type | Description | Notes
 **triggerPrice** | **Object** |  |  [optional]
 **triggerType** | [**TriggerType**](TriggerType.md) |  |  [optional]
 **clientOrderId** | **Object** | An optional client-provided identifier for the order. |  [optional]
+**parentOrderId** | **Object** |  |  [optional]

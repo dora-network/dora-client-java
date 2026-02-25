@@ -118,6 +118,7 @@ import tech.dora.model.ValidateSubmitOrderResponse;
 import tech.dora.model.WithdrawRequest;
 import tech.dora.model.WithdrawResponse;
 import tech.dora.model.WithdrawalInitiationResponse;
+import tech.dora.model.WithdrawalRequestReason;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -149,6 +150,138 @@ public class DefaultApi {
         this.headers = headers;
     }
 
+    /**
+     * Build call for approveLedgerWithdrawRequest
+     * @param withdrawalId  (required)
+     * @param body  (optional)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call approveLedgerWithdrawRequestCall(Object withdrawalId, WithdrawalRequestReason body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = body;
+        
+        // create path and map variables
+        String localVarPath = "/v1/ledger/withdraw/requests/{withdrawal_id}/approve"
+            .replaceAll("\\{" + "withdrawal_id" + "\\}", apiClient.escapeString(withdrawalId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        if (headers != null) {
+            localVarHeaderParams.putAll(headers);
+        }
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call approveLedgerWithdrawRequestValidateBeforeCall(Object withdrawalId, WithdrawalRequestReason body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'withdrawalId' is set
+        if (withdrawalId == null) {
+            throw new ApiException("Missing the required parameter 'withdrawalId' when calling approveLedgerWithdrawRequest(Async)");
+        }
+        
+        com.squareup.okhttp.Call call = approveLedgerWithdrawRequestCall(withdrawalId, body, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
+
+    /**
+     * Approve a pending withdrawal request
+     * Approve a pending withdrawal request, allowing the transfer of assets to the outside world to proceed. Note that this does not interact with any external systems; it simply updates the status of the withdrawal request in the ledger. Actual transfer of assets must be handled separately.
+     * @param withdrawalId  (required)
+     * @param body  (optional)
+     * @return WithdrawalInitiationResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public WithdrawalInitiationResponse approveLedgerWithdrawRequest(Object withdrawalId, WithdrawalRequestReason body) throws ApiException {
+        ApiResponse<WithdrawalInitiationResponse> resp = approveLedgerWithdrawRequestWithHttpInfo(withdrawalId, body);
+        return resp.getData();
+    }
+
+    /**
+     * Approve a pending withdrawal request
+     * Approve a pending withdrawal request, allowing the transfer of assets to the outside world to proceed. Note that this does not interact with any external systems; it simply updates the status of the withdrawal request in the ledger. Actual transfer of assets must be handled separately.
+     * @param withdrawalId  (required)
+     * @param body  (optional)
+     * @return ApiResponse&lt;WithdrawalInitiationResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<WithdrawalInitiationResponse> approveLedgerWithdrawRequestWithHttpInfo(Object withdrawalId, WithdrawalRequestReason body) throws ApiException {
+        com.squareup.okhttp.Call call = approveLedgerWithdrawRequestValidateBeforeCall(withdrawalId, body, null, null);
+        Type localVarReturnType = new TypeToken<WithdrawalInitiationResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Approve a pending withdrawal request (asynchronously)
+     * Approve a pending withdrawal request, allowing the transfer of assets to the outside world to proceed. Note that this does not interact with any external systems; it simply updates the status of the withdrawal request in the ledger. Actual transfer of assets must be handled separately.
+     * @param withdrawalId  (required)
+     * @param body  (optional)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call approveLedgerWithdrawRequestAsync(Object withdrawalId, WithdrawalRequestReason body, final ApiCallback<WithdrawalInitiationResponse> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = approveLedgerWithdrawRequestValidateBeforeCall(withdrawalId, body, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<WithdrawalInitiationResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
     /**
      * Build call for cancelAllOpenOrders
      * @param orderBookId  (optional)
@@ -283,6 +416,138 @@ public class DefaultApi {
 
         com.squareup.okhttp.Call call = cancelAllOpenOrdersValidateBeforeCall(orderBookId, userId, orderKind, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<ListOrdersResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for cancelLedgerWithdrawRequest
+     * @param withdrawalId  (required)
+     * @param body  (optional)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call cancelLedgerWithdrawRequestCall(Object withdrawalId, WithdrawalRequestReason body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = body;
+        
+        // create path and map variables
+        String localVarPath = "/v1/ledger/withdraw/requests/{withdrawal_id}/cancel"
+            .replaceAll("\\{" + "withdrawal_id" + "\\}", apiClient.escapeString(withdrawalId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        if (headers != null) {
+            localVarHeaderParams.putAll(headers);
+        }
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call cancelLedgerWithdrawRequestValidateBeforeCall(Object withdrawalId, WithdrawalRequestReason body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'withdrawalId' is set
+        if (withdrawalId == null) {
+            throw new ApiException("Missing the required parameter 'withdrawalId' when calling cancelLedgerWithdrawRequest(Async)");
+        }
+        
+        com.squareup.okhttp.Call call = cancelLedgerWithdrawRequestCall(withdrawalId, body, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
+
+    /**
+     * Cancel a pending withdrawal request
+     * Cancel a pending withdrawal request, providing an optional reason for the cancellation.
+     * @param withdrawalId  (required)
+     * @param body  (optional)
+     * @return WithdrawalInitiationResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public WithdrawalInitiationResponse cancelLedgerWithdrawRequest(Object withdrawalId, WithdrawalRequestReason body) throws ApiException {
+        ApiResponse<WithdrawalInitiationResponse> resp = cancelLedgerWithdrawRequestWithHttpInfo(withdrawalId, body);
+        return resp.getData();
+    }
+
+    /**
+     * Cancel a pending withdrawal request
+     * Cancel a pending withdrawal request, providing an optional reason for the cancellation.
+     * @param withdrawalId  (required)
+     * @param body  (optional)
+     * @return ApiResponse&lt;WithdrawalInitiationResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<WithdrawalInitiationResponse> cancelLedgerWithdrawRequestWithHttpInfo(Object withdrawalId, WithdrawalRequestReason body) throws ApiException {
+        com.squareup.okhttp.Call call = cancelLedgerWithdrawRequestValidateBeforeCall(withdrawalId, body, null, null);
+        Type localVarReturnType = new TypeToken<WithdrawalInitiationResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Cancel a pending withdrawal request (asynchronously)
+     * Cancel a pending withdrawal request, providing an optional reason for the cancellation.
+     * @param withdrawalId  (required)
+     * @param body  (optional)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call cancelLedgerWithdrawRequestAsync(Object withdrawalId, WithdrawalRequestReason body, final ApiCallback<WithdrawalInitiationResponse> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = cancelLedgerWithdrawRequestValidateBeforeCall(withdrawalId, body, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<WithdrawalInitiationResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -1686,6 +1951,131 @@ public class DefaultApi {
 
         com.squareup.okhttp.Call call = getAllAssetPricesValidateBeforeCall(progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<ListAssetPriceResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for getAllWithdrawalRequests
+     * @param status  (optional)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call getAllWithdrawalRequestsCall(Object status, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = null;
+        
+        // create path and map variables
+        String localVarPath = "/v1/ledger/withdraw/requests";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (status != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("status", status));
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        if (headers != null) {
+            localVarHeaderParams.putAll(headers);
+        }
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call getAllWithdrawalRequestsValidateBeforeCall(Object status, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        com.squareup.okhttp.Call call = getAllWithdrawalRequestsCall(status, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
+
+    /**
+     * Get all withdrawal requests
+     * 
+     * @param status  (optional)
+     * @return AllWithdrawalInitiationsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public AllWithdrawalInitiationsResponse getAllWithdrawalRequests(Object status) throws ApiException {
+        ApiResponse<AllWithdrawalInitiationsResponse> resp = getAllWithdrawalRequestsWithHttpInfo(status);
+        return resp.getData();
+    }
+
+    /**
+     * Get all withdrawal requests
+     * 
+     * @param status  (optional)
+     * @return ApiResponse&lt;AllWithdrawalInitiationsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<AllWithdrawalInitiationsResponse> getAllWithdrawalRequestsWithHttpInfo(Object status) throws ApiException {
+        com.squareup.okhttp.Call call = getAllWithdrawalRequestsValidateBeforeCall(status, null, null);
+        Type localVarReturnType = new TypeToken<AllWithdrawalInitiationsResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Get all withdrawal requests (asynchronously)
+     * 
+     * @param status  (optional)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call getAllWithdrawalRequestsAsync(Object status, final ApiCallback<AllWithdrawalInitiationsResponse> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = getAllWithdrawalRequestsValidateBeforeCall(status, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<AllWithdrawalInitiationsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -3587,12 +3977,13 @@ public class DefaultApi {
     }
     /**
      * Build call for getLedgerWithdrawRequestsBySelf
+     * @param status  (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getLedgerWithdrawRequestsBySelfCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getLedgerWithdrawRequestsBySelfCall(Object status, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -3600,6 +3991,8 @@ public class DefaultApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (status != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("status", status));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -3637,9 +4030,9 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getLedgerWithdrawRequestsBySelfValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getLedgerWithdrawRequestsBySelfValidateBeforeCall(Object status, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        com.squareup.okhttp.Call call = getLedgerWithdrawRequestsBySelfCall(progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getLedgerWithdrawRequestsBySelfCall(status, progressListener, progressRequestListener);
         return call;
 
         
@@ -3651,22 +4044,24 @@ public class DefaultApi {
     /**
      * Get all pending withdrawal requests for the logged in user
      * 
+     * @param status  (optional)
      * @return AllWithdrawalInitiationsResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public AllWithdrawalInitiationsResponse getLedgerWithdrawRequestsBySelf() throws ApiException {
-        ApiResponse<AllWithdrawalInitiationsResponse> resp = getLedgerWithdrawRequestsBySelfWithHttpInfo();
+    public AllWithdrawalInitiationsResponse getLedgerWithdrawRequestsBySelf(Object status) throws ApiException {
+        ApiResponse<AllWithdrawalInitiationsResponse> resp = getLedgerWithdrawRequestsBySelfWithHttpInfo(status);
         return resp.getData();
     }
 
     /**
      * Get all pending withdrawal requests for the logged in user
      * 
+     * @param status  (optional)
      * @return ApiResponse&lt;AllWithdrawalInitiationsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<AllWithdrawalInitiationsResponse> getLedgerWithdrawRequestsBySelfWithHttpInfo() throws ApiException {
-        com.squareup.okhttp.Call call = getLedgerWithdrawRequestsBySelfValidateBeforeCall(null, null);
+    public ApiResponse<AllWithdrawalInitiationsResponse> getLedgerWithdrawRequestsBySelfWithHttpInfo(Object status) throws ApiException {
+        com.squareup.okhttp.Call call = getLedgerWithdrawRequestsBySelfValidateBeforeCall(status, null, null);
         Type localVarReturnType = new TypeToken<AllWithdrawalInitiationsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -3674,11 +4069,12 @@ public class DefaultApi {
     /**
      * Get all pending withdrawal requests for the logged in user (asynchronously)
      * 
+     * @param status  (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getLedgerWithdrawRequestsBySelfAsync(final ApiCallback<AllWithdrawalInitiationsResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call getLedgerWithdrawRequestsBySelfAsync(Object status, final ApiCallback<AllWithdrawalInitiationsResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -3699,7 +4095,141 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getLedgerWithdrawRequestsBySelfValidateBeforeCall(progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getLedgerWithdrawRequestsBySelfValidateBeforeCall(status, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<AllWithdrawalInitiationsResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for getLedgerWithdrawRequestsByUserID
+     * @param userId  (required)
+     * @param status  (optional)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call getLedgerWithdrawRequestsByUserIDCall(Object userId, Object status, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = null;
+        
+        // create path and map variables
+        String localVarPath = "/v1/ledger/withdraw/requests/{user_id}"
+            .replaceAll("\\{" + "user_id" + "\\}", apiClient.escapeString(userId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (status != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("status", status));
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        if (headers != null) {
+            localVarHeaderParams.putAll(headers);
+        }
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call getLedgerWithdrawRequestsByUserIDValidateBeforeCall(Object userId, Object status, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling getLedgerWithdrawRequestsByUserID(Async)");
+        }
+        
+        com.squareup.okhttp.Call call = getLedgerWithdrawRequestsByUserIDCall(userId, status, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
+
+    /**
+     * Get all pending withdrawal requests for this user
+     * 
+     * @param userId  (required)
+     * @param status  (optional)
+     * @return AllWithdrawalInitiationsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public AllWithdrawalInitiationsResponse getLedgerWithdrawRequestsByUserID(Object userId, Object status) throws ApiException {
+        ApiResponse<AllWithdrawalInitiationsResponse> resp = getLedgerWithdrawRequestsByUserIDWithHttpInfo(userId, status);
+        return resp.getData();
+    }
+
+    /**
+     * Get all pending withdrawal requests for this user
+     * 
+     * @param userId  (required)
+     * @param status  (optional)
+     * @return ApiResponse&lt;AllWithdrawalInitiationsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<AllWithdrawalInitiationsResponse> getLedgerWithdrawRequestsByUserIDWithHttpInfo(Object userId, Object status) throws ApiException {
+        com.squareup.okhttp.Call call = getLedgerWithdrawRequestsByUserIDValidateBeforeCall(userId, status, null, null);
+        Type localVarReturnType = new TypeToken<AllWithdrawalInitiationsResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Get all pending withdrawal requests for this user (asynchronously)
+     * 
+     * @param userId  (required)
+     * @param status  (optional)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call getLedgerWithdrawRequestsByUserIDAsync(Object userId, Object status, final ApiCallback<AllWithdrawalInitiationsResponse> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = getLedgerWithdrawRequestsByUserIDValidateBeforeCall(userId, status, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<AllWithdrawalInitiationsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -6720,12 +7250,13 @@ public class DefaultApi {
      * Build call for ledgerWithdraw
      * @param body  (required)
      * @param userId  (required)
+     * @param status  (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call ledgerWithdrawCall(DefundUserRequest body, Object userId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call ledgerWithdrawCall(DefundUserRequest body, Object userId, Object status, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -6734,6 +7265,8 @@ public class DefaultApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (status != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("status", status));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -6771,7 +7304,7 @@ public class DefaultApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call ledgerWithdrawValidateBeforeCall(DefundUserRequest body, Object userId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call ledgerWithdrawValidateBeforeCall(DefundUserRequest body, Object userId, Object status, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'body' is set
         if (body == null) {
             throw new ApiException("Missing the required parameter 'body' when calling ledgerWithdraw(Async)");
@@ -6781,7 +7314,7 @@ public class DefaultApi {
             throw new ApiException("Missing the required parameter 'userId' when calling ledgerWithdraw(Async)");
         }
         
-        com.squareup.okhttp.Call call = ledgerWithdrawCall(body, userId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = ledgerWithdrawCall(body, userId, status, progressListener, progressRequestListener);
         return call;
 
         
@@ -6795,11 +7328,12 @@ public class DefaultApi {
      * Withdraw assets from this user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
      * @param body  (required)
      * @param userId  (required)
+     * @param status  (optional)
      * @return FundUserResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public FundUserResponse ledgerWithdraw(DefundUserRequest body, Object userId) throws ApiException {
-        ApiResponse<FundUserResponse> resp = ledgerWithdrawWithHttpInfo(body, userId);
+    public FundUserResponse ledgerWithdraw(DefundUserRequest body, Object userId, Object status) throws ApiException {
+        ApiResponse<FundUserResponse> resp = ledgerWithdrawWithHttpInfo(body, userId, status);
         return resp.getData();
     }
 
@@ -6808,11 +7342,12 @@ public class DefaultApi {
      * Withdraw assets from this user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
      * @param body  (required)
      * @param userId  (required)
+     * @param status  (optional)
      * @return ApiResponse&lt;FundUserResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<FundUserResponse> ledgerWithdrawWithHttpInfo(DefundUserRequest body, Object userId) throws ApiException {
-        com.squareup.okhttp.Call call = ledgerWithdrawValidateBeforeCall(body, userId, null, null);
+    public ApiResponse<FundUserResponse> ledgerWithdrawWithHttpInfo(DefundUserRequest body, Object userId, Object status) throws ApiException {
+        com.squareup.okhttp.Call call = ledgerWithdrawValidateBeforeCall(body, userId, status, null, null);
         Type localVarReturnType = new TypeToken<FundUserResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -6822,11 +7357,12 @@ public class DefaultApi {
      * Withdraw assets from this user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
      * @param body  (required)
      * @param userId  (required)
+     * @param status  (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call ledgerWithdrawAsync(DefundUserRequest body, Object userId, final ApiCallback<FundUserResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call ledgerWithdrawAsync(DefundUserRequest body, Object userId, Object status, final ApiCallback<FundUserResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -6847,7 +7383,7 @@ public class DefaultApi {
             };
         }
 
-        com.squareup.okhttp.Call call = ledgerWithdrawValidateBeforeCall(body, userId, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = ledgerWithdrawValidateBeforeCall(body, userId, status, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<FundUserResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -6865,7 +7401,7 @@ public class DefaultApi {
         Object localVarPostBody = body;
         
         // create path and map variables
-        String localVarPath = "/v1/ledger/withdraw/requests/self"
+        String localVarPath = "/v1/ledger/withdraw/requests/{user_id}"
             .replaceAll("\\{" + "user_id" + "\\}", apiClient.escapeString(userId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -6927,8 +7463,8 @@ public class DefaultApi {
     }
 
     /**
-     * Initiate a withdrawal request for the logged in user to the outside world
-     * Withdraw assets from the logged in user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
+     * Initiate a withdrawal request for this user to the outside world
+     * Withdraw assets from this user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
      * @param body  (required)
      * @param userId  (required)
      * @return WithdrawalInitiationResponse
@@ -6940,8 +7476,8 @@ public class DefaultApi {
     }
 
     /**
-     * Initiate a withdrawal request for the logged in user to the outside world
-     * Withdraw assets from the logged in user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
+     * Initiate a withdrawal request for this user to the outside world
+     * Withdraw assets from this user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
      * @param body  (required)
      * @param userId  (required)
      * @return ApiResponse&lt;WithdrawalInitiationResponse&gt;
@@ -6954,8 +7490,8 @@ public class DefaultApi {
     }
 
     /**
-     * Initiate a withdrawal request for the logged in user to the outside world (asynchronously)
-     * Withdraw assets from the logged in user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
+     * Initiate a withdrawal request for this user to the outside world (asynchronously)
+     * Withdraw assets from this user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
      * @param body  (required)
      * @param userId  (required)
      * @param callback The callback to be executed when the API call finishes
@@ -6984,6 +7520,142 @@ public class DefaultApi {
         }
 
         com.squareup.okhttp.Call call = ledgerWithdrawRequestValidateBeforeCall(body, userId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<WithdrawalInitiationResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for ledgerWithdrawRequestSelf
+     * @param body  (required)
+     * @param userId  (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call ledgerWithdrawRequestSelfCall(DefundUserRequest body, Object userId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = body;
+        
+        // create path and map variables
+        String localVarPath = "/v1/ledger/withdraw/requests/self"
+            .replaceAll("\\{" + "user_id" + "\\}", apiClient.escapeString(userId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        if (headers != null) {
+            localVarHeaderParams.putAll(headers);
+        }
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call ledgerWithdrawRequestSelfValidateBeforeCall(DefundUserRequest body, Object userId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling ledgerWithdrawRequestSelf(Async)");
+        }
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling ledgerWithdrawRequestSelf(Async)");
+        }
+        
+        com.squareup.okhttp.Call call = ledgerWithdrawRequestSelfCall(body, userId, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
+
+    /**
+     * Initiate a withdrawal request for the logged in user to the outside world
+     * Withdraw assets from the logged in user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
+     * @param body  (required)
+     * @param userId  (required)
+     * @return WithdrawalInitiationResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public WithdrawalInitiationResponse ledgerWithdrawRequestSelf(DefundUserRequest body, Object userId) throws ApiException {
+        ApiResponse<WithdrawalInitiationResponse> resp = ledgerWithdrawRequestSelfWithHttpInfo(body, userId);
+        return resp.getData();
+    }
+
+    /**
+     * Initiate a withdrawal request for the logged in user to the outside world
+     * Withdraw assets from the logged in user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
+     * @param body  (required)
+     * @param userId  (required)
+     * @return ApiResponse&lt;WithdrawalInitiationResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<WithdrawalInitiationResponse> ledgerWithdrawRequestSelfWithHttpInfo(DefundUserRequest body, Object userId) throws ApiException {
+        com.squareup.okhttp.Call call = ledgerWithdrawRequestSelfValidateBeforeCall(body, userId, null, null);
+        Type localVarReturnType = new TypeToken<WithdrawalInitiationResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Initiate a withdrawal request for the logged in user to the outside world (asynchronously)
+     * Withdraw assets from the logged in user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
+     * @param body  (required)
+     * @param userId  (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call ledgerWithdrawRequestSelfAsync(DefundUserRequest body, Object userId, final ApiCallback<WithdrawalInitiationResponse> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = ledgerWithdrawRequestSelfValidateBeforeCall(body, userId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<WithdrawalInitiationResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -8637,6 +9309,142 @@ public class DefaultApi {
 
         com.squareup.okhttp.Call call = payLeverageGetAccruedInterestValidateBeforeCall(body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<PayLeverageAccruedInterestResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for rejectLedgerWithdrawRequest
+     * @param body  (required)
+     * @param withdrawalId  (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call rejectLedgerWithdrawRequestCall(WithdrawalRequestReason body, Object withdrawalId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = body;
+        
+        // create path and map variables
+        String localVarPath = "/v1/ledger/withdraw/requests/{withdrawal_id}/reject"
+            .replaceAll("\\{" + "withdrawal_id" + "\\}", apiClient.escapeString(withdrawalId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        if (headers != null) {
+            localVarHeaderParams.putAll(headers);
+        }
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call rejectLedgerWithdrawRequestValidateBeforeCall(WithdrawalRequestReason body, Object withdrawalId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling rejectLedgerWithdrawRequest(Async)");
+        }
+        // verify the required parameter 'withdrawalId' is set
+        if (withdrawalId == null) {
+            throw new ApiException("Missing the required parameter 'withdrawalId' when calling rejectLedgerWithdrawRequest(Async)");
+        }
+        
+        com.squareup.okhttp.Call call = rejectLedgerWithdrawRequestCall(body, withdrawalId, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
+
+    /**
+     * Reject a pending withdrawal request
+     * Reject a pending withdrawal request, providing a reason for the rejection. Note that this does not interact with any external systems; it simply updates the status of the withdrawal request in the ledger. Actual transfer of assets must be handled separately.
+     * @param body  (required)
+     * @param withdrawalId  (required)
+     * @return WithdrawalInitiationResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public WithdrawalInitiationResponse rejectLedgerWithdrawRequest(WithdrawalRequestReason body, Object withdrawalId) throws ApiException {
+        ApiResponse<WithdrawalInitiationResponse> resp = rejectLedgerWithdrawRequestWithHttpInfo(body, withdrawalId);
+        return resp.getData();
+    }
+
+    /**
+     * Reject a pending withdrawal request
+     * Reject a pending withdrawal request, providing a reason for the rejection. Note that this does not interact with any external systems; it simply updates the status of the withdrawal request in the ledger. Actual transfer of assets must be handled separately.
+     * @param body  (required)
+     * @param withdrawalId  (required)
+     * @return ApiResponse&lt;WithdrawalInitiationResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<WithdrawalInitiationResponse> rejectLedgerWithdrawRequestWithHttpInfo(WithdrawalRequestReason body, Object withdrawalId) throws ApiException {
+        com.squareup.okhttp.Call call = rejectLedgerWithdrawRequestValidateBeforeCall(body, withdrawalId, null, null);
+        Type localVarReturnType = new TypeToken<WithdrawalInitiationResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Reject a pending withdrawal request (asynchronously)
+     * Reject a pending withdrawal request, providing a reason for the rejection. Note that this does not interact with any external systems; it simply updates the status of the withdrawal request in the ledger. Actual transfer of assets must be handled separately.
+     * @param body  (required)
+     * @param withdrawalId  (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call rejectLedgerWithdrawRequestAsync(WithdrawalRequestReason body, Object withdrawalId, final ApiCallback<WithdrawalInitiationResponse> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = rejectLedgerWithdrawRequestValidateBeforeCall(body, withdrawalId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<WithdrawalInitiationResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

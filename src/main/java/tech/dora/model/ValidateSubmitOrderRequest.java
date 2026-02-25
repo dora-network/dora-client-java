@@ -27,7 +27,7 @@ import tech.dora.model.Side;
  * ValidateSubmitOrderRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-16T09:45:54.663794137+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-25T19:11:03.957235479+01:00[Europe/Paris]")
 
 public class ValidateSubmitOrderRequest {
   @SerializedName("quantity")
@@ -68,6 +68,12 @@ public class ValidateSubmitOrderRequest {
 
   @SerializedName("assets_config")
   private Object assetsConfig = null;
+
+  @SerializedName("stop_loss_price")
+  private Object stopLossPrice = null;
+
+  @SerializedName("take_profit_price")
+  private Object takeProfitPrice = null;
 
   public ValidateSubmitOrderRequest quantity(Object quantity) {
     this.quantity = quantity;
@@ -303,6 +309,42 @@ public class ValidateSubmitOrderRequest {
     this.assetsConfig = assetsConfig;
   }
 
+  public ValidateSubmitOrderRequest stopLossPrice(Object stopLossPrice) {
+    this.stopLossPrice = stopLossPrice;
+    return this;
+  }
+
+   /**
+   * Stop loss price
+   * @return stopLossPrice
+  **/
+  @Schema(description = "Stop loss price")
+  public Object getStopLossPrice() {
+    return stopLossPrice;
+  }
+
+  public void setStopLossPrice(Object stopLossPrice) {
+    this.stopLossPrice = stopLossPrice;
+  }
+
+  public ValidateSubmitOrderRequest takeProfitPrice(Object takeProfitPrice) {
+    this.takeProfitPrice = takeProfitPrice;
+    return this;
+  }
+
+   /**
+   * Take profit price
+   * @return takeProfitPrice
+  **/
+  @Schema(description = "Take profit price")
+  public Object getTakeProfitPrice() {
+    return takeProfitPrice;
+  }
+
+  public void setTakeProfitPrice(Object takeProfitPrice) {
+    this.takeProfitPrice = takeProfitPrice;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -325,12 +367,14 @@ public class ValidateSubmitOrderRequest {
         Objects.equals(this.quoteAssetId, validateSubmitOrderRequest.quoteAssetId) &&
         Objects.equals(this.clientOrderId, validateSubmitOrderRequest.clientOrderId) &&
         Objects.equals(this.positionAssets, validateSubmitOrderRequest.positionAssets) &&
-        Objects.equals(this.assetsConfig, validateSubmitOrderRequest.assetsConfig);
+        Objects.equals(this.assetsConfig, validateSubmitOrderRequest.assetsConfig) &&
+        Objects.equals(this.stopLossPrice, validateSubmitOrderRequest.stopLossPrice) &&
+        Objects.equals(this.takeProfitPrice, validateSubmitOrderRequest.takeProfitPrice);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(quantity, tick, kind, side, price, goodTillDate, inverseLeverage, userBalance, baseAssetId, quoteAssetId, clientOrderId, positionAssets, assetsConfig);
+    return Objects.hash(quantity, tick, kind, side, price, goodTillDate, inverseLeverage, userBalance, baseAssetId, quoteAssetId, clientOrderId, positionAssets, assetsConfig, stopLossPrice, takeProfitPrice);
   }
 
 
@@ -352,6 +396,8 @@ public class ValidateSubmitOrderRequest {
     sb.append("    clientOrderId: ").append(toIndentedString(clientOrderId)).append("\n");
     sb.append("    positionAssets: ").append(toIndentedString(positionAssets)).append("\n");
     sb.append("    assetsConfig: ").append(toIndentedString(assetsConfig)).append("\n");
+    sb.append("    stopLossPrice: ").append(toIndentedString(stopLossPrice)).append("\n");
+    sb.append("    takeProfitPrice: ").append(toIndentedString(takeProfitPrice)).append("\n");
     sb.append("}");
     return sb.toString();
   }

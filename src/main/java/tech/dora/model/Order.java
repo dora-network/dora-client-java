@@ -29,7 +29,7 @@ import tech.dora.model.TriggerType;
  * Order
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-16T09:45:54.663794137+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-25T19:11:03.957235479+01:00[Europe/Paris]")
 
 public class Order {
   @SerializedName("order_id")
@@ -100,6 +100,9 @@ public class Order {
 
   @SerializedName("client_order_id")
   private Object clientOrderId = null;
+
+  @SerializedName("parent_order_id")
+  private Object parentOrderId = null;
 
   public Order orderId(Object orderId) {
     this.orderId = orderId;
@@ -515,6 +518,24 @@ public class Order {
     this.clientOrderId = clientOrderId;
   }
 
+  public Order parentOrderId(Object parentOrderId) {
+    this.parentOrderId = parentOrderId;
+    return this;
+  }
+
+   /**
+   * Get parentOrderId
+   * @return parentOrderId
+  **/
+  @Schema(description = "")
+  public Object getParentOrderId() {
+    return parentOrderId;
+  }
+
+  public void setParentOrderId(Object parentOrderId) {
+    this.parentOrderId = parentOrderId;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -547,12 +568,13 @@ public class Order {
         Objects.equals(this.goodTillDate, order.goodTillDate) &&
         Objects.equals(this.triggerPrice, order.triggerPrice) &&
         Objects.equals(this.triggerType, order.triggerType) &&
-        Objects.equals(this.clientOrderId, order.clientOrderId);
+        Objects.equals(this.clientOrderId, order.clientOrderId) &&
+        Objects.equals(this.parentOrderId, order.parentOrderId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderId, orderBookId, kind, originalPrice, avgFillPrice, cancelledQuantity, openQuantity, originalQuantity, filledQuantity, filledNotional, lastUpdateAt, openedAt, inverseLeverage, side, status, userId, orderModifiers, positionId, orderInfo, goodTillDate, triggerPrice, triggerType, clientOrderId);
+    return Objects.hash(orderId, orderBookId, kind, originalPrice, avgFillPrice, cancelledQuantity, openQuantity, originalQuantity, filledQuantity, filledNotional, lastUpdateAt, openedAt, inverseLeverage, side, status, userId, orderModifiers, positionId, orderInfo, goodTillDate, triggerPrice, triggerType, clientOrderId, parentOrderId);
   }
 
 
@@ -584,6 +606,7 @@ public class Order {
     sb.append("    triggerPrice: ").append(toIndentedString(triggerPrice)).append("\n");
     sb.append("    triggerType: ").append(toIndentedString(triggerType)).append("\n");
     sb.append("    clientOrderId: ").append(toIndentedString(clientOrderId)).append("\n");
+    sb.append("    parentOrderId: ").append(toIndentedString(parentOrderId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

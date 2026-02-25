@@ -14,13 +14,41 @@ package tech.dora.model;
 
 import java.util.Objects;
 import java.util.Arrays;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 /**
- * SupplyResponse
+ * WithdrawalRequestReason
  */
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-25T19:11:03.957235479+01:00[Europe/Paris]")
 
-public class SupplyResponse {
+public class WithdrawalRequestReason {
+  @SerializedName("reason")
+  private Object reason = null;
+
+  public WithdrawalRequestReason reason(Object reason) {
+    this.reason = reason;
+    return this;
+  }
+
+   /**
+   * Get reason
+   * @return reason
+  **/
+  @Schema(required = true, description = "")
+  public Object getReason() {
+    return reason;
+  }
+
+  public void setReason(Object reason) {
+    this.reason = reason;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -30,20 +58,22 @@ public class SupplyResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    return true;
+    WithdrawalRequestReason withdrawalRequestReason = (WithdrawalRequestReason) o;
+    return Objects.equals(this.reason, withdrawalRequestReason.reason);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash();
+    return Objects.hash(reason);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SupplyResponse {\n");
+    sb.append("class WithdrawalRequestReason {\n");
     
+    sb.append("    reason: ").append(toIndentedString(reason)).append("\n");
     sb.append("}");
     return sb.toString();
   }

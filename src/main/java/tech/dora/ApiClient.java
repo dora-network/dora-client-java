@@ -53,7 +53,7 @@ import tech.dora.auth.OAuth;
 
 public class ApiClient {
 
-    private String basePath = "https://localhost:8084";
+    private String basePath = "https://staging.dora.co/";
     private boolean debugging = false;
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
     private String tempFolderPath = null;
@@ -109,7 +109,7 @@ public class ApiClient {
     /**
      * Set base path
      *
-     * @param basePath Base path of the URL (e.g https://localhost:8084
+     * @param basePath Base path of the URL (e.g https://staging.dora.co/
      * @return An instance of OkHttpClient
      */
     public ApiClient setBasePath(String basePath) {

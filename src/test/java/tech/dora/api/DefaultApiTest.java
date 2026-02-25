@@ -104,6 +104,7 @@ import tech.dora.model.ValidateSubmitOrderResponse;
 import tech.dora.model.WithdrawRequest;
 import tech.dora.model.WithdrawResponse;
 import tech.dora.model.WithdrawalInitiationResponse;
+import tech.dora.model.WithdrawalRequestReason;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -123,6 +124,22 @@ public class DefaultApiTest {
     private final DefaultApi api = new DefaultApi();
 
     /**
+     * Approve a pending withdrawal request
+     *
+     * Approve a pending withdrawal request, allowing the transfer of assets to the outside world to proceed. Note that this does not interact with any external systems; it simply updates the status of the withdrawal request in the ledger. Actual transfer of assets must be handled separately.
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void approveLedgerWithdrawRequestTest() throws Exception {
+        Object withdrawalId = null;
+        WithdrawalRequestReason body = null;
+        WithdrawalInitiationResponse response = api.approveLedgerWithdrawRequest(withdrawalId, body);
+
+        // TODO: test validations
+    }
+    /**
      * Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#x27;s orders on specific orderbook
      *
      * 
@@ -136,6 +153,22 @@ public class DefaultApiTest {
         Object userId = null;
         OrderKind orderKind = null;
         ListOrdersResponse response = api.cancelAllOpenOrders(orderBookId, userId, orderKind);
+
+        // TODO: test validations
+    }
+    /**
+     * Cancel a pending withdrawal request
+     *
+     * Cancel a pending withdrawal request, providing an optional reason for the cancellation.
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void cancelLedgerWithdrawRequestTest() throws Exception {
+        Object withdrawalId = null;
+        WithdrawalRequestReason body = null;
+        WithdrawalInitiationResponse response = api.cancelLedgerWithdrawRequest(withdrawalId, body);
 
         // TODO: test validations
     }
@@ -301,6 +334,21 @@ public class DefaultApiTest {
     @Test
     public void getAllAssetPricesTest() throws Exception {
         ListAssetPriceResponse response = api.getAllAssetPrices();
+
+        // TODO: test validations
+    }
+    /**
+     * Get all withdrawal requests
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void getAllWithdrawalRequestsTest() throws Exception {
+        Object status = null;
+        AllWithdrawalInitiationsResponse response = api.getAllWithdrawalRequests(status);
 
         // TODO: test validations
     }
@@ -538,7 +586,24 @@ public class DefaultApiTest {
      */
     @Test
     public void getLedgerWithdrawRequestsBySelfTest() throws Exception {
-        AllWithdrawalInitiationsResponse response = api.getLedgerWithdrawRequestsBySelf();
+        Object status = null;
+        AllWithdrawalInitiationsResponse response = api.getLedgerWithdrawRequestsBySelf(status);
+
+        // TODO: test validations
+    }
+    /**
+     * Get all pending withdrawal requests for this user
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void getLedgerWithdrawRequestsByUserIDTest() throws Exception {
+        Object userId = null;
+        Object status = null;
+        AllWithdrawalInitiationsResponse response = api.getLedgerWithdrawRequestsByUserID(userId, status);
 
         // TODO: test validations
     }
@@ -912,7 +977,24 @@ public class DefaultApiTest {
     public void ledgerWithdrawTest() throws Exception {
         DefundUserRequest body = null;
         Object userId = null;
-        FundUserResponse response = api.ledgerWithdraw(body, userId);
+        Object status = null;
+        FundUserResponse response = api.ledgerWithdraw(body, userId, status);
+
+        // TODO: test validations
+    }
+    /**
+     * Initiate a withdrawal request for this user to the outside world
+     *
+     * Withdraw assets from this user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void ledgerWithdrawRequestTest() throws Exception {
+        DefundUserRequest body = null;
+        Object userId = null;
+        WithdrawalInitiationResponse response = api.ledgerWithdrawRequest(body, userId);
 
         // TODO: test validations
     }
@@ -925,10 +1007,10 @@ public class DefaultApiTest {
      *          if the Api call fails
      */
     @Test
-    public void ledgerWithdrawRequestTest() throws Exception {
+    public void ledgerWithdrawRequestSelfTest() throws Exception {
         DefundUserRequest body = null;
         Object userId = null;
-        WithdrawalInitiationResponse response = api.ledgerWithdrawRequest(body, userId);
+        WithdrawalInitiationResponse response = api.ledgerWithdrawRequestSelf(body, userId);
 
         // TODO: test validations
     }
@@ -1131,6 +1213,22 @@ public class DefaultApiTest {
     public void payLeverageGetAccruedInterestTest() throws Exception {
         PayLeverageAccruedInterestRequest body = null;
         PayLeverageAccruedInterestResponse response = api.payLeverageGetAccruedInterest(body);
+
+        // TODO: test validations
+    }
+    /**
+     * Reject a pending withdrawal request
+     *
+     * Reject a pending withdrawal request, providing a reason for the rejection. Note that this does not interact with any external systems; it simply updates the status of the withdrawal request in the ledger. Actual transfer of assets must be handled separately.
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void rejectLedgerWithdrawRequestTest() throws Exception {
+        WithdrawalRequestReason body = null;
+        Object withdrawalId = null;
+        WithdrawalInitiationResponse response = api.rejectLedgerWithdrawRequest(body, withdrawalId);
 
         // TODO: test validations
     }

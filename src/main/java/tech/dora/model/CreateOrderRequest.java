@@ -23,12 +23,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 import tech.dora.model.OrderKind;
 import tech.dora.model.Side;
-import tech.dora.model.TriggerType;
 /**
  * CreateOrderRequest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-16T09:45:54.663794137+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-25T19:11:03.957235479+01:00[Europe/Paris]")
 
 public class CreateOrderRequest {
   @SerializedName("quantity")
@@ -58,14 +57,14 @@ public class CreateOrderRequest {
   @SerializedName("good_till_date")
   private Object goodTillDate = null;
 
-  @SerializedName("trigger_price")
-  private Object triggerPrice = null;
-
-  @SerializedName("trigger_type")
-  private TriggerType triggerType = null;
-
   @SerializedName("client_order_id")
   private Object clientOrderId = null;
+
+  @SerializedName("stop_loss_price")
+  private Object stopLossPrice = null;
+
+  @SerializedName("take_profit_price")
+  private Object takeProfitPrice = null;
 
   public CreateOrderRequest quantity(Object quantity) {
     this.quantity = quantity;
@@ -229,42 +228,6 @@ public class CreateOrderRequest {
     this.goodTillDate = goodTillDate;
   }
 
-  public CreateOrderRequest triggerPrice(Object triggerPrice) {
-    this.triggerPrice = triggerPrice;
-    return this;
-  }
-
-   /**
-   * Get triggerPrice
-   * @return triggerPrice
-  **/
-  @Schema(description = "")
-  public Object getTriggerPrice() {
-    return triggerPrice;
-  }
-
-  public void setTriggerPrice(Object triggerPrice) {
-    this.triggerPrice = triggerPrice;
-  }
-
-  public CreateOrderRequest triggerType(TriggerType triggerType) {
-    this.triggerType = triggerType;
-    return this;
-  }
-
-   /**
-   * Get triggerType
-   * @return triggerType
-  **/
-  @Schema(description = "")
-  public TriggerType getTriggerType() {
-    return triggerType;
-  }
-
-  public void setTriggerType(TriggerType triggerType) {
-    this.triggerType = triggerType;
-  }
-
   public CreateOrderRequest clientOrderId(Object clientOrderId) {
     this.clientOrderId = clientOrderId;
     return this;
@@ -281,6 +244,42 @@ public class CreateOrderRequest {
 
   public void setClientOrderId(Object clientOrderId) {
     this.clientOrderId = clientOrderId;
+  }
+
+  public CreateOrderRequest stopLossPrice(Object stopLossPrice) {
+    this.stopLossPrice = stopLossPrice;
+    return this;
+  }
+
+   /**
+   * Stop loss price
+   * @return stopLossPrice
+  **/
+  @Schema(description = "Stop loss price")
+  public Object getStopLossPrice() {
+    return stopLossPrice;
+  }
+
+  public void setStopLossPrice(Object stopLossPrice) {
+    this.stopLossPrice = stopLossPrice;
+  }
+
+  public CreateOrderRequest takeProfitPrice(Object takeProfitPrice) {
+    this.takeProfitPrice = takeProfitPrice;
+    return this;
+  }
+
+   /**
+   * Take profit price
+   * @return takeProfitPrice
+  **/
+  @Schema(description = "Take profit price")
+  public Object getTakeProfitPrice() {
+    return takeProfitPrice;
+  }
+
+  public void setTakeProfitPrice(Object takeProfitPrice) {
+    this.takeProfitPrice = takeProfitPrice;
   }
 
 
@@ -302,14 +301,14 @@ public class CreateOrderRequest {
         Objects.equals(this.orderBookId, createOrderRequest.orderBookId) &&
         Objects.equals(this.orderModifiers, createOrderRequest.orderModifiers) &&
         Objects.equals(this.goodTillDate, createOrderRequest.goodTillDate) &&
-        Objects.equals(this.triggerPrice, createOrderRequest.triggerPrice) &&
-        Objects.equals(this.triggerType, createOrderRequest.triggerType) &&
-        Objects.equals(this.clientOrderId, createOrderRequest.clientOrderId);
+        Objects.equals(this.clientOrderId, createOrderRequest.clientOrderId) &&
+        Objects.equals(this.stopLossPrice, createOrderRequest.stopLossPrice) &&
+        Objects.equals(this.takeProfitPrice, createOrderRequest.takeProfitPrice);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(quantity, inverseLeverage, price, kind, side, fromGlobalPosition, orderBookId, orderModifiers, goodTillDate, triggerPrice, triggerType, clientOrderId);
+    return Objects.hash(quantity, inverseLeverage, price, kind, side, fromGlobalPosition, orderBookId, orderModifiers, goodTillDate, clientOrderId, stopLossPrice, takeProfitPrice);
   }
 
 
@@ -327,9 +326,9 @@ public class CreateOrderRequest {
     sb.append("    orderBookId: ").append(toIndentedString(orderBookId)).append("\n");
     sb.append("    orderModifiers: ").append(toIndentedString(orderModifiers)).append("\n");
     sb.append("    goodTillDate: ").append(toIndentedString(goodTillDate)).append("\n");
-    sb.append("    triggerPrice: ").append(toIndentedString(triggerPrice)).append("\n");
-    sb.append("    triggerType: ").append(toIndentedString(triggerType)).append("\n");
     sb.append("    clientOrderId: ").append(toIndentedString(clientOrderId)).append("\n");
+    sb.append("    stopLossPrice: ").append(toIndentedString(stopLossPrice)).append("\n");
+    sb.append("    takeProfitPrice: ").append(toIndentedString(takeProfitPrice)).append("\n");
     sb.append("}");
     return sb.toString();
   }

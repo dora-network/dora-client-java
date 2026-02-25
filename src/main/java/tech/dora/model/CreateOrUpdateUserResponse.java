@@ -25,7 +25,7 @@ import java.io.IOException;
  * Response body for POST /user or PUT /user/{id}: contains the ID of the created or updated user.
  */
 @Schema(description = "Response body for POST /user or PUT /user/{id}: contains the ID of the created or updated user.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-16T09:45:54.663794137+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-25T19:11:03.957235479+01:00[Europe/Paris]")
 
 public class CreateOrUpdateUserResponse {
   @SerializedName("id")

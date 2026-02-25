@@ -12,6 +12,6 @@ Name | Type | Description | Notes
 **orderBookId** | **Object** | Required: the order book to submit the order to | 
 **orderModifiers** | **Object** |  |  [optional]
 **goodTillDate** | **Object** |  |  [optional]
-**triggerPrice** | **Object** |  |  [optional]
-**triggerType** | [**TriggerType**](TriggerType.md) |  |  [optional]
 **clientOrderId** | **Object** | An optional client-provided identifier for the order. |  [optional]
+**stopLossPrice** | **Object** | Stop loss price |  [optional]
+**takeProfitPrice** | **Object** | Take profit price |  [optional]
