@@ -12,6 +12,7 @@
 
 package tech.dora.api;
 
+import tech.dora.model.AllPositionsResponse;
 import tech.dora.model.AllWithdrawalInitiationsResponse;
 import tech.dora.model.AssetKind;
 import tech.dora.model.AssetRequestError;
@@ -23,6 +24,8 @@ import tech.dora.model.ClosePositionRequest;
 import tech.dora.model.ClosePositionResponse;
 import tech.dora.model.CreateAPIKeyRequest;
 import tech.dora.model.CreateAPIKeyResponse;
+import tech.dora.model.CreateConditionalOrderRequest;
+import tech.dora.model.CreateConditionalOrderResponse;
 import tech.dora.model.CreateIntegratorUserRequest;
 import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponse;
@@ -40,6 +43,7 @@ import tech.dora.model.GetOrderBookSummaryResponse;
 import tech.dora.model.GetOrderResponse;
 import tech.dora.model.GetOrderbookStatsResponse;
 import tech.dora.model.GetPoolPriceResponse;
+import tech.dora.model.GetRealizedPnlSettlementsResponse;
 import tech.dora.model.GetTopOfBookResponse;
 import tech.dora.model.GetTransactionResponse;
 import tech.dora.model.GetUserResponse;
@@ -72,6 +76,7 @@ import tech.dora.model.ResponseEnvelope;
 import tech.dora.model.RevokeAPIKeyResponse;
 import tech.dora.model.SettleLeverageAccruedInterestRequest;
 import tech.dora.model.SettleLeverageAccruedInterestResponse;
+import tech.dora.model.SettleRealizedPnlRecordResponse;
 import tech.dora.model.Side;
 import tech.dora.model.StreamAssetPricesResponse;
 import tech.dora.model.StreamAssetsResponse;
@@ -264,6 +269,21 @@ public class DefaultApiTest {
         // TODO: test validations
     }
     /**
+     * Create a new conditional orders
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void createConditionalOrderTest() throws Exception {
+        CreateConditionalOrderRequest body = null;
+        CreateConditionalOrderResponse response = api.createConditionalOrder(body);
+
+        // TODO: test validations
+    }
+    /**
      * Create a new order
      *
      * 
@@ -334,6 +354,20 @@ public class DefaultApiTest {
     @Test
     public void getAllAssetPricesTest() throws Exception {
         ListAssetPriceResponse response = api.getAllAssetPrices();
+
+        // TODO: test validations
+    }
+    /**
+     * Get all users&#x27; positions
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void getAllPositionsTest() throws Exception {
+        AllPositionsResponse response = api.getAllPositions();
 
         // TODO: test validations
     }
@@ -757,6 +791,26 @@ public class DefaultApiTest {
         // TODO: test validations
     }
     /**
+     * Get realized P&amp;L settlements with filters
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void getRealizedPnlSettlementsTest() throws Exception {
+        Object userId = null;
+        Object tenantId = null;
+        Object positionId = null;
+        Object createdAfter = null;
+        Object settledBefore = null;
+        Object isSettled = null;
+        GetRealizedPnlSettlementsResponse response = api.getRealizedPnlSettlements(userId, tenantId, positionId, createdAfter, settledBefore, isSettled);
+
+        // TODO: test validations
+    }
+    /**
      * Get a trade by ID
      *
      * 
@@ -821,9 +875,10 @@ public class DefaultApiTest {
         Object txKinds = null;
         Object start = null;
         Object end = null;
+        Object tenantId = null;
         Object page = null;
         Object limit = null;
-        ListTransactionsResponse response = api.getTransactions(pools, userIds, txKinds, start, end, page, limit);
+        ListTransactionsResponse response = api.getTransactions(pools, userIds, txKinds, start, end, tenantId, page, limit);
 
         // TODO: test validations
     }
@@ -1275,6 +1330,21 @@ public class DefaultApiTest {
     public void settleLeverageAccruedInterestTest() throws Exception {
         SettleLeverageAccruedInterestRequest body = null;
         SettleLeverageAccruedInterestResponse response = api.settleLeverageAccruedInterest(body);
+
+        // TODO: test validations
+    }
+    /**
+     * Mark a realized P&amp;L settlement as settled
+     *
+     * 
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void settleRealizedPnlRecordTest() throws Exception {
+        Object settlementId = null;
+        SettleRealizedPnlRecordResponse response = api.settleRealizedPnlRecord(settlementId);
 
         // TODO: test validations
     }

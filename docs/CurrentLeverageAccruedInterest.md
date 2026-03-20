@@ -7,3 +7,5 @@ Name | Type | Description | Notes
 **assetId** | **Object** |  | 
 **positionId** | **Object** |  | 
 **currentAccruedInterestUsd** | **Object** |  | 
+**assetName** | **Object** |  |  [optional]
+**assetSymbol** | **Object** |  |  [optional]

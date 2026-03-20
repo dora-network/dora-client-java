@@ -25,7 +25,7 @@ import java.io.IOException;
  * UserConfig
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-25T19:11:03.957235479+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-03-20T17:06:55.829868863+01:00[Europe/Paris]")
 
 public class UserConfig {
   @SerializedName("id")
@@ -48,6 +48,18 @@ public class UserConfig {
 
   @SerializedName("notifications_enabled")
   private Object notificationsEnabled = null;
+
+  @SerializedName("allow_email_notifications")
+  private Object allowEmailNotifications = null;
+
+  @SerializedName("allow_liquidations_notifications")
+  private Object allowLiquidationsNotifications = null;
+
+  @SerializedName("allow_deposit_withdrawal_notifications")
+  private Object allowDepositWithdrawalNotifications = null;
+
+  @SerializedName("allow_orders_notifications")
+  private Object allowOrdersNotifications = null;
 
   public UserConfig id(Object id) {
     this.id = id;
@@ -175,6 +187,78 @@ public class UserConfig {
     this.notificationsEnabled = notificationsEnabled;
   }
 
+  public UserConfig allowEmailNotifications(Object allowEmailNotifications) {
+    this.allowEmailNotifications = allowEmailNotifications;
+    return this;
+  }
+
+   /**
+   * Get allowEmailNotifications
+   * @return allowEmailNotifications
+  **/
+  @Schema(required = true, description = "")
+  public Object getAllowEmailNotifications() {
+    return allowEmailNotifications;
+  }
+
+  public void setAllowEmailNotifications(Object allowEmailNotifications) {
+    this.allowEmailNotifications = allowEmailNotifications;
+  }
+
+  public UserConfig allowLiquidationsNotifications(Object allowLiquidationsNotifications) {
+    this.allowLiquidationsNotifications = allowLiquidationsNotifications;
+    return this;
+  }
+
+   /**
+   * Get allowLiquidationsNotifications
+   * @return allowLiquidationsNotifications
+  **/
+  @Schema(required = true, description = "")
+  public Object getAllowLiquidationsNotifications() {
+    return allowLiquidationsNotifications;
+  }
+
+  public void setAllowLiquidationsNotifications(Object allowLiquidationsNotifications) {
+    this.allowLiquidationsNotifications = allowLiquidationsNotifications;
+  }
+
+  public UserConfig allowDepositWithdrawalNotifications(Object allowDepositWithdrawalNotifications) {
+    this.allowDepositWithdrawalNotifications = allowDepositWithdrawalNotifications;
+    return this;
+  }
+
+   /**
+   * Get allowDepositWithdrawalNotifications
+   * @return allowDepositWithdrawalNotifications
+  **/
+  @Schema(required = true, description = "")
+  public Object getAllowDepositWithdrawalNotifications() {
+    return allowDepositWithdrawalNotifications;
+  }
+
+  public void setAllowDepositWithdrawalNotifications(Object allowDepositWithdrawalNotifications) {
+    this.allowDepositWithdrawalNotifications = allowDepositWithdrawalNotifications;
+  }
+
+  public UserConfig allowOrdersNotifications(Object allowOrdersNotifications) {
+    this.allowOrdersNotifications = allowOrdersNotifications;
+    return this;
+  }
+
+   /**
+   * Get allowOrdersNotifications
+   * @return allowOrdersNotifications
+  **/
+  @Schema(required = true, description = "")
+  public Object getAllowOrdersNotifications() {
+    return allowOrdersNotifications;
+  }
+
+  public void setAllowOrdersNotifications(Object allowOrdersNotifications) {
+    this.allowOrdersNotifications = allowOrdersNotifications;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -191,12 +275,16 @@ public class UserConfig {
         Objects.equals(this.createdAt, userConfig.createdAt) &&
         Objects.equals(this.updatedAt, userConfig.updatedAt) &&
         Objects.equals(this.showTutorialCards, userConfig.showTutorialCards) &&
-        Objects.equals(this.notificationsEnabled, userConfig.notificationsEnabled);
+        Objects.equals(this.notificationsEnabled, userConfig.notificationsEnabled) &&
+        Objects.equals(this.allowEmailNotifications, userConfig.allowEmailNotifications) &&
+        Objects.equals(this.allowLiquidationsNotifications, userConfig.allowLiquidationsNotifications) &&
+        Objects.equals(this.allowDepositWithdrawalNotifications, userConfig.allowDepositWithdrawalNotifications) &&
+        Objects.equals(this.allowOrdersNotifications, userConfig.allowOrdersNotifications);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, photoUrl, timezone, createdAt, updatedAt, showTutorialCards, notificationsEnabled);
+    return Objects.hash(id, photoUrl, timezone, createdAt, updatedAt, showTutorialCards, notificationsEnabled, allowEmailNotifications, allowLiquidationsNotifications, allowDepositWithdrawalNotifications, allowOrdersNotifications);
   }
 
 
@@ -212,6 +300,10 @@ public class UserConfig {
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
     sb.append("    showTutorialCards: ").append(toIndentedString(showTutorialCards)).append("\n");
     sb.append("    notificationsEnabled: ").append(toIndentedString(notificationsEnabled)).append("\n");
+    sb.append("    allowEmailNotifications: ").append(toIndentedString(allowEmailNotifications)).append("\n");
+    sb.append("    allowLiquidationsNotifications: ").append(toIndentedString(allowLiquidationsNotifications)).append("\n");
+    sb.append("    allowDepositWithdrawalNotifications: ").append(toIndentedString(allowDepositWithdrawalNotifications)).append("\n");
+    sb.append("    allowOrdersNotifications: ").append(toIndentedString(allowOrdersNotifications)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -10,3 +10,7 @@ Name | Type | Description | Notes
 **updatedAt** | **Object** |  | 
 **showTutorialCards** | **Object** |  | 
 **notificationsEnabled** | **Object** |  | 
+**allowEmailNotifications** | **Object** |  | 
+**allowLiquidationsNotifications** | **Object** |  | 
+**allowDepositWithdrawalNotifications** | **Object** |  | 
+**allowOrdersNotifications** | **Object** |  | 

@@ -18,3 +18,4 @@ Name | Type | Description | Notes
 **assetsConfig** | **Object** | Configuration for the assets in the order |  [optional]
 **stopLossPrice** | **Object** | Stop loss price |  [optional]
 **takeProfitPrice** | **Object** | Take profit price |  [optional]
+**restrictions** | **Object** | Map of restriction keys to Restriction objects |  [optional]

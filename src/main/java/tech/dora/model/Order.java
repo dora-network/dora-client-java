@@ -29,7 +29,7 @@ import tech.dora.model.TriggerType;
  * Order
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-25T19:11:03.957235479+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-03-20T17:06:55.829868863+01:00[Europe/Paris]")
 
 public class Order {
   @SerializedName("order_id")
@@ -61,6 +61,12 @@ public class Order {
 
   @SerializedName("filled_notional")
   private Object filledNotional = null;
+
+  @SerializedName("locked_quantity")
+  private Object lockedQuantity = null;
+
+  @SerializedName("impending_borrows_quantity")
+  private Object impendingBorrowsQuantity = null;
 
   @SerializedName("last_update_at")
   private Object lastUpdateAt = null;
@@ -284,6 +290,42 @@ public class Order {
     this.filledNotional = filledNotional;
   }
 
+  public Order lockedQuantity(Object lockedQuantity) {
+    this.lockedQuantity = lockedQuantity;
+    return this;
+  }
+
+   /**
+   * Balance locked to ensure limit buy orders have sufficient balance to be fulfilled
+   * @return lockedQuantity
+  **/
+  @Schema(required = true, description = "Balance locked to ensure limit buy orders have sufficient balance to be fulfilled")
+  public Object getLockedQuantity() {
+    return lockedQuantity;
+  }
+
+  public void setLockedQuantity(Object lockedQuantity) {
+    this.lockedQuantity = lockedQuantity;
+  }
+
+  public Order impendingBorrowsQuantity(Object impendingBorrowsQuantity) {
+    this.impendingBorrowsQuantity = impendingBorrowsQuantity;
+    return this;
+  }
+
+   /**
+   * Borrows locked from the liquidity pool to ensure limit short sell orders have sufficient balance to be fulfilled
+   * @return impendingBorrowsQuantity
+  **/
+  @Schema(required = true, description = "Borrows locked from the liquidity pool to ensure limit short sell orders have sufficient balance to be fulfilled")
+  public Object getImpendingBorrowsQuantity() {
+    return impendingBorrowsQuantity;
+  }
+
+  public void setImpendingBorrowsQuantity(Object impendingBorrowsQuantity) {
+    this.impendingBorrowsQuantity = impendingBorrowsQuantity;
+  }
+
   public Order lastUpdateAt(Object lastUpdateAt) {
     this.lastUpdateAt = lastUpdateAt;
     return this;
@@ -293,7 +335,7 @@ public class Order {
    * Get lastUpdateAt
    * @return lastUpdateAt
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public Object getLastUpdateAt() {
     return lastUpdateAt;
   }
@@ -556,6 +598,8 @@ public class Order {
         Objects.equals(this.originalQuantity, order.originalQuantity) &&
         Objects.equals(this.filledQuantity, order.filledQuantity) &&
         Objects.equals(this.filledNotional, order.filledNotional) &&
+        Objects.equals(this.lockedQuantity, order.lockedQuantity) &&
+        Objects.equals(this.impendingBorrowsQuantity, order.impendingBorrowsQuantity) &&
         Objects.equals(this.lastUpdateAt, order.lastUpdateAt) &&
         Objects.equals(this.openedAt, order.openedAt) &&
         Objects.equals(this.inverseLeverage, order.inverseLeverage) &&
@@ -574,7 +618,7 @@ public class Order {
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderId, orderBookId, kind, originalPrice, avgFillPrice, cancelledQuantity, openQuantity, originalQuantity, filledQuantity, filledNotional, lastUpdateAt, openedAt, inverseLeverage, side, status, userId, orderModifiers, positionId, orderInfo, goodTillDate, triggerPrice, triggerType, clientOrderId, parentOrderId);
+    return Objects.hash(orderId, orderBookId, kind, originalPrice, avgFillPrice, cancelledQuantity, openQuantity, originalQuantity, filledQuantity, filledNotional, lockedQuantity, impendingBorrowsQuantity, lastUpdateAt, openedAt, inverseLeverage, side, status, userId, orderModifiers, positionId, orderInfo, goodTillDate, triggerPrice, triggerType, clientOrderId, parentOrderId);
   }
 
 
@@ -593,6 +637,8 @@ public class Order {
     sb.append("    originalQuantity: ").append(toIndentedString(originalQuantity)).append("\n");
     sb.append("    filledQuantity: ").append(toIndentedString(filledQuantity)).append("\n");
     sb.append("    filledNotional: ").append(toIndentedString(filledNotional)).append("\n");
+    sb.append("    lockedQuantity: ").append(toIndentedString(lockedQuantity)).append("\n");
+    sb.append("    impendingBorrowsQuantity: ").append(toIndentedString(impendingBorrowsQuantity)).append("\n");
     sb.append("    lastUpdateAt: ").append(toIndentedString(lastUpdateAt)).append("\n");
     sb.append("    openedAt: ").append(toIndentedString(openedAt)).append("\n");
     sb.append("    inverseLeverage: ").append(toIndentedString(inverseLeverage)).append("\n");

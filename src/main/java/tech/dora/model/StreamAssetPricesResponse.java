@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * Map of asset prices keyed by asset ID. Format: {\&quot;asset_id\&quot;: {\&quot;asset_id\&quot;: \&quot;uuid\&quot;, \&quot;price\&quot;: \&quot;decimal\&quot;, \&quot;time\&quot;: \&quot;date-time\&quot;}}
  */
 @Schema(description = "Map of asset prices keyed by asset ID. Format: {\"asset_id\": {\"asset_id\": \"uuid\", \"price\": \"decimal\", \"time\": \"date-time\"}}")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-25T19:11:03.957235479+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-03-20T17:06:55.829868863+01:00[Europe/Paris]")
 
 public class StreamAssetPricesResponse {
 

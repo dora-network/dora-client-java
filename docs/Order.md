@@ -13,7 +13,9 @@ Name | Type | Description | Notes
 **originalQuantity** | **Object** | The original quantity of the order when it was created. | 
 **filledQuantity** | **Object** | Quantity that has been filled so far. | 
 **filledNotional** | **Object** | Quote quantity that has been filled so far. | 
-**lastUpdateAt** | **Object** |  |  [optional]
+**lockedQuantity** | **Object** | Balance locked to ensure limit buy orders have sufficient balance to be fulfilled | 
+**impendingBorrowsQuantity** | **Object** | Borrows locked from the liquidity pool to ensure limit short sell orders have sufficient balance to be fulfilled | 
+**lastUpdateAt** | **Object** |  | 
 **openedAt** | **Object** |  | 
 **inverseLeverage** | **Object** |  | 
 **side** | [**Side**](Side.md) |  | 

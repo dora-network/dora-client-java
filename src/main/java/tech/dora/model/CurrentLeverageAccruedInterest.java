@@ -25,7 +25,7 @@ import java.io.IOException;
  * CurrentLeverageAccruedInterest
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-25T19:11:03.957235479+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-03-20T17:06:55.829868863+01:00[Europe/Paris]")
 
 public class CurrentLeverageAccruedInterest {
   @SerializedName("user_id")
@@ -39,6 +39,12 @@ public class CurrentLeverageAccruedInterest {
 
   @SerializedName("current_accrued_interest_usd")
   private Object currentAccruedInterestUsd = null;
+
+  @SerializedName("asset_name")
+  private Object assetName = null;
+
+  @SerializedName("asset_symbol")
+  private Object assetSymbol = null;
 
   public CurrentLeverageAccruedInterest userId(Object userId) {
     this.userId = userId;
@@ -112,6 +118,42 @@ public class CurrentLeverageAccruedInterest {
     this.currentAccruedInterestUsd = currentAccruedInterestUsd;
   }
 
+  public CurrentLeverageAccruedInterest assetName(Object assetName) {
+    this.assetName = assetName;
+    return this;
+  }
+
+   /**
+   * Get assetName
+   * @return assetName
+  **/
+  @Schema(description = "")
+  public Object getAssetName() {
+    return assetName;
+  }
+
+  public void setAssetName(Object assetName) {
+    this.assetName = assetName;
+  }
+
+  public CurrentLeverageAccruedInterest assetSymbol(Object assetSymbol) {
+    this.assetSymbol = assetSymbol;
+    return this;
+  }
+
+   /**
+   * Get assetSymbol
+   * @return assetSymbol
+  **/
+  @Schema(description = "")
+  public Object getAssetSymbol() {
+    return assetSymbol;
+  }
+
+  public void setAssetSymbol(Object assetSymbol) {
+    this.assetSymbol = assetSymbol;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -125,12 +167,14 @@ public class CurrentLeverageAccruedInterest {
     return Objects.equals(this.userId, currentLeverageAccruedInterest.userId) &&
         Objects.equals(this.assetId, currentLeverageAccruedInterest.assetId) &&
         Objects.equals(this.positionId, currentLeverageAccruedInterest.positionId) &&
-        Objects.equals(this.currentAccruedInterestUsd, currentLeverageAccruedInterest.currentAccruedInterestUsd);
+        Objects.equals(this.currentAccruedInterestUsd, currentLeverageAccruedInterest.currentAccruedInterestUsd) &&
+        Objects.equals(this.assetName, currentLeverageAccruedInterest.assetName) &&
+        Objects.equals(this.assetSymbol, currentLeverageAccruedInterest.assetSymbol);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, assetId, positionId, currentAccruedInterestUsd);
+    return Objects.hash(userId, assetId, positionId, currentAccruedInterestUsd, assetName, assetSymbol);
   }
 
 
@@ -143,6 +187,8 @@ public class CurrentLeverageAccruedInterest {
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
     sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
     sb.append("    currentAccruedInterestUsd: ").append(toIndentedString(currentAccruedInterestUsd)).append("\n");
+    sb.append("    assetName: ").append(toIndentedString(assetName)).append("\n");
+    sb.append("    assetSymbol: ").append(toIndentedString(assetSymbol)).append("\n");
     sb.append("}");
     return sb.toString();
   }

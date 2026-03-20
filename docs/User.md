@@ -19,3 +19,7 @@ Name | Type | Description | Notes
 **showTutorialCards** | **Object** |  | 
 **notificationsEnabled** | **Object** |  | 
 **tenantId** | **Object** |  | 
+**allowEmailNotifications** | **Object** |  | 
+**allowLiquidationsNotifications** | **Object** |  | 
+**allowDepositWithdrawalNotifications** | **Object** |  | 
+**allowOrdersNotifications** | **Object** |  | 

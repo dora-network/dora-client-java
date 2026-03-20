@@ -27,7 +27,7 @@ import tech.dora.model.UpdateFieldString;
  * Request body for PUT /user/{id}/config: update a user changeable details only. Other properties can only be changed by an admin following a manual request by the user.
  */
 @Schema(description = "Request body for PUT /user/{id}/config: update a user changeable details only. Other properties can only be changed by an admin following a manual request by the user.")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-02-25T19:11:03.957235479+01:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2026-03-20T17:06:55.829868863+01:00[Europe/Paris]")
 
 public class UpdateUserConfigRequest {
   @SerializedName("photo_url")
@@ -41,6 +41,18 @@ public class UpdateUserConfigRequest {
 
   @SerializedName("notifications_enabled")
   private UpdateFieldBoolean notificationsEnabled = null;
+
+  @SerializedName("allow_email_notifications")
+  private UpdateFieldBoolean allowEmailNotifications = null;
+
+  @SerializedName("allow_liquidations_notifications")
+  private UpdateFieldBoolean allowLiquidationsNotifications = null;
+
+  @SerializedName("allow_deposit_withdrawal_notifications")
+  private UpdateFieldBoolean allowDepositWithdrawalNotifications = null;
+
+  @SerializedName("allow_orders_notifications")
+  private UpdateFieldBoolean allowOrdersNotifications = null;
 
   public UpdateUserConfigRequest photoUrl(UpdateFieldString photoUrl) {
     this.photoUrl = photoUrl;
@@ -114,6 +126,78 @@ public class UpdateUserConfigRequest {
     this.notificationsEnabled = notificationsEnabled;
   }
 
+  public UpdateUserConfigRequest allowEmailNotifications(UpdateFieldBoolean allowEmailNotifications) {
+    this.allowEmailNotifications = allowEmailNotifications;
+    return this;
+  }
+
+   /**
+   * Optional: Whether to allow email notifications.
+   * @return allowEmailNotifications
+  **/
+  @Schema(description = "Optional: Whether to allow email notifications.")
+  public UpdateFieldBoolean getAllowEmailNotifications() {
+    return allowEmailNotifications;
+  }
+
+  public void setAllowEmailNotifications(UpdateFieldBoolean allowEmailNotifications) {
+    this.allowEmailNotifications = allowEmailNotifications;
+  }
+
+  public UpdateUserConfigRequest allowLiquidationsNotifications(UpdateFieldBoolean allowLiquidationsNotifications) {
+    this.allowLiquidationsNotifications = allowLiquidationsNotifications;
+    return this;
+  }
+
+   /**
+   * Optional: Whether to allow liquidations notifications.
+   * @return allowLiquidationsNotifications
+  **/
+  @Schema(description = "Optional: Whether to allow liquidations notifications.")
+  public UpdateFieldBoolean getAllowLiquidationsNotifications() {
+    return allowLiquidationsNotifications;
+  }
+
+  public void setAllowLiquidationsNotifications(UpdateFieldBoolean allowLiquidationsNotifications) {
+    this.allowLiquidationsNotifications = allowLiquidationsNotifications;
+  }
+
+  public UpdateUserConfigRequest allowDepositWithdrawalNotifications(UpdateFieldBoolean allowDepositWithdrawalNotifications) {
+    this.allowDepositWithdrawalNotifications = allowDepositWithdrawalNotifications;
+    return this;
+  }
+
+   /**
+   * Optional: Whether to allow deposit/withdrawal notifications.
+   * @return allowDepositWithdrawalNotifications
+  **/
+  @Schema(description = "Optional: Whether to allow deposit/withdrawal notifications.")
+  public UpdateFieldBoolean getAllowDepositWithdrawalNotifications() {
+    return allowDepositWithdrawalNotifications;
+  }
+
+  public void setAllowDepositWithdrawalNotifications(UpdateFieldBoolean allowDepositWithdrawalNotifications) {
+    this.allowDepositWithdrawalNotifications = allowDepositWithdrawalNotifications;
+  }
+
+  public UpdateUserConfigRequest allowOrdersNotifications(UpdateFieldBoolean allowOrdersNotifications) {
+    this.allowOrdersNotifications = allowOrdersNotifications;
+    return this;
+  }
+
+   /**
+   * Optional: Whether to allow orders notifications.
+   * @return allowOrdersNotifications
+  **/
+  @Schema(description = "Optional: Whether to allow orders notifications.")
+  public UpdateFieldBoolean getAllowOrdersNotifications() {
+    return allowOrdersNotifications;
+  }
+
+  public void setAllowOrdersNotifications(UpdateFieldBoolean allowOrdersNotifications) {
+    this.allowOrdersNotifications = allowOrdersNotifications;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -127,12 +211,16 @@ public class UpdateUserConfigRequest {
     return Objects.equals(this.photoUrl, updateUserConfigRequest.photoUrl) &&
         Objects.equals(this.timezone, updateUserConfigRequest.timezone) &&
         Objects.equals(this.showTutorialCards, updateUserConfigRequest.showTutorialCards) &&
-        Objects.equals(this.notificationsEnabled, updateUserConfigRequest.notificationsEnabled);
+        Objects.equals(this.notificationsEnabled, updateUserConfigRequest.notificationsEnabled) &&
+        Objects.equals(this.allowEmailNotifications, updateUserConfigRequest.allowEmailNotifications) &&
+        Objects.equals(this.allowLiquidationsNotifications, updateUserConfigRequest.allowLiquidationsNotifications) &&
+        Objects.equals(this.allowDepositWithdrawalNotifications, updateUserConfigRequest.allowDepositWithdrawalNotifications) &&
+        Objects.equals(this.allowOrdersNotifications, updateUserConfigRequest.allowOrdersNotifications);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(photoUrl, timezone, showTutorialCards, notificationsEnabled);
+    return Objects.hash(photoUrl, timezone, showTutorialCards, notificationsEnabled, allowEmailNotifications, allowLiquidationsNotifications, allowDepositWithdrawalNotifications, allowOrdersNotifications);
   }
 
 
@@ -145,6 +233,10 @@ public class UpdateUserConfigRequest {
     sb.append("    timezone: ").append(toIndentedString(timezone)).append("\n");
     sb.append("    showTutorialCards: ").append(toIndentedString(showTutorialCards)).append("\n");
     sb.append("    notificationsEnabled: ").append(toIndentedString(notificationsEnabled)).append("\n");
+    sb.append("    allowEmailNotifications: ").append(toIndentedString(allowEmailNotifications)).append("\n");
+    sb.append("    allowLiquidationsNotifications: ").append(toIndentedString(allowLiquidationsNotifications)).append("\n");
+    sb.append("    allowDepositWithdrawalNotifications: ").append(toIndentedString(allowDepositWithdrawalNotifications)).append("\n");
+    sb.append("    allowOrdersNotifications: ").append(toIndentedString(allowOrdersNotifications)).append("\n");
     sb.append("}");
     return sb.toString();
   }
