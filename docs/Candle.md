@@ -1,12 +1,19 @@
+
+
 # Candle
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**orderBookId** | **Object** |  | 
-**startTimestamp** | **Object** |  | 
-**open** | **Object** |  | 
-**high** | **Object** |  | 
-**low** | **Object** |  | 
-**close** | **Object** |  | 
-**volume** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**orderBookId** | **UUID** |  |  |
+|**startTimestamp** | **OffsetDateTime** |  |  |
+|**open** | **String** |  |  |
+|**high** | **String** |  |  |
+|**low** | **String** |  |  |
+|**close** | **String** |  |  |
+|**volume** | **String** |  |  |
+
+
+

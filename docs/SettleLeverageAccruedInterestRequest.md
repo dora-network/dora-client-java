@@ -1,7 +1,14 @@
+
+
 # SettleLeverageAccruedInterestRequest
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**assetId** | **Object** |  |  [optional]
-**positionId** | **Object** |  |  [optional]
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**assetId** | **UUID** |  |  [optional] |
+|**positionId** | **UUID** |  |  [optional] |
+
+
+

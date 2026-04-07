@@ -1,6 +1,13 @@
+
+
 # WithdrawalRequestReason
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**reason** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**reason** | **String** |  |  |
+
+
+

@@ -1,26 +1,33 @@
+
+
 # OrderBook
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**orderBookId** | **Object** |  | 
-**orderBookSeq** | **Object** |  |  [optional]
-**baseQuantity** | **Object** |  | 
-**baseAssetId** | **Object** |  | 
-**createdAt** | **Object** |  | 
-**displayName** | **Object** |  | 
-**baseAssetFractionalizedUnits** | **Object** |  | 
-**quoteAssetFractionalizedUnits** | **Object** |  | 
-**feeFactor** | **Object** |  | 
-**initialAssetsRatio** | **Object** |  | 
-**maturityAt** | **Object** |  | 
-**quoteQuantity** | **Object** |  | 
-**quoteAssetId** | **Object** |  | 
-**sharesQuantity** | **Object** |  | 
-**status** | [**OrderBookStatus**](OrderBookStatus.md) |  | 
-**tickSize** | **Object** |  | 
-**updatedAt** | **Object** |  | 
-**haltedAt** | **Object** |  |  [optional]
-**terminatedAt** | **Object** |  |  [optional]
-**poolUpdatedAt** | **Object** |  |  [optional]
-**sharesAssetId** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**orderBookId** | **UUID** |  |  |
+|**orderBookSeq** | **Long** |  |  [optional] |
+|**baseQuantity** | **BigDecimal** |  |  |
+|**baseAssetId** | **UUID** |  |  |
+|**createdAt** | **OffsetDateTime** |  |  |
+|**displayName** | **String** |  |  |
+|**baseAssetFractionalizedUnits** | **Long** |  |  |
+|**quoteAssetFractionalizedUnits** | **Long** |  |  |
+|**feeFactor** | **BigDecimal** |  |  |
+|**initialAssetsRatio** | **BigDecimal** |  |  |
+|**maturityAt** | **OffsetDateTime** |  |  |
+|**quoteQuantity** | **BigDecimal** |  |  |
+|**quoteAssetId** | **UUID** |  |  |
+|**sharesQuantity** | **BigDecimal** |  |  |
+|**status** | **OrderBookStatus** |  |  |
+|**tickSize** | **BigDecimal** |  |  |
+|**updatedAt** | **OffsetDateTime** |  |  |
+|**haltedAt** | **OffsetDateTime** |  |  [optional] |
+|**terminatedAt** | **OffsetDateTime** |  |  [optional] |
+|**poolUpdatedAt** | **OffsetDateTime** |  |  [optional] |
+|**sharesAssetId** | **UUID** |  |  |
+
+
+

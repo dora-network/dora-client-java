@@ -1,10 +1,17 @@
+
+
 # IsolatedCollateral
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**globalPositionId** | **Object** |  | 
-**isolatedPositionId** | **Object** |  | 
-**transactionId** | **Object** |  | 
-**assetId** | **Object** |  | 
-**quantity** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**globalPositionId** | **UUID** |  |  |
+|**isolatedPositionId** | **UUID** |  |  |
+|**transactionId** | **UUID** |  |  |
+|**assetId** | **UUID** |  |  |
+|**quantity** | **String** |  |  |
+
+
+

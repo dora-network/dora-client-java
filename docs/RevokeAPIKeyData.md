@@ -1,9 +1,16 @@
+
+
 # RevokeAPIKeyData
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**userId** | **Object** |  | 
-**keyId** | **Object** |  | 
-**label** | **Object** |  | 
-**isActive** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**userId** | **UUID** |  |  |
+|**keyId** | **String** |  |  |
+|**label** | **String** |  |  |
+|**isActive** | **Boolean** |  |  |
+
+
+

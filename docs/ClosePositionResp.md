@@ -1,6 +1,13 @@
+
+
 # ClosePositionResp
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**orderId** | **Object** |  |  [optional]
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**orderId** | **UUID** |  |  [optional] |
+
+
+

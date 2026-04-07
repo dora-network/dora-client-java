@@ -1,9 +1,16 @@
+
+
 # Collateral
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**positionId** | **Object** |  | 
-**transactionId** | **Object** |  | 
-**assetId** | **Object** |  | 
-**quantity** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**positionId** | **UUID** |  |  |
+|**transactionId** | **UUID** |  |  |
+|**assetId** | **UUID** |  |  |
+|**quantity** | **String** |  |  |
+
+
+

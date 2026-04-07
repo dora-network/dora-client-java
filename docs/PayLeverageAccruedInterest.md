@@ -1,9 +1,16 @@
+
+
 # PayLeverageAccruedInterest
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**transactionId** | **Object** |  | 
-**assetId** | **Object** |  | 
-**positionId** | **Object** |  | 
-**currentAccruedInterestUsd** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**transactionId** | **UUID** |  |  |
+|**assetId** | **UUID** |  |  |
+|**positionId** | **UUID** |  |  |
+|**currentAccruedInterestUsd** | **String** |  |  |
+
+
+

@@ -1,7 +1,14 @@
+
+
 # UnitedPosition
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**globalPositionId** | **Object** |  | 
-**transactionIds** | **Object** |  |  [optional]
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**globalPositionId** | **UUID** |  |  |
+|**transactionIds** | **List&lt;UUID&gt;** |  |  [optional] |
+
+
+

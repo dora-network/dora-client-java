@@ -1,8 +1,15 @@
+
+
 # UserExistsResponse
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**emailExists** | **Object** |  | 
-**firebaseSet** | **Object** |  | 
-**shouldCreateUser** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**emailExists** | **Boolean** |  |  |
+|**firebaseSet** | **Boolean** |  |  |
+|**shouldCreateUser** | **Boolean** |  |  |
+
+
+

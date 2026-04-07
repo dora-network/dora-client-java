@@ -1,14 +1,21 @@
+
+
 # UserCouponPayment
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**userId** | **Object** |  | 
-**positionId** | **Object** |  | 
-**assetId** | **Object** |  | 
-**couponPaymentId** | **Object** |  | 
-**seq** | **Object** |  | 
-**pending** | **Object** |  | 
-**completed** | **Object** |  | 
-**startedAt** | **Object** |  | 
-**endedAt** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**userId** | **UUID** |  |  |
+|**positionId** | **UUID** |  |  |
+|**assetId** | **UUID** |  |  |
+|**couponPaymentId** | **UUID** |  |  |
+|**seq** | **Long** |  |  |
+|**pending** | **String** |  |  |
+|**completed** | **String** |  |  |
+|**startedAt** | **OffsetDateTime** |  |  |
+|**endedAt** | **OffsetDateTime** |  |  |
+
+
+

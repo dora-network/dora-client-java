@@ -1,12 +1,19 @@
+
+
 # CreateIntegratorUserRequest
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**email** | **Object** |  |  [optional]
-**name** | **Object** |  |  [optional]
-**nativeAssetId** | **Object** |  |  [optional]
-**photoUrl** | **Object** |  |  [optional]
-**provider** | **Object** |  |  [optional]
-**providerId** | **Object** |  |  [optional]
-**timezone** | **Object** |  |  [optional]
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**email** | **String** |  |  [optional] |
+|**name** | **String** |  |  [optional] |
+|**nativeAssetId** | **UUID** |  |  [optional] |
+|**photoUrl** | **String** |  |  [optional] |
+|**provider** | **String** |  |  [optional] |
+|**providerId** | **UUID** |  |  [optional] |
+|**timezone** | **String** |  |  [optional] |
+
+
+

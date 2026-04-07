@@ -1,8 +1,15 @@
+
+
 # BalanceTransfer
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**fromPositionId** | **Object** |  | 
-**toPositionId** | **Object** |  | 
-**transactionId** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**fromPositionId** | **UUID** |  |  |
+|**toPositionId** | **UUID** |  |  |
+|**transactionId** | **UUID** |  |  |
+
+
+

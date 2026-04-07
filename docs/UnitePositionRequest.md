@@ -1,6 +1,13 @@
+
+
 # UnitePositionRequest
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**globalPositionId** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**globalPositionId** | **UUID** |  |  |
+
+
+

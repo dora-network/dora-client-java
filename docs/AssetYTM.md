@@ -1,9 +1,16 @@
+
+
 # AssetYTM
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**assetId** | **Object** |  | 
-**currentTime** | **Object** |  | 
-**currentPrice** | **Object** |  | 
-**yieldToMaturity** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**assetId** | **UUID** |  |  |
+|**currentTime** | **OffsetDateTime** |  |  |
+|**currentPrice** | **String** |  |  |
+|**yieldToMaturity** | **String** |  |  |
+
+
+

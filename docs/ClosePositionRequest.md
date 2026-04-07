@@ -1,7 +1,14 @@
+
+
 # ClosePositionRequest
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**positionId** | **Object** |  | 
-**orderBookId** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**positionId** | **UUID** |  |  |
+|**orderBookId** | **UUID** |  |  |
+
+
+

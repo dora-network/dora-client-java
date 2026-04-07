@@ -1,26 +1,33 @@
+
+
 # Asset
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**id** | **Object** |  | 
-**collateralWeight** | **Object** |  | 
-**createdAt** | **Object** |  | 
-**decimals** | **Object** |  | 
-**fractionalizedUnits** | **Object** |  | 
-**description** | **Object** |  | 
-**liquidationWeight** | **Object** |  | 
-**maxSupply** | **Object** |  | 
-**maxUtilization** | **Object** |  | 
-**name** | **Object** |  | 
-**symbol** | **Object** |  | 
-**kind** | [**AssetKind**](AssetKind.md) |  | 
-**yield** | **Object** |  |  [optional]
-**canAddLiquidity** | **Object** |  | 
-**canDirectBorrow** | **Object** |  | 
-**canOnboard** | **Object** |  | 
-**canTrade** | **Object** |  | 
-**canVirtualBorrow** | **Object** |  | 
-**maxLeverage** | **Object** |  | 
-**leverageInterestRate** | **Object** |  |  [optional]
-**bond** | [**Bond**](Bond.md) |  |  [optional]
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**id** | **UUID** |  |  |
+|**collateralWeight** | **BigDecimal** |  |  |
+|**createdAt** | **OffsetDateTime** |  |  |
+|**decimals** | **Integer** |  |  |
+|**fractionalizedUnits** | **Integer** |  |  |
+|**description** | **String** |  |  |
+|**liquidationWeight** | **BigDecimal** |  |  |
+|**maxSupply** | **Integer** |  |  |
+|**maxUtilization** | **Integer** |  |  |
+|**name** | **String** |  |  |
+|**symbol** | **String** |  |  |
+|**kind** | **AssetKind** |  |  |
+|**yield** | **BigDecimal** |  |  [optional] |
+|**canAddLiquidity** | **Boolean** |  |  |
+|**canDirectBorrow** | **Boolean** |  |  |
+|**canOnboard** | **Boolean** |  |  |
+|**canTrade** | **Boolean** |  |  |
+|**canVirtualBorrow** | **Boolean** |  |  |
+|**maxLeverage** | **BigDecimal** |  |  |
+|**leverageInterestRate** | **BigDecimal** |  |  [optional] |
+|**bond** | [**Bond**](Bond.md) |  |  [optional] |
+
+
+

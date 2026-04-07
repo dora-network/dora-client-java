@@ -1,11 +1,18 @@
+
+
 # Liquidity
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**orderBookId** | **Object** |  | 
-**positionId** | **Object** |  | 
-**transactionId** | **Object** |  | 
-**baseQuantity** | **Object** |  | 
-**quoteQuantity** | **Object** |  | 
-**sharesQuantity** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**orderBookId** | **UUID** |  |  |
+|**positionId** | **UUID** |  |  |
+|**transactionId** | **UUID** |  |  |
+|**baseQuantity** | **String** |  |  |
+|**quoteQuantity** | **String** |  |  |
+|**sharesQuantity** | **String** |  |  |
+
+
+

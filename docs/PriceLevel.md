@@ -1,7 +1,14 @@
+
+
 # PriceLevel
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**price** | **Object** |  | 
-**quantity** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**price** | **String** |  |  |
+|**quantity** | **String** |  |  |
+
+
+

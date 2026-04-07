@@ -1,27 +1,55 @@
+
+
 # TransactionKind
 
 ## Enum
 
+
 * `ACCRUE_INTEREST` (value: `"ACCRUE_INTEREST"`)
+
 * `ADD_LIQUIDITY` (value: `"ADD_LIQUIDITY"`)
+
 * `BOND_MATURE` (value: `"BOND_MATURE"`)
+
 * `CLAIM_INTEREST` (value: `"CLAIM_INTEREST"`)
+
 * `CREDIT` (value: `"CREDIT"`)
+
 * `DEBIT` (value: `"DEBIT"`)
+
 * `EXTERNAL_DEPOSIT` (value: `"EXTERNAL_DEPOSIT"`)
+
 * `EXTERNAL_WITHDRAW` (value: `"EXTERNAL_WITHDRAW"`)
+
 * `FILL` (value: `"FILL"`)
+
 * `LENDING_INTEREST_ACCRUAL` (value: `"LENDING_INTEREST_ACCRUAL"`)
+
 * `LIQUIDATE` (value: `"LIQUIDATE"`)
+
 * `MATCH_ORDER` (value: `"MATCH_ORDER"`)
+
 * `PAY_INTEREST` (value: `"PAY_INTEREST"`)
+
 * `SUBTRACT_LIQUIDITY` (value: `"SUBTRACT_LIQUIDITY"`)
+
 * `REPAY` (value: `"REPAY"`)
+
 * `SUPPLY` (value: `"SUPPLY"`)
+
 * `WITHDRAW` (value: `"WITHDRAW"`)
+
 * `ISOLATE_COLLATERAL` (value: `"ISOLATE_COLLATERAL"`)
+
 * `ISOLATE_POSITION` (value: `"ISOLATE_POSITION"`)
+
 * `UNITE_POSITION` (value: `"UNITE_POSITION"`)
+
 * `COLLATERALIZE` (value: `"COLLATERALIZE"`)
+
 * `DE_COLLATERALIZE` (value: `"DE-COLLATERALIZE"`)
+
 * `COUPON_PAYMENT` (value: `"COUPON_PAYMENT"`)
+
+
+

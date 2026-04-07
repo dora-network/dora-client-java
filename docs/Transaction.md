@@ -1,15 +1,22 @@
+
+
 # Transaction
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**id** | **Object** |  | 
-**createdAt** | **Object** |  | 
-**kind** | [**TransactionKind**](TransactionKind.md) |  | 
-**asset0** | **Object** |  | 
-**quantity0** | **Object** |  | 
-**quantity1** | **Object** |  | 
-**asset1** | **Object** |  | 
-**userId** | **Object** |  | 
-**adminUserId** | **Object** |  | 
-**orderSide** | [**Side**](Side.md) |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**id** | **UUID** |  |  |
+|**createdAt** | **OffsetDateTime** |  |  |
+|**kind** | **TransactionKind** |  |  |
+|**asset0** | **UUID** |  |  |
+|**quantity0** | **String** |  |  |
+|**quantity1** | **String** |  |  |
+|**asset1** | **UUID** |  |  |
+|**userId** | **UUID** |  |  |
+|**adminUserId** | **UUID** |  |  |
+|**orderSide** | **Side** |  |  |
+
+
+

@@ -1,6 +1,13 @@
+
+
 # PositionResponse
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**portfolio** | [**Portfolio**](Portfolio.md) |  |  [optional]
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**portfolio** | [**Portfolio**](Portfolio.md) |  |  [optional] |
+
+
+

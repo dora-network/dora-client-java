@@ -1,16 +1,23 @@
+
+
 # UserConfig
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**id** | **Object** |  | 
-**photoUrl** | **Object** |  |  [optional]
-**timezone** | **Object** | User&#x27;s timezone, e.g., &#x27;America/New_York&#x27;, or an offset. |  [optional]
-**createdAt** | **Object** |  | 
-**updatedAt** | **Object** |  | 
-**showTutorialCards** | **Object** |  | 
-**notificationsEnabled** | **Object** |  | 
-**allowEmailNotifications** | **Object** |  | 
-**allowLiquidationsNotifications** | **Object** |  | 
-**allowDepositWithdrawalNotifications** | **Object** |  | 
-**allowOrdersNotifications** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**id** | **UUID** |  |  |
+|**photoUrl** | **String** |  |  [optional] |
+|**timezone** | **String** | User&#39;s timezone, e.g., &#39;America/New_York&#39;, or an offset. |  [optional] |
+|**createdAt** | **OffsetDateTime** |  |  |
+|**updatedAt** | **OffsetDateTime** |  |  |
+|**showTutorialCards** | **Boolean** |  |  |
+|**notificationsEnabled** | **Boolean** |  |  |
+|**allowEmailNotifications** | **Boolean** |  |  |
+|**allowLiquidationsNotifications** | **Boolean** |  |  |
+|**allowDepositWithdrawalNotifications** | **Boolean** |  |  |
+|**allowOrdersNotifications** | **Boolean** |  |  |
+
+
+

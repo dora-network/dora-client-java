@@ -1,7 +1,14 @@
+
+
 # DefundUserRequest
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**assetId** | **Object** |  | 
-**quantity** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**assetId** | **UUID** |  |  |
+|**quantity** | **String** |  |  |
+
+
+

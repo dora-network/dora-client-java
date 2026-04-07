@@ -1,101 +1,104 @@
 # DefaultApi
 
-All URIs are relative to *https://staging.dora.co/*
+All URIs are relative to *https://staging.dora.co*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**approveLedgerWithdrawRequest**](DefaultApi.md#approveLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/approve | Approve a pending withdrawal request
-[**cancelAllOpenOrders**](DefaultApi.md#cancelAllOpenOrders) | **DELETE** /v1/orders | Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#x27;s orders on specific orderbook
-[**cancelLedgerWithdrawRequest**](DefaultApi.md#cancelLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request
-[**cancelOrderById**](DefaultApi.md#cancelOrderById) | **DELETE** /v1/orders/{order_id} | Cancel an order by ID
-[**checkUserEmailExists**](DefaultApi.md#checkUserEmailExists) | **GET** /v1/user/exists | Check whether a user email exists
-[**claimLeverageGetAccruedInterest**](DefaultApi.md#claimLeverageGetAccruedInterest) | **POST** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user
-[**closeIsolatedPosition**](DefaultApi.md#closeIsolatedPosition) | **POST** /v1/positions/close | Close isolated positions, repaying the borrowed
-[**createAPIKeyForUser**](DefaultApi.md#createAPIKeyForUser) | **POST** /v1/user/apikey | Create apikey for a user
-[**createAPIKeyForUserID**](DefaultApi.md#createAPIKeyForUserID) | **POST** /v1/user/{user_id}/apikey | Create apikey for a user
-[**createConditionalOrder**](DefaultApi.md#createConditionalOrder) | **POST** /v1/orders/conditional | Create a new conditional orders
-[**createOrder**](DefaultApi.md#createOrder) | **POST** /v1/orders | Create a new order
-[**createUser**](DefaultApi.md#createUser) | **POST** /v1/integrators/user | Create a new user
-[**deleteUser**](DefaultApi.md#deleteUser) | **DELETE** /v1/user/{user_id} | Delete user by ID
-[**getAPIKeysForUserID**](DefaultApi.md#getAPIKeysForUserID) | **GET** /v1/user/{user_id}/apikey | Get user&#x27;s api keys: admin or integrator only
-[**getAllAssetPrices**](DefaultApi.md#getAllAssetPrices) | **GET** /v1/price | Get the current price of all assets
-[**getAllPositions**](DefaultApi.md#getAllPositions) | **GET** /v1/ledger/positions | Get all users&#x27; positions
-[**getAllWithdrawalRequests**](DefaultApi.md#getAllWithdrawalRequests) | **GET** /v1/ledger/withdraw/requests | Get all withdrawal requests
-[**getAssetById**](DefaultApi.md#getAssetById) | **GET** /v1/assets/{asset_id} | Get asset by ID
-[**getAssetPrice**](DefaultApi.md#getAssetPrice) | **GET** /v1/price/asset/{asset_id} | Get the current price of an asset
-[**getAssetYTMById**](DefaultApi.md#getAssetYTMById) | **GET** /v1/assets/{asset_id}/ytm | Get annualized yield to maturity for a bond asset
-[**getAssetsStream**](DefaultApi.md#getAssetsStream) | **GET** /v1/assets/stream | Get all inserts or updates for assets
-[**getCandleData**](DefaultApi.md#getCandleData) | **GET** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook
-[**getCouponPaymentsByAssetId**](DefaultApi.md#getCouponPaymentsByAssetId) | **GET** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset
-[**getL1Depth**](DefaultApi.md#getL1Depth) | **GET** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth)
-[**getL2Depth**](DefaultApi.md#getL2Depth) | **GET** /v1/orderbooks/{order_book_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth)
-[**getL3Depth**](DefaultApi.md#getL3Depth) | **GET** /v1/orderbooks/{order_book_id}/L3 | Get all open orders for a specific orderbook (L3 market depth)
-[**getLedgerBalancesSelf**](DefaultApi.md#getLedgerBalancesSelf) | **GET** /v1/ledger/balances/self | Get your own available, locked, and borrowed assets
-[**getLedgerInterestSelf**](DefaultApi.md#getLedgerInterestSelf) | **GET** /v1/ledger/interest/self | Get your own interest
-[**getLedgerModule**](DefaultApi.md#getLedgerModule) | **GET** /v1/ledger/module | Get the entire module object, including unborrowed leverage assets and total leverage trackers
-[**getLedgerModuleByAsset**](DefaultApi.md#getLedgerModuleByAsset) | **GET** /v1/ledger/module/{asset_id} | Get the module object for a single asset ID
-[**getLedgerPositionsSelf**](DefaultApi.md#getLedgerPositionsSelf) | **GET** /v1/ledger/positions/self | Get your own positions
-[**getLedgerValueSelf**](DefaultApi.md#getLedgerValueSelf) | **GET** /v1/ledger/value/self | Get your own available, locked, and borrowed USD value; and realized and unrealized PnL
-[**getLedgerWithdrawRequestsBySelf**](DefaultApi.md#getLedgerWithdrawRequestsBySelf) | **GET** /v1/ledger/withdraw/requests/self | Get all pending withdrawal requests for the logged in user
-[**getLedgerWithdrawRequestsByUserID**](DefaultApi.md#getLedgerWithdrawRequestsByUserID) | **GET** /v1/ledger/withdraw/requests/{user_id} | Get all pending withdrawal requests for this user
-[**getOrderById**](DefaultApi.md#getOrderById) | **GET** /v1/orders/{order_id} | Get order by ID
-[**getOrderbookById**](DefaultApi.md#getOrderbookById) | **GET** /v1/orderbooks/{order_book_id} | Get orderbook by ID
-[**getOrderbookDepth**](DefaultApi.md#getOrderbookDepth) | **GET** /v1/orderbooks/{order_book_id}/depth | Get the aggregated price levels for a specific orderbook (L2 market depth)
-[**getOrderbookOrders**](DefaultApi.md#getOrderbookOrders) | **GET** /v1/orderbooks/{order_book_id}/orders | Get all open orders for a specific orderbook (L3 market depth)
-[**getOrderbookStats**](DefaultApi.md#getOrderbookStats) | **GET** /v1/orderbooks/{order_book_id}/stats | Get orderbook stats
-[**getOrderbookStatsStream**](DefaultApi.md#getOrderbookStatsStream) | **GET** /v1/orderbooks/{order_book_id}/stats/stream | Orderbook stats stream
-[**getOrderbookSummary**](DefaultApi.md#getOrderbookSummary) | **GET** /v1/orderbooks/{order_book_id}/summary | Get summary of an orderbook
-[**getOrderbookTop**](DefaultApi.md#getOrderbookTop) | **GET** /v1/orderbooks/{order_book_id}/top | Get the top price levels for a specific orderbook (L1 market depth)
-[**getPLForSelfByAccount**](DefaultApi.md#getPLForSelfByAccount) | **GET** /v1/pl/self | Get account-by-account PL breakdown for the logged in user
-[**getPoolPrice**](DefaultApi.md#getPoolPrice) | **GET** /v1/price/pool/{pool_id} | Get the current price of a pool
-[**getRealizedPnlSettlements**](DefaultApi.md#getRealizedPnlSettlements) | **GET** /v1/realized_pnl_settlements | Get realized P&amp;L settlements with filters
-[**getTradeById**](DefaultApi.md#getTradeById) | **GET** /v1/trades/{trade_id} | Get a trade by ID
-[**getTrades**](DefaultApi.md#getTrades) | **GET** /v1/trades | Get a filtered, paginated list of trades
-[**getTransactionById**](DefaultApi.md#getTransactionById) | **GET** /v1/transactions/{transaction_id} | Get a transaction by ID
-[**getTransactions**](DefaultApi.md#getTransactions) | **GET** /v1/transactions | Get a filtered, paginated list of transactions
-[**getUserById**](DefaultApi.md#getUserById) | **GET** /v1/user/{user_id} | Get user by ID (admin only)
-[**getUserCouponPaymentsStream**](DefaultApi.md#getUserCouponPaymentsStream) | **GET** /v1/user/{user_id}/coupon_payments/stream | Stream user&#x27;s coupon payment accruals in real time
-[**getUserLedgerStream**](DefaultApi.md#getUserLedgerStream) | **GET** /v1/user/{user_id}/ledger/stream | Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates
-[**getUserOrderUpdatesStream**](DefaultApi.md#getUserOrderUpdatesStream) | **GET** /v1/user/{user_id}/orders/{order_book_id}/updates/stream | Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
-[**getUserOrdersUpdatesStreamAll**](DefaultApi.md#getUserOrdersUpdatesStreamAll) | **GET** /v1/user/{user_id}/orders/all/updates/stream | Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
-[**getUserSelf**](DefaultApi.md#getUserSelf) | **GET** /v1/user/self | Get user details for the authenticated user
-[**getUserTransactionsStream**](DefaultApi.md#getUserTransactionsStream) | **GET** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
-[**getUsersAPIKeys**](DefaultApi.md#getUsersAPIKeys) | **GET** /v1/user/apikey | Get user&#x27;s api keys
-[**ledgerDeposit**](DefaultApi.md#ledgerDeposit) | **POST** /v1/ledger/deposit/{user_id} | Deposit assets into this user&#x27;s account from the outside world
-[**ledgerWithdraw**](DefaultApi.md#ledgerWithdraw) | **POST** /v1/ledger/withdraw/{user_id} | Withdraw assets from this user to the outside world
-[**ledgerWithdrawRequest**](DefaultApi.md#ledgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{user_id} | Initiate a withdrawal request for this user to the outside world
-[**ledgerWithdrawRequestSelf**](DefaultApi.md#ledgerWithdrawRequestSelf) | **POST** /v1/ledger/withdraw/requests/self | Initiate a withdrawal request for the logged in user to the outside world
-[**leverageGetAccruedInterestByUser**](DefaultApi.md#leverageGetAccruedInterestByUser) | **GET** /v1/leverage/accrued_interest/self | Get current accrued leverage interest for the user
-[**leverageIsolateCollateral**](DefaultApi.md#leverageIsolateCollateral) | **POST** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#x27;s global collateral
-[**leverageSupply**](DefaultApi.md#leverageSupply) | **POST** /v1/leverage/supply | Supply leverage for a specific asset
-[**leverageUnite**](DefaultApi.md#leverageUnite) | **POST** /v1/leverage/unite | Combines all isolated positions into a single global position
-[**leverageWithdraw**](DefaultApi.md#leverageWithdraw) | **POST** /v1/leverage/withdraw | Withdraw leverage for a specific asset
-[**liquidityAdd**](DefaultApi.md#liquidityAdd) | **POST** /v1/liquidity/pool/{pool_id}/add | Add liquidity to a pool
-[**liquiditySubtract**](DefaultApi.md#liquiditySubtract) | **POST** /v1/liquidity/pool/{pool_id}/remove | Subtract liquidity from a pool
-[**listAssets**](DefaultApi.md#listAssets) | **GET** /v1/assets | List assets
-[**listOrderBooks**](DefaultApi.md#listOrderBooks) | **GET** /v1/orderbooks | List order books
-[**listOrders**](DefaultApi.md#listOrders) | **GET** /v1/orders | List all orders
-[**listPositionAccountsSelf**](DefaultApi.md#listPositionAccountsSelf) | **GET** /v1/user/self/position_accounts | List all position accounts for the authenticated user
-[**payLeverageGetAccruedInterest**](DefaultApi.md#payLeverageGetAccruedInterest) | **POST** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user
-[**rejectLedgerWithdrawRequest**](DefaultApi.md#rejectLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/reject | Reject a pending withdrawal request
-[**revokeAPIKeyForUser**](DefaultApi.md#revokeAPIKeyForUser) | **PUT** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user
-[**revokeAPIKeyForUserID**](DefaultApi.md#revokeAPIKeyForUserID) | **PUT** /v1/user/{user_id}/apikey/{key_id}/revoke | Revoke apikey for a user: admin or integrator only
-[**settleLeverageAccruedInterest**](DefaultApi.md#settleLeverageAccruedInterest) | **POST** /v1/leverage/accrued_interest/settle | Settle current accrued leverage interest for a specific user
-[**settleRealizedPnlRecord**](DefaultApi.md#settleRealizedPnlRecord) | **PUT** /v1/realized_pnl_settlements/{settlement_id} | Mark a realized P&amp;L settlement as settled
-[**streamAssetPrices**](DefaultApi.md#streamAssetPrices) | **GET** /v1/prices/stream | Stream real-time asset prices as map objects
-[**streamCandleData**](DefaultApi.md#streamCandleData) | **GET** /v1/charts/{order_book_id}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
-[**streamOrderBookBalances**](DefaultApi.md#streamOrderBookBalances) | **GET** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
-[**streamOrderbookOpenOrders**](DefaultApi.md#streamOrderbookOpenOrders) | **GET** /v1/orderbooks/{order_book_id}/open/stream | Get a snapshot of open orders in an order book and open a stream for real-time updates
-[**streamTrades**](DefaultApi.md#streamTrades) | **GET** /v1/trades/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
-[**transferAvailableBalances**](DefaultApi.md#transferAvailableBalances) | **POST** /v1/positions/transfer_balances | Transfer available balance between a user&#x27;s accounts (e.g. global to isolated position)
-[**updateUserConfig**](DefaultApi.md#updateUserConfig) | **PUT** /v1/user/{user_id}/config | Update user configuration by ID
-[**updateUserConfigSelf**](DefaultApi.md#updateUserConfigSelf) | **PUT** /v1/user/config/self | Update user configuration for the authenticated user
-[**validateSubmitOrder**](DefaultApi.md#validateSubmitOrder) | **POST** /v1/orders/validate | Validate submit order request data
-[**verifyUser**](DefaultApi.md#verifyUser) | **PUT** /v1/user/{user_id}/verify | Verify a user by ID
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**approveLedgerWithdrawRequest**](DefaultApi.md#approveLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/approve | Approve a pending withdrawal request |
+| [**cancelAllOpenOrders**](DefaultApi.md#cancelAllOpenOrders) | **DELETE** /v1/orders | Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#39;s orders on specific orderbook |
+| [**cancelLedgerWithdrawRequest**](DefaultApi.md#cancelLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request |
+| [**cancelOrderById**](DefaultApi.md#cancelOrderById) | **DELETE** /v1/orders/{order_id} | Cancel an order by ID |
+| [**checkUserEmailExists**](DefaultApi.md#checkUserEmailExists) | **GET** /v1/user/exists | Check whether a user email exists |
+| [**claimLeverageGetAccruedInterest**](DefaultApi.md#claimLeverageGetAccruedInterest) | **POST** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user |
+| [**closeIsolatedPosition**](DefaultApi.md#closeIsolatedPosition) | **POST** /v1/positions/close | Close isolated positions, repaying the borrowed |
+| [**createAPIKeyForUser**](DefaultApi.md#createAPIKeyForUser) | **POST** /v1/user/apikey | Create apikey for a user |
+| [**createAPIKeyForUserID**](DefaultApi.md#createAPIKeyForUserID) | **POST** /v1/user/{user_id}/apikey | Create apikey for a user |
+| [**createConditionalOrder**](DefaultApi.md#createConditionalOrder) | **POST** /v1/orders/conditional | Create a new conditional orders |
+| [**createOrder**](DefaultApi.md#createOrder) | **POST** /v1/orders | Create a new order |
+| [**createUser**](DefaultApi.md#createUser) | **POST** /v1/integrators/user | Create a new user |
+| [**deleteUser**](DefaultApi.md#deleteUser) | **DELETE** /v1/user/{user_id} | Delete user by ID |
+| [**getAPIKeysForUserID**](DefaultApi.md#getAPIKeysForUserID) | **GET** /v1/user/{user_id}/apikey | Get user&#39;s api keys: admin or integrator only |
+| [**getAllAssetPrices**](DefaultApi.md#getAllAssetPrices) | **GET** /v1/price | Get the current price of all assets |
+| [**getAllPositions**](DefaultApi.md#getAllPositions) | **GET** /v1/ledger/positions | Get all users&#39; positions |
+| [**getAllWithdrawalRequests**](DefaultApi.md#getAllWithdrawalRequests) | **GET** /v1/ledger/withdraw/requests | Get all withdrawal requests |
+| [**getAssetById**](DefaultApi.md#getAssetById) | **GET** /v1/assets/{asset_id} | Get asset by ID |
+| [**getAssetPrice**](DefaultApi.md#getAssetPrice) | **GET** /v1/price/asset/{asset_id} | Get the current price of an asset |
+| [**getAssetYTMById**](DefaultApi.md#getAssetYTMById) | **GET** /v1/assets/{asset_id}/ytm | Get annualized yield to maturity for a bond asset |
+| [**getAssetsStream**](DefaultApi.md#getAssetsStream) | **GET** /v1/assets/stream | Get all inserts or updates for assets |
+| [**getCandleData**](DefaultApi.md#getCandleData) | **GET** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook |
+| [**getCouponPaymentsByAssetId**](DefaultApi.md#getCouponPaymentsByAssetId) | **GET** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset |
+| [**getL1Depth**](DefaultApi.md#getL1Depth) | **GET** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth) |
+| [**getL2Depth**](DefaultApi.md#getL2Depth) | **GET** /v1/orderbooks/{order_book_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth) |
+| [**getL3Depth**](DefaultApi.md#getL3Depth) | **GET** /v1/orderbooks/{order_book_id}/L3 | Get all open orders for a specific orderbook (L3 market depth) |
+| [**getLedgerBalancesSelf**](DefaultApi.md#getLedgerBalancesSelf) | **GET** /v1/ledger/balances/self | Get your own available, locked, and borrowed assets |
+| [**getLedgerInterestSelf**](DefaultApi.md#getLedgerInterestSelf) | **GET** /v1/ledger/interest/self | Get your own interest |
+| [**getLedgerModule**](DefaultApi.md#getLedgerModule) | **GET** /v1/ledger/module | Get the entire module object, including unborrowed leverage assets and total leverage trackers |
+| [**getLedgerModuleByAsset**](DefaultApi.md#getLedgerModuleByAsset) | **GET** /v1/ledger/module/{asset_id} | Get the module object for a single asset ID |
+| [**getLedgerPositionsSelf**](DefaultApi.md#getLedgerPositionsSelf) | **GET** /v1/ledger/positions/self | Get your own positions |
+| [**getLedgerValueSelf**](DefaultApi.md#getLedgerValueSelf) | **GET** /v1/ledger/value/self | Get your own available, locked, and borrowed USD value; and realized and unrealized PnL |
+| [**getLedgerWithdrawRequestsBySelf**](DefaultApi.md#getLedgerWithdrawRequestsBySelf) | **GET** /v1/ledger/withdraw/requests/self | Get all pending withdrawal requests for the logged in user |
+| [**getLedgerWithdrawRequestsByUserID**](DefaultApi.md#getLedgerWithdrawRequestsByUserID) | **GET** /v1/ledger/withdraw/requests/{user_id} | Get all pending withdrawal requests for this user |
+| [**getOrderById**](DefaultApi.md#getOrderById) | **GET** /v1/orders/{order_id} | Get order by ID |
+| [**getOrderbookById**](DefaultApi.md#getOrderbookById) | **GET** /v1/orderbooks/{order_book_id} | Get orderbook by ID |
+| [**getOrderbookDepth**](DefaultApi.md#getOrderbookDepth) | **GET** /v1/orderbooks/{order_book_id}/depth | Get the aggregated price levels for a specific orderbook (L2 market depth) |
+| [**getOrderbookOrders**](DefaultApi.md#getOrderbookOrders) | **GET** /v1/orderbooks/{order_book_id}/orders | Get all open orders for a specific orderbook (L3 market depth) |
+| [**getOrderbookStats**](DefaultApi.md#getOrderbookStats) | **GET** /v1/orderbooks/{order_book_id}/stats | Get orderbook stats |
+| [**getOrderbookStatsStream**](DefaultApi.md#getOrderbookStatsStream) | **GET** /v1/orderbooks/{order_book_id}/stats/stream | Orderbook stats stream |
+| [**getOrderbookSummary**](DefaultApi.md#getOrderbookSummary) | **GET** /v1/orderbooks/{order_book_id}/summary | Get summary of an orderbook |
+| [**getOrderbookTop**](DefaultApi.md#getOrderbookTop) | **GET** /v1/orderbooks/{order_book_id}/top | Get the top price levels for a specific orderbook (L1 market depth) |
+| [**getPLForSelfByAccount**](DefaultApi.md#getPLForSelfByAccount) | **GET** /v1/pl/self | Get account-by-account PL breakdown for the logged in user |
+| [**getPoolPrice**](DefaultApi.md#getPoolPrice) | **GET** /v1/price/pool/{pool_id} | Get the current price of a pool |
+| [**getRealizedPnlSettlements**](DefaultApi.md#getRealizedPnlSettlements) | **GET** /v1/realized_pnl_settlements | Get realized P&amp;L settlements with filters |
+| [**getTradeById**](DefaultApi.md#getTradeById) | **GET** /v1/trades/{trade_id} | Get a trade by ID |
+| [**getTrades**](DefaultApi.md#getTrades) | **GET** /v1/trades | Get a filtered, paginated list of trades |
+| [**getTransactionById**](DefaultApi.md#getTransactionById) | **GET** /v1/transactions/{transaction_id} | Get a transaction by ID |
+| [**getTransactions**](DefaultApi.md#getTransactions) | **GET** /v1/transactions | Get a filtered, paginated list of transactions |
+| [**getTransactionsSettlements**](DefaultApi.md#getTransactionsSettlements) | **GET** /v1/transactions/settlements | Get transactions settlements with filters |
+| [**getUserById**](DefaultApi.md#getUserById) | **GET** /v1/user/{user_id} | Get user by ID (admin only) |
+| [**getUserCouponPaymentsStream**](DefaultApi.md#getUserCouponPaymentsStream) | **GET** /v1/user/{user_id}/coupon_payments/stream | Stream user&#39;s coupon payment accruals in real time |
+| [**getUserLedgerStream**](DefaultApi.md#getUserLedgerStream) | **GET** /v1/user/{user_id}/ledger/stream | Get a snapshot of user&#39;s ledger updates since a specific time, and opens a stream for further updates |
+| [**getUserOrderUpdatesStream**](DefaultApi.md#getUserOrderUpdatesStream) | **GET** /v1/user/{user_id}/orders/{order_book_id}/updates/stream | Get a snapshot of user&#39;s order updates for the given order book since a specific time, and opens a stream for further updates |
+| [**getUserOrdersUpdatesStreamAll**](DefaultApi.md#getUserOrdersUpdatesStreamAll) | **GET** /v1/user/{user_id}/orders/all/updates/stream | Get a snapshot of user&#39;s order updates across all order books since a specific time, and opens a stream for further updates |
+| [**getUserSelf**](DefaultApi.md#getUserSelf) | **GET** /v1/user/self | Get user details for the authenticated user |
+| [**getUserTransactionsStream**](DefaultApi.md#getUserTransactionsStream) | **GET** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#39;s executed transactions since a specific time, and opens a stream for further updates |
+| [**getUsersAPIKeys**](DefaultApi.md#getUsersAPIKeys) | **GET** /v1/user/apikey | Get user&#39;s api keys |
+| [**ledgerDeposit**](DefaultApi.md#ledgerDeposit) | **POST** /v1/ledger/deposit/{user_id} | Deposit assets into this user&#39;s account from the outside world |
+| [**ledgerWithdraw**](DefaultApi.md#ledgerWithdraw) | **POST** /v1/ledger/withdraw/{user_id} | Withdraw assets from this user to the outside world |
+| [**ledgerWithdrawRequest**](DefaultApi.md#ledgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{user_id} | Initiate a withdrawal request for this user to the outside world |
+| [**ledgerWithdrawRequestSelf**](DefaultApi.md#ledgerWithdrawRequestSelf) | **POST** /v1/ledger/withdraw/requests/self | Initiate a withdrawal request for the logged in user to the outside world |
+| [**leverageGetAccruedInterestByUser**](DefaultApi.md#leverageGetAccruedInterestByUser) | **GET** /v1/leverage/accrued_interest/self | Get current accrued leverage interest for the user |
+| [**leverageIsolateCollateral**](DefaultApi.md#leverageIsolateCollateral) | **POST** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#39;s global collateral |
+| [**leverageSupply**](DefaultApi.md#leverageSupply) | **POST** /v1/leverage/supply | Supply leverage for a specific asset |
+| [**leverageUnite**](DefaultApi.md#leverageUnite) | **POST** /v1/leverage/unite | Combines all isolated positions into a single global position |
+| [**leverageWithdraw**](DefaultApi.md#leverageWithdraw) | **POST** /v1/leverage/withdraw | Withdraw leverage for a specific asset |
+| [**liquidityAdd**](DefaultApi.md#liquidityAdd) | **POST** /v1/liquidity/pool/{pool_id}/add | Add liquidity to a pool |
+| [**liquiditySubtract**](DefaultApi.md#liquiditySubtract) | **POST** /v1/liquidity/pool/{pool_id}/remove | Subtract liquidity from a pool |
+| [**listAssets**](DefaultApi.md#listAssets) | **GET** /v1/assets | List assets |
+| [**listOrderBooks**](DefaultApi.md#listOrderBooks) | **GET** /v1/orderbooks | List order books |
+| [**listOrders**](DefaultApi.md#listOrders) | **GET** /v1/orders | List all orders |
+| [**listPositionAccountsSelf**](DefaultApi.md#listPositionAccountsSelf) | **GET** /v1/user/self/position_accounts | List all position accounts for the authenticated user |
+| [**payLeverageGetAccruedInterest**](DefaultApi.md#payLeverageGetAccruedInterest) | **POST** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user |
+| [**rejectLedgerWithdrawRequest**](DefaultApi.md#rejectLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/reject | Reject a pending withdrawal request |
+| [**revokeAPIKeyForUser**](DefaultApi.md#revokeAPIKeyForUser) | **PUT** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user |
+| [**revokeAPIKeyForUserID**](DefaultApi.md#revokeAPIKeyForUserID) | **PUT** /v1/user/{user_id}/apikey/{key_id}/revoke | Revoke apikey for a user: admin or integrator only |
+| [**settleLeverageAccruedInterest**](DefaultApi.md#settleLeverageAccruedInterest) | **POST** /v1/leverage/accrued_interest/settle | Settle current accrued leverage interest for a specific user |
+| [**settleRealizedPnlRecord**](DefaultApi.md#settleRealizedPnlRecord) | **PUT** /v1/realized_pnl_settlements/{settlement_id} | Mark a realized P&amp;L settlement as settled |
+| [**settleTransactionsSettlements**](DefaultApi.md#settleTransactionsSettlements) | **PUT** /v1/transactions/settlements | Settle multiple transactions settlements in batch |
+| [**streamAssetPrices**](DefaultApi.md#streamAssetPrices) | **GET** /v1/prices/stream | Stream real-time asset prices as map objects |
+| [**streamCandleData**](DefaultApi.md#streamCandleData) | **GET** /v1/charts/{order_book_id}/candle/stream | Get a snapshot of candlestick data from date provided, and open a stream for real-time updates |
+| [**streamOrderBookBalances**](DefaultApi.md#streamOrderBookBalances) | **GET** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates |
+| [**streamOrderbookOpenOrders**](DefaultApi.md#streamOrderbookOpenOrders) | **GET** /v1/orderbooks/{order_book_id}/open/stream | Get a snapshot of open orders in an order book and open a stream for real-time updates |
+| [**streamTrades**](DefaultApi.md#streamTrades) | **GET** /v1/trades/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates |
+| [**transferAvailableBalances**](DefaultApi.md#transferAvailableBalances) | **POST** /v1/positions/transfer_balances | Transfer available balance between a user&#39;s accounts (e.g. global to isolated position) |
+| [**updateUserConfig**](DefaultApi.md#updateUserConfig) | **PUT** /v1/user/{user_id}/config | Update user configuration by ID |
+| [**updateUserConfigSelf**](DefaultApi.md#updateUserConfigSelf) | **PUT** /v1/user/config/self | Update user configuration for the authenticated user |
+| [**validateSubmitOrder**](DefaultApi.md#validateSubmitOrder) | **POST** /v1/orders/validate | Validate submit order request data |
+| [**verifyUser**](DefaultApi.md#verifyUser) | **PUT** /v1/user/{user_id}/verify | Verify a user by ID |
 
-<a name="approveLedgerWithdrawRequest"></a>
+
+<a id="approveLedgerWithdrawRequest"></a>
 # **approveLedgerWithdrawRequest**
-> WithdrawalInitiationResponse approveLedgerWithdrawRequest(withdrawalId, body)
+> WithdrawalInitiationResponseEnvelope approveLedgerWithdrawRequest(withdrawalId, withdrawalRequestReason)
 
 Approve a pending withdrawal request
 
@@ -104,114 +107,154 @@ Approve a pending withdrawal request, allowing the transfer of assets to the out
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object withdrawalId = null; // Object | 
-WithdrawalRequestReason body = new WithdrawalRequestReason(); // WithdrawalRequestReason | 
-try {
-    WithdrawalInitiationResponse result = apiInstance.approveLedgerWithdrawRequest(withdrawalId, body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#approveLedgerWithdrawRequest");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID withdrawalId = UUID.randomUUID(); // UUID | 
+    WithdrawalRequestReason withdrawalRequestReason = new WithdrawalRequestReason(); // WithdrawalRequestReason | 
+    try {
+      WithdrawalInitiationResponseEnvelope result = apiInstance.approveLedgerWithdrawRequest(withdrawalId, withdrawalRequestReason);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#approveLedgerWithdrawRequest");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **withdrawalId** | [**Object**](.md)|  |
- **body** | [**WithdrawalRequestReason**](WithdrawalRequestReason.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **withdrawalId** | **UUID**|  | |
+| **withdrawalRequestReason** | [**WithdrawalRequestReason**](WithdrawalRequestReason.md)|  | [optional] |
 
 ### Return type
 
-[**WithdrawalInitiationResponse**](WithdrawalInitiationResponse.md)
+[**WithdrawalInitiationResponseEnvelope**](WithdrawalInitiationResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="cancelAllOpenOrders"></a>
-# **cancelAllOpenOrders**
-> ListOrdersResponse cancelAllOpenOrders(orderBookId, userId, orderKind)
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Withdrawal request approved successfully |  -  |
+| **400** | Bad request, e.g. invalid withdrawal ID format or request is not in a pending state |  -  |
+| **404** | Withdrawal request not found |  -  |
+| **403** | Forbidden, user does not have permission to approve this withdrawal request |  -  |
+| **500** | Internal server error |  -  |
 
-Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#x27;s orders on specific orderbook
+<a id="cancelAllOpenOrders"></a>
+# **cancelAllOpenOrders**
+> ListOrdersResponseEnvelope cancelAllOpenOrders(orderBookId, userId, orderKind)
+
+Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#39;s orders on specific orderbook
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-Object userId = null; // Object | 
-OrderKind orderKind = new OrderKind(); // OrderKind | 
-try {
-    ListOrdersResponse result = apiInstance.cancelAllOpenOrders(orderBookId, userId, orderKind);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#cancelAllOpenOrders");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String orderBookId = "orderBookId_example"; // String | 
+    UUID userId = UUID.randomUUID(); // UUID | 
+    OrderKind orderKind = OrderKind.fromValue("LIMIT"); // OrderKind | 
+    try {
+      ListOrdersResponseEnvelope result = apiInstance.cancelAllOpenOrders(orderBookId, userId, orderKind);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#cancelAllOpenOrders");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  | [optional]
- **userId** | [**Object**](.md)|  | [optional]
- **orderKind** | [**OrderKind**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | **String**|  | [optional] |
+| **userId** | **UUID**|  | [optional] |
+| **orderKind** | [**OrderKind**](.md)|  | [optional] [enum: LIMIT, MARKET] |
 
 ### Return type
 
-[**ListOrdersResponse**](ListOrdersResponse.md)
+[**ListOrdersResponseEnvelope**](ListOrdersResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="cancelLedgerWithdrawRequest"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | All open orders have been cancelled |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="cancelLedgerWithdrawRequest"></a>
 # **cancelLedgerWithdrawRequest**
-> WithdrawalInitiationResponse cancelLedgerWithdrawRequest(withdrawalId, body)
+> WithdrawalInitiationResponseEnvelope cancelLedgerWithdrawRequest(withdrawalId, withdrawalRequestReason)
 
 Cancel a pending withdrawal request
 
@@ -220,680 +263,930 @@ Cancel a pending withdrawal request, providing an optional reason for the cancel
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object withdrawalId = null; // Object | 
-WithdrawalRequestReason body = new WithdrawalRequestReason(); // WithdrawalRequestReason | 
-try {
-    WithdrawalInitiationResponse result = apiInstance.cancelLedgerWithdrawRequest(withdrawalId, body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#cancelLedgerWithdrawRequest");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID withdrawalId = UUID.randomUUID(); // UUID | 
+    WithdrawalRequestReason withdrawalRequestReason = new WithdrawalRequestReason(); // WithdrawalRequestReason | 
+    try {
+      WithdrawalInitiationResponseEnvelope result = apiInstance.cancelLedgerWithdrawRequest(withdrawalId, withdrawalRequestReason);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#cancelLedgerWithdrawRequest");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **withdrawalId** | [**Object**](.md)|  |
- **body** | [**WithdrawalRequestReason**](WithdrawalRequestReason.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **withdrawalId** | **UUID**|  | |
+| **withdrawalRequestReason** | [**WithdrawalRequestReason**](WithdrawalRequestReason.md)|  | [optional] |
 
 ### Return type
 
-[**WithdrawalInitiationResponse**](WithdrawalInitiationResponse.md)
+[**WithdrawalInitiationResponseEnvelope**](WithdrawalInitiationResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="cancelOrderById"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Withdrawal request cancelled successfully |  -  |
+| **400** | Bad request, e.g. invalid withdrawal ID format or request is not in a pending state |  -  |
+| **404** | Withdrawal request not found |  -  |
+| **403** | Forbidden, user does not have permission to cancel this withdrawal request |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="cancelOrderById"></a>
 # **cancelOrderById**
-> CancelOrderResponse cancelOrderById(orderId)
+> CancelOrderResponseEnvelope cancelOrderById(orderId)
 
 Cancel an order by ID
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object orderId = null; // Object | 
-try {
-    CancelOrderResponse result = apiInstance.cancelOrderById(orderId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#cancelOrderById");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID orderId = UUID.randomUUID(); // UUID | 
+    try {
+      CancelOrderResponseEnvelope result = apiInstance.cancelOrderById(orderId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#cancelOrderById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderId** | **UUID**|  | |
 
 ### Return type
 
-[**CancelOrderResponse**](CancelOrderResponse.md)
+[**CancelOrderResponseEnvelope**](CancelOrderResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="checkUserEmailExists"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Order cancelled successfully |  -  |
+| **400** | Bad request, e.g. invalid order ID format |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this order |  -  |
+| **404** | Order not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="checkUserEmailExists"></a>
 # **checkUserEmailExists**
-> EmailExistsResponse checkUserEmailExists(email)
+> EmailExistsResponseEnvelope checkUserEmailExists(email)
 
 Check whether a user email exists
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object email = null; // Object | 
-try {
-    EmailExistsResponse result = apiInstance.checkUserEmailExists(email);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#checkUserEmailExists");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String email = "email_example"; // String | 
+    try {
+      EmailExistsResponseEnvelope result = apiInstance.checkUserEmailExists(email);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#checkUserEmailExists");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **email** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **email** | **String**|  | |
 
 ### Return type
 
-[**EmailExistsResponse**](EmailExistsResponse.md)
+[**EmailExistsResponseEnvelope**](EmailExistsResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="claimLeverageGetAccruedInterest"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | True if the email exists, false otherwise |  -  |
+| **400** | Bad request, e.g. invalid path parameters |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="claimLeverageGetAccruedInterest"></a>
 # **claimLeverageGetAccruedInterest**
-> ClaimLeverageAccruedInterestResponse claimLeverageGetAccruedInterest(body)
+> ClaimLeverageAccruedInterestResponseEnvelope claimLeverageGetAccruedInterest(claimLeverageAccruedInterestRequest)
 
 Claim current accrued leverage interest for a specific user
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-ClaimLeverageAccruedInterestRequest body = new ClaimLeverageAccruedInterestRequest(); // ClaimLeverageAccruedInterestRequest | 
-try {
-    ClaimLeverageAccruedInterestResponse result = apiInstance.claimLeverageGetAccruedInterest(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#claimLeverageGetAccruedInterest");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    ClaimLeverageAccruedInterestRequest claimLeverageAccruedInterestRequest = new ClaimLeverageAccruedInterestRequest(); // ClaimLeverageAccruedInterestRequest | 
+    try {
+      ClaimLeverageAccruedInterestResponseEnvelope result = apiInstance.claimLeverageGetAccruedInterest(claimLeverageAccruedInterestRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#claimLeverageGetAccruedInterest");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**ClaimLeverageAccruedInterestRequest**](ClaimLeverageAccruedInterestRequest.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **claimLeverageAccruedInterestRequest** | [**ClaimLeverageAccruedInterestRequest**](ClaimLeverageAccruedInterestRequest.md)|  | |
 
 ### Return type
 
-[**ClaimLeverageAccruedInterestResponse**](ClaimLeverageAccruedInterestResponse.md)
+[**ClaimLeverageAccruedInterestResponseEnvelope**](ClaimLeverageAccruedInterestResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="closeIsolatedPosition"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Current leverage accrued interest claimed successfully |  -  |
+| **400** | Bad request, e.g. invalid parameters |  -  |
+| **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="closeIsolatedPosition"></a>
 # **closeIsolatedPosition**
-> ClosePositionResponse closeIsolatedPosition(body)
+> ClosePositionResponseEnvelope closeIsolatedPosition(closePositionRequest)
 
 Close isolated positions, repaying the borrowed
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-ClosePositionRequest body = new ClosePositionRequest(); // ClosePositionRequest | 
-try {
-    ClosePositionResponse result = apiInstance.closeIsolatedPosition(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#closeIsolatedPosition");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    ClosePositionRequest closePositionRequest = new ClosePositionRequest(); // ClosePositionRequest | 
+    try {
+      ClosePositionResponseEnvelope result = apiInstance.closeIsolatedPosition(closePositionRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#closeIsolatedPosition");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**ClosePositionRequest**](ClosePositionRequest.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **closePositionRequest** | [**ClosePositionRequest**](ClosePositionRequest.md)|  | |
 
 ### Return type
 
-[**ClosePositionResponse**](ClosePositionResponse.md)
+[**ClosePositionResponseEnvelope**](ClosePositionResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="createAPIKeyForUser"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Isolated Position Closed |  -  |
+| **400** | Bad request, e.g. missing required fields |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this route |  -  |
+| **404** | Not found, e.g. order_book or position not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="createAPIKeyForUser"></a>
 # **createAPIKeyForUser**
-> CreateAPIKeyResponse createAPIKeyForUser(body)
+> CreateAPIKeyResponseEnvelope createAPIKeyForUser(createAPIKeyRequest)
 
 Create apikey for a user
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-CreateAPIKeyRequest body = new CreateAPIKeyRequest(); // CreateAPIKeyRequest | 
-try {
-    CreateAPIKeyResponse result = apiInstance.createAPIKeyForUser(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#createAPIKeyForUser");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    CreateAPIKeyRequest createAPIKeyRequest = new CreateAPIKeyRequest(); // CreateAPIKeyRequest | 
+    try {
+      CreateAPIKeyResponseEnvelope result = apiInstance.createAPIKeyForUser(createAPIKeyRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#createAPIKeyForUser");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**CreateAPIKeyRequest**](CreateAPIKeyRequest.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **createAPIKeyRequest** | [**CreateAPIKeyRequest**](CreateAPIKeyRequest.md)|  | |
 
 ### Return type
 
-[**CreateAPIKeyResponse**](CreateAPIKeyResponse.md)
+[**CreateAPIKeyResponseEnvelope**](CreateAPIKeyResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="createAPIKeyForUserID"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | APIKey created |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="createAPIKeyForUserID"></a>
 # **createAPIKeyForUserID**
-> CreateAPIKeyResponse createAPIKeyForUserID(body, userId)
+> CreateAPIKeyResponseEnvelope createAPIKeyForUserID(userId, createAPIKeyRequest)
 
 Create apikey for a user
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-CreateAPIKeyRequest body = new CreateAPIKeyRequest(); // CreateAPIKeyRequest | 
-Object userId = null; // Object | 
-try {
-    CreateAPIKeyResponse result = apiInstance.createAPIKeyForUserID(body, userId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#createAPIKeyForUserID");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String userId = "userId_example"; // String | 
+    CreateAPIKeyRequest createAPIKeyRequest = new CreateAPIKeyRequest(); // CreateAPIKeyRequest | 
+    try {
+      CreateAPIKeyResponseEnvelope result = apiInstance.createAPIKeyForUserID(userId, createAPIKeyRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#createAPIKeyForUserID");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**CreateAPIKeyRequest**](CreateAPIKeyRequest.md)|  |
- **userId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **createAPIKeyRequest** | [**CreateAPIKeyRequest**](CreateAPIKeyRequest.md)|  | |
 
 ### Return type
 
-[**CreateAPIKeyResponse**](CreateAPIKeyResponse.md)
+[**CreateAPIKeyResponseEnvelope**](CreateAPIKeyResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="createConditionalOrder"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | APIKey created |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="createConditionalOrder"></a>
 # **createConditionalOrder**
-> CreateConditionalOrderResponse createConditionalOrder(body)
+> CreateConditionalOrderResponseEnvelope createConditionalOrder(createConditionalOrderRequest)
 
 Create a new conditional orders
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-CreateConditionalOrderRequest body = new CreateConditionalOrderRequest(); // CreateConditionalOrderRequest | 
-try {
-    CreateConditionalOrderResponse result = apiInstance.createConditionalOrder(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#createConditionalOrder");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    CreateConditionalOrderRequest createConditionalOrderRequest = new CreateConditionalOrderRequest(); // CreateConditionalOrderRequest | 
+    try {
+      CreateConditionalOrderResponseEnvelope result = apiInstance.createConditionalOrder(createConditionalOrderRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#createConditionalOrder");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**CreateConditionalOrderRequest**](CreateConditionalOrderRequest.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **createConditionalOrderRequest** | [**CreateConditionalOrderRequest**](CreateConditionalOrderRequest.md)|  | |
 
 ### Return type
 
-[**CreateConditionalOrderResponse**](CreateConditionalOrderResponse.md)
+[**CreateConditionalOrderResponseEnvelope**](CreateConditionalOrderResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="createOrder"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Conditional orders are created |  -  |
+| **400** | Bad request, e.g. missing required fields |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="createOrder"></a>
 # **createOrder**
-> CreateOrderResponse createOrder(body)
+> CreateOrderResponseEnvelope createOrder(createOrderRequest)
 
 Create a new order
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-CreateOrderRequest body = new CreateOrderRequest(); // CreateOrderRequest | 
-try {
-    CreateOrderResponse result = apiInstance.createOrder(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#createOrder");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    CreateOrderRequest createOrderRequest = new CreateOrderRequest(); // CreateOrderRequest | 
+    try {
+      CreateOrderResponseEnvelope result = apiInstance.createOrder(createOrderRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#createOrder");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**CreateOrderRequest**](CreateOrderRequest.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **createOrderRequest** | [**CreateOrderRequest**](CreateOrderRequest.md)|  | |
 
 ### Return type
 
-[**CreateOrderResponse**](CreateOrderResponse.md)
+[**CreateOrderResponseEnvelope**](CreateOrderResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="createUser"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Order created |  -  |
+| **400** | Bad request, e.g. missing required fields |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="createUser"></a>
 # **createUser**
-> UserCreatedResponse createUser(body)
+> UserCreatedResponseEnvelope createUser(createIntegratorUserRequest)
 
 Create a new user
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-CreateIntegratorUserRequest body = new CreateIntegratorUserRequest(); // CreateIntegratorUserRequest | 
-try {
-    UserCreatedResponse result = apiInstance.createUser(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#createUser");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    CreateIntegratorUserRequest createIntegratorUserRequest = new CreateIntegratorUserRequest(); // CreateIntegratorUserRequest | 
+    try {
+      UserCreatedResponseEnvelope result = apiInstance.createUser(createIntegratorUserRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#createUser");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**CreateIntegratorUserRequest**](CreateIntegratorUserRequest.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **createIntegratorUserRequest** | [**CreateIntegratorUserRequest**](CreateIntegratorUserRequest.md)|  | |
 
 ### Return type
 
-[**UserCreatedResponse**](UserCreatedResponse.md)
+[**UserCreatedResponseEnvelope**](UserCreatedResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="deleteUser"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | User created |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="deleteUser"></a>
 # **deleteUser**
-> UserDeletedResponse deleteUser(userId)
+> UserDeletedResponseEnvelope deleteUser(userId)
 
 Delete user by ID
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object userId = null; // Object | 
-try {
-    UserDeletedResponse result = apiInstance.deleteUser(userId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#deleteUser");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    try {
+      UserDeletedResponseEnvelope result = apiInstance.deleteUser(userId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#deleteUser");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
 
 ### Return type
 
-[**UserDeletedResponse**](UserDeletedResponse.md)
+[**UserDeletedResponseEnvelope**](UserDeletedResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getAPIKeysForUserID"></a>
-# **getAPIKeysForUserID**
-> GetAPIKeyResponse getAPIKeysForUserID(userId)
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User deleted |  -  |
+| **401** | Unauthorized, only admin can delete users |  -  |
+| **403** | Forbidden, only admin can delete users |  -  |
+| **404** | User not found |  -  |
 
-Get user&#x27;s api keys: admin or integrator only
+<a id="getAPIKeysForUserID"></a>
+# **getAPIKeysForUserID**
+> APIKeyResponseEnvelope getAPIKeysForUserID(userId)
+
+Get user&#39;s api keys: admin or integrator only
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object userId = null; // Object | 
-try {
-    GetAPIKeyResponse result = apiInstance.getAPIKeysForUserID(userId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getAPIKeysForUserID");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String userId = "userId_example"; // String | 
+    try {
+      APIKeyResponseEnvelope result = apiInstance.getAPIKeysForUserID(userId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getAPIKeysForUserID");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
 
 ### Return type
 
-[**GetAPIKeyResponse**](GetAPIKeyResponse.md)
+[**APIKeyResponseEnvelope**](APIKeyResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getAllAssetPrices"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | A list of existing api-keys |  -  |
+| **400** | Bad request, e.g. invalid path parameters |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getAllAssetPrices"></a>
 # **getAllAssetPrices**
-> ListAssetPriceResponse getAllAssetPrices()
+> ListAssetPriceResponseEnvelope getAllAssetPrices()
 
 Get the current price of all assets
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-try {
-    ListAssetPriceResponse result = apiInstance.getAllAssetPrices();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getAllAssetPrices");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      ListAssetPriceResponseEnvelope result = apiInstance.getAllAssetPrices();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getAllAssetPrices");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -902,48 +1195,66 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ListAssetPriceResponse**](ListAssetPriceResponse.md)
+[**ListAssetPriceResponseEnvelope**](ListAssetPriceResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getAllPositions"></a>
-# **getAllPositions**
-> AllPositionsResponse getAllPositions()
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Current prices of all assets |  -  |
+| **500** | Internal server error |  -  |
 
-Get all users&#x27; positions
+<a id="getAllPositions"></a>
+# **getAllPositions**
+> AllPositionsResponseEnvelope getAllPositions()
+
+Get all users&#39; positions
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-try {
-    AllPositionsResponse result = apiInstance.getAllPositions();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getAllPositions");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      AllPositionsResponseEnvelope result = apiInstance.getAllPositions();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getAllPositions");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -952,104 +1263,140 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**AllPositionsResponse**](AllPositionsResponse.md)
+[**AllPositionsResponseEnvelope**](AllPositionsResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getAllWithdrawalRequests"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User positions |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getAllWithdrawalRequests"></a>
 # **getAllWithdrawalRequests**
-> AllWithdrawalInitiationsResponse getAllWithdrawalRequests(status)
+> AllWithdrawalInitiationsResponseEnvelope getAllWithdrawalRequests(status)
 
 Get all withdrawal requests
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object status = null; // Object | 
-try {
-    AllWithdrawalInitiationsResponse result = apiInstance.getAllWithdrawalRequests(status);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getAllWithdrawalRequests");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String status = "status_example"; // String | 
+    try {
+      AllWithdrawalInitiationsResponseEnvelope result = apiInstance.getAllWithdrawalRequests(status);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getAllWithdrawalRequests");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **status** | [**Object**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **status** | **String**|  | [optional] |
 
 ### Return type
 
-[**AllWithdrawalInitiationsResponse**](AllWithdrawalInitiationsResponse.md)
+[**AllWithdrawalInitiationsResponseEnvelope**](AllWithdrawalInitiationsResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getAssetById"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | List of withdrawal requests |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getAssetById"></a>
 # **getAssetById**
-> GetAssetByIDResponse getAssetById(assetId)
+> GetAssetByIDResponseEnvelope getAssetById(assetId)
 
 Get asset by ID
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object assetId = null; // Object | 
-try {
-    GetAssetByIDResponse result = apiInstance.getAssetById(assetId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getAssetById");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID assetId = UUID.randomUUID(); // UUID | 
+    try {
+      GetAssetByIDResponseEnvelope result = apiInstance.getAssetById(assetId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getAssetById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **assetId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **assetId** | **UUID**|  | |
 
 ### Return type
 
-[**GetAssetByIDResponse**](GetAssetByIDResponse.md)
+[**GetAssetByIDResponseEnvelope**](GetAssetByIDResponseEnvelope.md)
 
 ### Authorization
 
@@ -1060,93 +1407,132 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getAssetPrice"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Asset details |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | Asset not found |  -  |
+
+<a id="getAssetPrice"></a>
 # **getAssetPrice**
-> GetAssetPriceResponse getAssetPrice(assetId)
+> AssetPriceResponseEnvelope getAssetPrice(assetId)
 
 Get the current price of an asset
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object assetId = null; // Object | 
-try {
-    GetAssetPriceResponse result = apiInstance.getAssetPrice(assetId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getAssetPrice");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID assetId = UUID.randomUUID(); // UUID | 
+    try {
+      AssetPriceResponseEnvelope result = apiInstance.getAssetPrice(assetId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getAssetPrice");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **assetId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **assetId** | **UUID**|  | |
 
 ### Return type
 
-[**GetAssetPriceResponse**](GetAssetPriceResponse.md)
+[**AssetPriceResponseEnvelope**](AssetPriceResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getAssetYTMById"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Current price of the asset |  -  |
+| **400** | Bad request, e.g. invalid ID format |  -  |
+| **404** | Asset not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getAssetYTMById"></a>
 # **getAssetYTMById**
-> GetAssetYTMByIDResponse getAssetYTMById(assetId)
+> GetAssetYTMByIDResponseEnvelope getAssetYTMById(assetId)
 
 Get annualized yield to maturity for a bond asset
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object assetId = null; // Object | 
-try {
-    GetAssetYTMByIDResponse result = apiInstance.getAssetYTMById(assetId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getAssetYTMById");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID assetId = UUID.randomUUID(); // UUID | 
+    try {
+      GetAssetYTMByIDResponseEnvelope result = apiInstance.getAssetYTMById(assetId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getAssetYTMById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **assetId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **assetId** | **UUID**|  | |
 
 ### Return type
 
-[**GetAssetYTMByIDResponse**](GetAssetYTMByIDResponse.md)
+[**GetAssetYTMByIDResponseEnvelope**](GetAssetYTMByIDResponseEnvelope.md)
 
 ### Authorization
 
@@ -1157,7 +1543,14 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getAssetsStream"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Asset YTM details |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | Asset not found |  -  |
+
+<a id="getAssetsStream"></a>
 # **getAssetsStream**
 > StreamAssetsResponse getAssetsStream(since, until)
 
@@ -1166,28 +1559,40 @@ Get all inserts or updates for assets
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object since = null; // Object | 
-Object until = null; // Object | 
-try {
-    StreamAssetsResponse result = apiInstance.getAssetsStream(since, until);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getAssetsStream");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
+    OffsetDateTime until = OffsetDateTime.now(); // OffsetDateTime | 
+    try {
+      StreamAssetsResponse result = apiInstance.getAssetsStream(since, until);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getAssetsStream");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **since** | [**Object**](.md)|  | [optional]
- **until** | [**Object**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **since** | **OffsetDateTime**|  | [optional] |
+| **until** | **OffsetDateTime**|  | [optional] |
 
 ### Return type
 
@@ -1202,45 +1607,65 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getCandleData"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Asset&#39;s stream |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this route |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getCandleData"></a>
 # **getCandleData**
-> ListCandlesResponse getCandleData(orderBookId, start, end, resolution)
+> ListCandlesResponseEnvelope getCandleData(orderBookId, start, end, resolution)
 
 Get candlestick data for an orderbook
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-Object start = null; // Object | 
-Object end = null; // Object | 
-CandleResolution resolution = new CandleResolution(); // CandleResolution | 
-try {
-    ListCandlesResponse result = apiInstance.getCandleData(orderBookId, start, end, resolution);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getCandleData");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String orderBookId = "orderBookId_example"; // String | 
+    OffsetDateTime start = OffsetDateTime.now(); // OffsetDateTime | 
+    OffsetDateTime end = OffsetDateTime.now(); // OffsetDateTime | 
+    CandleResolution resolution = CandleResolution.fromValue("1m"); // CandleResolution | 
+    try {
+      ListCandlesResponseEnvelope result = apiInstance.getCandleData(orderBookId, start, end, resolution);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getCandleData");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  |
- **start** | [**Object**](.md)|  | [optional]
- **end** | [**Object**](.md)|  | [optional]
- **resolution** | [**CandleResolution**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | **String**|  | |
+| **start** | **OffsetDateTime**|  | |
+| **end** | **OffsetDateTime**|  | |
+| **resolution** | [**CandleResolution**](.md)|  | [optional] [enum: 1m, 5m, 15m, 1h, 4h, 1d] |
 
 ### Return type
 
-[**ListCandlesResponse**](ListCandlesResponse.md)
+[**ListCandlesResponseEnvelope**](ListCandlesResponseEnvelope.md)
 
 ### Authorization
 
@@ -1251,39 +1676,59 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getCouponPaymentsByAssetId"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Candlestick data |  -  |
+| **400** | Bad request, e.g. invalid parameters |  -  |
+| **404** | Orderbook not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getCouponPaymentsByAssetId"></a>
 # **getCouponPaymentsByAssetId**
-> ListCouponPaymentsResponse getCouponPaymentsByAssetId(assetId)
+> ListCouponPaymentsResponseEnvelope getCouponPaymentsByAssetId(assetId)
 
 Get coupon payments for a bond asset
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object assetId = null; // Object | 
-try {
-    ListCouponPaymentsResponse result = apiInstance.getCouponPaymentsByAssetId(assetId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getCouponPaymentsByAssetId");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID assetId = UUID.randomUUID(); // UUID | 
+    try {
+      ListCouponPaymentsResponseEnvelope result = apiInstance.getCouponPaymentsByAssetId(assetId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getCouponPaymentsByAssetId");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **assetId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **assetId** | **UUID**|  | |
 
 ### Return type
 
-[**ListCouponPaymentsResponse**](ListCouponPaymentsResponse.md)
+[**ListCouponPaymentsResponseEnvelope**](ListCouponPaymentsResponseEnvelope.md)
 
 ### Authorization
 
@@ -1294,39 +1739,58 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getL1Depth"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | List of coupon payments |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | Asset not found or no coupon payments available |  -  |
+
+<a id="getL1Depth"></a>
 # **getL1Depth**
-> GetTopOfBookResponse getL1Depth(orderBookId)
+> GetTopOfBookResponseEnvelope getL1Depth(orderBookId)
 
 Get the top price levels for a specific orderbook (L1 market depth)
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-try {
-    GetTopOfBookResponse result = apiInstance.getL1Depth(orderBookId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getL1Depth");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID orderBookId = UUID.randomUUID(); // UUID | 
+    try {
+      GetTopOfBookResponseEnvelope result = apiInstance.getL1Depth(orderBookId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getL1Depth");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | **UUID**|  | |
 
 ### Return type
 
-[**GetTopOfBookResponse**](GetTopOfBookResponse.md)
+[**GetTopOfBookResponseEnvelope**](GetTopOfBookResponseEnvelope.md)
 
 ### Authorization
 
@@ -1337,39 +1801,59 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getL2Depth"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Top price levels data |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | Orderbook not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getL2Depth"></a>
 # **getL2Depth**
-> ListOrderBookDepthResponse getL2Depth(orderBookId)
+> ListOrderBookDepthResponseEnvelope getL2Depth(orderBookId)
 
 Get the aggregated price levels for a specific orderbook (L2 market depth)
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-try {
-    ListOrderBookDepthResponse result = apiInstance.getL2Depth(orderBookId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getL2Depth");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID orderBookId = UUID.randomUUID(); // UUID | 
+    try {
+      ListOrderBookDepthResponseEnvelope result = apiInstance.getL2Depth(orderBookId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getL2Depth");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | **UUID**|  | |
 
 ### Return type
 
-[**ListOrderBookDepthResponse**](ListOrderBookDepthResponse.md)
+[**ListOrderBookDepthResponseEnvelope**](ListOrderBookDepthResponseEnvelope.md)
 
 ### Authorization
 
@@ -1380,39 +1864,59 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getL3Depth"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Order book depth data |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | Orderbook not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getL3Depth"></a>
 # **getL3Depth**
-> ListOrdersResponse getL3Depth(orderBookId)
+> ListOrdersResponseEnvelope getL3Depth(orderBookId)
 
 Get all open orders for a specific orderbook (L3 market depth)
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-try {
-    ListOrdersResponse result = apiInstance.getL3Depth(orderBookId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getL3Depth");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID orderBookId = UUID.randomUUID(); // UUID | 
+    try {
+      ListOrdersResponseEnvelope result = apiInstance.getL3Depth(orderBookId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getL3Depth");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | **UUID**|  | |
 
 ### Return type
 
-[**ListOrdersResponse**](ListOrdersResponse.md)
+[**ListOrdersResponseEnvelope**](ListOrdersResponseEnvelope.md)
 
 ### Authorization
 
@@ -1423,37 +1927,58 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getLedgerBalancesSelf"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | List of orders for the orderbook |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
+| **404** | Orderbook not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getLedgerBalancesSelf"></a>
 # **getLedgerBalancesSelf**
-> UserBalanceResponse getLedgerBalancesSelf()
+> UserBalanceResponseEnvelope getLedgerBalancesSelf()
 
 Get your own available, locked, and borrowed assets
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-try {
-    UserBalanceResponse result = apiInstance.getLedgerBalancesSelf();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getLedgerBalancesSelf");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      UserBalanceResponseEnvelope result = apiInstance.getLedgerBalancesSelf();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getLedgerBalancesSelf");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -1462,48 +1987,68 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UserBalanceResponse**](UserBalanceResponse.md)
+[**UserBalanceResponseEnvelope**](UserBalanceResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getLedgerInterestSelf"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User balances |  -  |
+| **400** | Bad request, e.g. invalid user ID format |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getLedgerInterestSelf"></a>
 # **getLedgerInterestSelf**
-> UserInterestResponse getLedgerInterestSelf()
+> UserInterestResponseEnvelope getLedgerInterestSelf()
 
 Get your own interest
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-try {
-    UserInterestResponse result = apiInstance.getLedgerInterestSelf();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getLedgerInterestSelf");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      UserInterestResponseEnvelope result = apiInstance.getLedgerInterestSelf();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getLedgerInterestSelf");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -1512,48 +2057,68 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UserInterestResponse**](UserInterestResponse.md)
+[**UserInterestResponseEnvelope**](UserInterestResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getLedgerModule"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User interest |  -  |
+| **400** | Bad request, e.g. invalid user ID format |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getLedgerModule"></a>
 # **getLedgerModule**
-> LedgerModuleResponse getLedgerModule()
+> LedgerModuleResponseEnvelope getLedgerModule()
 
 Get the entire module object, including unborrowed leverage assets and total leverage trackers
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-try {
-    LedgerModuleResponse result = apiInstance.getLedgerModule();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getLedgerModule");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      LedgerModuleResponseEnvelope result = apiInstance.getLedgerModule();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getLedgerModule");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -1562,102 +2127,141 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**LedgerModuleResponse**](LedgerModuleResponse.md)
+[**LedgerModuleResponseEnvelope**](LedgerModuleResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getLedgerModuleByAsset"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Leverage module object |  -  |
+| **404** | Module not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getLedgerModuleByAsset"></a>
 # **getLedgerModuleByAsset**
-> LedgerModuleByAssetResponse getLedgerModuleByAsset(assetId)
+> LedgerModuleByAssetResponseEnvelope getLedgerModuleByAsset(assetId)
 
 Get the module object for a single asset ID
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object assetId = null; // Object | 
-try {
-    LedgerModuleByAssetResponse result = apiInstance.getLedgerModuleByAsset(assetId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getLedgerModuleByAsset");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID assetId = UUID.randomUUID(); // UUID | 
+    try {
+      LedgerModuleByAssetResponseEnvelope result = apiInstance.getLedgerModuleByAsset(assetId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getLedgerModuleByAsset");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **assetId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **assetId** | **UUID**|  | |
 
 ### Return type
 
-[**LedgerModuleByAssetResponse**](LedgerModuleByAssetResponse.md)
+[**LedgerModuleByAssetResponseEnvelope**](LedgerModuleByAssetResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getLedgerPositionsSelf"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Leverage module balance for asset |  -  |
+| **400** | Bad request, e.g. invalid asset ID format |  -  |
+| **404** | Asset not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getLedgerPositionsSelf"></a>
 # **getLedgerPositionsSelf**
-> UserPositionResponse getLedgerPositionsSelf()
+> UserPositionResponseEnvelope getLedgerPositionsSelf()
 
 Get your own positions
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-try {
-    UserPositionResponse result = apiInstance.getLedgerPositionsSelf();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getLedgerPositionsSelf");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      UserPositionResponseEnvelope result = apiInstance.getLedgerPositionsSelf();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getLedgerPositionsSelf");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -1666,48 +2270,68 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UserPositionResponse**](UserPositionResponse.md)
+[**UserPositionResponseEnvelope**](UserPositionResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getLedgerValueSelf"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User positions |  -  |
+| **400** | Bad request, e.g. invalid user ID format |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getLedgerValueSelf"></a>
 # **getLedgerValueSelf**
-> UserValueResponse getLedgerValueSelf()
+> UserValueResponseEnvelope getLedgerValueSelf()
 
 Get your own available, locked, and borrowed USD value; and realized and unrealized PnL
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-try {
-    UserValueResponse result = apiInstance.getLedgerValueSelf();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getLedgerValueSelf");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      UserValueResponseEnvelope result = apiInstance.getLedgerValueSelf();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getLedgerValueSelf");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -1716,268 +2340,368 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UserValueResponse**](UserValueResponse.md)
+[**UserValueResponseEnvelope**](UserValueResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getLedgerWithdrawRequestsBySelf"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User value |  -  |
+| **400** | Bad request, e.g. invalid user ID format |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getLedgerWithdrawRequestsBySelf"></a>
 # **getLedgerWithdrawRequestsBySelf**
-> AllWithdrawalInitiationsResponse getLedgerWithdrawRequestsBySelf(status)
+> AllWithdrawalInitiationsResponseEnvelope getLedgerWithdrawRequestsBySelf(status)
 
 Get all pending withdrawal requests for the logged in user
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object status = null; // Object | 
-try {
-    AllWithdrawalInitiationsResponse result = apiInstance.getLedgerWithdrawRequestsBySelf(status);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getLedgerWithdrawRequestsBySelf");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String status = "status_example"; // String | 
+    try {
+      AllWithdrawalInitiationsResponseEnvelope result = apiInstance.getLedgerWithdrawRequestsBySelf(status);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getLedgerWithdrawRequestsBySelf");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **status** | [**Object**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **status** | **String**|  | [optional] |
 
 ### Return type
 
-[**AllWithdrawalInitiationsResponse**](AllWithdrawalInitiationsResponse.md)
+[**AllWithdrawalInitiationsResponseEnvelope**](AllWithdrawalInitiationsResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getLedgerWithdrawRequestsByUserID"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | List of pending withdrawal requests for the logged in user |  -  |
+| **400** | Bad request, e.g. invalid user ID format |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getLedgerWithdrawRequestsByUserID"></a>
 # **getLedgerWithdrawRequestsByUserID**
-> AllWithdrawalInitiationsResponse getLedgerWithdrawRequestsByUserID(userId, status)
+> AllWithdrawalInitiationsResponseEnvelope getLedgerWithdrawRequestsByUserID(userId, status)
 
 Get all pending withdrawal requests for this user
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object userId = null; // Object | 
-Object status = null; // Object | 
-try {
-    AllWithdrawalInitiationsResponse result = apiInstance.getLedgerWithdrawRequestsByUserID(userId, status);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getLedgerWithdrawRequestsByUserID");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    String status = "status_example"; // String | 
+    try {
+      AllWithdrawalInitiationsResponseEnvelope result = apiInstance.getLedgerWithdrawRequestsByUserID(userId, status);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getLedgerWithdrawRequestsByUserID");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userId** | [**Object**](.md)|  |
- **status** | [**Object**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
+| **status** | **String**|  | [optional] |
 
 ### Return type
 
-[**AllWithdrawalInitiationsResponse**](AllWithdrawalInitiationsResponse.md)
+[**AllWithdrawalInitiationsResponseEnvelope**](AllWithdrawalInitiationsResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getOrderById"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | List of pending withdrawal requests for this user |  -  |
+| **400** | Bad request, e.g. invalid user ID format |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getOrderById"></a>
 # **getOrderById**
-> GetOrderResponse getOrderById(orderId)
+> OrderResponseEnvelope getOrderById(orderId)
 
 Get order by ID
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object orderId = null; // Object | 
-try {
-    GetOrderResponse result = apiInstance.getOrderById(orderId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getOrderById");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID orderId = UUID.randomUUID(); // UUID | 
+    try {
+      OrderResponseEnvelope result = apiInstance.getOrderById(orderId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getOrderById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderId** | **UUID**|  | |
 
 ### Return type
 
-[**GetOrderResponse**](GetOrderResponse.md)
+[**OrderResponseEnvelope**](OrderResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getOrderbookById"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Order details |  -  |
+| **400** | Bad request, e.g. invalid order ID format |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this order |  -  |
+| **404** | Order not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getOrderbookById"></a>
 # **getOrderbookById**
-> GetOrderBookResponse getOrderbookById(orderBookId)
+> OrderBookResponseEnvelope getOrderbookById(orderBookId)
 
 Get orderbook by ID
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-try {
-    GetOrderBookResponse result = apiInstance.getOrderbookById(orderBookId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getOrderbookById");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID orderBookId = UUID.randomUUID(); // UUID | 
+    try {
+      OrderBookResponseEnvelope result = apiInstance.getOrderbookById(orderBookId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getOrderbookById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | **UUID**|  | |
 
 ### Return type
 
-[**GetOrderBookResponse**](GetOrderBookResponse.md)
+[**OrderBookResponseEnvelope**](OrderBookResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getOrderbookDepth"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Orderbook details |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | Orderbook not found |  -  |
+
+<a id="getOrderbookDepth"></a>
 # **getOrderbookDepth**
-> ListOrderBookDepthResponse getOrderbookDepth(orderBookId)
+> ListOrderBookDepthResponseEnvelope getOrderbookDepth(orderBookId)
 
 Get the aggregated price levels for a specific orderbook (L2 market depth)
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-try {
-    ListOrderBookDepthResponse result = apiInstance.getOrderbookDepth(orderBookId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getOrderbookDepth");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID orderBookId = UUID.randomUUID(); // UUID | 
+    try {
+      ListOrderBookDepthResponseEnvelope result = apiInstance.getOrderbookDepth(orderBookId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getOrderbookDepth");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | **UUID**|  | |
 
 ### Return type
 
-[**ListOrderBookDepthResponse**](ListOrderBookDepthResponse.md)
+[**ListOrderBookDepthResponseEnvelope**](ListOrderBookDepthResponseEnvelope.md)
 
 ### Authorization
 
@@ -1988,39 +2712,59 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getOrderbookOrders"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Order book depth data |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | Orderbook not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getOrderbookOrders"></a>
 # **getOrderbookOrders**
-> ListOrdersResponse getOrderbookOrders(orderBookId)
+> ListOrdersResponseEnvelope getOrderbookOrders(orderBookId)
 
 Get all open orders for a specific orderbook (L3 market depth)
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-try {
-    ListOrdersResponse result = apiInstance.getOrderbookOrders(orderBookId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getOrderbookOrders");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID orderBookId = UUID.randomUUID(); // UUID | 
+    try {
+      ListOrdersResponseEnvelope result = apiInstance.getOrderbookOrders(orderBookId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getOrderbookOrders");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | **UUID**|  | |
 
 ### Return type
 
-[**ListOrdersResponse**](ListOrdersResponse.md)
+[**ListOrdersResponseEnvelope**](ListOrdersResponseEnvelope.md)
 
 ### Authorization
 
@@ -2031,39 +2775,60 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getOrderbookStats"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | List of orders for the orderbook |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
+| **404** | Orderbook not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getOrderbookStats"></a>
 # **getOrderbookStats**
-> GetOrderbookStatsResponse getOrderbookStats(orderBookId)
+> OrderbookStatsResponseEnvelope getOrderbookStats(orderBookId)
 
 Get orderbook stats
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-try {
-    GetOrderbookStatsResponse result = apiInstance.getOrderbookStats(orderBookId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getOrderbookStats");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID orderBookId = UUID.randomUUID(); // UUID | 
+    try {
+      OrderbookStatsResponseEnvelope result = apiInstance.getOrderbookStats(orderBookId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getOrderbookStats");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | **UUID**|  | |
 
 ### Return type
 
-[**GetOrderbookStatsResponse**](GetOrderbookStatsResponse.md)
+[**OrderbookStatsResponseEnvelope**](OrderbookStatsResponseEnvelope.md)
 
 ### Authorization
 
@@ -2074,7 +2839,15 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getOrderbookStatsStream"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Orderbook stats details |  -  |
+| **204** | No Content |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | Orderbook not found |  -  |
+
+<a id="getOrderbookStatsStream"></a>
 # **getOrderbookStatsStream**
 > OrderbookStats getOrderbookStatsStream(orderBookId)
 
@@ -2083,37 +2856,49 @@ Orderbook stats stream
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-try {
-    OrderbookStats result = apiInstance.getOrderbookStatsStream(orderBookId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getOrderbookStatsStream");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID orderBookId = UUID.randomUUID(); // UUID | 
+    try {
+      OrderbookStats result = apiInstance.getOrderbookStatsStream(orderBookId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getOrderbookStatsStream");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | **UUID**|  | |
 
 ### Return type
 
@@ -2121,100 +2906,141 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getOrderbookSummary"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Orderbook stats stream |  -  |
+| **204** | No Content |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | Orderbook not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getOrderbookSummary"></a>
 # **getOrderbookSummary**
-> GetOrderBookSummaryResponse getOrderbookSummary(orderBookId)
+> OrderBookSummaryResponseEnvelope getOrderbookSummary(orderBookId)
 
 Get summary of an orderbook
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-try {
-    GetOrderBookSummaryResponse result = apiInstance.getOrderbookSummary(orderBookId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getOrderbookSummary");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID orderBookId = UUID.randomUUID(); // UUID | 
+    try {
+      OrderBookSummaryResponseEnvelope result = apiInstance.getOrderbookSummary(orderBookId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getOrderbookSummary");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | **UUID**|  | |
 
 ### Return type
 
-[**GetOrderBookSummaryResponse**](GetOrderBookSummaryResponse.md)
+[**OrderBookSummaryResponseEnvelope**](OrderBookSummaryResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getOrderbookTop"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Orderbook summary data |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | Orderbook not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getOrderbookTop"></a>
 # **getOrderbookTop**
-> GetTopOfBookResponse getOrderbookTop(orderBookId)
+> GetTopOfBookResponseEnvelope getOrderbookTop(orderBookId)
 
 Get the top price levels for a specific orderbook (L1 market depth)
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-try {
-    GetTopOfBookResponse result = apiInstance.getOrderbookTop(orderBookId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getOrderbookTop");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID orderBookId = UUID.randomUUID(); // UUID | 
+    try {
+      GetTopOfBookResponseEnvelope result = apiInstance.getOrderbookTop(orderBookId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getOrderbookTop");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | **UUID**|  | |
 
 ### Return type
 
-[**GetTopOfBookResponse**](GetTopOfBookResponse.md)
+[**GetTopOfBookResponseEnvelope**](GetTopOfBookResponseEnvelope.md)
 
 ### Authorization
 
@@ -2225,37 +3051,57 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getPLForSelfByAccount"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Top price levels data |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | Orderbook not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getPLForSelfByAccount"></a>
 # **getPLForSelfByAccount**
-> PLResponse getPLForSelfByAccount()
+> PLResponseEnvelope getPLForSelfByAccount()
 
 Get account-by-account PL breakdown for the logged in user
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-try {
-    PLResponse result = apiInstance.getPLForSelfByAccount();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getPLForSelfByAccount");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      PLResponseEnvelope result = apiInstance.getPLForSelfByAccount();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getPLForSelfByAccount");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -2264,168 +3110,228 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**PLResponse**](PLResponse.md)
+[**PLResponseEnvelope**](PLResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getPoolPrice"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | List of user accounts with a PL breakdown by asset and summary |  -  |
+| **401** | Unauthorized, user is not logged in |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getPoolPrice"></a>
 # **getPoolPrice**
-> GetPoolPriceResponse getPoolPrice(poolId)
+> PoolPriceResponseEnvelope getPoolPrice(poolId)
 
 Get the current price of a pool
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object poolId = null; // Object | 
-try {
-    GetPoolPriceResponse result = apiInstance.getPoolPrice(poolId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getPoolPrice");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID poolId = UUID.randomUUID(); // UUID | 
+    try {
+      PoolPriceResponseEnvelope result = apiInstance.getPoolPrice(poolId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getPoolPrice");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **poolId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **poolId** | **UUID**|  | |
 
 ### Return type
 
-[**GetPoolPriceResponse**](GetPoolPriceResponse.md)
+[**PoolPriceResponseEnvelope**](PoolPriceResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getRealizedPnlSettlements"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Current price of the pool |  -  |
+| **400** | Bad request, e.g. invalid ID format |  -  |
+| **404** | Pool not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getRealizedPnlSettlements"></a>
 # **getRealizedPnlSettlements**
-> GetRealizedPnlSettlementsResponse getRealizedPnlSettlements(userId, tenantId, positionId, createdAfter, settledBefore, isSettled)
+> GetRealizedPnlSettlementsResponseEnvelope getRealizedPnlSettlements(userId, tenantId, positionId, createdAfter, settledBefore, isSettled)
 
 Get realized P&amp;L settlements with filters
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object userId = null; // Object | 
-Object tenantId = null; // Object | 
-Object positionId = null; // Object | 
-Object createdAfter = null; // Object | 
-Object settledBefore = null; // Object | 
-Object isSettled = null; // Object | 
-try {
-    GetRealizedPnlSettlementsResponse result = apiInstance.getRealizedPnlSettlements(userId, tenantId, positionId, createdAfter, settledBefore, isSettled);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getRealizedPnlSettlements");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    UUID tenantId = UUID.randomUUID(); // UUID | 
+    UUID positionId = UUID.randomUUID(); // UUID | 
+    OffsetDateTime createdAfter = OffsetDateTime.now(); // OffsetDateTime | 
+    OffsetDateTime settledBefore = OffsetDateTime.now(); // OffsetDateTime | 
+    Boolean isSettled = true; // Boolean | 
+    try {
+      GetRealizedPnlSettlementsResponseEnvelope result = apiInstance.getRealizedPnlSettlements(userId, tenantId, positionId, createdAfter, settledBefore, isSettled);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getRealizedPnlSettlements");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userId** | [**Object**](.md)|  | [optional]
- **tenantId** | [**Object**](.md)|  | [optional]
- **positionId** | [**Object**](.md)|  | [optional]
- **createdAfter** | [**Object**](.md)|  | [optional]
- **settledBefore** | [**Object**](.md)|  | [optional]
- **isSettled** | [**Object**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | [optional] |
+| **tenantId** | **UUID**|  | [optional] |
+| **positionId** | **UUID**|  | [optional] |
+| **createdAfter** | **OffsetDateTime**|  | [optional] |
+| **settledBefore** | **OffsetDateTime**|  | [optional] |
+| **isSettled** | **Boolean**|  | [optional] |
 
 ### Return type
 
-[**GetRealizedPnlSettlementsResponse**](GetRealizedPnlSettlementsResponse.md)
+[**GetRealizedPnlSettlementsResponseEnvelope**](GetRealizedPnlSettlementsResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getTradeById"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | List of realized P&amp;L settlements with filters applied |  -  |
+| **401** | Unauthorized, user is not logged in |  -  |
+| **403** | Forbidden, user does not have access |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getTradeById"></a>
 # **getTradeById**
-> TradeResponse getTradeById(tradeId)
+> TradeResponseEnvelope getTradeById(tradeId)
 
 Get a trade by ID
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object tradeId = null; // Object | 
-try {
-    TradeResponse result = apiInstance.getTradeById(tradeId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getTradeById");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID tradeId = UUID.randomUUID(); // UUID | 
+    try {
+      TradeResponseEnvelope result = apiInstance.getTradeById(tradeId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getTradeById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **tradeId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tradeId** | **UUID**|  | |
 
 ### Return type
 
-[**TradeResponse**](TradeResponse.md)
+[**TradeResponseEnvelope**](TradeResponseEnvelope.md)
 
 ### Authorization
 
@@ -2436,103 +3342,143 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getTrades"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Trade details |  -  |
+| **400** | Bad request, e.g. invalid ID format |  -  |
+| **404** | Trade not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getTrades"></a>
 # **getTrades**
-> ListTradeResponse getTrades(orderBookIds, userIds, start, end, page, limit)
+> ListTradeResponseEnvelope getTrades(orderBookIds, userIds, start, end, page, limit)
 
 Get a filtered, paginated list of trades
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookIds = null; // Object | 
-Object userIds = null; // Object | 
-Object start = null; // Object | 
-Object end = null; // Object | 
-Object page = 1; // Object | 
-Object limit = 100; // Object | 
-try {
-    ListTradeResponse result = apiInstance.getTrades(orderBookIds, userIds, start, end, page, limit);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getTrades");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    List<String> orderBookIds = Arrays.asList(); // List<String> | 
+    List<UUID> userIds = Arrays.asList(); // List<UUID> | 
+    OffsetDateTime start = OffsetDateTime.now(); // OffsetDateTime | 
+    OffsetDateTime end = OffsetDateTime.now(); // OffsetDateTime | 
+    Integer page = 1; // Integer | 
+    Integer limit = 100; // Integer | 
+    try {
+      ListTradeResponseEnvelope result = apiInstance.getTrades(orderBookIds, userIds, start, end, page, limit);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getTrades");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookIds** | [**Object**](.md)|  | [optional]
- **userIds** | [**Object**](.md)|  | [optional]
- **start** | [**Object**](.md)|  | [optional]
- **end** | [**Object**](.md)|  | [optional]
- **page** | [**Object**](.md)|  | [optional] [default to 1]
- **limit** | [**Object**](.md)|  | [optional] [default to 100]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookIds** | [**List&lt;String&gt;**](String.md)|  | [optional] |
+| **userIds** | [**List&lt;UUID&gt;**](UUID.md)|  | [optional] |
+| **start** | **OffsetDateTime**|  | [optional] |
+| **end** | **OffsetDateTime**|  | [optional] |
+| **page** | **Integer**|  | [optional] [default to 1] |
+| **limit** | **Integer**|  | [optional] [default to 100] |
 
 ### Return type
 
-[**ListTradeResponse**](ListTradeResponse.md)
+[**ListTradeResponseEnvelope**](ListTradeResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getTransactionById"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | List of trades |  -  |
+| **400** | Bad request, e.g. invalid parameters |  -  |
+| **404** | No trades found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getTransactionById"></a>
 # **getTransactionById**
-> GetTransactionResponse getTransactionById(transactionId)
+> TransactionResponseEnvelope getTransactionById(transactionId)
 
 Get a transaction by ID
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object transactionId = null; // Object | 
-try {
-    GetTransactionResponse result = apiInstance.getTransactionById(transactionId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getTransactionById");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID transactionId = UUID.randomUUID(); // UUID | 
+    try {
+      TransactionResponseEnvelope result = apiInstance.getTransactionById(transactionId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getTransactionById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **transactionId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **transactionId** | **UUID**|  | |
 
 ### Return type
 
-[**GetTransactionResponse**](GetTransactionResponse.md)
+[**TransactionResponseEnvelope**](TransactionResponseEnvelope.md)
 
 ### Authorization
 
@@ -2543,53 +3489,73 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getTransactions"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Transaction details |  -  |
+| **400** | Bad request, e.g. invalid ID format |  -  |
+| **404** | Transaction not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getTransactions"></a>
 # **getTransactions**
-> ListTransactionsResponse getTransactions(pools, userIds, txKinds, start, end, tenantId, page, limit)
+> ListTransactionsResponseEnvelope getTransactions(pools, userIds, txKinds, start, end, tenantId, page, limit)
 
 Get a filtered, paginated list of transactions
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object pools = null; // Object | 
-Object userIds = null; // Object | 
-Object txKinds = null; // Object | 
-Object start = null; // Object | 
-Object end = null; // Object | 
-Object tenantId = null; // Object | 
-Object page = 1; // Object | 
-Object limit = 100; // Object | 
-try {
-    ListTransactionsResponse result = apiInstance.getTransactions(pools, userIds, txKinds, start, end, tenantId, page, limit);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getTransactions");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    List<String> pools = Arrays.asList(); // List<String> | 
+    List<UUID> userIds = Arrays.asList(); // List<UUID> | 
+    List<TransactionKind> txKinds = Arrays.asList(); // List<TransactionKind> | 
+    OffsetDateTime start = OffsetDateTime.now(); // OffsetDateTime | 
+    OffsetDateTime end = OffsetDateTime.now(); // OffsetDateTime | 
+    UUID tenantId = UUID.randomUUID(); // UUID | 
+    Integer page = 1; // Integer | 
+    Integer limit = 100; // Integer | 
+    try {
+      ListTransactionsResponseEnvelope result = apiInstance.getTransactions(pools, userIds, txKinds, start, end, tenantId, page, limit);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getTransactions");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **pools** | [**Object**](.md)|  | [optional]
- **userIds** | [**Object**](.md)|  | [optional]
- **txKinds** | [**Object**](.md)|  | [optional]
- **start** | [**Object**](.md)|  | [optional]
- **end** | [**Object**](.md)|  | [optional]
- **tenantId** | [**Object**](.md)|  | [optional]
- **page** | [**Object**](.md)|  | [optional] [default to 1]
- **limit** | [**Object**](.md)|  | [optional] [default to 100]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **pools** | [**List&lt;String&gt;**](String.md)|  | [optional] |
+| **userIds** | [**List&lt;UUID&gt;**](UUID.md)|  | [optional] |
+| **txKinds** | [**List&lt;TransactionKind&gt;**](TransactionKind.md)|  | [optional] |
+| **start** | **OffsetDateTime**|  | [optional] |
+| **end** | **OffsetDateTime**|  | [optional] |
+| **tenantId** | **UUID**|  | [optional] |
+| **page** | **Integer**|  | [optional] [default to 1] |
+| **limit** | **Integer**|  | [optional] [default to 100] |
 
 ### Return type
 
-[**ListTransactionsResponse**](ListTransactionsResponse.md)
+[**ListTransactionsResponseEnvelope**](ListTransactionsResponseEnvelope.md)
 
 ### Authorization
 
@@ -2600,99 +3566,221 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getUserById"></a>
-# **getUserById**
-> GetUserResponse getUserById(userId)
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | List of transactions |  -  |
+| **400** | Bad request, e.g. insufficient funds or invalid parameters |  -  |
+| **500** | Internal server error |  -  |
 
-Get user by ID (admin only)
+<a id="getTransactionsSettlements"></a>
+# **getTransactionsSettlements**
+> TransactionsSettlementsResponseEnvelope getTransactionsSettlements(tenantId, userId, positionId, txKind, createdAfter, settledBefore, isSettled)
+
+Get transactions settlements with filters
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object userId = null; // Object | 
-try {
-    GetUserResponse result = apiInstance.getUserById(userId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getUserById");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String tenantId = "tenantId_example"; // String | Tenant ID to filter settlements
+    UUID userId = UUID.randomUUID(); // UUID | User ID to filter settlements
+    UUID positionId = UUID.randomUUID(); // UUID | Position ID to filter settlements
+    String txKind = "txKind_example"; // String | Transaction kind to filter settlements
+    OffsetDateTime createdAfter = OffsetDateTime.now(); // OffsetDateTime | Filter settlements created after this time
+    OffsetDateTime settledBefore = OffsetDateTime.now(); // OffsetDateTime | Filter settlements settled before this time
+    Boolean isSettled = true; // Boolean | Filter settlements by settlement status
+    try {
+      TransactionsSettlementsResponseEnvelope result = apiInstance.getTransactionsSettlements(tenantId, userId, positionId, txKind, createdAfter, settledBefore, isSettled);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getTransactionsSettlements");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | **String**| Tenant ID to filter settlements | [optional] |
+| **userId** | **UUID**| User ID to filter settlements | [optional] |
+| **positionId** | **UUID**| Position ID to filter settlements | [optional] |
+| **txKind** | **String**| Transaction kind to filter settlements | [optional] |
+| **createdAfter** | **OffsetDateTime**| Filter settlements created after this time | [optional] |
+| **settledBefore** | **OffsetDateTime**| Filter settlements settled before this time | [optional] |
+| **isSettled** | **Boolean**| Filter settlements by settlement status | [optional] |
 
 ### Return type
 
-[**GetUserResponse**](GetUserResponse.md)
+[**TransactionsSettlementsResponseEnvelope**](TransactionsSettlementsResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getUserCouponPaymentsStream"></a>
-# **getUserCouponPaymentsStream**
-> StreamUserCouponPaymentsResponse getUserCouponPaymentsStream(userId)
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | A list of transaction settlements |  -  |
+| **400** | Bad request |  -  |
+| **404** | No settlements found |  -  |
+| **500** | Internal server error |  -  |
 
-Stream user&#x27;s coupon payment accruals in real time
+<a id="getUserById"></a>
+# **getUserById**
+> UserEnvelope getUserById(userId)
+
+Get user by ID (admin only)
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthQuery
-ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
-apiKeyAuthQuery.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthQuery.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-DefaultApi apiInstance = new DefaultApi();
-Object userId = null; // Object | 
-try {
-    StreamUserCouponPaymentsResponse result = apiInstance.getUserCouponPaymentsStream(userId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getUserCouponPaymentsStream");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    try {
+      UserEnvelope result = apiInstance.getUserById(userId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getUserById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
+
+### Return type
+
+[**UserEnvelope**](UserEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User details |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getUserCouponPaymentsStream"></a>
+# **getUserCouponPaymentsStream**
+> StreamUserCouponPaymentsResponse getUserCouponPaymentsStream(userId)
+
+Stream user&#39;s coupon payment accruals in real time
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthQuery
+    ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
+    apiKeyAuthQuery.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthQuery.setApiKeyPrefix("Token");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    try {
+      StreamUserCouponPaymentsResponse result = apiInstance.getUserCouponPaymentsStream(userId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getUserCouponPaymentsStream");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
 
 ### Return type
 
@@ -2707,45 +3795,63 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getUserLedgerStream"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User&#39;s coupon payments stream |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this data |  -  |
+| **404** | User not found or no coupon payments available |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getUserLedgerStream"></a>
 # **getUserLedgerStream**
 > StreamPositionsResponse getUserLedgerStream(userId)
 
-Get a snapshot of user&#x27;s ledger updates since a specific time, and opens a stream for further updates
+Get a snapshot of user&#39;s ledger updates since a specific time, and opens a stream for further updates
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthQuery
+    ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
+    apiKeyAuthQuery.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthQuery.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthQuery
-ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
-apiKeyAuthQuery.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthQuery.setApiKeyPrefix("Token");
-
-DefaultApi apiInstance = new DefaultApi();
-Object userId = null; // Object | 
-try {
-    StreamPositionsResponse result = apiInstance.getUserLedgerStream(userId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getUserLedgerStream");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    try {
+      StreamPositionsResponse result = apiInstance.getUserLedgerStream(userId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getUserLedgerStream");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
 
 ### Return type
 
@@ -2760,49 +3866,67 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getUserOrderUpdatesStream"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User&#39;s ledger stream |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this ledger |  -  |
+| **404** | User not found or no ledger entries available |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getUserOrderUpdatesStream"></a>
 # **getUserOrderUpdatesStream**
 > StreamOrderUpdatesResponse getUserOrderUpdatesStream(userId, orderBookId, since)
 
-Get a snapshot of user&#x27;s order updates for the given order book since a specific time, and opens a stream for further updates
+Get a snapshot of user&#39;s order updates for the given order book since a specific time, and opens a stream for further updates
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthQuery
+    ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
+    apiKeyAuthQuery.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthQuery.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthQuery
-ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
-apiKeyAuthQuery.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthQuery.setApiKeyPrefix("Token");
-
-DefaultApi apiInstance = new DefaultApi();
-Object userId = null; // Object | 
-Object orderBookId = null; // Object | 
-Object since = null; // Object | 
-try {
-    StreamOrderUpdatesResponse result = apiInstance.getUserOrderUpdatesStream(userId, orderBookId, since);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getUserOrderUpdatesStream");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    UUID orderBookId = UUID.randomUUID(); // UUID | 
+    OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
+    try {
+      StreamOrderUpdatesResponse result = apiInstance.getUserOrderUpdatesStream(userId, orderBookId, since);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getUserOrderUpdatesStream");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userId** | [**Object**](.md)|  |
- **orderBookId** | [**Object**](.md)|  |
- **since** | [**Object**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
+| **orderBookId** | **UUID**|  | |
+| **since** | **OffsetDateTime**|  | [optional] |
 
 ### Return type
 
@@ -2817,47 +3941,65 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getUserOrdersUpdatesStreamAll"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User&#39;s orders stream |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
+| **404** | User not found or no orders available |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getUserOrdersUpdatesStreamAll"></a>
 # **getUserOrdersUpdatesStreamAll**
 > StreamOrderUpdatesResponse getUserOrdersUpdatesStreamAll(userId, since)
 
-Get a snapshot of user&#x27;s order updates across all order books since a specific time, and opens a stream for further updates
+Get a snapshot of user&#39;s order updates across all order books since a specific time, and opens a stream for further updates
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthQuery
+    ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
+    apiKeyAuthQuery.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthQuery.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthQuery
-ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
-apiKeyAuthQuery.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthQuery.setApiKeyPrefix("Token");
-
-DefaultApi apiInstance = new DefaultApi();
-Object userId = null; // Object | 
-Object since = null; // Object | 
-try {
-    StreamOrderUpdatesResponse result = apiInstance.getUserOrdersUpdatesStreamAll(userId, since);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getUserOrdersUpdatesStreamAll");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
+    try {
+      StreamOrderUpdatesResponse result = apiInstance.getUserOrdersUpdatesStreamAll(userId, since);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getUserOrdersUpdatesStreamAll");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userId** | [**Object**](.md)|  |
- **since** | [**Object**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
+| **since** | **OffsetDateTime**|  | [optional] |
 
 ### Return type
 
@@ -2872,37 +4014,58 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getUserSelf"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User&#39;s orders stream |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
+| **404** | User not found or no orders available |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getUserSelf"></a>
 # **getUserSelf**
-> GetUserResponse getUserSelf()
+> UserEnvelope getUserSelf()
 
 Get user details for the authenticated user
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-try {
-    GetUserResponse result = apiInstance.getUserSelf();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getUserSelf");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      UserEnvelope result = apiInstance.getUserSelf();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getUserSelf");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -2911,58 +4074,75 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**GetUserResponse**](GetUserResponse.md)
+[**UserEnvelope**](UserEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getUserTransactionsStream"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User details |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getUserTransactionsStream"></a>
 # **getUserTransactionsStream**
 > StreamTransactionsResponse getUserTransactionsStream(userId, since)
 
-Get a snapshot of user&#x27;s executed transactions since a specific time, and opens a stream for further updates
+Get a snapshot of user&#39;s executed transactions since a specific time, and opens a stream for further updates
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthQuery
+    ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
+    apiKeyAuthQuery.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthQuery.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthQuery
-ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
-apiKeyAuthQuery.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthQuery.setApiKeyPrefix("Token");
-
-DefaultApi apiInstance = new DefaultApi();
-Object userId = null; // Object | 
-Object since = null; // Object | 
-try {
-    StreamTransactionsResponse result = apiInstance.getUserTransactionsStream(userId, since);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getUserTransactionsStream");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
+    try {
+      StreamTransactionsResponse result = apiInstance.getUserTransactionsStream(userId, since);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getUserTransactionsStream");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userId** | [**Object**](.md)|  |
- **since** | [**Object**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
+| **since** | **OffsetDateTime**|  | [optional] |
 
 ### Return type
 
@@ -2977,37 +4157,58 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getUsersAPIKeys"></a>
-# **getUsersAPIKeys**
-> GetAPIKeyResponse getUsersAPIKeys()
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User&#39;s transactions stream |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this transactions |  -  |
+| **404** | User not found or no transactions available |  -  |
+| **500** | Internal server error |  -  |
 
-Get user&#x27;s api keys
+<a id="getUsersAPIKeys"></a>
+# **getUsersAPIKeys**
+> APIKeyResponseEnvelope getUsersAPIKeys()
+
+Get user&#39;s api keys
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-try {
-    GetAPIKeyResponse result = apiInstance.getUsersAPIKeys();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#getUsersAPIKeys");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      APIKeyResponseEnvelope result = apiInstance.getUsersAPIKeys();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getUsersAPIKeys");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -3016,347 +4217,462 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**GetAPIKeyResponse**](GetAPIKeyResponse.md)
+[**APIKeyResponseEnvelope**](APIKeyResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="ledgerDeposit"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | A list of existing api-keys |  -  |
+| **400** | Bad request, e.g. invalid path parameters |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="ledgerDeposit"></a>
 # **ledgerDeposit**
-> FundUserResponse ledgerDeposit(body, userId)
+> FundUserResponseEnvelope ledgerDeposit(userId, fundUserRequest)
 
-Deposit assets into this user&#x27;s account from the outside world
+Deposit assets into this user&#39;s account from the outside world
 
-Deposit assets into this user&#x27;s account from the outside world. Note that this does not interact with any external systems; it simply adds the amount to the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
+Deposit assets into this user&#39;s account from the outside world. Note that this does not interact with any external systems; it simply adds the amount to the user&#39;s available balance in the ledger. Actual transfer of assets must be handled separately.
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-FundUserRequest body = new FundUserRequest(); // FundUserRequest | 
-Object userId = null; // Object | 
-try {
-    FundUserResponse result = apiInstance.ledgerDeposit(body, userId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#ledgerDeposit");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    FundUserRequest fundUserRequest = new FundUserRequest(); // FundUserRequest | 
+    try {
+      FundUserResponseEnvelope result = apiInstance.ledgerDeposit(userId, fundUserRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#ledgerDeposit");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**FundUserRequest**](FundUserRequest.md)|  |
- **userId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
+| **fundUserRequest** | [**FundUserRequest**](FundUserRequest.md)|  | |
 
 ### Return type
 
-[**FundUserResponse**](FundUserResponse.md)
+[**FundUserResponseEnvelope**](FundUserResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="ledgerWithdraw"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Deposit successful |  -  |
+| **400** | Bad request, e.g. invalid parameters or insufficient funds |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="ledgerWithdraw"></a>
 # **ledgerWithdraw**
-> FundUserResponse ledgerWithdraw(body, userId, status)
+> FundUserResponseEnvelope ledgerWithdraw(userId, defundUserRequest, status)
 
 Withdraw assets from this user to the outside world
 
-Withdraw assets from this user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
+Withdraw assets from this user&#39;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#39;s available balance in the ledger. Actual transfer of assets must be handled separately.
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-DefundUserRequest body = new DefundUserRequest(); // DefundUserRequest | 
-Object userId = null; // Object | 
-Object status = null; // Object | 
-try {
-    FundUserResponse result = apiInstance.ledgerWithdraw(body, userId, status);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#ledgerWithdraw");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    DefundUserRequest defundUserRequest = new DefundUserRequest(); // DefundUserRequest | 
+    String status = "status_example"; // String | 
+    try {
+      FundUserResponseEnvelope result = apiInstance.ledgerWithdraw(userId, defundUserRequest, status);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#ledgerWithdraw");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**DefundUserRequest**](DefundUserRequest.md)|  |
- **userId** | [**Object**](.md)|  |
- **status** | [**Object**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
+| **defundUserRequest** | [**DefundUserRequest**](DefundUserRequest.md)|  | |
+| **status** | **String**|  | [optional] |
 
 ### Return type
 
-[**FundUserResponse**](FundUserResponse.md)
+[**FundUserResponseEnvelope**](FundUserResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="ledgerWithdrawRequest"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Withdraw successful |  -  |
+| **400** | Bad request, e.g. invalid parameters or insufficient funds |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="ledgerWithdrawRequest"></a>
 # **ledgerWithdrawRequest**
-> WithdrawalInitiationResponse ledgerWithdrawRequest(body, userId)
+> WithdrawalInitiationResponseEnvelope ledgerWithdrawRequest(userId, defundUserRequest)
 
 Initiate a withdrawal request for this user to the outside world
 
-Withdraw assets from this user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
+Withdraw assets from this user&#39;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#39;s available balance in the ledger. Actual transfer of assets must be handled separately.
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-DefundUserRequest body = new DefundUserRequest(); // DefundUserRequest | 
-Object userId = null; // Object | 
-try {
-    WithdrawalInitiationResponse result = apiInstance.ledgerWithdrawRequest(body, userId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#ledgerWithdrawRequest");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    DefundUserRequest defundUserRequest = new DefundUserRequest(); // DefundUserRequest | 
+    try {
+      WithdrawalInitiationResponseEnvelope result = apiInstance.ledgerWithdrawRequest(userId, defundUserRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#ledgerWithdrawRequest");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**DefundUserRequest**](DefundUserRequest.md)|  |
- **userId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
+| **defundUserRequest** | [**DefundUserRequest**](DefundUserRequest.md)|  | |
 
 ### Return type
 
-[**WithdrawalInitiationResponse**](WithdrawalInitiationResponse.md)
+[**WithdrawalInitiationResponseEnvelope**](WithdrawalInitiationResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="ledgerWithdrawRequestSelf"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Withdraw request initiation successful |  -  |
+| **400** | Bad request, e.g. invalid parameters or insufficient funds |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="ledgerWithdrawRequestSelf"></a>
 # **ledgerWithdrawRequestSelf**
-> WithdrawalInitiationResponse ledgerWithdrawRequestSelf(body, userId)
+> WithdrawalInitiationResponseEnvelope ledgerWithdrawRequestSelf(userId, defundUserRequest)
 
 Initiate a withdrawal request for the logged in user to the outside world
 
-Withdraw assets from the logged in user&#x27;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#x27;s available balance in the ledger. Actual transfer of assets must be handled separately.
+Withdraw assets from the logged in user&#39;s account to the outside world. Note that this does not interact with any external systems; it simply deducts the amount from the user&#39;s available balance in the ledger. Actual transfer of assets must be handled separately.
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-DefundUserRequest body = new DefundUserRequest(); // DefundUserRequest | 
-Object userId = null; // Object | 
-try {
-    WithdrawalInitiationResponse result = apiInstance.ledgerWithdrawRequestSelf(body, userId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#ledgerWithdrawRequestSelf");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    DefundUserRequest defundUserRequest = new DefundUserRequest(); // DefundUserRequest | 
+    try {
+      WithdrawalInitiationResponseEnvelope result = apiInstance.ledgerWithdrawRequestSelf(userId, defundUserRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#ledgerWithdrawRequestSelf");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**DefundUserRequest**](DefundUserRequest.md)|  |
- **userId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
+| **defundUserRequest** | [**DefundUserRequest**](DefundUserRequest.md)|  | |
 
 ### Return type
 
-[**WithdrawalInitiationResponse**](WithdrawalInitiationResponse.md)
+[**WithdrawalInitiationResponseEnvelope**](WithdrawalInitiationResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="leverageGetAccruedInterestByUser"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Withdraw request initiation successful |  -  |
+| **400** | Bad request, e.g. invalid parameters or insufficient funds |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="leverageGetAccruedInterestByUser"></a>
 # **leverageGetAccruedInterestByUser**
-> CurrentLeverageAccruedInterestResponse leverageGetAccruedInterestByUser(positionId, assetId)
+> CurrentLeverageAccruedInterestResponseEnvelope leverageGetAccruedInterestByUser(positionId, assetId)
 
 Get current accrued leverage interest for the user
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object positionId = null; // Object | 
-Object assetId = null; // Object | 
-try {
-    CurrentLeverageAccruedInterestResponse result = apiInstance.leverageGetAccruedInterestByUser(positionId, assetId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#leverageGetAccruedInterestByUser");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID positionId = UUID.randomUUID(); // UUID | 
+    UUID assetId = UUID.randomUUID(); // UUID | 
+    try {
+      CurrentLeverageAccruedInterestResponseEnvelope result = apiInstance.leverageGetAccruedInterestByUser(positionId, assetId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#leverageGetAccruedInterestByUser");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **positionId** | [**Object**](.md)|  | [optional]
- **assetId** | [**Object**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **positionId** | **UUID**|  | [optional] |
+| **assetId** | **UUID**|  | [optional] |
 
 ### Return type
 
-[**CurrentLeverageAccruedInterestResponse**](CurrentLeverageAccruedInterestResponse.md)
+[**CurrentLeverageAccruedInterestResponseEnvelope**](CurrentLeverageAccruedInterestResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="leverageIsolateCollateral"></a>
-# **leverageIsolateCollateral**
-> IsolateCollateralResponse leverageIsolateCollateral(body)
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Current leverage accrued interest retrieved successfully |  -  |
+| **400** | Bad request, e.g. invalid parameters |  -  |
+| **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
+| **500** | Internal server error |  -  |
 
-Create an isolated position by transferring collateral to the position from the user&#x27;s global collateral
+<a id="leverageIsolateCollateral"></a>
+# **leverageIsolateCollateral**
+> IsolateCollateralResponse leverageIsolateCollateral(isolateCollateralRequest)
+
+Create an isolated position by transferring collateral to the position from the user&#39;s global collateral
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-IsolateCollateralRequest body = new IsolateCollateralRequest(); // IsolateCollateralRequest | 
-try {
-    IsolateCollateralResponse result = apiInstance.leverageIsolateCollateral(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#leverageIsolateCollateral");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    IsolateCollateralRequest isolateCollateralRequest = new IsolateCollateralRequest(); // IsolateCollateralRequest | 
+    try {
+      IsolateCollateralResponse result = apiInstance.leverageIsolateCollateral(isolateCollateralRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#leverageIsolateCollateral");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**IsolateCollateralRequest**](IsolateCollateralRequest.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **isolateCollateralRequest** | [**IsolateCollateralRequest**](IsolateCollateralRequest.md)|  | |
 
 ### Return type
 
@@ -3364,70 +4680,100 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="leverageSupply"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Leverage position isolated |  -  |
+| **400** | Bad request, e.g. insufficient collateral or invalid parameters |  -  |
+| **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
+| **404** | Leverage position not found |  -  |
+| **409** | Conflict, e.g. the requested amount is not available to transfer |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="leverageSupply"></a>
 # **leverageSupply**
-> SupplyResponse leverageSupply(body)
+> SupplyResponseEnvelope leverageSupply(supplyRequest)
 
 Supply leverage for a specific asset
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-SupplyRequest body = new SupplyRequest(); // SupplyRequest | 
-try {
-    SupplyResponse result = apiInstance.leverageSupply(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#leverageSupply");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    SupplyRequest supplyRequest = new SupplyRequest(); // SupplyRequest | 
+    try {
+      SupplyResponseEnvelope result = apiInstance.leverageSupply(supplyRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#leverageSupply");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**SupplyRequest**](SupplyRequest.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **supplyRequest** | [**SupplyRequest**](SupplyRequest.md)|  | |
 
 ### Return type
 
-[**SupplyResponse**](SupplyResponse.md)
+[**SupplyResponseEnvelope**](SupplyResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="leverageUnite"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Supply successful |  -  |
+| **400** | Bad request, e.g. insufficient collateral or invalid parameters |  -  |
+| **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="leverageUnite"></a>
 # **leverageUnite**
-> UnitePositionResponse leverageUnite(body)
+> UnitePositionResponseEnvelope leverageUnite(unitePositionRequest)
 
 Combines all isolated positions into a single global position
 
@@ -3436,268 +4782,366 @@ Combines all isolated positions into a single global position
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-UnitePositionRequest body = new UnitePositionRequest(); // UnitePositionRequest | 
-try {
-    UnitePositionResponse result = apiInstance.leverageUnite(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#leverageUnite");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UnitePositionRequest unitePositionRequest = new UnitePositionRequest(); // UnitePositionRequest | 
+    try {
+      UnitePositionResponseEnvelope result = apiInstance.leverageUnite(unitePositionRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#leverageUnite");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**UnitePositionRequest**](UnitePositionRequest.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **unitePositionRequest** | [**UnitePositionRequest**](UnitePositionRequest.md)|  | |
 
 ### Return type
 
-[**UnitePositionResponse**](UnitePositionResponse.md)
+[**UnitePositionResponseEnvelope**](UnitePositionResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="leverageWithdraw"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Leverage position combined |  -  |
+| **400** | Bad request, e.g. insufficient collateral or invalid parameters |  -  |
+| **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
+| **404** | Leverage position not found |  -  |
+| **409** | Conflict, e.g. the requested amount is not available to transfer |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="leverageWithdraw"></a>
 # **leverageWithdraw**
-> WithdrawResponse leverageWithdraw(body)
+> WithdrawResponseEnvelope leverageWithdraw(withdrawRequest)
 
 Withdraw leverage for a specific asset
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-WithdrawRequest body = new WithdrawRequest(); // WithdrawRequest | 
-try {
-    WithdrawResponse result = apiInstance.leverageWithdraw(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#leverageWithdraw");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    WithdrawRequest withdrawRequest = new WithdrawRequest(); // WithdrawRequest | 
+    try {
+      WithdrawResponseEnvelope result = apiInstance.leverageWithdraw(withdrawRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#leverageWithdraw");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**WithdrawRequest**](WithdrawRequest.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **withdrawRequest** | [**WithdrawRequest**](WithdrawRequest.md)|  | |
 
 ### Return type
 
-[**WithdrawResponse**](WithdrawResponse.md)
+[**WithdrawResponseEnvelope**](WithdrawResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="liquidityAdd"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Withdraw successful |  -  |
+| **400** | Bad request, e.g. insufficient collateral or invalid parameters |  -  |
+| **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="liquidityAdd"></a>
 # **liquidityAdd**
-> LiquidityResponse liquidityAdd(body, poolId)
+> LiquidityResponseEnvelope liquidityAdd(poolId, liquidityRequest)
 
 Add liquidity to a pool
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-LiquidityRequest body = new LiquidityRequest(); // LiquidityRequest | 
-Object poolId = null; // Object | 
-try {
-    LiquidityResponse result = apiInstance.liquidityAdd(body, poolId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#liquidityAdd");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID poolId = UUID.randomUUID(); // UUID | 
+    LiquidityRequest liquidityRequest = new LiquidityRequest(); // LiquidityRequest | 
+    try {
+      LiquidityResponseEnvelope result = apiInstance.liquidityAdd(poolId, liquidityRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#liquidityAdd");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**LiquidityRequest**](LiquidityRequest.md)|  |
- **poolId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **poolId** | **UUID**|  | |
+| **liquidityRequest** | [**LiquidityRequest**](LiquidityRequest.md)|  | |
 
 ### Return type
 
-[**LiquidityResponse**](LiquidityResponse.md)
+[**LiquidityResponseEnvelope**](LiquidityResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="liquiditySubtract"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Liquidity added |  -  |
+| **400** | Bad request, e.g. insufficient funds or invalid parameters |  -  |
+| **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
+| **404** | Pool not found |  -  |
+| **409** | Conflict, e.g. the requested amount is not available to transfer |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="liquiditySubtract"></a>
 # **liquiditySubtract**
-> LiquidityResponse liquiditySubtract(body, poolId)
+> LiquidityResponseEnvelope liquiditySubtract(poolId, liquidityRequest)
 
 Subtract liquidity from a pool
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-LiquidityRequest body = new LiquidityRequest(); // LiquidityRequest | 
-Object poolId = null; // Object | 
-try {
-    LiquidityResponse result = apiInstance.liquiditySubtract(body, poolId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#liquiditySubtract");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID poolId = UUID.randomUUID(); // UUID | 
+    LiquidityRequest liquidityRequest = new LiquidityRequest(); // LiquidityRequest | 
+    try {
+      LiquidityResponseEnvelope result = apiInstance.liquiditySubtract(poolId, liquidityRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#liquiditySubtract");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**LiquidityRequest**](LiquidityRequest.md)|  |
- **poolId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **poolId** | **UUID**|  | |
+| **liquidityRequest** | [**LiquidityRequest**](LiquidityRequest.md)|  | |
 
 ### Return type
 
-[**LiquidityResponse**](LiquidityResponse.md)
+[**LiquidityResponseEnvelope**](LiquidityResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="listAssets"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Liquidity subtracted |  -  |
+| **400** | Bad request, e.g. insufficient funds or invalid parameters |  -  |
+| **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
+| **404** | Pool not found |  -  |
+| **409** | Conflict, e.g. the requested amount is not available to transfer |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="listAssets"></a>
 # **listAssets**
-> ListAssetsResponse listAssets(createdAfter, createdBefore, assetKind, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, page, limit)
+> ResponseEnvelopeOfListAssets listAssets(createdAfter, createdBefore, assetKind, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, page, limit)
 
 List assets
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object createdAfter = null; // Object | 
-Object createdBefore = null; // Object | 
-AssetKind assetKind = new AssetKind(); // AssetKind | Asset kind (BOND, CURRENCY, INTEREST, POOL_SHARE)
-Object canAddLiquidity = null; // Object | 
-Object canDirectBorrow = null; // Object | 
-Object canOnboard = null; // Object | 
-Object canTrade = null; // Object | 
-Object canVirtualBorrow = null; // Object | 
-Object page = 1; // Object | 
-Object limit = 100; // Object | 
-try {
-    ListAssetsResponse result = apiInstance.listAssets(createdAfter, createdBefore, assetKind, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, page, limit);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#listAssets");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    OffsetDateTime createdAfter = OffsetDateTime.now(); // OffsetDateTime | 
+    OffsetDateTime createdBefore = OffsetDateTime.now(); // OffsetDateTime | 
+    AssetKind assetKind = AssetKind.fromValue("BOND"); // AssetKind | Asset kind (BOND, CURRENCY, INTEREST, POOL_SHARE)
+    Boolean canAddLiquidity = true; // Boolean | 
+    Boolean canDirectBorrow = true; // Boolean | 
+    Boolean canOnboard = true; // Boolean | 
+    Boolean canTrade = true; // Boolean | 
+    Boolean canVirtualBorrow = true; // Boolean | 
+    Integer page = 1; // Integer | 
+    Integer limit = 100; // Integer | 
+    try {
+      ResponseEnvelopeOfListAssets result = apiInstance.listAssets(createdAfter, createdBefore, assetKind, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, page, limit);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#listAssets");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **createdAfter** | [**Object**](.md)|  | [optional]
- **createdBefore** | [**Object**](.md)|  | [optional]
- **assetKind** | [**AssetKind**](.md)| Asset kind (BOND, CURRENCY, INTEREST, POOL_SHARE) | [optional]
- **canAddLiquidity** | [**Object**](.md)|  | [optional]
- **canDirectBorrow** | [**Object**](.md)|  | [optional]
- **canOnboard** | [**Object**](.md)|  | [optional]
- **canTrade** | [**Object**](.md)|  | [optional]
- **canVirtualBorrow** | [**Object**](.md)|  | [optional]
- **page** | [**Object**](.md)|  | [optional] [default to 1]
- **limit** | [**Object**](.md)|  | [optional] [default to 100]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **createdAfter** | **OffsetDateTime**|  | [optional] |
+| **createdBefore** | **OffsetDateTime**|  | [optional] |
+| **assetKind** | [**AssetKind**](.md)| Asset kind (BOND, CURRENCY, INTEREST, POOL_SHARE) | [optional] [enum: BOND, CURRENCY, INTEREST, POOL_SHARE] |
+| **canAddLiquidity** | **Boolean**|  | [optional] |
+| **canDirectBorrow** | **Boolean**|  | [optional] |
+| **canOnboard** | **Boolean**|  | [optional] |
+| **canTrade** | **Boolean**|  | [optional] |
+| **canVirtualBorrow** | **Boolean**|  | [optional] |
+| **page** | **Integer**|  | [optional] [default to 1] |
+| **limit** | **Integer**|  | [optional] [default to 100] |
 
 ### Return type
 
-[**ListAssetsResponse**](ListAssetsResponse.md)
+[**ResponseEnvelopeOfListAssets**](ResponseEnvelopeOfListAssets.md)
 
 ### Authorization
 
@@ -3708,167 +5152,227 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="listOrderBooks"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | A list of assets |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="listOrderBooks"></a>
 # **listOrderBooks**
-> ListOrderBooksResponse listOrderBooks(status, baseAssetId, quoteAssetId, page, limit)
+> ListOrderbookResponseEnvelope listOrderBooks(status, baseAssetId, quoteAssetId, page, limit)
 
 List order books
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-OrderBookStatus status = new OrderBookStatus(); // OrderBookStatus | 
-Object baseAssetId = null; // Object | 
-Object quoteAssetId = null; // Object | 
-Object page = 1; // Object | 
-Object limit = 100; // Object | 
-try {
-    ListOrderBooksResponse result = apiInstance.listOrderBooks(status, baseAssetId, quoteAssetId, page, limit);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#listOrderBooks");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    OrderBookStatus status = OrderBookStatus.fromValue("CLOSED"); // OrderBookStatus | 
+    UUID baseAssetId = UUID.randomUUID(); // UUID | 
+    UUID quoteAssetId = UUID.randomUUID(); // UUID | 
+    Integer page = 1; // Integer | 
+    Integer limit = 100; // Integer | 
+    try {
+      ListOrderbookResponseEnvelope result = apiInstance.listOrderBooks(status, baseAssetId, quoteAssetId, page, limit);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#listOrderBooks");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **status** | [**OrderBookStatus**](.md)|  | [optional]
- **baseAssetId** | [**Object**](.md)|  | [optional]
- **quoteAssetId** | [**Object**](.md)|  | [optional]
- **page** | [**Object**](.md)|  | [optional] [default to 1]
- **limit** | [**Object**](.md)|  | [optional] [default to 100]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **status** | [**OrderBookStatus**](.md)|  | [optional] [enum: CLOSED, OPEN, SUSPENDED] |
+| **baseAssetId** | **UUID**|  | [optional] |
+| **quoteAssetId** | **UUID**|  | [optional] |
+| **page** | **Integer**|  | [optional] [default to 1] |
+| **limit** | **Integer**|  | [optional] [default to 100] |
 
 ### Return type
 
-[**ListOrderBooksResponse**](ListOrderBooksResponse.md)
+[**ListOrderbookResponseEnvelope**](ListOrderbookResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="listOrders"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | A list of orderbooks |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | No orderbooks found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="listOrders"></a>
 # **listOrders**
-> ListOrdersResponse listOrders(orderBookId, kind, status, side, from, to, page, limit)
+> ListOrdersResponseEnvelope listOrders(orderBookId, kind, status, side, from, to, page, limit)
 
 List all orders
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-Object kind = null; // Object | 
-Object status = null; // Object | 
-Side side = new Side(); // Side | 
-Object from = null; // Object | 
-Object to = null; // Object | 
-Object page = 1; // Object | 
-Object limit = 100; // Object | 
-try {
-    ListOrdersResponse result = apiInstance.listOrders(orderBookId, kind, status, side, from, to, page, limit);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#listOrders");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    List<UUID> orderBookId = Arrays.asList(); // List<UUID> | 
+    List<OrderKind> kind = Arrays.asList(); // List<OrderKind> | 
+    List<OrderStatus> status = Arrays.asList(); // List<OrderStatus> | 
+    Side side = Side.fromValue("BUY"); // Side | 
+    OffsetDateTime from = OffsetDateTime.now(); // OffsetDateTime | 
+    OffsetDateTime to = OffsetDateTime.now(); // OffsetDateTime | 
+    Integer page = 1; // Integer | 
+    Integer limit = 100; // Integer | 
+    try {
+      ListOrdersResponseEnvelope result = apiInstance.listOrders(orderBookId, kind, status, side, from, to, page, limit);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#listOrders");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  | [optional]
- **kind** | [**Object**](.md)|  | [optional]
- **status** | [**Object**](.md)|  | [optional]
- **side** | [**Side**](.md)|  | [optional]
- **from** | [**Object**](.md)|  | [optional]
- **to** | [**Object**](.md)|  | [optional]
- **page** | [**Object**](.md)|  | [optional] [default to 1]
- **limit** | [**Object**](.md)|  | [optional] [default to 100]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | [**List&lt;UUID&gt;**](UUID.md)|  | [optional] |
+| **kind** | [**List&lt;OrderKind&gt;**](OrderKind.md)|  | [optional] |
+| **status** | [**List&lt;OrderStatus&gt;**](OrderStatus.md)|  | [optional] |
+| **side** | [**Side**](.md)|  | [optional] [enum: BUY, SELL] |
+| **from** | **OffsetDateTime**|  | [optional] |
+| **to** | **OffsetDateTime**|  | [optional] |
+| **page** | **Integer**|  | [optional] [default to 1] |
+| **limit** | **Integer**|  | [optional] [default to 100] |
 
 ### Return type
 
-[**ListOrdersResponse**](ListOrdersResponse.md)
+[**ListOrdersResponseEnvelope**](ListOrdersResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="listPositionAccountsSelf"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | A list of orders |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
+| **404** | No orders found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="listPositionAccountsSelf"></a>
 # **listPositionAccountsSelf**
-> ListPositionAccountsResponse listPositionAccountsSelf()
+> ListPositionAccountsResponseEnvelope listPositionAccountsSelf()
 
 List all position accounts for the authenticated user
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-try {
-    ListPositionAccountsResponse result = apiInstance.listPositionAccountsSelf();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#listPositionAccountsSelf");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      ListPositionAccountsResponseEnvelope result = apiInstance.listPositionAccountsSelf();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#listPositionAccountsSelf");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -3877,74 +5381,102 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ListPositionAccountsResponse**](ListPositionAccountsResponse.md)
+[**ListPositionAccountsResponseEnvelope**](ListPositionAccountsResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="payLeverageGetAccruedInterest"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | List of position accounts including the position id, the position name, and global account indicator |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="payLeverageGetAccruedInterest"></a>
 # **payLeverageGetAccruedInterest**
-> PayLeverageAccruedInterestResponse payLeverageGetAccruedInterest(body)
+> PayLeverageAccruedInterestResponseEnvelope payLeverageGetAccruedInterest(payLeverageAccruedInterestRequest)
 
 Pay current accrued leverage interest for a specific user
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-PayLeverageAccruedInterestRequest body = new PayLeverageAccruedInterestRequest(); // PayLeverageAccruedInterestRequest | 
-try {
-    PayLeverageAccruedInterestResponse result = apiInstance.payLeverageGetAccruedInterest(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#payLeverageGetAccruedInterest");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    PayLeverageAccruedInterestRequest payLeverageAccruedInterestRequest = new PayLeverageAccruedInterestRequest(); // PayLeverageAccruedInterestRequest | 
+    try {
+      PayLeverageAccruedInterestResponseEnvelope result = apiInstance.payLeverageGetAccruedInterest(payLeverageAccruedInterestRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#payLeverageGetAccruedInterest");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**PayLeverageAccruedInterestRequest**](PayLeverageAccruedInterestRequest.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **payLeverageAccruedInterestRequest** | [**PayLeverageAccruedInterestRequest**](PayLeverageAccruedInterestRequest.md)|  | |
 
 ### Return type
 
-[**PayLeverageAccruedInterestResponse**](PayLeverageAccruedInterestResponse.md)
+[**PayLeverageAccruedInterestResponseEnvelope**](PayLeverageAccruedInterestResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="rejectLedgerWithdrawRequest"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Current leverage accrued interest paid successfully |  -  |
+| **400** | Bad request, e.g. invalid parameters |  -  |
+| **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="rejectLedgerWithdrawRequest"></a>
 # **rejectLedgerWithdrawRequest**
-> WithdrawalInitiationResponse rejectLedgerWithdrawRequest(body, withdrawalId)
+> WithdrawalInitiationResponseEnvelope rejectLedgerWithdrawRequest(withdrawalId, withdrawalRequestReason)
 
 Reject a pending withdrawal request
 
@@ -3953,272 +5485,445 @@ Reject a pending withdrawal request, providing a reason for the rejection. Note 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-WithdrawalRequestReason body = new WithdrawalRequestReason(); // WithdrawalRequestReason | 
-Object withdrawalId = null; // Object | 
-try {
-    WithdrawalInitiationResponse result = apiInstance.rejectLedgerWithdrawRequest(body, withdrawalId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#rejectLedgerWithdrawRequest");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID withdrawalId = UUID.randomUUID(); // UUID | 
+    WithdrawalRequestReason withdrawalRequestReason = new WithdrawalRequestReason(); // WithdrawalRequestReason | 
+    try {
+      WithdrawalInitiationResponseEnvelope result = apiInstance.rejectLedgerWithdrawRequest(withdrawalId, withdrawalRequestReason);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#rejectLedgerWithdrawRequest");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**WithdrawalRequestReason**](WithdrawalRequestReason.md)|  |
- **withdrawalId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **withdrawalId** | **UUID**|  | |
+| **withdrawalRequestReason** | [**WithdrawalRequestReason**](WithdrawalRequestReason.md)|  | |
 
 ### Return type
 
-[**WithdrawalInitiationResponse**](WithdrawalInitiationResponse.md)
+[**WithdrawalInitiationResponseEnvelope**](WithdrawalInitiationResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="revokeAPIKeyForUser"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Withdrawal request rejected successfully |  -  |
+| **400** | Bad request, e.g. invalid withdrawal ID format or request is not in a pending state |  -  |
+| **404** | Withdrawal request not found |  -  |
+| **403** | Forbidden, user does not have permission to reject this withdrawal request |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="revokeAPIKeyForUser"></a>
 # **revokeAPIKeyForUser**
-> RevokeAPIKeyResponse revokeAPIKeyForUser(keyId)
+> RevokeAPIKeyResponseEnvelope revokeAPIKeyForUser(keyId)
 
 Revoke apikey for a user
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object keyId = null; // Object | 
-try {
-    RevokeAPIKeyResponse result = apiInstance.revokeAPIKeyForUser(keyId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#revokeAPIKeyForUser");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String keyId = "keyId_example"; // String | 
+    try {
+      RevokeAPIKeyResponseEnvelope result = apiInstance.revokeAPIKeyForUser(keyId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#revokeAPIKeyForUser");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **keyId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **keyId** | **String**|  | |
 
 ### Return type
 
-[**RevokeAPIKeyResponse**](RevokeAPIKeyResponse.md)
+[**RevokeAPIKeyResponseEnvelope**](RevokeAPIKeyResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="revokeAPIKeyForUserID"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | APIKey revoked |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="revokeAPIKeyForUserID"></a>
 # **revokeAPIKeyForUserID**
-> RevokeAPIKeyResponse revokeAPIKeyForUserID(userId, keyId)
+> RevokeAPIKeyResponseEnvelope revokeAPIKeyForUserID(userId, keyId)
 
 Revoke apikey for a user: admin or integrator only
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object userId = null; // Object | 
-Object keyId = null; // Object | 
-try {
-    RevokeAPIKeyResponse result = apiInstance.revokeAPIKeyForUserID(userId, keyId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#revokeAPIKeyForUserID");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String userId = "userId_example"; // String | 
+    String keyId = "keyId_example"; // String | 
+    try {
+      RevokeAPIKeyResponseEnvelope result = apiInstance.revokeAPIKeyForUserID(userId, keyId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#revokeAPIKeyForUserID");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userId** | [**Object**](.md)|  |
- **keyId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **keyId** | **String**|  | |
 
 ### Return type
 
-[**RevokeAPIKeyResponse**](RevokeAPIKeyResponse.md)
+[**RevokeAPIKeyResponseEnvelope**](RevokeAPIKeyResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="settleLeverageAccruedInterest"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | APIKey revoked |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="settleLeverageAccruedInterest"></a>
 # **settleLeverageAccruedInterest**
-> SettleLeverageAccruedInterestResponse settleLeverageAccruedInterest(body)
+> SettleLeverageAccruedInterestResponseEnvelope settleLeverageAccruedInterest(settleLeverageAccruedInterestRequest)
 
 Settle current accrued leverage interest for a specific user
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-SettleLeverageAccruedInterestRequest body = new SettleLeverageAccruedInterestRequest(); // SettleLeverageAccruedInterestRequest | 
-try {
-    SettleLeverageAccruedInterestResponse result = apiInstance.settleLeverageAccruedInterest(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#settleLeverageAccruedInterest");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    SettleLeverageAccruedInterestRequest settleLeverageAccruedInterestRequest = new SettleLeverageAccruedInterestRequest(); // SettleLeverageAccruedInterestRequest | 
+    try {
+      SettleLeverageAccruedInterestResponseEnvelope result = apiInstance.settleLeverageAccruedInterest(settleLeverageAccruedInterestRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#settleLeverageAccruedInterest");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**SettleLeverageAccruedInterestRequest**](SettleLeverageAccruedInterestRequest.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **settleLeverageAccruedInterestRequest** | [**SettleLeverageAccruedInterestRequest**](SettleLeverageAccruedInterestRequest.md)|  | |
 
 ### Return type
 
-[**SettleLeverageAccruedInterestResponse**](SettleLeverageAccruedInterestResponse.md)
+[**SettleLeverageAccruedInterestResponseEnvelope**](SettleLeverageAccruedInterestResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="settleRealizedPnlRecord"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Current leverage accrued interest settled successfully |  -  |
+| **400** | Bad request, e.g. invalid parameters |  -  |
+| **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="settleRealizedPnlRecord"></a>
 # **settleRealizedPnlRecord**
-> SettleRealizedPnlRecordResponse settleRealizedPnlRecord(settlementId)
+> SettleRealizedPnlRecordResponseEnvelope settleRealizedPnlRecord(settlementId)
 
 Mark a realized P&amp;L settlement as settled
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object settlementId = null; // Object | 
-try {
-    SettleRealizedPnlRecordResponse result = apiInstance.settleRealizedPnlRecord(settlementId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#settleRealizedPnlRecord");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID settlementId = UUID.randomUUID(); // UUID | 
+    try {
+      SettleRealizedPnlRecordResponseEnvelope result = apiInstance.settleRealizedPnlRecord(settlementId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#settleRealizedPnlRecord");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **settlementId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **settlementId** | **UUID**|  | |
 
 ### Return type
 
-[**SettleRealizedPnlRecordResponse**](SettleRealizedPnlRecordResponse.md)
+[**SettleRealizedPnlRecordResponseEnvelope**](SettleRealizedPnlRecordResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="streamAssetPrices"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The realized P&amp;L settlement record has been marked as settled |  -  |
+| **401** | Unauthorized, user is not logged in |  -  |
+| **403** | Forbidden, user does not have access |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="settleTransactionsSettlements"></a>
+# **settleTransactionsSettlements**
+> TransactionsSettlementsResponse settleTransactionsSettlements(transactionsSettlementRequest)
+
+Settle multiple transactions settlements in batch
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    TransactionsSettlementRequest transactionsSettlementRequest = new TransactionsSettlementRequest(); // TransactionsSettlementRequest | 
+    try {
+      TransactionsSettlementsResponse result = apiInstance.settleTransactionsSettlements(transactionsSettlementRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#settleTransactionsSettlements");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **transactionsSettlementRequest** | [**TransactionsSettlementRequest**](TransactionsSettlementRequest.md)|  | |
+
+### Return type
+
+[**TransactionsSettlementsResponse**](TransactionsSettlementsResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Settlements updated |  -  |
+| **400** | Bad request |  -  |
+| **404** | No transactions for settlement found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="streamAssetPrices"></a>
 # **streamAssetPrices**
 > StreamAssetPricesResponse streamAssetPrices(since, assetId)
 
@@ -4229,28 +5934,40 @@ Opens a WebSocket stream for real-time asset price updates. First message contai
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object since = null; // Object | 
-Object assetId = null; // Object | 
-try {
-    StreamAssetPricesResponse result = apiInstance.streamAssetPrices(since, assetId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#streamAssetPrices");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
+    UUID assetId = UUID.randomUUID(); // UUID | 
+    try {
+      StreamAssetPricesResponse result = apiInstance.streamAssetPrices(since, assetId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#streamAssetPrices");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **since** | [**Object**](.md)|  | [optional]
- **assetId** | [**Object**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **since** | **OffsetDateTime**|  | [optional] |
+| **assetId** | **UUID**|  | [optional] |
 
 ### Return type
 
@@ -4265,7 +5982,14 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="streamCandleData"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Real-time stream of asset prices. First message: all current prices. Subsequent messages: only changed prices. |  -  |
+| **400** | Bad request, e.g. invalid parameters |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="streamCandleData"></a>
 # **streamCandleData**
 > StreamCandlesResponse streamCandleData(orderBookId, since, resolution)
 
@@ -4274,30 +5998,42 @@ Get a snapshot of candlestick data from date provided, and open a stream for rea
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-Object since = null; // Object | 
-CandleResolution resolution = new CandleResolution(); // CandleResolution | 
-try {
-    StreamCandlesResponse result = apiInstance.streamCandleData(orderBookId, since, resolution);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#streamCandleData");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String orderBookId = "orderBookId_example"; // String | 
+    OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
+    CandleResolution resolution = CandleResolution.fromValue("1m"); // CandleResolution | 
+    try {
+      StreamCandlesResponse result = apiInstance.streamCandleData(orderBookId, since, resolution);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#streamCandleData");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  |
- **since** | [**Object**](.md)|  | [optional]
- **resolution** | [**CandleResolution**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | **String**|  | |
+| **since** | **OffsetDateTime**|  | [optional] |
+| **resolution** | [**CandleResolution**](.md)|  | [optional] [enum: 1m, 5m, 15m, 1h, 4h, 1d] |
 
 ### Return type
 
@@ -4312,7 +6048,15 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="streamOrderBookBalances"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Stream opened successfully |  -  |
+| **400** | Bad request, e.g. invalid parameters |  -  |
+| **404** | Orderbook not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="streamOrderBookBalances"></a>
 # **streamOrderBookBalances**
 > StreamOrderBookBalancesResponse streamOrderBookBalances(orderBookId, since)
 
@@ -4321,28 +6065,40 @@ Get a snapshot of base and quote balances for an order book and open a stream fo
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-Object since = null; // Object | 
-try {
-    StreamOrderBookBalancesResponse result = apiInstance.streamOrderBookBalances(orderBookId, since);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#streamOrderBookBalances");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID orderBookId = UUID.randomUUID(); // UUID | 
+    OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
+    try {
+      StreamOrderBookBalancesResponse result = apiInstance.streamOrderBookBalances(orderBookId, since);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#streamOrderBookBalances");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  |
- **since** | [**Object**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | **UUID**|  | |
+| **since** | **OffsetDateTime**|  | [optional] |
 
 ### Return type
 
@@ -4357,7 +6113,15 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="streamOrderbookOpenOrders"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Stream opened successfully |  -  |
+| **400** | Bad request, e.g. invalid order book ID format |  -  |
+| **404** | Orderbook not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="streamOrderbookOpenOrders"></a>
 # **streamOrderbookOpenOrders**
 > LiveOrderbook streamOrderbookOpenOrders(orderBookId, since)
 
@@ -4366,28 +6130,40 @@ Get a snapshot of open orders in an order book and open a stream for real-time u
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-Object since = null; // Object | 
-try {
-    LiveOrderbook result = apiInstance.streamOrderbookOpenOrders(orderBookId, since);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#streamOrderbookOpenOrders");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID orderBookId = UUID.randomUUID(); // UUID | 
+    OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
+    try {
+      LiveOrderbook result = apiInstance.streamOrderbookOpenOrders(orderBookId, since);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#streamOrderbookOpenOrders");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  |
- **since** | [**Object**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | **UUID**|  | |
+| **since** | **OffsetDateTime**|  | [optional] |
 
 ### Return type
 
@@ -4402,7 +6178,15 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="streamTrades"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Stream opened successfully |  -  |
+| **400** | Bad request, e.g. invalid order book ID format |  -  |
+| **404** | Orderbook not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="streamTrades"></a>
 # **streamTrades**
 > StreamTradesResponse streamTrades(orderBookId, since)
 
@@ -4411,28 +6195,40 @@ Get a snapshot of trades executed on the given order book from a specific date a
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiException;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
 
-DefaultApi apiInstance = new DefaultApi();
-Object orderBookId = null; // Object | 
-Object since = null; // Object | 
-try {
-    StreamTradesResponse result = apiInstance.streamTrades(orderBookId, since);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#streamTrades");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID orderBookId = UUID.randomUUID(); // UUID | 
+    OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
+    try {
+      StreamTradesResponse result = apiInstance.streamTrades(orderBookId, since);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#streamTrades");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderBookId** | [**Object**](.md)|  |
- **since** | [**Object**](.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **orderBookId** | **UUID**|  | |
+| **since** | **OffsetDateTime**|  | [optional] |
 
 ### Return type
 
@@ -4447,210 +6243,290 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="transferAvailableBalances"></a>
-# **transferAvailableBalances**
-> TransferBalancesResponse transferAvailableBalances(body)
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Real-time trade updates |  -  |
+| **400** | Bad request, e.g. invalid parameters |  -  |
+| **500** | Internal server error |  -  |
 
-Transfer available balance between a user&#x27;s accounts (e.g. global to isolated position)
+<a id="transferAvailableBalances"></a>
+# **transferAvailableBalances**
+> TransferBalancesResponseEnvelope transferAvailableBalances(transferBalancesRequest)
+
+Transfer available balance between a user&#39;s accounts (e.g. global to isolated position)
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-TransferBalancesRequest body = new TransferBalancesRequest(); // TransferBalancesRequest | 
-try {
-    TransferBalancesResponse result = apiInstance.transferAvailableBalances(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#transferAvailableBalances");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    TransferBalancesRequest transferBalancesRequest = new TransferBalancesRequest(); // TransferBalancesRequest | 
+    try {
+      TransferBalancesResponseEnvelope result = apiInstance.transferAvailableBalances(transferBalancesRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#transferAvailableBalances");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**TransferBalancesRequest**](TransferBalancesRequest.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **transferBalancesRequest** | [**TransferBalancesRequest**](TransferBalancesRequest.md)|  | |
 
 ### Return type
 
-[**TransferBalancesResponse**](TransferBalancesResponse.md)
+[**TransferBalancesResponseEnvelope**](TransferBalancesResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="updateUserConfig"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Isolated Position Created |  -  |
+| **400** | Bad request, e.g. missing required fields |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
+| **409** | Conflict, e.g. the requested amount is not available to transfer |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="updateUserConfig"></a>
 # **updateUserConfig**
-> UserUpdatedResponse updateUserConfig(body, userId)
+> UserUpdatedResponseEnvelope updateUserConfig(userId, updateUserConfigRequest)
 
 Update user configuration by ID
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-UpdateUserConfigRequest body = new UpdateUserConfigRequest(); // UpdateUserConfigRequest | 
-Object userId = null; // Object | 
-try {
-    UserUpdatedResponse result = apiInstance.updateUserConfig(body, userId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#updateUserConfig");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    UpdateUserConfigRequest updateUserConfigRequest = new UpdateUserConfigRequest(); // UpdateUserConfigRequest | 
+    try {
+      UserUpdatedResponseEnvelope result = apiInstance.updateUserConfig(userId, updateUserConfigRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#updateUserConfig");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**UpdateUserConfigRequest**](UpdateUserConfigRequest.md)|  |
- **userId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
+| **updateUserConfigRequest** | [**UpdateUserConfigRequest**](UpdateUserConfigRequest.md)|  | |
 
 ### Return type
 
-[**UserUpdatedResponse**](UserUpdatedResponse.md)
+[**UserUpdatedResponseEnvelope**](UserUpdatedResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="updateUserConfigSelf"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User configuration updated |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="updateUserConfigSelf"></a>
 # **updateUserConfigSelf**
-> UserUpdatedResponse updateUserConfigSelf(body)
+> UserUpdatedResponseEnvelope updateUserConfigSelf(updateUserConfigRequest)
 
 Update user configuration for the authenticated user
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-UpdateUserConfigRequest body = new UpdateUserConfigRequest(); // UpdateUserConfigRequest | 
-try {
-    UserUpdatedResponse result = apiInstance.updateUserConfigSelf(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#updateUserConfigSelf");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UpdateUserConfigRequest updateUserConfigRequest = new UpdateUserConfigRequest(); // UpdateUserConfigRequest | 
+    try {
+      UserUpdatedResponseEnvelope result = apiInstance.updateUserConfigSelf(updateUserConfigRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#updateUserConfigSelf");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**UpdateUserConfigRequest**](UpdateUserConfigRequest.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **updateUserConfigRequest** | [**UpdateUserConfigRequest**](UpdateUserConfigRequest.md)|  | |
 
 ### Return type
 
-[**UserUpdatedResponse**](UserUpdatedResponse.md)
+[**UserUpdatedResponseEnvelope**](UserUpdatedResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="validateSubmitOrder"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User configuration updated |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="validateSubmitOrder"></a>
 # **validateSubmitOrder**
-> ValidateSubmitOrderResponse validateSubmitOrder(body)
+> ValidateSubmitOrderResponse validateSubmitOrder(validateSubmitOrderRequest)
 
 Validate submit order request data
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-ValidateSubmitOrderRequest body = new ValidateSubmitOrderRequest(); // ValidateSubmitOrderRequest | 
-try {
-    ValidateSubmitOrderResponse result = apiInstance.validateSubmitOrder(body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#validateSubmitOrder");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    ValidateSubmitOrderRequest validateSubmitOrderRequest = new ValidateSubmitOrderRequest(); // ValidateSubmitOrderRequest | 
+    try {
+      ValidateSubmitOrderResponse result = apiInstance.validateSubmitOrder(validateSubmitOrderRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#validateSubmitOrder");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**ValidateSubmitOrderRequest**](ValidateSubmitOrderRequest.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **validateSubmitOrderRequest** | [**ValidateSubmitOrderRequest**](ValidateSubmitOrderRequest.md)|  | |
 
 ### Return type
 
@@ -4658,64 +6534,92 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="verifyUser"></a>
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Validated submit order request |  -  |
+| **400** | Bad request, e.g. missing required fields |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="verifyUser"></a>
 # **verifyUser**
-> UserUpdatedResponse verifyUser(userId)
+> UserUpdatedResponseEnvelope verifyUser(userId)
 
 Verify a user by ID
 
 ### Example
 ```java
 // Import classes:
-//import tech.dora.ApiClient;
-//import tech.dora.ApiException;
-//import tech.dora.Configuration;
-//import tech.dora.auth.*;
-//import tech.dora.api.DefaultApi;
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
 
-// Configure API key authorization: apiKeyAuthHeader
-ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-apiKeyAuthHeader.setApiKey("YOUR API KEY");
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKeyAuthHeader.setApiKeyPrefix("Token");
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
-
-DefaultApi apiInstance = new DefaultApi();
-Object userId = null; // Object | 
-try {
-    UserUpdatedResponse result = apiInstance.verifyUser(userId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#verifyUser");
-    e.printStackTrace();
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    try {
+      UserUpdatedResponseEnvelope result = apiInstance.verifyUser(userId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#verifyUser");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userId** | [**Object**](.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
 
 ### Return type
 
-[**UserUpdatedResponse**](UserUpdatedResponse.md)
+[**UserUpdatedResponseEnvelope**](UserUpdatedResponseEnvelope.md)
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader)[bearerAuth](../README.md#bearerAuth)
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User verified |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
 

@@ -1,9 +1,16 @@
+
+
 # AssetPrice
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**assetId** | **Object** |  | 
-**price** | **Object** |  | 
-**ytm** | **Object** |  |  [optional]
-**time** | **Object** |  | 
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**assetId** | **UUID** |  |  |
+|**price** | **String** |  |  |
+|**ytm** | **String** |  |  [optional] |
+|**time** | **OffsetDateTime** |  |  |
+
+
+

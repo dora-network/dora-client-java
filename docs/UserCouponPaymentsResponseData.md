@@ -1,7 +1,14 @@
+
+
 # UserCouponPaymentsResponseData
 
+
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**couponPayments** | **Object** |  |  [optional]
-**summaryByAsset** | **Object** |  |  [optional]
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**couponPayments** | [**List&lt;UserCouponPayment&gt;**](UserCouponPayment.md) |  |  [optional] |
+|**summaryByAsset** | [**List&lt;UserCouponPaymentAssetSummary&gt;**](UserCouponPaymentAssetSummary.md) |  |  [optional] |
+
+
+
