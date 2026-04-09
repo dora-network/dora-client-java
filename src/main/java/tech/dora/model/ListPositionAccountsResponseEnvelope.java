@@ -21,9 +21,11 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import tech.dora.model.Metadata;
-import tech.dora.model.PositionAccounts;
+import tech.dora.model.PositionAccount;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,12 +54,12 @@ import tech.dora.JSON;
 /**
  * ListPositionAccountsResponseEnvelope
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-07T12:22:17.571174232+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-09T12:22:26.036360558+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
 public class ListPositionAccountsResponseEnvelope {
   public static final String SERIALIZED_NAME_DATA = "data";
   @SerializedName(SERIALIZED_NAME_DATA)
   @javax.annotation.Nullable
-  private PositionAccounts data = new ArrayList<>();
+  private List<PositionAccount> data = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_ERROR = "error";
   @SerializedName(SERIALIZED_NAME_ERROR)
@@ -72,8 +74,16 @@ public class ListPositionAccountsResponseEnvelope {
   public ListPositionAccountsResponseEnvelope() {
   }
 
-  public ListPositionAccountsResponseEnvelope data(@javax.annotation.Nullable PositionAccounts data) {
+  public ListPositionAccountsResponseEnvelope data(@javax.annotation.Nullable List<PositionAccount> data) {
     this.data = data;
+    return this;
+  }
+
+  public ListPositionAccountsResponseEnvelope addDataItem(PositionAccount dataItem) {
+    if (this.data == null) {
+      this.data = new ArrayList<>();
+    }
+    this.data.add(dataItem);
     return this;
   }
 
@@ -82,11 +92,11 @@ public class ListPositionAccountsResponseEnvelope {
    * @return data
    */
   @javax.annotation.Nullable
-  public PositionAccounts getData() {
+  public List<PositionAccount> getData() {
     return data;
   }
 
-  public void setData(@javax.annotation.Nullable PositionAccounts data) {
+  public void setData(@javax.annotation.Nullable List<PositionAccount> data) {
     this.data = data;
   }
 
@@ -211,6 +221,20 @@ public class ListPositionAccountsResponseEnvelope {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+      if (jsonObj.get("data") != null && !jsonObj.get("data").isJsonNull()) {
+        JsonArray jsonArraydata = jsonObj.getAsJsonArray("data");
+        if (jsonArraydata != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("data").isJsonArray()) {
+            throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `data` to be an array in the JSON string but got `%s`", jsonObj.get("data").toString()));
+          }
+
+          // validate the optional field `data` (array)
+          for (int i = 0; i < jsonArraydata.size(); i++) {
+            PositionAccount.validateJsonElement(jsonArraydata.get(i));
+          };
+        }
+      }
       if ((jsonObj.get("error") != null && !jsonObj.get("error").isJsonNull()) && !jsonObj.get("error").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `error` to be a primitive type in the JSON string but got `%s`", jsonObj.get("error").toString()));
       }

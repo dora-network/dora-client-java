@@ -51,7 +51,7 @@ import tech.dora.JSON;
 /**
  * WithdrawRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-07T12:22:17.571174232+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-09T12:22:26.036360558+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
 public class WithdrawRequest {
   public static final String SERIALIZED_NAME_POSITION_ID = "position_id";
   @SerializedName(SERIALIZED_NAME_POSITION_ID)

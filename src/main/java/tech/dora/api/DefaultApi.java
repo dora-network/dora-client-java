@@ -31,6 +31,7 @@ import tech.dora.model.APIKeyResponseEnvelope;
 import tech.dora.model.AllPositionsResponseEnvelope;
 import tech.dora.model.AllWithdrawalInitiationsResponseEnvelope;
 import tech.dora.model.AssetKind;
+import tech.dora.model.AssetPrice;
 import tech.dora.model.AssetPriceResponseEnvelope;
 import tech.dora.model.AssetRequestError;
 import tech.dora.model.CancelOrderResponseEnvelope;
@@ -93,14 +94,13 @@ import tech.dora.model.SettleLeverageAccruedInterestRequest;
 import tech.dora.model.SettleLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.SettleRealizedPnlRecordResponseEnvelope;
 import tech.dora.model.Side;
-import tech.dora.model.StreamAssetPricesResponse;
-import tech.dora.model.StreamAssetsResponse;
-import tech.dora.model.StreamCandlesResponse;
-import tech.dora.model.StreamOrderBookBalancesResponse;
-import tech.dora.model.StreamOrderUpdatesResponse;
-import tech.dora.model.StreamPositionsResponse;
-import tech.dora.model.StreamTradesResponse;
-import tech.dora.model.StreamTransactionsResponse;
+import tech.dora.model.StreamAssetsEntry;
+import tech.dora.model.StreamCandlesEntry;
+import tech.dora.model.StreamOrderBookBalanceEntry;
+import tech.dora.model.StreamOrderUpdatesEntry;
+import tech.dora.model.StreamPositionsEntry;
+import tech.dora.model.StreamTradesEntry;
+import tech.dora.model.StreamTransactionsEntry;
 import tech.dora.model.StreamUserCouponPaymentsResponse;
 import tech.dora.model.SupplyRequest;
 import tech.dora.model.SupplyResponseEnvelope;
@@ -3011,7 +3011,7 @@ public class DefaultApi {
      * 
      * @param since  (optional)
      * @param until  (optional)
-     * @return StreamAssetsResponse
+     * @return List&lt;StreamAssetsEntry&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -3023,8 +3023,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public StreamAssetsResponse getAssetsStream(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable OffsetDateTime until) throws ApiException {
-        ApiResponse<StreamAssetsResponse> localVarResp = getAssetsStreamWithHttpInfo(since, until);
+    public List<StreamAssetsEntry> getAssetsStream(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable OffsetDateTime until) throws ApiException {
+        ApiResponse<List<StreamAssetsEntry>> localVarResp = getAssetsStreamWithHttpInfo(since, until);
         return localVarResp.getData();
     }
 
@@ -3033,7 +3033,7 @@ public class DefaultApi {
      * 
      * @param since  (optional)
      * @param until  (optional)
-     * @return ApiResponse&lt;StreamAssetsResponse&gt;
+     * @return ApiResponse&lt;List&lt;StreamAssetsEntry&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -3045,9 +3045,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<StreamAssetsResponse> getAssetsStreamWithHttpInfo(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable OffsetDateTime until) throws ApiException {
+    public ApiResponse<List<StreamAssetsEntry>> getAssetsStreamWithHttpInfo(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable OffsetDateTime until) throws ApiException {
         okhttp3.Call localVarCall = getAssetsStreamValidateBeforeCall(since, until, null);
-        Type localVarReturnType = new TypeToken<StreamAssetsResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<StreamAssetsEntry>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -3069,10 +3069,10 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getAssetsStreamAsync(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable OffsetDateTime until, final ApiCallback<StreamAssetsResponse> _callback) throws ApiException {
+    public okhttp3.Call getAssetsStreamAsync(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable OffsetDateTime until, final ApiCallback<List<StreamAssetsEntry>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getAssetsStreamValidateBeforeCall(since, until, _callback);
-        Type localVarReturnType = new TypeToken<StreamAssetsResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<StreamAssetsEntry>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -7622,7 +7622,7 @@ public class DefaultApi {
      * Get a snapshot of user&#39;s ledger updates since a specific time, and opens a stream for further updates
      * 
      * @param userId  (required)
-     * @return StreamPositionsResponse
+     * @return List&lt;StreamPositionsEntry&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -7635,8 +7635,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public StreamPositionsResponse getUserLedgerStream(@javax.annotation.Nonnull UUID userId) throws ApiException {
-        ApiResponse<StreamPositionsResponse> localVarResp = getUserLedgerStreamWithHttpInfo(userId);
+    public List<StreamPositionsEntry> getUserLedgerStream(@javax.annotation.Nonnull UUID userId) throws ApiException {
+        ApiResponse<List<StreamPositionsEntry>> localVarResp = getUserLedgerStreamWithHttpInfo(userId);
         return localVarResp.getData();
     }
 
@@ -7644,7 +7644,7 @@ public class DefaultApi {
      * Get a snapshot of user&#39;s ledger updates since a specific time, and opens a stream for further updates
      * 
      * @param userId  (required)
-     * @return ApiResponse&lt;StreamPositionsResponse&gt;
+     * @return ApiResponse&lt;List&lt;StreamPositionsEntry&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -7657,9 +7657,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<StreamPositionsResponse> getUserLedgerStreamWithHttpInfo(@javax.annotation.Nonnull UUID userId) throws ApiException {
+    public ApiResponse<List<StreamPositionsEntry>> getUserLedgerStreamWithHttpInfo(@javax.annotation.Nonnull UUID userId) throws ApiException {
         okhttp3.Call localVarCall = getUserLedgerStreamValidateBeforeCall(userId, null);
-        Type localVarReturnType = new TypeToken<StreamPositionsResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<StreamPositionsEntry>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -7681,10 +7681,10 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getUserLedgerStreamAsync(@javax.annotation.Nonnull UUID userId, final ApiCallback<StreamPositionsResponse> _callback) throws ApiException {
+    public okhttp3.Call getUserLedgerStreamAsync(@javax.annotation.Nonnull UUID userId, final ApiCallback<List<StreamPositionsEntry>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getUserLedgerStreamValidateBeforeCall(userId, _callback);
-        Type localVarReturnType = new TypeToken<StreamPositionsResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<StreamPositionsEntry>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -7779,7 +7779,7 @@ public class DefaultApi {
      * @param userId  (required)
      * @param orderBookId  (required)
      * @param since  (optional)
-     * @return StreamOrderUpdatesResponse
+     * @return List&lt;StreamOrderUpdatesEntry&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -7792,8 +7792,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public StreamOrderUpdatesResponse getUserOrderUpdatesStream(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
-        ApiResponse<StreamOrderUpdatesResponse> localVarResp = getUserOrderUpdatesStreamWithHttpInfo(userId, orderBookId, since);
+    public List<StreamOrderUpdatesEntry> getUserOrderUpdatesStream(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
+        ApiResponse<List<StreamOrderUpdatesEntry>> localVarResp = getUserOrderUpdatesStreamWithHttpInfo(userId, orderBookId, since);
         return localVarResp.getData();
     }
 
@@ -7803,7 +7803,7 @@ public class DefaultApi {
      * @param userId  (required)
      * @param orderBookId  (required)
      * @param since  (optional)
-     * @return ApiResponse&lt;StreamOrderUpdatesResponse&gt;
+     * @return ApiResponse&lt;List&lt;StreamOrderUpdatesEntry&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -7816,9 +7816,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<StreamOrderUpdatesResponse> getUserOrderUpdatesStreamWithHttpInfo(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
+    public ApiResponse<List<StreamOrderUpdatesEntry>> getUserOrderUpdatesStreamWithHttpInfo(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
         okhttp3.Call localVarCall = getUserOrderUpdatesStreamValidateBeforeCall(userId, orderBookId, since, null);
-        Type localVarReturnType = new TypeToken<StreamOrderUpdatesResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<StreamOrderUpdatesEntry>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -7842,10 +7842,10 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getUserOrderUpdatesStreamAsync(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since, final ApiCallback<StreamOrderUpdatesResponse> _callback) throws ApiException {
+    public okhttp3.Call getUserOrderUpdatesStreamAsync(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since, final ApiCallback<List<StreamOrderUpdatesEntry>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getUserOrderUpdatesStreamValidateBeforeCall(userId, orderBookId, since, _callback);
-        Type localVarReturnType = new TypeToken<StreamOrderUpdatesResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<StreamOrderUpdatesEntry>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -7932,7 +7932,7 @@ public class DefaultApi {
      * 
      * @param userId  (required)
      * @param since  (optional)
-     * @return StreamOrderUpdatesResponse
+     * @return List&lt;StreamOrderUpdatesEntry&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -7945,8 +7945,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public StreamOrderUpdatesResponse getUserOrdersUpdatesStreamAll(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
-        ApiResponse<StreamOrderUpdatesResponse> localVarResp = getUserOrdersUpdatesStreamAllWithHttpInfo(userId, since);
+    public List<StreamOrderUpdatesEntry> getUserOrdersUpdatesStreamAll(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
+        ApiResponse<List<StreamOrderUpdatesEntry>> localVarResp = getUserOrdersUpdatesStreamAllWithHttpInfo(userId, since);
         return localVarResp.getData();
     }
 
@@ -7955,7 +7955,7 @@ public class DefaultApi {
      * 
      * @param userId  (required)
      * @param since  (optional)
-     * @return ApiResponse&lt;StreamOrderUpdatesResponse&gt;
+     * @return ApiResponse&lt;List&lt;StreamOrderUpdatesEntry&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -7968,9 +7968,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<StreamOrderUpdatesResponse> getUserOrdersUpdatesStreamAllWithHttpInfo(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
+    public ApiResponse<List<StreamOrderUpdatesEntry>> getUserOrdersUpdatesStreamAllWithHttpInfo(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
         okhttp3.Call localVarCall = getUserOrdersUpdatesStreamAllValidateBeforeCall(userId, since, null);
-        Type localVarReturnType = new TypeToken<StreamOrderUpdatesResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<StreamOrderUpdatesEntry>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -7993,10 +7993,10 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getUserOrdersUpdatesStreamAllAsync(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable OffsetDateTime since, final ApiCallback<StreamOrderUpdatesResponse> _callback) throws ApiException {
+    public okhttp3.Call getUserOrdersUpdatesStreamAllAsync(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable OffsetDateTime since, final ApiCallback<List<StreamOrderUpdatesEntry>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getUserOrdersUpdatesStreamAllValidateBeforeCall(userId, since, _callback);
-        Type localVarReturnType = new TypeToken<StreamOrderUpdatesResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<StreamOrderUpdatesEntry>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -8212,7 +8212,7 @@ public class DefaultApi {
      * 
      * @param userId  (required)
      * @param since  (optional)
-     * @return StreamTransactionsResponse
+     * @return List&lt;StreamTransactionsEntry&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -8225,8 +8225,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public StreamTransactionsResponse getUserTransactionsStream(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
-        ApiResponse<StreamTransactionsResponse> localVarResp = getUserTransactionsStreamWithHttpInfo(userId, since);
+    public List<StreamTransactionsEntry> getUserTransactionsStream(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
+        ApiResponse<List<StreamTransactionsEntry>> localVarResp = getUserTransactionsStreamWithHttpInfo(userId, since);
         return localVarResp.getData();
     }
 
@@ -8235,7 +8235,7 @@ public class DefaultApi {
      * 
      * @param userId  (required)
      * @param since  (optional)
-     * @return ApiResponse&lt;StreamTransactionsResponse&gt;
+     * @return ApiResponse&lt;List&lt;StreamTransactionsEntry&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -8248,9 +8248,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<StreamTransactionsResponse> getUserTransactionsStreamWithHttpInfo(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
+    public ApiResponse<List<StreamTransactionsEntry>> getUserTransactionsStreamWithHttpInfo(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
         okhttp3.Call localVarCall = getUserTransactionsStreamValidateBeforeCall(userId, since, null);
-        Type localVarReturnType = new TypeToken<StreamTransactionsResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<StreamTransactionsEntry>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -8273,10 +8273,10 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getUserTransactionsStreamAsync(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable OffsetDateTime since, final ApiCallback<StreamTransactionsResponse> _callback) throws ApiException {
+    public okhttp3.Call getUserTransactionsStreamAsync(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable OffsetDateTime since, final ApiCallback<List<StreamTransactionsEntry>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getUserTransactionsStreamValidateBeforeCall(userId, since, _callback);
-        Type localVarReturnType = new TypeToken<StreamTransactionsResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<StreamTransactionsEntry>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -11810,7 +11810,7 @@ public class DefaultApi {
      * Opens a WebSocket stream for real-time asset price updates. First message contains all current prices, subsequent messages contain only changed prices. Data is sent as JSON objects keyed by asset ID.
      * @param since  (optional)
      * @param assetId  (optional)
-     * @return StreamAssetPricesResponse
+     * @return Map&lt;String, AssetPrice&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -11821,8 +11821,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public StreamAssetPricesResponse streamAssetPrices(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable UUID assetId) throws ApiException {
-        ApiResponse<StreamAssetPricesResponse> localVarResp = streamAssetPricesWithHttpInfo(since, assetId);
+    public Map<String, AssetPrice> streamAssetPrices(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable UUID assetId) throws ApiException {
+        ApiResponse<Map<String, AssetPrice>> localVarResp = streamAssetPricesWithHttpInfo(since, assetId);
         return localVarResp.getData();
     }
 
@@ -11831,7 +11831,7 @@ public class DefaultApi {
      * Opens a WebSocket stream for real-time asset price updates. First message contains all current prices, subsequent messages contain only changed prices. Data is sent as JSON objects keyed by asset ID.
      * @param since  (optional)
      * @param assetId  (optional)
-     * @return ApiResponse&lt;StreamAssetPricesResponse&gt;
+     * @return ApiResponse&lt;Map&lt;String, AssetPrice&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -11842,9 +11842,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<StreamAssetPricesResponse> streamAssetPricesWithHttpInfo(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable UUID assetId) throws ApiException {
+    public ApiResponse<Map<String, AssetPrice>> streamAssetPricesWithHttpInfo(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable UUID assetId) throws ApiException {
         okhttp3.Call localVarCall = streamAssetPricesValidateBeforeCall(since, assetId, null);
-        Type localVarReturnType = new TypeToken<StreamAssetPricesResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<Map<String, AssetPrice>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -11865,10 +11865,10 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call streamAssetPricesAsync(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable UUID assetId, final ApiCallback<StreamAssetPricesResponse> _callback) throws ApiException {
+    public okhttp3.Call streamAssetPricesAsync(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable UUID assetId, final ApiCallback<Map<String, AssetPrice>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = streamAssetPricesValidateBeforeCall(since, assetId, _callback);
-        Type localVarReturnType = new TypeToken<StreamAssetPricesResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<Map<String, AssetPrice>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -11960,7 +11960,7 @@ public class DefaultApi {
      * @param orderBookId  (required)
      * @param since  (optional)
      * @param resolution  (optional)
-     * @return StreamCandlesResponse
+     * @return List&lt;StreamCandlesEntry&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -11972,8 +11972,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public StreamCandlesResponse streamCandleData(@javax.annotation.Nonnull String orderBookId, @javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable CandleResolution resolution) throws ApiException {
-        ApiResponse<StreamCandlesResponse> localVarResp = streamCandleDataWithHttpInfo(orderBookId, since, resolution);
+    public List<StreamCandlesEntry> streamCandleData(@javax.annotation.Nonnull String orderBookId, @javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable CandleResolution resolution) throws ApiException {
+        ApiResponse<List<StreamCandlesEntry>> localVarResp = streamCandleDataWithHttpInfo(orderBookId, since, resolution);
         return localVarResp.getData();
     }
 
@@ -11983,7 +11983,7 @@ public class DefaultApi {
      * @param orderBookId  (required)
      * @param since  (optional)
      * @param resolution  (optional)
-     * @return ApiResponse&lt;StreamCandlesResponse&gt;
+     * @return ApiResponse&lt;List&lt;StreamCandlesEntry&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -11995,9 +11995,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<StreamCandlesResponse> streamCandleDataWithHttpInfo(@javax.annotation.Nonnull String orderBookId, @javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable CandleResolution resolution) throws ApiException {
+    public ApiResponse<List<StreamCandlesEntry>> streamCandleDataWithHttpInfo(@javax.annotation.Nonnull String orderBookId, @javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable CandleResolution resolution) throws ApiException {
         okhttp3.Call localVarCall = streamCandleDataValidateBeforeCall(orderBookId, since, resolution, null);
-        Type localVarReturnType = new TypeToken<StreamCandlesResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<StreamCandlesEntry>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -12020,10 +12020,10 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call streamCandleDataAsync(@javax.annotation.Nonnull String orderBookId, @javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable CandleResolution resolution, final ApiCallback<StreamCandlesResponse> _callback) throws ApiException {
+    public okhttp3.Call streamCandleDataAsync(@javax.annotation.Nonnull String orderBookId, @javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable CandleResolution resolution, final ApiCallback<List<StreamCandlesEntry>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = streamCandleDataValidateBeforeCall(orderBookId, since, resolution, _callback);
-        Type localVarReturnType = new TypeToken<StreamCandlesResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<StreamCandlesEntry>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -12109,7 +12109,7 @@ public class DefaultApi {
      * 
      * @param orderBookId  (required)
      * @param since  (optional)
-     * @return StreamOrderBookBalancesResponse
+     * @return List&lt;StreamOrderBookBalanceEntry&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -12121,8 +12121,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public StreamOrderBookBalancesResponse streamOrderBookBalances(@javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
-        ApiResponse<StreamOrderBookBalancesResponse> localVarResp = streamOrderBookBalancesWithHttpInfo(orderBookId, since);
+    public List<StreamOrderBookBalanceEntry> streamOrderBookBalances(@javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
+        ApiResponse<List<StreamOrderBookBalanceEntry>> localVarResp = streamOrderBookBalancesWithHttpInfo(orderBookId, since);
         return localVarResp.getData();
     }
 
@@ -12131,7 +12131,7 @@ public class DefaultApi {
      * 
      * @param orderBookId  (required)
      * @param since  (optional)
-     * @return ApiResponse&lt;StreamOrderBookBalancesResponse&gt;
+     * @return ApiResponse&lt;List&lt;StreamOrderBookBalanceEntry&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -12143,9 +12143,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<StreamOrderBookBalancesResponse> streamOrderBookBalancesWithHttpInfo(@javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
+    public ApiResponse<List<StreamOrderBookBalanceEntry>> streamOrderBookBalancesWithHttpInfo(@javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
         okhttp3.Call localVarCall = streamOrderBookBalancesValidateBeforeCall(orderBookId, since, null);
-        Type localVarReturnType = new TypeToken<StreamOrderBookBalancesResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<StreamOrderBookBalanceEntry>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -12167,10 +12167,10 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call streamOrderBookBalancesAsync(@javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since, final ApiCallback<StreamOrderBookBalancesResponse> _callback) throws ApiException {
+    public okhttp3.Call streamOrderBookBalancesAsync(@javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since, final ApiCallback<List<StreamOrderBookBalanceEntry>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = streamOrderBookBalancesValidateBeforeCall(orderBookId, since, _callback);
-        Type localVarReturnType = new TypeToken<StreamOrderBookBalancesResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<StreamOrderBookBalanceEntry>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -12402,7 +12402,7 @@ public class DefaultApi {
      * 
      * @param orderBookId  (required)
      * @param since  (optional)
-     * @return StreamTradesResponse
+     * @return List&lt;StreamTradesEntry&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -12413,8 +12413,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public StreamTradesResponse streamTrades(@javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
-        ApiResponse<StreamTradesResponse> localVarResp = streamTradesWithHttpInfo(orderBookId, since);
+    public List<StreamTradesEntry> streamTrades(@javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
+        ApiResponse<List<StreamTradesEntry>> localVarResp = streamTradesWithHttpInfo(orderBookId, since);
         return localVarResp.getData();
     }
 
@@ -12423,7 +12423,7 @@ public class DefaultApi {
      * 
      * @param orderBookId  (required)
      * @param since  (optional)
-     * @return ApiResponse&lt;StreamTradesResponse&gt;
+     * @return ApiResponse&lt;List&lt;StreamTradesEntry&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -12434,9 +12434,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<StreamTradesResponse> streamTradesWithHttpInfo(@javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
+    public ApiResponse<List<StreamTradesEntry>> streamTradesWithHttpInfo(@javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since) throws ApiException {
         okhttp3.Call localVarCall = streamTradesValidateBeforeCall(orderBookId, since, null);
-        Type localVarReturnType = new TypeToken<StreamTradesResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<StreamTradesEntry>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -12457,10 +12457,10 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call streamTradesAsync(@javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since, final ApiCallback<StreamTradesResponse> _callback) throws ApiException {
+    public okhttp3.Call streamTradesAsync(@javax.annotation.Nonnull UUID orderBookId, @javax.annotation.Nullable OffsetDateTime since, final ApiCallback<List<StreamTradesEntry>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = streamTradesValidateBeforeCall(orderBookId, since, _callback);
-        Type localVarReturnType = new TypeToken<StreamTradesResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<StreamTradesEntry>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

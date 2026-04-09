@@ -21,9 +21,11 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import tech.dora.model.Metadata;
-import tech.dora.model.PLAccounts;
+import tech.dora.model.PLAccount;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,12 +54,12 @@ import tech.dora.JSON;
 /**
  * PLResponseEnvelope
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-07T12:22:17.571174232+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-09T12:22:26.036360558+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
 public class PLResponseEnvelope {
   public static final String SERIALIZED_NAME_DATA = "data";
   @SerializedName(SERIALIZED_NAME_DATA)
   @javax.annotation.Nullable
-  private PLAccounts data = new ArrayList<>();
+  private List<PLAccount> data = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_ERROR = "error";
   @SerializedName(SERIALIZED_NAME_ERROR)
@@ -72,8 +74,16 @@ public class PLResponseEnvelope {
   public PLResponseEnvelope() {
   }
 
-  public PLResponseEnvelope data(@javax.annotation.Nullable PLAccounts data) {
+  public PLResponseEnvelope data(@javax.annotation.Nullable List<PLAccount> data) {
     this.data = data;
+    return this;
+  }
+
+  public PLResponseEnvelope addDataItem(PLAccount dataItem) {
+    if (this.data == null) {
+      this.data = new ArrayList<>();
+    }
+    this.data.add(dataItem);
     return this;
   }
 
@@ -82,11 +92,11 @@ public class PLResponseEnvelope {
    * @return data
    */
   @javax.annotation.Nullable
-  public PLAccounts getData() {
+  public List<PLAccount> getData() {
     return data;
   }
 
-  public void setData(@javax.annotation.Nullable PLAccounts data) {
+  public void setData(@javax.annotation.Nullable List<PLAccount> data) {
     this.data = data;
   }
 
@@ -211,6 +221,20 @@ public class PLResponseEnvelope {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+      if (jsonObj.get("data") != null && !jsonObj.get("data").isJsonNull()) {
+        JsonArray jsonArraydata = jsonObj.getAsJsonArray("data");
+        if (jsonArraydata != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("data").isJsonArray()) {
+            throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `data` to be an array in the JSON string but got `%s`", jsonObj.get("data").toString()));
+          }
+
+          // validate the optional field `data` (array)
+          for (int i = 0; i < jsonArraydata.size(); i++) {
+            PLAccount.validateJsonElement(jsonArraydata.get(i));
+          };
+        }
+      }
       if ((jsonObj.get("error") != null && !jsonObj.get("error").isJsonNull()) && !jsonObj.get("error").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `error` to be a primitive type in the JSON string but got `%s`", jsonObj.get("error").toString()));
       }

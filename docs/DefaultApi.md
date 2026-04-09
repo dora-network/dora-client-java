@@ -1552,7 +1552,7 @@ No authorization required
 
 <a id="getAssetsStream"></a>
 # **getAssetsStream**
-> StreamAssetsResponse getAssetsStream(since, until)
+> List&lt;StreamAssetsEntry&gt; getAssetsStream(since, until)
 
 Get all inserts or updates for assets
 
@@ -1574,7 +1574,7 @@ public class Example {
     OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
     OffsetDateTime until = OffsetDateTime.now(); // OffsetDateTime | 
     try {
-      StreamAssetsResponse result = apiInstance.getAssetsStream(since, until);
+      List<StreamAssetsEntry> result = apiInstance.getAssetsStream(since, until);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#getAssetsStream");
@@ -1596,7 +1596,7 @@ public class Example {
 
 ### Return type
 
-[**StreamAssetsResponse**](StreamAssetsResponse.md)
+[**List&lt;StreamAssetsEntry&gt;**](StreamAssetsEntry.md)
 
 ### Authorization
 
@@ -3806,7 +3806,7 @@ public class Example {
 
 <a id="getUserLedgerStream"></a>
 # **getUserLedgerStream**
-> StreamPositionsResponse getUserLedgerStream(userId)
+> List&lt;StreamPositionsEntry&gt; getUserLedgerStream(userId)
 
 Get a snapshot of user&#39;s ledger updates since a specific time, and opens a stream for further updates
 
@@ -3834,7 +3834,7 @@ public class Example {
     DefaultApi apiInstance = new DefaultApi(defaultClient);
     UUID userId = UUID.randomUUID(); // UUID | 
     try {
-      StreamPositionsResponse result = apiInstance.getUserLedgerStream(userId);
+      List<StreamPositionsEntry> result = apiInstance.getUserLedgerStream(userId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#getUserLedgerStream");
@@ -3855,7 +3855,7 @@ public class Example {
 
 ### Return type
 
-[**StreamPositionsResponse**](StreamPositionsResponse.md)
+[**List&lt;StreamPositionsEntry&gt;**](StreamPositionsEntry.md)
 
 ### Authorization
 
@@ -3877,7 +3877,7 @@ public class Example {
 
 <a id="getUserOrderUpdatesStream"></a>
 # **getUserOrderUpdatesStream**
-> StreamOrderUpdatesResponse getUserOrderUpdatesStream(userId, orderBookId, since)
+> List&lt;StreamOrderUpdatesEntry&gt; getUserOrderUpdatesStream(userId, orderBookId, since)
 
 Get a snapshot of user&#39;s order updates for the given order book since a specific time, and opens a stream for further updates
 
@@ -3907,7 +3907,7 @@ public class Example {
     UUID orderBookId = UUID.randomUUID(); // UUID | 
     OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
     try {
-      StreamOrderUpdatesResponse result = apiInstance.getUserOrderUpdatesStream(userId, orderBookId, since);
+      List<StreamOrderUpdatesEntry> result = apiInstance.getUserOrderUpdatesStream(userId, orderBookId, since);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#getUserOrderUpdatesStream");
@@ -3930,7 +3930,7 @@ public class Example {
 
 ### Return type
 
-[**StreamOrderUpdatesResponse**](StreamOrderUpdatesResponse.md)
+[**List&lt;StreamOrderUpdatesEntry&gt;**](StreamOrderUpdatesEntry.md)
 
 ### Authorization
 
@@ -3952,7 +3952,7 @@ public class Example {
 
 <a id="getUserOrdersUpdatesStreamAll"></a>
 # **getUserOrdersUpdatesStreamAll**
-> StreamOrderUpdatesResponse getUserOrdersUpdatesStreamAll(userId, since)
+> List&lt;StreamOrderUpdatesEntry&gt; getUserOrdersUpdatesStreamAll(userId, since)
 
 Get a snapshot of user&#39;s order updates across all order books since a specific time, and opens a stream for further updates
 
@@ -3981,7 +3981,7 @@ public class Example {
     UUID userId = UUID.randomUUID(); // UUID | 
     OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
     try {
-      StreamOrderUpdatesResponse result = apiInstance.getUserOrdersUpdatesStreamAll(userId, since);
+      List<StreamOrderUpdatesEntry> result = apiInstance.getUserOrdersUpdatesStreamAll(userId, since);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#getUserOrdersUpdatesStreamAll");
@@ -4003,7 +4003,7 @@ public class Example {
 
 ### Return type
 
-[**StreamOrderUpdatesResponse**](StreamOrderUpdatesResponse.md)
+[**List&lt;StreamOrderUpdatesEntry&gt;**](StreamOrderUpdatesEntry.md)
 
 ### Authorization
 
@@ -4095,7 +4095,7 @@ This endpoint does not need any parameter.
 
 <a id="getUserTransactionsStream"></a>
 # **getUserTransactionsStream**
-> StreamTransactionsResponse getUserTransactionsStream(userId, since)
+> List&lt;StreamTransactionsEntry&gt; getUserTransactionsStream(userId, since)
 
 Get a snapshot of user&#39;s executed transactions since a specific time, and opens a stream for further updates
 
@@ -4124,7 +4124,7 @@ public class Example {
     UUID userId = UUID.randomUUID(); // UUID | 
     OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
     try {
-      StreamTransactionsResponse result = apiInstance.getUserTransactionsStream(userId, since);
+      List<StreamTransactionsEntry> result = apiInstance.getUserTransactionsStream(userId, since);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#getUserTransactionsStream");
@@ -4146,7 +4146,7 @@ public class Example {
 
 ### Return type
 
-[**StreamTransactionsResponse**](StreamTransactionsResponse.md)
+[**List&lt;StreamTransactionsEntry&gt;**](StreamTransactionsEntry.md)
 
 ### Authorization
 
@@ -5925,7 +5925,7 @@ public class Example {
 
 <a id="streamAssetPrices"></a>
 # **streamAssetPrices**
-> StreamAssetPricesResponse streamAssetPrices(since, assetId)
+> Map&lt;String, AssetPrice&gt; streamAssetPrices(since, assetId)
 
 Stream real-time asset prices as map objects
 
@@ -5949,7 +5949,7 @@ public class Example {
     OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
     UUID assetId = UUID.randomUUID(); // UUID | 
     try {
-      StreamAssetPricesResponse result = apiInstance.streamAssetPrices(since, assetId);
+      Map<String, AssetPrice> result = apiInstance.streamAssetPrices(since, assetId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#streamAssetPrices");
@@ -5971,7 +5971,7 @@ public class Example {
 
 ### Return type
 
-[**StreamAssetPricesResponse**](StreamAssetPricesResponse.md)
+[**Map&lt;String, AssetPrice&gt;**](AssetPrice.md)
 
 ### Authorization
 
@@ -5991,7 +5991,7 @@ No authorization required
 
 <a id="streamCandleData"></a>
 # **streamCandleData**
-> StreamCandlesResponse streamCandleData(orderBookId, since, resolution)
+> List&lt;StreamCandlesEntry&gt; streamCandleData(orderBookId, since, resolution)
 
 Get a snapshot of candlestick data from date provided, and open a stream for real-time updates
 
@@ -6014,7 +6014,7 @@ public class Example {
     OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
     CandleResolution resolution = CandleResolution.fromValue("1m"); // CandleResolution | 
     try {
-      StreamCandlesResponse result = apiInstance.streamCandleData(orderBookId, since, resolution);
+      List<StreamCandlesEntry> result = apiInstance.streamCandleData(orderBookId, since, resolution);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#streamCandleData");
@@ -6037,7 +6037,7 @@ public class Example {
 
 ### Return type
 
-[**StreamCandlesResponse**](StreamCandlesResponse.md)
+[**List&lt;StreamCandlesEntry&gt;**](StreamCandlesEntry.md)
 
 ### Authorization
 
@@ -6058,7 +6058,7 @@ No authorization required
 
 <a id="streamOrderBookBalances"></a>
 # **streamOrderBookBalances**
-> StreamOrderBookBalancesResponse streamOrderBookBalances(orderBookId, since)
+> List&lt;StreamOrderBookBalanceEntry&gt; streamOrderBookBalances(orderBookId, since)
 
 Get a snapshot of base and quote balances for an order book and open a stream for real-time updates
 
@@ -6080,7 +6080,7 @@ public class Example {
     UUID orderBookId = UUID.randomUUID(); // UUID | 
     OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
     try {
-      StreamOrderBookBalancesResponse result = apiInstance.streamOrderBookBalances(orderBookId, since);
+      List<StreamOrderBookBalanceEntry> result = apiInstance.streamOrderBookBalances(orderBookId, since);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#streamOrderBookBalances");
@@ -6102,7 +6102,7 @@ public class Example {
 
 ### Return type
 
-[**StreamOrderBookBalancesResponse**](StreamOrderBookBalancesResponse.md)
+[**List&lt;StreamOrderBookBalanceEntry&gt;**](StreamOrderBookBalanceEntry.md)
 
 ### Authorization
 
@@ -6188,7 +6188,7 @@ No authorization required
 
 <a id="streamTrades"></a>
 # **streamTrades**
-> StreamTradesResponse streamTrades(orderBookId, since)
+> List&lt;StreamTradesEntry&gt; streamTrades(orderBookId, since)
 
 Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates
 
@@ -6210,7 +6210,7 @@ public class Example {
     UUID orderBookId = UUID.randomUUID(); // UUID | 
     OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
     try {
-      StreamTradesResponse result = apiInstance.streamTrades(orderBookId, since);
+      List<StreamTradesEntry> result = apiInstance.streamTrades(orderBookId, since);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#streamTrades");
@@ -6232,7 +6232,7 @@ public class Example {
 
 ### Return type
 
-[**StreamTradesResponse**](StreamTradesResponse.md)
+[**List&lt;StreamTradesEntry&gt;**](StreamTradesEntry.md)
 
 ### Authorization
 

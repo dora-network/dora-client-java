@@ -18,6 +18,7 @@ import tech.dora.model.APIKeyResponseEnvelope;
 import tech.dora.model.AllPositionsResponseEnvelope;
 import tech.dora.model.AllWithdrawalInitiationsResponseEnvelope;
 import tech.dora.model.AssetKind;
+import tech.dora.model.AssetPrice;
 import tech.dora.model.AssetPriceResponseEnvelope;
 import tech.dora.model.AssetRequestError;
 import tech.dora.model.CancelOrderResponseEnvelope;
@@ -80,14 +81,13 @@ import tech.dora.model.SettleLeverageAccruedInterestRequest;
 import tech.dora.model.SettleLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.SettleRealizedPnlRecordResponseEnvelope;
 import tech.dora.model.Side;
-import tech.dora.model.StreamAssetPricesResponse;
-import tech.dora.model.StreamAssetsResponse;
-import tech.dora.model.StreamCandlesResponse;
-import tech.dora.model.StreamOrderBookBalancesResponse;
-import tech.dora.model.StreamOrderUpdatesResponse;
-import tech.dora.model.StreamPositionsResponse;
-import tech.dora.model.StreamTradesResponse;
-import tech.dora.model.StreamTransactionsResponse;
+import tech.dora.model.StreamAssetsEntry;
+import tech.dora.model.StreamCandlesEntry;
+import tech.dora.model.StreamOrderBookBalanceEntry;
+import tech.dora.model.StreamOrderUpdatesEntry;
+import tech.dora.model.StreamPositionsEntry;
+import tech.dora.model.StreamTradesEntry;
+import tech.dora.model.StreamTransactionsEntry;
 import tech.dora.model.StreamUserCouponPaymentsResponse;
 import tech.dora.model.SupplyRequest;
 import tech.dora.model.SupplyResponseEnvelope;
@@ -391,7 +391,7 @@ public class DefaultApiTest {
     public void getAssetsStreamTest() throws ApiException {
         OffsetDateTime since = null;
         OffsetDateTime until = null;
-        StreamAssetsResponse response = api.getAssetsStream(since, until);
+        List<StreamAssetsEntry> response = api.getAssetsStream(since, until);
         // TODO: test validations
     }
 
@@ -796,7 +796,7 @@ public class DefaultApiTest {
     @Test
     public void getUserLedgerStreamTest() throws ApiException {
         UUID userId = null;
-        StreamPositionsResponse response = api.getUserLedgerStream(userId);
+        List<StreamPositionsEntry> response = api.getUserLedgerStream(userId);
         // TODO: test validations
     }
 
@@ -810,7 +810,7 @@ public class DefaultApiTest {
         UUID userId = null;
         UUID orderBookId = null;
         OffsetDateTime since = null;
-        StreamOrderUpdatesResponse response = api.getUserOrderUpdatesStream(userId, orderBookId, since);
+        List<StreamOrderUpdatesEntry> response = api.getUserOrderUpdatesStream(userId, orderBookId, since);
         // TODO: test validations
     }
 
@@ -823,7 +823,7 @@ public class DefaultApiTest {
     public void getUserOrdersUpdatesStreamAllTest() throws ApiException {
         UUID userId = null;
         OffsetDateTime since = null;
-        StreamOrderUpdatesResponse response = api.getUserOrdersUpdatesStreamAll(userId, since);
+        List<StreamOrderUpdatesEntry> response = api.getUserOrdersUpdatesStreamAll(userId, since);
         // TODO: test validations
     }
 
@@ -847,7 +847,7 @@ public class DefaultApiTest {
     public void getUserTransactionsStreamTest() throws ApiException {
         UUID userId = null;
         OffsetDateTime since = null;
-        StreamTransactionsResponse response = api.getUserTransactionsStream(userId, since);
+        List<StreamTransactionsEntry> response = api.getUserTransactionsStream(userId, since);
         // TODO: test validations
     }
 
@@ -1178,7 +1178,7 @@ public class DefaultApiTest {
     public void streamAssetPricesTest() throws ApiException {
         OffsetDateTime since = null;
         UUID assetId = null;
-        StreamAssetPricesResponse response = api.streamAssetPrices(since, assetId);
+        Map<String, AssetPrice> response = api.streamAssetPrices(since, assetId);
         // TODO: test validations
     }
 
@@ -1192,7 +1192,7 @@ public class DefaultApiTest {
         String orderBookId = null;
         OffsetDateTime since = null;
         CandleResolution resolution = null;
-        StreamCandlesResponse response = api.streamCandleData(orderBookId, since, resolution);
+        List<StreamCandlesEntry> response = api.streamCandleData(orderBookId, since, resolution);
         // TODO: test validations
     }
 
@@ -1205,7 +1205,7 @@ public class DefaultApiTest {
     public void streamOrderBookBalancesTest() throws ApiException {
         UUID orderBookId = null;
         OffsetDateTime since = null;
-        StreamOrderBookBalancesResponse response = api.streamOrderBookBalances(orderBookId, since);
+        List<StreamOrderBookBalanceEntry> response = api.streamOrderBookBalances(orderBookId, since);
         // TODO: test validations
     }
 
@@ -1231,7 +1231,7 @@ public class DefaultApiTest {
     public void streamTradesTest() throws ApiException {
         UUID orderBookId = null;
         OffsetDateTime since = null;
-        StreamTradesResponse response = api.streamTrades(orderBookId, since);
+        List<StreamTradesEntry> response = api.streamTrades(orderBookId, since);
         // TODO: test validations
     }
 
