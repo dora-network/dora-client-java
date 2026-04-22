@@ -3205,7 +3205,7 @@ public class Example {
 
 <a id="getRealizedPnlSettlements"></a>
 # **getRealizedPnlSettlements**
-> GetRealizedPnlSettlementsResponseEnvelope getRealizedPnlSettlements(userId, tenantId, positionId, createdAfter, settledBefore, isSettled)
+> GetRealizedPnlSettlementsResponseEnvelope getRealizedPnlSettlements(userId, tenantId, positionId, createdAfter, createdBefore, settledAfter, settledBefore, isSettled)
 
 Get realized P&amp;L settlements with filters
 
@@ -3239,10 +3239,12 @@ public class Example {
     UUID tenantId = UUID.randomUUID(); // UUID | 
     UUID positionId = UUID.randomUUID(); // UUID | 
     OffsetDateTime createdAfter = OffsetDateTime.now(); // OffsetDateTime | 
+    OffsetDateTime createdBefore = OffsetDateTime.now(); // OffsetDateTime | 
+    OffsetDateTime settledAfter = OffsetDateTime.now(); // OffsetDateTime | 
     OffsetDateTime settledBefore = OffsetDateTime.now(); // OffsetDateTime | 
     Boolean isSettled = true; // Boolean | 
     try {
-      GetRealizedPnlSettlementsResponseEnvelope result = apiInstance.getRealizedPnlSettlements(userId, tenantId, positionId, createdAfter, settledBefore, isSettled);
+      GetRealizedPnlSettlementsResponseEnvelope result = apiInstance.getRealizedPnlSettlements(userId, tenantId, positionId, createdAfter, createdBefore, settledAfter, settledBefore, isSettled);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#getRealizedPnlSettlements");
@@ -3263,6 +3265,8 @@ public class Example {
 | **tenantId** | **UUID**|  | [optional] |
 | **positionId** | **UUID**|  | [optional] |
 | **createdAfter** | **OffsetDateTime**|  | [optional] |
+| **createdBefore** | **OffsetDateTime**|  | [optional] |
+| **settledAfter** | **OffsetDateTime**|  | [optional] |
 | **settledBefore** | **OffsetDateTime**|  | [optional] |
 | **isSettled** | **Boolean**|  | [optional] |
 

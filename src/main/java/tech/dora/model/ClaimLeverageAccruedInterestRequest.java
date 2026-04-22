@@ -51,44 +51,20 @@ import tech.dora.JSON;
 /**
  * ClaimLeverageAccruedInterestRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-09T12:22:26.036360558+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-22T16:51:54.643938577+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
 public class ClaimLeverageAccruedInterestRequest {
-  public static final String SERIALIZED_NAME_POSITION_ID = "position_id";
-  @SerializedName(SERIALIZED_NAME_POSITION_ID)
-  @javax.annotation.Nonnull
-  private UUID positionId;
-
   public static final String SERIALIZED_NAME_ASSET_ID = "asset_id";
   @SerializedName(SERIALIZED_NAME_ASSET_ID)
   @javax.annotation.Nonnull
   private UUID assetId;
 
-  public static final String SERIALIZED_NAME_QUANTITY = "quantity";
-  @SerializedName(SERIALIZED_NAME_QUANTITY)
+  public static final String SERIALIZED_NAME_POSITION_ID = "position_id";
+  @SerializedName(SERIALIZED_NAME_POSITION_ID)
   @javax.annotation.Nonnull
-  private String quantity;
+  private UUID positionId;
 
   public ClaimLeverageAccruedInterestRequest() {
   }
-
-  public ClaimLeverageAccruedInterestRequest positionId(@javax.annotation.Nonnull UUID positionId) {
-    this.positionId = positionId;
-    return this;
-  }
-
-  /**
-   * Get positionId
-   * @return positionId
-   */
-  @javax.annotation.Nonnull
-  public UUID getPositionId() {
-    return positionId;
-  }
-
-  public void setPositionId(@javax.annotation.Nonnull UUID positionId) {
-    this.positionId = positionId;
-  }
-
 
   public ClaimLeverageAccruedInterestRequest assetId(@javax.annotation.Nonnull UUID assetId) {
     this.assetId = assetId;
@@ -109,22 +85,22 @@ public class ClaimLeverageAccruedInterestRequest {
   }
 
 
-  public ClaimLeverageAccruedInterestRequest quantity(@javax.annotation.Nonnull String quantity) {
-    this.quantity = quantity;
+  public ClaimLeverageAccruedInterestRequest positionId(@javax.annotation.Nonnull UUID positionId) {
+    this.positionId = positionId;
     return this;
   }
 
   /**
-   * Get quantity
-   * @return quantity
+   * Get positionId
+   * @return positionId
    */
   @javax.annotation.Nonnull
-  public String getQuantity() {
-    return quantity;
+  public UUID getPositionId() {
+    return positionId;
   }
 
-  public void setQuantity(@javax.annotation.Nonnull String quantity) {
-    this.quantity = quantity;
+  public void setPositionId(@javax.annotation.Nonnull UUID positionId) {
+    this.positionId = positionId;
   }
 
 
@@ -138,23 +114,21 @@ public class ClaimLeverageAccruedInterestRequest {
       return false;
     }
     ClaimLeverageAccruedInterestRequest claimLeverageAccruedInterestRequest = (ClaimLeverageAccruedInterestRequest) o;
-    return Objects.equals(this.positionId, claimLeverageAccruedInterestRequest.positionId) &&
-        Objects.equals(this.assetId, claimLeverageAccruedInterestRequest.assetId) &&
-        Objects.equals(this.quantity, claimLeverageAccruedInterestRequest.quantity);
+    return Objects.equals(this.assetId, claimLeverageAccruedInterestRequest.assetId) &&
+        Objects.equals(this.positionId, claimLeverageAccruedInterestRequest.positionId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(positionId, assetId, quantity);
+    return Objects.hash(assetId, positionId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ClaimLeverageAccruedInterestRequest {\n");
-    sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
-    sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
+    sb.append("    positionId: ").append(toIndentedString(positionId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -176,10 +150,10 @@ public class ClaimLeverageAccruedInterestRequest {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("position_id", "asset_id", "quantity"));
+    openapiFields = new HashSet<String>(Arrays.asList("asset_id", "position_id"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("position_id", "asset_id", "quantity"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("asset_id", "position_id"));
   }
 
   /**
@@ -210,14 +184,11 @@ public class ClaimLeverageAccruedInterestRequest {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("position_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `position_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("position_id").toString()));
-      }
       if (!jsonObj.get("asset_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `asset_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("asset_id").toString()));
       }
-      if (!jsonObj.get("quantity").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `quantity` to be a primitive type in the JSON string but got `%s`", jsonObj.get("quantity").toString()));
+      if (!jsonObj.get("position_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `position_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("position_id").toString()));
       }
   }
 

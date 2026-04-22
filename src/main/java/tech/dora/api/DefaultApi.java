@@ -6263,6 +6263,8 @@ public class DefaultApi {
      * @param tenantId  (optional)
      * @param positionId  (optional)
      * @param createdAfter  (optional)
+     * @param createdBefore  (optional)
+     * @param settledAfter  (optional)
      * @param settledBefore  (optional)
      * @param isSettled  (optional)
      * @param _callback Callback for upload/download progress
@@ -6278,7 +6280,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getRealizedPnlSettlementsCall(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID tenantId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getRealizedPnlSettlementsCall(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID tenantId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime createdBefore, @javax.annotation.Nullable OffsetDateTime settledAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -6319,6 +6321,14 @@ public class DefaultApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("created_after", createdAfter));
         }
 
+        if (createdBefore != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("created_before", createdBefore));
+        }
+
+        if (settledAfter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("settled_after", settledAfter));
+        }
+
         if (settledBefore != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("settled_before", settledBefore));
         }
@@ -6347,8 +6357,8 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getRealizedPnlSettlementsValidateBeforeCall(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID tenantId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled, final ApiCallback _callback) throws ApiException {
-        return getRealizedPnlSettlementsCall(userId, tenantId, positionId, createdAfter, settledBefore, isSettled, _callback);
+    private okhttp3.Call getRealizedPnlSettlementsValidateBeforeCall(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID tenantId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime createdBefore, @javax.annotation.Nullable OffsetDateTime settledAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled, final ApiCallback _callback) throws ApiException {
+        return getRealizedPnlSettlementsCall(userId, tenantId, positionId, createdAfter, createdBefore, settledAfter, settledBefore, isSettled, _callback);
 
     }
 
@@ -6359,6 +6369,8 @@ public class DefaultApi {
      * @param tenantId  (optional)
      * @param positionId  (optional)
      * @param createdAfter  (optional)
+     * @param createdBefore  (optional)
+     * @param settledAfter  (optional)
      * @param settledBefore  (optional)
      * @param isSettled  (optional)
      * @return GetRealizedPnlSettlementsResponseEnvelope
@@ -6373,8 +6385,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public GetRealizedPnlSettlementsResponseEnvelope getRealizedPnlSettlements(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID tenantId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled) throws ApiException {
-        ApiResponse<GetRealizedPnlSettlementsResponseEnvelope> localVarResp = getRealizedPnlSettlementsWithHttpInfo(userId, tenantId, positionId, createdAfter, settledBefore, isSettled);
+    public GetRealizedPnlSettlementsResponseEnvelope getRealizedPnlSettlements(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID tenantId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime createdBefore, @javax.annotation.Nullable OffsetDateTime settledAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled) throws ApiException {
+        ApiResponse<GetRealizedPnlSettlementsResponseEnvelope> localVarResp = getRealizedPnlSettlementsWithHttpInfo(userId, tenantId, positionId, createdAfter, createdBefore, settledAfter, settledBefore, isSettled);
         return localVarResp.getData();
     }
 
@@ -6385,6 +6397,8 @@ public class DefaultApi {
      * @param tenantId  (optional)
      * @param positionId  (optional)
      * @param createdAfter  (optional)
+     * @param createdBefore  (optional)
+     * @param settledAfter  (optional)
      * @param settledBefore  (optional)
      * @param isSettled  (optional)
      * @return ApiResponse&lt;GetRealizedPnlSettlementsResponseEnvelope&gt;
@@ -6399,8 +6413,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<GetRealizedPnlSettlementsResponseEnvelope> getRealizedPnlSettlementsWithHttpInfo(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID tenantId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled) throws ApiException {
-        okhttp3.Call localVarCall = getRealizedPnlSettlementsValidateBeforeCall(userId, tenantId, positionId, createdAfter, settledBefore, isSettled, null);
+    public ApiResponse<GetRealizedPnlSettlementsResponseEnvelope> getRealizedPnlSettlementsWithHttpInfo(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID tenantId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime createdBefore, @javax.annotation.Nullable OffsetDateTime settledAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled) throws ApiException {
+        okhttp3.Call localVarCall = getRealizedPnlSettlementsValidateBeforeCall(userId, tenantId, positionId, createdAfter, createdBefore, settledAfter, settledBefore, isSettled, null);
         Type localVarReturnType = new TypeToken<GetRealizedPnlSettlementsResponseEnvelope>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -6412,6 +6426,8 @@ public class DefaultApi {
      * @param tenantId  (optional)
      * @param positionId  (optional)
      * @param createdAfter  (optional)
+     * @param createdBefore  (optional)
+     * @param settledAfter  (optional)
      * @param settledBefore  (optional)
      * @param isSettled  (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -6427,9 +6443,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getRealizedPnlSettlementsAsync(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID tenantId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled, final ApiCallback<GetRealizedPnlSettlementsResponseEnvelope> _callback) throws ApiException {
+    public okhttp3.Call getRealizedPnlSettlementsAsync(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID tenantId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime createdBefore, @javax.annotation.Nullable OffsetDateTime settledAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled, final ApiCallback<GetRealizedPnlSettlementsResponseEnvelope> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getRealizedPnlSettlementsValidateBeforeCall(userId, tenantId, positionId, createdAfter, settledBefore, isSettled, _callback);
+        okhttp3.Call localVarCall = getRealizedPnlSettlementsValidateBeforeCall(userId, tenantId, positionId, createdAfter, createdBefore, settledAfter, settledBefore, isSettled, _callback);
         Type localVarReturnType = new TypeToken<GetRealizedPnlSettlementsResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

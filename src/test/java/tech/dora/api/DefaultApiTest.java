@@ -680,9 +680,11 @@ public class DefaultApiTest {
         UUID tenantId = null;
         UUID positionId = null;
         OffsetDateTime createdAfter = null;
+        OffsetDateTime createdBefore = null;
+        OffsetDateTime settledAfter = null;
         OffsetDateTime settledBefore = null;
         Boolean isSettled = null;
-        GetRealizedPnlSettlementsResponseEnvelope response = api.getRealizedPnlSettlements(userId, tenantId, positionId, createdAfter, settledBefore, isSettled);
+        GetRealizedPnlSettlementsResponseEnvelope response = api.getRealizedPnlSettlements(userId, tenantId, positionId, createdAfter, createdBefore, settledAfter, settledBefore, isSettled);
         // TODO: test validations
     }
 

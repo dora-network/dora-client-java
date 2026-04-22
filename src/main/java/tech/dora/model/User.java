@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import tech.dora.model.CountryCode;
 import tech.dora.model.UserRole;
 
 import com.google.gson.Gson;
@@ -55,7 +56,7 @@ import tech.dora.JSON;
 /**
  * User
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-09T12:22:26.036360558+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-22T16:51:54.643938577+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
 public class User {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -77,10 +78,20 @@ public class User {
   @javax.annotation.Nonnull
   private String email;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
+  public static final String SERIALIZED_NAME_FIRST_NAME = "first_name";
+  @SerializedName(SERIALIZED_NAME_FIRST_NAME)
   @javax.annotation.Nonnull
-  private String name;
+  private String firstName;
+
+  public static final String SERIALIZED_NAME_LAST_NAME = "last_name";
+  @SerializedName(SERIALIZED_NAME_LAST_NAME)
+  @javax.annotation.Nonnull
+  private String lastName;
+
+  public static final String SERIALIZED_NAME_COUNTRY_OF_DOMICILE = "country_of_domicile";
+  @SerializedName(SERIALIZED_NAME_COUNTRY_OF_DOMICILE)
+  @javax.annotation.Nonnull
+  private CountryCode countryOfDomicile;
 
   public static final String SERIALIZED_NAME_NATIVE_ASSET_ID = "native_asset_id";
   @SerializedName(SERIALIZED_NAME_NATIVE_ASSET_ID)
@@ -236,22 +247,60 @@ public class User {
   }
 
 
-  public User name(@javax.annotation.Nonnull String name) {
-    this.name = name;
+  public User firstName(@javax.annotation.Nonnull String firstName) {
+    this.firstName = firstName;
     return this;
   }
 
   /**
-   * Get name
-   * @return name
+   * Get firstName
+   * @return firstName
    */
   @javax.annotation.Nonnull
-  public String getName() {
-    return name;
+  public String getFirstName() {
+    return firstName;
   }
 
-  public void setName(@javax.annotation.Nonnull String name) {
-    this.name = name;
+  public void setFirstName(@javax.annotation.Nonnull String firstName) {
+    this.firstName = firstName;
+  }
+
+
+  public User lastName(@javax.annotation.Nonnull String lastName) {
+    this.lastName = lastName;
+    return this;
+  }
+
+  /**
+   * Get lastName
+   * @return lastName
+   */
+  @javax.annotation.Nonnull
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(@javax.annotation.Nonnull String lastName) {
+    this.lastName = lastName;
+  }
+
+
+  public User countryOfDomicile(@javax.annotation.Nonnull CountryCode countryOfDomicile) {
+    this.countryOfDomicile = countryOfDomicile;
+    return this;
+  }
+
+  /**
+   * Get countryOfDomicile
+   * @return countryOfDomicile
+   */
+  @javax.annotation.Nonnull
+  public CountryCode getCountryOfDomicile() {
+    return countryOfDomicile;
+  }
+
+  public void setCountryOfDomicile(@javax.annotation.Nonnull CountryCode countryOfDomicile) {
+    this.countryOfDomicile = countryOfDomicile;
   }
 
 
@@ -562,7 +611,9 @@ public class User {
         Objects.equals(this.closedAt, user.closedAt) &&
         Objects.equals(this.disabledAt, user.disabledAt) &&
         Objects.equals(this.email, user.email) &&
-        Objects.equals(this.name, user.name) &&
+        Objects.equals(this.firstName, user.firstName) &&
+        Objects.equals(this.lastName, user.lastName) &&
+        Objects.equals(this.countryOfDomicile, user.countryOfDomicile) &&
         Objects.equals(this.nativeAssetId, user.nativeAssetId) &&
         Objects.equals(this.photoUrl, user.photoUrl) &&
         Objects.equals(this.provider, user.provider) &&
@@ -582,7 +633,7 @@ public class User {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, closedAt, disabledAt, email, name, nativeAssetId, photoUrl, provider, providerId, roles, timezone, timezoneOffset, verifiedAt, showTutorialCards, notificationsEnabled, tenantId, allowEmailNotifications, allowLiquidationsNotifications, allowDepositWithdrawalNotifications, allowOrdersNotifications);
+    return Objects.hash(id, closedAt, disabledAt, email, firstName, lastName, countryOfDomicile, nativeAssetId, photoUrl, provider, providerId, roles, timezone, timezoneOffset, verifiedAt, showTutorialCards, notificationsEnabled, tenantId, allowEmailNotifications, allowLiquidationsNotifications, allowDepositWithdrawalNotifications, allowOrdersNotifications);
   }
 
   @Override
@@ -593,7 +644,9 @@ public class User {
     sb.append("    closedAt: ").append(toIndentedString(closedAt)).append("\n");
     sb.append("    disabledAt: ").append(toIndentedString(disabledAt)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
+    sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
+    sb.append("    countryOfDomicile: ").append(toIndentedString(countryOfDomicile)).append("\n");
     sb.append("    nativeAssetId: ").append(toIndentedString(nativeAssetId)).append("\n");
     sb.append("    photoUrl: ").append(toIndentedString(photoUrl)).append("\n");
     sb.append("    provider: ").append(toIndentedString(provider)).append("\n");
@@ -630,10 +683,10 @@ public class User {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "closed_at", "disabled_at", "email", "name", "native_asset_id", "photo_url", "provider", "provider_id", "roles", "timezone", "timezone_offset", "verified_at", "show_tutorial_cards", "notifications_enabled", "tenant_id", "allow_email_notifications", "allow_liquidations_notifications", "allow_deposit_withdrawal_notifications", "allow_orders_notifications"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "closed_at", "disabled_at", "email", "first_name", "last_name", "country_of_domicile", "native_asset_id", "photo_url", "provider", "provider_id", "roles", "timezone", "timezone_offset", "verified_at", "show_tutorial_cards", "notifications_enabled", "tenant_id", "allow_email_notifications", "allow_liquidations_notifications", "allow_deposit_withdrawal_notifications", "allow_orders_notifications"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "email", "name", "native_asset_id", "roles", "show_tutorial_cards", "notifications_enabled", "tenant_id", "allow_email_notifications", "allow_liquidations_notifications", "allow_deposit_withdrawal_notifications", "allow_orders_notifications"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "email", "first_name", "last_name", "country_of_domicile", "native_asset_id", "roles", "show_tutorial_cards", "notifications_enabled", "tenant_id", "allow_email_notifications", "allow_liquidations_notifications", "allow_deposit_withdrawal_notifications", "allow_orders_notifications"));
   }
 
   /**
@@ -670,9 +723,14 @@ public class User {
       if (!jsonObj.get("email").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email").toString()));
       }
-      if (!jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
+      if (!jsonObj.get("first_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `first_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("first_name").toString()));
       }
+      if (!jsonObj.get("last_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `last_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("last_name").toString()));
+      }
+      // validate the required field `country_of_domicile`
+      CountryCode.validateJsonElement(jsonObj.get("country_of_domicile"));
       if (!jsonObj.get("native_asset_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `native_asset_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("native_asset_id").toString()));
       }

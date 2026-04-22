@@ -56,7 +56,7 @@ import tech.dora.JSON;
 /**
  * RealizedPnlSettlements
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-09T12:22:26.036360558+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-22T16:51:54.643938577+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
 public class RealizedPnlSettlements {
   public static final String SERIALIZED_NAME_SETTLEMENTS = "settlements";
   @SerializedName(SERIALIZED_NAME_SETTLEMENTS)
@@ -72,6 +72,16 @@ public class RealizedPnlSettlements {
   @SerializedName(SERIALIZED_NAME_TENANT_TOTALS)
   @javax.annotation.Nullable
   private Map<String, BigDecimal> tenantTotals = new HashMap<>();
+
+  public static final String SERIALIZED_NAME_USER_TOTALS_UNSETTLED = "user_totals_unsettled";
+  @SerializedName(SERIALIZED_NAME_USER_TOTALS_UNSETTLED)
+  @javax.annotation.Nullable
+  private Map<String, BigDecimal> userTotalsUnsettled = new HashMap<>();
+
+  public static final String SERIALIZED_NAME_TENANT_TOTALS_UNSETTLED = "tenant_totals_unsettled";
+  @SerializedName(SERIALIZED_NAME_TENANT_TOTALS_UNSETTLED)
+  @javax.annotation.Nullable
+  private Map<String, BigDecimal> tenantTotalsUnsettled = new HashMap<>();
 
   public RealizedPnlSettlements() {
   }
@@ -157,6 +167,60 @@ public class RealizedPnlSettlements {
   }
 
 
+  public RealizedPnlSettlements userTotalsUnsettled(@javax.annotation.Nullable Map<String, BigDecimal> userTotalsUnsettled) {
+    this.userTotalsUnsettled = userTotalsUnsettled;
+    return this;
+  }
+
+  public RealizedPnlSettlements putUserTotalsUnsettledItem(String key, BigDecimal userTotalsUnsettledItem) {
+    if (this.userTotalsUnsettled == null) {
+      this.userTotalsUnsettled = new HashMap<>();
+    }
+    this.userTotalsUnsettled.put(key, userTotalsUnsettledItem);
+    return this;
+  }
+
+  /**
+   * A map of user IDs to their total realized PnL in USD across unsettled settlements (where settled_at is null) included in the response
+   * @return userTotalsUnsettled
+   */
+  @javax.annotation.Nullable
+  public Map<String, BigDecimal> getUserTotalsUnsettled() {
+    return userTotalsUnsettled;
+  }
+
+  public void setUserTotalsUnsettled(@javax.annotation.Nullable Map<String, BigDecimal> userTotalsUnsettled) {
+    this.userTotalsUnsettled = userTotalsUnsettled;
+  }
+
+
+  public RealizedPnlSettlements tenantTotalsUnsettled(@javax.annotation.Nullable Map<String, BigDecimal> tenantTotalsUnsettled) {
+    this.tenantTotalsUnsettled = tenantTotalsUnsettled;
+    return this;
+  }
+
+  public RealizedPnlSettlements putTenantTotalsUnsettledItem(String key, BigDecimal tenantTotalsUnsettledItem) {
+    if (this.tenantTotalsUnsettled == null) {
+      this.tenantTotalsUnsettled = new HashMap<>();
+    }
+    this.tenantTotalsUnsettled.put(key, tenantTotalsUnsettledItem);
+    return this;
+  }
+
+  /**
+   * A map of tenant IDs to their total realized PnL in USD across unsettled settlements (where settled_at is null) included in the response
+   * @return tenantTotalsUnsettled
+   */
+  @javax.annotation.Nullable
+  public Map<String, BigDecimal> getTenantTotalsUnsettled() {
+    return tenantTotalsUnsettled;
+  }
+
+  public void setTenantTotalsUnsettled(@javax.annotation.Nullable Map<String, BigDecimal> tenantTotalsUnsettled) {
+    this.tenantTotalsUnsettled = tenantTotalsUnsettled;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -169,12 +233,14 @@ public class RealizedPnlSettlements {
     RealizedPnlSettlements realizedPnlSettlements = (RealizedPnlSettlements) o;
     return Objects.equals(this.settlements, realizedPnlSettlements.settlements) &&
         Objects.equals(this.userTotals, realizedPnlSettlements.userTotals) &&
-        Objects.equals(this.tenantTotals, realizedPnlSettlements.tenantTotals);
+        Objects.equals(this.tenantTotals, realizedPnlSettlements.tenantTotals) &&
+        Objects.equals(this.userTotalsUnsettled, realizedPnlSettlements.userTotalsUnsettled) &&
+        Objects.equals(this.tenantTotalsUnsettled, realizedPnlSettlements.tenantTotalsUnsettled);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(settlements, userTotals, tenantTotals);
+    return Objects.hash(settlements, userTotals, tenantTotals, userTotalsUnsettled, tenantTotalsUnsettled);
   }
 
   @Override
@@ -184,6 +250,8 @@ public class RealizedPnlSettlements {
     sb.append("    settlements: ").append(toIndentedString(settlements)).append("\n");
     sb.append("    userTotals: ").append(toIndentedString(userTotals)).append("\n");
     sb.append("    tenantTotals: ").append(toIndentedString(tenantTotals)).append("\n");
+    sb.append("    userTotalsUnsettled: ").append(toIndentedString(userTotalsUnsettled)).append("\n");
+    sb.append("    tenantTotalsUnsettled: ").append(toIndentedString(tenantTotalsUnsettled)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -205,7 +273,7 @@ public class RealizedPnlSettlements {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("settlements", "user_totals", "tenant_totals"));
+    openapiFields = new HashSet<String>(Arrays.asList("settlements", "user_totals", "tenant_totals", "user_totals_unsettled", "tenant_totals_unsettled"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(0);

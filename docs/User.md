@@ -11,7 +11,9 @@
 |**closedAt** | **OffsetDateTime** |  |  [optional] |
 |**disabledAt** | **OffsetDateTime** |  |  [optional] |
 |**email** | **String** |  |  |
-|**name** | **String** |  |  |
+|**firstName** | **String** |  |  |
+|**lastName** | **String** |  |  |
+|**countryOfDomicile** | **CountryCode** |  |  |
 |**nativeAssetId** | **UUID** |  |  |
 |**photoUrl** | **String** |  |  [optional] |
 |**provider** | **String** |  |  [optional] |

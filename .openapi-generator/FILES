@@ -32,6 +32,7 @@ docs/ClosePositionRequest.md
 docs/ClosePositionResp.md
 docs/ClosePositionResponseEnvelope.md
 docs/Collateral.md
+docs/CountryCode.md
 docs/CouponPayment.md
 docs/CreateAPIKeyData.md
 docs/CreateAPIKeyRequest.md
@@ -251,6 +252,7 @@ src/main/java/tech/dora/model/ClosePositionRequest.java
 src/main/java/tech/dora/model/ClosePositionResp.java
 src/main/java/tech/dora/model/ClosePositionResponseEnvelope.java
 src/main/java/tech/dora/model/Collateral.java
+src/main/java/tech/dora/model/CountryCode.java
 src/main/java/tech/dora/model/CouponPayment.java
 src/main/java/tech/dora/model/CreateAPIKeyData.java
 src/main/java/tech/dora/model/CreateAPIKeyRequest.java
@@ -442,6 +444,7 @@ src/test/java/tech/dora/model/ClosePositionRequestTest.java
 src/test/java/tech/dora/model/ClosePositionRespTest.java
 src/test/java/tech/dora/model/ClosePositionResponseEnvelopeTest.java
 src/test/java/tech/dora/model/CollateralTest.java
+src/test/java/tech/dora/model/CountryCodeTest.java
 src/test/java/tech/dora/model/CouponPaymentTest.java
 src/test/java/tech/dora/model/CreateAPIKeyDataTest.java
 src/test/java/tech/dora/model/CreateAPIKeyRequestTest.java

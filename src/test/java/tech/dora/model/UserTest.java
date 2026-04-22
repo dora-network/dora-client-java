@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import tech.dora.model.CountryCode;
 import tech.dora.model.UserRole;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -75,11 +76,27 @@ public class UserTest {
     }
 
     /**
-     * Test the property 'name'
+     * Test the property 'firstName'
      */
     @Test
-    public void nameTest() {
-        // TODO: test name
+    public void firstNameTest() {
+        // TODO: test firstName
+    }
+
+    /**
+     * Test the property 'lastName'
+     */
+    @Test
+    public void lastNameTest() {
+        // TODO: test lastName
+    }
+
+    /**
+     * Test the property 'countryOfDomicile'
+     */
+    @Test
+    public void countryOfDomicileTest() {
+        // TODO: test countryOfDomicile
     }
 
     /**

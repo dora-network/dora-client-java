@@ -39,14 +39,6 @@ public class PayLeverageAccruedInterestRequestTest {
     }
 
     /**
-     * Test the property 'positionId'
-     */
-    @Test
-    public void positionIdTest() {
-        // TODO: test positionId
-    }
-
-    /**
      * Test the property 'assetId'
      */
     @Test
@@ -55,11 +47,11 @@ public class PayLeverageAccruedInterestRequestTest {
     }
 
     /**
-     * Test the property 'quantity'
+     * Test the property 'positionId'
      */
     @Test
-    public void quantityTest() {
-        // TODO: test quantity
+    public void positionIdTest() {
+        // TODO: test positionId
     }
 
 }

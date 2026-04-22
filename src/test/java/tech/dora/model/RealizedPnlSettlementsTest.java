@@ -67,4 +67,20 @@ public class RealizedPnlSettlementsTest {
         // TODO: test tenantTotals
     }
 
+    /**
+     * Test the property 'userTotalsUnsettled'
+     */
+    @Test
+    public void userTotalsUnsettledTest() {
+        // TODO: test userTotalsUnsettled
+    }
+
+    /**
+     * Test the property 'tenantTotalsUnsettled'
+     */
+    @Test
+    public void tenantTotalsUnsettledTest() {
+        // TODO: test tenantTotalsUnsettled
+    }
+
 }

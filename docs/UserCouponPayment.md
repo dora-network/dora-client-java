@@ -16,6 +16,7 @@
 |**completed** | **String** |  |  |
 |**startedAt** | **OffsetDateTime** |  |  |
 |**endedAt** | **OffsetDateTime** |  |  |
+|**transactionId** | **UUID** |  |  [optional] |
 
 
 

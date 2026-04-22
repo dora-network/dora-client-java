@@ -52,7 +52,7 @@ import tech.dora.JSON;
 /**
  * UserCouponPayment
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-09T12:22:26.036360558+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-22T16:51:54.643938577+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
 public class UserCouponPayment {
   public static final String SERIALIZED_NAME_USER_ID = "user_id";
   @SerializedName(SERIALIZED_NAME_USER_ID)
@@ -98,6 +98,11 @@ public class UserCouponPayment {
   @SerializedName(SERIALIZED_NAME_ENDED_AT)
   @javax.annotation.Nonnull
   private OffsetDateTime endedAt;
+
+  public static final String SERIALIZED_NAME_TRANSACTION_ID = "transaction_id";
+  @SerializedName(SERIALIZED_NAME_TRANSACTION_ID)
+  @javax.annotation.Nullable
+  private UUID transactionId;
 
   public UserCouponPayment() {
   }
@@ -274,6 +279,25 @@ public class UserCouponPayment {
   }
 
 
+  public UserCouponPayment transactionId(@javax.annotation.Nullable UUID transactionId) {
+    this.transactionId = transactionId;
+    return this;
+  }
+
+  /**
+   * Get transactionId
+   * @return transactionId
+   */
+  @javax.annotation.Nullable
+  public UUID getTransactionId() {
+    return transactionId;
+  }
+
+  public void setTransactionId(@javax.annotation.Nullable UUID transactionId) {
+    this.transactionId = transactionId;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -292,12 +316,13 @@ public class UserCouponPayment {
         Objects.equals(this.pending, userCouponPayment.pending) &&
         Objects.equals(this.completed, userCouponPayment.completed) &&
         Objects.equals(this.startedAt, userCouponPayment.startedAt) &&
-        Objects.equals(this.endedAt, userCouponPayment.endedAt);
+        Objects.equals(this.endedAt, userCouponPayment.endedAt) &&
+        Objects.equals(this.transactionId, userCouponPayment.transactionId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, positionId, assetId, couponPaymentId, seq, pending, completed, startedAt, endedAt);
+    return Objects.hash(userId, positionId, assetId, couponPaymentId, seq, pending, completed, startedAt, endedAt, transactionId);
   }
 
   @Override
@@ -313,6 +338,7 @@ public class UserCouponPayment {
     sb.append("    completed: ").append(toIndentedString(completed)).append("\n");
     sb.append("    startedAt: ").append(toIndentedString(startedAt)).append("\n");
     sb.append("    endedAt: ").append(toIndentedString(endedAt)).append("\n");
+    sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -334,7 +360,7 @@ public class UserCouponPayment {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("user_id", "position_id", "asset_id", "coupon_payment_id", "seq", "pending", "completed", "started_at", "ended_at"));
+    openapiFields = new HashSet<String>(Arrays.asList("user_id", "position_id", "asset_id", "coupon_payment_id", "seq", "pending", "completed", "started_at", "ended_at", "transaction_id"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("user_id", "position_id", "asset_id", "coupon_payment_id", "seq", "pending", "completed", "started_at", "ended_at"));
@@ -385,6 +411,9 @@ public class UserCouponPayment {
       }
       if (!jsonObj.get("completed").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `completed` to be a primitive type in the JSON string but got `%s`", jsonObj.get("completed").toString()));
+      }
+      if ((jsonObj.get("transaction_id") != null && !jsonObj.get("transaction_id").isJsonNull()) && !jsonObj.get("transaction_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `transaction_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("transaction_id").toString()));
       }
   }
 

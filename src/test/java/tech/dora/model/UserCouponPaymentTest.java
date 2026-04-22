@@ -111,4 +111,12 @@ public class UserCouponPaymentTest {
         // TODO: test endedAt
     }
 
+    /**
+     * Test the property 'transactionId'
+     */
+    @Test
+    public void transactionIdTest() {
+        // TODO: test transactionId
+    }
+
 }

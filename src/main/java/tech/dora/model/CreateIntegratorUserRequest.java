@@ -23,6 +23,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.UUID;
+import tech.dora.model.CountryCode;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -51,17 +52,27 @@ import tech.dora.JSON;
 /**
  * CreateIntegratorUserRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-09T12:22:26.036360558+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-22T16:51:54.643938577+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
 public class CreateIntegratorUserRequest {
   public static final String SERIALIZED_NAME_EMAIL = "email";
   @SerializedName(SERIALIZED_NAME_EMAIL)
   @javax.annotation.Nullable
   private String email;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
+  public static final String SERIALIZED_NAME_FIRST_NAME = "first_name";
+  @SerializedName(SERIALIZED_NAME_FIRST_NAME)
   @javax.annotation.Nullable
-  private String name;
+  private String firstName;
+
+  public static final String SERIALIZED_NAME_LAST_NAME = "last_name";
+  @SerializedName(SERIALIZED_NAME_LAST_NAME)
+  @javax.annotation.Nullable
+  private String lastName;
+
+  public static final String SERIALIZED_NAME_COUNTRY_OF_DOMICILE = "country_of_domicile";
+  @SerializedName(SERIALIZED_NAME_COUNTRY_OF_DOMICILE)
+  @javax.annotation.Nullable
+  private CountryCode countryOfDomicile;
 
   public static final String SERIALIZED_NAME_NATIVE_ASSET_ID = "native_asset_id";
   @SerializedName(SERIALIZED_NAME_NATIVE_ASSET_ID)
@@ -110,22 +121,60 @@ public class CreateIntegratorUserRequest {
   }
 
 
-  public CreateIntegratorUserRequest name(@javax.annotation.Nullable String name) {
-    this.name = name;
+  public CreateIntegratorUserRequest firstName(@javax.annotation.Nullable String firstName) {
+    this.firstName = firstName;
     return this;
   }
 
   /**
-   * Get name
-   * @return name
+   * Get firstName
+   * @return firstName
    */
   @javax.annotation.Nullable
-  public String getName() {
-    return name;
+  public String getFirstName() {
+    return firstName;
   }
 
-  public void setName(@javax.annotation.Nullable String name) {
-    this.name = name;
+  public void setFirstName(@javax.annotation.Nullable String firstName) {
+    this.firstName = firstName;
+  }
+
+
+  public CreateIntegratorUserRequest lastName(@javax.annotation.Nullable String lastName) {
+    this.lastName = lastName;
+    return this;
+  }
+
+  /**
+   * Get lastName
+   * @return lastName
+   */
+  @javax.annotation.Nullable
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(@javax.annotation.Nullable String lastName) {
+    this.lastName = lastName;
+  }
+
+
+  public CreateIntegratorUserRequest countryOfDomicile(@javax.annotation.Nullable CountryCode countryOfDomicile) {
+    this.countryOfDomicile = countryOfDomicile;
+    return this;
+  }
+
+  /**
+   * Get countryOfDomicile
+   * @return countryOfDomicile
+   */
+  @javax.annotation.Nullable
+  public CountryCode getCountryOfDomicile() {
+    return countryOfDomicile;
+  }
+
+  public void setCountryOfDomicile(@javax.annotation.Nullable CountryCode countryOfDomicile) {
+    this.countryOfDomicile = countryOfDomicile;
   }
 
 
@@ -235,7 +284,9 @@ public class CreateIntegratorUserRequest {
     }
     CreateIntegratorUserRequest createIntegratorUserRequest = (CreateIntegratorUserRequest) o;
     return Objects.equals(this.email, createIntegratorUserRequest.email) &&
-        Objects.equals(this.name, createIntegratorUserRequest.name) &&
+        Objects.equals(this.firstName, createIntegratorUserRequest.firstName) &&
+        Objects.equals(this.lastName, createIntegratorUserRequest.lastName) &&
+        Objects.equals(this.countryOfDomicile, createIntegratorUserRequest.countryOfDomicile) &&
         Objects.equals(this.nativeAssetId, createIntegratorUserRequest.nativeAssetId) &&
         Objects.equals(this.photoUrl, createIntegratorUserRequest.photoUrl) &&
         Objects.equals(this.provider, createIntegratorUserRequest.provider) &&
@@ -245,7 +296,7 @@ public class CreateIntegratorUserRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(email, name, nativeAssetId, photoUrl, provider, providerId, timezone);
+    return Objects.hash(email, firstName, lastName, countryOfDomicile, nativeAssetId, photoUrl, provider, providerId, timezone);
   }
 
   @Override
@@ -253,7 +304,9 @@ public class CreateIntegratorUserRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateIntegratorUserRequest {\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
+    sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
+    sb.append("    countryOfDomicile: ").append(toIndentedString(countryOfDomicile)).append("\n");
     sb.append("    nativeAssetId: ").append(toIndentedString(nativeAssetId)).append("\n");
     sb.append("    photoUrl: ").append(toIndentedString(photoUrl)).append("\n");
     sb.append("    provider: ").append(toIndentedString(provider)).append("\n");
@@ -310,8 +363,15 @@ public class CreateIntegratorUserRequest {
       if ((jsonObj.get("email") != null && !jsonObj.get("email").isJsonNull()) && !jsonObj.get("email").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email").toString()));
       }
-      if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
+      if ((jsonObj.get("first_name") != null && !jsonObj.get("first_name").isJsonNull()) && !jsonObj.get("first_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `first_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("first_name").toString()));
+      }
+      if ((jsonObj.get("last_name") != null && !jsonObj.get("last_name").isJsonNull()) && !jsonObj.get("last_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `last_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("last_name").toString()));
+      }
+      // validate the optional field `country_of_domicile`
+      if (jsonObj.get("country_of_domicile") != null && !jsonObj.get("country_of_domicile").isJsonNull()) {
+        CountryCode.validateJsonElement(jsonObj.get("country_of_domicile"));
       }
       if ((jsonObj.get("native_asset_id") != null && !jsonObj.get("native_asset_id").isJsonNull()) && !jsonObj.get("native_asset_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `native_asset_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("native_asset_id").toString()));
