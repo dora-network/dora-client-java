@@ -5,10 +5,9 @@ All URIs are relative to *https://staging.dora.co*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**approveLedgerWithdrawRequest**](DefaultApi.md#approveLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/approve | Approve a pending withdrawal request |
-| [**cancelAllOpenOrders**](DefaultApi.md#cancelAllOpenOrders) | **DELETE** /v1/orders | Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#39;s orders on specific orderbook |
+| [**cancelAllOpenOrders**](DefaultApi.md#cancelAllOpenOrders) | **DELETE** /v1/orders | Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook |
 | [**cancelLedgerWithdrawRequest**](DefaultApi.md#cancelLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request |
 | [**cancelOrderById**](DefaultApi.md#cancelOrderById) | **DELETE** /v1/orders/{order_id} | Cancel an order by ID |
-| [**checkUserEmailExists**](DefaultApi.md#checkUserEmailExists) | **GET** /v1/user/exists | Check whether a user email exists |
 | [**claimLeverageGetAccruedInterest**](DefaultApi.md#claimLeverageGetAccruedInterest) | **POST** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user |
 | [**closeIsolatedPosition**](DefaultApi.md#closeIsolatedPosition) | **POST** /v1/positions/close | Close isolated positions, repaying the borrowed |
 | [**createAPIKeyForUser**](DefaultApi.md#createAPIKeyForUser) | **POST** /v1/user/apikey | Create apikey for a user |
@@ -54,13 +53,16 @@ All URIs are relative to *https://staging.dora.co*
 | [**getTransactionById**](DefaultApi.md#getTransactionById) | **GET** /v1/transactions/{transaction_id} | Get a transaction by ID |
 | [**getTransactions**](DefaultApi.md#getTransactions) | **GET** /v1/transactions | Get a filtered, paginated list of transactions |
 | [**getTransactionsSettlements**](DefaultApi.md#getTransactionsSettlements) | **GET** /v1/transactions/settlements | Get transactions settlements with filters |
+| [**getTransactionsStream**](DefaultApi.md#getTransactionsStream) | **GET** /v1/transactions/stream | Get transactions since a specific time, and open a stream for further updates |
 | [**getUserById**](DefaultApi.md#getUserById) | **GET** /v1/user/{user_id} | Get user by ID (admin only) |
 | [**getUserCouponPaymentsStream**](DefaultApi.md#getUserCouponPaymentsStream) | **GET** /v1/user/{user_id}/coupon_payments/stream | Stream user&#39;s coupon payment accruals in real time |
 | [**getUserLedgerStream**](DefaultApi.md#getUserLedgerStream) | **GET** /v1/user/{user_id}/ledger/stream | Get a snapshot of user&#39;s ledger updates since a specific time, and opens a stream for further updates |
+| [**getUserLeverageAccruedInterestStream**](DefaultApi.md#getUserLeverageAccruedInterestStream) | **GET** /v1/user/{user_id}/leverage/accrued_interest/stream | Stream user&#39;s current leverage accrued interest in real time |
 | [**getUserOrderUpdatesStream**](DefaultApi.md#getUserOrderUpdatesStream) | **GET** /v1/user/{user_id}/orders/{order_book_id}/updates/stream | Get a snapshot of user&#39;s order updates for the given order book since a specific time, and opens a stream for further updates |
 | [**getUserOrdersUpdatesStreamAll**](DefaultApi.md#getUserOrdersUpdatesStreamAll) | **GET** /v1/user/{user_id}/orders/all/updates/stream | Get a snapshot of user&#39;s order updates across all order books since a specific time, and opens a stream for further updates |
 | [**getUserSelf**](DefaultApi.md#getUserSelf) | **GET** /v1/user/self | Get user details for the authenticated user |
 | [**getUserTransactionsStream**](DefaultApi.md#getUserTransactionsStream) | **GET** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#39;s executed transactions since a specific time, and opens a stream for further updates |
+| [**getUsers**](DefaultApi.md#getUsers) | **GET** /v1/user | Get all users (admin only) |
 | [**getUsersAPIKeys**](DefaultApi.md#getUsersAPIKeys) | **GET** /v1/user/apikey | Get user&#39;s api keys |
 | [**ledgerDeposit**](DefaultApi.md#ledgerDeposit) | **POST** /v1/ledger/deposit/{user_id} | Deposit assets into this user&#39;s account from the outside world |
 | [**ledgerWithdraw**](DefaultApi.md#ledgerWithdraw) | **POST** /v1/ledger/withdraw/{user_id} | Withdraw assets from this user to the outside world |
@@ -177,9 +179,9 @@ public class Example {
 
 <a id="cancelAllOpenOrders"></a>
 # **cancelAllOpenOrders**
-> ListOrdersResponseEnvelope cancelAllOpenOrders(orderBookId, userId, orderKind)
+> ListOrdersResponseEnvelope cancelAllOpenOrders(orderBookId, userId, accountId, orderKind)
 
-Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#39;s orders on specific orderbook
+Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook
 
 ### Example
 ```java
@@ -209,9 +211,10 @@ public class Example {
     DefaultApi apiInstance = new DefaultApi(defaultClient);
     String orderBookId = "orderBookId_example"; // String | 
     UUID userId = UUID.randomUUID(); // UUID | 
+    UUID accountId = UUID.randomUUID(); // UUID | 
     OrderKind orderKind = OrderKind.fromValue("LIMIT"); // OrderKind | 
     try {
-      ListOrdersResponseEnvelope result = apiInstance.cancelAllOpenOrders(orderBookId, userId, orderKind);
+      ListOrdersResponseEnvelope result = apiInstance.cancelAllOpenOrders(orderBookId, userId, accountId, orderKind);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#cancelAllOpenOrders");
@@ -230,6 +233,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **orderBookId** | **String**|  | [optional] |
 | **userId** | **UUID**|  | [optional] |
+| **accountId** | **UUID**|  | [optional] |
 | **orderKind** | [**OrderKind**](.md)|  | [optional] [enum: LIMIT, MARKET] |
 
 ### Return type
@@ -404,79 +408,6 @@ public class Example {
 | **400** | Bad request, e.g. invalid order ID format |  -  |
 | **401** | Unauthorized, user not logged in or does not have access to this order |  -  |
 | **404** | Order not found |  -  |
-| **500** | Internal server error |  -  |
-
-<a id="checkUserEmailExists"></a>
-# **checkUserEmailExists**
-> EmailExistsResponseEnvelope checkUserEmailExists(email)
-
-Check whether a user email exists
-
-### Example
-```java
-// Import classes:
-import tech.dora.ApiClient;
-import tech.dora.ApiException;
-import tech.dora.Configuration;
-import tech.dora.auth.*;
-import tech.dora.models.*;
-import tech.dora.api.DefaultApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://staging.dora.co");
-    
-    // Configure API key authorization: apiKeyAuthHeader
-    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-    apiKeyAuthHeader.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //apiKeyAuthHeader.setApiKeyPrefix("Token");
-
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
-
-    DefaultApi apiInstance = new DefaultApi(defaultClient);
-    String email = "email_example"; // String | 
-    try {
-      EmailExistsResponseEnvelope result = apiInstance.checkUserEmailExists(email);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling DefaultApi#checkUserEmailExists");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **email** | **String**|  | |
-
-### Return type
-
-[**EmailExistsResponseEnvelope**](EmailExistsResponseEnvelope.md)
-
-### Authorization
-
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | True if the email exists, false otherwise |  -  |
-| **400** | Bad request, e.g. invalid path parameters |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="claimLeverageGetAccruedInterest"></a>
@@ -3663,6 +3594,76 @@ public class Example {
 | **404** | No settlements found |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="getTransactionsStream"></a>
+# **getTransactionsStream**
+> List&lt;StreamTransactionsEntry&gt; getTransactionsStream(since)
+
+Get transactions since a specific time, and open a stream for further updates
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthQuery
+    ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
+    apiKeyAuthQuery.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthQuery.setApiKeyPrefix("Token");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
+    try {
+      List<StreamTransactionsEntry> result = apiInstance.getTransactionsStream(since);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getTransactionsStream");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **since** | **OffsetDateTime**|  | [optional] |
+
+### Return type
+
+[**List&lt;StreamTransactionsEntry&gt;**](StreamTransactionsEntry.md)
+
+### Authorization
+
+[apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Transactions stream |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to these transactions |  -  |
+| **500** | Internal server error |  -  |
+
 <a id="getUserById"></a>
 # **getUserById**
 > UserEnvelope getUserById(userId)
@@ -3877,6 +3878,77 @@ public class Example {
 | **400** | Bad request, e.g. invalid query parameters |  -  |
 | **401** | Unauthorized, user not logged in or does not have access to this ledger |  -  |
 | **404** | User not found or no ledger entries available |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getUserLeverageAccruedInterestStream"></a>
+# **getUserLeverageAccruedInterestStream**
+> StreamCurrentLeverageAccruedInterestResponse getUserLeverageAccruedInterestStream(userId)
+
+Stream user&#39;s current leverage accrued interest in real time
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthQuery
+    ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
+    apiKeyAuthQuery.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthQuery.setApiKeyPrefix("Token");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    try {
+      StreamCurrentLeverageAccruedInterestResponse result = apiInstance.getUserLeverageAccruedInterestStream(userId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getUserLeverageAccruedInterestStream");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
+
+### Return type
+
+[**StreamCurrentLeverageAccruedInterestResponse**](StreamCurrentLeverageAccruedInterestResponse.md)
+
+### Authorization
+
+[apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User&#39;s leverage accrued interest stream |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this data |  -  |
+| **404** | User not found or no leverage accrued interest available |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="getUserOrderUpdatesStream"></a>
@@ -4168,6 +4240,90 @@ public class Example {
 | **400** | Bad request, e.g. invalid query parameters |  -  |
 | **401** | Unauthorized, user not logged in or does not have access to this transactions |  -  |
 | **404** | User not found or no transactions available |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getUsers"></a>
+# **getUsers**
+> ListUsersResponseEnvelope getUsers(id, limit, offset, email, firstName, lastName, countryOfDomicile)
+
+Get all users (admin only)
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID id = UUID.randomUUID(); // UUID | 
+    Integer limit = 100; // Integer | 
+    Integer offset = 0; // Integer | 
+    String email = "email_example"; // String | 
+    String firstName = "firstName_example"; // String | 
+    String lastName = "lastName_example"; // String | 
+    CountryCode countryOfDomicile = CountryCode.fromValue("AF"); // CountryCode | 
+    try {
+      ListUsersResponseEnvelope result = apiInstance.getUsers(id, limit, offset, email, firstName, lastName, countryOfDomicile);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getUsers");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **UUID**|  | [optional] |
+| **limit** | **Integer**|  | [optional] [default to 100] |
+| **offset** | **Integer**|  | [optional] [default to 0] |
+| **email** | **String**|  | [optional] |
+| **firstName** | **String**|  | [optional] |
+| **lastName** | **String**|  | [optional] |
+| **countryOfDomicile** | [**CountryCode**](.md)|  | [optional] [enum: AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, CV, KH, CM, CA, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, SZ, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MK, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW] |
+
+### Return type
+
+[**ListUsersResponseEnvelope**](ListUsersResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | A list of users |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="getUsersAPIKeys"></a>

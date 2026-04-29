@@ -27,6 +27,7 @@ import tech.dora.model.ClaimLeverageAccruedInterestRequest;
 import tech.dora.model.ClaimLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.ClosePositionRequest;
 import tech.dora.model.ClosePositionResponseEnvelope;
+import tech.dora.model.CountryCode;
 import tech.dora.model.CreateAPIKeyRequest;
 import tech.dora.model.CreateAPIKeyResponseEnvelope;
 import tech.dora.model.CreateConditionalOrderRequest;
@@ -36,7 +37,6 @@ import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponseEnvelope;
 import tech.dora.model.CurrentLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.DefundUserRequest;
-import tech.dora.model.EmailExistsResponseEnvelope;
 import tech.dora.model.FundUserRequest;
 import tech.dora.model.FundUserResponseEnvelope;
 import tech.dora.model.GetAssetByIDResponseEnvelope;
@@ -59,6 +59,7 @@ import tech.dora.model.ListOrdersResponseEnvelope;
 import tech.dora.model.ListPositionAccountsResponseEnvelope;
 import tech.dora.model.ListTradeResponseEnvelope;
 import tech.dora.model.ListTransactionsResponseEnvelope;
+import tech.dora.model.ListUsersResponseEnvelope;
 import tech.dora.model.LiveOrderbook;
 import java.time.OffsetDateTime;
 import tech.dora.model.OrderBookResponseEnvelope;
@@ -83,6 +84,7 @@ import tech.dora.model.SettleRealizedPnlRecordResponseEnvelope;
 import tech.dora.model.Side;
 import tech.dora.model.StreamAssetsEntry;
 import tech.dora.model.StreamCandlesEntry;
+import tech.dora.model.StreamCurrentLeverageAccruedInterestResponse;
 import tech.dora.model.StreamOrderBookBalanceEntry;
 import tech.dora.model.StreamOrderUpdatesEntry;
 import tech.dora.model.StreamPositionsEntry;
@@ -151,7 +153,7 @@ public class DefaultApiTest {
     }
 
     /**
-     * Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#39;s orders on specific orderbook
+     * Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook
      *
      * @throws ApiException if the Api call fails
      */
@@ -159,8 +161,9 @@ public class DefaultApiTest {
     public void cancelAllOpenOrdersTest() throws ApiException {
         String orderBookId = null;
         UUID userId = null;
+        UUID accountId = null;
         OrderKind orderKind = null;
-        ListOrdersResponseEnvelope response = api.cancelAllOpenOrders(orderBookId, userId, orderKind);
+        ListOrdersResponseEnvelope response = api.cancelAllOpenOrders(orderBookId, userId, accountId, orderKind);
         // TODO: test validations
     }
 
@@ -188,18 +191,6 @@ public class DefaultApiTest {
     public void cancelOrderByIdTest() throws ApiException {
         UUID orderId = null;
         CancelOrderResponseEnvelope response = api.cancelOrderById(orderId);
-        // TODO: test validations
-    }
-
-    /**
-     * Check whether a user email exists
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void checkUserEmailExistsTest() throws ApiException {
-        String email = null;
-        EmailExistsResponseEnvelope response = api.checkUserEmailExists(email);
         // TODO: test validations
     }
 
@@ -767,6 +758,18 @@ public class DefaultApiTest {
     }
 
     /**
+     * Get transactions since a specific time, and open a stream for further updates
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getTransactionsStreamTest() throws ApiException {
+        OffsetDateTime since = null;
+        List<StreamTransactionsEntry> response = api.getTransactionsStream(since);
+        // TODO: test validations
+    }
+
+    /**
      * Get user by ID (admin only)
      *
      * @throws ApiException if the Api call fails
@@ -799,6 +802,18 @@ public class DefaultApiTest {
     public void getUserLedgerStreamTest() throws ApiException {
         UUID userId = null;
         List<StreamPositionsEntry> response = api.getUserLedgerStream(userId);
+        // TODO: test validations
+    }
+
+    /**
+     * Stream user&#39;s current leverage accrued interest in real time
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getUserLeverageAccruedInterestStreamTest() throws ApiException {
+        UUID userId = null;
+        StreamCurrentLeverageAccruedInterestResponse response = api.getUserLeverageAccruedInterestStream(userId);
         // TODO: test validations
     }
 
@@ -850,6 +865,24 @@ public class DefaultApiTest {
         UUID userId = null;
         OffsetDateTime since = null;
         List<StreamTransactionsEntry> response = api.getUserTransactionsStream(userId, since);
+        // TODO: test validations
+    }
+
+    /**
+     * Get all users (admin only)
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getUsersTest() throws ApiException {
+        UUID id = null;
+        Integer limit = null;
+        Integer offset = null;
+        String email = null;
+        String firstName = null;
+        String lastName = null;
+        CountryCode countryOfDomicile = null;
+        ListUsersResponseEnvelope response = api.getUsers(id, limit, offset, email, firstName, lastName, countryOfDomicile);
         // TODO: test validations
     }
 

@@ -21,9 +21,11 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import tech.dora.model.Metadata;
-import tech.dora.model.UserExistsResponse;
+import tech.dora.model.User;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -50,14 +52,14 @@ import java.util.Locale;
 import tech.dora.JSON;
 
 /**
- * EmailExistsResponseEnvelope
+ * ListUsersResponseEnvelope
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-22T16:51:54.643938577+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
-public class EmailExistsResponseEnvelope {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-29T20:52:14.700905316+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+public class ListUsersResponseEnvelope {
   public static final String SERIALIZED_NAME_DATA = "data";
   @SerializedName(SERIALIZED_NAME_DATA)
   @javax.annotation.Nullable
-  private UserExistsResponse data;
+  private List<User> data = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_ERROR = "error";
   @SerializedName(SERIALIZED_NAME_ERROR)
@@ -69,11 +71,19 @@ public class EmailExistsResponseEnvelope {
   @javax.annotation.Nonnull
   private Metadata metadata;
 
-  public EmailExistsResponseEnvelope() {
+  public ListUsersResponseEnvelope() {
   }
 
-  public EmailExistsResponseEnvelope data(@javax.annotation.Nullable UserExistsResponse data) {
+  public ListUsersResponseEnvelope data(@javax.annotation.Nullable List<User> data) {
     this.data = data;
+    return this;
+  }
+
+  public ListUsersResponseEnvelope addDataItem(User dataItem) {
+    if (this.data == null) {
+      this.data = new ArrayList<>();
+    }
+    this.data.add(dataItem);
     return this;
   }
 
@@ -82,16 +92,16 @@ public class EmailExistsResponseEnvelope {
    * @return data
    */
   @javax.annotation.Nullable
-  public UserExistsResponse getData() {
+  public List<User> getData() {
     return data;
   }
 
-  public void setData(@javax.annotation.Nullable UserExistsResponse data) {
+  public void setData(@javax.annotation.Nullable List<User> data) {
     this.data = data;
   }
 
 
-  public EmailExistsResponseEnvelope error(@javax.annotation.Nullable String error) {
+  public ListUsersResponseEnvelope error(@javax.annotation.Nullable String error) {
     this.error = error;
     return this;
   }
@@ -110,7 +120,7 @@ public class EmailExistsResponseEnvelope {
   }
 
 
-  public EmailExistsResponseEnvelope metadata(@javax.annotation.Nonnull Metadata metadata) {
+  public ListUsersResponseEnvelope metadata(@javax.annotation.Nonnull Metadata metadata) {
     this.metadata = metadata;
     return this;
   }
@@ -138,10 +148,10 @@ public class EmailExistsResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    EmailExistsResponseEnvelope emailExistsResponseEnvelope = (EmailExistsResponseEnvelope) o;
-    return Objects.equals(this.data, emailExistsResponseEnvelope.data) &&
-        Objects.equals(this.error, emailExistsResponseEnvelope.error) &&
-        Objects.equals(this.metadata, emailExistsResponseEnvelope.metadata);
+    ListUsersResponseEnvelope listUsersResponseEnvelope = (ListUsersResponseEnvelope) o;
+    return Objects.equals(this.data, listUsersResponseEnvelope.data) &&
+        Objects.equals(this.error, listUsersResponseEnvelope.error) &&
+        Objects.equals(this.metadata, listUsersResponseEnvelope.metadata);
   }
 
   @Override
@@ -152,7 +162,7 @@ public class EmailExistsResponseEnvelope {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class EmailExistsResponseEnvelope {\n");
+    sb.append("class ListUsersResponseEnvelope {\n");
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("    error: ").append(toIndentedString(error)).append("\n");
     sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
@@ -187,33 +197,43 @@ public class EmailExistsResponseEnvelope {
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to EmailExistsResponseEnvelope
+   * @throws IOException if the JSON Element is invalid with respect to ListUsersResponseEnvelope
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!EmailExistsResponseEnvelope.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in EmailExistsResponseEnvelope is not found in the empty JSON string", EmailExistsResponseEnvelope.openapiRequiredFields.toString()));
+        if (!ListUsersResponseEnvelope.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in ListUsersResponseEnvelope is not found in the empty JSON string", ListUsersResponseEnvelope.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!EmailExistsResponseEnvelope.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `EmailExistsResponseEnvelope` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!ListUsersResponseEnvelope.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `ListUsersResponseEnvelope` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : EmailExistsResponseEnvelope.openapiRequiredFields) {
+      for (String requiredField : ListUsersResponseEnvelope.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
           throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the optional field `data`
       if (jsonObj.get("data") != null && !jsonObj.get("data").isJsonNull()) {
-        UserExistsResponse.validateJsonElement(jsonObj.get("data"));
+        JsonArray jsonArraydata = jsonObj.getAsJsonArray("data");
+        if (jsonArraydata != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("data").isJsonArray()) {
+            throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `data` to be an array in the JSON string but got `%s`", jsonObj.get("data").toString()));
+          }
+
+          // validate the optional field `data` (array)
+          for (int i = 0; i < jsonArraydata.size(); i++) {
+            User.validateJsonElement(jsonArraydata.get(i));
+          };
+        }
       }
       if ((jsonObj.get("error") != null && !jsonObj.get("error").isJsonNull()) && !jsonObj.get("error").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `error` to be a primitive type in the JSON string but got `%s`", jsonObj.get("error").toString()));
@@ -226,22 +246,22 @@ public class EmailExistsResponseEnvelope {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!EmailExistsResponseEnvelope.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'EmailExistsResponseEnvelope' and its subtypes
+       if (!ListUsersResponseEnvelope.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ListUsersResponseEnvelope' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<EmailExistsResponseEnvelope> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(EmailExistsResponseEnvelope.class));
+       final TypeAdapter<ListUsersResponseEnvelope> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ListUsersResponseEnvelope.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<EmailExistsResponseEnvelope>() {
+       return (TypeAdapter<T>) new TypeAdapter<ListUsersResponseEnvelope>() {
            @Override
-           public void write(JsonWriter out, EmailExistsResponseEnvelope value) throws IOException {
+           public void write(JsonWriter out, ListUsersResponseEnvelope value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public EmailExistsResponseEnvelope read(JsonReader in) throws IOException {
+           public ListUsersResponseEnvelope read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -252,18 +272,18 @@ public class EmailExistsResponseEnvelope {
   }
 
   /**
-   * Create an instance of EmailExistsResponseEnvelope given an JSON string
+   * Create an instance of ListUsersResponseEnvelope given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of EmailExistsResponseEnvelope
-   * @throws IOException if the JSON string is invalid with respect to EmailExistsResponseEnvelope
+   * @return An instance of ListUsersResponseEnvelope
+   * @throws IOException if the JSON string is invalid with respect to ListUsersResponseEnvelope
    */
-  public static EmailExistsResponseEnvelope fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, EmailExistsResponseEnvelope.class);
+  public static ListUsersResponseEnvelope fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ListUsersResponseEnvelope.class);
   }
 
   /**
-   * Convert an instance of EmailExistsResponseEnvelope to an JSON string
+   * Convert an instance of ListUsersResponseEnvelope to an JSON string
    *
    * @return JSON string
    */

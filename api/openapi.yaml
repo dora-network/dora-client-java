@@ -256,6 +256,80 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /v1/user:
+    get:
+      operationId: getUsers
+      parameters:
+      - explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: email
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: first_name
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: last_name
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: country_of_domicile
+        required: false
+        schema:
+          $ref: "#/components/schemas/CountryCode"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListUsersResponse"
+          description: A list of users
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get all users (admin only)
+      x-accepts:
+      - application/json
   /v1/user/{user_id}:
     delete:
       operationId: deleteUser
@@ -1035,6 +1109,14 @@ paths:
         style: form
       - explode: true
         in: query
+        name: account_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - explode: true
+        in: query
         name: order_kind
         required: false
         schema:
@@ -1060,9 +1142,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
-      summary: "Cancel all open orders, if user passes orderbook on query param it\
-        \ will cancel all orders on specific orderbook, admin can cancel user's orders\
-        \ on specific orderbook"
+      summary: "Cancel all open orders, if user passes orderbook or account_id on\
+        \ query params it will cancel all orders on specific orderbook or account,\
+        \ admin can cancel user's orders on specific orderbook"
       x-accepts:
       - application/json
     get:
@@ -3647,6 +3729,55 @@ paths:
       summary: Stream user's coupon payment accruals in real time
       x-accepts:
       - application/json
+  /v1/user/{user_id}/leverage/accrued_interest/stream:
+    get:
+      operationId: getUserLeverageAccruedInterestStream
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamCurrentLeverageAccruedInterestResponse"
+          description: User's leverage accrued interest stream
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this data"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found or no leverage accrued interest available
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      security:
+      - apiKeyAuthQuery: []
+      summary: Stream user's current leverage accrued interest in real time
+      x-accepts:
+      - application/json
   /v1/user/{user_id}/transactions/stream:
     get:
       operationId: getUserTransactionsStream
@@ -3705,6 +3836,50 @@ paths:
         \ and opens a stream for further updates"
       x-accepts:
       - application/json
+  /v1/transactions/stream:
+    get:
+      operationId: getTransactionsStream
+      parameters:
+      - explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StreamTransactionsResponse"
+          description: Transactions stream
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ these transactions"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      security:
+      - apiKeyAuthQuery: []
+      summary: "Get transactions since a specific time, and open a stream for further\
+        \ updates"
+      x-accepts:
+      - application/json
   /v1/assets/stream:
     get:
       operationId: getAssetsStream
@@ -3753,39 +3928,6 @@ paths:
           description: Internal server error
       security: []
       summary: Get all inserts or updates for assets
-      x-accepts:
-      - application/json
-  /v1/user/exists:
-    get:
-      operationId: checkUserEmailExists
-      parameters:
-      - explode: true
-        in: query
-        name: email
-        required: true
-        schema:
-          type: string
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/EmailExistsResponse"
-          description: "True if the email exists, false otherwise"
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-          description: "Bad request, e.g. invalid path parameters"
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-          description: Internal server error
-      summary: Check whether a user email exists
       x-accepts:
       - application/json
   /v1/user/apikey:
@@ -4724,6 +4866,71 @@ components:
       - TRADER
       - INTEGRATOR
       type: string
+    ListUsersResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/User"
+            type: array
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - tenant_id: tenant_id
+          allow_orders_notifications: true
+          closed_at: 2000-01-23T04:56:07.000+00:00
+          native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          timezone: timezone
+          disabled_at: 2000-01-23T04:56:07.000+00:00
+          roles:
+          - PUBLIC
+          - PUBLIC
+          timezone_offset: 0
+          last_name: last_name
+          show_tutorial_cards: true
+          allow_liquidations_notifications: true
+          notifications_enabled: true
+          allow_email_notifications: true
+          allow_deposit_withdrawal_notifications: true
+          country_of_domicile: IN
+          provider: provider
+          verified_at: 2000-01-23T04:56:07.000+00:00
+          provider_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          photo_url: photo_url
+          first_name: first_name
+          email: email
+        - tenant_id: tenant_id
+          allow_orders_notifications: true
+          closed_at: 2000-01-23T04:56:07.000+00:00
+          native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          timezone: timezone
+          disabled_at: 2000-01-23T04:56:07.000+00:00
+          roles:
+          - PUBLIC
+          - PUBLIC
+          timezone_offset: 0
+          last_name: last_name
+          show_tutorial_cards: true
+          allow_liquidations_notifications: true
+          notifications_enabled: true
+          allow_email_notifications: true
+          allow_deposit_withdrawal_notifications: true
+          country_of_domicile: IN
+          provider: provider
+          verified_at: 2000-01-23T04:56:07.000+00:00
+          provider_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          photo_url: photo_url
+          first_name: first_name
+          email: email
+        error: error
+    ListUsersResponse:
+      $ref: "#/components/schemas/ListUsersResponseEnvelope"
     CreateIntegratorUserRequest:
       example:
         country_of_domicile: IN
@@ -6162,10 +6369,6 @@ components:
           format: uuid
           type: string
     UserExistsResponse:
-      example:
-        should_create_user: true
-        firebase_set: true
-        email_exists: true
       properties:
         email_exists:
           type: boolean
@@ -6257,24 +6460,6 @@ components:
         error: error
     GetOrderbookStatsResponse:
       $ref: "#/components/schemas/OrderbookStatsResponseEnvelope"
-    EmailExistsResponseEnvelope:
-      allOf:
-      - $ref: "#/components/schemas/ResponseEnvelope"
-      - properties:
-          data:
-            $ref: "#/components/schemas/UserExistsResponse"
-      example:
-        metadata:
-          trace_id: trace_id
-          status_code: 0
-          request_id: request_id
-        data:
-          should_create_user: true
-          firebase_set: true
-          email_exists: true
-        error: error
-    EmailExistsResponse:
-      $ref: "#/components/schemas/EmailExistsResponseEnvelope"
     CreateOrderResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -6616,6 +6801,26 @@ components:
         summary_by_asset:
           items:
             $ref: "#/components/schemas/UserCouponPaymentAssetSummary"
+          type: array
+    StreamCurrentLeverageAccruedInterestResponse:
+      example:
+        current_leverage_accrued_interest:
+        - asset_name: asset_name
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          current_accrued_interest_usd: current_accrued_interest_usd
+          asset_symbol: asset_symbol
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - asset_name: asset_name
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          current_accrued_interest_usd: current_accrued_interest_usd
+          asset_symbol: asset_symbol
+          position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        current_leverage_accrued_interest:
+          items:
+            $ref: "#/components/schemas/CurrentLeverageAccruedInterest"
           type: array
     TransformedAssets:
       example:

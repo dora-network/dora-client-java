@@ -40,6 +40,7 @@ import tech.dora.model.ClaimLeverageAccruedInterestRequest;
 import tech.dora.model.ClaimLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.ClosePositionRequest;
 import tech.dora.model.ClosePositionResponseEnvelope;
+import tech.dora.model.CountryCode;
 import tech.dora.model.CreateAPIKeyRequest;
 import tech.dora.model.CreateAPIKeyResponseEnvelope;
 import tech.dora.model.CreateConditionalOrderRequest;
@@ -49,7 +50,6 @@ import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponseEnvelope;
 import tech.dora.model.CurrentLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.DefundUserRequest;
-import tech.dora.model.EmailExistsResponseEnvelope;
 import tech.dora.model.FundUserRequest;
 import tech.dora.model.FundUserResponseEnvelope;
 import tech.dora.model.GetAssetByIDResponseEnvelope;
@@ -72,6 +72,7 @@ import tech.dora.model.ListOrdersResponseEnvelope;
 import tech.dora.model.ListPositionAccountsResponseEnvelope;
 import tech.dora.model.ListTradeResponseEnvelope;
 import tech.dora.model.ListTransactionsResponseEnvelope;
+import tech.dora.model.ListUsersResponseEnvelope;
 import tech.dora.model.LiveOrderbook;
 import java.time.OffsetDateTime;
 import tech.dora.model.OrderBookResponseEnvelope;
@@ -96,6 +97,7 @@ import tech.dora.model.SettleRealizedPnlRecordResponseEnvelope;
 import tech.dora.model.Side;
 import tech.dora.model.StreamAssetsEntry;
 import tech.dora.model.StreamCandlesEntry;
+import tech.dora.model.StreamCurrentLeverageAccruedInterestResponse;
 import tech.dora.model.StreamOrderBookBalanceEntry;
 import tech.dora.model.StreamOrderUpdatesEntry;
 import tech.dora.model.StreamPositionsEntry;
@@ -328,6 +330,7 @@ public class DefaultApi {
      * Build call for cancelAllOpenOrders
      * @param orderBookId  (optional)
      * @param userId  (optional)
+     * @param accountId  (optional)
      * @param orderKind  (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -341,7 +344,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call cancelAllOpenOrdersCall(@javax.annotation.Nullable String orderBookId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable OrderKind orderKind, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call cancelAllOpenOrdersCall(@javax.annotation.Nullable String orderBookId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID accountId, @javax.annotation.Nullable OrderKind orderKind, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -374,6 +377,10 @@ public class DefaultApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("user_id", userId));
         }
 
+        if (accountId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("account_id", accountId));
+        }
+
         if (orderKind != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("order_kind", orderKind));
         }
@@ -398,16 +405,17 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call cancelAllOpenOrdersValidateBeforeCall(@javax.annotation.Nullable String orderBookId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable OrderKind orderKind, final ApiCallback _callback) throws ApiException {
-        return cancelAllOpenOrdersCall(orderBookId, userId, orderKind, _callback);
+    private okhttp3.Call cancelAllOpenOrdersValidateBeforeCall(@javax.annotation.Nullable String orderBookId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID accountId, @javax.annotation.Nullable OrderKind orderKind, final ApiCallback _callback) throws ApiException {
+        return cancelAllOpenOrdersCall(orderBookId, userId, accountId, orderKind, _callback);
 
     }
 
     /**
-     * Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#39;s orders on specific orderbook
+     * Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook
      * 
      * @param orderBookId  (optional)
      * @param userId  (optional)
+     * @param accountId  (optional)
      * @param orderKind  (optional)
      * @return ListOrdersResponseEnvelope
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -420,16 +428,17 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ListOrdersResponseEnvelope cancelAllOpenOrders(@javax.annotation.Nullable String orderBookId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable OrderKind orderKind) throws ApiException {
-        ApiResponse<ListOrdersResponseEnvelope> localVarResp = cancelAllOpenOrdersWithHttpInfo(orderBookId, userId, orderKind);
+    public ListOrdersResponseEnvelope cancelAllOpenOrders(@javax.annotation.Nullable String orderBookId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID accountId, @javax.annotation.Nullable OrderKind orderKind) throws ApiException {
+        ApiResponse<ListOrdersResponseEnvelope> localVarResp = cancelAllOpenOrdersWithHttpInfo(orderBookId, userId, accountId, orderKind);
         return localVarResp.getData();
     }
 
     /**
-     * Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#39;s orders on specific orderbook
+     * Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook
      * 
      * @param orderBookId  (optional)
      * @param userId  (optional)
+     * @param accountId  (optional)
      * @param orderKind  (optional)
      * @return ApiResponse&lt;ListOrdersResponseEnvelope&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -442,17 +451,18 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ListOrdersResponseEnvelope> cancelAllOpenOrdersWithHttpInfo(@javax.annotation.Nullable String orderBookId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable OrderKind orderKind) throws ApiException {
-        okhttp3.Call localVarCall = cancelAllOpenOrdersValidateBeforeCall(orderBookId, userId, orderKind, null);
+    public ApiResponse<ListOrdersResponseEnvelope> cancelAllOpenOrdersWithHttpInfo(@javax.annotation.Nullable String orderBookId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID accountId, @javax.annotation.Nullable OrderKind orderKind) throws ApiException {
+        okhttp3.Call localVarCall = cancelAllOpenOrdersValidateBeforeCall(orderBookId, userId, accountId, orderKind, null);
         Type localVarReturnType = new TypeToken<ListOrdersResponseEnvelope>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Cancel all open orders, if user passes orderbook on query param it will cancel all orders on specific orderbook, admin can cancel user&#39;s orders on specific orderbook (asynchronously)
+     * Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook (asynchronously)
      * 
      * @param orderBookId  (optional)
      * @param userId  (optional)
+     * @param accountId  (optional)
      * @param orderKind  (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -466,9 +476,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call cancelAllOpenOrdersAsync(@javax.annotation.Nullable String orderBookId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable OrderKind orderKind, final ApiCallback<ListOrdersResponseEnvelope> _callback) throws ApiException {
+    public okhttp3.Call cancelAllOpenOrdersAsync(@javax.annotation.Nullable String orderBookId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID accountId, @javax.annotation.Nullable OrderKind orderKind, final ApiCallback<ListOrdersResponseEnvelope> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = cancelAllOpenOrdersValidateBeforeCall(orderBookId, userId, orderKind, _callback);
+        okhttp3.Call localVarCall = cancelAllOpenOrdersValidateBeforeCall(orderBookId, userId, accountId, orderKind, _callback);
         Type localVarReturnType = new TypeToken<ListOrdersResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -761,144 +771,6 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = cancelOrderByIdValidateBeforeCall(orderId, _callback);
         Type localVarReturnType = new TypeToken<CancelOrderResponseEnvelope>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for checkUserEmailExists
-     * @param email  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> True if the email exists, false otherwise </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. invalid path parameters </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call checkUserEmailExistsCall(@javax.annotation.Nonnull String email, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/v1/user/exists";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (email != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("email", email));
-        }
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call checkUserEmailExistsValidateBeforeCall(@javax.annotation.Nonnull String email, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'email' is set
-        if (email == null) {
-            throw new ApiException("Missing the required parameter 'email' when calling checkUserEmailExists(Async)");
-        }
-
-        return checkUserEmailExistsCall(email, _callback);
-
-    }
-
-    /**
-     * Check whether a user email exists
-     * 
-     * @param email  (required)
-     * @return EmailExistsResponseEnvelope
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> True if the email exists, false otherwise </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. invalid path parameters </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     </table>
-     */
-    public EmailExistsResponseEnvelope checkUserEmailExists(@javax.annotation.Nonnull String email) throws ApiException {
-        ApiResponse<EmailExistsResponseEnvelope> localVarResp = checkUserEmailExistsWithHttpInfo(email);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Check whether a user email exists
-     * 
-     * @param email  (required)
-     * @return ApiResponse&lt;EmailExistsResponseEnvelope&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> True if the email exists, false otherwise </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. invalid path parameters </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<EmailExistsResponseEnvelope> checkUserEmailExistsWithHttpInfo(@javax.annotation.Nonnull String email) throws ApiException {
-        okhttp3.Call localVarCall = checkUserEmailExistsValidateBeforeCall(email, null);
-        Type localVarReturnType = new TypeToken<EmailExistsResponseEnvelope>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Check whether a user email exists (asynchronously)
-     * 
-     * @param email  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> True if the email exists, false otherwise </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. invalid path parameters </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call checkUserEmailExistsAsync(@javax.annotation.Nonnull String email, final ApiCallback<EmailExistsResponseEnvelope> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = checkUserEmailExistsValidateBeforeCall(email, _callback);
-        Type localVarReturnType = new TypeToken<EmailExistsResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -7280,6 +7152,143 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for getTransactionsStream
+     * @param since  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Transactions stream </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to these transactions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getTransactionsStreamCall(@javax.annotation.Nullable OffsetDateTime since, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/transactions/stream";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (since != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("since", since));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthQuery" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getTransactionsStreamValidateBeforeCall(@javax.annotation.Nullable OffsetDateTime since, final ApiCallback _callback) throws ApiException {
+        return getTransactionsStreamCall(since, _callback);
+
+    }
+
+    /**
+     * Get transactions since a specific time, and open a stream for further updates
+     * 
+     * @param since  (optional)
+     * @return List&lt;StreamTransactionsEntry&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Transactions stream </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to these transactions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<StreamTransactionsEntry> getTransactionsStream(@javax.annotation.Nullable OffsetDateTime since) throws ApiException {
+        ApiResponse<List<StreamTransactionsEntry>> localVarResp = getTransactionsStreamWithHttpInfo(since);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get transactions since a specific time, and open a stream for further updates
+     * 
+     * @param since  (optional)
+     * @return ApiResponse&lt;List&lt;StreamTransactionsEntry&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Transactions stream </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to these transactions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<StreamTransactionsEntry>> getTransactionsStreamWithHttpInfo(@javax.annotation.Nullable OffsetDateTime since) throws ApiException {
+        okhttp3.Call localVarCall = getTransactionsStreamValidateBeforeCall(since, null);
+        Type localVarReturnType = new TypeToken<List<StreamTransactionsEntry>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get transactions since a specific time, and open a stream for further updates (asynchronously)
+     * 
+     * @param since  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Transactions stream </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to these transactions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getTransactionsStreamAsync(@javax.annotation.Nullable OffsetDateTime since, final ApiCallback<List<StreamTransactionsEntry>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getTransactionsStreamValidateBeforeCall(since, _callback);
+        Type localVarReturnType = new TypeToken<List<StreamTransactionsEntry>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for getUserById
      * @param userId  (required)
      * @param _callback Callback for upload/download progress
@@ -7701,6 +7710,149 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = getUserLedgerStreamValidateBeforeCall(userId, _callback);
         Type localVarReturnType = new TypeToken<List<StreamPositionsEntry>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getUserLeverageAccruedInterestStream
+     * @param userId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> User&#39;s leverage accrued interest stream </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this data </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> User not found or no leverage accrued interest available </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getUserLeverageAccruedInterestStreamCall(@javax.annotation.Nonnull UUID userId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/user/{user_id}/leverage/accrued_interest/stream"
+            .replace("{" + "user_id" + "}", localVarApiClient.escapeString(userId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthQuery" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getUserLeverageAccruedInterestStreamValidateBeforeCall(@javax.annotation.Nonnull UUID userId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling getUserLeverageAccruedInterestStream(Async)");
+        }
+
+        return getUserLeverageAccruedInterestStreamCall(userId, _callback);
+
+    }
+
+    /**
+     * Stream user&#39;s current leverage accrued interest in real time
+     * 
+     * @param userId  (required)
+     * @return StreamCurrentLeverageAccruedInterestResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> User&#39;s leverage accrued interest stream </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this data </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> User not found or no leverage accrued interest available </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public StreamCurrentLeverageAccruedInterestResponse getUserLeverageAccruedInterestStream(@javax.annotation.Nonnull UUID userId) throws ApiException {
+        ApiResponse<StreamCurrentLeverageAccruedInterestResponse> localVarResp = getUserLeverageAccruedInterestStreamWithHttpInfo(userId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Stream user&#39;s current leverage accrued interest in real time
+     * 
+     * @param userId  (required)
+     * @return ApiResponse&lt;StreamCurrentLeverageAccruedInterestResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> User&#39;s leverage accrued interest stream </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this data </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> User not found or no leverage accrued interest available </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<StreamCurrentLeverageAccruedInterestResponse> getUserLeverageAccruedInterestStreamWithHttpInfo(@javax.annotation.Nonnull UUID userId) throws ApiException {
+        okhttp3.Call localVarCall = getUserLeverageAccruedInterestStreamValidateBeforeCall(userId, null);
+        Type localVarReturnType = new TypeToken<StreamCurrentLeverageAccruedInterestResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Stream user&#39;s current leverage accrued interest in real time (asynchronously)
+     * 
+     * @param userId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> User&#39;s leverage accrued interest stream </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this data </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> User not found or no leverage accrued interest available </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getUserLeverageAccruedInterestStreamAsync(@javax.annotation.Nonnull UUID userId, final ApiCallback<StreamCurrentLeverageAccruedInterestResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getUserLeverageAccruedInterestStreamValidateBeforeCall(userId, _callback);
+        Type localVarReturnType = new TypeToken<StreamCurrentLeverageAccruedInterestResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -8293,6 +8445,183 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = getUserTransactionsStreamValidateBeforeCall(userId, since, _callback);
         Type localVarReturnType = new TypeToken<List<StreamTransactionsEntry>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getUsers
+     * @param id  (optional)
+     * @param limit  (optional, default to 100)
+     * @param offset  (optional, default to 0)
+     * @param email  (optional)
+     * @param firstName  (optional)
+     * @param lastName  (optional)
+     * @param countryOfDomicile  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of users </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getUsersCall(@javax.annotation.Nullable UUID id, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer offset, @javax.annotation.Nullable String email, @javax.annotation.Nullable String firstName, @javax.annotation.Nullable String lastName, @javax.annotation.Nullable CountryCode countryOfDomicile, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/user";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (id != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("id", id));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (offset != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("offset", offset));
+        }
+
+        if (email != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("email", email));
+        }
+
+        if (firstName != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("first_name", firstName));
+        }
+
+        if (lastName != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("last_name", lastName));
+        }
+
+        if (countryOfDomicile != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("country_of_domicile", countryOfDomicile));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getUsersValidateBeforeCall(@javax.annotation.Nullable UUID id, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer offset, @javax.annotation.Nullable String email, @javax.annotation.Nullable String firstName, @javax.annotation.Nullable String lastName, @javax.annotation.Nullable CountryCode countryOfDomicile, final ApiCallback _callback) throws ApiException {
+        return getUsersCall(id, limit, offset, email, firstName, lastName, countryOfDomicile, _callback);
+
+    }
+
+    /**
+     * Get all users (admin only)
+     * 
+     * @param id  (optional)
+     * @param limit  (optional, default to 100)
+     * @param offset  (optional, default to 0)
+     * @param email  (optional)
+     * @param firstName  (optional)
+     * @param lastName  (optional)
+     * @param countryOfDomicile  (optional)
+     * @return ListUsersResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of users </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ListUsersResponseEnvelope getUsers(@javax.annotation.Nullable UUID id, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer offset, @javax.annotation.Nullable String email, @javax.annotation.Nullable String firstName, @javax.annotation.Nullable String lastName, @javax.annotation.Nullable CountryCode countryOfDomicile) throws ApiException {
+        ApiResponse<ListUsersResponseEnvelope> localVarResp = getUsersWithHttpInfo(id, limit, offset, email, firstName, lastName, countryOfDomicile);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get all users (admin only)
+     * 
+     * @param id  (optional)
+     * @param limit  (optional, default to 100)
+     * @param offset  (optional, default to 0)
+     * @param email  (optional)
+     * @param firstName  (optional)
+     * @param lastName  (optional)
+     * @param countryOfDomicile  (optional)
+     * @return ApiResponse&lt;ListUsersResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of users </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ListUsersResponseEnvelope> getUsersWithHttpInfo(@javax.annotation.Nullable UUID id, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer offset, @javax.annotation.Nullable String email, @javax.annotation.Nullable String firstName, @javax.annotation.Nullable String lastName, @javax.annotation.Nullable CountryCode countryOfDomicile) throws ApiException {
+        okhttp3.Call localVarCall = getUsersValidateBeforeCall(id, limit, offset, email, firstName, lastName, countryOfDomicile, null);
+        Type localVarReturnType = new TypeToken<ListUsersResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get all users (admin only) (asynchronously)
+     * 
+     * @param id  (optional)
+     * @param limit  (optional, default to 100)
+     * @param offset  (optional, default to 0)
+     * @param email  (optional)
+     * @param firstName  (optional)
+     * @param lastName  (optional)
+     * @param countryOfDomicile  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of users </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getUsersAsync(@javax.annotation.Nullable UUID id, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer offset, @javax.annotation.Nullable String email, @javax.annotation.Nullable String firstName, @javax.annotation.Nullable String lastName, @javax.annotation.Nullable CountryCode countryOfDomicile, final ApiCallback<ListUsersResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getUsersValidateBeforeCall(id, limit, offset, email, firstName, lastName, countryOfDomicile, _callback);
+        Type localVarReturnType = new TypeToken<ListUsersResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

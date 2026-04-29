@@ -48,7 +48,6 @@ docs/CurrentLeverageAccruedInterest.md
 docs/CurrentLeverageAccruedInterestResponseEnvelope.md
 docs/DefaultApi.md
 docs/DefundUserRequest.md
-docs/EmailExistsResponseEnvelope.md
 docs/FundUser.md
 docs/FundUserRequest.md
 docs/FundUserResponseEnvelope.md
@@ -81,6 +80,7 @@ docs/ListPositionsResponse.md
 docs/ListTradeResponseEnvelope.md
 docs/ListTransactionsResponseEnvelope.md
 docs/ListUserCouponPaymentsResponseEnvelope.md
+docs/ListUsersResponseEnvelope.md
 docs/LiveOrderbook.md
 docs/Margin.md
 docs/Metadata.md
@@ -135,6 +135,7 @@ docs/SettleRealizedPnlRecordResponseEnvelope.md
 docs/Side.md
 docs/StreamAssetsEntry.md
 docs/StreamCandlesEntry.md
+docs/StreamCurrentLeverageAccruedInterestResponse.md
 docs/StreamEntry.md
 docs/StreamOrderBookBalanceEntry.md
 docs/StreamOrderUpdatesEntry.md
@@ -267,7 +268,6 @@ src/main/java/tech/dora/model/CreateOrderResponseEnvelope.java
 src/main/java/tech/dora/model/CurrentLeverageAccruedInterest.java
 src/main/java/tech/dora/model/CurrentLeverageAccruedInterestResponseEnvelope.java
 src/main/java/tech/dora/model/DefundUserRequest.java
-src/main/java/tech/dora/model/EmailExistsResponseEnvelope.java
 src/main/java/tech/dora/model/FundUser.java
 src/main/java/tech/dora/model/FundUserRequest.java
 src/main/java/tech/dora/model/FundUserResponseEnvelope.java
@@ -300,6 +300,7 @@ src/main/java/tech/dora/model/ListPositionsResponse.java
 src/main/java/tech/dora/model/ListTradeResponseEnvelope.java
 src/main/java/tech/dora/model/ListTransactionsResponseEnvelope.java
 src/main/java/tech/dora/model/ListUserCouponPaymentsResponseEnvelope.java
+src/main/java/tech/dora/model/ListUsersResponseEnvelope.java
 src/main/java/tech/dora/model/LiveOrderbook.java
 src/main/java/tech/dora/model/Margin.java
 src/main/java/tech/dora/model/Metadata.java
@@ -354,6 +355,7 @@ src/main/java/tech/dora/model/SettleRealizedPnlRecordResponseEnvelope.java
 src/main/java/tech/dora/model/Side.java
 src/main/java/tech/dora/model/StreamAssetsEntry.java
 src/main/java/tech/dora/model/StreamCandlesEntry.java
+src/main/java/tech/dora/model/StreamCurrentLeverageAccruedInterestResponse.java
 src/main/java/tech/dora/model/StreamEntry.java
 src/main/java/tech/dora/model/StreamOrderBookBalanceEntry.java
 src/main/java/tech/dora/model/StreamOrderUpdatesEntry.java
@@ -459,7 +461,6 @@ src/test/java/tech/dora/model/CreateOrderResponseEnvelopeTest.java
 src/test/java/tech/dora/model/CurrentLeverageAccruedInterestResponseEnvelopeTest.java
 src/test/java/tech/dora/model/CurrentLeverageAccruedInterestTest.java
 src/test/java/tech/dora/model/DefundUserRequestTest.java
-src/test/java/tech/dora/model/EmailExistsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/FundUserRequestTest.java
 src/test/java/tech/dora/model/FundUserResponseEnvelopeTest.java
 src/test/java/tech/dora/model/FundUserTest.java
@@ -492,6 +493,7 @@ src/test/java/tech/dora/model/ListPositionsResponseTest.java
 src/test/java/tech/dora/model/ListTradeResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListTransactionsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListUserCouponPaymentsResponseEnvelopeTest.java
+src/test/java/tech/dora/model/ListUsersResponseEnvelopeTest.java
 src/test/java/tech/dora/model/LiveOrderbookTest.java
 src/test/java/tech/dora/model/MarginTest.java
 src/test/java/tech/dora/model/MetadataTest.java
@@ -546,6 +548,7 @@ src/test/java/tech/dora/model/SettleRealizedPnlRecordResponseEnvelopeTest.java
 src/test/java/tech/dora/model/SideTest.java
 src/test/java/tech/dora/model/StreamAssetsEntryTest.java
 src/test/java/tech/dora/model/StreamCandlesEntryTest.java
+src/test/java/tech/dora/model/StreamCurrentLeverageAccruedInterestResponseTest.java
 src/test/java/tech/dora/model/StreamEntryTest.java
 src/test/java/tech/dora/model/StreamOrderBookBalanceEntryTest.java
 src/test/java/tech/dora/model/StreamOrderUpdatesEntryTest.java

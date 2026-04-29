@@ -134,7 +134,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.CurrentLeverageAccruedInterest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.CurrentLeverageAccruedInterestResponseEnvelope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.DefundUserRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.EmailExistsResponseEnvelope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.FundUser.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.FundUserRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.FundUserResponseEnvelope.CustomTypeAdapterFactory());
@@ -166,6 +165,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.ListTradeResponseEnvelope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.ListTransactionsResponseEnvelope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.ListUserCouponPaymentsResponseEnvelope.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.ListUsersResponseEnvelope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.LiveOrderbook.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.Margin.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.Metadata.CustomTypeAdapterFactory());
@@ -213,6 +213,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.SettleRealizedPnlRecordResponseEnvelope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.StreamAssetsEntry.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.StreamCandlesEntry.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.StreamCurrentLeverageAccruedInterestResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.StreamEntry.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.StreamOrderBookBalanceEntry.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.StreamOrderUpdatesEntry.CustomTypeAdapterFactory());

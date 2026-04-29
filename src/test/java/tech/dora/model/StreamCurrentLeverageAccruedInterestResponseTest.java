@@ -19,48 +19,33 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
-import tech.dora.model.Metadata;
-import tech.dora.model.UserExistsResponse;
+import java.util.List;
+import tech.dora.model.CurrentLeverageAccruedInterest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for EmailExistsResponseEnvelope
+ * Model tests for StreamCurrentLeverageAccruedInterestResponse
  */
-public class EmailExistsResponseEnvelopeTest {
-    private final EmailExistsResponseEnvelope model = new EmailExistsResponseEnvelope();
+public class StreamCurrentLeverageAccruedInterestResponseTest {
+    private final StreamCurrentLeverageAccruedInterestResponse model = new StreamCurrentLeverageAccruedInterestResponse();
 
     /**
-     * Model tests for EmailExistsResponseEnvelope
+     * Model tests for StreamCurrentLeverageAccruedInterestResponse
      */
     @Test
-    public void testEmailExistsResponseEnvelope() {
-        // TODO: test EmailExistsResponseEnvelope
+    public void testStreamCurrentLeverageAccruedInterestResponse() {
+        // TODO: test StreamCurrentLeverageAccruedInterestResponse
     }
 
     /**
-     * Test the property 'data'
+     * Test the property 'currentLeverageAccruedInterest'
      */
     @Test
-    public void dataTest() {
-        // TODO: test data
-    }
-
-    /**
-     * Test the property 'error'
-     */
-    @Test
-    public void errorTest() {
-        // TODO: test error
-    }
-
-    /**
-     * Test the property 'metadata'
-     */
-    @Test
-    public void metadataTest() {
-        // TODO: test metadata
+    public void currentLeverageAccruedInterestTest() {
+        // TODO: test currentLeverageAccruedInterest
     }
 
 }
