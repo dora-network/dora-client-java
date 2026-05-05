@@ -55,7 +55,7 @@ import tech.dora.JSON;
 /**
  * Asset
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-29T20:52:14.700905316+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-05-05T17:49:51.053434332+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
 public class Asset {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -100,7 +100,27 @@ public class Asset {
   public static final String SERIALIZED_NAME_MAX_UTILIZATION = "max_utilization";
   @SerializedName(SERIALIZED_NAME_MAX_UTILIZATION)
   @javax.annotation.Nonnull
-  private Integer maxUtilization;
+  private BigDecimal maxUtilization;
+
+  public static final String SERIALIZED_NAME_MINIMUM_RATE = "minimum_rate";
+  @SerializedName(SERIALIZED_NAME_MINIMUM_RATE)
+  @javax.annotation.Nonnull
+  private BigDecimal minimumRate;
+
+  public static final String SERIALIZED_NAME_KINK_RATE = "kink_rate";
+  @SerializedName(SERIALIZED_NAME_KINK_RATE)
+  @javax.annotation.Nonnull
+  private BigDecimal kinkRate;
+
+  public static final String SERIALIZED_NAME_MAXIMUM_RATE = "maximum_rate";
+  @SerializedName(SERIALIZED_NAME_MAXIMUM_RATE)
+  @javax.annotation.Nonnull
+  private BigDecimal maximumRate;
+
+  public static final String SERIALIZED_NAME_KINK_UTILIZATION = "kink_utilization";
+  @SerializedName(SERIALIZED_NAME_KINK_UTILIZATION)
+  @javax.annotation.Nonnull
+  private BigDecimal kinkUtilization;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -324,7 +344,7 @@ public class Asset {
   }
 
 
-  public Asset maxUtilization(@javax.annotation.Nonnull Integer maxUtilization) {
+  public Asset maxUtilization(@javax.annotation.Nonnull BigDecimal maxUtilization) {
     this.maxUtilization = maxUtilization;
     return this;
   }
@@ -332,15 +352,100 @@ public class Asset {
   /**
    * Get maxUtilization
    * minimum: 0
+   * maximum: 1
    * @return maxUtilization
    */
   @javax.annotation.Nonnull
-  public Integer getMaxUtilization() {
+  public BigDecimal getMaxUtilization() {
     return maxUtilization;
   }
 
-  public void setMaxUtilization(@javax.annotation.Nonnull Integer maxUtilization) {
+  public void setMaxUtilization(@javax.annotation.Nonnull BigDecimal maxUtilization) {
     this.maxUtilization = maxUtilization;
+  }
+
+
+  public Asset minimumRate(@javax.annotation.Nonnull BigDecimal minimumRate) {
+    this.minimumRate = minimumRate;
+    return this;
+  }
+
+  /**
+   * Get minimumRate
+   * minimum: 0
+   * maximum: 1
+   * @return minimumRate
+   */
+  @javax.annotation.Nonnull
+  public BigDecimal getMinimumRate() {
+    return minimumRate;
+  }
+
+  public void setMinimumRate(@javax.annotation.Nonnull BigDecimal minimumRate) {
+    this.minimumRate = minimumRate;
+  }
+
+
+  public Asset kinkRate(@javax.annotation.Nonnull BigDecimal kinkRate) {
+    this.kinkRate = kinkRate;
+    return this;
+  }
+
+  /**
+   * Get kinkRate
+   * minimum: 0
+   * maximum: 1
+   * @return kinkRate
+   */
+  @javax.annotation.Nonnull
+  public BigDecimal getKinkRate() {
+    return kinkRate;
+  }
+
+  public void setKinkRate(@javax.annotation.Nonnull BigDecimal kinkRate) {
+    this.kinkRate = kinkRate;
+  }
+
+
+  public Asset maximumRate(@javax.annotation.Nonnull BigDecimal maximumRate) {
+    this.maximumRate = maximumRate;
+    return this;
+  }
+
+  /**
+   * Get maximumRate
+   * minimum: 0
+   * maximum: 1
+   * @return maximumRate
+   */
+  @javax.annotation.Nonnull
+  public BigDecimal getMaximumRate() {
+    return maximumRate;
+  }
+
+  public void setMaximumRate(@javax.annotation.Nonnull BigDecimal maximumRate) {
+    this.maximumRate = maximumRate;
+  }
+
+
+  public Asset kinkUtilization(@javax.annotation.Nonnull BigDecimal kinkUtilization) {
+    this.kinkUtilization = kinkUtilization;
+    return this;
+  }
+
+  /**
+   * Get kinkUtilization
+   * minimum: 0
+   * maximum: 1
+   * @return kinkUtilization
+   */
+  @javax.annotation.Nonnull
+  public BigDecimal getKinkUtilization() {
+    return kinkUtilization;
+  }
+
+  public void setKinkUtilization(@javax.annotation.Nonnull BigDecimal kinkUtilization) {
+    this.kinkUtilization = kinkUtilization;
   }
 
 
@@ -593,6 +698,10 @@ public class Asset {
         Objects.equals(this.liquidationWeight, asset.liquidationWeight) &&
         Objects.equals(this.maxSupply, asset.maxSupply) &&
         Objects.equals(this.maxUtilization, asset.maxUtilization) &&
+        Objects.equals(this.minimumRate, asset.minimumRate) &&
+        Objects.equals(this.kinkRate, asset.kinkRate) &&
+        Objects.equals(this.maximumRate, asset.maximumRate) &&
+        Objects.equals(this.kinkUtilization, asset.kinkUtilization) &&
         Objects.equals(this.name, asset.name) &&
         Objects.equals(this.symbol, asset.symbol) &&
         Objects.equals(this.kind, asset.kind) &&
@@ -609,7 +718,7 @@ public class Asset {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, collateralWeight, createdAt, decimals, fractionalizedUnits, description, liquidationWeight, maxSupply, maxUtilization, name, symbol, kind, yield, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, maxLeverage, leverageInterestRate, bond);
+    return Objects.hash(id, collateralWeight, createdAt, decimals, fractionalizedUnits, description, liquidationWeight, maxSupply, maxUtilization, minimumRate, kinkRate, maximumRate, kinkUtilization, name, symbol, kind, yield, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, maxLeverage, leverageInterestRate, bond);
   }
 
   @Override
@@ -625,6 +734,10 @@ public class Asset {
     sb.append("    liquidationWeight: ").append(toIndentedString(liquidationWeight)).append("\n");
     sb.append("    maxSupply: ").append(toIndentedString(maxSupply)).append("\n");
     sb.append("    maxUtilization: ").append(toIndentedString(maxUtilization)).append("\n");
+    sb.append("    minimumRate: ").append(toIndentedString(minimumRate)).append("\n");
+    sb.append("    kinkRate: ").append(toIndentedString(kinkRate)).append("\n");
+    sb.append("    maximumRate: ").append(toIndentedString(maximumRate)).append("\n");
+    sb.append("    kinkUtilization: ").append(toIndentedString(kinkUtilization)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
     sb.append("    kind: ").append(toIndentedString(kind)).append("\n");
@@ -658,10 +771,10 @@ public class Asset {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "collateral_weight", "created_at", "decimals", "fractionalized_units", "description", "liquidation_weight", "max_supply", "max_utilization", "name", "symbol", "kind", "yield", "can_add_liquidity", "can_direct_borrow", "can_onboard", "can_trade", "can_virtual_borrow", "max_leverage", "leverage_interest_rate", "bond"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "collateral_weight", "created_at", "decimals", "fractionalized_units", "description", "liquidation_weight", "max_supply", "max_utilization", "minimum_rate", "kink_rate", "maximum_rate", "kink_utilization", "name", "symbol", "kind", "yield", "can_add_liquidity", "can_direct_borrow", "can_onboard", "can_trade", "can_virtual_borrow", "max_leverage", "leverage_interest_rate", "bond"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "collateral_weight", "created_at", "decimals", "fractionalized_units", "description", "liquidation_weight", "max_supply", "max_utilization", "name", "symbol", "kind", "can_add_liquidity", "can_direct_borrow", "can_onboard", "can_trade", "can_virtual_borrow", "max_leverage"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "collateral_weight", "created_at", "decimals", "fractionalized_units", "description", "liquidation_weight", "max_supply", "max_utilization", "minimum_rate", "kink_rate", "maximum_rate", "kink_utilization", "name", "symbol", "kind", "can_add_liquidity", "can_direct_borrow", "can_onboard", "can_trade", "can_virtual_borrow", "max_leverage"));
   }
 
   /**

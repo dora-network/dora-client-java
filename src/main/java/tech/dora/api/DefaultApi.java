@@ -38,6 +38,7 @@ import tech.dora.model.CancelOrderResponseEnvelope;
 import tech.dora.model.CandleResolution;
 import tech.dora.model.ClaimLeverageAccruedInterestRequest;
 import tech.dora.model.ClaimLeverageAccruedInterestResponseEnvelope;
+import tech.dora.model.CloseAccountRequest;
 import tech.dora.model.ClosePositionRequest;
 import tech.dora.model.ClosePositionResponseEnvelope;
 import tech.dora.model.CountryCode;
@@ -56,13 +57,17 @@ import tech.dora.model.GetAssetByIDResponseEnvelope;
 import tech.dora.model.GetAssetYTMByIDResponseEnvelope;
 import tech.dora.model.GetRealizedPnlSettlementsResponseEnvelope;
 import tech.dora.model.GetTopOfBookResponseEnvelope;
+import tech.dora.model.HistoricalLeverageInterestRatesResponseEnvelope;
 import tech.dora.model.IsolateCollateralRequest;
 import tech.dora.model.IsolateCollateralResponse;
+import tech.dora.model.LedgerAccountsResponseV2Envelope;
 import tech.dora.model.LedgerModuleByAssetResponseEnvelope;
 import tech.dora.model.LedgerModuleResponseEnvelope;
+import tech.dora.model.LeverageInterestRateResponseEnvelope;
 import tech.dora.model.LeverageRequestError;
 import tech.dora.model.LiquidityRequest;
 import tech.dora.model.LiquidityResponseEnvelope;
+import tech.dora.model.ListAccountsResponseV2Envelope;
 import tech.dora.model.ListAssetPriceResponseEnvelope;
 import tech.dora.model.ListCandlesResponseEnvelope;
 import tech.dora.model.ListCouponPaymentsResponseEnvelope;
@@ -74,6 +79,8 @@ import tech.dora.model.ListTradeResponseEnvelope;
 import tech.dora.model.ListTransactionsResponseEnvelope;
 import tech.dora.model.ListUsersResponseEnvelope;
 import tech.dora.model.LiveOrderbook;
+import tech.dora.model.NewIsolatedAccountRequestV2;
+import tech.dora.model.NewIsolatedAccountResponseV2Envelope;
 import java.time.OffsetDateTime;
 import tech.dora.model.OrderBookResponseEnvelope;
 import tech.dora.model.OrderBookStatus;
@@ -114,6 +121,8 @@ import tech.dora.model.TransactionResponseEnvelope;
 import tech.dora.model.TransactionsSettlementRequest;
 import tech.dora.model.TransactionsSettlementsResponse;
 import tech.dora.model.TransactionsSettlementsResponseEnvelope;
+import tech.dora.model.TransferAccountBalancesRequest;
+import tech.dora.model.TransferAccountBalancesResponseEnvelope;
 import tech.dora.model.TransferBalancesRequest;
 import tech.dora.model.TransferBalancesResponseEnvelope;
 import java.util.UUID;
@@ -914,6 +923,149 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for closeIsolatedAccountV2
+     * @param closeAccountRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Isolated account closed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found, e.g. order_book or account not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call closeIsolatedAccountV2Call(@javax.annotation.Nonnull CloseAccountRequest closeAccountRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = closeAccountRequest;
+
+        // create path and map variables
+        String localVarPath = "/v2/accounts/close";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call closeIsolatedAccountV2ValidateBeforeCall(@javax.annotation.Nonnull CloseAccountRequest closeAccountRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'closeAccountRequest' is set
+        if (closeAccountRequest == null) {
+            throw new ApiException("Missing the required parameter 'closeAccountRequest' when calling closeIsolatedAccountV2(Async)");
+        }
+
+        return closeIsolatedAccountV2Call(closeAccountRequest, _callback);
+
+    }
+
+    /**
+     * Close an isolated account, repaying the borrowed
+     * 
+     * @param closeAccountRequest  (required)
+     * @return ClosePositionResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Isolated account closed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found, e.g. order_book or account not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ClosePositionResponseEnvelope closeIsolatedAccountV2(@javax.annotation.Nonnull CloseAccountRequest closeAccountRequest) throws ApiException {
+        ApiResponse<ClosePositionResponseEnvelope> localVarResp = closeIsolatedAccountV2WithHttpInfo(closeAccountRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Close an isolated account, repaying the borrowed
+     * 
+     * @param closeAccountRequest  (required)
+     * @return ApiResponse&lt;ClosePositionResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Isolated account closed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found, e.g. order_book or account not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ClosePositionResponseEnvelope> closeIsolatedAccountV2WithHttpInfo(@javax.annotation.Nonnull CloseAccountRequest closeAccountRequest) throws ApiException {
+        okhttp3.Call localVarCall = closeIsolatedAccountV2ValidateBeforeCall(closeAccountRequest, null);
+        Type localVarReturnType = new TypeToken<ClosePositionResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Close an isolated account, repaying the borrowed (asynchronously)
+     * 
+     * @param closeAccountRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Isolated account closed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found, e.g. order_book or account not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call closeIsolatedAccountV2Async(@javax.annotation.Nonnull CloseAccountRequest closeAccountRequest, final ApiCallback<ClosePositionResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = closeIsolatedAccountV2ValidateBeforeCall(closeAccountRequest, _callback);
+        Type localVarReturnType = new TypeToken<ClosePositionResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for closeIsolatedPosition
      * @param closePositionRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -1472,6 +1624,149 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = createConditionalOrderValidateBeforeCall(createConditionalOrderRequest, _callback);
         Type localVarReturnType = new TypeToken<CreateConditionalOrderResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for createNewIsolatedAccountV2
+     * @param newIsolatedAccountRequestV2  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Isolated account created </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createNewIsolatedAccountV2Call(@javax.annotation.Nonnull NewIsolatedAccountRequestV2 newIsolatedAccountRequestV2, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = newIsolatedAccountRequestV2;
+
+        // create path and map variables
+        String localVarPath = "/v2/accounts/new_isolated";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createNewIsolatedAccountV2ValidateBeforeCall(@javax.annotation.Nonnull NewIsolatedAccountRequestV2 newIsolatedAccountRequestV2, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'newIsolatedAccountRequestV2' is set
+        if (newIsolatedAccountRequestV2 == null) {
+            throw new ApiException("Missing the required parameter 'newIsolatedAccountRequestV2' when calling createNewIsolatedAccountV2(Async)");
+        }
+
+        return createNewIsolatedAccountV2Call(newIsolatedAccountRequestV2, _callback);
+
+    }
+
+    /**
+     * Create a new isolated account for a user transferring available assets into the account
+     * 
+     * @param newIsolatedAccountRequestV2  (required)
+     * @return NewIsolatedAccountResponseV2Envelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Isolated account created </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public NewIsolatedAccountResponseV2Envelope createNewIsolatedAccountV2(@javax.annotation.Nonnull NewIsolatedAccountRequestV2 newIsolatedAccountRequestV2) throws ApiException {
+        ApiResponse<NewIsolatedAccountResponseV2Envelope> localVarResp = createNewIsolatedAccountV2WithHttpInfo(newIsolatedAccountRequestV2);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Create a new isolated account for a user transferring available assets into the account
+     * 
+     * @param newIsolatedAccountRequestV2  (required)
+     * @return ApiResponse&lt;NewIsolatedAccountResponseV2Envelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Isolated account created </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<NewIsolatedAccountResponseV2Envelope> createNewIsolatedAccountV2WithHttpInfo(@javax.annotation.Nonnull NewIsolatedAccountRequestV2 newIsolatedAccountRequestV2) throws ApiException {
+        okhttp3.Call localVarCall = createNewIsolatedAccountV2ValidateBeforeCall(newIsolatedAccountRequestV2, null);
+        Type localVarReturnType = new TypeToken<NewIsolatedAccountResponseV2Envelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Create a new isolated account for a user transferring available assets into the account (asynchronously)
+     * 
+     * @param newIsolatedAccountRequestV2  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Isolated account created </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createNewIsolatedAccountV2Async(@javax.annotation.Nonnull NewIsolatedAccountRequestV2 newIsolatedAccountRequestV2, final ApiCallback<NewIsolatedAccountResponseV2Envelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createNewIsolatedAccountV2ValidateBeforeCall(newIsolatedAccountRequestV2, _callback);
+        Type localVarReturnType = new TypeToken<NewIsolatedAccountResponseV2Envelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -3674,6 +3969,135 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = getL3DepthValidateBeforeCall(orderBookId, _callback);
         Type localVarReturnType = new TypeToken<ListOrdersResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getLedgerAccountsSelfV2
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> User accounts </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid user ID format </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getLedgerAccountsSelfV2Call(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v2/ledger/accounts/self";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getLedgerAccountsSelfV2ValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return getLedgerAccountsSelfV2Call(_callback);
+
+    }
+
+    /**
+     * Get your own accounts
+     * 
+     * @return LedgerAccountsResponseV2Envelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> User accounts </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid user ID format </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public LedgerAccountsResponseV2Envelope getLedgerAccountsSelfV2() throws ApiException {
+        ApiResponse<LedgerAccountsResponseV2Envelope> localVarResp = getLedgerAccountsSelfV2WithHttpInfo();
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get your own accounts
+     * 
+     * @return ApiResponse&lt;LedgerAccountsResponseV2Envelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> User accounts </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid user ID format </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<LedgerAccountsResponseV2Envelope> getLedgerAccountsSelfV2WithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = getLedgerAccountsSelfV2ValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<LedgerAccountsResponseV2Envelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get your own accounts (asynchronously)
+     * 
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> User accounts </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid user ID format </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getLedgerAccountsSelfV2Async(final ApiCallback<LedgerAccountsResponseV2Envelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getLedgerAccountsSelfV2ValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<LedgerAccountsResponseV2Envelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -6973,6 +7397,8 @@ public class DefaultApi {
      * @param positionId Position ID to filter settlements (optional)
      * @param txKind Transaction kind to filter settlements (optional)
      * @param createdAfter Filter settlements created after this time (optional)
+     * @param createdBefore Filter settlements created before this time (optional)
+     * @param settledAfter Filter settlements settled after this time (optional)
      * @param settledBefore Filter settlements settled before this time (optional)
      * @param isSettled Filter settlements by settlement status (optional)
      * @param _callback Callback for upload/download progress
@@ -6988,7 +7414,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getTransactionsSettlementsCall(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable String txKind, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getTransactionsSettlementsCall(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable String txKind, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime createdBefore, @javax.annotation.Nullable OffsetDateTime settledAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -7033,6 +7459,14 @@ public class DefaultApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("created_after", createdAfter));
         }
 
+        if (createdBefore != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("created_before", createdBefore));
+        }
+
+        if (settledAfter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("settled_after", settledAfter));
+        }
+
         if (settledBefore != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("settled_before", settledBefore));
         }
@@ -7061,8 +7495,8 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getTransactionsSettlementsValidateBeforeCall(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable String txKind, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled, final ApiCallback _callback) throws ApiException {
-        return getTransactionsSettlementsCall(tenantId, userId, positionId, txKind, createdAfter, settledBefore, isSettled, _callback);
+    private okhttp3.Call getTransactionsSettlementsValidateBeforeCall(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable String txKind, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime createdBefore, @javax.annotation.Nullable OffsetDateTime settledAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled, final ApiCallback _callback) throws ApiException {
+        return getTransactionsSettlementsCall(tenantId, userId, positionId, txKind, createdAfter, createdBefore, settledAfter, settledBefore, isSettled, _callback);
 
     }
 
@@ -7074,6 +7508,8 @@ public class DefaultApi {
      * @param positionId Position ID to filter settlements (optional)
      * @param txKind Transaction kind to filter settlements (optional)
      * @param createdAfter Filter settlements created after this time (optional)
+     * @param createdBefore Filter settlements created before this time (optional)
+     * @param settledAfter Filter settlements settled after this time (optional)
      * @param settledBefore Filter settlements settled before this time (optional)
      * @param isSettled Filter settlements by settlement status (optional)
      * @return TransactionsSettlementsResponseEnvelope
@@ -7088,8 +7524,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public TransactionsSettlementsResponseEnvelope getTransactionsSettlements(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable String txKind, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled) throws ApiException {
-        ApiResponse<TransactionsSettlementsResponseEnvelope> localVarResp = getTransactionsSettlementsWithHttpInfo(tenantId, userId, positionId, txKind, createdAfter, settledBefore, isSettled);
+    public TransactionsSettlementsResponseEnvelope getTransactionsSettlements(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable String txKind, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime createdBefore, @javax.annotation.Nullable OffsetDateTime settledAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled) throws ApiException {
+        ApiResponse<TransactionsSettlementsResponseEnvelope> localVarResp = getTransactionsSettlementsWithHttpInfo(tenantId, userId, positionId, txKind, createdAfter, createdBefore, settledAfter, settledBefore, isSettled);
         return localVarResp.getData();
     }
 
@@ -7101,6 +7537,8 @@ public class DefaultApi {
      * @param positionId Position ID to filter settlements (optional)
      * @param txKind Transaction kind to filter settlements (optional)
      * @param createdAfter Filter settlements created after this time (optional)
+     * @param createdBefore Filter settlements created before this time (optional)
+     * @param settledAfter Filter settlements settled after this time (optional)
      * @param settledBefore Filter settlements settled before this time (optional)
      * @param isSettled Filter settlements by settlement status (optional)
      * @return ApiResponse&lt;TransactionsSettlementsResponseEnvelope&gt;
@@ -7115,8 +7553,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<TransactionsSettlementsResponseEnvelope> getTransactionsSettlementsWithHttpInfo(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable String txKind, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled) throws ApiException {
-        okhttp3.Call localVarCall = getTransactionsSettlementsValidateBeforeCall(tenantId, userId, positionId, txKind, createdAfter, settledBefore, isSettled, null);
+    public ApiResponse<TransactionsSettlementsResponseEnvelope> getTransactionsSettlementsWithHttpInfo(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable String txKind, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime createdBefore, @javax.annotation.Nullable OffsetDateTime settledAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled) throws ApiException {
+        okhttp3.Call localVarCall = getTransactionsSettlementsValidateBeforeCall(tenantId, userId, positionId, txKind, createdAfter, createdBefore, settledAfter, settledBefore, isSettled, null);
         Type localVarReturnType = new TypeToken<TransactionsSettlementsResponseEnvelope>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -7129,6 +7567,8 @@ public class DefaultApi {
      * @param positionId Position ID to filter settlements (optional)
      * @param txKind Transaction kind to filter settlements (optional)
      * @param createdAfter Filter settlements created after this time (optional)
+     * @param createdBefore Filter settlements created before this time (optional)
+     * @param settledAfter Filter settlements settled after this time (optional)
      * @param settledBefore Filter settlements settled before this time (optional)
      * @param isSettled Filter settlements by settlement status (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -7144,9 +7584,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getTransactionsSettlementsAsync(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable String txKind, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled, final ApiCallback<TransactionsSettlementsResponseEnvelope> _callback) throws ApiException {
+    public okhttp3.Call getTransactionsSettlementsAsync(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable UUID positionId, @javax.annotation.Nullable String txKind, @javax.annotation.Nullable OffsetDateTime createdAfter, @javax.annotation.Nullable OffsetDateTime createdBefore, @javax.annotation.Nullable OffsetDateTime settledAfter, @javax.annotation.Nullable OffsetDateTime settledBefore, @javax.annotation.Nullable Boolean isSettled, final ApiCallback<TransactionsSettlementsResponseEnvelope> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getTransactionsSettlementsValidateBeforeCall(tenantId, userId, positionId, txKind, createdAfter, settledBefore, isSettled, _callback);
+        okhttp3.Call localVarCall = getTransactionsSettlementsValidateBeforeCall(tenantId, userId, positionId, txKind, createdAfter, createdBefore, settledAfter, settledBefore, isSettled, _callback);
         Type localVarReturnType = new TypeToken<TransactionsSettlementsResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -9484,6 +9924,320 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for leverageGetHistoricalInterestRates
+     * @param assetId  (required)
+     * @param start  (optional)
+     * @param end  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Historical leverage interest rates retrieved successfully </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid time parameter or end before/equal start </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, e.g. user not logged in or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call leverageGetHistoricalInterestRatesCall(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/leverage/interest_rate/{asset_id}/historical"
+            .replace("{" + "asset_id" + "}", localVarApiClient.escapeString(assetId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (start != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("start", start));
+        }
+
+        if (end != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("end", end));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call leverageGetHistoricalInterestRatesValidateBeforeCall(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'assetId' is set
+        if (assetId == null) {
+            throw new ApiException("Missing the required parameter 'assetId' when calling leverageGetHistoricalInterestRates(Async)");
+        }
+
+        return leverageGetHistoricalInterestRatesCall(assetId, start, end, _callback);
+
+    }
+
+    /**
+     * Get historical leverage interest rates for a specific asset
+     * 
+     * @param assetId  (required)
+     * @param start  (optional)
+     * @param end  (optional)
+     * @return HistoricalLeverageInterestRatesResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Historical leverage interest rates retrieved successfully </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid time parameter or end before/equal start </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, e.g. user not logged in or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public HistoricalLeverageInterestRatesResponseEnvelope leverageGetHistoricalInterestRates(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end) throws ApiException {
+        ApiResponse<HistoricalLeverageInterestRatesResponseEnvelope> localVarResp = leverageGetHistoricalInterestRatesWithHttpInfo(assetId, start, end);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get historical leverage interest rates for a specific asset
+     * 
+     * @param assetId  (required)
+     * @param start  (optional)
+     * @param end  (optional)
+     * @return ApiResponse&lt;HistoricalLeverageInterestRatesResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Historical leverage interest rates retrieved successfully </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid time parameter or end before/equal start </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, e.g. user not logged in or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<HistoricalLeverageInterestRatesResponseEnvelope> leverageGetHistoricalInterestRatesWithHttpInfo(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end) throws ApiException {
+        okhttp3.Call localVarCall = leverageGetHistoricalInterestRatesValidateBeforeCall(assetId, start, end, null);
+        Type localVarReturnType = new TypeToken<HistoricalLeverageInterestRatesResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get historical leverage interest rates for a specific asset (asynchronously)
+     * 
+     * @param assetId  (required)
+     * @param start  (optional)
+     * @param end  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Historical leverage interest rates retrieved successfully </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid time parameter or end before/equal start </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, e.g. user not logged in or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call leverageGetHistoricalInterestRatesAsync(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, final ApiCallback<HistoricalLeverageInterestRatesResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = leverageGetHistoricalInterestRatesValidateBeforeCall(assetId, start, end, _callback);
+        Type localVarReturnType = new TypeToken<HistoricalLeverageInterestRatesResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for leverageGetInterestRate
+     * @param assetId  (required)
+     * @param start  (optional)
+     * @param end  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Leverage interest rate retrieved successfully </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid/mismatched time parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, e.g. user not logged in or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No utilization data found for the selected window or asset not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call leverageGetInterestRateCall(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/leverage/interest_rate/{asset_id}"
+            .replace("{" + "asset_id" + "}", localVarApiClient.escapeString(assetId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (start != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("start", start));
+        }
+
+        if (end != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("end", end));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call leverageGetInterestRateValidateBeforeCall(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'assetId' is set
+        if (assetId == null) {
+            throw new ApiException("Missing the required parameter 'assetId' when calling leverageGetInterestRate(Async)");
+        }
+
+        return leverageGetInterestRateCall(assetId, start, end, _callback);
+
+    }
+
+    /**
+     * Get leverage interest rate for a specific asset
+     * 
+     * @param assetId  (required)
+     * @param start  (optional)
+     * @param end  (optional)
+     * @return LeverageInterestRateResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Leverage interest rate retrieved successfully </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid/mismatched time parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, e.g. user not logged in or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No utilization data found for the selected window or asset not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public LeverageInterestRateResponseEnvelope leverageGetInterestRate(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end) throws ApiException {
+        ApiResponse<LeverageInterestRateResponseEnvelope> localVarResp = leverageGetInterestRateWithHttpInfo(assetId, start, end);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get leverage interest rate for a specific asset
+     * 
+     * @param assetId  (required)
+     * @param start  (optional)
+     * @param end  (optional)
+     * @return ApiResponse&lt;LeverageInterestRateResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Leverage interest rate retrieved successfully </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid/mismatched time parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, e.g. user not logged in or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No utilization data found for the selected window or asset not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<LeverageInterestRateResponseEnvelope> leverageGetInterestRateWithHttpInfo(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end) throws ApiException {
+        okhttp3.Call localVarCall = leverageGetInterestRateValidateBeforeCall(assetId, start, end, null);
+        Type localVarReturnType = new TypeToken<LeverageInterestRateResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get leverage interest rate for a specific asset (asynchronously)
+     * 
+     * @param assetId  (required)
+     * @param start  (optional)
+     * @param end  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Leverage interest rate retrieved successfully </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid/mismatched time parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, e.g. user not logged in or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No utilization data found for the selected window or asset not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call leverageGetInterestRateAsync(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, final ApiCallback<LeverageInterestRateResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = leverageGetInterestRateValidateBeforeCall(assetId, start, end, _callback);
+        Type localVarReturnType = new TypeToken<LeverageInterestRateResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for leverageIsolateCollateral
      * @param isolateCollateralRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -10384,6 +11138,135 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = liquiditySubtractValidateBeforeCall(poolId, liquidityRequest, _callback);
         Type localVarReturnType = new TypeToken<LiquidityResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listAccountsSelfV2
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List of accounts including the account id, the account name, and global account indicator </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAccountsSelfV2Call(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v2/user/self/accounts";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listAccountsSelfV2ValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return listAccountsSelfV2Call(_callback);
+
+    }
+
+    /**
+     * List all accounts for the authenticated user
+     * 
+     * @return ListAccountsResponseV2Envelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List of accounts including the account id, the account name, and global account indicator </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ListAccountsResponseV2Envelope listAccountsSelfV2() throws ApiException {
+        ApiResponse<ListAccountsResponseV2Envelope> localVarResp = listAccountsSelfV2WithHttpInfo();
+        return localVarResp.getData();
+    }
+
+    /**
+     * List all accounts for the authenticated user
+     * 
+     * @return ApiResponse&lt;ListAccountsResponseV2Envelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List of accounts including the account id, the account name, and global account indicator </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ListAccountsResponseV2Envelope> listAccountsSelfV2WithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = listAccountsSelfV2ValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<ListAccountsResponseV2Envelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List all accounts for the authenticated user (asynchronously)
+     * 
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List of accounts including the account id, the account name, and global account indicator </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAccountsSelfV2Async(final ApiCallback<ListAccountsResponseV2Envelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listAccountsSelfV2ValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<ListAccountsResponseV2Envelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -12806,6 +13689,149 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = streamTradesValidateBeforeCall(orderBookId, since, _callback);
         Type localVarReturnType = new TypeToken<List<StreamTradesEntry>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for transferAccountBalancesV2
+     * @param transferAccountBalancesRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Isolated account created </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call transferAccountBalancesV2Call(@javax.annotation.Nonnull TransferAccountBalancesRequest transferAccountBalancesRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = transferAccountBalancesRequest;
+
+        // create path and map variables
+        String localVarPath = "/v2/accounts/transfer_balances";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call transferAccountBalancesV2ValidateBeforeCall(@javax.annotation.Nonnull TransferAccountBalancesRequest transferAccountBalancesRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'transferAccountBalancesRequest' is set
+        if (transferAccountBalancesRequest == null) {
+            throw new ApiException("Missing the required parameter 'transferAccountBalancesRequest' when calling transferAccountBalancesV2(Async)");
+        }
+
+        return transferAccountBalancesV2Call(transferAccountBalancesRequest, _callback);
+
+    }
+
+    /**
+     * Transfer available balance between a user&#39;s accounts
+     * 
+     * @param transferAccountBalancesRequest  (required)
+     * @return TransferAccountBalancesResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Isolated account created </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TransferAccountBalancesResponseEnvelope transferAccountBalancesV2(@javax.annotation.Nonnull TransferAccountBalancesRequest transferAccountBalancesRequest) throws ApiException {
+        ApiResponse<TransferAccountBalancesResponseEnvelope> localVarResp = transferAccountBalancesV2WithHttpInfo(transferAccountBalancesRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Transfer available balance between a user&#39;s accounts
+     * 
+     * @param transferAccountBalancesRequest  (required)
+     * @return ApiResponse&lt;TransferAccountBalancesResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Isolated account created </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TransferAccountBalancesResponseEnvelope> transferAccountBalancesV2WithHttpInfo(@javax.annotation.Nonnull TransferAccountBalancesRequest transferAccountBalancesRequest) throws ApiException {
+        okhttp3.Call localVarCall = transferAccountBalancesV2ValidateBeforeCall(transferAccountBalancesRequest, null);
+        Type localVarReturnType = new TypeToken<TransferAccountBalancesResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Transfer available balance between a user&#39;s accounts (asynchronously)
+     * 
+     * @param transferAccountBalancesRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Isolated account created </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call transferAccountBalancesV2Async(@javax.annotation.Nonnull TransferAccountBalancesRequest transferAccountBalancesRequest, final ApiCallback<TransferAccountBalancesResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = transferAccountBalancesV2ValidateBeforeCall(transferAccountBalancesRequest, _callback);
+        Type localVarReturnType = new TypeToken<TransferAccountBalancesResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

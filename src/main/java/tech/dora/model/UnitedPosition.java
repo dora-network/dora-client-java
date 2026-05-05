@@ -53,7 +53,7 @@ import tech.dora.JSON;
 /**
  * UnitedPosition
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-29T20:52:14.700905316+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-05-05T17:49:51.053434332+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
 public class UnitedPosition {
   public static final String SERIALIZED_NAME_GLOBAL_POSITION_ID = "global_position_id";
   @SerializedName(SERIALIZED_NAME_GLOBAL_POSITION_ID)
@@ -62,7 +62,7 @@ public class UnitedPosition {
 
   public static final String SERIALIZED_NAME_TRANSACTION_IDS = "transaction_ids";
   @SerializedName(SERIALIZED_NAME_TRANSACTION_IDS)
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   private List<UUID> transactionIds = new ArrayList<>();
 
   public UnitedPosition() {
@@ -87,7 +87,7 @@ public class UnitedPosition {
   }
 
 
-  public UnitedPosition transactionIds(@javax.annotation.Nullable List<UUID> transactionIds) {
+  public UnitedPosition transactionIds(@javax.annotation.Nonnull List<UUID> transactionIds) {
     this.transactionIds = transactionIds;
     return this;
   }
@@ -104,12 +104,12 @@ public class UnitedPosition {
    * Get transactionIds
    * @return transactionIds
    */
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public List<UUID> getTransactionIds() {
     return transactionIds;
   }
 
-  public void setTransactionIds(@javax.annotation.Nullable List<UUID> transactionIds) {
+  public void setTransactionIds(@javax.annotation.Nonnull List<UUID> transactionIds) {
     this.transactionIds = transactionIds;
   }
 
@@ -163,7 +163,7 @@ public class UnitedPosition {
     openapiFields = new HashSet<String>(Arrays.asList("global_position_id", "transaction_ids"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("global_position_id"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("global_position_id", "transaction_ids"));
   }
 
   /**
@@ -197,8 +197,10 @@ public class UnitedPosition {
       if (!jsonObj.get("global_position_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `global_position_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("global_position_id").toString()));
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("transaction_ids") != null && !jsonObj.get("transaction_ids").isJsonNull() && !jsonObj.get("transaction_ids").isJsonArray()) {
+      // ensure the required json array is present
+      if (jsonObj.get("transaction_ids") == null) {
+        throw new IllegalArgumentException("Expected the field `linkedContent` to be an array in the JSON string but got `null`");
+      } else if (!jsonObj.get("transaction_ids").isJsonArray()) {
         throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `transaction_ids` to be an array in the JSON string but got `%s`", jsonObj.get("transaction_ids").toString()));
       }
   }

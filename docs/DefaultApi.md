@@ -9,10 +9,12 @@ All URIs are relative to *https://staging.dora.co*
 | [**cancelLedgerWithdrawRequest**](DefaultApi.md#cancelLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request |
 | [**cancelOrderById**](DefaultApi.md#cancelOrderById) | **DELETE** /v1/orders/{order_id} | Cancel an order by ID |
 | [**claimLeverageGetAccruedInterest**](DefaultApi.md#claimLeverageGetAccruedInterest) | **POST** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user |
+| [**closeIsolatedAccountV2**](DefaultApi.md#closeIsolatedAccountV2) | **POST** /v2/accounts/close | Close an isolated account, repaying the borrowed |
 | [**closeIsolatedPosition**](DefaultApi.md#closeIsolatedPosition) | **POST** /v1/positions/close | Close isolated positions, repaying the borrowed |
 | [**createAPIKeyForUser**](DefaultApi.md#createAPIKeyForUser) | **POST** /v1/user/apikey | Create apikey for a user |
 | [**createAPIKeyForUserID**](DefaultApi.md#createAPIKeyForUserID) | **POST** /v1/user/{user_id}/apikey | Create apikey for a user |
 | [**createConditionalOrder**](DefaultApi.md#createConditionalOrder) | **POST** /v1/orders/conditional | Create a new conditional orders |
+| [**createNewIsolatedAccountV2**](DefaultApi.md#createNewIsolatedAccountV2) | **POST** /v2/accounts/new_isolated | Create a new isolated account for a user transferring available assets into the account |
 | [**createOrder**](DefaultApi.md#createOrder) | **POST** /v1/orders | Create a new order |
 | [**createUser**](DefaultApi.md#createUser) | **POST** /v1/integrators/user | Create a new user |
 | [**deleteUser**](DefaultApi.md#deleteUser) | **DELETE** /v1/user/{user_id} | Delete user by ID |
@@ -29,6 +31,7 @@ All URIs are relative to *https://staging.dora.co*
 | [**getL1Depth**](DefaultApi.md#getL1Depth) | **GET** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth) |
 | [**getL2Depth**](DefaultApi.md#getL2Depth) | **GET** /v1/orderbooks/{order_book_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth) |
 | [**getL3Depth**](DefaultApi.md#getL3Depth) | **GET** /v1/orderbooks/{order_book_id}/L3 | Get all open orders for a specific orderbook (L3 market depth) |
+| [**getLedgerAccountsSelfV2**](DefaultApi.md#getLedgerAccountsSelfV2) | **GET** /v2/ledger/accounts/self | Get your own accounts |
 | [**getLedgerBalancesSelf**](DefaultApi.md#getLedgerBalancesSelf) | **GET** /v1/ledger/balances/self | Get your own available, locked, and borrowed assets |
 | [**getLedgerInterestSelf**](DefaultApi.md#getLedgerInterestSelf) | **GET** /v1/ledger/interest/self | Get your own interest |
 | [**getLedgerModule**](DefaultApi.md#getLedgerModule) | **GET** /v1/ledger/module | Get the entire module object, including unborrowed leverage assets and total leverage trackers |
@@ -69,12 +72,15 @@ All URIs are relative to *https://staging.dora.co*
 | [**ledgerWithdrawRequest**](DefaultApi.md#ledgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{user_id} | Initiate a withdrawal request for this user to the outside world |
 | [**ledgerWithdrawRequestSelf**](DefaultApi.md#ledgerWithdrawRequestSelf) | **POST** /v1/ledger/withdraw/requests/self | Initiate a withdrawal request for the logged in user to the outside world |
 | [**leverageGetAccruedInterestByUser**](DefaultApi.md#leverageGetAccruedInterestByUser) | **GET** /v1/leverage/accrued_interest/self | Get current accrued leverage interest for the user |
+| [**leverageGetHistoricalInterestRates**](DefaultApi.md#leverageGetHistoricalInterestRates) | **GET** /v1/leverage/interest_rate/{asset_id}/historical | Get historical leverage interest rates for a specific asset |
+| [**leverageGetInterestRate**](DefaultApi.md#leverageGetInterestRate) | **GET** /v1/leverage/interest_rate/{asset_id} | Get leverage interest rate for a specific asset |
 | [**leverageIsolateCollateral**](DefaultApi.md#leverageIsolateCollateral) | **POST** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#39;s global collateral |
 | [**leverageSupply**](DefaultApi.md#leverageSupply) | **POST** /v1/leverage/supply | Supply leverage for a specific asset |
 | [**leverageUnite**](DefaultApi.md#leverageUnite) | **POST** /v1/leverage/unite | Combines all isolated positions into a single global position |
 | [**leverageWithdraw**](DefaultApi.md#leverageWithdraw) | **POST** /v1/leverage/withdraw | Withdraw leverage for a specific asset |
 | [**liquidityAdd**](DefaultApi.md#liquidityAdd) | **POST** /v1/liquidity/pool/{pool_id}/add | Add liquidity to a pool |
 | [**liquiditySubtract**](DefaultApi.md#liquiditySubtract) | **POST** /v1/liquidity/pool/{pool_id}/remove | Subtract liquidity from a pool |
+| [**listAccountsSelfV2**](DefaultApi.md#listAccountsSelfV2) | **GET** /v2/user/self/accounts | List all accounts for the authenticated user |
 | [**listAssets**](DefaultApi.md#listAssets) | **GET** /v1/assets | List assets |
 | [**listOrderBooks**](DefaultApi.md#listOrderBooks) | **GET** /v1/orderbooks | List order books |
 | [**listOrders**](DefaultApi.md#listOrders) | **GET** /v1/orders | List all orders |
@@ -91,6 +97,7 @@ All URIs are relative to *https://staging.dora.co*
 | [**streamOrderBookBalances**](DefaultApi.md#streamOrderBookBalances) | **GET** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates |
 | [**streamOrderbookOpenOrders**](DefaultApi.md#streamOrderbookOpenOrders) | **GET** /v1/orderbooks/{order_book_id}/open/stream | Get a snapshot of open orders in an order book and open a stream for real-time updates |
 | [**streamTrades**](DefaultApi.md#streamTrades) | **GET** /v1/trades/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates |
+| [**transferAccountBalancesV2**](DefaultApi.md#transferAccountBalancesV2) | **POST** /v2/accounts/transfer_balances | Transfer available balance between a user&#39;s accounts |
 | [**transferAvailableBalances**](DefaultApi.md#transferAvailableBalances) | **POST** /v1/positions/transfer_balances | Transfer available balance between a user&#39;s accounts (e.g. global to isolated position) |
 | [**updateUserConfig**](DefaultApi.md#updateUserConfig) | **PUT** /v1/user/{user_id}/config | Update user configuration by ID |
 | [**updateUserConfigSelf**](DefaultApi.md#updateUserConfigSelf) | **PUT** /v1/user/config/self | Update user configuration for the authenticated user |
@@ -484,6 +491,81 @@ public class Example {
 | **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="closeIsolatedAccountV2"></a>
+# **closeIsolatedAccountV2**
+> ClosePositionResponseEnvelope closeIsolatedAccountV2(closeAccountRequest)
+
+Close an isolated account, repaying the borrowed
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    CloseAccountRequest closeAccountRequest = new CloseAccountRequest(); // CloseAccountRequest | 
+    try {
+      ClosePositionResponseEnvelope result = apiInstance.closeIsolatedAccountV2(closeAccountRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#closeIsolatedAccountV2");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **closeAccountRequest** | [**CloseAccountRequest**](CloseAccountRequest.md)|  | |
+
+### Return type
+
+[**ClosePositionResponseEnvelope**](ClosePositionResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Isolated account closed |  -  |
+| **400** | Bad request, e.g. missing required fields |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this route |  -  |
+| **404** | Not found, e.g. order_book or account not found |  -  |
+| **500** | Internal server error |  -  |
+
 <a id="closeIsolatedPosition"></a>
 # **closeIsolatedPosition**
 > ClosePositionResponseEnvelope closeIsolatedPosition(closePositionRequest)
@@ -779,6 +861,81 @@ public class Example {
 | **201** | Conditional orders are created |  -  |
 | **400** | Bad request, e.g. missing required fields |  -  |
 | **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="createNewIsolatedAccountV2"></a>
+# **createNewIsolatedAccountV2**
+> NewIsolatedAccountResponseV2Envelope createNewIsolatedAccountV2(newIsolatedAccountRequestV2)
+
+Create a new isolated account for a user transferring available assets into the account
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    NewIsolatedAccountRequestV2 newIsolatedAccountRequestV2 = new NewIsolatedAccountRequestV2(); // NewIsolatedAccountRequestV2 | 
+    try {
+      NewIsolatedAccountResponseV2Envelope result = apiInstance.createNewIsolatedAccountV2(newIsolatedAccountRequestV2);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#createNewIsolatedAccountV2");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **newIsolatedAccountRequestV2** | [**NewIsolatedAccountRequestV2**](NewIsolatedAccountRequestV2.md)|  | |
+
+### Return type
+
+[**NewIsolatedAccountResponseV2Envelope**](NewIsolatedAccountResponseV2Envelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Isolated account created |  -  |
+| **400** | Bad request, e.g. missing required fields |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
+| **409** | Conflict, e.g. the requested amount is not available to transfer |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="createOrder"></a>
@@ -1865,6 +2022,76 @@ No authorization required
 | **400** | Bad request, e.g. invalid query parameters |  -  |
 | **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
 | **404** | Orderbook not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getLedgerAccountsSelfV2"></a>
+# **getLedgerAccountsSelfV2**
+> LedgerAccountsResponseV2Envelope getLedgerAccountsSelfV2()
+
+Get your own accounts
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      LedgerAccountsResponseV2Envelope result = apiInstance.getLedgerAccountsSelfV2();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getLedgerAccountsSelfV2");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**LedgerAccountsResponseV2Envelope**](LedgerAccountsResponseV2Envelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User accounts |  -  |
+| **400** | Bad request, e.g. invalid user ID format |  -  |
+| **404** | User not found |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="getLedgerBalancesSelf"></a>
@@ -3510,7 +3737,7 @@ No authorization required
 
 <a id="getTransactionsSettlements"></a>
 # **getTransactionsSettlements**
-> TransactionsSettlementsResponseEnvelope getTransactionsSettlements(tenantId, userId, positionId, txKind, createdAfter, settledBefore, isSettled)
+> TransactionsSettlementsResponseEnvelope getTransactionsSettlements(tenantId, userId, positionId, txKind, createdAfter, createdBefore, settledAfter, settledBefore, isSettled)
 
 Get transactions settlements with filters
 
@@ -3545,10 +3772,12 @@ public class Example {
     UUID positionId = UUID.randomUUID(); // UUID | Position ID to filter settlements
     String txKind = "txKind_example"; // String | Transaction kind to filter settlements
     OffsetDateTime createdAfter = OffsetDateTime.now(); // OffsetDateTime | Filter settlements created after this time
+    OffsetDateTime createdBefore = OffsetDateTime.now(); // OffsetDateTime | Filter settlements created before this time
+    OffsetDateTime settledAfter = OffsetDateTime.now(); // OffsetDateTime | Filter settlements settled after this time
     OffsetDateTime settledBefore = OffsetDateTime.now(); // OffsetDateTime | Filter settlements settled before this time
     Boolean isSettled = true; // Boolean | Filter settlements by settlement status
     try {
-      TransactionsSettlementsResponseEnvelope result = apiInstance.getTransactionsSettlements(tenantId, userId, positionId, txKind, createdAfter, settledBefore, isSettled);
+      TransactionsSettlementsResponseEnvelope result = apiInstance.getTransactionsSettlements(tenantId, userId, positionId, txKind, createdAfter, createdBefore, settledAfter, settledBefore, isSettled);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#getTransactionsSettlements");
@@ -3570,6 +3799,8 @@ public class Example {
 | **positionId** | **UUID**| Position ID to filter settlements | [optional] |
 | **txKind** | **String**| Transaction kind to filter settlements | [optional] |
 | **createdAfter** | **OffsetDateTime**| Filter settlements created after this time | [optional] |
+| **createdBefore** | **OffsetDateTime**| Filter settlements created before this time | [optional] |
+| **settledAfter** | **OffsetDateTime**| Filter settlements settled after this time | [optional] |
 | **settledBefore** | **OffsetDateTime**| Filter settlements settled before this time | [optional] |
 | **isSettled** | **Boolean**| Filter settlements by settlement status | [optional] |
 
@@ -4781,6 +5012,163 @@ public class Example {
 | **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="leverageGetHistoricalInterestRates"></a>
+# **leverageGetHistoricalInterestRates**
+> HistoricalLeverageInterestRatesResponseEnvelope leverageGetHistoricalInterestRates(assetId, start, end)
+
+Get historical leverage interest rates for a specific asset
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID assetId = UUID.randomUUID(); // UUID | 
+    OffsetDateTime start = OffsetDateTime.now(); // OffsetDateTime | 
+    OffsetDateTime end = OffsetDateTime.now(); // OffsetDateTime | 
+    try {
+      HistoricalLeverageInterestRatesResponseEnvelope result = apiInstance.leverageGetHistoricalInterestRates(assetId, start, end);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#leverageGetHistoricalInterestRates");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **assetId** | **UUID**|  | |
+| **start** | **OffsetDateTime**|  | [optional] |
+| **end** | **OffsetDateTime**|  | [optional] |
+
+### Return type
+
+[**HistoricalLeverageInterestRatesResponseEnvelope**](HistoricalLeverageInterestRatesResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Historical leverage interest rates retrieved successfully |  -  |
+| **400** | Bad request, e.g. invalid time parameter or end before/equal start |  -  |
+| **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="leverageGetInterestRate"></a>
+# **leverageGetInterestRate**
+> LeverageInterestRateResponseEnvelope leverageGetInterestRate(assetId, start, end)
+
+Get leverage interest rate for a specific asset
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID assetId = UUID.randomUUID(); // UUID | 
+    OffsetDateTime start = OffsetDateTime.now(); // OffsetDateTime | 
+    OffsetDateTime end = OffsetDateTime.now(); // OffsetDateTime | 
+    try {
+      LeverageInterestRateResponseEnvelope result = apiInstance.leverageGetInterestRate(assetId, start, end);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#leverageGetInterestRate");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **assetId** | **UUID**|  | |
+| **start** | **OffsetDateTime**|  | [optional] |
+| **end** | **OffsetDateTime**|  | [optional] |
+
+### Return type
+
+[**LeverageInterestRateResponseEnvelope**](LeverageInterestRateResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Leverage interest rate retrieved successfully |  -  |
+| **400** | Bad request, e.g. invalid/mismatched time parameters |  -  |
+| **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
+| **404** | No utilization data found for the selected window or asset not found |  -  |
+| **500** | Internal server error |  -  |
+
 <a id="leverageIsolateCollateral"></a>
 # **leverageIsolateCollateral**
 > IsolateCollateralResponse leverageIsolateCollateral(isolateCollateralRequest)
@@ -5237,6 +5625,76 @@ public class Example {
 | **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
 | **404** | Pool not found |  -  |
 | **409** | Conflict, e.g. the requested amount is not available to transfer |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="listAccountsSelfV2"></a>
+# **listAccountsSelfV2**
+> ListAccountsResponseV2Envelope listAccountsSelfV2()
+
+List all accounts for the authenticated user
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      ListAccountsResponseV2Envelope result = apiInstance.listAccountsSelfV2();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#listAccountsSelfV2");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ListAccountsResponseV2Envelope**](ListAccountsResponseV2Envelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | List of accounts including the account id, the account name, and global account indicator |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | User not found |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="listAssets"></a>
@@ -6408,6 +6866,81 @@ No authorization required
 |-------------|-------------|------------------|
 | **200** | Real-time trade updates |  -  |
 | **400** | Bad request, e.g. invalid parameters |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="transferAccountBalancesV2"></a>
+# **transferAccountBalancesV2**
+> TransferAccountBalancesResponseEnvelope transferAccountBalancesV2(transferAccountBalancesRequest)
+
+Transfer available balance between a user&#39;s accounts
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    TransferAccountBalancesRequest transferAccountBalancesRequest = new TransferAccountBalancesRequest(); // TransferAccountBalancesRequest | 
+    try {
+      TransferAccountBalancesResponseEnvelope result = apiInstance.transferAccountBalancesV2(transferAccountBalancesRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#transferAccountBalancesV2");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **transferAccountBalancesRequest** | [**TransferAccountBalancesRequest**](TransferAccountBalancesRequest.md)|  | |
+
+### Return type
+
+[**TransferAccountBalancesResponseEnvelope**](TransferAccountBalancesResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Isolated account created |  -  |
+| **400** | Bad request, e.g. missing required fields |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
+| **409** | Conflict, e.g. the requested amount is not available to transfer |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="transferAvailableBalances"></a>

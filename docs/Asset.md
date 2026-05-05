@@ -15,7 +15,11 @@
 |**description** | **String** |  |  |
 |**liquidationWeight** | **BigDecimal** |  |  |
 |**maxSupply** | **Integer** |  |  |
-|**maxUtilization** | **Integer** |  |  |
+|**maxUtilization** | **BigDecimal** |  |  |
+|**minimumRate** | **BigDecimal** |  |  |
+|**kinkRate** | **BigDecimal** |  |  |
+|**maximumRate** | **BigDecimal** |  |  |
+|**kinkUtilization** | **BigDecimal** |  |  |
 |**name** | **String** |  |  |
 |**symbol** | **String** |  |  |
 |**kind** | **AssetKind** |  |  |

@@ -2377,6 +2377,134 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /v1/leverage/interest_rate/{asset_id}:
+    get:
+      operationId: leverageGetInterestRate
+      parameters:
+      - explode: false
+        in: path
+        name: asset_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: start
+        required: false
+        schema:
+          description: Optional start time for the interest rate window. Must be paired
+            with end.
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: end
+        required: false
+        schema:
+          description: Optional end time for the interest rate window. Must be paired
+            with start.
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LeverageInterestRateResponse"
+          description: Leverage interest rate retrieved successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid/mismatched time parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, e.g. user not logged in or invalid credentials"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: No utilization data found for the selected window or asset
+            not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get leverage interest rate for a specific asset
+      x-accepts:
+      - application/json
+  /v1/leverage/interest_rate/{asset_id}/historical:
+    get:
+      operationId: leverageGetHistoricalInterestRates
+      parameters:
+      - explode: false
+        in: path
+        name: asset_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: start
+        required: false
+        schema:
+          description: "Optional start time for the historical window. If omitted\
+            \ (or if end is omitted), defaults to last 7 days."
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: end
+        required: false
+        schema:
+          description: "Optional end time for the historical window. If omitted (or\
+            \ if start is omitted), defaults to now."
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoricalLeverageInterestRatesResponse"
+          description: Historical leverage interest rates retrieved successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid time parameter or end before/equal\
+            \ start"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, e.g. user not logged in or invalid credentials"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get historical leverage interest rates for a specific asset
+      x-accepts:
+      - application/json
   /v1/leverage/isolate_collateral:
     post:
       deprecated: true
@@ -2947,6 +3075,24 @@ paths:
         explode: true
         in: query
         name: created_after
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: Filter settlements created before this time
+        explode: true
+        in: query
+        name: created_before
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: Filter settlements settled after this time
+        explode: true
+        in: query
+        name: settled_after
         required: false
         schema:
           format: date-time
@@ -4304,19 +4450,229 @@ paths:
       summary: Mark a realized P&L settlement as settled
       x-accepts:
       - application/json
+  /v2/ledger/accounts/self:
+    get:
+      operationId: getLedgerAccountsSelfV2
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LedgerAccountsResponseV2"
+          description: User accounts
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid user ID format"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get your own accounts
+      x-accepts:
+      - application/json
+  /v2/accounts/transfer_balances:
+    post:
+      operationId: transferAccountBalancesV2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransferAccountBalancesRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransferAccountBalancesResponse"
+          description: Isolated account created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. missing required fields"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this orderbook"
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Conflict, e.g. the requested amount is not available to transfer"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Transfer available balance between a user's accounts
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/accounts/close:
+    post:
+      operationId: closeIsolatedAccountV2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CloseAccountRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloseAccountResponse"
+          description: Isolated account closed
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. missing required fields"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this route"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Not found, e.g. order_book or account not found"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: "Close an isolated account, repaying the borrowed"
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/user/self/accounts:
+    get:
+      operationId: listAccountsSelfV2
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAccountsResponseV2"
+          description: "List of accounts including the account id, the account name,\
+            \ and global account indicator"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: List all accounts for the authenticated user
+      x-accepts:
+      - application/json
+  /v2/accounts/new_isolated:
+    post:
+      operationId: createNewIsolatedAccountV2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewIsolatedAccountRequestV2"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewIsolatedAccountResponseV2"
+          description: Isolated account created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. missing required fields"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this orderbook"
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Conflict, e.g. the requested amount is not available to transfer"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Create a new isolated account for a user transferring available assets
+        into the account
+      x-content-type: application/json
+      x-accepts:
+      - application/json
 components:
   schemas:
     Asset:
       example:
         symbol: symbol
         can_add_liquidity: true
-        max_leverage: 1.361607674925191
         fractionalized_units: 1
+        kink_utilization: 0.4145608029883936
+        created_at: 2000-01-23T04:56:07.000+00:00
+        description: description
+        maximum_rate: 0.20271230230023218
+        leverage_interest_rate: 1.0246457001441578
+        max_utilization: 0.7061401241503109
+        collateral_weight: 0.6027456183070403
+        yield: 0.7386281948385884
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        can_trade: true
+        max_leverage: 1.1231513536777256
         kind: BOND
         can_onboard: true
         can_virtual_borrow: true
-        created_at: 2000-01-23T04:56:07.000+00:00
-        description: description
+        minimum_rate: 0.9301444243932576
+        kink_rate: 0.3616076749251911
         bond:
           kind: COUPON-PAYING
           payments_per_year: 0
@@ -4331,17 +4687,11 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           final_coupon_at: 2000-01-23T04:56:07.000+00:00
           isin: isin
-        leverage_interest_rate: 2.027123023002322
-        max_utilization: 0
-        collateral_weight: 0.6027456183070403
         decimals: 0
-        yield: 0.9301444243932576
         liquidation_weight: 0.5637376656633328
         max_supply: 0
         name: name
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         can_direct_borrow: true
-        can_trade: true
       properties:
         id:
           format: uuid
@@ -4369,8 +4719,25 @@ components:
           minimum: 0
           type: integer
         max_utilization:
+          maximum: 1
           minimum: 0
-          type: integer
+          type: number
+        minimum_rate:
+          maximum: 1
+          minimum: 0
+          type: number
+        kink_rate:
+          maximum: 1
+          minimum: 0
+          type: number
+        maximum_rate:
+          maximum: 1
+          minimum: 0
+          type: number
+        kink_utilization:
+          maximum: 1
+          minimum: 0
+          type: number
         name:
           type: string
         symbol:
@@ -4411,10 +4778,14 @@ components:
       - fractionalized_units
       - id
       - kind
+      - kink_rate
+      - kink_utilization
       - liquidation_weight
       - max_leverage
       - max_supply
       - max_utilization
+      - maximum_rate
+      - minimum_rate
       - name
       - symbol
     Bond:
@@ -4499,13 +4870,23 @@ components:
         data:
         - symbol: symbol
           can_add_liquidity: true
-          max_leverage: 1.361607674925191
           fractionalized_units: 1
+          kink_utilization: 0.4145608029883936
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          maximum_rate: 0.20271230230023218
+          leverage_interest_rate: 1.0246457001441578
+          max_utilization: 0.7061401241503109
+          collateral_weight: 0.6027456183070403
+          yield: 0.7386281948385884
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          can_trade: true
+          max_leverage: 1.1231513536777256
           kind: BOND
           can_onboard: true
           can_virtual_borrow: true
-          created_at: 2000-01-23T04:56:07.000+00:00
-          description: description
+          minimum_rate: 0.9301444243932576
+          kink_rate: 0.3616076749251911
           bond:
             kind: COUPON-PAYING
             payments_per_year: 0
@@ -4520,26 +4901,30 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             final_coupon_at: 2000-01-23T04:56:07.000+00:00
             isin: isin
-          leverage_interest_rate: 2.027123023002322
-          max_utilization: 0
-          collateral_weight: 0.6027456183070403
           decimals: 0
-          yield: 0.9301444243932576
           liquidation_weight: 0.5637376656633328
           max_supply: 0
           name: name
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           can_direct_borrow: true
-          can_trade: true
         - symbol: symbol
           can_add_liquidity: true
-          max_leverage: 1.361607674925191
           fractionalized_units: 1
+          kink_utilization: 0.4145608029883936
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          maximum_rate: 0.20271230230023218
+          leverage_interest_rate: 1.0246457001441578
+          max_utilization: 0.7061401241503109
+          collateral_weight: 0.6027456183070403
+          yield: 0.7386281948385884
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          can_trade: true
+          max_leverage: 1.1231513536777256
           kind: BOND
           can_onboard: true
           can_virtual_borrow: true
-          created_at: 2000-01-23T04:56:07.000+00:00
-          description: description
+          minimum_rate: 0.9301444243932576
+          kink_rate: 0.3616076749251911
           bond:
             kind: COUPON-PAYING
             payments_per_year: 0
@@ -4554,17 +4939,11 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             final_coupon_at: 2000-01-23T04:56:07.000+00:00
             isin: isin
-          leverage_interest_rate: 2.027123023002322
-          max_utilization: 0
-          collateral_weight: 0.6027456183070403
           decimals: 0
-          yield: 0.9301444243932576
           liquidation_weight: 0.5637376656633328
           max_supply: 0
           name: name
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           can_direct_borrow: true
-          can_trade: true
         error: error
     ListAssetsResponse:
       $ref: "#/components/schemas/ResponseEnvelopeOfListAssets"
@@ -4582,13 +4961,23 @@ components:
         data:
           symbol: symbol
           can_add_liquidity: true
-          max_leverage: 1.361607674925191
           fractionalized_units: 1
+          kink_utilization: 0.4145608029883936
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          maximum_rate: 0.20271230230023218
+          leverage_interest_rate: 1.0246457001441578
+          max_utilization: 0.7061401241503109
+          collateral_weight: 0.6027456183070403
+          yield: 0.7386281948385884
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          can_trade: true
+          max_leverage: 1.1231513536777256
           kind: BOND
           can_onboard: true
           can_virtual_borrow: true
-          created_at: 2000-01-23T04:56:07.000+00:00
-          description: description
+          minimum_rate: 0.9301444243932576
+          kink_rate: 0.3616076749251911
           bond:
             kind: COUPON-PAYING
             payments_per_year: 0
@@ -4603,17 +4992,11 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             final_coupon_at: 2000-01-23T04:56:07.000+00:00
             isin: isin
-          leverage_interest_rate: 2.027123023002322
-          max_utilization: 0
-          collateral_weight: 0.6027456183070403
           decimals: 0
-          yield: 0.9301444243932576
           liquidation_weight: 0.5637376656633328
           max_supply: 0
           name: name
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           can_direct_borrow: true
-          can_trade: true
         error: error
     GetAssetByIDResponse:
       $ref: "#/components/schemas/GetAssetByIDResponseEnvelope"
@@ -7102,6 +7485,7 @@ components:
           type: array
       required:
       - global_position_id
+      - transaction_ids
     UnitePositionResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -7679,6 +8063,196 @@ components:
         error: error
     CurrentLeverageAccruedInterestResponse:
       $ref: "#/components/schemas/CurrentLeverageAccruedInterestResponseEnvelope"
+    LeverageInterestRate:
+      example:
+        start_time: 2000-01-23T04:56:07.000+00:00
+        avg_interest_rate: avg_interest_rate
+        end_time: 2000-01-23T04:56:07.000+00:00
+        interest_rate: interest_rate
+        utilization: utilization
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        avg_utilization: avg_utilization
+      properties:
+        asset_id:
+          format: uuid
+          type: string
+        utilization:
+          format: decimal
+          type: string
+        avg_utilization:
+          format: decimal
+          type: string
+        avg_interest_rate:
+          format: decimal
+          type: string
+        interest_rate:
+          format: decimal
+          type: string
+        start_time:
+          format: date-time
+          type: string
+        end_time:
+          format: date-time
+          type: string
+      required:
+      - asset_id
+      - avg_interest_rate
+      - avg_utilization
+      - end_time
+      - interest_rate
+      - start_time
+      - utilization
+    LeverageInterestRateResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/LeverageInterestRate"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+          start_time: 2000-01-23T04:56:07.000+00:00
+          avg_interest_rate: avg_interest_rate
+          end_time: 2000-01-23T04:56:07.000+00:00
+          interest_rate: interest_rate
+          utilization: utilization
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          avg_utilization: avg_utilization
+        error: error
+    LeverageInterestRateResponse:
+      $ref: "#/components/schemas/LeverageInterestRateResponseEnvelope"
+    HistoricalLeverageInterestRate:
+      example:
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        kink_utilization: kink_utilization
+        interest_rate: interest_rate
+        utilization: utilization
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        minimum_rate: minimum_rate
+        maximum_rate: maximum_rate
+        maximum_utilization: maximum_utilization
+        kink_rate: kink_rate
+      properties:
+        asset_id:
+          format: uuid
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        utilization:
+          format: decimal
+          type: string
+        maximum_utilization:
+          format: decimal
+          type: string
+        minimum_rate:
+          format: decimal
+          type: string
+        kink_rate:
+          format: decimal
+          type: string
+        maximum_rate:
+          format: decimal
+          type: string
+        kink_utilization:
+          format: decimal
+          type: string
+        interest_rate:
+          format: decimal
+          type: string
+      required:
+      - asset_id
+      - interest_rate
+      - kink_rate
+      - kink_utilization
+      - maximum_rate
+      - maximum_utilization
+      - minimum_rate
+      - updated_at
+      - utilization
+    HistoricalLeverageInterestRates:
+      example:
+        start_time: 2000-01-23T04:56:07.000+00:00
+        rates:
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          kink_utilization: kink_utilization
+          interest_rate: interest_rate
+          utilization: utilization
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          minimum_rate: minimum_rate
+          maximum_rate: maximum_rate
+          maximum_utilization: maximum_utilization
+          kink_rate: kink_rate
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          kink_utilization: kink_utilization
+          interest_rate: interest_rate
+          utilization: utilization
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          minimum_rate: minimum_rate
+          maximum_rate: maximum_rate
+          maximum_utilization: maximum_utilization
+          kink_rate: kink_rate
+        end_time: 2000-01-23T04:56:07.000+00:00
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        asset_id:
+          format: uuid
+          type: string
+        start_time:
+          format: date-time
+          type: string
+        end_time:
+          format: date-time
+          type: string
+        rates:
+          items:
+            $ref: "#/components/schemas/HistoricalLeverageInterestRate"
+          type: array
+      required:
+      - asset_id
+      - end_time
+      - rates
+      - start_time
+    HistoricalLeverageInterestRatesResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/HistoricalLeverageInterestRates"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+          start_time: 2000-01-23T04:56:07.000+00:00
+          rates:
+          - updated_at: 2000-01-23T04:56:07.000+00:00
+            kink_utilization: kink_utilization
+            interest_rate: interest_rate
+            utilization: utilization
+            asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            minimum_rate: minimum_rate
+            maximum_rate: maximum_rate
+            maximum_utilization: maximum_utilization
+            kink_rate: kink_rate
+          - updated_at: 2000-01-23T04:56:07.000+00:00
+            kink_utilization: kink_utilization
+            interest_rate: interest_rate
+            utilization: utilization
+            asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            minimum_rate: minimum_rate
+            maximum_rate: maximum_rate
+            maximum_utilization: maximum_utilization
+            kink_rate: kink_rate
+          end_time: 2000-01-23T04:56:07.000+00:00
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+    HistoricalLeverageInterestRatesResponse:
+      $ref: "#/components/schemas/HistoricalLeverageInterestRatesResponseEnvelope"
     WithdrawalRequestReason:
       example:
         reason: reason
@@ -7905,13 +8479,23 @@ components:
         Val:
           symbol: symbol
           can_add_liquidity: true
-          max_leverage: 1.361607674925191
           fractionalized_units: 1
+          kink_utilization: 0.4145608029883936
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          maximum_rate: 0.20271230230023218
+          leverage_interest_rate: 1.0246457001441578
+          max_utilization: 0.7061401241503109
+          collateral_weight: 0.6027456183070403
+          yield: 0.7386281948385884
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          can_trade: true
+          max_leverage: 1.1231513536777256
           kind: BOND
           can_onboard: true
           can_virtual_borrow: true
-          created_at: 2000-01-23T04:56:07.000+00:00
-          description: description
+          minimum_rate: 0.9301444243932576
+          kink_rate: 0.3616076749251911
           bond:
             kind: COUPON-PAYING
             payments_per_year: 0
@@ -7926,17 +8510,11 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             final_coupon_at: 2000-01-23T04:56:07.000+00:00
             isin: isin
-          leverage_interest_rate: 2.027123023002322
-          max_utilization: 0
-          collateral_weight: 0.6027456183070403
           decimals: 0
-          yield: 0.9301444243932576
           liquidation_weight: 0.5637376656633328
           max_supply: 0
           name: name
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           can_direct_borrow: true
-          can_trade: true
         Time: 2000-01-23T04:56:07.000+00:00
     StreamAssetsResponse:
       items:
@@ -9394,6 +9972,7 @@ components:
           used: used
           remaining: remaining
         unrealized_pl: unrealized_pl
+        kind: BOND
         impending_borrows: impending_borrows
         mark_price: mark_price
         available: available
@@ -9401,11 +9980,17 @@ components:
         initial_capital: initial_capital
         unused_collateral: unused_collateral
         sl: sl
+        id: id
         tp: tp
         locked: locked
         borrowed: borrowed
         leverage_limit: leverage_limit
       properties:
+        id:
+          description: The ID of the asset
+          type: string
+        kind:
+          $ref: "#/components/schemas/AssetKind"
         symbol:
           description: The symbol of the asset
           type: string
@@ -9461,7 +10046,9 @@ components:
       - available
       - avg_entry_price
       - borrowed
+      - id
       - initial_capital
+      - kind
       - leverage_limit
       - liquidation_price
       - locked
@@ -9514,6 +10101,7 @@ components:
             used: used
             remaining: remaining
           unrealized_pl: unrealized_pl
+          kind: BOND
           impending_borrows: impending_borrows
           mark_price: mark_price
           available: available
@@ -9521,6 +10109,7 @@ components:
           initial_capital: initial_capital
           unused_collateral: unused_collateral
           sl: sl
+          id: id
           tp: tp
           locked: locked
           borrowed: borrowed
@@ -9533,6 +10122,7 @@ components:
             used: used
             remaining: remaining
           unrealized_pl: unrealized_pl
+          kind: BOND
           impending_borrows: impending_borrows
           mark_price: mark_price
           available: available
@@ -9540,6 +10130,7 @@ components:
           initial_capital: initial_capital
           unused_collateral: unused_collateral
           sl: sl
+          id: id
           tp: tp
           locked: locked
           borrowed: borrowed
@@ -9601,6 +10192,7 @@ components:
               used: used
               remaining: remaining
             unrealized_pl: unrealized_pl
+            kind: BOND
             impending_borrows: impending_borrows
             mark_price: mark_price
             available: available
@@ -9608,6 +10200,7 @@ components:
             initial_capital: initial_capital
             unused_collateral: unused_collateral
             sl: sl
+            id: id
             tp: tp
             locked: locked
             borrowed: borrowed
@@ -9620,6 +10213,7 @@ components:
               used: used
               remaining: remaining
             unrealized_pl: unrealized_pl
+            kind: BOND
             impending_borrows: impending_borrows
             mark_price: mark_price
             available: available
@@ -9627,6 +10221,7 @@ components:
             initial_capital: initial_capital
             unused_collateral: unused_collateral
             sl: sl
+            id: id
             tp: tp
             locked: locked
             borrowed: borrowed
@@ -9649,6 +10244,7 @@ components:
               used: used
               remaining: remaining
             unrealized_pl: unrealized_pl
+            kind: BOND
             impending_borrows: impending_borrows
             mark_price: mark_price
             available: available
@@ -9656,6 +10252,7 @@ components:
             initial_capital: initial_capital
             unused_collateral: unused_collateral
             sl: sl
+            id: id
             tp: tp
             locked: locked
             borrowed: borrowed
@@ -9668,6 +10265,7 @@ components:
               used: used
               remaining: remaining
             unrealized_pl: unrealized_pl
+            kind: BOND
             impending_borrows: impending_borrows
             mark_price: mark_price
             available: available
@@ -9675,6 +10273,7 @@ components:
             initial_capital: initial_capital
             unused_collateral: unused_collateral
             sl: sl
+            id: id
             tp: tp
             locked: locked
             borrowed: borrowed
@@ -9856,6 +10455,380 @@ components:
         error: error
     SettleRealizedPnlRecordResponse:
       $ref: "#/components/schemas/SettleRealizedPnlRecordResponseEnvelope"
+    AccountV2:
+      example:
+        supplied: supplied
+        impending_borrows: impending_borrows
+        available: available
+        pending_withdrawal: pending_withdrawal
+        is_global: true
+        created_at: 2000-01-23T04:56:07.000+00:00
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        avg_entry_price: avg_entry_price
+        borrow_limit: borrow_limit
+        account_name: account_name
+        liquidation_threshold: liquidation_threshold
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        locked: locked
+        seq: 1
+        borrowed: borrowed
+      properties:
+        id:
+          description: "The unique identifier for the account. Used, for example,\
+            \ when creating an order from an account, or deciding collateral should\
+            \ be transferred from account A to account B."
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        seq:
+          minimum: 1
+          type: integer
+        is_global:
+          type: boolean
+        available:
+          description: "The available balance in the account for this asset that are\
+            \ not locked, supplied, or used as collateral"
+          type: string
+        locked:
+          description: "The balance that has been reserved for a current order. If\
+            \ spent by the order, they are removed. If the order is cancelled, they\
+            \ are returned to the account's available balance."
+          type: string
+        supplied:
+          description: The balance that user has supplied to the leverage module.
+            The user remains entitled to these assets and can withdraw them into their
+            available balance.
+          type: string
+        borrowed:
+          description: "The total amount of debt outstanding for this account. This\
+            \ account cannot be closed until all debt is fully repaid, i.e. borrowed\
+            \ = 0."
+          type: string
+        impending_borrows:
+          description: "The equivalent of locked balances, but for leveraged orders.\
+            \ If a user has an active order that would borrow assets as part of its\
+            \ input, then their borrow limit must be reduced until the order is executed\
+            \ or cancelled."
+          type: string
+        avg_entry_price:
+          description: average cost per unit quantity that was paid (long accounts)
+            or received (short accounts) for this asset.
+          type: string
+        borrow_limit:
+          description: The borrow limit
+          type: string
+        liquidation_threshold:
+          description: The borrow limit
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        pending_withdrawal:
+          description: The amount of asset that is pending withdrawal from the account.
+          type: string
+        account_name:
+          type: string
+      required:
+      - account_name
+      - asset_id
+      - available
+      - avg_entry_price
+      - borrow_limit
+      - borrowed
+      - created_at
+      - id
+      - impending_borrows
+      - liquidation_threshold
+      - locked
+      - pending_withdrawal
+      - seq
+      - supplied
+    AccountPortfolioV2:
+      example:
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        accounts:
+          key:
+            key:
+              supplied: supplied
+              impending_borrows: impending_borrows
+              available: available
+              pending_withdrawal: pending_withdrawal
+              is_global: true
+              created_at: 2000-01-23T04:56:07.000+00:00
+              asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              avg_entry_price: avg_entry_price
+              borrow_limit: borrow_limit
+              account_name: account_name
+              liquidation_threshold: liquidation_threshold
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              locked: locked
+              seq: 1
+              borrowed: borrowed
+        net_stablecoin_equivalence:
+          gained:
+            key: gained
+          lost:
+            key: lost
+      properties:
+        user_id:
+          format: uuid
+          type: string
+        accounts:
+          additionalProperties:
+            additionalProperties:
+              $ref: "#/components/schemas/AccountV2"
+        net_stablecoin_equivalence:
+          $ref: "#/components/schemas/TransformedAssets"
+      required:
+      - accounts
+      - net_stablecoin_equivalence
+      - user_id
+    AccountPortfolioResponseV2:
+      example:
+        portfolio:
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          accounts:
+            key:
+              key:
+                supplied: supplied
+                impending_borrows: impending_borrows
+                available: available
+                pending_withdrawal: pending_withdrawal
+                is_global: true
+                created_at: 2000-01-23T04:56:07.000+00:00
+                asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                avg_entry_price: avg_entry_price
+                borrow_limit: borrow_limit
+                account_name: account_name
+                liquidation_threshold: liquidation_threshold
+                id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                locked: locked
+                seq: 1
+                borrowed: borrowed
+          net_stablecoin_equivalence:
+            gained:
+              key: gained
+            lost:
+              key: lost
+      properties:
+        portfolio:
+          $ref: "#/components/schemas/AccountPortfolioV2"
+    LedgerAccountsResponseV2Envelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/AccountPortfolioResponseV2"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+          portfolio:
+            user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            accounts:
+              key:
+                key:
+                  supplied: supplied
+                  impending_borrows: impending_borrows
+                  available: available
+                  pending_withdrawal: pending_withdrawal
+                  is_global: true
+                  created_at: 2000-01-23T04:56:07.000+00:00
+                  asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  avg_entry_price: avg_entry_price
+                  borrow_limit: borrow_limit
+                  account_name: account_name
+                  liquidation_threshold: liquidation_threshold
+                  id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  locked: locked
+                  seq: 1
+                  borrowed: borrowed
+            net_stablecoin_equivalence:
+              gained:
+                key: gained
+              lost:
+                key: lost
+        error: error
+    LedgerAccountsResponseV2:
+      $ref: "#/components/schemas/LedgerAccountsResponseV2Envelope"
+    NewIsolatedAccountRequestV2:
+      example:
+        quantity: quantity
+        global_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        account_name: account_name
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        global_account_id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        quantity:
+          format: decimal
+          type: string
+        account_name:
+          type: string
+      required:
+      - asset_id
+      - global_account_id
+      - quantity
+    NewIsolatedAccountResponseV2Envelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/AccountV2"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+          supplied: supplied
+          impending_borrows: impending_borrows
+          available: available
+          pending_withdrawal: pending_withdrawal
+          is_global: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          avg_entry_price: avg_entry_price
+          borrow_limit: borrow_limit
+          account_name: account_name
+          liquidation_threshold: liquidation_threshold
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          locked: locked
+          seq: 1
+          borrowed: borrowed
+        error: error
+    NewIsolatedAccountResponseV2:
+      $ref: "#/components/schemas/NewIsolatedAccountResponseV2Envelope"
+    TransferAccountBalancesRequest:
+      example:
+        to_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        quantity: quantity
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        from_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        from_account_id:
+          format: uuid
+          type: string
+        to_account_id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        quantity:
+          format: decimal
+          type: string
+      required:
+      - asset_id
+      - from_account_id
+      - quantity
+      - to_account_id
+    AccountBalanceTransfer:
+      example:
+        transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        to_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        from_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        from_account_id:
+          format: uuid
+          type: string
+        to_account_id:
+          format: uuid
+          type: string
+        transaction_id:
+          format: uuid
+          type: string
+      required:
+      - from_account_id
+      - to_account_id
+      - transaction_id
+    TransferAccountBalancesResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/AccountBalanceTransfer"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+          transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          to_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          from_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+    TransferAccountBalancesResponse:
+      $ref: "#/components/schemas/TransferAccountBalancesResponseEnvelope"
+    CloseAccountRequest:
+      example:
+        account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        account_id:
+          format: uuid
+          type: string
+        order_book_id:
+          format: uuid
+          type: string
+      required:
+      - account_id
+      - order_book_id
+    CloseAccountResponse:
+      $ref: "#/components/schemas/ClosePositionResponseEnvelope"
+    AccountSummaryV2:
+      example:
+        account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        account_name: account_name
+        is_global: true
+      properties:
+        account_id:
+          description: The ID of the account
+          format: uuid
+          type: string
+        account_name:
+          description: The name of the account
+          type: string
+        is_global:
+          description: Whether the account is the global or an isolated account
+          type: boolean
+      required:
+      - account_id
+      - account_name
+      - is_global
+    AccountsListV2:
+      items:
+        $ref: "#/components/schemas/AccountSummaryV2"
+      type: array
+    ListAccountsResponseV2Envelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/AccountsListV2"
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          account_name: account_name
+          is_global: true
+        - account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          account_name: account_name
+          is_global: true
+        error: error
+    ListAccountsResponseV2:
+      $ref: "#/components/schemas/ListAccountsResponseV2Envelope"
     PositionAsset:
       example:
         kind: BOND

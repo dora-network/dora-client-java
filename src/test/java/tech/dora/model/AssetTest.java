@@ -115,6 +115,38 @@ public class AssetTest {
     }
 
     /**
+     * Test the property 'minimumRate'
+     */
+    @Test
+    public void minimumRateTest() {
+        // TODO: test minimumRate
+    }
+
+    /**
+     * Test the property 'kinkRate'
+     */
+    @Test
+    public void kinkRateTest() {
+        // TODO: test kinkRate
+    }
+
+    /**
+     * Test the property 'maximumRate'
+     */
+    @Test
+    public void maximumRateTest() {
+        // TODO: test maximumRate
+    }
+
+    /**
+     * Test the property 'kinkUtilization'
+     */
+    @Test
+    public void kinkUtilizationTest() {
+        // TODO: test kinkUtilization
+    }
+
+    /**
      * Test the property 'name'
      */
     @Test

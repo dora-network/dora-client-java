@@ -22,6 +22,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import tech.dora.model.AssetKind;
 import tech.dora.model.Margin;
 
 import com.google.gson.Gson;
@@ -51,8 +52,18 @@ import tech.dora.JSON;
 /**
  * PLAsset
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-29T20:52:14.700905316+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-05-05T17:49:51.053434332+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
 public class PLAsset {
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
+  @javax.annotation.Nonnull
+  private String id;
+
+  public static final String SERIALIZED_NAME_KIND = "kind";
+  @SerializedName(SERIALIZED_NAME_KIND)
+  @javax.annotation.Nonnull
+  private AssetKind kind;
+
   public static final String SERIALIZED_NAME_SYMBOL = "symbol";
   @SerializedName(SERIALIZED_NAME_SYMBOL)
   @javax.annotation.Nonnull
@@ -187,6 +198,44 @@ public class PLAsset {
 
   public PLAsset() {
   }
+
+  public PLAsset id(@javax.annotation.Nonnull String id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * The ID of the asset
+   * @return id
+   */
+  @javax.annotation.Nonnull
+  public String getId() {
+    return id;
+  }
+
+  public void setId(@javax.annotation.Nonnull String id) {
+    this.id = id;
+  }
+
+
+  public PLAsset kind(@javax.annotation.Nonnull AssetKind kind) {
+    this.kind = kind;
+    return this;
+  }
+
+  /**
+   * Get kind
+   * @return kind
+   */
+  @javax.annotation.Nonnull
+  public AssetKind getKind() {
+    return kind;
+  }
+
+  public void setKind(@javax.annotation.Nonnull AssetKind kind) {
+    this.kind = kind;
+  }
+
 
   public PLAsset symbol(@javax.annotation.Nonnull String symbol) {
     this.symbol = symbol;
@@ -502,7 +551,9 @@ public class PLAsset {
       return false;
     }
     PLAsset plAsset = (PLAsset) o;
-    return Objects.equals(this.symbol, plAsset.symbol) &&
+    return Objects.equals(this.id, plAsset.id) &&
+        Objects.equals(this.kind, plAsset.kind) &&
+        Objects.equals(this.symbol, plAsset.symbol) &&
         Objects.equals(this.side, plAsset.side) &&
         Objects.equals(this.avgEntryPrice, plAsset.avgEntryPrice) &&
         Objects.equals(this.markPrice, plAsset.markPrice) &&
@@ -522,13 +573,15 @@ public class PLAsset {
 
   @Override
   public int hashCode() {
-    return Objects.hash(symbol, side, avgEntryPrice, markPrice, liquidationPrice, available, borrowed, margin, unrealizedPl, leverageLimit, tp, sl, initialCapital, impendingBorrows, locked, unusedCollateral);
+    return Objects.hash(id, kind, symbol, side, avgEntryPrice, markPrice, liquidationPrice, available, borrowed, margin, unrealizedPl, leverageLimit, tp, sl, initialCapital, impendingBorrows, locked, unusedCollateral);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class PLAsset {\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    kind: ").append(toIndentedString(kind)).append("\n");
     sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
     sb.append("    side: ").append(toIndentedString(side)).append("\n");
     sb.append("    avgEntryPrice: ").append(toIndentedString(avgEntryPrice)).append("\n");
@@ -566,10 +619,10 @@ public class PLAsset {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("symbol", "side", "avg_entry_price", "mark_price", "liquidation_price", "available", "borrowed", "margin", "unrealized_pl", "leverage_limit", "tp", "sl", "initial_capital", "impending_borrows", "locked", "unused_collateral"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "kind", "symbol", "side", "avg_entry_price", "mark_price", "liquidation_price", "available", "borrowed", "margin", "unrealized_pl", "leverage_limit", "tp", "sl", "initial_capital", "impending_borrows", "locked", "unused_collateral"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("symbol", "side", "avg_entry_price", "mark_price", "liquidation_price", "available", "borrowed", "margin", "unrealized_pl", "leverage_limit", "initial_capital", "locked", "unused_collateral"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "kind", "symbol", "side", "avg_entry_price", "mark_price", "liquidation_price", "available", "borrowed", "margin", "unrealized_pl", "leverage_limit", "initial_capital", "locked", "unused_collateral"));
   }
 
   /**
@@ -600,6 +653,11 @@ public class PLAsset {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+      if (!jsonObj.get("id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
+      }
+      // validate the required field `kind`
+      AssetKind.validateJsonElement(jsonObj.get("kind"));
       if (!jsonObj.get("symbol").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `symbol` to be a primitive type in the JSON string but got `%s`", jsonObj.get("symbol").toString()));
       }

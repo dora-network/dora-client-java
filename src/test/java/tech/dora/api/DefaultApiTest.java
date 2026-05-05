@@ -25,6 +25,7 @@ import tech.dora.model.CancelOrderResponseEnvelope;
 import tech.dora.model.CandleResolution;
 import tech.dora.model.ClaimLeverageAccruedInterestRequest;
 import tech.dora.model.ClaimLeverageAccruedInterestResponseEnvelope;
+import tech.dora.model.CloseAccountRequest;
 import tech.dora.model.ClosePositionRequest;
 import tech.dora.model.ClosePositionResponseEnvelope;
 import tech.dora.model.CountryCode;
@@ -43,13 +44,17 @@ import tech.dora.model.GetAssetByIDResponseEnvelope;
 import tech.dora.model.GetAssetYTMByIDResponseEnvelope;
 import tech.dora.model.GetRealizedPnlSettlementsResponseEnvelope;
 import tech.dora.model.GetTopOfBookResponseEnvelope;
+import tech.dora.model.HistoricalLeverageInterestRatesResponseEnvelope;
 import tech.dora.model.IsolateCollateralRequest;
 import tech.dora.model.IsolateCollateralResponse;
+import tech.dora.model.LedgerAccountsResponseV2Envelope;
 import tech.dora.model.LedgerModuleByAssetResponseEnvelope;
 import tech.dora.model.LedgerModuleResponseEnvelope;
+import tech.dora.model.LeverageInterestRateResponseEnvelope;
 import tech.dora.model.LeverageRequestError;
 import tech.dora.model.LiquidityRequest;
 import tech.dora.model.LiquidityResponseEnvelope;
+import tech.dora.model.ListAccountsResponseV2Envelope;
 import tech.dora.model.ListAssetPriceResponseEnvelope;
 import tech.dora.model.ListCandlesResponseEnvelope;
 import tech.dora.model.ListCouponPaymentsResponseEnvelope;
@@ -61,6 +66,8 @@ import tech.dora.model.ListTradeResponseEnvelope;
 import tech.dora.model.ListTransactionsResponseEnvelope;
 import tech.dora.model.ListUsersResponseEnvelope;
 import tech.dora.model.LiveOrderbook;
+import tech.dora.model.NewIsolatedAccountRequestV2;
+import tech.dora.model.NewIsolatedAccountResponseV2Envelope;
 import java.time.OffsetDateTime;
 import tech.dora.model.OrderBookResponseEnvelope;
 import tech.dora.model.OrderBookStatus;
@@ -101,6 +108,8 @@ import tech.dora.model.TransactionResponseEnvelope;
 import tech.dora.model.TransactionsSettlementRequest;
 import tech.dora.model.TransactionsSettlementsResponse;
 import tech.dora.model.TransactionsSettlementsResponseEnvelope;
+import tech.dora.model.TransferAccountBalancesRequest;
+import tech.dora.model.TransferAccountBalancesResponseEnvelope;
 import tech.dora.model.TransferBalancesRequest;
 import tech.dora.model.TransferBalancesResponseEnvelope;
 import java.util.UUID;
@@ -207,6 +216,18 @@ public class DefaultApiTest {
     }
 
     /**
+     * Close an isolated account, repaying the borrowed
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void closeIsolatedAccountV2Test() throws ApiException {
+        CloseAccountRequest closeAccountRequest = null;
+        ClosePositionResponseEnvelope response = api.closeIsolatedAccountV2(closeAccountRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Close isolated positions, repaying the borrowed
      *
      * @throws ApiException if the Api call fails
@@ -252,6 +273,18 @@ public class DefaultApiTest {
     public void createConditionalOrderTest() throws ApiException {
         CreateConditionalOrderRequest createConditionalOrderRequest = null;
         CreateConditionalOrderResponseEnvelope response = api.createConditionalOrder(createConditionalOrderRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Create a new isolated account for a user transferring available assets into the account
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void createNewIsolatedAccountV2Test() throws ApiException {
+        NewIsolatedAccountRequestV2 newIsolatedAccountRequestV2 = null;
+        NewIsolatedAccountResponseV2Envelope response = api.createNewIsolatedAccountV2(newIsolatedAccountRequestV2);
         // TODO: test validations
     }
 
@@ -446,6 +479,17 @@ public class DefaultApiTest {
     public void getL3DepthTest() throws ApiException {
         UUID orderBookId = null;
         ListOrdersResponseEnvelope response = api.getL3Depth(orderBookId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get your own accounts
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getLedgerAccountsSelfV2Test() throws ApiException {
+        LedgerAccountsResponseV2Envelope response = api.getLedgerAccountsSelfV2();
         // TODO: test validations
     }
 
@@ -751,9 +795,11 @@ public class DefaultApiTest {
         UUID positionId = null;
         String txKind = null;
         OffsetDateTime createdAfter = null;
+        OffsetDateTime createdBefore = null;
+        OffsetDateTime settledAfter = null;
         OffsetDateTime settledBefore = null;
         Boolean isSettled = null;
-        TransactionsSettlementsResponseEnvelope response = api.getTransactionsSettlements(tenantId, userId, positionId, txKind, createdAfter, settledBefore, isSettled);
+        TransactionsSettlementsResponseEnvelope response = api.getTransactionsSettlements(tenantId, userId, positionId, txKind, createdAfter, createdBefore, settledAfter, settledBefore, isSettled);
         // TODO: test validations
     }
 
@@ -972,6 +1018,34 @@ public class DefaultApiTest {
     }
 
     /**
+     * Get historical leverage interest rates for a specific asset
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void leverageGetHistoricalInterestRatesTest() throws ApiException {
+        UUID assetId = null;
+        OffsetDateTime start = null;
+        OffsetDateTime end = null;
+        HistoricalLeverageInterestRatesResponseEnvelope response = api.leverageGetHistoricalInterestRates(assetId, start, end);
+        // TODO: test validations
+    }
+
+    /**
+     * Get leverage interest rate for a specific asset
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void leverageGetInterestRateTest() throws ApiException {
+        UUID assetId = null;
+        OffsetDateTime start = null;
+        OffsetDateTime end = null;
+        LeverageInterestRateResponseEnvelope response = api.leverageGetInterestRate(assetId, start, end);
+        // TODO: test validations
+    }
+
+    /**
      * Create an isolated position by transferring collateral to the position from the user&#39;s global collateral
      *
      * @throws ApiException if the Api call fails
@@ -1044,6 +1118,17 @@ public class DefaultApiTest {
         UUID poolId = null;
         LiquidityRequest liquidityRequest = null;
         LiquidityResponseEnvelope response = api.liquiditySubtract(poolId, liquidityRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * List all accounts for the authenticated user
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listAccountsSelfV2Test() throws ApiException {
+        ListAccountsResponseV2Envelope response = api.listAccountsSelfV2();
         // TODO: test validations
     }
 
@@ -1267,6 +1352,18 @@ public class DefaultApiTest {
         UUID orderBookId = null;
         OffsetDateTime since = null;
         List<StreamTradesEntry> response = api.streamTrades(orderBookId, since);
+        // TODO: test validations
+    }
+
+    /**
+     * Transfer available balance between a user&#39;s accounts
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void transferAccountBalancesV2Test() throws ApiException {
+        TransferAccountBalancesRequest transferAccountBalancesRequest = null;
+        TransferAccountBalancesResponseEnvelope response = api.transferAccountBalancesV2(transferAccountBalancesRequest);
         // TODO: test validations
     }
 

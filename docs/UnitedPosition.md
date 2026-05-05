@@ -8,7 +8,7 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**globalPositionId** | **UUID** |  |  |
-|**transactionIds** | **List&lt;UUID&gt;** |  |  [optional] |
+|**transactionIds** | **List&lt;UUID&gt;** |  |  |
 
 
 

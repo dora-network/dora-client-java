@@ -51,7 +51,7 @@ import tech.dora.JSON;
 /**
  * CreateConditionalOrderResponseData
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-29T20:52:14.700905316+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-05-05T17:49:51.053434332+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
 public class CreateConditionalOrderResponseData {
   public static final String SERIALIZED_NAME_STOP_LOSS_ORDER_ID = "stop_loss_order_id";
   @SerializedName(SERIALIZED_NAME_STOP_LOSS_ORDER_ID)
