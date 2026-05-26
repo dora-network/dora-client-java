@@ -25,6 +25,7 @@ All URIs are relative to *https://staging.dora.co*
 | [**getAssetById**](DefaultApi.md#getAssetById) | **GET** /v1/assets/{asset_id} | Get asset by ID |
 | [**getAssetPrice**](DefaultApi.md#getAssetPrice) | **GET** /v1/price/asset/{asset_id} | Get the current price of an asset |
 | [**getAssetYTMById**](DefaultApi.md#getAssetYTMById) | **GET** /v1/assets/{asset_id}/ytm | Get annualized yield to maturity for a bond asset |
+| [**getAssetYieldData**](DefaultApi.md#getAssetYieldData) | **GET** /v1/charts/{asset_id}/yield | Get yield chart data for an asset |
 | [**getAssetsStream**](DefaultApi.md#getAssetsStream) | **GET** /v1/assets/stream | Get all inserts or updates for assets |
 | [**getCandleData**](DefaultApi.md#getCandleData) | **GET** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook |
 | [**getCouponPaymentsByAssetId**](DefaultApi.md#getCouponPaymentsByAssetId) | **GET** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset |
@@ -1637,6 +1638,75 @@ No authorization required
 | **200** | Asset YTM details |  -  |
 | **400** | Bad request, e.g. invalid query parameters |  -  |
 | **404** | Asset not found |  -  |
+
+<a id="getAssetYieldData"></a>
+# **getAssetYieldData**
+> ListAssetYieldResponseEnvelope getAssetYieldData(assetId, start, end, resolution)
+
+Get yield chart data for an asset
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID assetId = UUID.randomUUID(); // UUID | 
+    OffsetDateTime start = OffsetDateTime.now(); // OffsetDateTime | 
+    OffsetDateTime end = OffsetDateTime.now(); // OffsetDateTime | 
+    AssetYieldResolution resolution = AssetYieldResolution.fromValue("1h"); // AssetYieldResolution | 
+    try {
+      ListAssetYieldResponseEnvelope result = apiInstance.getAssetYieldData(assetId, start, end, resolution);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getAssetYieldData");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **assetId** | **UUID**|  | |
+| **start** | **OffsetDateTime**|  | |
+| **end** | **OffsetDateTime**|  | |
+| **resolution** | [**AssetYieldResolution**](.md)|  | [enum: 1h, 1d, 7d, 30d] |
+
+### Return type
+
+[**ListAssetYieldResponseEnvelope**](ListAssetYieldResponseEnvelope.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Yield chart points |  -  |
+| **400** | Bad request, e.g. invalid parameters |  -  |
+| **404** | Asset not found |  -  |
+| **500** | Internal server error |  -  |
 
 <a id="getAssetsStream"></a>
 # **getAssetsStream**
@@ -5809,7 +5879,7 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
-    OrderBookStatus status = OrderBookStatus.fromValue("CLOSED"); // OrderBookStatus | 
+    List<OrderBookStatus> status = Arrays.asList(); // List<OrderBookStatus> | 
     UUID baseAssetId = UUID.randomUUID(); // UUID | 
     UUID quoteAssetId = UUID.randomUUID(); // UUID | 
     Integer page = 1; // Integer | 
@@ -5832,7 +5902,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **status** | [**OrderBookStatus**](.md)|  | [optional] [enum: CLOSED, OPEN, SUSPENDED] |
+| **status** | [**List&lt;OrderBookStatus&gt;**](OrderBookStatus.md)|  | [optional] |
 | **baseAssetId** | **UUID**|  | [optional] |
 | **quoteAssetId** | **UUID**|  | [optional] |
 | **page** | **Integer**|  | [optional] [default to 1] |

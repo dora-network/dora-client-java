@@ -23,6 +23,8 @@ docs/AssetPrice.md
 docs/AssetPriceResponseEnvelope.md
 docs/AssetRequestError.md
 docs/AssetYTM.md
+docs/AssetYield.md
+docs/AssetYieldResolution.md
 docs/BalanceTransfer.md
 docs/BalancesResponse.md
 docs/Bond.md
@@ -83,6 +85,7 @@ docs/LiquidityRequest.md
 docs/LiquidityResponseEnvelope.md
 docs/ListAccountsResponseV2Envelope.md
 docs/ListAssetPriceResponseEnvelope.md
+docs/ListAssetYieldResponseEnvelope.md
 docs/ListCandlesResponseEnvelope.md
 docs/ListCouponPaymentsResponseEnvelope.md
 docs/ListOrderBookDepthResponseEnvelope.md
@@ -261,6 +264,8 @@ src/main/java/tech/dora/model/AssetPrice.java
 src/main/java/tech/dora/model/AssetPriceResponseEnvelope.java
 src/main/java/tech/dora/model/AssetRequestError.java
 src/main/java/tech/dora/model/AssetYTM.java
+src/main/java/tech/dora/model/AssetYield.java
+src/main/java/tech/dora/model/AssetYieldResolution.java
 src/main/java/tech/dora/model/BalanceTransfer.java
 src/main/java/tech/dora/model/BalancesResponse.java
 src/main/java/tech/dora/model/Bond.java
@@ -320,6 +325,7 @@ src/main/java/tech/dora/model/LiquidityRequest.java
 src/main/java/tech/dora/model/LiquidityResponseEnvelope.java
 src/main/java/tech/dora/model/ListAccountsResponseV2Envelope.java
 src/main/java/tech/dora/model/ListAssetPriceResponseEnvelope.java
+src/main/java/tech/dora/model/ListAssetYieldResponseEnvelope.java
 src/main/java/tech/dora/model/ListCandlesResponseEnvelope.java
 src/main/java/tech/dora/model/ListCouponPaymentsResponseEnvelope.java
 src/main/java/tech/dora/model/ListOrderBookDepthResponseEnvelope.java
@@ -471,6 +477,8 @@ src/test/java/tech/dora/model/AssetPriceTest.java
 src/test/java/tech/dora/model/AssetRequestErrorTest.java
 src/test/java/tech/dora/model/AssetTest.java
 src/test/java/tech/dora/model/AssetYTMTest.java
+src/test/java/tech/dora/model/AssetYieldResolutionTest.java
+src/test/java/tech/dora/model/AssetYieldTest.java
 src/test/java/tech/dora/model/BalanceTransferTest.java
 src/test/java/tech/dora/model/BalancesResponseTest.java
 src/test/java/tech/dora/model/BondKindTest.java
@@ -530,6 +538,7 @@ src/test/java/tech/dora/model/LiquidityResponseEnvelopeTest.java
 src/test/java/tech/dora/model/LiquidityTest.java
 src/test/java/tech/dora/model/ListAccountsResponseV2EnvelopeTest.java
 src/test/java/tech/dora/model/ListAssetPriceResponseEnvelopeTest.java
+src/test/java/tech/dora/model/ListAssetYieldResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListCandlesResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListCouponPaymentsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListOrderBookDepthResponseEnvelopeTest.java

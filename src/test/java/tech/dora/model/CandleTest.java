@@ -88,6 +88,14 @@ public class CandleTest {
     }
 
     /**
+     * Test the property 'ytm'
+     */
+    @Test
+    public void ytmTest() {
+        // TODO: test ytm
+    }
+
+    /**
      * Test the property 'volume'
      */
     @Test

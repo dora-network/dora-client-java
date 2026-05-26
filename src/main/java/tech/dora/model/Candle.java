@@ -52,7 +52,7 @@ import tech.dora.JSON;
 /**
  * Candle
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-05-05T17:49:51.053434332+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-05-26T18:31:22.271008569+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
 public class Candle {
   public static final String SERIALIZED_NAME_ORDER_BOOK_ID = "order_book_id";
   @SerializedName(SERIALIZED_NAME_ORDER_BOOK_ID)
@@ -83,6 +83,11 @@ public class Candle {
   @SerializedName(SERIALIZED_NAME_CLOSE)
   @javax.annotation.Nonnull
   private String close;
+
+  public static final String SERIALIZED_NAME_YTM = "ytm";
+  @SerializedName(SERIALIZED_NAME_YTM)
+  @javax.annotation.Nonnull
+  private String ytm;
 
   public static final String SERIALIZED_NAME_VOLUME = "volume";
   @SerializedName(SERIALIZED_NAME_VOLUME)
@@ -206,6 +211,25 @@ public class Candle {
   }
 
 
+  public Candle ytm(@javax.annotation.Nonnull String ytm) {
+    this.ytm = ytm;
+    return this;
+  }
+
+  /**
+   * Get ytm
+   * @return ytm
+   */
+  @javax.annotation.Nonnull
+  public String getYtm() {
+    return ytm;
+  }
+
+  public void setYtm(@javax.annotation.Nonnull String ytm) {
+    this.ytm = ytm;
+  }
+
+
   public Candle volume(@javax.annotation.Nonnull String volume) {
     this.volume = volume;
     return this;
@@ -241,12 +265,13 @@ public class Candle {
         Objects.equals(this.high, candle.high) &&
         Objects.equals(this.low, candle.low) &&
         Objects.equals(this.close, candle.close) &&
+        Objects.equals(this.ytm, candle.ytm) &&
         Objects.equals(this.volume, candle.volume);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderBookId, startTimestamp, open, high, low, close, volume);
+    return Objects.hash(orderBookId, startTimestamp, open, high, low, close, ytm, volume);
   }
 
   @Override
@@ -259,6 +284,7 @@ public class Candle {
     sb.append("    high: ").append(toIndentedString(high)).append("\n");
     sb.append("    low: ").append(toIndentedString(low)).append("\n");
     sb.append("    close: ").append(toIndentedString(close)).append("\n");
+    sb.append("    ytm: ").append(toIndentedString(ytm)).append("\n");
     sb.append("    volume: ").append(toIndentedString(volume)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -281,10 +307,10 @@ public class Candle {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("order_book_id", "start_timestamp", "open", "high", "low", "close", "volume"));
+    openapiFields = new HashSet<String>(Arrays.asList("order_book_id", "start_timestamp", "open", "high", "low", "close", "ytm", "volume"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("order_book_id", "start_timestamp", "open", "high", "low", "close", "volume"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("order_book_id", "start_timestamp", "open", "high", "low", "close", "ytm", "volume"));
   }
 
   /**
@@ -329,6 +355,9 @@ public class Candle {
       }
       if (!jsonObj.get("close").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `close` to be a primitive type in the JSON string but got `%s`", jsonObj.get("close").toString()));
+      }
+      if (!jsonObj.get("ytm").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `ytm` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ytm").toString()));
       }
       if (!jsonObj.get("volume").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `volume` to be a primitive type in the JSON string but got `%s`", jsonObj.get("volume").toString()));

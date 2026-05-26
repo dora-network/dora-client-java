@@ -74,12 +74,12 @@ public class ApiClient {
       new HashMap<String, ServerVariable>()
     ),
     new ServerConfiguration(
-      "https://prod.dora.co",
+      "https://api.dora.co",
       "DORA production API server",
       new HashMap<String, ServerVariable>()
     ),
     new ServerConfiguration(
-      "wss://prod.dora.co",
+      "wss://api.dora.co",
       "DORA production Websocket API server",
       new HashMap<String, ServerVariable>()
     )

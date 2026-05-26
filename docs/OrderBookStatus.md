@@ -11,5 +11,7 @@
 
 * `SUSPENDED` (value: `"SUSPENDED"`)
 
+* `TESTING` (value: `"TESTING"`)
+
 
 

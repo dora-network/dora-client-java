@@ -35,7 +35,9 @@ public enum OrderBookStatus {
   
   OPEN("OPEN"),
   
-  SUSPENDED("SUSPENDED");
+  SUSPENDED("SUSPENDED"),
+  
+  TESTING("TESTING");
 
   private String value;
 

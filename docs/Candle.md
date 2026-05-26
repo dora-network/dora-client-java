@@ -13,6 +13,7 @@
 |**high** | **String** |  |  |
 |**low** | **String** |  |  |
 |**close** | **String** |  |  |
+|**ytm** | **String** |  |  |
 |**volume** | **String** |  |  |
 
 

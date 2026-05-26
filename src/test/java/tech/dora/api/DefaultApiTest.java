@@ -21,6 +21,7 @@ import tech.dora.model.AssetKind;
 import tech.dora.model.AssetPrice;
 import tech.dora.model.AssetPriceResponseEnvelope;
 import tech.dora.model.AssetRequestError;
+import tech.dora.model.AssetYieldResolution;
 import tech.dora.model.CancelOrderResponseEnvelope;
 import tech.dora.model.CandleResolution;
 import tech.dora.model.ClaimLeverageAccruedInterestRequest;
@@ -56,6 +57,7 @@ import tech.dora.model.LiquidityRequest;
 import tech.dora.model.LiquidityResponseEnvelope;
 import tech.dora.model.ListAccountsResponseV2Envelope;
 import tech.dora.model.ListAssetPriceResponseEnvelope;
+import tech.dora.model.ListAssetYieldResponseEnvelope;
 import tech.dora.model.ListCandlesResponseEnvelope;
 import tech.dora.model.ListCouponPaymentsResponseEnvelope;
 import tech.dora.model.ListOrderBookDepthResponseEnvelope;
@@ -403,6 +405,21 @@ public class DefaultApiTest {
     public void getAssetYTMByIdTest() throws ApiException {
         UUID assetId = null;
         GetAssetYTMByIDResponseEnvelope response = api.getAssetYTMById(assetId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get yield chart data for an asset
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getAssetYieldDataTest() throws ApiException {
+        UUID assetId = null;
+        OffsetDateTime start = null;
+        OffsetDateTime end = null;
+        AssetYieldResolution resolution = null;
+        ListAssetYieldResponseEnvelope response = api.getAssetYieldData(assetId, start, end, resolution);
         // TODO: test validations
     }
 
@@ -1160,7 +1177,7 @@ public class DefaultApiTest {
      */
     @Test
     public void listOrderBooksTest() throws ApiException {
-        OrderBookStatus status = null;
+        List<OrderBookStatus> status = null;
         UUID baseAssetId = null;
         UUID quoteAssetId = null;
         Integer page = null;

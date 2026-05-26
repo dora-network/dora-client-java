@@ -8,9 +8,9 @@ servers:
 - description: DORA staging Websocket API server
   url: wss://staging.dora.co/
 - description: DORA production API server
-  url: https://prod.dora.co/
+  url: https://api.dora.co/
 - description: DORA production Websocket API server
-  url: wss://prod.dora.co/
+  url: wss://api.dora.co/
 security:
 - bearerAuth: []
 - apiKeyAuthHeader: []
@@ -609,7 +609,9 @@ paths:
         name: status
         required: false
         schema:
-          $ref: "#/components/schemas/OrderBookStatus"
+          items:
+            $ref: "#/components/schemas/OrderBookStatus"
+          type: array
         style: form
       - explode: true
         in: query
@@ -1524,6 +1526,70 @@ paths:
           description: Internal server error
       security: []
       summary: Get candlestick data for an orderbook
+      x-accepts:
+      - application/json
+  /v1/charts/{asset_id}/yield:
+    get:
+      operationId: getAssetYieldData
+      parameters:
+      - explode: false
+        in: path
+        name: asset_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: start
+        required: true
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: end
+        required: true
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: resolution
+        required: true
+        schema:
+          $ref: "#/components/schemas/AssetYieldResolution"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAssetYieldResponse"
+          description: Yield chart points
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid parameters"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Asset not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      security: []
+      summary: Get yield chart data for an asset
       x-accepts:
       - application/json
   /v1/ledger/module:
@@ -5940,6 +6006,7 @@ components:
       - CLOSED
       - OPEN
       - SUSPENDED
+      - TESTING
       type: string
     OrderBook:
       example:
@@ -8742,10 +8809,18 @@ components:
       - 4h
       - 1d
       type: string
+    AssetYieldResolution:
+      enum:
+      - 1h
+      - 1d
+      - 7d
+      - 30d
+      type: string
     Candle:
       example:
         volume: volume
         high: high
+        ytm: ytm
         start_timestamp: 2000-01-23T04:56:07.000+00:00
         low: low
         close: close
@@ -8766,6 +8841,8 @@ components:
           type: string
         close:
           type: string
+        ytm:
+          type: string
         volume:
           type: string
       required:
@@ -8776,6 +8853,7 @@ components:
       - order_book_id
       - start_timestamp
       - volume
+      - ytm
     TradeResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -9362,6 +9440,7 @@ components:
         data:
         - volume: volume
           high: high
+          ytm: ytm
           start_timestamp: 2000-01-23T04:56:07.000+00:00
           low: low
           close: close
@@ -9369,6 +9448,7 @@ components:
           open: open
         - volume: volume
           high: high
+          ytm: ytm
           start_timestamp: 2000-01-23T04:56:07.000+00:00
           low: low
           close: close
@@ -9377,6 +9457,65 @@ components:
         error: error
     ListCandlesResponse:
       $ref: "#/components/schemas/ListCandlesResponseEnvelope"
+    AssetYield:
+      example:
+        ytm: ytm
+        total_yield: total_yield
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tvl: tvl
+        lending_yield: lending_yield
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        asset_id:
+          format: uuid
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+        ytm:
+          type: string
+        lending_yield:
+          type: string
+        tvl:
+          type: string
+        total_yield:
+          type: string
+      required:
+      - asset_id
+      - lending_yield
+      - timestamp
+      - total_yield
+      - tvl
+      - ytm
+    ListAssetYieldResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/AssetYield"
+            type: array
+      example:
+        metadata:
+          trace_id: trace_id
+          status_code: 0
+          request_id: request_id
+        data:
+        - ytm: ytm
+          total_yield: total_yield
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tvl: tvl
+          lending_yield: lending_yield
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        - ytm: ytm
+          total_yield: total_yield
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tvl: tvl
+          lending_yield: lending_yield
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        error: error
+    ListAssetYieldResponse:
+      $ref: "#/components/schemas/ListAssetYieldResponseEnvelope"
     StreamCandlesEntry:
       allOf:
       - $ref: "#/components/schemas/StreamEntry"
@@ -9387,6 +9526,7 @@ components:
         Val:
           volume: volume
           high: high
+          ytm: ytm
           start_timestamp: 2000-01-23T04:56:07.000+00:00
           low: low
           close: close

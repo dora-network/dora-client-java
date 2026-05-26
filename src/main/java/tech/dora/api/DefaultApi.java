@@ -34,6 +34,7 @@ import tech.dora.model.AssetKind;
 import tech.dora.model.AssetPrice;
 import tech.dora.model.AssetPriceResponseEnvelope;
 import tech.dora.model.AssetRequestError;
+import tech.dora.model.AssetYieldResolution;
 import tech.dora.model.CancelOrderResponseEnvelope;
 import tech.dora.model.CandleResolution;
 import tech.dora.model.ClaimLeverageAccruedInterestRequest;
@@ -69,6 +70,7 @@ import tech.dora.model.LiquidityRequest;
 import tech.dora.model.LiquidityResponseEnvelope;
 import tech.dora.model.ListAccountsResponseV2Envelope;
 import tech.dora.model.ListAssetPriceResponseEnvelope;
+import tech.dora.model.ListAssetYieldResponseEnvelope;
 import tech.dora.model.ListCandlesResponseEnvelope;
 import tech.dora.model.ListCouponPaymentsResponseEnvelope;
 import tech.dora.model.ListOrderBookDepthResponseEnvelope;
@@ -3095,6 +3097,184 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = getAssetYTMByIdValidateBeforeCall(assetId, _callback);
         Type localVarReturnType = new TypeToken<GetAssetYTMByIDResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getAssetYieldData
+     * @param assetId  (required)
+     * @param start  (required)
+     * @param end  (required)
+     * @param resolution  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Yield chart points </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Asset not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getAssetYieldDataCall(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nonnull AssetYieldResolution resolution, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/charts/{asset_id}/yield"
+            .replace("{" + "asset_id" + "}", localVarApiClient.escapeString(assetId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (start != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("start", start));
+        }
+
+        if (end != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("end", end));
+        }
+
+        if (resolution != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("resolution", resolution));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getAssetYieldDataValidateBeforeCall(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nonnull AssetYieldResolution resolution, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'assetId' is set
+        if (assetId == null) {
+            throw new ApiException("Missing the required parameter 'assetId' when calling getAssetYieldData(Async)");
+        }
+
+        // verify the required parameter 'start' is set
+        if (start == null) {
+            throw new ApiException("Missing the required parameter 'start' when calling getAssetYieldData(Async)");
+        }
+
+        // verify the required parameter 'end' is set
+        if (end == null) {
+            throw new ApiException("Missing the required parameter 'end' when calling getAssetYieldData(Async)");
+        }
+
+        // verify the required parameter 'resolution' is set
+        if (resolution == null) {
+            throw new ApiException("Missing the required parameter 'resolution' when calling getAssetYieldData(Async)");
+        }
+
+        return getAssetYieldDataCall(assetId, start, end, resolution, _callback);
+
+    }
+
+    /**
+     * Get yield chart data for an asset
+     * 
+     * @param assetId  (required)
+     * @param start  (required)
+     * @param end  (required)
+     * @param resolution  (required)
+     * @return ListAssetYieldResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Yield chart points </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Asset not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ListAssetYieldResponseEnvelope getAssetYieldData(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nonnull AssetYieldResolution resolution) throws ApiException {
+        ApiResponse<ListAssetYieldResponseEnvelope> localVarResp = getAssetYieldDataWithHttpInfo(assetId, start, end, resolution);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get yield chart data for an asset
+     * 
+     * @param assetId  (required)
+     * @param start  (required)
+     * @param end  (required)
+     * @param resolution  (required)
+     * @return ApiResponse&lt;ListAssetYieldResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Yield chart points </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Asset not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ListAssetYieldResponseEnvelope> getAssetYieldDataWithHttpInfo(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nonnull AssetYieldResolution resolution) throws ApiException {
+        okhttp3.Call localVarCall = getAssetYieldDataValidateBeforeCall(assetId, start, end, resolution, null);
+        Type localVarReturnType = new TypeToken<ListAssetYieldResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get yield chart data for an asset (asynchronously)
+     * 
+     * @param assetId  (required)
+     * @param start  (required)
+     * @param end  (required)
+     * @param resolution  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Yield chart points </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Asset not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getAssetYieldDataAsync(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nonnull AssetYieldResolution resolution, final ApiCallback<ListAssetYieldResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getAssetYieldDataValidateBeforeCall(assetId, start, end, resolution, _callback);
+        Type localVarReturnType = new TypeToken<ListAssetYieldResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -11495,7 +11675,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listOrderBooksCall(@javax.annotation.Nullable OrderBookStatus status, @javax.annotation.Nullable UUID baseAssetId, @javax.annotation.Nullable UUID quoteAssetId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call listOrderBooksCall(@javax.annotation.Nullable List<OrderBookStatus> status, @javax.annotation.Nullable UUID baseAssetId, @javax.annotation.Nullable UUID quoteAssetId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -11521,7 +11701,7 @@ public class DefaultApi {
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         if (status != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("status", status));
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "status", status));
         }
 
         if (baseAssetId != null) {
@@ -11560,7 +11740,7 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listOrderBooksValidateBeforeCall(@javax.annotation.Nullable OrderBookStatus status, @javax.annotation.Nullable UUID baseAssetId, @javax.annotation.Nullable UUID quoteAssetId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call listOrderBooksValidateBeforeCall(@javax.annotation.Nullable List<OrderBookStatus> status, @javax.annotation.Nullable UUID baseAssetId, @javax.annotation.Nullable UUID quoteAssetId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
         return listOrderBooksCall(status, baseAssetId, quoteAssetId, page, limit, _callback);
 
     }
@@ -11585,7 +11765,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ListOrderbookResponseEnvelope listOrderBooks(@javax.annotation.Nullable OrderBookStatus status, @javax.annotation.Nullable UUID baseAssetId, @javax.annotation.Nullable UUID quoteAssetId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
+    public ListOrderbookResponseEnvelope listOrderBooks(@javax.annotation.Nullable List<OrderBookStatus> status, @javax.annotation.Nullable UUID baseAssetId, @javax.annotation.Nullable UUID quoteAssetId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
         ApiResponse<ListOrderbookResponseEnvelope> localVarResp = listOrderBooksWithHttpInfo(status, baseAssetId, quoteAssetId, page, limit);
         return localVarResp.getData();
     }
@@ -11610,7 +11790,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ListOrderbookResponseEnvelope> listOrderBooksWithHttpInfo(@javax.annotation.Nullable OrderBookStatus status, @javax.annotation.Nullable UUID baseAssetId, @javax.annotation.Nullable UUID quoteAssetId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
+    public ApiResponse<ListOrderbookResponseEnvelope> listOrderBooksWithHttpInfo(@javax.annotation.Nullable List<OrderBookStatus> status, @javax.annotation.Nullable UUID baseAssetId, @javax.annotation.Nullable UUID quoteAssetId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
         okhttp3.Call localVarCall = listOrderBooksValidateBeforeCall(status, baseAssetId, quoteAssetId, page, limit, null);
         Type localVarReturnType = new TypeToken<ListOrderbookResponseEnvelope>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -11637,7 +11817,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listOrderBooksAsync(@javax.annotation.Nullable OrderBookStatus status, @javax.annotation.Nullable UUID baseAssetId, @javax.annotation.Nullable UUID quoteAssetId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback<ListOrderbookResponseEnvelope> _callback) throws ApiException {
+    public okhttp3.Call listOrderBooksAsync(@javax.annotation.Nullable List<OrderBookStatus> status, @javax.annotation.Nullable UUID baseAssetId, @javax.annotation.Nullable UUID quoteAssetId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback<ListOrderbookResponseEnvelope> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = listOrderBooksValidateBeforeCall(status, baseAssetId, quoteAssetId, page, limit, _callback);
         Type localVarReturnType = new TypeToken<ListOrderbookResponseEnvelope>(){}.getType();
