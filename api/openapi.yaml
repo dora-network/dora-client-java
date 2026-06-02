@@ -8418,7 +8418,31 @@ components:
       - COLLATERALIZE
       - DE-COLLATERALIZE
       - COUPON_PAYMENT
+      - INTERNAL_TRANSFER
       type: string
+    TransactionInternalTransfer:
+      example:
+        to_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        quantity: quantity
+        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        from_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        from_account_id:
+          format: uuid
+          type: string
+        to_account_id:
+          format: uuid
+          type: string
+        asset_id:
+          format: uuid
+          type: string
+        quantity:
+          type: string
+      required:
+      - asset_id
+      - from_account_id
+      - quantity
+      - to_account_id
     Transaction:
       example:
         asset0: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -8428,6 +8452,11 @@ components:
         admin_user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         kind: ACCRUE_INTEREST
+        internal_transfer:
+          to_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity: quantity
+          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          from_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         created_at: 2000-01-23T04:56:07.000+00:00
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         order_side: BUY
@@ -8458,6 +8487,8 @@ components:
           type: string
         order_side:
           $ref: "#/components/schemas/Side"
+        internal_transfer:
+          $ref: "#/components/schemas/TransactionInternalTransfer"
       required:
       - admin_user_id
       - asset0
@@ -8497,6 +8528,11 @@ components:
           admin_user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           kind: ACCRUE_INTEREST
+          internal_transfer:
+            to_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            quantity: quantity
+            asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            from_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           order_side: BUY
@@ -8507,6 +8543,11 @@ components:
           admin_user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           kind: ACCRUE_INTEREST
+          internal_transfer:
+            to_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            quantity: quantity
+            asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            from_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           order_side: BUY
@@ -8528,6 +8569,11 @@ components:
           admin_user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           kind: ACCRUE_INTEREST
+          internal_transfer:
+            to_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            quantity: quantity
+            asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            from_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           order_side: BUY
@@ -8606,6 +8652,11 @@ components:
           admin_user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           kind: ACCRUE_INTEREST
+          internal_transfer:
+            to_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            quantity: quantity
+            asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            from_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           order_side: BUY

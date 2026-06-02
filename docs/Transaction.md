@@ -17,6 +17,7 @@
 |**userId** | **UUID** |  |  |
 |**adminUserId** | **UUID** |  |  |
 |**orderSide** | **Side** |  |  |
+|**internalTransfer** | [**TransactionInternalTransfer**](TransactionInternalTransfer.md) |  |  [optional] |
 
 
 

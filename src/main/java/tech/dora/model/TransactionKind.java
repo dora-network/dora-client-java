@@ -75,7 +75,9 @@ public enum TransactionKind {
   
   DE_COLLATERALIZE("DE-COLLATERALIZE"),
   
-  COUPON_PAYMENT("COUPON_PAYMENT");
+  COUPON_PAYMENT("COUPON_PAYMENT"),
+  
+  INTERNAL_TRANSFER("INTERNAL_TRANSFER");
 
   private String value;
 

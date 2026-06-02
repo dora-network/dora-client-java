@@ -51,5 +51,7 @@
 
 * `COUPON_PAYMENT` (value: `"COUPON_PAYMENT"`)
 
+* `INTERNAL_TRANSFER` (value: `"INTERNAL_TRANSFER"`)
+
 
 

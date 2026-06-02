@@ -25,6 +25,7 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.UUID;
 import tech.dora.model.Side;
+import tech.dora.model.TransactionInternalTransfer;
 import tech.dora.model.TransactionKind;
 
 import com.google.gson.Gson;
@@ -54,7 +55,7 @@ import tech.dora.JSON;
 /**
  * Transaction
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-05-26T18:31:22.271008569+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-02T17:13:50.947925667+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
 public class Transaction {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -105,6 +106,11 @@ public class Transaction {
   @SerializedName(SERIALIZED_NAME_ORDER_SIDE)
   @javax.annotation.Nonnull
   private Side orderSide;
+
+  public static final String SERIALIZED_NAME_INTERNAL_TRANSFER = "internal_transfer";
+  @SerializedName(SERIALIZED_NAME_INTERNAL_TRANSFER)
+  @javax.annotation.Nullable
+  private TransactionInternalTransfer internalTransfer;
 
   public Transaction() {
   }
@@ -299,6 +305,25 @@ public class Transaction {
   }
 
 
+  public Transaction internalTransfer(@javax.annotation.Nullable TransactionInternalTransfer internalTransfer) {
+    this.internalTransfer = internalTransfer;
+    return this;
+  }
+
+  /**
+   * Get internalTransfer
+   * @return internalTransfer
+   */
+  @javax.annotation.Nullable
+  public TransactionInternalTransfer getInternalTransfer() {
+    return internalTransfer;
+  }
+
+  public void setInternalTransfer(@javax.annotation.Nullable TransactionInternalTransfer internalTransfer) {
+    this.internalTransfer = internalTransfer;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -318,12 +343,13 @@ public class Transaction {
         Objects.equals(this.asset1, transaction.asset1) &&
         Objects.equals(this.userId, transaction.userId) &&
         Objects.equals(this.adminUserId, transaction.adminUserId) &&
-        Objects.equals(this.orderSide, transaction.orderSide);
+        Objects.equals(this.orderSide, transaction.orderSide) &&
+        Objects.equals(this.internalTransfer, transaction.internalTransfer);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, createdAt, kind, asset0, quantity0, quantity1, asset1, userId, adminUserId, orderSide);
+    return Objects.hash(id, createdAt, kind, asset0, quantity0, quantity1, asset1, userId, adminUserId, orderSide, internalTransfer);
   }
 
   @Override
@@ -340,6 +366,7 @@ public class Transaction {
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    adminUserId: ").append(toIndentedString(adminUserId)).append("\n");
     sb.append("    orderSide: ").append(toIndentedString(orderSide)).append("\n");
+    sb.append("    internalTransfer: ").append(toIndentedString(internalTransfer)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -361,7 +388,7 @@ public class Transaction {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "created_at", "kind", "asset0", "quantity0", "quantity1", "asset1", "user_id", "admin_user_id", "order_side"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "created_at", "kind", "asset0", "quantity0", "quantity1", "asset1", "user_id", "admin_user_id", "order_side", "internal_transfer"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "created_at", "kind", "asset0", "quantity0", "quantity1", "asset1", "user_id", "admin_user_id", "order_side"));
@@ -420,6 +447,10 @@ public class Transaction {
       }
       // validate the required field `order_side`
       Side.validateJsonElement(jsonObj.get("order_side"));
+      // validate the optional field `internal_transfer`
+      if (jsonObj.get("internal_transfer") != null && !jsonObj.get("internal_transfer").isJsonNull()) {
+        TransactionInternalTransfer.validateJsonElement(jsonObj.get("internal_transfer"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

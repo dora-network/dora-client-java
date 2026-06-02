@@ -171,6 +171,7 @@ docs/Trade.md
 docs/TradeRequestError.md
 docs/TradeResponseEnvelope.md
 docs/Transaction.md
+docs/TransactionInternalTransfer.md
 docs/TransactionKind.md
 docs/TransactionRequestError.md
 docs/TransactionResponseEnvelope.md
@@ -411,6 +412,7 @@ src/main/java/tech/dora/model/Trade.java
 src/main/java/tech/dora/model/TradeRequestError.java
 src/main/java/tech/dora/model/TradeResponseEnvelope.java
 src/main/java/tech/dora/model/Transaction.java
+src/main/java/tech/dora/model/TransactionInternalTransfer.java
 src/main/java/tech/dora/model/TransactionKind.java
 src/main/java/tech/dora/model/TransactionRequestError.java
 src/main/java/tech/dora/model/TransactionResponseEnvelope.java
@@ -623,6 +625,7 @@ src/test/java/tech/dora/model/TenantRestrictionsTest.java
 src/test/java/tech/dora/model/TradeRequestErrorTest.java
 src/test/java/tech/dora/model/TradeResponseEnvelopeTest.java
 src/test/java/tech/dora/model/TradeTest.java
+src/test/java/tech/dora/model/TransactionInternalTransferTest.java
 src/test/java/tech/dora/model/TransactionKindTest.java
 src/test/java/tech/dora/model/TransactionRequestErrorTest.java
 src/test/java/tech/dora/model/TransactionResponseEnvelopeTest.java

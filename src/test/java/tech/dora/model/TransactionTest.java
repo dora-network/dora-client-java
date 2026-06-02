@@ -23,6 +23,7 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.UUID;
 import tech.dora.model.Side;
+import tech.dora.model.TransactionInternalTransfer;
 import tech.dora.model.TransactionKind;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -119,6 +120,14 @@ public class TransactionTest {
     @Test
     public void orderSideTest() {
         // TODO: test orderSide
+    }
+
+    /**
+     * Test the property 'internalTransfer'
+     */
+    @Test
+    public void internalTransferTest() {
+        // TODO: test internalTransfer
     }
 
 }

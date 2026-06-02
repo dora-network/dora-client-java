@@ -49,10 +49,20 @@ import java.util.Locale;
 import tech.dora.JSON;
 
 /**
- * DefundUserRequest
+ * TransactionInternalTransfer
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-02T17:13:50.947925667+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
-public class DefundUserRequest {
+public class TransactionInternalTransfer {
+  public static final String SERIALIZED_NAME_FROM_ACCOUNT_ID = "from_account_id";
+  @SerializedName(SERIALIZED_NAME_FROM_ACCOUNT_ID)
+  @javax.annotation.Nonnull
+  private UUID fromAccountId;
+
+  public static final String SERIALIZED_NAME_TO_ACCOUNT_ID = "to_account_id";
+  @SerializedName(SERIALIZED_NAME_TO_ACCOUNT_ID)
+  @javax.annotation.Nonnull
+  private UUID toAccountId;
+
   public static final String SERIALIZED_NAME_ASSET_ID = "asset_id";
   @SerializedName(SERIALIZED_NAME_ASSET_ID)
   @javax.annotation.Nonnull
@@ -63,10 +73,48 @@ public class DefundUserRequest {
   @javax.annotation.Nonnull
   private String quantity;
 
-  public DefundUserRequest() {
+  public TransactionInternalTransfer() {
   }
 
-  public DefundUserRequest assetId(@javax.annotation.Nonnull UUID assetId) {
+  public TransactionInternalTransfer fromAccountId(@javax.annotation.Nonnull UUID fromAccountId) {
+    this.fromAccountId = fromAccountId;
+    return this;
+  }
+
+  /**
+   * Get fromAccountId
+   * @return fromAccountId
+   */
+  @javax.annotation.Nonnull
+  public UUID getFromAccountId() {
+    return fromAccountId;
+  }
+
+  public void setFromAccountId(@javax.annotation.Nonnull UUID fromAccountId) {
+    this.fromAccountId = fromAccountId;
+  }
+
+
+  public TransactionInternalTransfer toAccountId(@javax.annotation.Nonnull UUID toAccountId) {
+    this.toAccountId = toAccountId;
+    return this;
+  }
+
+  /**
+   * Get toAccountId
+   * @return toAccountId
+   */
+  @javax.annotation.Nonnull
+  public UUID getToAccountId() {
+    return toAccountId;
+  }
+
+  public void setToAccountId(@javax.annotation.Nonnull UUID toAccountId) {
+    this.toAccountId = toAccountId;
+  }
+
+
+  public TransactionInternalTransfer assetId(@javax.annotation.Nonnull UUID assetId) {
     this.assetId = assetId;
     return this;
   }
@@ -85,7 +133,7 @@ public class DefundUserRequest {
   }
 
 
-  public DefundUserRequest quantity(@javax.annotation.Nonnull String quantity) {
+  public TransactionInternalTransfer quantity(@javax.annotation.Nonnull String quantity) {
     this.quantity = quantity;
     return this;
   }
@@ -113,20 +161,24 @@ public class DefundUserRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DefundUserRequest defundUserRequest = (DefundUserRequest) o;
-    return Objects.equals(this.assetId, defundUserRequest.assetId) &&
-        Objects.equals(this.quantity, defundUserRequest.quantity);
+    TransactionInternalTransfer transactionInternalTransfer = (TransactionInternalTransfer) o;
+    return Objects.equals(this.fromAccountId, transactionInternalTransfer.fromAccountId) &&
+        Objects.equals(this.toAccountId, transactionInternalTransfer.toAccountId) &&
+        Objects.equals(this.assetId, transactionInternalTransfer.assetId) &&
+        Objects.equals(this.quantity, transactionInternalTransfer.quantity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(assetId, quantity);
+    return Objects.hash(fromAccountId, toAccountId, assetId, quantity);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DefundUserRequest {\n");
+    sb.append("class TransactionInternalTransfer {\n");
+    sb.append("    fromAccountId: ").append(toIndentedString(fromAccountId)).append("\n");
+    sb.append("    toAccountId: ").append(toIndentedString(toAccountId)).append("\n");
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("}");
@@ -150,40 +202,46 @@ public class DefundUserRequest {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("asset_id", "quantity"));
+    openapiFields = new HashSet<String>(Arrays.asList("from_account_id", "to_account_id", "asset_id", "quantity"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("asset_id", "quantity"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("from_account_id", "to_account_id", "asset_id", "quantity"));
   }
 
   /**
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to DefundUserRequest
+   * @throws IOException if the JSON Element is invalid with respect to TransactionInternalTransfer
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!DefundUserRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in DefundUserRequest is not found in the empty JSON string", DefundUserRequest.openapiRequiredFields.toString()));
+        if (!TransactionInternalTransfer.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in TransactionInternalTransfer is not found in the empty JSON string", TransactionInternalTransfer.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!DefundUserRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `DefundUserRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!TransactionInternalTransfer.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `TransactionInternalTransfer` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : DefundUserRequest.openapiRequiredFields) {
+      for (String requiredField : TransactionInternalTransfer.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
           throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+      if (!jsonObj.get("from_account_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `from_account_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("from_account_id").toString()));
+      }
+      if (!jsonObj.get("to_account_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `to_account_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("to_account_id").toString()));
+      }
       if (!jsonObj.get("asset_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `asset_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("asset_id").toString()));
       }
@@ -196,22 +254,22 @@ public class DefundUserRequest {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!DefundUserRequest.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'DefundUserRequest' and its subtypes
+       if (!TransactionInternalTransfer.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'TransactionInternalTransfer' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<DefundUserRequest> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(DefundUserRequest.class));
+       final TypeAdapter<TransactionInternalTransfer> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(TransactionInternalTransfer.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<DefundUserRequest>() {
+       return (TypeAdapter<T>) new TypeAdapter<TransactionInternalTransfer>() {
            @Override
-           public void write(JsonWriter out, DefundUserRequest value) throws IOException {
+           public void write(JsonWriter out, TransactionInternalTransfer value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public DefundUserRequest read(JsonReader in) throws IOException {
+           public TransactionInternalTransfer read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -222,18 +280,18 @@ public class DefundUserRequest {
   }
 
   /**
-   * Create an instance of DefundUserRequest given an JSON string
+   * Create an instance of TransactionInternalTransfer given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of DefundUserRequest
-   * @throws IOException if the JSON string is invalid with respect to DefundUserRequest
+   * @return An instance of TransactionInternalTransfer
+   * @throws IOException if the JSON string is invalid with respect to TransactionInternalTransfer
    */
-  public static DefundUserRequest fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, DefundUserRequest.class);
+  public static TransactionInternalTransfer fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, TransactionInternalTransfer.class);
   }
 
   /**
-   * Convert an instance of DefundUserRequest to an JSON string
+   * Convert an instance of TransactionInternalTransfer to an JSON string
    *
    * @return JSON string
    */
