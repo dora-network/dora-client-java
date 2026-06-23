@@ -96,6 +96,38 @@ public class CandleTest {
     }
 
     /**
+     * Test the property 'openYtm'
+     */
+    @Test
+    public void openYtmTest() {
+        // TODO: test openYtm
+    }
+
+    /**
+     * Test the property 'closeYtm'
+     */
+    @Test
+    public void closeYtmTest() {
+        // TODO: test closeYtm
+    }
+
+    /**
+     * Test the property 'highYtm'
+     */
+    @Test
+    public void highYtmTest() {
+        // TODO: test highYtm
+    }
+
+    /**
+     * Test the property 'lowYtm'
+     */
+    @Test
+    public void lowYtmTest() {
+        // TODO: test lowYtm
+    }
+
+    /**
      * Test the property 'volume'
      */
     @Test

@@ -219,4 +219,12 @@ public class UserTest {
         // TODO: test allowOrdersNotifications
     }
 
+    /**
+     * Test the property 'allowCopyTrading'
+     */
+    @Test
+    public void allowCopyTradingTest() {
+        // TODO: test allowCopyTrading
+    }
+
 }

@@ -7783,7 +7783,6 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Transactions stream </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to these transactions </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -7831,7 +7830,7 @@ public class DefaultApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "apiKeyAuthQuery" };
+        String[] localVarAuthNames = new String[] {  };
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -7853,7 +7852,6 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Transactions stream </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to these transactions </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -7874,7 +7872,6 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Transactions stream </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to these transactions </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -7897,7 +7894,6 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Transactions stream </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to these transactions </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -10115,7 +10111,7 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Historical leverage interest rates retrieved successfully </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Historical leverage borrowing and lending yields retrieved successfully </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid time parameter or end before/equal start </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, e.g. user not logged in or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
@@ -10186,7 +10182,7 @@ public class DefaultApi {
     }
 
     /**
-     * Get historical leverage interest rates for a specific asset
+     * Get historical leverage borrowing and lending yields for a specific asset
      * 
      * @param assetId  (required)
      * @param start  (optional)
@@ -10197,7 +10193,7 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Historical leverage interest rates retrieved successfully </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Historical leverage borrowing and lending yields retrieved successfully </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid time parameter or end before/equal start </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, e.g. user not logged in or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
@@ -10209,7 +10205,7 @@ public class DefaultApi {
     }
 
     /**
-     * Get historical leverage interest rates for a specific asset
+     * Get historical leverage borrowing and lending yields for a specific asset
      * 
      * @param assetId  (required)
      * @param start  (optional)
@@ -10220,7 +10216,7 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Historical leverage interest rates retrieved successfully </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Historical leverage borrowing and lending yields retrieved successfully </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid time parameter or end before/equal start </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, e.g. user not logged in or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
@@ -10233,7 +10229,7 @@ public class DefaultApi {
     }
 
     /**
-     * Get historical leverage interest rates for a specific asset (asynchronously)
+     * Get historical leverage borrowing and lending yields for a specific asset (asynchronously)
      * 
      * @param assetId  (required)
      * @param start  (optional)
@@ -10245,7 +10241,7 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Historical leverage interest rates retrieved successfully </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Historical leverage borrowing and lending yields retrieved successfully </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid time parameter or end before/equal start </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, e.g. user not logged in or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
@@ -10270,7 +10266,7 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Leverage interest rate retrieved successfully </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Leverage borrowing and lending yields retrieved successfully </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid/mismatched time parameters </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, e.g. user not logged in or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> No utilization data found for the selected window or asset not found </td><td>  -  </td></tr>
@@ -10342,7 +10338,7 @@ public class DefaultApi {
     }
 
     /**
-     * Get leverage interest rate for a specific asset
+     * Get leverage borrowing and lending yields for a specific asset
      * 
      * @param assetId  (required)
      * @param start  (optional)
@@ -10353,7 +10349,7 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Leverage interest rate retrieved successfully </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Leverage borrowing and lending yields retrieved successfully </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid/mismatched time parameters </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, e.g. user not logged in or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> No utilization data found for the selected window or asset not found </td><td>  -  </td></tr>
@@ -10366,7 +10362,7 @@ public class DefaultApi {
     }
 
     /**
-     * Get leverage interest rate for a specific asset
+     * Get leverage borrowing and lending yields for a specific asset
      * 
      * @param assetId  (required)
      * @param start  (optional)
@@ -10377,7 +10373,7 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Leverage interest rate retrieved successfully </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Leverage borrowing and lending yields retrieved successfully </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid/mismatched time parameters </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, e.g. user not logged in or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> No utilization data found for the selected window or asset not found </td><td>  -  </td></tr>
@@ -10391,7 +10387,7 @@ public class DefaultApi {
     }
 
     /**
-     * Get leverage interest rate for a specific asset (asynchronously)
+     * Get leverage borrowing and lending yields for a specific asset (asynchronously)
      * 
      * @param assetId  (required)
      * @param start  (optional)
@@ -10403,7 +10399,7 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Leverage interest rate retrieved successfully </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Leverage borrowing and lending yields retrieved successfully </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid/mismatched time parameters </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, e.g. user not logged in or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> No utilization data found for the selected window or asset not found </td><td>  -  </td></tr>
@@ -13141,7 +13137,6 @@ public class DefaultApi {
     }
     /**
      * Build call for streamAssetPrices
-     * @param since  (optional)
      * @param assetId  (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -13155,7 +13150,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call streamAssetPricesCall(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable UUID assetId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call streamAssetPricesCall(@javax.annotation.Nullable UUID assetId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -13179,10 +13174,6 @@ public class DefaultApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (since != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("since", since));
-        }
 
         if (assetId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("asset_id", assetId));
@@ -13208,15 +13199,14 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call streamAssetPricesValidateBeforeCall(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable UUID assetId, final ApiCallback _callback) throws ApiException {
-        return streamAssetPricesCall(since, assetId, _callback);
+    private okhttp3.Call streamAssetPricesValidateBeforeCall(@javax.annotation.Nullable UUID assetId, final ApiCallback _callback) throws ApiException {
+        return streamAssetPricesCall(assetId, _callback);
 
     }
 
     /**
      * Stream real-time asset prices as map objects
      * Opens a WebSocket stream for real-time asset price updates. First message contains all current prices, subsequent messages contain only changed prices. Data is sent as JSON objects keyed by asset ID.
-     * @param since  (optional)
      * @param assetId  (optional)
      * @return Map&lt;String, AssetPrice&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -13229,15 +13219,14 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public Map<String, AssetPrice> streamAssetPrices(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable UUID assetId) throws ApiException {
-        ApiResponse<Map<String, AssetPrice>> localVarResp = streamAssetPricesWithHttpInfo(since, assetId);
+    public Map<String, AssetPrice> streamAssetPrices(@javax.annotation.Nullable UUID assetId) throws ApiException {
+        ApiResponse<Map<String, AssetPrice>> localVarResp = streamAssetPricesWithHttpInfo(assetId);
         return localVarResp.getData();
     }
 
     /**
      * Stream real-time asset prices as map objects
      * Opens a WebSocket stream for real-time asset price updates. First message contains all current prices, subsequent messages contain only changed prices. Data is sent as JSON objects keyed by asset ID.
-     * @param since  (optional)
      * @param assetId  (optional)
      * @return ApiResponse&lt;Map&lt;String, AssetPrice&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -13250,8 +13239,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Map<String, AssetPrice>> streamAssetPricesWithHttpInfo(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable UUID assetId) throws ApiException {
-        okhttp3.Call localVarCall = streamAssetPricesValidateBeforeCall(since, assetId, null);
+    public ApiResponse<Map<String, AssetPrice>> streamAssetPricesWithHttpInfo(@javax.annotation.Nullable UUID assetId) throws ApiException {
+        okhttp3.Call localVarCall = streamAssetPricesValidateBeforeCall(assetId, null);
         Type localVarReturnType = new TypeToken<Map<String, AssetPrice>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -13259,7 +13248,6 @@ public class DefaultApi {
     /**
      * Stream real-time asset prices as map objects (asynchronously)
      * Opens a WebSocket stream for real-time asset price updates. First message contains all current prices, subsequent messages contain only changed prices. Data is sent as JSON objects keyed by asset ID.
-     * @param since  (optional)
      * @param assetId  (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -13273,9 +13261,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call streamAssetPricesAsync(@javax.annotation.Nullable OffsetDateTime since, @javax.annotation.Nullable UUID assetId, final ApiCallback<Map<String, AssetPrice>> _callback) throws ApiException {
+    public okhttp3.Call streamAssetPricesAsync(@javax.annotation.Nullable UUID assetId, final ApiCallback<Map<String, AssetPrice>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = streamAssetPricesValidateBeforeCall(since, assetId, _callback);
+        okhttp3.Call localVarCall = streamAssetPricesValidateBeforeCall(assetId, _callback);
         Type localVarReturnType = new TypeToken<Map<String, AssetPrice>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

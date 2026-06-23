@@ -10,7 +10,7 @@
 |**fromAccountId** | **UUID** |  |  |
 |**toAccountId** | **UUID** |  |  |
 |**assetId** | **UUID** |  |  |
-|**quantity** | **BigDecimal** |  |  |
+|**quantity** | **String** |  |  |
 
 
 

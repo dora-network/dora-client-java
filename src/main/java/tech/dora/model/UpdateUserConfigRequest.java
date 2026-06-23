@@ -14,7 +14,6 @@
 package tech.dora.model;
 
 import java.util.Objects;
-import java.util.Locale;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -45,14 +44,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Locale;
 
 import tech.dora.JSON;
 
 /**
  * Request body for PUT /user/{id}/config: update a user changeable details only. Other properties can only be changed by an admin following a manual request by the user.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-02T17:13:50.947925667+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-23T16:44:58.682065994+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class UpdateUserConfigRequest {
   public static final String SERIALIZED_NAME_PHOTO_URL = "photo_url";
   @SerializedName(SERIALIZED_NAME_PHOTO_URL)
@@ -93,6 +91,11 @@ public class UpdateUserConfigRequest {
   @SerializedName(SERIALIZED_NAME_ALLOW_ORDERS_NOTIFICATIONS)
   @javax.annotation.Nullable
   private UpdateFieldBoolean allowOrdersNotifications;
+
+  public static final String SERIALIZED_NAME_ALLOW_COPY_TRADING = "allow_copy_trading";
+  @SerializedName(SERIALIZED_NAME_ALLOW_COPY_TRADING)
+  @javax.annotation.Nullable
+  private UpdateFieldBoolean allowCopyTrading;
 
   public UpdateUserConfigRequest() {
   }
@@ -249,6 +252,25 @@ public class UpdateUserConfigRequest {
   }
 
 
+  public UpdateUserConfigRequest allowCopyTrading(@javax.annotation.Nullable UpdateFieldBoolean allowCopyTrading) {
+    this.allowCopyTrading = allowCopyTrading;
+    return this;
+  }
+
+  /**
+   * Optional: Whether to allow copy trading.
+   * @return allowCopyTrading
+   */
+  @javax.annotation.Nullable
+  public UpdateFieldBoolean getAllowCopyTrading() {
+    return allowCopyTrading;
+  }
+
+  public void setAllowCopyTrading(@javax.annotation.Nullable UpdateFieldBoolean allowCopyTrading) {
+    this.allowCopyTrading = allowCopyTrading;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -266,12 +288,13 @@ public class UpdateUserConfigRequest {
         Objects.equals(this.allowEmailNotifications, updateUserConfigRequest.allowEmailNotifications) &&
         Objects.equals(this.allowLiquidationsNotifications, updateUserConfigRequest.allowLiquidationsNotifications) &&
         Objects.equals(this.allowDepositWithdrawalNotifications, updateUserConfigRequest.allowDepositWithdrawalNotifications) &&
-        Objects.equals(this.allowOrdersNotifications, updateUserConfigRequest.allowOrdersNotifications);
+        Objects.equals(this.allowOrdersNotifications, updateUserConfigRequest.allowOrdersNotifications) &&
+        Objects.equals(this.allowCopyTrading, updateUserConfigRequest.allowCopyTrading);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(photoUrl, timezone, showTutorialCards, notificationsEnabled, allowEmailNotifications, allowLiquidationsNotifications, allowDepositWithdrawalNotifications, allowOrdersNotifications);
+    return Objects.hash(photoUrl, timezone, showTutorialCards, notificationsEnabled, allowEmailNotifications, allowLiquidationsNotifications, allowDepositWithdrawalNotifications, allowOrdersNotifications, allowCopyTrading);
   }
 
   @Override
@@ -286,6 +309,7 @@ public class UpdateUserConfigRequest {
     sb.append("    allowLiquidationsNotifications: ").append(toIndentedString(allowLiquidationsNotifications)).append("\n");
     sb.append("    allowDepositWithdrawalNotifications: ").append(toIndentedString(allowDepositWithdrawalNotifications)).append("\n");
     sb.append("    allowOrdersNotifications: ").append(toIndentedString(allowOrdersNotifications)).append("\n");
+    sb.append("    allowCopyTrading: ").append(toIndentedString(allowCopyTrading)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -295,10 +319,7 @@ public class UpdateUserConfigRequest {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
@@ -307,7 +328,7 @@ public class UpdateUserConfigRequest {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("photo_url", "timezone", "show_tutorial_cards", "notifications_enabled", "allow_email_notifications", "allow_liquidations_notifications", "allow_deposit_withdrawal_notifications", "allow_orders_notifications"));
+    openapiFields = new HashSet<String>(Arrays.asList("photo_url", "timezone", "show_tutorial_cards", "notifications_enabled", "allow_email_notifications", "allow_liquidations_notifications", "allow_deposit_withdrawal_notifications", "allow_orders_notifications", "allow_copy_trading"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("timezone"));
@@ -322,7 +343,7 @@ public class UpdateUserConfigRequest {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!UpdateUserConfigRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in UpdateUserConfigRequest is not found in the empty JSON string", UpdateUserConfigRequest.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in UpdateUserConfigRequest is not found in the empty JSON string", UpdateUserConfigRequest.openapiRequiredFields.toString()));
         }
       }
 
@@ -330,14 +351,14 @@ public class UpdateUserConfigRequest {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!UpdateUserConfigRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `UpdateUserConfigRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `UpdateUserConfigRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : UpdateUserConfigRequest.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -370,6 +391,10 @@ public class UpdateUserConfigRequest {
       // validate the optional field `allow_orders_notifications`
       if (jsonObj.get("allow_orders_notifications") != null && !jsonObj.get("allow_orders_notifications").isJsonNull()) {
         UpdateFieldBoolean.validateJsonElement(jsonObj.get("allow_orders_notifications"));
+      }
+      // validate the optional field `allow_copy_trading`
+      if (jsonObj.get("allow_copy_trading") != null && !jsonObj.get("allow_copy_trading").isJsonNull()) {
+        UpdateFieldBoolean.validateJsonElement(jsonObj.get("allow_copy_trading"));
       }
   }
 

@@ -10,7 +10,9 @@
 |**assetId** | **UUID** |  |  |
 |**timestamp** | **OffsetDateTime** |  |  |
 |**ytm** | **String** |  |  |
-|**lendingYield** | **String** |  |  |
+|**borrowingYieldRate** | **String** |  |  |
+|**lendingYieldRate** | **String** |  |  |
+|**price** | **String** |  |  |
 |**tvl** | **String** |  |  |
 |**totalYield** | **String** |  |  |
 

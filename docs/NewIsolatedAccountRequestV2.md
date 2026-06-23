@@ -9,7 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**globalAccountId** | **UUID** |  |  |
 |**assetId** | **UUID** |  |  |
-|**quantity** | **BigDecimal** |  |  |
+|**quantity** | **String** |  |  |
 |**accountName** | **String** |  |  [optional] |
 
 

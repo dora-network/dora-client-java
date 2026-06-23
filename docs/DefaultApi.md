@@ -73,8 +73,8 @@ All URIs are relative to *https://staging.dora.co*
 | [**ledgerWithdrawRequest**](DefaultApi.md#ledgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{user_id} | Initiate a withdrawal request for this user to the outside world |
 | [**ledgerWithdrawRequestSelf**](DefaultApi.md#ledgerWithdrawRequestSelf) | **POST** /v1/ledger/withdraw/requests/self | Initiate a withdrawal request for the logged in user to the outside world |
 | [**leverageGetAccruedInterestByUser**](DefaultApi.md#leverageGetAccruedInterestByUser) | **GET** /v1/leverage/accrued_interest/self | Get current accrued leverage interest for the user |
-| [**leverageGetHistoricalInterestRates**](DefaultApi.md#leverageGetHistoricalInterestRates) | **GET** /v1/leverage/interest_rate/{asset_id}/historical | Get historical leverage interest rates for a specific asset |
-| [**leverageGetInterestRate**](DefaultApi.md#leverageGetInterestRate) | **GET** /v1/leverage/interest_rate/{asset_id} | Get leverage interest rate for a specific asset |
+| [**leverageGetHistoricalInterestRates**](DefaultApi.md#leverageGetHistoricalInterestRates) | **GET** /v1/leverage/interest_rate/{asset_id}/historical | Get historical leverage borrowing and lending yields for a specific asset |
+| [**leverageGetInterestRate**](DefaultApi.md#leverageGetInterestRate) | **GET** /v1/leverage/interest_rate/{asset_id} | Get leverage borrowing and lending yields for a specific asset |
 | [**leverageIsolateCollateral**](DefaultApi.md#leverageIsolateCollateral) | **POST** /v1/leverage/isolate_collateral | Create an isolated position by transferring collateral to the position from the user&#39;s global collateral |
 | [**leverageSupply**](DefaultApi.md#leverageSupply) | **POST** /v1/leverage/supply | Supply leverage for a specific asset |
 | [**leverageUnite**](DefaultApi.md#leverageUnite) | **POST** /v1/leverage/unite | Combines all isolated positions into a single global position |
@@ -3907,7 +3907,6 @@ Get transactions since a specific time, and open a stream for further updates
 import tech.dora.ApiClient;
 import tech.dora.ApiException;
 import tech.dora.Configuration;
-import tech.dora.auth.*;
 import tech.dora.models.*;
 import tech.dora.api.DefaultApi;
 
@@ -3915,12 +3914,6 @@ public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("https://staging.dora.co");
-    
-    // Configure API key authorization: apiKeyAuthQuery
-    ApiKeyAuth apiKeyAuthQuery = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthQuery");
-    apiKeyAuthQuery.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //apiKeyAuthQuery.setApiKeyPrefix("Token");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
     OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
@@ -3950,7 +3943,7 @@ public class Example {
 
 ### Authorization
 
-[apiKeyAuthQuery](../README.md#apiKeyAuthQuery)
+No authorization required
 
 ### HTTP request headers
 
@@ -3962,7 +3955,6 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | Transactions stream |  -  |
 | **400** | Bad request, e.g. invalid query parameters |  -  |
-| **401** | Unauthorized, user not logged in or does not have access to these transactions |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="getUserById"></a>
@@ -5086,7 +5078,7 @@ public class Example {
 # **leverageGetHistoricalInterestRates**
 > HistoricalLeverageInterestRatesResponseEnvelope leverageGetHistoricalInterestRates(assetId, start, end)
 
-Get historical leverage interest rates for a specific asset
+Get historical leverage borrowing and lending yields for a specific asset
 
 ### Example
 ```java
@@ -5155,7 +5147,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Historical leverage interest rates retrieved successfully |  -  |
+| **200** | Historical leverage borrowing and lending yields retrieved successfully |  -  |
 | **400** | Bad request, e.g. invalid time parameter or end before/equal start |  -  |
 | **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
 | **500** | Internal server error |  -  |
@@ -5164,7 +5156,7 @@ public class Example {
 # **leverageGetInterestRate**
 > LeverageInterestRateResponseEnvelope leverageGetInterestRate(assetId, start, end)
 
-Get leverage interest rate for a specific asset
+Get leverage borrowing and lending yields for a specific asset
 
 ### Example
 ```java
@@ -5233,7 +5225,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Leverage interest rate retrieved successfully |  -  |
+| **200** | Leverage borrowing and lending yields retrieved successfully |  -  |
 | **400** | Bad request, e.g. invalid/mismatched time parameters |  -  |
 | **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
 | **404** | No utilization data found for the selected window or asset not found |  -  |
@@ -6613,7 +6605,7 @@ public class Example {
 
 <a id="streamAssetPrices"></a>
 # **streamAssetPrices**
-> Map&lt;String, AssetPrice&gt; streamAssetPrices(since, assetId)
+> Map&lt;String, AssetPrice&gt; streamAssetPrices(assetId)
 
 Stream real-time asset prices as map objects
 
@@ -6634,10 +6626,9 @@ public class Example {
     defaultClient.setBasePath("https://staging.dora.co");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
-    OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | 
     UUID assetId = UUID.randomUUID(); // UUID | 
     try {
-      Map<String, AssetPrice> result = apiInstance.streamAssetPrices(since, assetId);
+      Map<String, AssetPrice> result = apiInstance.streamAssetPrices(assetId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#streamAssetPrices");
@@ -6654,7 +6645,6 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **since** | **OffsetDateTime**|  | [optional] |
 | **assetId** | **UUID**|  | [optional] |
 
 ### Return type

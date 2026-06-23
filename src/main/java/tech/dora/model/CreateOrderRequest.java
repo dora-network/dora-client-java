@@ -14,7 +14,6 @@
 package tech.dora.model;
 
 import java.util.Objects;
-import java.util.Locale;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -50,14 +49,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Locale;
 
 import tech.dora.JSON;
 
 /**
  * CreateOrderRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-02T17:13:50.947925667+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-23T16:44:58.682065994+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class CreateOrderRequest {
   public static final String SERIALIZED_NAME_QUANTITY = "quantity";
   @SerializedName(SERIALIZED_NAME_QUANTITY)
@@ -412,10 +410,7 @@ public class CreateOrderRequest {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
@@ -439,7 +434,7 @@ public class CreateOrderRequest {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!CreateOrderRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in CreateOrderRequest is not found in the empty JSON string", CreateOrderRequest.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in CreateOrderRequest is not found in the empty JSON string", CreateOrderRequest.openapiRequiredFields.toString()));
         }
       }
 
@@ -447,45 +442,45 @@ public class CreateOrderRequest {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!CreateOrderRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `CreateOrderRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `CreateOrderRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : CreateOrderRequest.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("quantity").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `quantity` to be a primitive type in the JSON string but got `%s`", jsonObj.get("quantity").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `quantity` to be a primitive type in the JSON string but got `%s`", jsonObj.get("quantity").toString()));
       }
       if (!jsonObj.get("inverse_leverage").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `inverse_leverage` to be a primitive type in the JSON string but got `%s`", jsonObj.get("inverse_leverage").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `inverse_leverage` to be a primitive type in the JSON string but got `%s`", jsonObj.get("inverse_leverage").toString()));
       }
       if ((jsonObj.get("price") != null && !jsonObj.get("price").isJsonNull()) && !jsonObj.get("price").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("price").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("price").toString()));
       }
       // validate the required field `kind`
       OrderKind.validateJsonElement(jsonObj.get("kind"));
       // validate the required field `side`
       Side.validateJsonElement(jsonObj.get("side"));
       if (!jsonObj.get("order_book_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `order_book_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_book_id").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `order_book_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_book_id").toString()));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("order_modifiers") != null && !jsonObj.get("order_modifiers").isJsonNull() && !jsonObj.get("order_modifiers").isJsonArray()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `order_modifiers` to be an array in the JSON string but got `%s`", jsonObj.get("order_modifiers").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `order_modifiers` to be an array in the JSON string but got `%s`", jsonObj.get("order_modifiers").toString()));
       }
       if ((jsonObj.get("client_order_id") != null && !jsonObj.get("client_order_id").isJsonNull()) && !jsonObj.get("client_order_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `client_order_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("client_order_id").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `client_order_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("client_order_id").toString()));
       }
       if ((jsonObj.get("stop_loss_price") != null && !jsonObj.get("stop_loss_price").isJsonNull()) && !jsonObj.get("stop_loss_price").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `stop_loss_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("stop_loss_price").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `stop_loss_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("stop_loss_price").toString()));
       }
       if ((jsonObj.get("take_profit_price") != null && !jsonObj.get("take_profit_price").isJsonNull()) && !jsonObj.get("take_profit_price").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `take_profit_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("take_profit_price").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `take_profit_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("take_profit_price").toString()));
       }
   }
 

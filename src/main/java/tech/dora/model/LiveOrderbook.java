@@ -14,7 +14,6 @@
 package tech.dora.model;
 
 import java.util.Objects;
-import java.util.Locale;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -46,14 +45,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Locale;
 
 import tech.dora.JSON;
 
 /**
  * LiveOrderbook
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-02T17:13:50.947925667+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-23T16:44:58.682065994+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class LiveOrderbook {
   public static final String SERIALIZED_NAME_BIDS = "bids";
   @SerializedName(SERIALIZED_NAME_BIDS)
@@ -156,10 +154,7 @@ public class LiveOrderbook {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
@@ -183,7 +178,7 @@ public class LiveOrderbook {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!LiveOrderbook.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in LiveOrderbook is not found in the empty JSON string", LiveOrderbook.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in LiveOrderbook is not found in the empty JSON string", LiveOrderbook.openapiRequiredFields.toString()));
         }
       }
 
@@ -191,37 +186,37 @@ public class LiveOrderbook {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!LiveOrderbook.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `LiveOrderbook` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `LiveOrderbook` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : LiveOrderbook.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // ensure the json data is an array
-      if (!jsonObj.get("bids").isJsonArray()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `bids` to be an array in the JSON string but got `%s`", jsonObj.get("bids").toString()));
+      if (jsonObj.get("bids") != null) {
+        if (!jsonObj.get("bids").isJsonArray()) {
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `bids` to be an array in the JSON string but got `%s`", jsonObj.get("bids").toString()));
+        }
+        JsonArray jsonArraybids = jsonObj.getAsJsonArray("bids");
+        // validate the required field `bids` (array)
+        for (int i = 0; i < jsonArraybids.size(); i++) {
+          PriceLevel.validateJsonElement(jsonArraybids.get(i));
+        }
       }
-
-      JsonArray jsonArraybids = jsonObj.getAsJsonArray("bids");
-      // validate the required field `bids` (array)
-      for (int i = 0; i < jsonArraybids.size(); i++) {
-        PriceLevel.validateJsonElement(jsonArraybids.get(i));
-      };
-      // ensure the json data is an array
-      if (!jsonObj.get("asks").isJsonArray()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `asks` to be an array in the JSON string but got `%s`", jsonObj.get("asks").toString()));
+      if (jsonObj.get("asks") != null) {
+        if (!jsonObj.get("asks").isJsonArray()) {
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `asks` to be an array in the JSON string but got `%s`", jsonObj.get("asks").toString()));
+        }
+        JsonArray jsonArrayasks = jsonObj.getAsJsonArray("asks");
+        // validate the required field `asks` (array)
+        for (int i = 0; i < jsonArrayasks.size(); i++) {
+          PriceLevel.validateJsonElement(jsonArrayasks.get(i));
+        }
       }
-
-      JsonArray jsonArrayasks = jsonObj.getAsJsonArray("asks");
-      // validate the required field `asks` (array)
-      for (int i = 0; i < jsonArrayasks.size(); i++) {
-        PriceLevel.validateJsonElement(jsonArrayasks.get(i));
-      };
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

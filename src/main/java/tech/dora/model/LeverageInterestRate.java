@@ -14,14 +14,12 @@
 package tech.dora.model;
 
 import java.util.Objects;
-import java.util.Locale;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.UUID;
@@ -46,14 +44,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Locale;
 
 import tech.dora.JSON;
 
 /**
  * LeverageInterestRate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-02T17:13:50.947925667+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-23T16:44:58.682065994+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class LeverageInterestRate {
   public static final String SERIALIZED_NAME_ASSET_ID = "asset_id";
   @SerializedName(SERIALIZED_NAME_ASSET_ID)
@@ -63,22 +60,37 @@ public class LeverageInterestRate {
   public static final String SERIALIZED_NAME_UTILIZATION = "utilization";
   @SerializedName(SERIALIZED_NAME_UTILIZATION)
   @javax.annotation.Nonnull
-  private BigDecimal utilization;
+  private String utilization;
 
   public static final String SERIALIZED_NAME_AVG_UTILIZATION = "avg_utilization";
   @SerializedName(SERIALIZED_NAME_AVG_UTILIZATION)
   @javax.annotation.Nonnull
-  private BigDecimal avgUtilization;
+  private String avgUtilization;
 
-  public static final String SERIALIZED_NAME_AVG_INTEREST_RATE = "avg_interest_rate";
-  @SerializedName(SERIALIZED_NAME_AVG_INTEREST_RATE)
+  public static final String SERIALIZED_NAME_AVG_BORROWING_YIELD_RATE = "avg_borrowing_yield_rate";
+  @SerializedName(SERIALIZED_NAME_AVG_BORROWING_YIELD_RATE)
   @javax.annotation.Nonnull
-  private BigDecimal avgInterestRate;
+  private String avgBorrowingYieldRate;
 
-  public static final String SERIALIZED_NAME_INTEREST_RATE = "interest_rate";
-  @SerializedName(SERIALIZED_NAME_INTEREST_RATE)
+  public static final String SERIALIZED_NAME_AVG_LENDING_YIELD_RATE = "avg_lending_yield_rate";
+  @SerializedName(SERIALIZED_NAME_AVG_LENDING_YIELD_RATE)
   @javax.annotation.Nonnull
-  private BigDecimal interestRate;
+  private String avgLendingYieldRate;
+
+  public static final String SERIALIZED_NAME_BORROWING_YIELD_RATE = "borrowing_yield_rate";
+  @SerializedName(SERIALIZED_NAME_BORROWING_YIELD_RATE)
+  @javax.annotation.Nonnull
+  private String borrowingYieldRate;
+
+  public static final String SERIALIZED_NAME_LENDING_YIELD_RATE = "lending_yield_rate";
+  @SerializedName(SERIALIZED_NAME_LENDING_YIELD_RATE)
+  @javax.annotation.Nonnull
+  private String lendingYieldRate;
+
+  public static final String SERIALIZED_NAME_YIELD_TO_MATURITY = "yield_to_maturity";
+  @SerializedName(SERIALIZED_NAME_YIELD_TO_MATURITY)
+  @javax.annotation.Nonnull
+  private String yieldToMaturity;
 
   public static final String SERIALIZED_NAME_START_TIME = "start_time";
   @SerializedName(SERIALIZED_NAME_START_TIME)
@@ -112,7 +124,7 @@ public class LeverageInterestRate {
   }
 
 
-  public LeverageInterestRate utilization(@javax.annotation.Nonnull BigDecimal utilization) {
+  public LeverageInterestRate utilization(@javax.annotation.Nonnull String utilization) {
     this.utilization = utilization;
     return this;
   }
@@ -122,16 +134,16 @@ public class LeverageInterestRate {
    * @return utilization
    */
   @javax.annotation.Nonnull
-  public BigDecimal getUtilization() {
+  public String getUtilization() {
     return utilization;
   }
 
-  public void setUtilization(@javax.annotation.Nonnull BigDecimal utilization) {
+  public void setUtilization(@javax.annotation.Nonnull String utilization) {
     this.utilization = utilization;
   }
 
 
-  public LeverageInterestRate avgUtilization(@javax.annotation.Nonnull BigDecimal avgUtilization) {
+  public LeverageInterestRate avgUtilization(@javax.annotation.Nonnull String avgUtilization) {
     this.avgUtilization = avgUtilization;
     return this;
   }
@@ -141,50 +153,107 @@ public class LeverageInterestRate {
    * @return avgUtilization
    */
   @javax.annotation.Nonnull
-  public BigDecimal getAvgUtilization() {
+  public String getAvgUtilization() {
     return avgUtilization;
   }
 
-  public void setAvgUtilization(@javax.annotation.Nonnull BigDecimal avgUtilization) {
+  public void setAvgUtilization(@javax.annotation.Nonnull String avgUtilization) {
     this.avgUtilization = avgUtilization;
   }
 
 
-  public LeverageInterestRate avgInterestRate(@javax.annotation.Nonnull BigDecimal avgInterestRate) {
-    this.avgInterestRate = avgInterestRate;
+  public LeverageInterestRate avgBorrowingYieldRate(@javax.annotation.Nonnull String avgBorrowingYieldRate) {
+    this.avgBorrowingYieldRate = avgBorrowingYieldRate;
     return this;
   }
 
   /**
-   * Get avgInterestRate
-   * @return avgInterestRate
+   * Get avgBorrowingYieldRate
+   * @return avgBorrowingYieldRate
    */
   @javax.annotation.Nonnull
-  public BigDecimal getAvgInterestRate() {
-    return avgInterestRate;
+  public String getAvgBorrowingYieldRate() {
+    return avgBorrowingYieldRate;
   }
 
-  public void setAvgInterestRate(@javax.annotation.Nonnull BigDecimal avgInterestRate) {
-    this.avgInterestRate = avgInterestRate;
+  public void setAvgBorrowingYieldRate(@javax.annotation.Nonnull String avgBorrowingYieldRate) {
+    this.avgBorrowingYieldRate = avgBorrowingYieldRate;
   }
 
 
-  public LeverageInterestRate interestRate(@javax.annotation.Nonnull BigDecimal interestRate) {
-    this.interestRate = interestRate;
+  public LeverageInterestRate avgLendingYieldRate(@javax.annotation.Nonnull String avgLendingYieldRate) {
+    this.avgLendingYieldRate = avgLendingYieldRate;
     return this;
   }
 
   /**
-   * Get interestRate
-   * @return interestRate
+   * Get avgLendingYieldRate
+   * @return avgLendingYieldRate
    */
   @javax.annotation.Nonnull
-  public BigDecimal getInterestRate() {
-    return interestRate;
+  public String getAvgLendingYieldRate() {
+    return avgLendingYieldRate;
   }
 
-  public void setInterestRate(@javax.annotation.Nonnull BigDecimal interestRate) {
-    this.interestRate = interestRate;
+  public void setAvgLendingYieldRate(@javax.annotation.Nonnull String avgLendingYieldRate) {
+    this.avgLendingYieldRate = avgLendingYieldRate;
+  }
+
+
+  public LeverageInterestRate borrowingYieldRate(@javax.annotation.Nonnull String borrowingYieldRate) {
+    this.borrowingYieldRate = borrowingYieldRate;
+    return this;
+  }
+
+  /**
+   * Get borrowingYieldRate
+   * @return borrowingYieldRate
+   */
+  @javax.annotation.Nonnull
+  public String getBorrowingYieldRate() {
+    return borrowingYieldRate;
+  }
+
+  public void setBorrowingYieldRate(@javax.annotation.Nonnull String borrowingYieldRate) {
+    this.borrowingYieldRate = borrowingYieldRate;
+  }
+
+
+  public LeverageInterestRate lendingYieldRate(@javax.annotation.Nonnull String lendingYieldRate) {
+    this.lendingYieldRate = lendingYieldRate;
+    return this;
+  }
+
+  /**
+   * Get lendingYieldRate
+   * @return lendingYieldRate
+   */
+  @javax.annotation.Nonnull
+  public String getLendingYieldRate() {
+    return lendingYieldRate;
+  }
+
+  public void setLendingYieldRate(@javax.annotation.Nonnull String lendingYieldRate) {
+    this.lendingYieldRate = lendingYieldRate;
+  }
+
+
+  public LeverageInterestRate yieldToMaturity(@javax.annotation.Nonnull String yieldToMaturity) {
+    this.yieldToMaturity = yieldToMaturity;
+    return this;
+  }
+
+  /**
+   * Get yieldToMaturity
+   * @return yieldToMaturity
+   */
+  @javax.annotation.Nonnull
+  public String getYieldToMaturity() {
+    return yieldToMaturity;
+  }
+
+  public void setYieldToMaturity(@javax.annotation.Nonnull String yieldToMaturity) {
+    this.yieldToMaturity = yieldToMaturity;
   }
 
 
@@ -239,15 +308,18 @@ public class LeverageInterestRate {
     return Objects.equals(this.assetId, leverageInterestRate.assetId) &&
         Objects.equals(this.utilization, leverageInterestRate.utilization) &&
         Objects.equals(this.avgUtilization, leverageInterestRate.avgUtilization) &&
-        Objects.equals(this.avgInterestRate, leverageInterestRate.avgInterestRate) &&
-        Objects.equals(this.interestRate, leverageInterestRate.interestRate) &&
+        Objects.equals(this.avgBorrowingYieldRate, leverageInterestRate.avgBorrowingYieldRate) &&
+        Objects.equals(this.avgLendingYieldRate, leverageInterestRate.avgLendingYieldRate) &&
+        Objects.equals(this.borrowingYieldRate, leverageInterestRate.borrowingYieldRate) &&
+        Objects.equals(this.lendingYieldRate, leverageInterestRate.lendingYieldRate) &&
+        Objects.equals(this.yieldToMaturity, leverageInterestRate.yieldToMaturity) &&
         Objects.equals(this.startTime, leverageInterestRate.startTime) &&
         Objects.equals(this.endTime, leverageInterestRate.endTime);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(assetId, utilization, avgUtilization, avgInterestRate, interestRate, startTime, endTime);
+    return Objects.hash(assetId, utilization, avgUtilization, avgBorrowingYieldRate, avgLendingYieldRate, borrowingYieldRate, lendingYieldRate, yieldToMaturity, startTime, endTime);
   }
 
   @Override
@@ -257,8 +329,11 @@ public class LeverageInterestRate {
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
     sb.append("    utilization: ").append(toIndentedString(utilization)).append("\n");
     sb.append("    avgUtilization: ").append(toIndentedString(avgUtilization)).append("\n");
-    sb.append("    avgInterestRate: ").append(toIndentedString(avgInterestRate)).append("\n");
-    sb.append("    interestRate: ").append(toIndentedString(interestRate)).append("\n");
+    sb.append("    avgBorrowingYieldRate: ").append(toIndentedString(avgBorrowingYieldRate)).append("\n");
+    sb.append("    avgLendingYieldRate: ").append(toIndentedString(avgLendingYieldRate)).append("\n");
+    sb.append("    borrowingYieldRate: ").append(toIndentedString(borrowingYieldRate)).append("\n");
+    sb.append("    lendingYieldRate: ").append(toIndentedString(lendingYieldRate)).append("\n");
+    sb.append("    yieldToMaturity: ").append(toIndentedString(yieldToMaturity)).append("\n");
     sb.append("    startTime: ").append(toIndentedString(startTime)).append("\n");
     sb.append("    endTime: ").append(toIndentedString(endTime)).append("\n");
     sb.append("}");
@@ -270,10 +345,7 @@ public class LeverageInterestRate {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
@@ -282,10 +354,10 @@ public class LeverageInterestRate {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("asset_id", "utilization", "avg_utilization", "avg_interest_rate", "interest_rate", "start_time", "end_time"));
+    openapiFields = new HashSet<String>(Arrays.asList("asset_id", "utilization", "avg_utilization", "avg_borrowing_yield_rate", "avg_lending_yield_rate", "borrowing_yield_rate", "lending_yield_rate", "yield_to_maturity", "start_time", "end_time"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("asset_id", "utilization", "avg_utilization", "avg_interest_rate", "interest_rate", "start_time", "end_time"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("asset_id", "utilization", "avg_utilization", "avg_borrowing_yield_rate", "avg_lending_yield_rate", "borrowing_yield_rate", "lending_yield_rate", "yield_to_maturity", "start_time", "end_time"));
   }
 
   /**
@@ -297,7 +369,7 @@ public class LeverageInterestRate {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!LeverageInterestRate.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in LeverageInterestRate is not found in the empty JSON string", LeverageInterestRate.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in LeverageInterestRate is not found in the empty JSON string", LeverageInterestRate.openapiRequiredFields.toString()));
         }
       }
 
@@ -305,31 +377,40 @@ public class LeverageInterestRate {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!LeverageInterestRate.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `LeverageInterestRate` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `LeverageInterestRate` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : LeverageInterestRate.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("asset_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `asset_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("asset_id").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `asset_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("asset_id").toString()));
       }
       if (!jsonObj.get("utilization").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `utilization` to be a primitive type in the JSON string but got `%s`", jsonObj.get("utilization").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `utilization` to be a primitive type in the JSON string but got `%s`", jsonObj.get("utilization").toString()));
       }
       if (!jsonObj.get("avg_utilization").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `avg_utilization` to be a primitive type in the JSON string but got `%s`", jsonObj.get("avg_utilization").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `avg_utilization` to be a primitive type in the JSON string but got `%s`", jsonObj.get("avg_utilization").toString()));
       }
-      if (!jsonObj.get("avg_interest_rate").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `avg_interest_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("avg_interest_rate").toString()));
+      if (!jsonObj.get("avg_borrowing_yield_rate").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `avg_borrowing_yield_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("avg_borrowing_yield_rate").toString()));
       }
-      if (!jsonObj.get("interest_rate").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `interest_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("interest_rate").toString()));
+      if (!jsonObj.get("avg_lending_yield_rate").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `avg_lending_yield_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("avg_lending_yield_rate").toString()));
+      }
+      if (!jsonObj.get("borrowing_yield_rate").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `borrowing_yield_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("borrowing_yield_rate").toString()));
+      }
+      if (!jsonObj.get("lending_yield_rate").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `lending_yield_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lending_yield_rate").toString()));
+      }
+      if (!jsonObj.get("yield_to_maturity").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `yield_to_maturity` to be a primitive type in the JSON string but got `%s`", jsonObj.get("yield_to_maturity").toString()));
       }
   }
 

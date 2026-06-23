@@ -14,14 +14,12 @@
 package tech.dora.model;
 
 import java.util.Objects;
-import java.util.Locale;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -49,14 +47,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Locale;
 
 import tech.dora.JSON;
 
 /**
  * RealizedPnlSettlements
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-02T17:13:50.947925667+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-23T16:44:58.682065994+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class RealizedPnlSettlements {
   public static final String SERIALIZED_NAME_SETTLEMENTS = "settlements";
   @SerializedName(SERIALIZED_NAME_SETTLEMENTS)
@@ -66,22 +63,22 @@ public class RealizedPnlSettlements {
   public static final String SERIALIZED_NAME_USER_TOTALS = "user_totals";
   @SerializedName(SERIALIZED_NAME_USER_TOTALS)
   @javax.annotation.Nullable
-  private Map<String, BigDecimal> userTotals = new HashMap<>();
+  private Map<String, String> userTotals = new HashMap<>();
 
   public static final String SERIALIZED_NAME_TENANT_TOTALS = "tenant_totals";
   @SerializedName(SERIALIZED_NAME_TENANT_TOTALS)
   @javax.annotation.Nullable
-  private Map<String, BigDecimal> tenantTotals = new HashMap<>();
+  private Map<String, String> tenantTotals = new HashMap<>();
 
   public static final String SERIALIZED_NAME_USER_TOTALS_UNSETTLED = "user_totals_unsettled";
   @SerializedName(SERIALIZED_NAME_USER_TOTALS_UNSETTLED)
   @javax.annotation.Nullable
-  private Map<String, BigDecimal> userTotalsUnsettled = new HashMap<>();
+  private Map<String, String> userTotalsUnsettled = new HashMap<>();
 
   public static final String SERIALIZED_NAME_TENANT_TOTALS_UNSETTLED = "tenant_totals_unsettled";
   @SerializedName(SERIALIZED_NAME_TENANT_TOTALS_UNSETTLED)
   @javax.annotation.Nullable
-  private Map<String, BigDecimal> tenantTotalsUnsettled = new HashMap<>();
+  private Map<String, String> tenantTotalsUnsettled = new HashMap<>();
 
   public RealizedPnlSettlements() {
   }
@@ -113,12 +110,12 @@ public class RealizedPnlSettlements {
   }
 
 
-  public RealizedPnlSettlements userTotals(@javax.annotation.Nullable Map<String, BigDecimal> userTotals) {
+  public RealizedPnlSettlements userTotals(@javax.annotation.Nullable Map<String, String> userTotals) {
     this.userTotals = userTotals;
     return this;
   }
 
-  public RealizedPnlSettlements putUserTotalsItem(String key, BigDecimal userTotalsItem) {
+  public RealizedPnlSettlements putUserTotalsItem(String key, String userTotalsItem) {
     if (this.userTotals == null) {
       this.userTotals = new HashMap<>();
     }
@@ -131,21 +128,21 @@ public class RealizedPnlSettlements {
    * @return userTotals
    */
   @javax.annotation.Nullable
-  public Map<String, BigDecimal> getUserTotals() {
+  public Map<String, String> getUserTotals() {
     return userTotals;
   }
 
-  public void setUserTotals(@javax.annotation.Nullable Map<String, BigDecimal> userTotals) {
+  public void setUserTotals(@javax.annotation.Nullable Map<String, String> userTotals) {
     this.userTotals = userTotals;
   }
 
 
-  public RealizedPnlSettlements tenantTotals(@javax.annotation.Nullable Map<String, BigDecimal> tenantTotals) {
+  public RealizedPnlSettlements tenantTotals(@javax.annotation.Nullable Map<String, String> tenantTotals) {
     this.tenantTotals = tenantTotals;
     return this;
   }
 
-  public RealizedPnlSettlements putTenantTotalsItem(String key, BigDecimal tenantTotalsItem) {
+  public RealizedPnlSettlements putTenantTotalsItem(String key, String tenantTotalsItem) {
     if (this.tenantTotals == null) {
       this.tenantTotals = new HashMap<>();
     }
@@ -158,21 +155,21 @@ public class RealizedPnlSettlements {
    * @return tenantTotals
    */
   @javax.annotation.Nullable
-  public Map<String, BigDecimal> getTenantTotals() {
+  public Map<String, String> getTenantTotals() {
     return tenantTotals;
   }
 
-  public void setTenantTotals(@javax.annotation.Nullable Map<String, BigDecimal> tenantTotals) {
+  public void setTenantTotals(@javax.annotation.Nullable Map<String, String> tenantTotals) {
     this.tenantTotals = tenantTotals;
   }
 
 
-  public RealizedPnlSettlements userTotalsUnsettled(@javax.annotation.Nullable Map<String, BigDecimal> userTotalsUnsettled) {
+  public RealizedPnlSettlements userTotalsUnsettled(@javax.annotation.Nullable Map<String, String> userTotalsUnsettled) {
     this.userTotalsUnsettled = userTotalsUnsettled;
     return this;
   }
 
-  public RealizedPnlSettlements putUserTotalsUnsettledItem(String key, BigDecimal userTotalsUnsettledItem) {
+  public RealizedPnlSettlements putUserTotalsUnsettledItem(String key, String userTotalsUnsettledItem) {
     if (this.userTotalsUnsettled == null) {
       this.userTotalsUnsettled = new HashMap<>();
     }
@@ -185,21 +182,21 @@ public class RealizedPnlSettlements {
    * @return userTotalsUnsettled
    */
   @javax.annotation.Nullable
-  public Map<String, BigDecimal> getUserTotalsUnsettled() {
+  public Map<String, String> getUserTotalsUnsettled() {
     return userTotalsUnsettled;
   }
 
-  public void setUserTotalsUnsettled(@javax.annotation.Nullable Map<String, BigDecimal> userTotalsUnsettled) {
+  public void setUserTotalsUnsettled(@javax.annotation.Nullable Map<String, String> userTotalsUnsettled) {
     this.userTotalsUnsettled = userTotalsUnsettled;
   }
 
 
-  public RealizedPnlSettlements tenantTotalsUnsettled(@javax.annotation.Nullable Map<String, BigDecimal> tenantTotalsUnsettled) {
+  public RealizedPnlSettlements tenantTotalsUnsettled(@javax.annotation.Nullable Map<String, String> tenantTotalsUnsettled) {
     this.tenantTotalsUnsettled = tenantTotalsUnsettled;
     return this;
   }
 
-  public RealizedPnlSettlements putTenantTotalsUnsettledItem(String key, BigDecimal tenantTotalsUnsettledItem) {
+  public RealizedPnlSettlements putTenantTotalsUnsettledItem(String key, String tenantTotalsUnsettledItem) {
     if (this.tenantTotalsUnsettled == null) {
       this.tenantTotalsUnsettled = new HashMap<>();
     }
@@ -212,11 +209,11 @@ public class RealizedPnlSettlements {
    * @return tenantTotalsUnsettled
    */
   @javax.annotation.Nullable
-  public Map<String, BigDecimal> getTenantTotalsUnsettled() {
+  public Map<String, String> getTenantTotalsUnsettled() {
     return tenantTotalsUnsettled;
   }
 
-  public void setTenantTotalsUnsettled(@javax.annotation.Nullable Map<String, BigDecimal> tenantTotalsUnsettled) {
+  public void setTenantTotalsUnsettled(@javax.annotation.Nullable Map<String, String> tenantTotalsUnsettled) {
     this.tenantTotalsUnsettled = tenantTotalsUnsettled;
   }
 
@@ -261,10 +258,7 @@ public class RealizedPnlSettlements {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
@@ -288,7 +282,7 @@ public class RealizedPnlSettlements {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!RealizedPnlSettlements.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in RealizedPnlSettlements is not found in the empty JSON string", RealizedPnlSettlements.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in RealizedPnlSettlements is not found in the empty JSON string", RealizedPnlSettlements.openapiRequiredFields.toString()));
         }
       }
 
@@ -296,7 +290,7 @@ public class RealizedPnlSettlements {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!RealizedPnlSettlements.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `RealizedPnlSettlements` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `RealizedPnlSettlements` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -305,7 +299,7 @@ public class RealizedPnlSettlements {
         if (jsonArraysettlements != null) {
           // ensure the json data is an array
           if (!jsonObj.get("settlements").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `settlements` to be an array in the JSON string but got `%s`", jsonObj.get("settlements").toString()));
+            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `settlements` to be an array in the JSON string but got `%s`", jsonObj.get("settlements").toString()));
           }
 
           // validate the optional field `settlements` (array)

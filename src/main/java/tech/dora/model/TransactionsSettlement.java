@@ -14,14 +14,12 @@
 package tech.dora.model;
 
 import java.util.Objects;
-import java.util.Locale;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.UUID;
@@ -46,14 +44,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Locale;
 
 import tech.dora.JSON;
 
 /**
  * TransactionsSettlement
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-02T17:13:50.947925667+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-23T16:44:58.682065994+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class TransactionsSettlement {
   public static final String SERIALIZED_NAME_TX_ID = "tx_id";
   @SerializedName(SERIALIZED_NAME_TX_ID)
@@ -83,7 +80,7 @@ public class TransactionsSettlement {
   public static final String SERIALIZED_NAME_QUANTITY_USD = "quantity_usd";
   @SerializedName(SERIALIZED_NAME_QUANTITY_USD)
   @javax.annotation.Nonnull
-  private BigDecimal quantityUsd;
+  private String quantityUsd;
 
   public static final String SERIALIZED_NAME_CREATED_AT = "created_at";
   @SerializedName(SERIALIZED_NAME_CREATED_AT)
@@ -198,7 +195,7 @@ public class TransactionsSettlement {
   }
 
 
-  public TransactionsSettlement quantityUsd(@javax.annotation.Nonnull BigDecimal quantityUsd) {
+  public TransactionsSettlement quantityUsd(@javax.annotation.Nonnull String quantityUsd) {
     this.quantityUsd = quantityUsd;
     return this;
   }
@@ -208,11 +205,11 @@ public class TransactionsSettlement {
    * @return quantityUsd
    */
   @javax.annotation.Nonnull
-  public BigDecimal getQuantityUsd() {
+  public String getQuantityUsd() {
     return quantityUsd;
   }
 
-  public void setQuantityUsd(@javax.annotation.Nonnull BigDecimal quantityUsd) {
+  public void setQuantityUsd(@javax.annotation.Nonnull String quantityUsd) {
     this.quantityUsd = quantityUsd;
   }
 
@@ -322,10 +319,7 @@ public class TransactionsSettlement {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
@@ -349,7 +343,7 @@ public class TransactionsSettlement {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!TransactionsSettlement.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in TransactionsSettlement is not found in the empty JSON string", TransactionsSettlement.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in TransactionsSettlement is not found in the empty JSON string", TransactionsSettlement.openapiRequiredFields.toString()));
         }
       }
 
@@ -357,37 +351,37 @@ public class TransactionsSettlement {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!TransactionsSettlement.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `TransactionsSettlement` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `TransactionsSettlement` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : TransactionsSettlement.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("tx_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `tx_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tx_id").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tx_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tx_id").toString()));
       }
       if (!jsonObj.get("user_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `user_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user_id").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `user_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user_id").toString()));
       }
       if (!jsonObj.get("tenant_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `tenant_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tenant_id").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tenant_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tenant_id").toString()));
       }
       if (!jsonObj.get("position_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `position_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("position_id").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `position_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("position_id").toString()));
       }
       if (!jsonObj.get("tx_kind").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `tx_kind` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tx_kind").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tx_kind` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tx_kind").toString()));
       }
       if (!jsonObj.get("quantity_usd").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `quantity_usd` to be a primitive type in the JSON string but got `%s`", jsonObj.get("quantity_usd").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `quantity_usd` to be a primitive type in the JSON string but got `%s`", jsonObj.get("quantity_usd").toString()));
       }
       if ((jsonObj.get("settled_by") != null && !jsonObj.get("settled_by").isJsonNull()) && !jsonObj.get("settled_by").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `settled_by` to be a primitive type in the JSON string but got `%s`", jsonObj.get("settled_by").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `settled_by` to be a primitive type in the JSON string but got `%s`", jsonObj.get("settled_by").toString()));
       }
   }
 

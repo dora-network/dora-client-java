@@ -14,14 +14,12 @@
 package tech.dora.model;
 
 import java.util.Objects;
-import java.util.Locale;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.UUID;
@@ -46,14 +44,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Locale;
 
 import tech.dora.JSON;
 
 /**
  * HistoricalLeverageInterestRate
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-02T17:13:50.947925667+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-23T16:44:58.682065994+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class HistoricalLeverageInterestRate {
   public static final String SERIALIZED_NAME_ASSET_ID = "asset_id";
   @SerializedName(SERIALIZED_NAME_ASSET_ID)
@@ -68,37 +65,47 @@ public class HistoricalLeverageInterestRate {
   public static final String SERIALIZED_NAME_UTILIZATION = "utilization";
   @SerializedName(SERIALIZED_NAME_UTILIZATION)
   @javax.annotation.Nonnull
-  private BigDecimal utilization;
+  private String utilization;
 
   public static final String SERIALIZED_NAME_MAXIMUM_UTILIZATION = "maximum_utilization";
   @SerializedName(SERIALIZED_NAME_MAXIMUM_UTILIZATION)
   @javax.annotation.Nonnull
-  private BigDecimal maximumUtilization;
+  private String maximumUtilization;
 
   public static final String SERIALIZED_NAME_MINIMUM_RATE = "minimum_rate";
   @SerializedName(SERIALIZED_NAME_MINIMUM_RATE)
   @javax.annotation.Nonnull
-  private BigDecimal minimumRate;
+  private String minimumRate;
 
   public static final String SERIALIZED_NAME_KINK_RATE = "kink_rate";
   @SerializedName(SERIALIZED_NAME_KINK_RATE)
   @javax.annotation.Nonnull
-  private BigDecimal kinkRate;
+  private String kinkRate;
 
   public static final String SERIALIZED_NAME_MAXIMUM_RATE = "maximum_rate";
   @SerializedName(SERIALIZED_NAME_MAXIMUM_RATE)
   @javax.annotation.Nonnull
-  private BigDecimal maximumRate;
+  private String maximumRate;
 
   public static final String SERIALIZED_NAME_KINK_UTILIZATION = "kink_utilization";
   @SerializedName(SERIALIZED_NAME_KINK_UTILIZATION)
   @javax.annotation.Nonnull
-  private BigDecimal kinkUtilization;
+  private String kinkUtilization;
 
-  public static final String SERIALIZED_NAME_INTEREST_RATE = "interest_rate";
-  @SerializedName(SERIALIZED_NAME_INTEREST_RATE)
+  public static final String SERIALIZED_NAME_BORROWING_YIELD_RATE = "borrowing_yield_rate";
+  @SerializedName(SERIALIZED_NAME_BORROWING_YIELD_RATE)
   @javax.annotation.Nonnull
-  private BigDecimal interestRate;
+  private String borrowingYieldRate;
+
+  public static final String SERIALIZED_NAME_LENDING_YIELD_RATE = "lending_yield_rate";
+  @SerializedName(SERIALIZED_NAME_LENDING_YIELD_RATE)
+  @javax.annotation.Nonnull
+  private String lendingYieldRate;
+
+  public static final String SERIALIZED_NAME_YIELD_TO_MATURITY = "yield_to_maturity";
+  @SerializedName(SERIALIZED_NAME_YIELD_TO_MATURITY)
+  @javax.annotation.Nonnull
+  private String yieldToMaturity;
 
   public HistoricalLeverageInterestRate() {
   }
@@ -141,7 +148,7 @@ public class HistoricalLeverageInterestRate {
   }
 
 
-  public HistoricalLeverageInterestRate utilization(@javax.annotation.Nonnull BigDecimal utilization) {
+  public HistoricalLeverageInterestRate utilization(@javax.annotation.Nonnull String utilization) {
     this.utilization = utilization;
     return this;
   }
@@ -151,16 +158,16 @@ public class HistoricalLeverageInterestRate {
    * @return utilization
    */
   @javax.annotation.Nonnull
-  public BigDecimal getUtilization() {
+  public String getUtilization() {
     return utilization;
   }
 
-  public void setUtilization(@javax.annotation.Nonnull BigDecimal utilization) {
+  public void setUtilization(@javax.annotation.Nonnull String utilization) {
     this.utilization = utilization;
   }
 
 
-  public HistoricalLeverageInterestRate maximumUtilization(@javax.annotation.Nonnull BigDecimal maximumUtilization) {
+  public HistoricalLeverageInterestRate maximumUtilization(@javax.annotation.Nonnull String maximumUtilization) {
     this.maximumUtilization = maximumUtilization;
     return this;
   }
@@ -170,16 +177,16 @@ public class HistoricalLeverageInterestRate {
    * @return maximumUtilization
    */
   @javax.annotation.Nonnull
-  public BigDecimal getMaximumUtilization() {
+  public String getMaximumUtilization() {
     return maximumUtilization;
   }
 
-  public void setMaximumUtilization(@javax.annotation.Nonnull BigDecimal maximumUtilization) {
+  public void setMaximumUtilization(@javax.annotation.Nonnull String maximumUtilization) {
     this.maximumUtilization = maximumUtilization;
   }
 
 
-  public HistoricalLeverageInterestRate minimumRate(@javax.annotation.Nonnull BigDecimal minimumRate) {
+  public HistoricalLeverageInterestRate minimumRate(@javax.annotation.Nonnull String minimumRate) {
     this.minimumRate = minimumRate;
     return this;
   }
@@ -189,16 +196,16 @@ public class HistoricalLeverageInterestRate {
    * @return minimumRate
    */
   @javax.annotation.Nonnull
-  public BigDecimal getMinimumRate() {
+  public String getMinimumRate() {
     return minimumRate;
   }
 
-  public void setMinimumRate(@javax.annotation.Nonnull BigDecimal minimumRate) {
+  public void setMinimumRate(@javax.annotation.Nonnull String minimumRate) {
     this.minimumRate = minimumRate;
   }
 
 
-  public HistoricalLeverageInterestRate kinkRate(@javax.annotation.Nonnull BigDecimal kinkRate) {
+  public HistoricalLeverageInterestRate kinkRate(@javax.annotation.Nonnull String kinkRate) {
     this.kinkRate = kinkRate;
     return this;
   }
@@ -208,16 +215,16 @@ public class HistoricalLeverageInterestRate {
    * @return kinkRate
    */
   @javax.annotation.Nonnull
-  public BigDecimal getKinkRate() {
+  public String getKinkRate() {
     return kinkRate;
   }
 
-  public void setKinkRate(@javax.annotation.Nonnull BigDecimal kinkRate) {
+  public void setKinkRate(@javax.annotation.Nonnull String kinkRate) {
     this.kinkRate = kinkRate;
   }
 
 
-  public HistoricalLeverageInterestRate maximumRate(@javax.annotation.Nonnull BigDecimal maximumRate) {
+  public HistoricalLeverageInterestRate maximumRate(@javax.annotation.Nonnull String maximumRate) {
     this.maximumRate = maximumRate;
     return this;
   }
@@ -227,16 +234,16 @@ public class HistoricalLeverageInterestRate {
    * @return maximumRate
    */
   @javax.annotation.Nonnull
-  public BigDecimal getMaximumRate() {
+  public String getMaximumRate() {
     return maximumRate;
   }
 
-  public void setMaximumRate(@javax.annotation.Nonnull BigDecimal maximumRate) {
+  public void setMaximumRate(@javax.annotation.Nonnull String maximumRate) {
     this.maximumRate = maximumRate;
   }
 
 
-  public HistoricalLeverageInterestRate kinkUtilization(@javax.annotation.Nonnull BigDecimal kinkUtilization) {
+  public HistoricalLeverageInterestRate kinkUtilization(@javax.annotation.Nonnull String kinkUtilization) {
     this.kinkUtilization = kinkUtilization;
     return this;
   }
@@ -246,31 +253,69 @@ public class HistoricalLeverageInterestRate {
    * @return kinkUtilization
    */
   @javax.annotation.Nonnull
-  public BigDecimal getKinkUtilization() {
+  public String getKinkUtilization() {
     return kinkUtilization;
   }
 
-  public void setKinkUtilization(@javax.annotation.Nonnull BigDecimal kinkUtilization) {
+  public void setKinkUtilization(@javax.annotation.Nonnull String kinkUtilization) {
     this.kinkUtilization = kinkUtilization;
   }
 
 
-  public HistoricalLeverageInterestRate interestRate(@javax.annotation.Nonnull BigDecimal interestRate) {
-    this.interestRate = interestRate;
+  public HistoricalLeverageInterestRate borrowingYieldRate(@javax.annotation.Nonnull String borrowingYieldRate) {
+    this.borrowingYieldRate = borrowingYieldRate;
     return this;
   }
 
   /**
-   * Get interestRate
-   * @return interestRate
+   * Get borrowingYieldRate
+   * @return borrowingYieldRate
    */
   @javax.annotation.Nonnull
-  public BigDecimal getInterestRate() {
-    return interestRate;
+  public String getBorrowingYieldRate() {
+    return borrowingYieldRate;
   }
 
-  public void setInterestRate(@javax.annotation.Nonnull BigDecimal interestRate) {
-    this.interestRate = interestRate;
+  public void setBorrowingYieldRate(@javax.annotation.Nonnull String borrowingYieldRate) {
+    this.borrowingYieldRate = borrowingYieldRate;
+  }
+
+
+  public HistoricalLeverageInterestRate lendingYieldRate(@javax.annotation.Nonnull String lendingYieldRate) {
+    this.lendingYieldRate = lendingYieldRate;
+    return this;
+  }
+
+  /**
+   * Get lendingYieldRate
+   * @return lendingYieldRate
+   */
+  @javax.annotation.Nonnull
+  public String getLendingYieldRate() {
+    return lendingYieldRate;
+  }
+
+  public void setLendingYieldRate(@javax.annotation.Nonnull String lendingYieldRate) {
+    this.lendingYieldRate = lendingYieldRate;
+  }
+
+
+  public HistoricalLeverageInterestRate yieldToMaturity(@javax.annotation.Nonnull String yieldToMaturity) {
+    this.yieldToMaturity = yieldToMaturity;
+    return this;
+  }
+
+  /**
+   * Get yieldToMaturity
+   * @return yieldToMaturity
+   */
+  @javax.annotation.Nonnull
+  public String getYieldToMaturity() {
+    return yieldToMaturity;
+  }
+
+  public void setYieldToMaturity(@javax.annotation.Nonnull String yieldToMaturity) {
+    this.yieldToMaturity = yieldToMaturity;
   }
 
 
@@ -292,12 +337,14 @@ public class HistoricalLeverageInterestRate {
         Objects.equals(this.kinkRate, historicalLeverageInterestRate.kinkRate) &&
         Objects.equals(this.maximumRate, historicalLeverageInterestRate.maximumRate) &&
         Objects.equals(this.kinkUtilization, historicalLeverageInterestRate.kinkUtilization) &&
-        Objects.equals(this.interestRate, historicalLeverageInterestRate.interestRate);
+        Objects.equals(this.borrowingYieldRate, historicalLeverageInterestRate.borrowingYieldRate) &&
+        Objects.equals(this.lendingYieldRate, historicalLeverageInterestRate.lendingYieldRate) &&
+        Objects.equals(this.yieldToMaturity, historicalLeverageInterestRate.yieldToMaturity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(assetId, updatedAt, utilization, maximumUtilization, minimumRate, kinkRate, maximumRate, kinkUtilization, interestRate);
+    return Objects.hash(assetId, updatedAt, utilization, maximumUtilization, minimumRate, kinkRate, maximumRate, kinkUtilization, borrowingYieldRate, lendingYieldRate, yieldToMaturity);
   }
 
   @Override
@@ -312,7 +359,9 @@ public class HistoricalLeverageInterestRate {
     sb.append("    kinkRate: ").append(toIndentedString(kinkRate)).append("\n");
     sb.append("    maximumRate: ").append(toIndentedString(maximumRate)).append("\n");
     sb.append("    kinkUtilization: ").append(toIndentedString(kinkUtilization)).append("\n");
-    sb.append("    interestRate: ").append(toIndentedString(interestRate)).append("\n");
+    sb.append("    borrowingYieldRate: ").append(toIndentedString(borrowingYieldRate)).append("\n");
+    sb.append("    lendingYieldRate: ").append(toIndentedString(lendingYieldRate)).append("\n");
+    sb.append("    yieldToMaturity: ").append(toIndentedString(yieldToMaturity)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -322,10 +371,7 @@ public class HistoricalLeverageInterestRate {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
@@ -334,10 +380,10 @@ public class HistoricalLeverageInterestRate {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("asset_id", "updated_at", "utilization", "maximum_utilization", "minimum_rate", "kink_rate", "maximum_rate", "kink_utilization", "interest_rate"));
+    openapiFields = new HashSet<String>(Arrays.asList("asset_id", "updated_at", "utilization", "maximum_utilization", "minimum_rate", "kink_rate", "maximum_rate", "kink_utilization", "borrowing_yield_rate", "lending_yield_rate", "yield_to_maturity"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("asset_id", "updated_at", "utilization", "maximum_utilization", "minimum_rate", "kink_rate", "maximum_rate", "kink_utilization", "interest_rate"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("asset_id", "updated_at", "utilization", "maximum_utilization", "minimum_rate", "kink_rate", "maximum_rate", "kink_utilization", "borrowing_yield_rate", "lending_yield_rate", "yield_to_maturity"));
   }
 
   /**
@@ -349,7 +395,7 @@ public class HistoricalLeverageInterestRate {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!HistoricalLeverageInterestRate.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in HistoricalLeverageInterestRate is not found in the empty JSON string", HistoricalLeverageInterestRate.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in HistoricalLeverageInterestRate is not found in the empty JSON string", HistoricalLeverageInterestRate.openapiRequiredFields.toString()));
         }
       }
 
@@ -357,40 +403,46 @@ public class HistoricalLeverageInterestRate {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!HistoricalLeverageInterestRate.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `HistoricalLeverageInterestRate` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `HistoricalLeverageInterestRate` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : HistoricalLeverageInterestRate.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("asset_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `asset_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("asset_id").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `asset_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("asset_id").toString()));
       }
       if (!jsonObj.get("utilization").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `utilization` to be a primitive type in the JSON string but got `%s`", jsonObj.get("utilization").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `utilization` to be a primitive type in the JSON string but got `%s`", jsonObj.get("utilization").toString()));
       }
       if (!jsonObj.get("maximum_utilization").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `maximum_utilization` to be a primitive type in the JSON string but got `%s`", jsonObj.get("maximum_utilization").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `maximum_utilization` to be a primitive type in the JSON string but got `%s`", jsonObj.get("maximum_utilization").toString()));
       }
       if (!jsonObj.get("minimum_rate").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `minimum_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("minimum_rate").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `minimum_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("minimum_rate").toString()));
       }
       if (!jsonObj.get("kink_rate").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `kink_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("kink_rate").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `kink_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("kink_rate").toString()));
       }
       if (!jsonObj.get("maximum_rate").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `maximum_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("maximum_rate").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `maximum_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("maximum_rate").toString()));
       }
       if (!jsonObj.get("kink_utilization").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `kink_utilization` to be a primitive type in the JSON string but got `%s`", jsonObj.get("kink_utilization").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `kink_utilization` to be a primitive type in the JSON string but got `%s`", jsonObj.get("kink_utilization").toString()));
       }
-      if (!jsonObj.get("interest_rate").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `interest_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("interest_rate").toString()));
+      if (!jsonObj.get("borrowing_yield_rate").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `borrowing_yield_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("borrowing_yield_rate").toString()));
+      }
+      if (!jsonObj.get("lending_yield_rate").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `lending_yield_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lending_yield_rate").toString()));
+      }
+      if (!jsonObj.get("yield_to_maturity").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `yield_to_maturity` to be a primitive type in the JSON string but got `%s`", jsonObj.get("yield_to_maturity").toString()));
       }
   }
 

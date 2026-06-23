@@ -7,12 +7,12 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**price** | **BigDecimal** |  |  |
+|**price** | **String** |  |  |
 |**orderBookId** | **UUID** | Required: the order book to submit the order to |  |
 |**positionId** | **UUID** | Required: the position to submit the order to |  |
 |**assetId** | **UUID** | Required: the asset to submit the order to |  |
-|**stopLossPrice** | **BigDecimal** | Stop loss price |  [optional] |
-|**takeProfitPrice** | **BigDecimal** | Take profit price |  [optional] |
+|**stopLossPrice** | **String** | Stop loss price |  [optional] |
+|**takeProfitPrice** | **String** | Take profit price |  [optional] |
 
 
 

@@ -9,13 +9,15 @@
 |------------ | ------------- | ------------- | -------------|
 |**assetId** | **UUID** |  |  |
 |**updatedAt** | **OffsetDateTime** |  |  |
-|**utilization** | **BigDecimal** |  |  |
-|**maximumUtilization** | **BigDecimal** |  |  |
-|**minimumRate** | **BigDecimal** |  |  |
-|**kinkRate** | **BigDecimal** |  |  |
-|**maximumRate** | **BigDecimal** |  |  |
-|**kinkUtilization** | **BigDecimal** |  |  |
-|**interestRate** | **BigDecimal** |  |  |
+|**utilization** | **String** |  |  |
+|**maximumUtilization** | **String** |  |  |
+|**minimumRate** | **String** |  |  |
+|**kinkRate** | **String** |  |  |
+|**maximumRate** | **String** |  |  |
+|**kinkUtilization** | **String** |  |  |
+|**borrowingYieldRate** | **String** |  |  |
+|**lendingYieldRate** | **String** |  |  |
+|**yieldToMaturity** | **String** |  |  |
 
 
 

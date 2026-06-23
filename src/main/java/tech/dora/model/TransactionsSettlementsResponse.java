@@ -14,14 +14,12 @@
 package tech.dora.model;
 
 import java.util.Objects;
-import java.util.Locale;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -49,14 +47,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Locale;
 
 import tech.dora.JSON;
 
 /**
  * TransactionsSettlementsResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-02T17:13:50.947925667+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-23T16:44:58.682065994+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class TransactionsSettlementsResponse {
   public static final String SERIALIZED_NAME_SETTLEMENTS = "settlements";
   @SerializedName(SERIALIZED_NAME_SETTLEMENTS)
@@ -66,12 +63,12 @@ public class TransactionsSettlementsResponse {
   public static final String SERIALIZED_NAME_USER_TOTALS = "user_totals";
   @SerializedName(SERIALIZED_NAME_USER_TOTALS)
   @javax.annotation.Nullable
-  private Map<String, BigDecimal> userTotals = new HashMap<>();
+  private Map<String, String> userTotals = new HashMap<>();
 
   public static final String SERIALIZED_NAME_TENANT_TOTALS = "tenant_totals";
   @SerializedName(SERIALIZED_NAME_TENANT_TOTALS)
   @javax.annotation.Nullable
-  private Map<String, BigDecimal> tenantTotals = new HashMap<>();
+  private Map<String, String> tenantTotals = new HashMap<>();
 
   public TransactionsSettlementsResponse() {
   }
@@ -103,12 +100,12 @@ public class TransactionsSettlementsResponse {
   }
 
 
-  public TransactionsSettlementsResponse userTotals(@javax.annotation.Nullable Map<String, BigDecimal> userTotals) {
+  public TransactionsSettlementsResponse userTotals(@javax.annotation.Nullable Map<String, String> userTotals) {
     this.userTotals = userTotals;
     return this;
   }
 
-  public TransactionsSettlementsResponse putUserTotalsItem(String key, BigDecimal userTotalsItem) {
+  public TransactionsSettlementsResponse putUserTotalsItem(String key, String userTotalsItem) {
     if (this.userTotals == null) {
       this.userTotals = new HashMap<>();
     }
@@ -121,21 +118,21 @@ public class TransactionsSettlementsResponse {
    * @return userTotals
    */
   @javax.annotation.Nullable
-  public Map<String, BigDecimal> getUserTotals() {
+  public Map<String, String> getUserTotals() {
     return userTotals;
   }
 
-  public void setUserTotals(@javax.annotation.Nullable Map<String, BigDecimal> userTotals) {
+  public void setUserTotals(@javax.annotation.Nullable Map<String, String> userTotals) {
     this.userTotals = userTotals;
   }
 
 
-  public TransactionsSettlementsResponse tenantTotals(@javax.annotation.Nullable Map<String, BigDecimal> tenantTotals) {
+  public TransactionsSettlementsResponse tenantTotals(@javax.annotation.Nullable Map<String, String> tenantTotals) {
     this.tenantTotals = tenantTotals;
     return this;
   }
 
-  public TransactionsSettlementsResponse putTenantTotalsItem(String key, BigDecimal tenantTotalsItem) {
+  public TransactionsSettlementsResponse putTenantTotalsItem(String key, String tenantTotalsItem) {
     if (this.tenantTotals == null) {
       this.tenantTotals = new HashMap<>();
     }
@@ -148,11 +145,11 @@ public class TransactionsSettlementsResponse {
    * @return tenantTotals
    */
   @javax.annotation.Nullable
-  public Map<String, BigDecimal> getTenantTotals() {
+  public Map<String, String> getTenantTotals() {
     return tenantTotals;
   }
 
-  public void setTenantTotals(@javax.annotation.Nullable Map<String, BigDecimal> tenantTotals) {
+  public void setTenantTotals(@javax.annotation.Nullable Map<String, String> tenantTotals) {
     this.tenantTotals = tenantTotals;
   }
 
@@ -193,10 +190,7 @@ public class TransactionsSettlementsResponse {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
@@ -220,7 +214,7 @@ public class TransactionsSettlementsResponse {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!TransactionsSettlementsResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in TransactionsSettlementsResponse is not found in the empty JSON string", TransactionsSettlementsResponse.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in TransactionsSettlementsResponse is not found in the empty JSON string", TransactionsSettlementsResponse.openapiRequiredFields.toString()));
         }
       }
 
@@ -228,7 +222,7 @@ public class TransactionsSettlementsResponse {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!TransactionsSettlementsResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `TransactionsSettlementsResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `TransactionsSettlementsResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -237,7 +231,7 @@ public class TransactionsSettlementsResponse {
         if (jsonArraysettlements != null) {
           // ensure the json data is an array
           if (!jsonObj.get("settlements").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `settlements` to be an array in the JSON string but got `%s`", jsonObj.get("settlements").toString()));
+            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `settlements` to be an array in the JSON string but got `%s`", jsonObj.get("settlements").toString()));
           }
 
           // validate the optional field `settlements` (array)

@@ -12,7 +12,7 @@
 |**tenantId** | **String** |  |  |
 |**positionId** | **UUID** |  |  |
 |**txKind** | **String** |  |  |
-|**quantityUsd** | **BigDecimal** |  |  |
+|**quantityUsd** | **String** |  |  |
 |**createdAt** | **OffsetDateTime** |  |  |
 |**settledAt** | **OffsetDateTime** |  |  [optional] |
 |**settledBy** | **UUID** |  |  [optional] |

@@ -16,6 +16,7 @@ Request body for PUT /user/{id}/config: update a user changeable details only. O
 |**allowLiquidationsNotifications** | [**UpdateFieldBoolean**](UpdateFieldBoolean.md) | Optional: Whether to allow liquidations notifications. |  [optional] |
 |**allowDepositWithdrawalNotifications** | [**UpdateFieldBoolean**](UpdateFieldBoolean.md) | Optional: Whether to allow deposit/withdrawal notifications. |  [optional] |
 |**allowOrdersNotifications** | [**UpdateFieldBoolean**](UpdateFieldBoolean.md) | Optional: Whether to allow orders notifications. |  [optional] |
+|**allowCopyTrading** | [**UpdateFieldBoolean**](UpdateFieldBoolean.md) | Optional: Whether to allow copy trading. |  [optional] |
 
 
 

@@ -64,11 +64,27 @@ public class AssetYieldTest {
     }
 
     /**
-     * Test the property 'lendingYield'
+     * Test the property 'borrowingYieldRate'
      */
     @Test
-    public void lendingYieldTest() {
-        // TODO: test lendingYield
+    public void borrowingYieldRateTest() {
+        // TODO: test borrowingYieldRate
+    }
+
+    /**
+     * Test the property 'lendingYieldRate'
+     */
+    @Test
+    public void lendingYieldRateTest() {
+        // TODO: test lendingYieldRate
+    }
+
+    /**
+     * Test the property 'price'
+     */
+    @Test
+    public void priceTest() {
+        // TODO: test price
     }
 
     /**

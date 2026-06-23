@@ -1035,7 +1035,7 @@ public class DefaultApiTest {
     }
 
     /**
-     * Get historical leverage interest rates for a specific asset
+     * Get historical leverage borrowing and lending yields for a specific asset
      *
      * @throws ApiException if the Api call fails
      */
@@ -1049,7 +1049,7 @@ public class DefaultApiTest {
     }
 
     /**
-     * Get leverage interest rate for a specific asset
+     * Get leverage borrowing and lending yields for a specific asset
      *
      * @throws ApiException if the Api call fails
      */
@@ -1313,9 +1313,8 @@ public class DefaultApiTest {
      */
     @Test
     public void streamAssetPricesTest() throws ApiException {
-        OffsetDateTime since = null;
         UUID assetId = null;
-        Map<String, AssetPrice> response = api.streamAssetPrices(since, assetId);
+        Map<String, AssetPrice> response = api.streamAssetPrices(assetId);
         // TODO: test validations
     }
 

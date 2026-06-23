@@ -19,7 +19,6 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.UUID;
@@ -105,11 +104,27 @@ public class HistoricalLeverageInterestRateTest {
     }
 
     /**
-     * Test the property 'interestRate'
+     * Test the property 'borrowingYieldRate'
      */
     @Test
-    public void interestRateTest() {
-        // TODO: test interestRate
+    public void borrowingYieldRateTest() {
+        // TODO: test borrowingYieldRate
+    }
+
+    /**
+     * Test the property 'lendingYieldRate'
+     */
+    @Test
+    public void lendingYieldRateTest() {
+        // TODO: test lendingYieldRate
+    }
+
+    /**
+     * Test the property 'yieldToMaturity'
+     */
+    @Test
+    public void yieldToMaturityTest() {
+        // TODO: test yieldToMaturity
     }
 
 }

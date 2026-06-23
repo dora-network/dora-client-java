@@ -14,7 +14,6 @@
 package tech.dora.model;
 
 import java.util.Objects;
-import java.util.Locale;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -45,14 +44,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Locale;
 
 import tech.dora.JSON;
 
 /**
  * AssetYield
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-02T17:13:50.947925667+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-23T16:44:58.682065994+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class AssetYield {
   public static final String SERIALIZED_NAME_ASSET_ID = "asset_id";
   @SerializedName(SERIALIZED_NAME_ASSET_ID)
@@ -69,10 +67,20 @@ public class AssetYield {
   @javax.annotation.Nonnull
   private String ytm;
 
-  public static final String SERIALIZED_NAME_LENDING_YIELD = "lending_yield";
-  @SerializedName(SERIALIZED_NAME_LENDING_YIELD)
+  public static final String SERIALIZED_NAME_BORROWING_YIELD_RATE = "borrowing_yield_rate";
+  @SerializedName(SERIALIZED_NAME_BORROWING_YIELD_RATE)
   @javax.annotation.Nonnull
-  private String lendingYield;
+  private String borrowingYieldRate;
+
+  public static final String SERIALIZED_NAME_LENDING_YIELD_RATE = "lending_yield_rate";
+  @SerializedName(SERIALIZED_NAME_LENDING_YIELD_RATE)
+  @javax.annotation.Nonnull
+  private String lendingYieldRate;
+
+  public static final String SERIALIZED_NAME_PRICE = "price";
+  @SerializedName(SERIALIZED_NAME_PRICE)
+  @javax.annotation.Nonnull
+  private String price;
 
   public static final String SERIALIZED_NAME_TVL = "tvl";
   @SerializedName(SERIALIZED_NAME_TVL)
@@ -144,22 +152,60 @@ public class AssetYield {
   }
 
 
-  public AssetYield lendingYield(@javax.annotation.Nonnull String lendingYield) {
-    this.lendingYield = lendingYield;
+  public AssetYield borrowingYieldRate(@javax.annotation.Nonnull String borrowingYieldRate) {
+    this.borrowingYieldRate = borrowingYieldRate;
     return this;
   }
 
   /**
-   * Get lendingYield
-   * @return lendingYield
+   * Get borrowingYieldRate
+   * @return borrowingYieldRate
    */
   @javax.annotation.Nonnull
-  public String getLendingYield() {
-    return lendingYield;
+  public String getBorrowingYieldRate() {
+    return borrowingYieldRate;
   }
 
-  public void setLendingYield(@javax.annotation.Nonnull String lendingYield) {
-    this.lendingYield = lendingYield;
+  public void setBorrowingYieldRate(@javax.annotation.Nonnull String borrowingYieldRate) {
+    this.borrowingYieldRate = borrowingYieldRate;
+  }
+
+
+  public AssetYield lendingYieldRate(@javax.annotation.Nonnull String lendingYieldRate) {
+    this.lendingYieldRate = lendingYieldRate;
+    return this;
+  }
+
+  /**
+   * Get lendingYieldRate
+   * @return lendingYieldRate
+   */
+  @javax.annotation.Nonnull
+  public String getLendingYieldRate() {
+    return lendingYieldRate;
+  }
+
+  public void setLendingYieldRate(@javax.annotation.Nonnull String lendingYieldRate) {
+    this.lendingYieldRate = lendingYieldRate;
+  }
+
+
+  public AssetYield price(@javax.annotation.Nonnull String price) {
+    this.price = price;
+    return this;
+  }
+
+  /**
+   * Get price
+   * @return price
+   */
+  @javax.annotation.Nonnull
+  public String getPrice() {
+    return price;
+  }
+
+  public void setPrice(@javax.annotation.Nonnull String price) {
+    this.price = price;
   }
 
 
@@ -214,14 +260,16 @@ public class AssetYield {
     return Objects.equals(this.assetId, assetYield.assetId) &&
         Objects.equals(this.timestamp, assetYield.timestamp) &&
         Objects.equals(this.ytm, assetYield.ytm) &&
-        Objects.equals(this.lendingYield, assetYield.lendingYield) &&
+        Objects.equals(this.borrowingYieldRate, assetYield.borrowingYieldRate) &&
+        Objects.equals(this.lendingYieldRate, assetYield.lendingYieldRate) &&
+        Objects.equals(this.price, assetYield.price) &&
         Objects.equals(this.tvl, assetYield.tvl) &&
         Objects.equals(this.totalYield, assetYield.totalYield);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(assetId, timestamp, ytm, lendingYield, tvl, totalYield);
+    return Objects.hash(assetId, timestamp, ytm, borrowingYieldRate, lendingYieldRate, price, tvl, totalYield);
   }
 
   @Override
@@ -231,7 +279,9 @@ public class AssetYield {
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
     sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
     sb.append("    ytm: ").append(toIndentedString(ytm)).append("\n");
-    sb.append("    lendingYield: ").append(toIndentedString(lendingYield)).append("\n");
+    sb.append("    borrowingYieldRate: ").append(toIndentedString(borrowingYieldRate)).append("\n");
+    sb.append("    lendingYieldRate: ").append(toIndentedString(lendingYieldRate)).append("\n");
+    sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    tvl: ").append(toIndentedString(tvl)).append("\n");
     sb.append("    totalYield: ").append(toIndentedString(totalYield)).append("\n");
     sb.append("}");
@@ -243,10 +293,7 @@ public class AssetYield {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
@@ -255,10 +302,10 @@ public class AssetYield {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("asset_id", "timestamp", "ytm", "lending_yield", "tvl", "total_yield"));
+    openapiFields = new HashSet<String>(Arrays.asList("asset_id", "timestamp", "ytm", "borrowing_yield_rate", "lending_yield_rate", "price", "tvl", "total_yield"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("asset_id", "timestamp", "ytm", "lending_yield", "tvl", "total_yield"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("asset_id", "timestamp", "ytm", "borrowing_yield_rate", "lending_yield_rate", "price", "tvl", "total_yield"));
   }
 
   /**
@@ -270,7 +317,7 @@ public class AssetYield {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!AssetYield.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in AssetYield is not found in the empty JSON string", AssetYield.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in AssetYield is not found in the empty JSON string", AssetYield.openapiRequiredFields.toString()));
         }
       }
 
@@ -278,31 +325,37 @@ public class AssetYield {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!AssetYield.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `AssetYield` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `AssetYield` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : AssetYield.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("asset_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `asset_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("asset_id").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `asset_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("asset_id").toString()));
       }
       if (!jsonObj.get("ytm").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `ytm` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ytm").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `ytm` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ytm").toString()));
       }
-      if (!jsonObj.get("lending_yield").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `lending_yield` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lending_yield").toString()));
+      if (!jsonObj.get("borrowing_yield_rate").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `borrowing_yield_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("borrowing_yield_rate").toString()));
+      }
+      if (!jsonObj.get("lending_yield_rate").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `lending_yield_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lending_yield_rate").toString()));
+      }
+      if (!jsonObj.get("price").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("price").toString()));
       }
       if (!jsonObj.get("tvl").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `tvl` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tvl").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tvl` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tvl").toString()));
       }
       if (!jsonObj.get("total_yield").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `total_yield` to be a primitive type in the JSON string but got `%s`", jsonObj.get("total_yield").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `total_yield` to be a primitive type in the JSON string but got `%s`", jsonObj.get("total_yield").toString()));
       }
   }
 

@@ -14,7 +14,6 @@
 package tech.dora.model;
 
 import java.util.Objects;
-import java.util.Locale;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -45,14 +44,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Locale;
 
 import tech.dora.JSON;
 
 /**
  * Candle
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-02T17:13:50.947925667+02:00[Europe/Paris]", comments = "Generator version: 7.17.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-23T16:44:58.682065994+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class Candle {
   public static final String SERIALIZED_NAME_ORDER_BOOK_ID = "order_book_id";
   @SerializedName(SERIALIZED_NAME_ORDER_BOOK_ID)
@@ -85,9 +83,30 @@ public class Candle {
   private String close;
 
   public static final String SERIALIZED_NAME_YTM = "ytm";
+  @Deprecated
   @SerializedName(SERIALIZED_NAME_YTM)
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private String ytm;
+
+  public static final String SERIALIZED_NAME_OPEN_YTM = "open_ytm";
+  @SerializedName(SERIALIZED_NAME_OPEN_YTM)
+  @javax.annotation.Nonnull
+  private String openYtm;
+
+  public static final String SERIALIZED_NAME_CLOSE_YTM = "close_ytm";
+  @SerializedName(SERIALIZED_NAME_CLOSE_YTM)
+  @javax.annotation.Nonnull
+  private String closeYtm;
+
+  public static final String SERIALIZED_NAME_HIGH_YTM = "high_ytm";
+  @SerializedName(SERIALIZED_NAME_HIGH_YTM)
+  @javax.annotation.Nonnull
+  private String highYtm;
+
+  public static final String SERIALIZED_NAME_LOW_YTM = "low_ytm";
+  @SerializedName(SERIALIZED_NAME_LOW_YTM)
+  @javax.annotation.Nonnull
+  private String lowYtm;
 
   public static final String SERIALIZED_NAME_VOLUME = "volume";
   @SerializedName(SERIALIZED_NAME_VOLUME)
@@ -211,22 +230,102 @@ public class Candle {
   }
 
 
-  public Candle ytm(@javax.annotation.Nonnull String ytm) {
+  @Deprecated
+  public Candle ytm(@javax.annotation.Nullable String ytm) {
     this.ytm = ytm;
     return this;
   }
 
   /**
-   * Get ytm
+   * DEPRECATED: Use close_ytm instead.
    * @return ytm
+   * @deprecated
    */
-  @javax.annotation.Nonnull
+  @Deprecated
+  @javax.annotation.Nullable
   public String getYtm() {
     return ytm;
   }
 
-  public void setYtm(@javax.annotation.Nonnull String ytm) {
+  @Deprecated
+  public void setYtm(@javax.annotation.Nullable String ytm) {
     this.ytm = ytm;
+  }
+
+
+  public Candle openYtm(@javax.annotation.Nonnull String openYtm) {
+    this.openYtm = openYtm;
+    return this;
+  }
+
+  /**
+   * Get openYtm
+   * @return openYtm
+   */
+  @javax.annotation.Nonnull
+  public String getOpenYtm() {
+    return openYtm;
+  }
+
+  public void setOpenYtm(@javax.annotation.Nonnull String openYtm) {
+    this.openYtm = openYtm;
+  }
+
+
+  public Candle closeYtm(@javax.annotation.Nonnull String closeYtm) {
+    this.closeYtm = closeYtm;
+    return this;
+  }
+
+  /**
+   * Get closeYtm
+   * @return closeYtm
+   */
+  @javax.annotation.Nonnull
+  public String getCloseYtm() {
+    return closeYtm;
+  }
+
+  public void setCloseYtm(@javax.annotation.Nonnull String closeYtm) {
+    this.closeYtm = closeYtm;
+  }
+
+
+  public Candle highYtm(@javax.annotation.Nonnull String highYtm) {
+    this.highYtm = highYtm;
+    return this;
+  }
+
+  /**
+   * Get highYtm
+   * @return highYtm
+   */
+  @javax.annotation.Nonnull
+  public String getHighYtm() {
+    return highYtm;
+  }
+
+  public void setHighYtm(@javax.annotation.Nonnull String highYtm) {
+    this.highYtm = highYtm;
+  }
+
+
+  public Candle lowYtm(@javax.annotation.Nonnull String lowYtm) {
+    this.lowYtm = lowYtm;
+    return this;
+  }
+
+  /**
+   * Get lowYtm
+   * @return lowYtm
+   */
+  @javax.annotation.Nonnull
+  public String getLowYtm() {
+    return lowYtm;
+  }
+
+  public void setLowYtm(@javax.annotation.Nonnull String lowYtm) {
+    this.lowYtm = lowYtm;
   }
 
 
@@ -266,12 +365,16 @@ public class Candle {
         Objects.equals(this.low, candle.low) &&
         Objects.equals(this.close, candle.close) &&
         Objects.equals(this.ytm, candle.ytm) &&
+        Objects.equals(this.openYtm, candle.openYtm) &&
+        Objects.equals(this.closeYtm, candle.closeYtm) &&
+        Objects.equals(this.highYtm, candle.highYtm) &&
+        Objects.equals(this.lowYtm, candle.lowYtm) &&
         Objects.equals(this.volume, candle.volume);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderBookId, startTimestamp, open, high, low, close, ytm, volume);
+    return Objects.hash(orderBookId, startTimestamp, open, high, low, close, ytm, openYtm, closeYtm, highYtm, lowYtm, volume);
   }
 
   @Override
@@ -285,6 +388,10 @@ public class Candle {
     sb.append("    low: ").append(toIndentedString(low)).append("\n");
     sb.append("    close: ").append(toIndentedString(close)).append("\n");
     sb.append("    ytm: ").append(toIndentedString(ytm)).append("\n");
+    sb.append("    openYtm: ").append(toIndentedString(openYtm)).append("\n");
+    sb.append("    closeYtm: ").append(toIndentedString(closeYtm)).append("\n");
+    sb.append("    highYtm: ").append(toIndentedString(highYtm)).append("\n");
+    sb.append("    lowYtm: ").append(toIndentedString(lowYtm)).append("\n");
     sb.append("    volume: ").append(toIndentedString(volume)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -295,10 +402,7 @@ public class Candle {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
@@ -307,10 +411,10 @@ public class Candle {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("order_book_id", "start_timestamp", "open", "high", "low", "close", "ytm", "volume"));
+    openapiFields = new HashSet<String>(Arrays.asList("order_book_id", "start_timestamp", "open", "high", "low", "close", "ytm", "open_ytm", "close_ytm", "high_ytm", "low_ytm", "volume"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("order_book_id", "start_timestamp", "open", "high", "low", "close", "ytm", "volume"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("order_book_id", "start_timestamp", "open", "high", "low", "close", "open_ytm", "close_ytm", "high_ytm", "low_ytm", "volume"));
   }
 
   /**
@@ -322,7 +426,7 @@ public class Candle {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!Candle.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in Candle is not found in the empty JSON string", Candle.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in Candle is not found in the empty JSON string", Candle.openapiRequiredFields.toString()));
         }
       }
 
@@ -330,37 +434,49 @@ public class Candle {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!Candle.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Candle` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Candle` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : Candle.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("order_book_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `order_book_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_book_id").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `order_book_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_book_id").toString()));
       }
       if (!jsonObj.get("open").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `open` to be a primitive type in the JSON string but got `%s`", jsonObj.get("open").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `open` to be a primitive type in the JSON string but got `%s`", jsonObj.get("open").toString()));
       }
       if (!jsonObj.get("high").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `high` to be a primitive type in the JSON string but got `%s`", jsonObj.get("high").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `high` to be a primitive type in the JSON string but got `%s`", jsonObj.get("high").toString()));
       }
       if (!jsonObj.get("low").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `low` to be a primitive type in the JSON string but got `%s`", jsonObj.get("low").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `low` to be a primitive type in the JSON string but got `%s`", jsonObj.get("low").toString()));
       }
       if (!jsonObj.get("close").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `close` to be a primitive type in the JSON string but got `%s`", jsonObj.get("close").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `close` to be a primitive type in the JSON string but got `%s`", jsonObj.get("close").toString()));
       }
-      if (!jsonObj.get("ytm").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `ytm` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ytm").toString()));
+      if ((jsonObj.get("ytm") != null && !jsonObj.get("ytm").isJsonNull()) && !jsonObj.get("ytm").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `ytm` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ytm").toString()));
+      }
+      if (!jsonObj.get("open_ytm").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `open_ytm` to be a primitive type in the JSON string but got `%s`", jsonObj.get("open_ytm").toString()));
+      }
+      if (!jsonObj.get("close_ytm").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `close_ytm` to be a primitive type in the JSON string but got `%s`", jsonObj.get("close_ytm").toString()));
+      }
+      if (!jsonObj.get("high_ytm").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `high_ytm` to be a primitive type in the JSON string but got `%s`", jsonObj.get("high_ytm").toString()));
+      }
+      if (!jsonObj.get("low_ytm").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `low_ytm` to be a primitive type in the JSON string but got `%s`", jsonObj.get("low_ytm").toString()));
       }
       if (!jsonObj.get("volume").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `volume` to be a primitive type in the JSON string but got `%s`", jsonObj.get("volume").toString()));
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `volume` to be a primitive type in the JSON string but got `%s`", jsonObj.get("volume").toString()));
       }
   }
 

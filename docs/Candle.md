@@ -13,7 +13,11 @@
 |**high** | **String** |  |  |
 |**low** | **String** |  |  |
 |**close** | **String** |  |  |
-|**ytm** | **String** |  |  |
+|**ytm** | **String** | DEPRECATED: Use close_ytm instead. |  [optional] |
+|**openYtm** | **String** |  |  |
+|**closeYtm** | **String** |  |  |
+|**highYtm** | **String** |  |  |
+|**lowYtm** | **String** |  |  |
 |**volume** | **String** |  |  |
 
 
