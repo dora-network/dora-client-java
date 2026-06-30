@@ -600,6 +600,57 @@ paths:
       summary: Verify a user by ID
       x-accepts:
       - application/json
+  /v1/user/ranking:
+    get:
+      operationId: getTopTradersByPnL
+      parameters:
+      - explode: true
+        in: query
+        name: start
+        required: true
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: end
+        required: true
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetPnLRankingResponse"
+          description: Top traders by PnL
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid path parameters"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get top traders by PnL
+      x-accepts:
+      - application/json
   /v1/orderbooks:
     get:
       operationId: listOrderBooks
@@ -1153,6 +1204,16 @@ paths:
     get:
       operationId: listOrders
       parameters:
+      - description: Filter by user ID (only allowed if the user has copy trading
+          enabled)
+        explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
       - explode: true
         in: query
         name: order_book_id
@@ -4844,6 +4905,10 @@ components:
           format: uuid
           type: string
         kind:
+          $ref: "#/components/schemas/CouponKind"
+        coupon_kind:
+          $ref: "#/components/schemas/CouponKind"
+        bond_kind:
           $ref: "#/components/schemas/BondKind"
         coupon_start_at:
           format: date-time
@@ -5224,6 +5289,11 @@ components:
       - POOL_SHARE
       type: string
     BondKind:
+      enum:
+      - CORPORATE
+      - TREASURY
+      type: string
+    CouponKind:
       enum:
       - COUPON-PAYING
       - PRINCIPAL-ONLY
@@ -5922,6 +5992,66 @@ components:
       - ZW
       example: IN
       type: string
+    PnLRankingResponse:
+      example:
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        first_name: first_name
+        total_pnl: total_pnl
+        total_trades: 0
+        winning_trades: 6
+        losing_trades: 1
+        win_rate: win_rate
+      properties:
+        user_id:
+          format: uuid
+          type: string
+        first_name:
+          type: string
+        total_pnl:
+          type: string
+        total_trades:
+          type: integer
+        winning_trades:
+          type: integer
+        losing_trades:
+          type: integer
+        win_rate:
+          type: string
+      required:
+      - first_name
+      - losing_trades
+      - total_pnl
+      - total_trades
+      - user_id
+      - win_rate
+      - winning_trades
+    GetPnLRankingResponse:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/PnLRankingResponse"
+            type: array
+            default: null
+      example:
+        data:
+        - user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          first_name: first_name
+          total_pnl: total_pnl
+          total_trades: 0
+          winning_trades: 6
+          losing_trades: 1
+          win_rate: win_rate
+        - user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          first_name: first_name
+          total_pnl: total_pnl
+          total_trades: 0
+          winning_trades: 6
+          losing_trades: 1
+          win_rate: win_rate
+        error: error
+        metadata: ""
     OrderBookStatus:
       enum:
       - CLOSED
@@ -6572,8 +6702,14 @@ components:
         assets_config:
         - asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           price: price
+          module_available: module_available
+          module_supplied: module_supplied
+          module_borrowed: module_borrowed
         - asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           price: price
+          module_available: module_available
+          module_supplied: module_supplied
+          module_borrowed: module_borrowed
         stop_loss_price: stop_loss_price
         take_profit_price: take_profit_price
         restrictions:
@@ -10869,6 +11005,9 @@ components:
       example:
         asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         price: price
+        module_available: module_available
+        module_supplied: module_supplied
+        module_borrowed: module_borrowed
       properties:
         asset_id:
           format: uuid
@@ -10877,6 +11016,21 @@ components:
           description: "if an asset is a CURRENCY, set 1 USD price,If an asset is\
             \ a BOND and the price isn't found, set to 0 USD \n You can find price\
             \ details on /price/asset/{asset_id} route"
+          type: string
+        module_available:
+          description: "Optional leverage module available balance for this asset,\
+            \ from /v1/ledger/module/{asset_id}. If provided, validation rejects orders\
+            \ that need to borrow more than the module can supply."
+          type: string
+        module_supplied:
+          description: "Optional leverage module total supplied balance for this asset,\
+            \ from /v1/ledger/module/{asset_id}. Required with module_available when\
+            \ the asset has max_utilization."
+          type: string
+        module_borrowed:
+          description: "Optional leverage module borrowed balance for this asset,\
+            \ from /v1/ledger/module/{asset_id}. Required with module_available when\
+            \ the asset has max_utilization."
           type: string
       required:
       - asset_id

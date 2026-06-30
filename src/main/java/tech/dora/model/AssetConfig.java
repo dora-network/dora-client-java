@@ -49,7 +49,7 @@ import tech.dora.JSON;
 /**
  * AssetConfig
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-23T16:44:58.682065994+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-30T16:26:11.497442354+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class AssetConfig {
   public static final String SERIALIZED_NAME_ASSET_ID = "asset_id";
   @SerializedName(SERIALIZED_NAME_ASSET_ID)
@@ -60,6 +60,21 @@ public class AssetConfig {
   @SerializedName(SERIALIZED_NAME_PRICE)
   @javax.annotation.Nonnull
   private String price;
+
+  public static final String SERIALIZED_NAME_MODULE_AVAILABLE = "module_available";
+  @SerializedName(SERIALIZED_NAME_MODULE_AVAILABLE)
+  @javax.annotation.Nullable
+  private String moduleAvailable;
+
+  public static final String SERIALIZED_NAME_MODULE_SUPPLIED = "module_supplied";
+  @SerializedName(SERIALIZED_NAME_MODULE_SUPPLIED)
+  @javax.annotation.Nullable
+  private String moduleSupplied;
+
+  public static final String SERIALIZED_NAME_MODULE_BORROWED = "module_borrowed";
+  @SerializedName(SERIALIZED_NAME_MODULE_BORROWED)
+  @javax.annotation.Nullable
+  private String moduleBorrowed;
 
   public AssetConfig() {
   }
@@ -102,6 +117,63 @@ public class AssetConfig {
   }
 
 
+  public AssetConfig moduleAvailable(@javax.annotation.Nullable String moduleAvailable) {
+    this.moduleAvailable = moduleAvailable;
+    return this;
+  }
+
+  /**
+   * Optional leverage module available balance for this asset, from /v1/ledger/module/{asset_id}. If provided, validation rejects orders that need to borrow more than the module can supply.
+   * @return moduleAvailable
+   */
+  @javax.annotation.Nullable
+  public String getModuleAvailable() {
+    return moduleAvailable;
+  }
+
+  public void setModuleAvailable(@javax.annotation.Nullable String moduleAvailable) {
+    this.moduleAvailable = moduleAvailable;
+  }
+
+
+  public AssetConfig moduleSupplied(@javax.annotation.Nullable String moduleSupplied) {
+    this.moduleSupplied = moduleSupplied;
+    return this;
+  }
+
+  /**
+   * Optional leverage module total supplied balance for this asset, from /v1/ledger/module/{asset_id}. Required with module_available when the asset has max_utilization.
+   * @return moduleSupplied
+   */
+  @javax.annotation.Nullable
+  public String getModuleSupplied() {
+    return moduleSupplied;
+  }
+
+  public void setModuleSupplied(@javax.annotation.Nullable String moduleSupplied) {
+    this.moduleSupplied = moduleSupplied;
+  }
+
+
+  public AssetConfig moduleBorrowed(@javax.annotation.Nullable String moduleBorrowed) {
+    this.moduleBorrowed = moduleBorrowed;
+    return this;
+  }
+
+  /**
+   * Optional leverage module borrowed balance for this asset, from /v1/ledger/module/{asset_id}. Required with module_available when the asset has max_utilization.
+   * @return moduleBorrowed
+   */
+  @javax.annotation.Nullable
+  public String getModuleBorrowed() {
+    return moduleBorrowed;
+  }
+
+  public void setModuleBorrowed(@javax.annotation.Nullable String moduleBorrowed) {
+    this.moduleBorrowed = moduleBorrowed;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -113,12 +185,15 @@ public class AssetConfig {
     }
     AssetConfig assetConfig = (AssetConfig) o;
     return Objects.equals(this.assetId, assetConfig.assetId) &&
-        Objects.equals(this.price, assetConfig.price);
+        Objects.equals(this.price, assetConfig.price) &&
+        Objects.equals(this.moduleAvailable, assetConfig.moduleAvailable) &&
+        Objects.equals(this.moduleSupplied, assetConfig.moduleSupplied) &&
+        Objects.equals(this.moduleBorrowed, assetConfig.moduleBorrowed);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(assetId, price);
+    return Objects.hash(assetId, price, moduleAvailable, moduleSupplied, moduleBorrowed);
   }
 
   @Override
@@ -127,6 +202,9 @@ public class AssetConfig {
     sb.append("class AssetConfig {\n");
     sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
+    sb.append("    moduleAvailable: ").append(toIndentedString(moduleAvailable)).append("\n");
+    sb.append("    moduleSupplied: ").append(toIndentedString(moduleSupplied)).append("\n");
+    sb.append("    moduleBorrowed: ").append(toIndentedString(moduleBorrowed)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -145,7 +223,7 @@ public class AssetConfig {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("asset_id", "price"));
+    openapiFields = new HashSet<String>(Arrays.asList("asset_id", "price", "module_available", "module_supplied", "module_borrowed"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("asset_id", "price"));
@@ -184,6 +262,15 @@ public class AssetConfig {
       }
       if (!jsonObj.get("price").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("price").toString()));
+      }
+      if ((jsonObj.get("module_available") != null && !jsonObj.get("module_available").isJsonNull()) && !jsonObj.get("module_available").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `module_available` to be a primitive type in the JSON string but got `%s`", jsonObj.get("module_available").toString()));
+      }
+      if ((jsonObj.get("module_supplied") != null && !jsonObj.get("module_supplied").isJsonNull()) && !jsonObj.get("module_supplied").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `module_supplied` to be a primitive type in the JSON string but got `%s`", jsonObj.get("module_supplied").toString()));
+      }
+      if ((jsonObj.get("module_borrowed") != null && !jsonObj.get("module_borrowed").isJsonNull()) && !jsonObj.get("module_borrowed").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `module_borrowed` to be a primitive type in the JSON string but got `%s`", jsonObj.get("module_borrowed").toString()));
       }
   }
 

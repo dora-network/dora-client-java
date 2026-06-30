@@ -29,9 +29,9 @@ import com.google.gson.stream.JsonWriter;
 @JsonAdapter(BondKind.Adapter.class)
 public enum BondKind {
   
-  COUPON_PAYING("COUPON-PAYING"),
+  CORPORATE("CORPORATE"),
   
-  PRINCIPAL_ONLY("PRINCIPAL-ONLY");
+  TREASURY("TREASURY");
 
   private String value;
 

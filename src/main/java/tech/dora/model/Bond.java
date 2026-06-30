@@ -24,6 +24,7 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.UUID;
 import tech.dora.model.BondKind;
+import tech.dora.model.CouponKind;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -51,7 +52,7 @@ import tech.dora.JSON;
 /**
  * Bond
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-23T16:44:58.682065994+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-30T16:26:11.497442354+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class Bond {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -61,7 +62,17 @@ public class Bond {
   public static final String SERIALIZED_NAME_KIND = "kind";
   @SerializedName(SERIALIZED_NAME_KIND)
   @javax.annotation.Nonnull
-  private BondKind kind;
+  private CouponKind kind;
+
+  public static final String SERIALIZED_NAME_COUPON_KIND = "coupon_kind";
+  @SerializedName(SERIALIZED_NAME_COUPON_KIND)
+  @javax.annotation.Nullable
+  private CouponKind couponKind;
+
+  public static final String SERIALIZED_NAME_BOND_KIND = "bond_kind";
+  @SerializedName(SERIALIZED_NAME_BOND_KIND)
+  @javax.annotation.Nullable
+  private BondKind bondKind;
 
   public static final String SERIALIZED_NAME_COUPON_START_AT = "coupon_start_at";
   @SerializedName(SERIALIZED_NAME_COUPON_START_AT)
@@ -140,7 +151,7 @@ public class Bond {
   }
 
 
-  public Bond kind(@javax.annotation.Nonnull BondKind kind) {
+  public Bond kind(@javax.annotation.Nonnull CouponKind kind) {
     this.kind = kind;
     return this;
   }
@@ -150,12 +161,50 @@ public class Bond {
    * @return kind
    */
   @javax.annotation.Nonnull
-  public BondKind getKind() {
+  public CouponKind getKind() {
     return kind;
   }
 
-  public void setKind(@javax.annotation.Nonnull BondKind kind) {
+  public void setKind(@javax.annotation.Nonnull CouponKind kind) {
     this.kind = kind;
+  }
+
+
+  public Bond couponKind(@javax.annotation.Nullable CouponKind couponKind) {
+    this.couponKind = couponKind;
+    return this;
+  }
+
+  /**
+   * Get couponKind
+   * @return couponKind
+   */
+  @javax.annotation.Nullable
+  public CouponKind getCouponKind() {
+    return couponKind;
+  }
+
+  public void setCouponKind(@javax.annotation.Nullable CouponKind couponKind) {
+    this.couponKind = couponKind;
+  }
+
+
+  public Bond bondKind(@javax.annotation.Nullable BondKind bondKind) {
+    this.bondKind = bondKind;
+    return this;
+  }
+
+  /**
+   * Get bondKind
+   * @return bondKind
+   */
+  @javax.annotation.Nullable
+  public BondKind getBondKind() {
+    return bondKind;
+  }
+
+  public void setBondKind(@javax.annotation.Nullable BondKind bondKind) {
+    this.bondKind = bondKind;
   }
 
 
@@ -382,6 +431,8 @@ public class Bond {
     Bond bond = (Bond) o;
     return Objects.equals(this.id, bond.id) &&
         Objects.equals(this.kind, bond.kind) &&
+        Objects.equals(this.couponKind, bond.couponKind) &&
+        Objects.equals(this.bondKind, bond.bondKind) &&
         Objects.equals(this.couponStartAt, bond.couponStartAt) &&
         Objects.equals(this.createdAt, bond.createdAt) &&
         Objects.equals(this.finalCouponAt, bond.finalCouponAt) &&
@@ -397,7 +448,7 @@ public class Bond {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, kind, couponStartAt, createdAt, finalCouponAt, isin, issuedAt, issuer, maturityAt, principalValue, paymentsPerYear, paymentsEvery, nextCouponPayment);
+    return Objects.hash(id, kind, couponKind, bondKind, couponStartAt, createdAt, finalCouponAt, isin, issuedAt, issuer, maturityAt, principalValue, paymentsPerYear, paymentsEvery, nextCouponPayment);
   }
 
   @Override
@@ -406,6 +457,8 @@ public class Bond {
     sb.append("class Bond {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    kind: ").append(toIndentedString(kind)).append("\n");
+    sb.append("    couponKind: ").append(toIndentedString(couponKind)).append("\n");
+    sb.append("    bondKind: ").append(toIndentedString(bondKind)).append("\n");
     sb.append("    couponStartAt: ").append(toIndentedString(couponStartAt)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    finalCouponAt: ").append(toIndentedString(finalCouponAt)).append("\n");
@@ -435,7 +488,7 @@ public class Bond {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "kind", "coupon_start_at", "created_at", "final_coupon_at", "isin", "issued_at", "issuer", "maturity_at", "principal_value", "payments_per_year", "payments_every", "next_coupon_payment"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "kind", "coupon_kind", "bond_kind", "coupon_start_at", "created_at", "final_coupon_at", "isin", "issued_at", "issuer", "maturity_at", "principal_value", "payments_per_year", "payments_every", "next_coupon_payment"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "kind", "created_at", "isin", "issued_at", "issuer", "maturity_at", "principal_value", "payments_per_year"));
@@ -473,7 +526,15 @@ public class Bond {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
       // validate the required field `kind`
-      BondKind.validateJsonElement(jsonObj.get("kind"));
+      CouponKind.validateJsonElement(jsonObj.get("kind"));
+      // validate the optional field `coupon_kind`
+      if (jsonObj.get("coupon_kind") != null && !jsonObj.get("coupon_kind").isJsonNull()) {
+        CouponKind.validateJsonElement(jsonObj.get("coupon_kind"));
+      }
+      // validate the optional field `bond_kind`
+      if (jsonObj.get("bond_kind") != null && !jsonObj.get("bond_kind").isJsonNull()) {
+        BondKind.validateJsonElement(jsonObj.get("bond_kind"));
+      }
       if (!jsonObj.get("isin").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `isin` to be a primitive type in the JSON string but got `%s`", jsonObj.get("isin").toString()));
       }

@@ -5,9 +5,9 @@
 ## Enum
 
 
-* `COUPON_PAYING` (value: `"COUPON-PAYING"`)
+* `CORPORATE` (value: `"CORPORATE"`)
 
-* `PRINCIPAL_ONLY` (value: `"PRINCIPAL-ONLY"`)
+* `TREASURY` (value: `"TREASURY"`)
 
 
 

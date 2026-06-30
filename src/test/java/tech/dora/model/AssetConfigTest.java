@@ -54,4 +54,28 @@ public class AssetConfigTest {
         // TODO: test price
     }
 
+    /**
+     * Test the property 'moduleAvailable'
+     */
+    @Test
+    public void moduleAvailableTest() {
+        // TODO: test moduleAvailable
+    }
+
+    /**
+     * Test the property 'moduleSupplied'
+     */
+    @Test
+    public void moduleSuppliedTest() {
+        // TODO: test moduleSupplied
+    }
+
+    /**
+     * Test the property 'moduleBorrowed'
+     */
+    @Test
+    public void moduleBorrowedTest() {
+        // TODO: test moduleBorrowed
+    }
+
 }

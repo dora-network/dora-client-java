@@ -41,6 +41,7 @@ docs/ClosePositionResp.md
 docs/ClosePositionResponseEnvelope.md
 docs/Collateral.md
 docs/CountryCode.md
+docs/CouponKind.md
 docs/CouponPayment.md
 docs/CreateAPIKeyData.md
 docs/CreateAPIKeyRequest.md
@@ -61,6 +62,7 @@ docs/FundUserRequest.md
 docs/FundUserResponseEnvelope.md
 docs/GetAssetByIDResponseEnvelope.md
 docs/GetAssetYTMByIDResponseEnvelope.md
+docs/GetPnLRankingResponse.md
 docs/GetRealizedPnlSettlementsResponseEnvelope.md
 docs/GetTopOfBookResponseEnvelope.md
 docs/HistoricalLeverageInterestRate.md
@@ -129,6 +131,7 @@ docs/PLSummary.md
 docs/PayLeverageAccruedInterest.md
 docs/PayLeverageAccruedInterestRequest.md
 docs/PayLeverageAccruedInterestResponseEnvelope.md
+docs/PnLRankingResponse.md
 docs/PoolPrice.md
 docs/PoolPriceResponseEnvelope.md
 docs/PoolRequestError.md
@@ -283,6 +286,7 @@ src/main/java/tech/dora/model/ClosePositionResp.java
 src/main/java/tech/dora/model/ClosePositionResponseEnvelope.java
 src/main/java/tech/dora/model/Collateral.java
 src/main/java/tech/dora/model/CountryCode.java
+src/main/java/tech/dora/model/CouponKind.java
 src/main/java/tech/dora/model/CouponPayment.java
 src/main/java/tech/dora/model/CreateAPIKeyData.java
 src/main/java/tech/dora/model/CreateAPIKeyRequest.java
@@ -302,6 +306,7 @@ src/main/java/tech/dora/model/FundUserRequest.java
 src/main/java/tech/dora/model/FundUserResponseEnvelope.java
 src/main/java/tech/dora/model/GetAssetByIDResponseEnvelope.java
 src/main/java/tech/dora/model/GetAssetYTMByIDResponseEnvelope.java
+src/main/java/tech/dora/model/GetPnLRankingResponse.java
 src/main/java/tech/dora/model/GetRealizedPnlSettlementsResponseEnvelope.java
 src/main/java/tech/dora/model/GetTopOfBookResponseEnvelope.java
 src/main/java/tech/dora/model/HistoricalLeverageInterestRate.java
@@ -370,6 +375,7 @@ src/main/java/tech/dora/model/PLSummary.java
 src/main/java/tech/dora/model/PayLeverageAccruedInterest.java
 src/main/java/tech/dora/model/PayLeverageAccruedInterestRequest.java
 src/main/java/tech/dora/model/PayLeverageAccruedInterestResponseEnvelope.java
+src/main/java/tech/dora/model/PnLRankingResponse.java
 src/main/java/tech/dora/model/PoolPrice.java
 src/main/java/tech/dora/model/PoolPriceResponseEnvelope.java
 src/main/java/tech/dora/model/PoolRequestError.java
@@ -497,6 +503,7 @@ src/test/java/tech/dora/model/ClosePositionRespTest.java
 src/test/java/tech/dora/model/ClosePositionResponseEnvelopeTest.java
 src/test/java/tech/dora/model/CollateralTest.java
 src/test/java/tech/dora/model/CountryCodeTest.java
+src/test/java/tech/dora/model/CouponKindTest.java
 src/test/java/tech/dora/model/CouponPaymentTest.java
 src/test/java/tech/dora/model/CreateAPIKeyDataTest.java
 src/test/java/tech/dora/model/CreateAPIKeyRequestTest.java
@@ -516,6 +523,7 @@ src/test/java/tech/dora/model/FundUserResponseEnvelopeTest.java
 src/test/java/tech/dora/model/FundUserTest.java
 src/test/java/tech/dora/model/GetAssetByIDResponseEnvelopeTest.java
 src/test/java/tech/dora/model/GetAssetYTMByIDResponseEnvelopeTest.java
+src/test/java/tech/dora/model/GetPnLRankingResponseTest.java
 src/test/java/tech/dora/model/GetRealizedPnlSettlementsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/GetTopOfBookResponseEnvelopeTest.java
 src/test/java/tech/dora/model/HistoricalLeverageInterestRateTest.java
@@ -584,6 +592,7 @@ src/test/java/tech/dora/model/PLSummaryTest.java
 src/test/java/tech/dora/model/PayLeverageAccruedInterestRequestTest.java
 src/test/java/tech/dora/model/PayLeverageAccruedInterestResponseEnvelopeTest.java
 src/test/java/tech/dora/model/PayLeverageAccruedInterestTest.java
+src/test/java/tech/dora/model/PnLRankingResponseTest.java
 src/test/java/tech/dora/model/PoolPriceResponseEnvelopeTest.java
 src/test/java/tech/dora/model/PoolPriceTest.java
 src/test/java/tech/dora/model/PoolRequestErrorTest.java

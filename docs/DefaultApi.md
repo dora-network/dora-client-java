@@ -52,6 +52,7 @@ All URIs are relative to *https://staging.dora.co*
 | [**getPLForSelfByAccount**](DefaultApi.md#getPLForSelfByAccount) | **GET** /v1/pl/self | Get account-by-account PL breakdown for the logged in user |
 | [**getPoolPrice**](DefaultApi.md#getPoolPrice) | **GET** /v1/price/pool/{pool_id} | Get the current price of a pool |
 | [**getRealizedPnlSettlements**](DefaultApi.md#getRealizedPnlSettlements) | **GET** /v1/realized_pnl_settlements | Get realized P&amp;L settlements with filters |
+| [**getTopTradersByPnL**](DefaultApi.md#getTopTradersByPnL) | **GET** /v1/user/ranking | Get top traders by PnL |
 | [**getTradeById**](DefaultApi.md#getTradeById) | **GET** /v1/trades/{trade_id} | Get a trade by ID |
 | [**getTrades**](DefaultApi.md#getTrades) | **GET** /v1/trades | Get a filtered, paginated list of trades |
 | [**getTransactionById**](DefaultApi.md#getTransactionById) | **GET** /v1/transactions/{transaction_id} | Get a transaction by ID |
@@ -3519,6 +3520,83 @@ public class Example {
 | **403** | Forbidden, user does not have access |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="getTopTradersByPnL"></a>
+# **getTopTradersByPnL**
+> GetPnLRankingResponse getTopTradersByPnL(start, end, limit)
+
+Get top traders by PnL
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    OffsetDateTime start = OffsetDateTime.now(); // OffsetDateTime | 
+    OffsetDateTime end = OffsetDateTime.now(); // OffsetDateTime | 
+    Integer limit = 56; // Integer | 
+    try {
+      GetPnLRankingResponse result = apiInstance.getTopTradersByPnL(start, end, limit);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getTopTradersByPnL");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **start** | **OffsetDateTime**|  | |
+| **end** | **OffsetDateTime**|  | |
+| **limit** | **Integer**|  | [optional] |
+
+### Return type
+
+[**GetPnLRankingResponse**](GetPnLRankingResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Top traders by PnL |  -  |
+| **400** | Bad request, e.g. invalid path parameters |  -  |
+| **500** | Internal server error |  -  |
+
 <a id="getTradeById"></a>
 # **getTradeById**
 > TradeResponseEnvelope getTradeById(tradeId)
@@ -5923,7 +6001,7 @@ public class Example {
 
 <a id="listOrders"></a>
 # **listOrders**
-> ListOrdersResponseEnvelope listOrders(orderBookId, kind, status, side, from, to, page, limit)
+> ListOrdersResponseEnvelope listOrders(userId, orderBookId, kind, status, side, from, to, page, limit)
 
 List all orders
 
@@ -5953,6 +6031,7 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | Filter by user ID (only allowed if the user has copy trading enabled)
     List<UUID> orderBookId = Arrays.asList(); // List<UUID> | 
     List<OrderKind> kind = Arrays.asList(); // List<OrderKind> | 
     List<OrderStatus> status = Arrays.asList(); // List<OrderStatus> | 
@@ -5962,7 +6041,7 @@ public class Example {
     Integer page = 1; // Integer | 
     Integer limit = 100; // Integer | 
     try {
-      ListOrdersResponseEnvelope result = apiInstance.listOrders(orderBookId, kind, status, side, from, to, page, limit);
+      ListOrdersResponseEnvelope result = apiInstance.listOrders(userId, orderBookId, kind, status, side, from, to, page, limit);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#listOrders");
@@ -5979,6 +6058,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**| Filter by user ID (only allowed if the user has copy trading enabled) | [optional] |
 | **orderBookId** | [**List&lt;UUID&gt;**](UUID.md)|  | [optional] |
 | **kind** | [**List&lt;OrderKind&gt;**](OrderKind.md)|  | [optional] |
 | **status** | [**List&lt;OrderStatus&gt;**](OrderStatus.md)|  | [optional] |

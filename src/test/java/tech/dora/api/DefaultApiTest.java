@@ -43,6 +43,7 @@ import tech.dora.model.FundUserRequest;
 import tech.dora.model.FundUserResponseEnvelope;
 import tech.dora.model.GetAssetByIDResponseEnvelope;
 import tech.dora.model.GetAssetYTMByIDResponseEnvelope;
+import tech.dora.model.GetPnLRankingResponse;
 import tech.dora.model.GetRealizedPnlSettlementsResponseEnvelope;
 import tech.dora.model.GetTopOfBookResponseEnvelope;
 import tech.dora.model.HistoricalLeverageInterestRatesResponseEnvelope;
@@ -741,6 +742,20 @@ public class DefaultApiTest {
     }
 
     /**
+     * Get top traders by PnL
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getTopTradersByPnLTest() throws ApiException {
+        OffsetDateTime start = null;
+        OffsetDateTime end = null;
+        Integer limit = null;
+        GetPnLRankingResponse response = api.getTopTradersByPnL(start, end, limit);
+        // TODO: test validations
+    }
+
+    /**
      * Get a trade by ID
      *
      * @throws ApiException if the Api call fails
@@ -1193,6 +1208,7 @@ public class DefaultApiTest {
      */
     @Test
     public void listOrdersTest() throws ApiException {
+        UUID userId = null;
         List<UUID> orderBookId = null;
         List<OrderKind> kind = null;
         List<OrderStatus> status = null;
@@ -1201,7 +1217,7 @@ public class DefaultApiTest {
         OffsetDateTime to = null;
         Integer page = null;
         Integer limit = null;
-        ListOrdersResponseEnvelope response = api.listOrders(orderBookId, kind, status, side, from, to, page, limit);
+        ListOrdersResponseEnvelope response = api.listOrders(userId, orderBookId, kind, status, side, from, to, page, limit);
         // TODO: test validations
     }
 

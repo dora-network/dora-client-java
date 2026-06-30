@@ -56,6 +56,7 @@ import tech.dora.model.FundUserRequest;
 import tech.dora.model.FundUserResponseEnvelope;
 import tech.dora.model.GetAssetByIDResponseEnvelope;
 import tech.dora.model.GetAssetYTMByIDResponseEnvelope;
+import tech.dora.model.GetPnLRankingResponse;
 import tech.dora.model.GetRealizedPnlSettlementsResponseEnvelope;
 import tech.dora.model.GetTopOfBookResponseEnvelope;
 import tech.dora.model.HistoricalLeverageInterestRatesResponseEnvelope;
@@ -6927,6 +6928,165 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for getTopTradersByPnL
+     * @param start  (required)
+     * @param end  (required)
+     * @param limit  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Top traders by PnL </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid path parameters </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getTopTradersByPnLCall(@javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/user/ranking";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (start != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("start", start));
+        }
+
+        if (end != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("end", end));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getTopTradersByPnLValidateBeforeCall(@javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'start' is set
+        if (start == null) {
+            throw new ApiException("Missing the required parameter 'start' when calling getTopTradersByPnL(Async)");
+        }
+
+        // verify the required parameter 'end' is set
+        if (end == null) {
+            throw new ApiException("Missing the required parameter 'end' when calling getTopTradersByPnL(Async)");
+        }
+
+        return getTopTradersByPnLCall(start, end, limit, _callback);
+
+    }
+
+    /**
+     * Get top traders by PnL
+     * 
+     * @param start  (required)
+     * @param end  (required)
+     * @param limit  (optional)
+     * @return GetPnLRankingResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Top traders by PnL </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid path parameters </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public GetPnLRankingResponse getTopTradersByPnL(@javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nullable Integer limit) throws ApiException {
+        ApiResponse<GetPnLRankingResponse> localVarResp = getTopTradersByPnLWithHttpInfo(start, end, limit);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get top traders by PnL
+     * 
+     * @param start  (required)
+     * @param end  (required)
+     * @param limit  (optional)
+     * @return ApiResponse&lt;GetPnLRankingResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Top traders by PnL </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid path parameters </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<GetPnLRankingResponse> getTopTradersByPnLWithHttpInfo(@javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nullable Integer limit) throws ApiException {
+        okhttp3.Call localVarCall = getTopTradersByPnLValidateBeforeCall(start, end, limit, null);
+        Type localVarReturnType = new TypeToken<GetPnLRankingResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get top traders by PnL (asynchronously)
+     * 
+     * @param start  (required)
+     * @param end  (required)
+     * @param limit  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Top traders by PnL </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid path parameters </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getTopTradersByPnLAsync(@javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nullable Integer limit, final ApiCallback<GetPnLRankingResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getTopTradersByPnLValidateBeforeCall(start, end, limit, _callback);
+        Type localVarReturnType = new TypeToken<GetPnLRankingResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for getTradeById
      * @param tradeId  (required)
      * @param _callback Callback for upload/download progress
@@ -11822,6 +11982,7 @@ public class DefaultApi {
     }
     /**
      * Build call for listOrders
+     * @param userId Filter by user ID (only allowed if the user has copy trading enabled) (optional)
      * @param orderBookId  (optional)
      * @param kind  (optional)
      * @param status  (optional)
@@ -11844,7 +12005,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listOrdersCall(@javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call listOrdersCall(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -11868,6 +12029,10 @@ public class DefaultApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("user_id", userId));
+        }
 
         if (orderBookId != null) {
             localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "order_book_id", orderBookId));
@@ -11921,14 +12086,15 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listOrdersValidateBeforeCall(@javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
-        return listOrdersCall(orderBookId, kind, status, side, from, to, page, limit, _callback);
+    private okhttp3.Call listOrdersValidateBeforeCall(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
+        return listOrdersCall(userId, orderBookId, kind, status, side, from, to, page, limit, _callback);
 
     }
 
     /**
      * List all orders
      * 
+     * @param userId Filter by user ID (only allowed if the user has copy trading enabled) (optional)
      * @param orderBookId  (optional)
      * @param kind  (optional)
      * @param status  (optional)
@@ -11950,14 +12116,15 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ListOrdersResponseEnvelope listOrders(@javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
-        ApiResponse<ListOrdersResponseEnvelope> localVarResp = listOrdersWithHttpInfo(orderBookId, kind, status, side, from, to, page, limit);
+    public ListOrdersResponseEnvelope listOrders(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
+        ApiResponse<ListOrdersResponseEnvelope> localVarResp = listOrdersWithHttpInfo(userId, orderBookId, kind, status, side, from, to, page, limit);
         return localVarResp.getData();
     }
 
     /**
      * List all orders
      * 
+     * @param userId Filter by user ID (only allowed if the user has copy trading enabled) (optional)
      * @param orderBookId  (optional)
      * @param kind  (optional)
      * @param status  (optional)
@@ -11979,8 +12146,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ListOrdersResponseEnvelope> listOrdersWithHttpInfo(@javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
-        okhttp3.Call localVarCall = listOrdersValidateBeforeCall(orderBookId, kind, status, side, from, to, page, limit, null);
+    public ApiResponse<ListOrdersResponseEnvelope> listOrdersWithHttpInfo(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
+        okhttp3.Call localVarCall = listOrdersValidateBeforeCall(userId, orderBookId, kind, status, side, from, to, page, limit, null);
         Type localVarReturnType = new TypeToken<ListOrdersResponseEnvelope>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -11988,6 +12155,7 @@ public class DefaultApi {
     /**
      * List all orders (asynchronously)
      * 
+     * @param userId Filter by user ID (only allowed if the user has copy trading enabled) (optional)
      * @param orderBookId  (optional)
      * @param kind  (optional)
      * @param status  (optional)
@@ -12010,9 +12178,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listOrdersAsync(@javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback<ListOrdersResponseEnvelope> _callback) throws ApiException {
+    public okhttp3.Call listOrdersAsync(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback<ListOrdersResponseEnvelope> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listOrdersValidateBeforeCall(orderBookId, kind, status, side, from, to, page, limit, _callback);
+        okhttp3.Call localVarCall = listOrdersValidateBeforeCall(userId, orderBookId, kind, status, side, from, to, page, limit, _callback);
         Type localVarReturnType = new TypeToken<ListOrdersResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

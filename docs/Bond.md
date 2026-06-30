@@ -8,7 +8,9 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**id** | **UUID** |  |  |
-|**kind** | **BondKind** |  |  |
+|**kind** | **CouponKind** |  |  |
+|**couponKind** | **CouponKind** |  |  [optional] |
+|**bondKind** | **BondKind** |  |  [optional] |
 |**couponStartAt** | **OffsetDateTime** |  |  [optional] |
 |**createdAt** | **OffsetDateTime** |  |  |
 |**finalCouponAt** | **OffsetDateTime** |  |  [optional] |
