@@ -16,7 +16,7 @@ package tech.dora;
 import java.util.Collection;
 import java.util.Iterator;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-30T16:26:11.497442354+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-14T12:50:21.891437458+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class StringUtil {
   /**
    * Check if the given array contains the given value (with case-insensitive comparison).

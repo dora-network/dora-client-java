@@ -39,6 +39,7 @@ import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponseEnvelope;
 import tech.dora.model.CurrentLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.DefundUserRequest;
+import tech.dora.model.DepositInstructionsResponseEnvelope;
 import tech.dora.model.FundUserRequest;
 import tech.dora.model.FundUserResponseEnvelope;
 import tech.dora.model.GetAssetByIDResponseEnvelope;
@@ -61,6 +62,7 @@ import tech.dora.model.ListAssetPriceResponseEnvelope;
 import tech.dora.model.ListAssetYieldResponseEnvelope;
 import tech.dora.model.ListCandlesResponseEnvelope;
 import tech.dora.model.ListCouponPaymentsResponseEnvelope;
+import tech.dora.model.ListDepositsResponseEnvelope;
 import tech.dora.model.ListOrderBookDepthResponseEnvelope;
 import tech.dora.model.ListOrderbookResponseEnvelope;
 import tech.dora.model.ListOrdersResponseEnvelope;
@@ -69,8 +71,6 @@ import tech.dora.model.ListTradeResponseEnvelope;
 import tech.dora.model.ListTransactionsResponseEnvelope;
 import tech.dora.model.ListUsersResponseEnvelope;
 import tech.dora.model.LiveOrderbook;
-import tech.dora.model.NewIsolatedAccountRequestV2;
-import tech.dora.model.NewIsolatedAccountResponseV2Envelope;
 import java.time.OffsetDateTime;
 import tech.dora.model.OrderBookResponseEnvelope;
 import tech.dora.model.OrderBookStatus;
@@ -280,18 +280,6 @@ public class DefaultApiTest {
     }
 
     /**
-     * Create a new isolated account for a user transferring available assets into the account
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void createNewIsolatedAccountV2Test() throws ApiException {
-        NewIsolatedAccountRequestV2 newIsolatedAccountRequestV2 = null;
-        NewIsolatedAccountResponseV2Envelope response = api.createNewIsolatedAccountV2(newIsolatedAccountRequestV2);
-        // TODO: test validations
-    }
-
-    /**
      * Create a new order
      *
      * @throws ApiException if the Api call fails
@@ -461,6 +449,23 @@ public class DefaultApiTest {
     public void getCouponPaymentsByAssetIdTest() throws ApiException {
         UUID assetId = null;
         ListCouponPaymentsResponseEnvelope response = api.getCouponPaymentsByAssetId(assetId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get per-chain instructions for depositing USDC into the Dora vault
+     *
+     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getDepositInstructionsTest() throws ApiException {
+        String quantity = null;
+        String ownerAddress = null;
+        String nonce = null;
+        String clientReferenceId = null;
+        DepositInstructionsResponseEnvelope response = api.getDepositInstructions(quantity, ownerAddress, nonce, clientReferenceId);
         // TODO: test validations
     }
 
@@ -1182,6 +1187,22 @@ public class DefaultApiTest {
         Integer page = null;
         Integer limit = null;
         ResponseEnvelopeOfListAssets response = api.listAssets(createdAfter, createdBefore, assetKind, canAddLiquidity, canDirectBorrow, canOnboard, canTrade, canVirtualBorrow, page, limit);
+        // TODO: test validations
+    }
+
+    /**
+     * List USDC deposits
+     *
+     * Lists USDC deposits ordered by observed_at descending. Admin users may list deposits for any user (or all users); non-admin users may only list their own deposits.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listDepositsTest() throws ApiException {
+        UUID userId = null;
+        Long page = null;
+        Long limit = null;
+        ListDepositsResponseEnvelope response = api.listDeposits(userId, page, limit);
         // TODO: test validations
     }
 

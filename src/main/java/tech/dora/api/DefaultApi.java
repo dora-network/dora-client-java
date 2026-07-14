@@ -52,6 +52,7 @@ import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponseEnvelope;
 import tech.dora.model.CurrentLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.DefundUserRequest;
+import tech.dora.model.DepositInstructionsResponseEnvelope;
 import tech.dora.model.FundUserRequest;
 import tech.dora.model.FundUserResponseEnvelope;
 import tech.dora.model.GetAssetByIDResponseEnvelope;
@@ -74,6 +75,7 @@ import tech.dora.model.ListAssetPriceResponseEnvelope;
 import tech.dora.model.ListAssetYieldResponseEnvelope;
 import tech.dora.model.ListCandlesResponseEnvelope;
 import tech.dora.model.ListCouponPaymentsResponseEnvelope;
+import tech.dora.model.ListDepositsResponseEnvelope;
 import tech.dora.model.ListOrderBookDepthResponseEnvelope;
 import tech.dora.model.ListOrderbookResponseEnvelope;
 import tech.dora.model.ListOrdersResponseEnvelope;
@@ -82,8 +84,6 @@ import tech.dora.model.ListTradeResponseEnvelope;
 import tech.dora.model.ListTransactionsResponseEnvelope;
 import tech.dora.model.ListUsersResponseEnvelope;
 import tech.dora.model.LiveOrderbook;
-import tech.dora.model.NewIsolatedAccountRequestV2;
-import tech.dora.model.NewIsolatedAccountResponseV2Envelope;
 import java.time.OffsetDateTime;
 import tech.dora.model.OrderBookResponseEnvelope;
 import tech.dora.model.OrderBookStatus;
@@ -1627,149 +1627,6 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = createConditionalOrderValidateBeforeCall(createConditionalOrderRequest, _callback);
         Type localVarReturnType = new TypeToken<CreateConditionalOrderResponseEnvelope>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for createNewIsolatedAccountV2
-     * @param newIsolatedAccountRequestV2  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 201 </td><td> Isolated account created </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call createNewIsolatedAccountV2Call(@javax.annotation.Nonnull NewIsolatedAccountRequestV2 newIsolatedAccountRequestV2, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = newIsolatedAccountRequestV2;
-
-        // create path and map variables
-        String localVarPath = "/v2/accounts/new_isolated";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call createNewIsolatedAccountV2ValidateBeforeCall(@javax.annotation.Nonnull NewIsolatedAccountRequestV2 newIsolatedAccountRequestV2, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'newIsolatedAccountRequestV2' is set
-        if (newIsolatedAccountRequestV2 == null) {
-            throw new ApiException("Missing the required parameter 'newIsolatedAccountRequestV2' when calling createNewIsolatedAccountV2(Async)");
-        }
-
-        return createNewIsolatedAccountV2Call(newIsolatedAccountRequestV2, _callback);
-
-    }
-
-    /**
-     * Create a new isolated account for a user transferring available assets into the account
-     * 
-     * @param newIsolatedAccountRequestV2  (required)
-     * @return NewIsolatedAccountResponseV2Envelope
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 201 </td><td> Isolated account created </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     </table>
-     */
-    public NewIsolatedAccountResponseV2Envelope createNewIsolatedAccountV2(@javax.annotation.Nonnull NewIsolatedAccountRequestV2 newIsolatedAccountRequestV2) throws ApiException {
-        ApiResponse<NewIsolatedAccountResponseV2Envelope> localVarResp = createNewIsolatedAccountV2WithHttpInfo(newIsolatedAccountRequestV2);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Create a new isolated account for a user transferring available assets into the account
-     * 
-     * @param newIsolatedAccountRequestV2  (required)
-     * @return ApiResponse&lt;NewIsolatedAccountResponseV2Envelope&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 201 </td><td> Isolated account created </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<NewIsolatedAccountResponseV2Envelope> createNewIsolatedAccountV2WithHttpInfo(@javax.annotation.Nonnull NewIsolatedAccountRequestV2 newIsolatedAccountRequestV2) throws ApiException {
-        okhttp3.Call localVarCall = createNewIsolatedAccountV2ValidateBeforeCall(newIsolatedAccountRequestV2, null);
-        Type localVarReturnType = new TypeToken<NewIsolatedAccountResponseV2Envelope>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Create a new isolated account for a user transferring available assets into the account (asynchronously)
-     * 
-     * @param newIsolatedAccountRequestV2  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 201 </td><td> Isolated account created </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call createNewIsolatedAccountV2Async(@javax.annotation.Nonnull NewIsolatedAccountRequestV2 newIsolatedAccountRequestV2, final ApiCallback<NewIsolatedAccountResponseV2Envelope> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = createNewIsolatedAccountV2ValidateBeforeCall(newIsolatedAccountRequestV2, _callback);
-        Type localVarReturnType = new TypeToken<NewIsolatedAccountResponseV2Envelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -3729,6 +3586,182 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = getCouponPaymentsByAssetIdValidateBeforeCall(assetId, _callback);
         Type localVarReturnType = new TypeToken<ListCouponPaymentsResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getDepositInstructions
+     * @param quantity Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. (required)
+     * @param ownerAddress The user&#39;s wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner. (required)
+     * @param nonce The owner&#39;s current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain. (required)
+     * @param clientReferenceId Optional client-supplied reference as a hex string (0x prefix optional), at most 32 bytes. Left-aligned into the deposit call&#39;s bytes32 argument. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Per-chain deposit instructions for the authenticated user </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid or missing quantity, owner_address, or nonce, or an invalid client_reference_id </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getDepositInstructionsCall(@javax.annotation.Nonnull String quantity, @javax.annotation.Nonnull String ownerAddress, @javax.annotation.Nonnull String nonce, @javax.annotation.Nullable String clientReferenceId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/web3/deposit-instructions";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (quantity != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("quantity", quantity));
+        }
+
+        if (ownerAddress != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("owner_address", ownerAddress));
+        }
+
+        if (nonce != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("nonce", nonce));
+        }
+
+        if (clientReferenceId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("client_reference_id", clientReferenceId));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getDepositInstructionsValidateBeforeCall(@javax.annotation.Nonnull String quantity, @javax.annotation.Nonnull String ownerAddress, @javax.annotation.Nonnull String nonce, @javax.annotation.Nullable String clientReferenceId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'quantity' is set
+        if (quantity == null) {
+            throw new ApiException("Missing the required parameter 'quantity' when calling getDepositInstructions(Async)");
+        }
+
+        // verify the required parameter 'ownerAddress' is set
+        if (ownerAddress == null) {
+            throw new ApiException("Missing the required parameter 'ownerAddress' when calling getDepositInstructions(Async)");
+        }
+
+        // verify the required parameter 'nonce' is set
+        if (nonce == null) {
+            throw new ApiException("Missing the required parameter 'nonce' when calling getDepositInstructions(Async)");
+        }
+
+        return getDepositInstructionsCall(quantity, ownerAddress, nonce, clientReferenceId, _callback);
+
+    }
+
+    /**
+     * Get per-chain instructions for depositing USDC into the Dora vault
+     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry.
+     * @param quantity Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. (required)
+     * @param ownerAddress The user&#39;s wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner. (required)
+     * @param nonce The owner&#39;s current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain. (required)
+     * @param clientReferenceId Optional client-supplied reference as a hex string (0x prefix optional), at most 32 bytes. Left-aligned into the deposit call&#39;s bytes32 argument. (optional)
+     * @return DepositInstructionsResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Per-chain deposit instructions for the authenticated user </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid or missing quantity, owner_address, or nonce, or an invalid client_reference_id </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public DepositInstructionsResponseEnvelope getDepositInstructions(@javax.annotation.Nonnull String quantity, @javax.annotation.Nonnull String ownerAddress, @javax.annotation.Nonnull String nonce, @javax.annotation.Nullable String clientReferenceId) throws ApiException {
+        ApiResponse<DepositInstructionsResponseEnvelope> localVarResp = getDepositInstructionsWithHttpInfo(quantity, ownerAddress, nonce, clientReferenceId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get per-chain instructions for depositing USDC into the Dora vault
+     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry.
+     * @param quantity Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. (required)
+     * @param ownerAddress The user&#39;s wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner. (required)
+     * @param nonce The owner&#39;s current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain. (required)
+     * @param clientReferenceId Optional client-supplied reference as a hex string (0x prefix optional), at most 32 bytes. Left-aligned into the deposit call&#39;s bytes32 argument. (optional)
+     * @return ApiResponse&lt;DepositInstructionsResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Per-chain deposit instructions for the authenticated user </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid or missing quantity, owner_address, or nonce, or an invalid client_reference_id </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<DepositInstructionsResponseEnvelope> getDepositInstructionsWithHttpInfo(@javax.annotation.Nonnull String quantity, @javax.annotation.Nonnull String ownerAddress, @javax.annotation.Nonnull String nonce, @javax.annotation.Nullable String clientReferenceId) throws ApiException {
+        okhttp3.Call localVarCall = getDepositInstructionsValidateBeforeCall(quantity, ownerAddress, nonce, clientReferenceId, null);
+        Type localVarReturnType = new TypeToken<DepositInstructionsResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get per-chain instructions for depositing USDC into the Dora vault (asynchronously)
+     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry.
+     * @param quantity Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. (required)
+     * @param ownerAddress The user&#39;s wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner. (required)
+     * @param nonce The owner&#39;s current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain. (required)
+     * @param clientReferenceId Optional client-supplied reference as a hex string (0x prefix optional), at most 32 bytes. Left-aligned into the deposit call&#39;s bytes32 argument. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Per-chain deposit instructions for the authenticated user </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid or missing quantity, owner_address, or nonce, or an invalid client_reference_id </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getDepositInstructionsAsync(@javax.annotation.Nonnull String quantity, @javax.annotation.Nonnull String ownerAddress, @javax.annotation.Nonnull String nonce, @javax.annotation.Nullable String clientReferenceId, final ApiCallback<DepositInstructionsResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getDepositInstructionsValidateBeforeCall(quantity, ownerAddress, nonce, clientReferenceId, _callback);
+        Type localVarReturnType = new TypeToken<DepositInstructionsResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -11812,6 +11845,163 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for listDeposits
+     * @param userId Filter by user ID. Non-admin callers may only specify their own user ID. (optional)
+     * @param page  (optional, default to 1)
+     * @param limit  (optional, default to 50)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of deposits </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. a non-admin user requesting another user&#39;s deposits </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listDepositsCall(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable Long page, @javax.annotation.Nullable Long limit, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/web3/deposits";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("user_id", userId));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listDepositsValidateBeforeCall(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable Long page, @javax.annotation.Nullable Long limit, final ApiCallback _callback) throws ApiException {
+        return listDepositsCall(userId, page, limit, _callback);
+
+    }
+
+    /**
+     * List USDC deposits
+     * Lists USDC deposits ordered by observed_at descending. Admin users may list deposits for any user (or all users); non-admin users may only list their own deposits.
+     * @param userId Filter by user ID. Non-admin callers may only specify their own user ID. (optional)
+     * @param page  (optional, default to 1)
+     * @param limit  (optional, default to 50)
+     * @return ListDepositsResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of deposits </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. a non-admin user requesting another user&#39;s deposits </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ListDepositsResponseEnvelope listDeposits(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable Long page, @javax.annotation.Nullable Long limit) throws ApiException {
+        ApiResponse<ListDepositsResponseEnvelope> localVarResp = listDepositsWithHttpInfo(userId, page, limit);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List USDC deposits
+     * Lists USDC deposits ordered by observed_at descending. Admin users may list deposits for any user (or all users); non-admin users may only list their own deposits.
+     * @param userId Filter by user ID. Non-admin callers may only specify their own user ID. (optional)
+     * @param page  (optional, default to 1)
+     * @param limit  (optional, default to 50)
+     * @return ApiResponse&lt;ListDepositsResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of deposits </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. a non-admin user requesting another user&#39;s deposits </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ListDepositsResponseEnvelope> listDepositsWithHttpInfo(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable Long page, @javax.annotation.Nullable Long limit) throws ApiException {
+        okhttp3.Call localVarCall = listDepositsValidateBeforeCall(userId, page, limit, null);
+        Type localVarReturnType = new TypeToken<ListDepositsResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List USDC deposits (asynchronously)
+     * Lists USDC deposits ordered by observed_at descending. Admin users may list deposits for any user (or all users); non-admin users may only list their own deposits.
+     * @param userId Filter by user ID. Non-admin callers may only specify their own user ID. (optional)
+     * @param page  (optional, default to 1)
+     * @param limit  (optional, default to 50)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of deposits </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. a non-admin user requesting another user&#39;s deposits </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listDepositsAsync(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable Long page, @javax.annotation.Nullable Long limit, final ApiCallback<ListDepositsResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listDepositsValidateBeforeCall(userId, page, limit, _callback);
+        Type localVarReturnType = new TypeToken<ListDepositsResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for listOrderBooks
      * @param status  (optional)
      * @param baseAssetId  (optional)
@@ -11982,7 +12172,7 @@ public class DefaultApi {
     }
     /**
      * Build call for listOrders
-     * @param userId Filter by user ID (only allowed if the user has copy trading enabled) (optional)
+     * @param userId Filter by user ID (only allowed if the user has copy trading enabled, or if the requester is an Admin or Integrator within the same tenant) (optional)
      * @param orderBookId  (optional)
      * @param kind  (optional)
      * @param status  (optional)
@@ -12094,7 +12284,7 @@ public class DefaultApi {
     /**
      * List all orders
      * 
-     * @param userId Filter by user ID (only allowed if the user has copy trading enabled) (optional)
+     * @param userId Filter by user ID (only allowed if the user has copy trading enabled, or if the requester is an Admin or Integrator within the same tenant) (optional)
      * @param orderBookId  (optional)
      * @param kind  (optional)
      * @param status  (optional)
@@ -12124,7 +12314,7 @@ public class DefaultApi {
     /**
      * List all orders
      * 
-     * @param userId Filter by user ID (only allowed if the user has copy trading enabled) (optional)
+     * @param userId Filter by user ID (only allowed if the user has copy trading enabled, or if the requester is an Admin or Integrator within the same tenant) (optional)
      * @param orderBookId  (optional)
      * @param kind  (optional)
      * @param status  (optional)
@@ -12155,7 +12345,7 @@ public class DefaultApi {
     /**
      * List all orders (asynchronously)
      * 
-     * @param userId Filter by user ID (only allowed if the user has copy trading enabled) (optional)
+     * @param userId Filter by user ID (only allowed if the user has copy trading enabled, or if the requester is an Admin or Integrator within the same tenant) (optional)
      * @param orderBookId  (optional)
      * @param kind  (optional)
      * @param status  (optional)

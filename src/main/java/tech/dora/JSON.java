@@ -141,6 +141,12 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.CurrentLeverageAccruedInterest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.CurrentLeverageAccruedInterestResponseEnvelope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.DefundUserRequest.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.DepositArgs.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.DepositCall.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.DepositInstructionForChain.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.DepositInstructionsResponse.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.DepositInstructionsResponseEnvelope.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.DepositResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.FundUser.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.FundUserRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.FundUserResponseEnvelope.CustomTypeAdapterFactory());
@@ -173,6 +179,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.ListAssetYieldResponseEnvelope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.ListCandlesResponseEnvelope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.ListCouponPaymentsResponseEnvelope.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.ListDepositsResponseEnvelope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.ListOrderBookDepthResponseEnvelope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.ListOrderbookResponseEnvelope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.ListOrdersResponseEnvelope.CustomTypeAdapterFactory());
@@ -210,6 +217,9 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.PayLeverageAccruedInterest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.PayLeverageAccruedInterestRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.PayLeverageAccruedInterestResponseEnvelope.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.PermitDomain.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.PermitMessage.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.PermitTypedData.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.PnLRankingResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.PoolPrice.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.PoolPriceResponseEnvelope.CustomTypeAdapterFactory());
@@ -262,6 +272,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.TransferBalancesRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.TransferBalancesResponseEnvelope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.TransformedAssets.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.TypedDataField.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.UnitePositionRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.UnitePositionResponseEnvelope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.UnitedPosition.CustomTypeAdapterFactory());

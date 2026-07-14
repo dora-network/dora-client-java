@@ -49,7 +49,7 @@ import tech.dora.JSON;
 /**
  * Liquidity
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-30T16:26:11.497442354+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-14T12:50:21.891437458+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class Liquidity {
   public static final String SERIALIZED_NAME_ORDER_BOOK_ID = "order_book_id";
   @SerializedName(SERIALIZED_NAME_ORDER_BOOK_ID)

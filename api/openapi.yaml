@@ -1204,8 +1204,9 @@ paths:
     get:
       operationId: listOrders
       parameters:
-      - description: Filter by user ID (only allowed if the user has copy trading
-          enabled)
+      - description: "Filter by user ID (only allowed if the user has copy trading\
+          \ enabled, or if the requester is an Admin or Integrator within the same\
+          \ tenant)"
         explode: true
         in: query
         name: user_id
@@ -2687,8 +2688,7 @@ paths:
           description: Internal server error
       summary: Create an isolated position by transferring collateral to the position
         from the user's global collateral
-      x-deprecated-reason: "Use /v1/positions/new_isolated instead, to create an isolated\
-        \ position with available balance, then collateralize it in a separate step."
+      x-deprecated-reason: The position is created automatically through order flow.
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -4726,54 +4726,728 @@ paths:
       summary: List all accounts for the authenticated user
       x-accepts:
       - application/json
-  /v2/accounts/new_isolated:
-    post:
-      operationId: createNewIsolatedAccountV2
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/NewIsolatedAccountRequestV2"
+  /v1/web3/deposit-instructions:
+    get:
+      description: "Returns everything the caller needs to deposit USDC into the Dora\
+        \ vault with a single signature and a single transaction: an EIP-712 (EIP-2612\
+        \ permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor\
+        \ of the vault deposit() call. The client splits the permit signature into\
+        \ v/r/s and ABI-encodes the deposit function with the returned args plus (v,\
+        \ r, s); no separate approve transaction is needed. Only a single chain is\
+        \ currently supported: the provided nonce belongs to it, and the chains array\
+        \ holds at most one entry."
+      operationId: getDepositInstructions
+      parameters:
+      - description: "Human-decimal USDC quantity to deposit, e.g. '100.50'. Must\
+          \ be positive, with at most 6 decimal places."
+        explode: true
+        in: query
+        name: quantity
         required: true
+        schema:
+          type: string
+        style: form
+      - description: The user's wallet address as a 0x-prefixed 20-byte hex string.
+          Used as the permit owner.
+        explode: true
+        in: query
+        name: owner_address
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: "The owner's current USDC permit nonce (read client-side), as\
+          \ a non-negative decimal string. It belongs to the single supported chain."
+        explode: true
+        in: query
+        name: nonce
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: "Optional client-supplied reference as a hex string (0x prefix\
+          \ optional), at most 32 bytes. Left-aligned into the deposit call's bytes32\
+          \ argument."
+        explode: true
+        in: query
+        name: client_reference_id
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
-        "201":
+        "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NewIsolatedAccountResponseV2"
-          description: Isolated account created
+                $ref: "#/components/schemas/DepositInstructionsResponseEnvelope"
+          description: Per-chain deposit instructions for the authenticated user
         "400":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-          description: "Bad request, e.g. missing required fields"
+          description: "Bad request, e.g. invalid or missing quantity, owner_address,\
+            \ or nonce, or an invalid client_reference_id"
         "401":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-          description: "Unauthorized, user not logged in or does not have access to\
-            \ this orderbook"
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-          description: "Conflict, e.g. the requested amount is not available to transfer"
+          description: "Unauthorized, user not logged in"
         "500":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
-      summary: Create a new isolated account for a user transferring available assets
-        into the account
-      x-content-type: application/json
+      summary: Get per-chain instructions for depositing USDC into the Dora vault
+      x-accepts:
+      - application/json
+  /v1/web3/deposits:
+    get:
+      description: Lists USDC deposits ordered by observed_at descending. Admin users
+        may list deposits for any user (or all users); non-admin users may only list
+        their own deposits.
+      operationId: listDeposits
+      parameters:
+      - description: Filter by user ID. Non-admin callers may only specify their own
+          user ID.
+        explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          format: int64
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 50
+          format: int64
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListDepositsResponseEnvelope"
+          description: A list of deposits
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid query parameters"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden, e.g. a non-admin user requesting another user's\
+            \ deposits"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: List USDC deposits
       x-accepts:
       - application/json
 components:
   schemas:
+    Web3EventStatus:
+      description: Processing status of an observed on-chain event.
+      enum:
+      - PENDING
+      - FINALIZED
+      - ORPHANED
+      type: string
+    DepositInstructionForChain:
+      description: Everything the caller needs to deposit USDC into the Dora vault
+        on a single chain with one signature and one transaction.
+      example:
+        network_name: network_name
+        chain_id: chain_id
+        contract_address: contract_address
+        usdc_address: usdc_address
+        approval:
+          types:
+            key:
+            - name: name
+              type: type
+            - name: name
+              type: type
+          primaryType: primaryType
+          domain:
+            name: name
+            version: version
+            chainId: 0
+            verifyingContract: verifyingContract
+          message:
+            owner: owner
+            spender: spender
+            value: value
+            nonce: nonce
+            deadline: deadline
+        deposit:
+          to: to
+          chain_id: 6
+          value: value
+          function_signature: function_signature
+          selector: selector
+          args:
+            quantity: quantity
+            user_id: user_id
+            client_reference_id: client_reference_id
+            deadline: deadline
+      properties:
+        network_name:
+          description: "Human-readable network name, e.g. 'Ethereum Mainnet'."
+          type: string
+        chain_id:
+          description: EVM chain ID.
+          type: string
+        contract_address:
+          description: "The DoraUSDCVault contract address for this chain, as a 0x-prefixed\
+            \ hex string."
+          type: string
+        usdc_address:
+          description: "The ERC-20 USDC token contract on this chain, as a 0x-prefixed\
+            \ hex string. It is the verifying contract of the permit; the spender\
+            \ granted by the permit is contract_address (the vault)."
+          type: string
+        approval:
+          $ref: "#/components/schemas/PermitTypedData"
+        deposit:
+          $ref: "#/components/schemas/DepositCall"
+      required:
+      - approval
+      - chain_id
+      - contract_address
+      - deposit
+      - network_name
+      - usdc_address
+    PermitTypedData:
+      description: An EIP-712 typed-data message in the exact shape expected by eth_signTypedData_v4.
+        The user signs it to authorize the vault as a USDC spender via EIP-2612 permit.
+      example:
+        types:
+          key:
+          - name: name
+            type: type
+          - name: name
+            type: type
+        primaryType: primaryType
+        domain:
+          name: name
+          version: version
+          chainId: 0
+          verifyingContract: verifyingContract
+        message:
+          owner: owner
+          spender: spender
+          value: value
+          nonce: nonce
+          deadline: deadline
+      properties:
+        types:
+          additionalProperties:
+            items:
+              $ref: "#/components/schemas/TypedDataField"
+          description: "EIP-712 type definitions, keyed by type name ('EIP712Domain'\
+            \ and 'Permit')."
+        primaryType:
+          description: Always 'Permit'.
+          type: string
+        domain:
+          $ref: "#/components/schemas/PermitDomain"
+        message:
+          $ref: "#/components/schemas/PermitMessage"
+      required:
+      - domain
+      - message
+      - primaryType
+      - types
+    TypedDataField:
+      description: A single field in an EIP-712 type definition.
+      example:
+        name: name
+        type: type
+      properties:
+        name:
+          type: string
+        type:
+          description: "Solidity type, e.g. 'address' or 'uint256'."
+          type: string
+      required:
+      - name
+      - type
+    PermitDomain:
+      description: The EIP-712 domain separator data for the USDC token on this chain.
+      example:
+        name: name
+        version: version
+        chainId: 0
+        verifyingContract: verifyingContract
+      properties:
+        name:
+          description: "EIP-712 domain name of the USDC token, e.g. 'USD Coin'."
+          type: string
+        version:
+          description: "EIP-712 domain version of the USDC token, e.g. '2'."
+          type: string
+        chainId:
+          description: "EVM chain ID, as a JSON number."
+          format: int64
+          type: integer
+        verifyingContract:
+          description: "The USDC token contract address, as a 0x-prefixed hex string."
+          type: string
+      required:
+      - chainId
+      - name
+      - verifyingContract
+      - version
+    PermitMessage:
+      description: The EIP-2612 Permit struct the user signs. The uint256 fields are
+        decimal strings to avoid JSON number precision loss.
+      example:
+        owner: owner
+        spender: spender
+        value: value
+        nonce: nonce
+        deadline: deadline
+      properties:
+        owner:
+          description: "The user's wallet address (permit owner), as a 0x-prefixed\
+            \ hex string."
+          type: string
+        spender:
+          description: "The vault contract address granted the allowance, as a 0x-prefixed\
+            \ hex string."
+          type: string
+        value:
+          description: "Approved quantity in USDC base units (10^-6 USDC), as a decimal\
+            \ string."
+          type: string
+        nonce:
+          description: "The owner's current USDC permit nonce on this chain, as a\
+            \ decimal string."
+          type: string
+        deadline:
+          description: "Unix timestamp (seconds) at which the permit expires, as a\
+            \ decimal string. One hour from issuance."
+          type: string
+      required:
+      - deadline
+      - nonce
+      - owner
+      - spender
+      - value
+    DepositCall:
+      description: "Descriptor of the vault deposit() transaction the client builds\
+        \ after signing the permit. The client splits the permit signature into v/r/s\
+        \ and ABI-encodes function_signature with args plus (v, r, s) to produce the\
+        \ calldata sent to 'to'."
+      example:
+        to: to
+        chain_id: 6
+        value: value
+        function_signature: function_signature
+        selector: selector
+        args:
+          quantity: quantity
+          user_id: user_id
+          client_reference_id: client_reference_id
+          deadline: deadline
+      properties:
+        to:
+          description: "The vault contract address, as a 0x-prefixed hex string."
+          type: string
+        chain_id:
+          description: "EVM chain ID, as a JSON number."
+          format: int64
+          type: integer
+        value:
+          description: Native currency value to send with the transaction. Always
+            '0'.
+          type: string
+        function_signature:
+          description: "Canonical Solidity signature of the vault's permit-aware deposit\
+            \ function: deposit(uint256,bytes16,bytes32,uint256,uint8,bytes32,bytes32)."
+          type: string
+        selector:
+          description: "The 4-byte ABI call selector of function_signature, as a 0x-prefixed\
+            \ hex string."
+          type: string
+        args:
+          $ref: "#/components/schemas/DepositArgs"
+      required:
+      - args
+      - chain_id
+      - function_signature
+      - selector
+      - to
+      - value
+    DepositArgs:
+      description: "The non-signature arguments to the vault deposit() call. The remaining\
+        \ (v, r, s) arguments come from the permit signature the client obtains by\
+        \ signing the approval."
+      example:
+        quantity: quantity
+        user_id: user_id
+        client_reference_id: client_reference_id
+        deadline: deadline
+      properties:
+        quantity:
+          description: "Deposit quantity in USDC base units (10^-6 USDC), as a decimal\
+            \ string. Matches the permit's value."
+          type: string
+        user_id:
+          description: "The caller's user ID as 16 bytes, 0x-prefixed hex. Stored\
+            \ on-chain with the deposit and mapped back to the user by the indexer."
+          type: string
+        client_reference_id:
+          description: The bytes32 client reference as a 0x-prefixed hex string. All
+            zero bytes when not supplied.
+          type: string
+        deadline:
+          description: "Unix timestamp (seconds), as a decimal string. Matches the\
+            \ permit's deadline exactly."
+          type: string
+      required:
+      - client_reference_id
+      - deadline
+      - quantity
+      - user_id
+    DepositInstructionsResponse:
+      description: Per-chain instructions for depositing USDC into the Dora vault
+        via EIP-2612 permit.
+      example:
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        owner_address: owner_address
+        quantity: quantity
+        chains:
+        - network_name: network_name
+          chain_id: chain_id
+          contract_address: contract_address
+          usdc_address: usdc_address
+          approval:
+            types:
+              key:
+              - name: name
+                type: type
+              - name: name
+                type: type
+            primaryType: primaryType
+            domain:
+              name: name
+              version: version
+              chainId: 0
+              verifyingContract: verifyingContract
+            message:
+              owner: owner
+              spender: spender
+              value: value
+              nonce: nonce
+              deadline: deadline
+          deposit:
+            to: to
+            chain_id: 6
+            value: value
+            function_signature: function_signature
+            selector: selector
+            args:
+              quantity: quantity
+              user_id: user_id
+              client_reference_id: client_reference_id
+              deadline: deadline
+        - network_name: network_name
+          chain_id: chain_id
+          contract_address: contract_address
+          usdc_address: usdc_address
+          approval:
+            types:
+              key:
+              - name: name
+                type: type
+              - name: name
+                type: type
+            primaryType: primaryType
+            domain:
+              name: name
+              version: version
+              chainId: 0
+              verifyingContract: verifyingContract
+            message:
+              owner: owner
+              spender: spender
+              value: value
+              nonce: nonce
+              deadline: deadline
+          deposit:
+            to: to
+            chain_id: 6
+            value: value
+            function_signature: function_signature
+            selector: selector
+            args:
+              quantity: quantity
+              user_id: user_id
+              client_reference_id: client_reference_id
+              deadline: deadline
+      properties:
+        user_id:
+          description: The authenticated user the instructions are issued for.
+          format: uuid
+          type: string
+        owner_address:
+          description: "The wallet address the instructions were issued for, echoed\
+            \ from the request."
+          type: string
+        quantity:
+          description: "Human-decimal USDC deposit quantity, echoed from the request."
+          type: string
+        chains:
+          items:
+            $ref: "#/components/schemas/DepositInstructionForChain"
+          type: array
+          default: null
+      required:
+      - chains
+      - owner_address
+      - quantity
+      - user_id
+    DepositInstructionsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/DepositInstructionsResponse"
+      example:
+        data:
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          owner_address: owner_address
+          quantity: quantity
+          chains:
+          - network_name: network_name
+            chain_id: chain_id
+            contract_address: contract_address
+            usdc_address: usdc_address
+            approval:
+              types:
+                key:
+                - name: name
+                  type: type
+                - name: name
+                  type: type
+              primaryType: primaryType
+              domain:
+                name: name
+                version: version
+                chainId: 0
+                verifyingContract: verifyingContract
+              message:
+                owner: owner
+                spender: spender
+                value: value
+                nonce: nonce
+                deadline: deadline
+            deposit:
+              to: to
+              chain_id: 6
+              value: value
+              function_signature: function_signature
+              selector: selector
+              args:
+                quantity: quantity
+                user_id: user_id
+                client_reference_id: client_reference_id
+                deadline: deadline
+          - network_name: network_name
+            chain_id: chain_id
+            contract_address: contract_address
+            usdc_address: usdc_address
+            approval:
+              types:
+                key:
+                - name: name
+                  type: type
+                - name: name
+                  type: type
+              primaryType: primaryType
+              domain:
+                name: name
+                version: version
+                chainId: 0
+                verifyingContract: verifyingContract
+              message:
+                owner: owner
+                spender: spender
+                value: value
+                nonce: nonce
+                deadline: deadline
+            deposit:
+              to: to
+              chain_id: 6
+              value: value
+              function_signature: function_signature
+              selector: selector
+              args:
+                quantity: quantity
+                user_id: user_id
+                client_reference_id: client_reference_id
+                deadline: deadline
+        error: error
+        metadata: ""
+    DepositResponse:
+      description: A single USDC deposit observed on-chain.
+      example:
+        network_chain_id: 0
+        network_name: network_name
+        chain_id: chain_id
+        tx_hash: tx_hash
+        log_index: 6
+        block_number: 1
+        block_time: 2000-01-23T04:56:07.000+00:00
+        contract_address: contract_address
+        depositor_address: depositor_address
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        quantity: quantity
+        client_reference_id: client_reference_id
+        status: PENDING
+        transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        observed_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        network_chain_id:
+          description: Internal numeric identifier of the chain.
+          format: int32
+          type: integer
+        network_name:
+          description: Human-readable network name.
+          type: string
+        chain_id:
+          description: EVM chain ID.
+          type: string
+        tx_hash:
+          description: Transaction hash as a 0x-prefixed hex string.
+          type: string
+        log_index:
+          description: Index of the log within the transaction.
+          format: int32
+          type: integer
+        block_number:
+          format: int64
+          type: integer
+        block_time:
+          format: date-time
+          type: string
+        contract_address:
+          description: Vault contract address as a 0x-prefixed hex string.
+          type: string
+        depositor_address:
+          description: "Address that made the deposit, as a 0x-prefixed hex string."
+          type: string
+        user_id:
+          format: uuid
+          type: string
+        quantity:
+          description: Human-decimal USDC value (base units divided by 10^6).
+          type: string
+        client_reference_id:
+          description: "Optional client-supplied reference, as a 0x-prefixed hex string."
+          type: string
+        status:
+          $ref: "#/components/schemas/Web3EventStatus"
+        transaction_id:
+          description: "Internal transaction ID, present once the deposit has been\
+            \ credited."
+          format: uuid
+          type: string
+        observed_at:
+          format: date-time
+          type: string
+      required:
+      - block_number
+      - block_time
+      - chain_id
+      - contract_address
+      - depositor_address
+      - log_index
+      - network_chain_id
+      - network_name
+      - observed_at
+      - quantity
+      - status
+      - tx_hash
+      - user_id
+    ListDepositsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/DepositResponse"
+            type: array
+            default: null
+      example:
+        data:
+        - network_chain_id: 0
+          network_name: network_name
+          chain_id: chain_id
+          tx_hash: tx_hash
+          log_index: 6
+          block_number: 1
+          block_time: 2000-01-23T04:56:07.000+00:00
+          contract_address: contract_address
+          depositor_address: depositor_address
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity: quantity
+          client_reference_id: client_reference_id
+          status: PENDING
+          transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          observed_at: 2000-01-23T04:56:07.000+00:00
+        - network_chain_id: 0
+          network_name: network_name
+          chain_id: chain_id
+          tx_hash: tx_hash
+          log_index: 6
+          block_number: 1
+          block_time: 2000-01-23T04:56:07.000+00:00
+          contract_address: contract_address
+          depositor_address: depositor_address
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity: quantity
+          client_reference_id: client_reference_id
+          status: PENDING
+          transaction_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          observed_at: 2000-01-23T04:56:07.000+00:00
+        error: error
+        metadata: ""
     Asset:
       example:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -10808,11 +11482,6 @@ components:
     LedgerAccountsResponseV2:
       $ref: "#/components/schemas/LedgerAccountsResponseV2Envelope"
     NewIsolatedAccountRequestV2:
-      example:
-        global_account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        quantity: quantity
-        account_name: account_name
       properties:
         global_account_id:
           format: uuid
@@ -10834,25 +11503,6 @@ components:
       - properties:
           data:
             $ref: "#/components/schemas/AccountV2"
-      example:
-        data:
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          seq: 1
-          is_global: true
-          available: available
-          locked: locked
-          supplied: supplied
-          borrowed: borrowed
-          impending_borrows: impending_borrows
-          avg_entry_price: avg_entry_price
-          borrow_limit: borrow_limit
-          liquidation_threshold: liquidation_threshold
-          created_at: 2000-01-23T04:56:07.000+00:00
-          pending_withdrawal: pending_withdrawal
-          account_name: account_name
-        error: error
-        metadata: ""
     NewIsolatedAccountResponseV2:
       $ref: "#/components/schemas/NewIsolatedAccountResponseV2Envelope"
     TransferAccountBalancesRequest:

@@ -57,6 +57,12 @@ docs/CurrentLeverageAccruedInterest.md
 docs/CurrentLeverageAccruedInterestResponseEnvelope.md
 docs/DefaultApi.md
 docs/DefundUserRequest.md
+docs/DepositArgs.md
+docs/DepositCall.md
+docs/DepositInstructionForChain.md
+docs/DepositInstructionsResponse.md
+docs/DepositInstructionsResponseEnvelope.md
+docs/DepositResponse.md
 docs/FundUser.md
 docs/FundUserRequest.md
 docs/FundUserResponseEnvelope.md
@@ -90,6 +96,7 @@ docs/ListAssetPriceResponseEnvelope.md
 docs/ListAssetYieldResponseEnvelope.md
 docs/ListCandlesResponseEnvelope.md
 docs/ListCouponPaymentsResponseEnvelope.md
+docs/ListDepositsResponseEnvelope.md
 docs/ListOrderBookDepthResponseEnvelope.md
 docs/ListOrderbookResponseEnvelope.md
 docs/ListOrdersResponseEnvelope.md
@@ -131,6 +138,9 @@ docs/PLSummary.md
 docs/PayLeverageAccruedInterest.md
 docs/PayLeverageAccruedInterestRequest.md
 docs/PayLeverageAccruedInterestResponseEnvelope.md
+docs/PermitDomain.md
+docs/PermitMessage.md
+docs/PermitTypedData.md
 docs/PnLRankingResponse.md
 docs/PoolPrice.md
 docs/PoolPriceResponseEnvelope.md
@@ -188,6 +198,7 @@ docs/TransferBalancesRequest.md
 docs/TransferBalancesResponseEnvelope.md
 docs/TransformedAssets.md
 docs/TriggerType.md
+docs/TypedDataField.md
 docs/UnitePositionRequest.md
 docs/UnitePositionResponseEnvelope.md
 docs/UnitedPosition.md
@@ -215,6 +226,7 @@ docs/UserValue.md
 docs/UserValueResponseEnvelope.md
 docs/ValidateSubmitOrderRequest.md
 docs/ValidateSubmitOrderResponse.md
+docs/Web3EventStatus.md
 docs/Withdraw.md
 docs/WithdrawRequest.md
 docs/WithdrawResponseEnvelope.md
@@ -301,6 +313,12 @@ src/main/java/tech/dora/model/CreateOrderResponseEnvelope.java
 src/main/java/tech/dora/model/CurrentLeverageAccruedInterest.java
 src/main/java/tech/dora/model/CurrentLeverageAccruedInterestResponseEnvelope.java
 src/main/java/tech/dora/model/DefundUserRequest.java
+src/main/java/tech/dora/model/DepositArgs.java
+src/main/java/tech/dora/model/DepositCall.java
+src/main/java/tech/dora/model/DepositInstructionForChain.java
+src/main/java/tech/dora/model/DepositInstructionsResponse.java
+src/main/java/tech/dora/model/DepositInstructionsResponseEnvelope.java
+src/main/java/tech/dora/model/DepositResponse.java
 src/main/java/tech/dora/model/FundUser.java
 src/main/java/tech/dora/model/FundUserRequest.java
 src/main/java/tech/dora/model/FundUserResponseEnvelope.java
@@ -334,6 +352,7 @@ src/main/java/tech/dora/model/ListAssetPriceResponseEnvelope.java
 src/main/java/tech/dora/model/ListAssetYieldResponseEnvelope.java
 src/main/java/tech/dora/model/ListCandlesResponseEnvelope.java
 src/main/java/tech/dora/model/ListCouponPaymentsResponseEnvelope.java
+src/main/java/tech/dora/model/ListDepositsResponseEnvelope.java
 src/main/java/tech/dora/model/ListOrderBookDepthResponseEnvelope.java
 src/main/java/tech/dora/model/ListOrderbookResponseEnvelope.java
 src/main/java/tech/dora/model/ListOrdersResponseEnvelope.java
@@ -375,6 +394,9 @@ src/main/java/tech/dora/model/PLSummary.java
 src/main/java/tech/dora/model/PayLeverageAccruedInterest.java
 src/main/java/tech/dora/model/PayLeverageAccruedInterestRequest.java
 src/main/java/tech/dora/model/PayLeverageAccruedInterestResponseEnvelope.java
+src/main/java/tech/dora/model/PermitDomain.java
+src/main/java/tech/dora/model/PermitMessage.java
+src/main/java/tech/dora/model/PermitTypedData.java
 src/main/java/tech/dora/model/PnLRankingResponse.java
 src/main/java/tech/dora/model/PoolPrice.java
 src/main/java/tech/dora/model/PoolPriceResponseEnvelope.java
@@ -432,6 +454,7 @@ src/main/java/tech/dora/model/TransferBalancesRequest.java
 src/main/java/tech/dora/model/TransferBalancesResponseEnvelope.java
 src/main/java/tech/dora/model/TransformedAssets.java
 src/main/java/tech/dora/model/TriggerType.java
+src/main/java/tech/dora/model/TypedDataField.java
 src/main/java/tech/dora/model/UnitePositionRequest.java
 src/main/java/tech/dora/model/UnitePositionResponseEnvelope.java
 src/main/java/tech/dora/model/UnitedPosition.java
@@ -459,6 +482,7 @@ src/main/java/tech/dora/model/UserValue.java
 src/main/java/tech/dora/model/UserValueResponseEnvelope.java
 src/main/java/tech/dora/model/ValidateSubmitOrderRequest.java
 src/main/java/tech/dora/model/ValidateSubmitOrderResponse.java
+src/main/java/tech/dora/model/Web3EventStatus.java
 src/main/java/tech/dora/model/Withdraw.java
 src/main/java/tech/dora/model/WithdrawRequest.java
 src/main/java/tech/dora/model/WithdrawResponseEnvelope.java
@@ -518,6 +542,12 @@ src/test/java/tech/dora/model/CreateOrderResponseEnvelopeTest.java
 src/test/java/tech/dora/model/CurrentLeverageAccruedInterestResponseEnvelopeTest.java
 src/test/java/tech/dora/model/CurrentLeverageAccruedInterestTest.java
 src/test/java/tech/dora/model/DefundUserRequestTest.java
+src/test/java/tech/dora/model/DepositArgsTest.java
+src/test/java/tech/dora/model/DepositCallTest.java
+src/test/java/tech/dora/model/DepositInstructionForChainTest.java
+src/test/java/tech/dora/model/DepositInstructionsResponseEnvelopeTest.java
+src/test/java/tech/dora/model/DepositInstructionsResponseTest.java
+src/test/java/tech/dora/model/DepositResponseTest.java
 src/test/java/tech/dora/model/FundUserRequestTest.java
 src/test/java/tech/dora/model/FundUserResponseEnvelopeTest.java
 src/test/java/tech/dora/model/FundUserTest.java
@@ -551,6 +581,7 @@ src/test/java/tech/dora/model/ListAssetPriceResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListAssetYieldResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListCandlesResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListCouponPaymentsResponseEnvelopeTest.java
+src/test/java/tech/dora/model/ListDepositsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListOrderBookDepthResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListOrderbookResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListOrdersResponseEnvelopeTest.java
@@ -592,6 +623,9 @@ src/test/java/tech/dora/model/PLSummaryTest.java
 src/test/java/tech/dora/model/PayLeverageAccruedInterestRequestTest.java
 src/test/java/tech/dora/model/PayLeverageAccruedInterestResponseEnvelopeTest.java
 src/test/java/tech/dora/model/PayLeverageAccruedInterestTest.java
+src/test/java/tech/dora/model/PermitDomainTest.java
+src/test/java/tech/dora/model/PermitMessageTest.java
+src/test/java/tech/dora/model/PermitTypedDataTest.java
 src/test/java/tech/dora/model/PnLRankingResponseTest.java
 src/test/java/tech/dora/model/PoolPriceResponseEnvelopeTest.java
 src/test/java/tech/dora/model/PoolPriceTest.java
@@ -649,6 +683,7 @@ src/test/java/tech/dora/model/TransferBalancesRequestTest.java
 src/test/java/tech/dora/model/TransferBalancesResponseEnvelopeTest.java
 src/test/java/tech/dora/model/TransformedAssetsTest.java
 src/test/java/tech/dora/model/TriggerTypeTest.java
+src/test/java/tech/dora/model/TypedDataFieldTest.java
 src/test/java/tech/dora/model/UnitePositionRequestTest.java
 src/test/java/tech/dora/model/UnitePositionResponseEnvelopeTest.java
 src/test/java/tech/dora/model/UnitedPositionTest.java
@@ -676,6 +711,7 @@ src/test/java/tech/dora/model/UserValueResponseEnvelopeTest.java
 src/test/java/tech/dora/model/UserValueTest.java
 src/test/java/tech/dora/model/ValidateSubmitOrderRequestTest.java
 src/test/java/tech/dora/model/ValidateSubmitOrderResponseTest.java
+src/test/java/tech/dora/model/Web3EventStatusTest.java
 src/test/java/tech/dora/model/WithdrawRequestTest.java
 src/test/java/tech/dora/model/WithdrawResponseEnvelopeTest.java
 src/test/java/tech/dora/model/WithdrawTest.java

@@ -14,7 +14,6 @@ All URIs are relative to *https://staging.dora.co*
 | [**createAPIKeyForUser**](DefaultApi.md#createAPIKeyForUser) | **POST** /v1/user/apikey | Create apikey for a user |
 | [**createAPIKeyForUserID**](DefaultApi.md#createAPIKeyForUserID) | **POST** /v1/user/{user_id}/apikey | Create apikey for a user |
 | [**createConditionalOrder**](DefaultApi.md#createConditionalOrder) | **POST** /v1/orders/conditional | Create a new conditional orders |
-| [**createNewIsolatedAccountV2**](DefaultApi.md#createNewIsolatedAccountV2) | **POST** /v2/accounts/new_isolated | Create a new isolated account for a user transferring available assets into the account |
 | [**createOrder**](DefaultApi.md#createOrder) | **POST** /v1/orders | Create a new order |
 | [**createUser**](DefaultApi.md#createUser) | **POST** /v1/integrators/user | Create a new user |
 | [**deleteUser**](DefaultApi.md#deleteUser) | **DELETE** /v1/user/{user_id} | Delete user by ID |
@@ -29,6 +28,7 @@ All URIs are relative to *https://staging.dora.co*
 | [**getAssetsStream**](DefaultApi.md#getAssetsStream) | **GET** /v1/assets/stream | Get all inserts or updates for assets |
 | [**getCandleData**](DefaultApi.md#getCandleData) | **GET** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook |
 | [**getCouponPaymentsByAssetId**](DefaultApi.md#getCouponPaymentsByAssetId) | **GET** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset |
+| [**getDepositInstructions**](DefaultApi.md#getDepositInstructions) | **GET** /v1/web3/deposit-instructions | Get per-chain instructions for depositing USDC into the Dora vault |
 | [**getL1Depth**](DefaultApi.md#getL1Depth) | **GET** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth) |
 | [**getL2Depth**](DefaultApi.md#getL2Depth) | **GET** /v1/orderbooks/{order_book_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth) |
 | [**getL3Depth**](DefaultApi.md#getL3Depth) | **GET** /v1/orderbooks/{order_book_id}/L3 | Get all open orders for a specific orderbook (L3 market depth) |
@@ -84,6 +84,7 @@ All URIs are relative to *https://staging.dora.co*
 | [**liquiditySubtract**](DefaultApi.md#liquiditySubtract) | **POST** /v1/liquidity/pool/{pool_id}/remove | Subtract liquidity from a pool |
 | [**listAccountsSelfV2**](DefaultApi.md#listAccountsSelfV2) | **GET** /v2/user/self/accounts | List all accounts for the authenticated user |
 | [**listAssets**](DefaultApi.md#listAssets) | **GET** /v1/assets | List assets |
+| [**listDeposits**](DefaultApi.md#listDeposits) | **GET** /v1/web3/deposits | List USDC deposits |
 | [**listOrderBooks**](DefaultApi.md#listOrderBooks) | **GET** /v1/orderbooks | List order books |
 | [**listOrders**](DefaultApi.md#listOrders) | **GET** /v1/orders | List all orders |
 | [**listPositionAccountsSelf**](DefaultApi.md#listPositionAccountsSelf) | **GET** /v1/user/self/position_accounts | List all position accounts for the authenticated user |
@@ -863,81 +864,6 @@ public class Example {
 | **201** | Conditional orders are created |  -  |
 | **400** | Bad request, e.g. missing required fields |  -  |
 | **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
-| **500** | Internal server error |  -  |
-
-<a id="createNewIsolatedAccountV2"></a>
-# **createNewIsolatedAccountV2**
-> NewIsolatedAccountResponseV2Envelope createNewIsolatedAccountV2(newIsolatedAccountRequestV2)
-
-Create a new isolated account for a user transferring available assets into the account
-
-### Example
-```java
-// Import classes:
-import tech.dora.ApiClient;
-import tech.dora.ApiException;
-import tech.dora.Configuration;
-import tech.dora.auth.*;
-import tech.dora.models.*;
-import tech.dora.api.DefaultApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://staging.dora.co");
-    
-    // Configure API key authorization: apiKeyAuthHeader
-    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-    apiKeyAuthHeader.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //apiKeyAuthHeader.setApiKeyPrefix("Token");
-
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
-
-    DefaultApi apiInstance = new DefaultApi(defaultClient);
-    NewIsolatedAccountRequestV2 newIsolatedAccountRequestV2 = new NewIsolatedAccountRequestV2(); // NewIsolatedAccountRequestV2 | 
-    try {
-      NewIsolatedAccountResponseV2Envelope result = apiInstance.createNewIsolatedAccountV2(newIsolatedAccountRequestV2);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling DefaultApi#createNewIsolatedAccountV2");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **newIsolatedAccountRequestV2** | [**NewIsolatedAccountRequestV2**](NewIsolatedAccountRequestV2.md)|  | |
-
-### Return type
-
-[**NewIsolatedAccountResponseV2Envelope**](NewIsolatedAccountResponseV2Envelope.md)
-
-### Authorization
-
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **201** | Isolated account created |  -  |
-| **400** | Bad request, e.g. missing required fields |  -  |
-| **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
-| **409** | Conflict, e.g. the requested amount is not available to transfer |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="createOrder"></a>
@@ -1904,6 +1830,88 @@ No authorization required
 | **200** | List of coupon payments |  -  |
 | **400** | Bad request, e.g. invalid query parameters |  -  |
 | **404** | Asset not found or no coupon payments available |  -  |
+
+<a id="getDepositInstructions"></a>
+# **getDepositInstructions**
+> DepositInstructionsResponseEnvelope getDepositInstructions(quantity, ownerAddress, nonce, clientReferenceId)
+
+Get per-chain instructions for depositing USDC into the Dora vault
+
+Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String quantity = "quantity_example"; // String | Human-decimal USDC quantity to deposit, e.g. '100.50'. Must be positive, with at most 6 decimal places.
+    String ownerAddress = "ownerAddress_example"; // String | The user's wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner.
+    String nonce = "nonce_example"; // String | The owner's current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain.
+    String clientReferenceId = "clientReferenceId_example"; // String | Optional client-supplied reference as a hex string (0x prefix optional), at most 32 bytes. Left-aligned into the deposit call's bytes32 argument.
+    try {
+      DepositInstructionsResponseEnvelope result = apiInstance.getDepositInstructions(quantity, ownerAddress, nonce, clientReferenceId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getDepositInstructions");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **quantity** | **String**| Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. | |
+| **ownerAddress** | **String**| The user&#39;s wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner. | |
+| **nonce** | **String**| The owner&#39;s current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain. | |
+| **clientReferenceId** | **String**| Optional client-supplied reference as a hex string (0x prefix optional), at most 32 bytes. Left-aligned into the deposit call&#39;s bytes32 argument. | [optional] |
+
+### Return type
+
+[**DepositInstructionsResponseEnvelope**](DepositInstructionsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Per-chain deposit instructions for the authenticated user |  -  |
+| **400** | Bad request, e.g. invalid or missing quantity, owner_address, or nonce, or an invalid client_reference_id |  -  |
+| **401** | Unauthorized, user not logged in |  -  |
+| **500** | Internal server error |  -  |
 
 <a id="getL1Depth"></a>
 # **getL1Depth**
@@ -5917,6 +5925,87 @@ No authorization required
 | **400** | Bad request, e.g. invalid query parameters |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="listDeposits"></a>
+# **listDeposits**
+> ListDepositsResponseEnvelope listDeposits(userId, page, limit)
+
+List USDC deposits
+
+Lists USDC deposits ordered by observed_at descending. Admin users may list deposits for any user (or all users); non-admin users may only list their own deposits.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | Filter by user ID. Non-admin callers may only specify their own user ID.
+    Long page = 1L; // Long | 
+    Long limit = 50L; // Long | 
+    try {
+      ListDepositsResponseEnvelope result = apiInstance.listDeposits(userId, page, limit);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#listDeposits");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**| Filter by user ID. Non-admin callers may only specify their own user ID. | [optional] |
+| **page** | **Long**|  | [optional] [default to 1] |
+| **limit** | **Long**|  | [optional] [default to 50] |
+
+### Return type
+
+[**ListDepositsResponseEnvelope**](ListDepositsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | A list of deposits |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **401** | Unauthorized, user not logged in |  -  |
+| **403** | Forbidden, e.g. a non-admin user requesting another user&#39;s deposits |  -  |
+| **500** | Internal server error |  -  |
+
 <a id="listOrderBooks"></a>
 # **listOrderBooks**
 > ListOrderbookResponseEnvelope listOrderBooks(status, baseAssetId, quoteAssetId, page, limit)
@@ -6031,7 +6120,7 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
-    UUID userId = UUID.randomUUID(); // UUID | Filter by user ID (only allowed if the user has copy trading enabled)
+    UUID userId = UUID.randomUUID(); // UUID | Filter by user ID (only allowed if the user has copy trading enabled, or if the requester is an Admin or Integrator within the same tenant)
     List<UUID> orderBookId = Arrays.asList(); // List<UUID> | 
     List<OrderKind> kind = Arrays.asList(); // List<OrderKind> | 
     List<OrderStatus> status = Arrays.asList(); // List<OrderStatus> | 
@@ -6058,7 +6147,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **userId** | **UUID**| Filter by user ID (only allowed if the user has copy trading enabled) | [optional] |
+| **userId** | **UUID**| Filter by user ID (only allowed if the user has copy trading enabled, or if the requester is an Admin or Integrator within the same tenant) | [optional] |
 | **orderBookId** | [**List&lt;UUID&gt;**](UUID.md)|  | [optional] |
 | **kind** | [**List&lt;OrderKind&gt;**](OrderKind.md)|  | [optional] |
 | **status** | [**List&lt;OrderStatus&gt;**](OrderStatus.md)|  | [optional] |
