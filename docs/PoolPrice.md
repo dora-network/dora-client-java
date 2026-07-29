@@ -9,7 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**poolId** | **UUID** |  |  |
 |**price** | **String** |  |  |
-|**timestamp** | **OffsetDateTime** |  |  |
+|**time** | **OffsetDateTime** |  |  |
 
 
 

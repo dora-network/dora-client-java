@@ -27,6 +27,7 @@ All URIs are relative to *https://staging.dora.co*
 | [**getAssetYieldData**](DefaultApi.md#getAssetYieldData) | **GET** /v1/charts/{asset_id}/yield | Get yield chart data for an asset |
 | [**getAssetsStream**](DefaultApi.md#getAssetsStream) | **GET** /v1/assets/stream | Get all inserts or updates for assets |
 | [**getCandleData**](DefaultApi.md#getCandleData) | **GET** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook |
+| [**getCopyTraders**](DefaultApi.md#getCopyTraders) | **GET** /v1/user/copy_traders | Get list of user IDs with copy trading enabled |
 | [**getCouponPaymentsByAssetId**](DefaultApi.md#getCouponPaymentsByAssetId) | **GET** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset |
 | [**getDepositInstructions**](DefaultApi.md#getDepositInstructions) | **GET** /v1/web3/deposit-instructions | Get per-chain instructions for depositing USDC into the Dora vault |
 | [**getL1Depth**](DefaultApi.md#getL1Depth) | **GET** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth) |
@@ -90,6 +91,7 @@ All URIs are relative to *https://staging.dora.co*
 | [**listPositionAccountsSelf**](DefaultApi.md#listPositionAccountsSelf) | **GET** /v1/user/self/position_accounts | List all position accounts for the authenticated user |
 | [**payLeverageGetAccruedInterest**](DefaultApi.md#payLeverageGetAccruedInterest) | **POST** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user |
 | [**rejectLedgerWithdrawRequest**](DefaultApi.md#rejectLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/reject | Reject a pending withdrawal request |
+| [**repayUSD**](DefaultApi.md#repayUSD) | **POST** /v1/positions/repay_usd | Repay borrowed USD, then accrue and pay leverage interest |
 | [**revokeAPIKeyForUser**](DefaultApi.md#revokeAPIKeyForUser) | **PUT** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user |
 | [**revokeAPIKeyForUserID**](DefaultApi.md#revokeAPIKeyForUserID) | **PUT** /v1/user/{user_id}/apikey/{key_id}/revoke | Revoke apikey for a user: admin or integrator only |
 | [**settleLeverageAccruedInterest**](DefaultApi.md#settleLeverageAccruedInterest) | **POST** /v1/leverage/accrued_interest/settle | Settle current accrued leverage interest for a specific user |
@@ -1572,6 +1574,8 @@ No authorization required
 
 Get yield chart data for an asset
 
+Returns complete yield buckets starting at &#x60;start&#x60;; &#x60;end&#x60; is exclusive and a trailing partial bucket is omitted. Requests are limited to 10,000 complete buckets.
+
 ### Example
 ```java
 // Import classes:
@@ -1631,9 +1635,10 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Yield chart points |  -  |
-| **400** | Bad request, e.g. invalid parameters |  -  |
+| **400** | Bad request, e.g. invalid parameters or more than 10,000 complete buckets |  -  |
 | **404** | Asset not found |  -  |
 | **500** | Internal server error |  -  |
+| **504** | Yield query exceeded its execution deadline |  -  |
 
 <a id="getAssetsStream"></a>
 # **getAssetsStream**
@@ -1767,6 +1772,81 @@ No authorization required
 | **200** | Candlestick data |  -  |
 | **400** | Bad request, e.g. invalid parameters |  -  |
 | **404** | Orderbook not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getCopyTraders"></a>
+# **getCopyTraders**
+> GetCopyTradersResponse getCopyTraders(page, limit)
+
+Get list of user IDs with copy trading enabled
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    Integer page = 1; // Integer | 
+    Integer limit = 100; // Integer | 
+    try {
+      GetCopyTradersResponse result = apiInstance.getCopyTraders(page, limit);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getCopyTraders");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **page** | **Integer**|  | [optional] [default to 1] |
+| **limit** | **Integer**|  | [optional] [default to 100] |
+
+### Return type
+
+[**GetCopyTradersResponse**](GetCopyTradersResponse.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | List of user IDs who have allow_copy_trading enabled |  -  |
+| **400** | Bad request, e.g. invalid pagination parameters |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="getCouponPaymentsByAssetId"></a>
@@ -2752,6 +2832,8 @@ public class Example {
 
 Get order by ID
 
+Get details of a specific order. Traders can only view their own orders. Admins can view any order. Integrators can view orders for users within their tenant.
+
 ### Example
 ```java
 // Import classes:
@@ -3530,9 +3612,11 @@ public class Example {
 
 <a id="getTopTradersByPnL"></a>
 # **getTopTradersByPnL**
-> GetPnLRankingResponse getTopTradersByPnL(start, end, limit)
+> GetPnLRankingResponse getTopTradersByPnL(start, end, page, limit, all)
 
 Get top traders by PnL
+
+Returns user PnL ranking for the provided time range. By default only users with allow_copy_trading&#x3D;true are included. Set all&#x3D;true to include all users; this requires an admin role.
 
 ### Example
 ```java
@@ -3560,11 +3644,13 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
-    OffsetDateTime start = OffsetDateTime.now(); // OffsetDateTime | 
-    OffsetDateTime end = OffsetDateTime.now(); // OffsetDateTime | 
-    Integer limit = 56; // Integer | 
+    OffsetDateTime start = OffsetDateTime.now(); // OffsetDateTime | Start timestamp (inclusive) in RFC3339 format.
+    OffsetDateTime end = OffsetDateTime.now(); // OffsetDateTime | End timestamp (exclusive) in RFC3339 format.
+    Integer page = 1; // Integer | 1-based page number for pagination.
+    Integer limit = 100; // Integer | Number of records per page (max 100). Defaults to 100.
+    Boolean all = false; // Boolean | When true, includes users with allow_copy_trading=false. Requires admin role.
     try {
-      GetPnLRankingResponse result = apiInstance.getTopTradersByPnL(start, end, limit);
+      GetPnLRankingResponse result = apiInstance.getTopTradersByPnL(start, end, page, limit, all);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#getTopTradersByPnL");
@@ -3581,9 +3667,11 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **start** | **OffsetDateTime**|  | |
-| **end** | **OffsetDateTime**|  | |
-| **limit** | **Integer**|  | [optional] |
+| **start** | **OffsetDateTime**| Start timestamp (inclusive) in RFC3339 format. | |
+| **end** | **OffsetDateTime**| End timestamp (exclusive) in RFC3339 format. | |
+| **page** | **Integer**| 1-based page number for pagination. | [optional] [default to 1] |
+| **limit** | **Integer**| Number of records per page (max 100). Defaults to 100. | [optional] [default to 100] |
+| **all** | **Boolean**| When true, includes users with allow_copy_trading&#x3D;false. Requires admin role. | [optional] [default to false] |
 
 ### Return type
 
@@ -3602,7 +3690,9 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Top traders by PnL |  -  |
-| **400** | Bad request, e.g. invalid path parameters |  -  |
+| **400** | Bad request, e.g. invalid query parameters |  -  |
+| **401** | Unauthorized (authentication required when all&#x3D;true) |  -  |
+| **403** | Forbidden (admin role required when all&#x3D;true) |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="getTradeById"></a>
@@ -6400,6 +6490,82 @@ public class Example {
 | **400** | Bad request, e.g. invalid withdrawal ID format or request is not in a pending state |  -  |
 | **404** | Withdrawal request not found |  -  |
 | **403** | Forbidden, user does not have permission to reject this withdrawal request |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="repayUSD"></a>
+# **repayUSD**
+> RepayUSDResponseEnvelope repayUSD(repayUSDRequest)
+
+Repay borrowed USD, then accrue and pay leverage interest
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    RepayUSDRequest repayUSDRequest = new RepayUSDRequest(); // RepayUSDRequest | 
+    try {
+      RepayUSDResponseEnvelope result = apiInstance.repayUSD(repayUSDRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#repayUSD");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **repayUSDRequest** | [**RepayUSDRequest**](RepayUSDRequest.md)|  | |
+
+### Return type
+
+[**RepayUSDResponseEnvelope**](RepayUSDResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | USD borrow repaid |  -  |
+| **400** | Bad request, e.g. missing position_id |  -  |
+| **401** | Unauthorized |  -  |
+| **404** | Position or USD asset not found |  -  |
+| **409** | Position is not eligible for repayment or has no repayable USD balance |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="revokeAPIKeyForUser"></a>

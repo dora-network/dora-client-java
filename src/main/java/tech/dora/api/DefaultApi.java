@@ -57,6 +57,7 @@ import tech.dora.model.FundUserRequest;
 import tech.dora.model.FundUserResponseEnvelope;
 import tech.dora.model.GetAssetByIDResponseEnvelope;
 import tech.dora.model.GetAssetYTMByIDResponseEnvelope;
+import tech.dora.model.GetCopyTradersResponse;
 import tech.dora.model.GetPnLRankingResponse;
 import tech.dora.model.GetRealizedPnlSettlementsResponseEnvelope;
 import tech.dora.model.GetTopOfBookResponseEnvelope;
@@ -98,6 +99,8 @@ import tech.dora.model.PayLeverageAccruedInterestRequest;
 import tech.dora.model.PayLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.PoolPriceResponseEnvelope;
 import tech.dora.model.PoolRequestError;
+import tech.dora.model.RepayUSDRequest;
+import tech.dora.model.RepayUSDResponseEnvelope;
 import tech.dora.model.ResponseEnvelope;
 import tech.dora.model.ResponseEnvelopeOfListAssets;
 import tech.dora.model.RevokeAPIKeyResponseEnvelope;
@@ -2972,9 +2975,10 @@ public class DefaultApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Yield chart points </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. invalid parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or more than 10,000 complete buckets </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Asset not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 504 </td><td> Yield query exceeded its execution deadline </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getAssetYieldDataCall(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nonnull AssetYieldResolution resolution, final ApiCallback _callback) throws ApiException {
@@ -3062,7 +3066,7 @@ public class DefaultApi {
 
     /**
      * Get yield chart data for an asset
-     * 
+     * Returns complete yield buckets starting at &#x60;start&#x60;; &#x60;end&#x60; is exclusive and a trailing partial bucket is omitted. Requests are limited to 10,000 complete buckets.
      * @param assetId  (required)
      * @param start  (required)
      * @param end  (required)
@@ -3074,9 +3078,10 @@ public class DefaultApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Yield chart points </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. invalid parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or more than 10,000 complete buckets </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Asset not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 504 </td><td> Yield query exceeded its execution deadline </td><td>  -  </td></tr>
      </table>
      */
     public ListAssetYieldResponseEnvelope getAssetYieldData(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nonnull AssetYieldResolution resolution) throws ApiException {
@@ -3086,7 +3091,7 @@ public class DefaultApi {
 
     /**
      * Get yield chart data for an asset
-     * 
+     * Returns complete yield buckets starting at &#x60;start&#x60;; &#x60;end&#x60; is exclusive and a trailing partial bucket is omitted. Requests are limited to 10,000 complete buckets.
      * @param assetId  (required)
      * @param start  (required)
      * @param end  (required)
@@ -3098,9 +3103,10 @@ public class DefaultApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Yield chart points </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. invalid parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or more than 10,000 complete buckets </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Asset not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 504 </td><td> Yield query exceeded its execution deadline </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<ListAssetYieldResponseEnvelope> getAssetYieldDataWithHttpInfo(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nonnull AssetYieldResolution resolution) throws ApiException {
@@ -3111,7 +3117,7 @@ public class DefaultApi {
 
     /**
      * Get yield chart data for an asset (asynchronously)
-     * 
+     * Returns complete yield buckets starting at &#x60;start&#x60;; &#x60;end&#x60; is exclusive and a trailing partial bucket is omitted. Requests are limited to 10,000 complete buckets.
      * @param assetId  (required)
      * @param start  (required)
      * @param end  (required)
@@ -3124,9 +3130,10 @@ public class DefaultApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Yield chart points </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. invalid parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or more than 10,000 complete buckets </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Asset not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 504 </td><td> Yield query exceeded its execution deadline </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getAssetYieldDataAsync(@javax.annotation.Nonnull UUID assetId, @javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nonnull AssetYieldResolution resolution, final ApiCallback<ListAssetYieldResponseEnvelope> _callback) throws ApiException {
@@ -3451,6 +3458,147 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = getCandleDataValidateBeforeCall(orderBookId, start, end, resolution, _callback);
         Type localVarReturnType = new TypeToken<ListCandlesResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getCopyTraders
+     * @param page  (optional, default to 1)
+     * @param limit  (optional, default to 100)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List of user IDs who have allow_copy_trading enabled </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid pagination parameters </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getCopyTradersCall(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/user/copy_traders";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getCopyTradersValidateBeforeCall(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
+        return getCopyTradersCall(page, limit, _callback);
+
+    }
+
+    /**
+     * Get list of user IDs with copy trading enabled
+     * 
+     * @param page  (optional, default to 1)
+     * @param limit  (optional, default to 100)
+     * @return GetCopyTradersResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List of user IDs who have allow_copy_trading enabled </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid pagination parameters </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public GetCopyTradersResponse getCopyTraders(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
+        ApiResponse<GetCopyTradersResponse> localVarResp = getCopyTradersWithHttpInfo(page, limit);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get list of user IDs with copy trading enabled
+     * 
+     * @param page  (optional, default to 1)
+     * @param limit  (optional, default to 100)
+     * @return ApiResponse&lt;GetCopyTradersResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List of user IDs who have allow_copy_trading enabled </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid pagination parameters </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<GetCopyTradersResponse> getCopyTradersWithHttpInfo(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
+        okhttp3.Call localVarCall = getCopyTradersValidateBeforeCall(page, limit, null);
+        Type localVarReturnType = new TypeToken<GetCopyTradersResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get list of user IDs with copy trading enabled (asynchronously)
+     * 
+     * @param page  (optional, default to 1)
+     * @param limit  (optional, default to 100)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List of user IDs who have allow_copy_trading enabled </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid pagination parameters </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getCopyTradersAsync(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback<GetCopyTradersResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getCopyTradersValidateBeforeCall(page, limit, _callback);
+        Type localVarReturnType = new TypeToken<GetCopyTradersResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -5454,7 +5602,7 @@ public class DefaultApi {
 
     /**
      * Get order by ID
-     * 
+     * Get details of a specific order. Traders can only view their own orders. Admins can view any order. Integrators can view orders for users within their tenant.
      * @param orderId  (required)
      * @return OrderResponseEnvelope
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -5476,7 +5624,7 @@ public class DefaultApi {
 
     /**
      * Get order by ID
-     * 
+     * Get details of a specific order. Traders can only view their own orders. Admins can view any order. Integrators can view orders for users within their tenant.
      * @param orderId  (required)
      * @return ApiResponse&lt;OrderResponseEnvelope&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -5499,7 +5647,7 @@ public class DefaultApi {
 
     /**
      * Get order by ID (asynchronously)
-     * 
+     * Get details of a specific order. Traders can only view their own orders. Admins can view any order. Integrators can view orders for users within their tenant.
      * @param orderId  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -6962,9 +7110,11 @@ public class DefaultApi {
     }
     /**
      * Build call for getTopTradersByPnL
-     * @param start  (required)
-     * @param end  (required)
-     * @param limit  (optional)
+     * @param start Start timestamp (inclusive) in RFC3339 format. (required)
+     * @param end End timestamp (exclusive) in RFC3339 format. (required)
+     * @param page 1-based page number for pagination. (optional, default to 1)
+     * @param limit Number of records per page (max 100). Defaults to 100. (optional, default to 100)
+     * @param all When true, includes users with allow_copy_trading&#x3D;false. Requires admin role. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -6973,11 +7123,13 @@ public class DefaultApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Top traders by PnL </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. invalid path parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized (authentication required when all&#x3D;true) </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden (admin role required when all&#x3D;true) </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getTopTradersByPnLCall(@javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getTopTradersByPnLCall(@javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Boolean all, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -7010,8 +7162,16 @@ public class DefaultApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("end", end));
         }
 
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
         if (limit != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (all != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("all", all));
         }
 
         final String[] localVarAccepts = {
@@ -7034,7 +7194,7 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getTopTradersByPnLValidateBeforeCall(@javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getTopTradersByPnLValidateBeforeCall(@javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Boolean all, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'start' is set
         if (start == null) {
             throw new ApiException("Missing the required parameter 'start' when calling getTopTradersByPnL(Async)");
@@ -7045,16 +7205,18 @@ public class DefaultApi {
             throw new ApiException("Missing the required parameter 'end' when calling getTopTradersByPnL(Async)");
         }
 
-        return getTopTradersByPnLCall(start, end, limit, _callback);
+        return getTopTradersByPnLCall(start, end, page, limit, all, _callback);
 
     }
 
     /**
      * Get top traders by PnL
-     * 
-     * @param start  (required)
-     * @param end  (required)
-     * @param limit  (optional)
+     * Returns user PnL ranking for the provided time range. By default only users with allow_copy_trading&#x3D;true are included. Set all&#x3D;true to include all users; this requires an admin role.
+     * @param start Start timestamp (inclusive) in RFC3339 format. (required)
+     * @param end End timestamp (exclusive) in RFC3339 format. (required)
+     * @param page 1-based page number for pagination. (optional, default to 1)
+     * @param limit Number of records per page (max 100). Defaults to 100. (optional, default to 100)
+     * @param all When true, includes users with allow_copy_trading&#x3D;false. Requires admin role. (optional, default to false)
      * @return GetPnLRankingResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -7062,21 +7224,25 @@ public class DefaultApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Top traders by PnL </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. invalid path parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized (authentication required when all&#x3D;true) </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden (admin role required when all&#x3D;true) </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public GetPnLRankingResponse getTopTradersByPnL(@javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nullable Integer limit) throws ApiException {
-        ApiResponse<GetPnLRankingResponse> localVarResp = getTopTradersByPnLWithHttpInfo(start, end, limit);
+    public GetPnLRankingResponse getTopTradersByPnL(@javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Boolean all) throws ApiException {
+        ApiResponse<GetPnLRankingResponse> localVarResp = getTopTradersByPnLWithHttpInfo(start, end, page, limit, all);
         return localVarResp.getData();
     }
 
     /**
      * Get top traders by PnL
-     * 
-     * @param start  (required)
-     * @param end  (required)
-     * @param limit  (optional)
+     * Returns user PnL ranking for the provided time range. By default only users with allow_copy_trading&#x3D;true are included. Set all&#x3D;true to include all users; this requires an admin role.
+     * @param start Start timestamp (inclusive) in RFC3339 format. (required)
+     * @param end End timestamp (exclusive) in RFC3339 format. (required)
+     * @param page 1-based page number for pagination. (optional, default to 1)
+     * @param limit Number of records per page (max 100). Defaults to 100. (optional, default to 100)
+     * @param all When true, includes users with allow_copy_trading&#x3D;false. Requires admin role. (optional, default to false)
      * @return ApiResponse&lt;GetPnLRankingResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -7084,22 +7250,26 @@ public class DefaultApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Top traders by PnL </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. invalid path parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized (authentication required when all&#x3D;true) </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden (admin role required when all&#x3D;true) </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<GetPnLRankingResponse> getTopTradersByPnLWithHttpInfo(@javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nullable Integer limit) throws ApiException {
-        okhttp3.Call localVarCall = getTopTradersByPnLValidateBeforeCall(start, end, limit, null);
+    public ApiResponse<GetPnLRankingResponse> getTopTradersByPnLWithHttpInfo(@javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Boolean all) throws ApiException {
+        okhttp3.Call localVarCall = getTopTradersByPnLValidateBeforeCall(start, end, page, limit, all, null);
         Type localVarReturnType = new TypeToken<GetPnLRankingResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Get top traders by PnL (asynchronously)
-     * 
-     * @param start  (required)
-     * @param end  (required)
-     * @param limit  (optional)
+     * Returns user PnL ranking for the provided time range. By default only users with allow_copy_trading&#x3D;true are included. Set all&#x3D;true to include all users; this requires an admin role.
+     * @param start Start timestamp (inclusive) in RFC3339 format. (required)
+     * @param end End timestamp (exclusive) in RFC3339 format. (required)
+     * @param page 1-based page number for pagination. (optional, default to 1)
+     * @param limit Number of records per page (max 100). Defaults to 100. (optional, default to 100)
+     * @param all When true, includes users with allow_copy_trading&#x3D;false. Requires admin role. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -7108,13 +7278,15 @@ public class DefaultApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Top traders by PnL </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. invalid path parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized (authentication required when all&#x3D;true) </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden (admin role required when all&#x3D;true) </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getTopTradersByPnLAsync(@javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nullable Integer limit, final ApiCallback<GetPnLRankingResponse> _callback) throws ApiException {
+    public okhttp3.Call getTopTradersByPnLAsync(@javax.annotation.Nonnull OffsetDateTime start, @javax.annotation.Nonnull OffsetDateTime end, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Boolean all, final ApiCallback<GetPnLRankingResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getTopTradersByPnLValidateBeforeCall(start, end, limit, _callback);
+        okhttp3.Call localVarCall = getTopTradersByPnLValidateBeforeCall(start, end, page, limit, all, _callback);
         Type localVarReturnType = new TypeToken<GetPnLRankingResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -12793,6 +12965,153 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = rejectLedgerWithdrawRequestValidateBeforeCall(withdrawalId, withdrawalRequestReason, _callback);
         Type localVarReturnType = new TypeToken<WithdrawalInitiationResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for repayUSD
+     * @param repayUSDRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> USD borrow repaid </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. missing position_id </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Position or USD asset not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Position is not eligible for repayment or has no repayable USD balance </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call repayUSDCall(@javax.annotation.Nonnull RepayUSDRequest repayUSDRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = repayUSDRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/positions/repay_usd";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call repayUSDValidateBeforeCall(@javax.annotation.Nonnull RepayUSDRequest repayUSDRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'repayUSDRequest' is set
+        if (repayUSDRequest == null) {
+            throw new ApiException("Missing the required parameter 'repayUSDRequest' when calling repayUSD(Async)");
+        }
+
+        return repayUSDCall(repayUSDRequest, _callback);
+
+    }
+
+    /**
+     * Repay borrowed USD, then accrue and pay leverage interest
+     * 
+     * @param repayUSDRequest  (required)
+     * @return RepayUSDResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> USD borrow repaid </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. missing position_id </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Position or USD asset not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Position is not eligible for repayment or has no repayable USD balance </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public RepayUSDResponseEnvelope repayUSD(@javax.annotation.Nonnull RepayUSDRequest repayUSDRequest) throws ApiException {
+        ApiResponse<RepayUSDResponseEnvelope> localVarResp = repayUSDWithHttpInfo(repayUSDRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Repay borrowed USD, then accrue and pay leverage interest
+     * 
+     * @param repayUSDRequest  (required)
+     * @return ApiResponse&lt;RepayUSDResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> USD borrow repaid </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. missing position_id </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Position or USD asset not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Position is not eligible for repayment or has no repayable USD balance </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<RepayUSDResponseEnvelope> repayUSDWithHttpInfo(@javax.annotation.Nonnull RepayUSDRequest repayUSDRequest) throws ApiException {
+        okhttp3.Call localVarCall = repayUSDValidateBeforeCall(repayUSDRequest, null);
+        Type localVarReturnType = new TypeToken<RepayUSDResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Repay borrowed USD, then accrue and pay leverage interest (asynchronously)
+     * 
+     * @param repayUSDRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> USD borrow repaid </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. missing position_id </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Position or USD asset not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Position is not eligible for repayment or has no repayable USD balance </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call repayUSDAsync(@javax.annotation.Nonnull RepayUSDRequest repayUSDRequest, final ApiCallback<RepayUSDResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = repayUSDValidateBeforeCall(repayUSDRequest, _callback);
+        Type localVarReturnType = new TypeToken<RepayUSDResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

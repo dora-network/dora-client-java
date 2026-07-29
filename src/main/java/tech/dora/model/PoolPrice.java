@@ -50,7 +50,7 @@ import tech.dora.JSON;
 /**
  * PoolPrice
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-14T12:50:21.891437458+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-29T17:20:21.055505839+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class PoolPrice {
   public static final String SERIALIZED_NAME_POOL_ID = "pool_id";
   @SerializedName(SERIALIZED_NAME_POOL_ID)
@@ -62,10 +62,10 @@ public class PoolPrice {
   @javax.annotation.Nonnull
   private String price;
 
-  public static final String SERIALIZED_NAME_TIMESTAMP = "timestamp";
-  @SerializedName(SERIALIZED_NAME_TIMESTAMP)
+  public static final String SERIALIZED_NAME_TIME = "time";
+  @SerializedName(SERIALIZED_NAME_TIME)
   @javax.annotation.Nonnull
-  private OffsetDateTime timestamp;
+  private OffsetDateTime time;
 
   public PoolPrice() {
   }
@@ -108,22 +108,22 @@ public class PoolPrice {
   }
 
 
-  public PoolPrice timestamp(@javax.annotation.Nonnull OffsetDateTime timestamp) {
-    this.timestamp = timestamp;
+  public PoolPrice time(@javax.annotation.Nonnull OffsetDateTime time) {
+    this.time = time;
     return this;
   }
 
   /**
-   * Get timestamp
-   * @return timestamp
+   * Get time
+   * @return time
    */
   @javax.annotation.Nonnull
-  public OffsetDateTime getTimestamp() {
-    return timestamp;
+  public OffsetDateTime getTime() {
+    return time;
   }
 
-  public void setTimestamp(@javax.annotation.Nonnull OffsetDateTime timestamp) {
-    this.timestamp = timestamp;
+  public void setTime(@javax.annotation.Nonnull OffsetDateTime time) {
+    this.time = time;
   }
 
 
@@ -139,12 +139,12 @@ public class PoolPrice {
     PoolPrice poolPrice = (PoolPrice) o;
     return Objects.equals(this.poolId, poolPrice.poolId) &&
         Objects.equals(this.price, poolPrice.price) &&
-        Objects.equals(this.timestamp, poolPrice.timestamp);
+        Objects.equals(this.time, poolPrice.time);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(poolId, price, timestamp);
+    return Objects.hash(poolId, price, time);
   }
 
   @Override
@@ -153,7 +153,7 @@ public class PoolPrice {
     sb.append("class PoolPrice {\n");
     sb.append("    poolId: ").append(toIndentedString(poolId)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
-    sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
+    sb.append("    time: ").append(toIndentedString(time)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -172,10 +172,10 @@ public class PoolPrice {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("pool_id", "price", "timestamp"));
+    openapiFields = new HashSet<String>(Arrays.asList("pool_id", "price", "time"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("pool_id", "price", "timestamp"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("pool_id", "price", "time"));
   }
 
   /**

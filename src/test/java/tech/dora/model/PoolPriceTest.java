@@ -56,11 +56,11 @@ public class PoolPriceTest {
     }
 
     /**
-     * Test the property 'timestamp'
+     * Test the property 'time'
      */
     @Test
-    public void timestampTest() {
-        // TODO: test timestamp
+    public void timeTest() {
+        // TODO: test time
     }
 
 }

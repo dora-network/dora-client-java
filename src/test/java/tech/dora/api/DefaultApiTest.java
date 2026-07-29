@@ -44,6 +44,7 @@ import tech.dora.model.FundUserRequest;
 import tech.dora.model.FundUserResponseEnvelope;
 import tech.dora.model.GetAssetByIDResponseEnvelope;
 import tech.dora.model.GetAssetYTMByIDResponseEnvelope;
+import tech.dora.model.GetCopyTradersResponse;
 import tech.dora.model.GetPnLRankingResponse;
 import tech.dora.model.GetRealizedPnlSettlementsResponseEnvelope;
 import tech.dora.model.GetTopOfBookResponseEnvelope;
@@ -85,6 +86,8 @@ import tech.dora.model.PayLeverageAccruedInterestRequest;
 import tech.dora.model.PayLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.PoolPriceResponseEnvelope;
 import tech.dora.model.PoolRequestError;
+import tech.dora.model.RepayUSDRequest;
+import tech.dora.model.RepayUSDResponseEnvelope;
 import tech.dora.model.ResponseEnvelope;
 import tech.dora.model.ResponseEnvelopeOfListAssets;
 import tech.dora.model.RevokeAPIKeyResponseEnvelope;
@@ -400,6 +403,8 @@ public class DefaultApiTest {
     /**
      * Get yield chart data for an asset
      *
+     * Returns complete yield buckets starting at &#x60;start&#x60;; &#x60;end&#x60; is exclusive and a trailing partial bucket is omitted. Requests are limited to 10,000 complete buckets.
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -437,6 +442,19 @@ public class DefaultApiTest {
         OffsetDateTime end = null;
         CandleResolution resolution = null;
         ListCandlesResponseEnvelope response = api.getCandleData(orderBookId, start, end, resolution);
+        // TODO: test validations
+    }
+
+    /**
+     * Get list of user IDs with copy trading enabled
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getCopyTradersTest() throws ApiException {
+        Integer page = null;
+        Integer limit = null;
+        GetCopyTradersResponse response = api.getCopyTraders(page, limit);
         // TODO: test validations
     }
 
@@ -611,6 +629,8 @@ public class DefaultApiTest {
     /**
      * Get order by ID
      *
+     * Get details of a specific order. Traders can only view their own orders. Admins can view any order. Integrators can view orders for users within their tenant.
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -749,14 +769,18 @@ public class DefaultApiTest {
     /**
      * Get top traders by PnL
      *
+     * Returns user PnL ranking for the provided time range. By default only users with allow_copy_trading&#x3D;true are included. Set all&#x3D;true to include all users; this requires an admin role.
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
     public void getTopTradersByPnLTest() throws ApiException {
         OffsetDateTime start = null;
         OffsetDateTime end = null;
+        Integer page = null;
         Integer limit = null;
-        GetPnLRankingResponse response = api.getTopTradersByPnL(start, end, limit);
+        Boolean all = null;
+        GetPnLRankingResponse response = api.getTopTradersByPnL(start, end, page, limit, all);
         // TODO: test validations
     }
 
@@ -1277,6 +1301,18 @@ public class DefaultApiTest {
         UUID withdrawalId = null;
         WithdrawalRequestReason withdrawalRequestReason = null;
         WithdrawalInitiationResponseEnvelope response = api.rejectLedgerWithdrawRequest(withdrawalId, withdrawalRequestReason);
+        // TODO: test validations
+    }
+
+    /**
+     * Repay borrowed USD, then accrue and pay leverage interest
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void repayUSDTest() throws ApiException {
+        RepayUSDRequest repayUSDRequest = null;
+        RepayUSDResponseEnvelope response = api.repayUSD(repayUSDRequest);
         // TODO: test validations
     }
 

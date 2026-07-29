@@ -33,7 +33,11 @@ public enum Web3EventStatus {
   
   FINALIZED("FINALIZED"),
   
-  ORPHANED("ORPHANED");
+  ORPHANED("ORPHANED"),
+  
+  USER_NOT_EXIST("USER_NOT_EXIST"),
+  
+  DUST("DUST");
 
   private String value;
 
