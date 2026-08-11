@@ -719,7 +719,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetCopyTradersResponse"
-          description: List of user IDs who have allow_copy_trading enabled
+          description: List of users who have allow_copy_trading enabled
         "400":
           content:
             application/json:
@@ -732,7 +732,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
-      summary: Get list of user IDs with copy trading enabled
+      summary: Get list of users with copy trading enabled
       x-accepts:
       - application/json
   /v1/orderbooks:
@@ -1434,6 +1434,13 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: "Unauthorized, user not logged in or does not have access to\
             \ this orderbook"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden, e.g. the user's Global Account USD balance is below\
+            \ the required minimum cash reserve"
         "500":
           content:
             application/json:
@@ -1900,6 +1907,13 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: "Unauthorized, user not logged in or does not have access to\
             \ this orderbook"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden, e.g. the user's Global Account USD balance is below\
+            \ the required minimum cash reserve"
         "409":
           content:
             application/json:
@@ -2142,6 +2156,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: "Bad request, e.g. invalid parameters or insufficient funds"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden, e.g. an integrator depositing a non-USD asset,\
+            \ or a USD deposit to a user whose native asset is USDC (their USD only\
+            \ moves on chain, as USDC)"
         "500":
           content:
             application/json:
@@ -2194,6 +2216,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: "Bad request, e.g. invalid parameters or insufficient funds"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden: the acting user is not permitted, or the target\
+            \ user's native asset is USDC - their USD only moves on chain, as a USDC\
+            \ deposit or withdrawal"
         "500":
           content:
             application/json:
@@ -2312,6 +2342,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: "Bad request, e.g. invalid parameters or insufficient funds"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden: the acting user is not permitted, or the target\
+            \ user's native asset is USDC - their USD only moves on chain, as an USDC\
+            \ deposit or withdrawal"
         "500":
           content:
             application/json:
@@ -2395,6 +2433,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: "Bad request, e.g. invalid parameters or insufficient funds"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden, e.g. the user's Global Account USD balance is below\
+            \ the required minimum cash reserve"
         "500":
           content:
             application/json:
@@ -4780,6 +4825,13 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: "Unauthorized, user not logged in or does not have access to\
             \ this orderbook"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden, e.g. the user's Global Account USD balance is below\
+            \ the required minimum cash reserve"
         "409":
           content:
             application/json:
@@ -4883,7 +4935,8 @@ paths:
         \ v/r/s and ABI-encodes the deposit function with the returned args plus (v,\
         \ r, s); no separate approve transaction is needed. Only a single chain is\
         \ currently supported: the provided nonce belongs to it, and the chains array\
-        \ holds at most one entry."
+        \ holds at most one entry. Restricted to DORA tenant users whose native asset\
+        \ is USDC."
       operationId: getDepositInstructions
       parameters:
       - description: "Human-decimal USDC quantity to deposit, e.g. '100.50'. Must\
@@ -4943,6 +4996,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: "Unauthorized, user not logged in"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden: access is restricted to DORA tenant users whose\
+            \ native asset is USDC. Admin and indexer API keys have no native asset\
+            \ and are also denied."
         "500":
           content:
             application/json:
@@ -5023,6 +5084,464 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       summary: List USDC deposits
+      x-accepts:
+      - application/json
+  /v1/accounts/{user_id}/cash_reserve:
+    get:
+      description: "Returns the user's available Global Account USD balance alongside\
+        \ their minimum cash reserve requirement and its breakdown. While available_usd\
+        \ is below required_usd the user may not open new leveraged positions, submit\
+        \ buy orders, transfer assets out of their Global Account or withdraw."
+      operationId: getCashReserveByUserID
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CashReserveResponseEnvelope"
+          description: The user's minimum USD cash reserve state
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid user ID format"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden, the caller may only read their own cash reserve"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get the minimum USD cash reserve requirement for the given user
+      x-accepts:
+      - application/json
+  /v1/accounts/self/cash_reserve:
+    get:
+      description: "Returns the user's available Global Account USD balance alongside\
+        \ their minimum cash reserve requirement and its breakdown. While available_usd\
+        \ is below required_usd the user may not open new leveraged positions, submit\
+        \ buy orders, transfer assets out of their Global Account or withdraw."
+      operationId: getCashReserveSelf
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CashReserveResponseEnvelope"
+          description: The user's minimum USD cash reserve state
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid user ID format"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden, the caller may only read their own cash reserve"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get the minimum USD cash reserve requirement for the logged in user
+      x-accepts:
+      - application/json
+  /v1/trading_challenges:
+    get:
+      operationId: listTradingChallenges
+      parameters:
+      - explode: true
+        in: query
+        name: tenant_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          $ref: "#/components/schemas/TradingChallengeType"
+        style: form
+      - explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          $ref: "#/components/schemas/TradingChallengeStatus"
+        style: form
+      - explode: true
+        in: query
+        name: start
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: end
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradingChallengeListResponseEnvelope"
+          description: Trading challenges list
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Bad request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: List trading challenges
+      x-accepts:
+      - application/json
+    post:
+      operationId: createTradingChallenge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTradingChallengeRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradingChallengeResponseEnvelope"
+          description: Trading challenge created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Bad request
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Conflict
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Create a trading challenge
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v1/trading_challenges/add_users:
+    put:
+      operationId: addTradingChallengeUsers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddTradingChallengeUsersRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradingChallengeResponseEnvelope"
+          description: Users added
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Bad request
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Conflict
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Add users to a trading challenge
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v1/trading_challenges/remove_users:
+    put:
+      operationId: removeTradingChallengeUsers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RemoveTradingChallengeUsersRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradingChallengeResponseEnvelope"
+          description: Users removed
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Bad request
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Conflict
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Remove users from a trading challenge
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v1/trading_challenges/{trading_challenge_id}:
+    get:
+      operationId: getTradingChallengeByID
+      parameters:
+      - explode: false
+        in: path
+        name: trading_challenge_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradingChallengeResponseEnvelope"
+          description: Trading challenge
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Bad request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get trading challenge by ID
+      x-accepts:
+      - application/json
+  /v1/trading_challenges/{trading_challenge_id}/daily_snapshots:
+    get:
+      operationId: getTradingChallengeDailySnapshots
+      parameters:
+      - explode: false
+        in: path
+        name: trading_challenge_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradingChallengeDailySnapshotsResponseEnvelope"
+          description: Daily snapshots
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Bad request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get trading challenge daily snapshots
+      x-accepts:
+      - application/json
+  /v1/trading_challenges/{trading_challenge_id}/results:
+    get:
+      operationId: getTradingChallengeResults
+      parameters:
+      - explode: false
+        in: path
+        name: trading_challenge_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Leaderboard board selector. Defaults to TOP_PNL.
+        explode: true
+        in: query
+        name: board
+        required: false
+        schema:
+          default: TOP_PNL
+          enum:
+          - TOP_PNL
+          - TOP_VOLUME
+          - IRON_TRADER
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradingChallengeResultsResponseEnvelope"
+          description: Challenge results
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Bad request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get trading challenge results
+      x-accepts:
+      - application/json
+  /v1/trading_challenges/{trading_challenge_id}/claim:
+    post:
+      operationId: claimTradingChallengePrize
+      parameters:
+      - explode: false
+        in: path
+        name: trading_challenge_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClaimTradingChallengeResponseEnvelope"
+          description: Prize claimed
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Conflict
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Claim challenge prize
       x-accepts:
       - application/json
 components:
@@ -6149,6 +6668,7 @@ components:
           email: email
           first_name: first_name
           last_name: last_name
+          user_name: user_name
           country_of_domicile: IN
           native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           photo_url: photo_url
@@ -6174,6 +6694,7 @@ components:
           email: email
           first_name: first_name
           last_name: last_name
+          user_name: user_name
           country_of_domicile: IN
           native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           photo_url: photo_url
@@ -6202,6 +6723,7 @@ components:
         email: email
         first_name: first_name
         last_name: last_name
+        user_name: user_name
         country_of_domicile: IN
         native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         photo_url: photo_url
@@ -6217,9 +6739,14 @@ components:
           type: string
         last_name:
           type: string
+        user_name:
+          type: string
         country_of_domicile:
           $ref: "#/components/schemas/CountryCode"
         native_asset_id:
+          description: "Optional: the user's native asset ID. Must be a CURRENCY asset;\
+            \ defaults to USD. The USDC asset is never allowed for integrator-created\
+            \ users."
           format: uuid
           type: string
         photo_url:
@@ -6258,6 +6785,7 @@ components:
           email: email
           first_name: first_name
           last_name: last_name
+          user_name: user_name
           country_of_domicile: IN
           native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           photo_url: photo_url
@@ -6323,6 +6851,7 @@ components:
         email: email
         first_name: first_name
         last_name: last_name
+        user_name: user_name
         country_of_domicile: IN
         native_asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         photo_url: photo_url
@@ -6359,6 +6888,8 @@ components:
         first_name:
           type: string
         last_name:
+          type: string
+        user_name:
           type: string
         country_of_domicile:
           $ref: "#/components/schemas/CountryCode"
@@ -6419,6 +6950,7 @@ components:
       - roles
       - show_tutorial_cards
       - tenant_id
+      - user_name
     UserConfig:
       properties:
         id:
@@ -7086,16 +7618,30 @@ components:
       - properties:
           data:
             items:
-              format: uuid
-              type: string
+              $ref: "#/components/schemas/CopyTrader"
             type: array
             default: null
       example:
         data:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_name: user_name
+        - user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_name: user_name
         error: error
         metadata: ""
+    CopyTrader:
+      example:
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        user_name: user_name
+      properties:
+        user_id:
+          format: uuid
+          type: string
+        user_name:
+          type: string
+      required:
+      - user_id
+      - user_name
     OrderKind:
       enum:
       - LIMIT
@@ -10614,12 +11160,6 @@ components:
               type: string
             type: array
             default: null
-      example:
-        data:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        error: error
-        metadata: ""
     LiquidationTargetsResponse:
       $ref: "#/components/schemas/LiquidationTargetsResponseEnvelope"
     LeverageRequestError:
@@ -11125,6 +11665,8 @@ components:
         available: available
         health: health
         ltv: ltv
+        realized_pl: realized_pl
+        unrealized_pl: unrealized_pl
       properties:
         leverage:
           description: The leverage used to obtain the position on the isolated account
@@ -11137,12 +11679,21 @@ components:
           type: string
         ltv:
           type: string
+        realized_pl:
+          description: The realized profit or loss since account inception
+          type: string
+        unrealized_pl:
+          description: The unrealized profit or loss for the account's current open
+            positions
+          type: string
       required:
       - account_equity
       - available
       - health
       - leverage
       - ltv
+      - realized_pl
+      - unrealized_pl
     PLAccount:
       example:
         account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -11197,6 +11748,8 @@ components:
           available: available
           health: health
           ltv: ltv
+          realized_pl: realized_pl
+          unrealized_pl: unrealized_pl
       properties:
         account_id:
           description: The ID of the account holding the position
@@ -11286,6 +11839,8 @@ components:
             available: available
             health: health
             ltv: ltv
+            realized_pl: realized_pl
+            unrealized_pl: unrealized_pl
         - account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           account_name: account_name
           is_global: true
@@ -11338,6 +11893,8 @@ components:
             available: available
             health: health
             ltv: ltv
+            realized_pl: realized_pl
+            unrealized_pl: unrealized_pl
         error: error
         metadata: ""
     PLResponse:
@@ -11841,6 +12398,645 @@ components:
         metadata: ""
     ListAccountsResponseV2:
       $ref: "#/components/schemas/ListAccountsResponseV2Envelope"
+    CashReserveBreakdown:
+      description: Breakdown of the minimum USD cash reserve requirement.
+      example:
+        completed_pac: completed_pac
+        outstanding_lai: outstanding_lai
+        estimated_fees: estimated_fees
+        borrowed_portion: borrowed_portion
+        floor: floor
+        total: total
+      properties:
+        completed_pac:
+          description: "Completed PAC (partially accrued coupon) obligations the user\
+            \ owes, in USD."
+          type: string
+        outstanding_lai:
+          description: "Outstanding LAI (leverage accrued interest) the user owes,\
+            \ in USD."
+          type: string
+        estimated_fees:
+          description: "Estimated trading fees for the current settlement period,\
+            \ capped at a configured fraction (1% by default) of the user's traded\
+            \ USD volume since 00:00:00 UTC."
+          type: string
+        borrowed_portion:
+          description: "Configured fraction (10% by default) of the user's total outstanding\
+            \ borrowed value, in USD."
+          type: string
+        floor:
+          description: "Configured absolute minimum requirement, in USD."
+          type: string
+        total:
+          description: The amount of USD the user must keep available in their Global
+            Account.
+          type: string
+      required:
+      - borrowed_portion
+      - completed_pac
+      - estimated_fees
+      - floor
+      - outstanding_lai
+      - total
+    CashReserveResponse:
+      example:
+        enforced: true
+        available_usd: available_usd
+        committed_usd: committed_usd
+        required_usd: required_usd
+        satisfied: true
+        breakdown:
+          completed_pac: completed_pac
+          outstanding_lai: outstanding_lai
+          estimated_fees: estimated_fees
+          borrowed_portion: borrowed_portion
+          floor: floor
+          total: total
+      properties:
+        enforced:
+          description: Whether the minimum cash reserve guard is active in this environment.
+          type: boolean
+        available_usd:
+          description: The user's currently available USD balance in their Global
+            Account.
+          type: string
+        committed_usd:
+          description: "USD still counted in available_usd but already claimed by\
+            \ the user's open market buy orders on the Global Account, which reserve\
+            \ no funds at submission time. The reserve is evaluated against available_usd\
+            \ minus committed_usd."
+          type: string
+        required_usd:
+          description: The user's minimum USD cash reserve requirement.
+          type: string
+        satisfied:
+          description: Whether available_usd minus committed_usd is at least required_usd.
+          type: boolean
+        breakdown:
+          $ref: "#/components/schemas/CashReserveBreakdown"
+      required:
+      - available_usd
+      - breakdown
+      - committed_usd
+      - enforced
+      - required_usd
+      - satisfied
+    CashReserveResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/CashReserveResponse"
+      example:
+        data:
+          enforced: true
+          available_usd: available_usd
+          committed_usd: committed_usd
+          required_usd: required_usd
+          satisfied: true
+          breakdown:
+            completed_pac: completed_pac
+            outstanding_lai: outstanding_lai
+            estimated_fees: estimated_fees
+            borrowed_portion: borrowed_portion
+            floor: floor
+            total: total
+        error: error
+        metadata: ""
+    TradingChallengeType:
+      enum:
+      - TOURNAMENT
+      - CASH
+      type: string
+    TradingChallengeStatus:
+      enum:
+      - PENDING
+      - ACTIVE
+      - COMPLETED
+      type: string
+    CreateTradingChallengeRequest:
+      example:
+        tenant_id: tenant_id
+        name: name
+        type: TOURNAMENT
+        max_users: 1
+        start: 2000-01-23T04:56:07.000+00:00
+        end: 2000-01-23T04:56:07.000+00:00
+        initial_user_balance: initial_user_balance
+        gold_prize_quantity: gold_prize_quantity
+        silver_prize_quantity: silver_prize_quantity
+        bronze_prize_quantity: bronze_prize_quantity
+        pnl_condition: pnl_condition
+        total_volume_condition: total_volume_condition
+        avg_daily_volume_condition: avg_daily_volume_condition
+        minimum_equity_percentage_condition: 59
+        users:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        tenant_id:
+          type: string
+        name:
+          description: Trading challenge name
+          type: string
+        type:
+          $ref: "#/components/schemas/TradingChallengeType"
+        max_users:
+          minimum: 1
+          type: integer
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+        initial_user_balance:
+          type: string
+        gold_prize_quantity:
+          type: string
+        silver_prize_quantity:
+          type: string
+        bronze_prize_quantity:
+          type: string
+        pnl_condition:
+          type: string
+        total_volume_condition:
+          type: string
+        avg_daily_volume_condition:
+          type: string
+        minimum_equity_percentage_condition:
+          maximum: 99
+          minimum: 0
+          type: integer
+        users:
+          items:
+            format: uuid
+            type: string
+          type: array
+          default: null
+      required:
+      - end
+      - initial_user_balance
+      - max_users
+      - name
+      - start
+      - tenant_id
+      - type
+    AddTradingChallengeUsersRequest:
+      example:
+        trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        users:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        trading_challenge_id:
+          format: uuid
+          type: string
+        users:
+          items:
+            format: uuid
+            type: string
+          type: array
+          default: null
+      required:
+      - trading_challenge_id
+      - users
+    RemoveTradingChallengeUsersRequest:
+      example:
+        trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        users:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        trading_challenge_id:
+          format: uuid
+          type: string
+        users:
+          items:
+            format: uuid
+            type: string
+          type: array
+          default: null
+      required:
+      - trading_challenge_id
+      - users
+    TradingChallenge:
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        tenant_id: tenant_id
+        type: TOURNAMENT
+        status: PENDING
+        max_users: 0
+        start_at: 2000-01-23T04:56:07.000+00:00
+        end_at: 2000-01-23T04:56:07.000+00:00
+        initial_user_balance: initial_user_balance
+        gold_prize_quantity: gold_prize_quantity
+        silver_prize_quantity: silver_prize_quantity
+        bronze_prize_quantity: bronze_prize_quantity
+        pnl_condition: pnl_condition
+        total_volume_condition: total_volume_condition
+        avg_daily_volume_condition: avg_daily_volume_condition
+        minimum_equity_percentage_condition: 6
+        created_at: 2000-01-23T04:56:07.000+00:00
+        last_processed_at: 2000-01-23T04:56:07.000+00:00
+        users:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        users_count: 1
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          description: Trading challenge name
+          type: string
+        tenant_id:
+          type: string
+        type:
+          $ref: "#/components/schemas/TradingChallengeType"
+        status:
+          $ref: "#/components/schemas/TradingChallengeStatus"
+        max_users:
+          type: integer
+        start_at:
+          format: date-time
+          type: string
+        end_at:
+          format: date-time
+          type: string
+        initial_user_balance:
+          type: string
+        gold_prize_quantity:
+          type: string
+        silver_prize_quantity:
+          type: string
+        bronze_prize_quantity:
+          type: string
+        pnl_condition:
+          type: string
+        total_volume_condition:
+          type: string
+        avg_daily_volume_condition:
+          type: string
+        minimum_equity_percentage_condition:
+          type: integer
+        created_at:
+          format: date-time
+          type: string
+        last_processed_at:
+          format: date-time
+          type: string
+        users:
+          items:
+            format: uuid
+            type: string
+          type: array
+          default: null
+        users_count:
+          type: integer
+      required:
+      - avg_daily_volume_condition
+      - bronze_prize_quantity
+      - created_at
+      - end_at
+      - gold_prize_quantity
+      - id
+      - initial_user_balance
+      - max_users
+      - minimum_equity_percentage_condition
+      - pnl_condition
+      - silver_prize_quantity
+      - start_at
+      - status
+      - tenant_id
+      - total_volume_condition
+      - type
+      - users_count
+    TradingChallengeResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/TradingChallenge"
+      example:
+        data:
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          tenant_id: tenant_id
+          type: TOURNAMENT
+          status: PENDING
+          max_users: 0
+          start_at: 2000-01-23T04:56:07.000+00:00
+          end_at: 2000-01-23T04:56:07.000+00:00
+          initial_user_balance: initial_user_balance
+          gold_prize_quantity: gold_prize_quantity
+          silver_prize_quantity: silver_prize_quantity
+          bronze_prize_quantity: bronze_prize_quantity
+          pnl_condition: pnl_condition
+          total_volume_condition: total_volume_condition
+          avg_daily_volume_condition: avg_daily_volume_condition
+          minimum_equity_percentage_condition: 6
+          created_at: 2000-01-23T04:56:07.000+00:00
+          last_processed_at: 2000-01-23T04:56:07.000+00:00
+          users:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          users_count: 1
+        error: error
+        metadata: ""
+    TradingChallengeListResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/TradingChallenge"
+            type: array
+            default: null
+      example:
+        data:
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          tenant_id: tenant_id
+          type: TOURNAMENT
+          status: PENDING
+          max_users: 0
+          start_at: 2000-01-23T04:56:07.000+00:00
+          end_at: 2000-01-23T04:56:07.000+00:00
+          initial_user_balance: initial_user_balance
+          gold_prize_quantity: gold_prize_quantity
+          silver_prize_quantity: silver_prize_quantity
+          bronze_prize_quantity: bronze_prize_quantity
+          pnl_condition: pnl_condition
+          total_volume_condition: total_volume_condition
+          avg_daily_volume_condition: avg_daily_volume_condition
+          minimum_equity_percentage_condition: 6
+          created_at: 2000-01-23T04:56:07.000+00:00
+          last_processed_at: 2000-01-23T04:56:07.000+00:00
+          users:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          users_count: 1
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          tenant_id: tenant_id
+          type: TOURNAMENT
+          status: PENDING
+          max_users: 0
+          start_at: 2000-01-23T04:56:07.000+00:00
+          end_at: 2000-01-23T04:56:07.000+00:00
+          initial_user_balance: initial_user_balance
+          gold_prize_quantity: gold_prize_quantity
+          silver_prize_quantity: silver_prize_quantity
+          bronze_prize_quantity: bronze_prize_quantity
+          pnl_condition: pnl_condition
+          total_volume_condition: total_volume_condition
+          avg_daily_volume_condition: avg_daily_volume_condition
+          minimum_equity_percentage_condition: 6
+          created_at: 2000-01-23T04:56:07.000+00:00
+          last_processed_at: 2000-01-23T04:56:07.000+00:00
+          users:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          users_count: 1
+        error: error
+        metadata: ""
+    TradingChallengeDailySnapshot:
+      example:
+        trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        user_name: user_name
+        trading_date: 2000-01-23
+        daily_volume: daily_volume
+        daily_pnl: daily_pnl
+        daily_trades: 0
+        volume_compliant: true
+        eod_equity: eod_equity
+        active_day: true
+        created_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        trading_challenge_id:
+          format: uuid
+          type: string
+        user_id:
+          format: uuid
+          type: string
+        user_name:
+          type: string
+        trading_date:
+          format: date
+          type: string
+        daily_volume:
+          type: string
+        daily_pnl:
+          type: string
+        daily_trades:
+          type: integer
+        volume_compliant:
+          type: boolean
+        eod_equity:
+          type: string
+        active_day:
+          type: boolean
+        created_at:
+          format: date-time
+          type: string
+    TradingChallengeDailySnapshotsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/TradingChallengeDailySnapshot"
+            type: array
+            default: null
+      example:
+        data:
+        - trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_name: user_name
+          trading_date: 2000-01-23
+          daily_volume: daily_volume
+          daily_pnl: daily_pnl
+          daily_trades: 0
+          volume_compliant: true
+          eod_equity: eod_equity
+          active_day: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+        - trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_name: user_name
+          trading_date: 2000-01-23
+          daily_volume: daily_volume
+          daily_pnl: daily_pnl
+          daily_trades: 0
+          volume_compliant: true
+          eod_equity: eod_equity
+          active_day: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+        error: error
+        metadata: ""
+    TradingChallengeResult:
+      example:
+        trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        user_name: user_name
+        cum_volume: cum_volume
+        cum_pnl: cum_pnl
+        pnl_pct: pnl_pct
+        calendar_days_since_start: 0
+        active_days: 6
+        compliant_days: 1
+        crown_eligible: true
+        claim_eligible: true
+        status: PENDING
+        crown: NONE
+        created_at: 2000-01-23T04:56:07.000+00:00
+        current_day_daily_volume: current_day_daily_volume
+        current_day_daily_pnl: current_day_daily_pnl
+        current_day_trading_date: 2000-01-23
+        cum_trades: 5
+      properties:
+        trading_challenge_id:
+          format: uuid
+          type: string
+        user_id:
+          format: uuid
+          type: string
+        user_name:
+          type: string
+        cum_volume:
+          type: string
+        cum_pnl:
+          type: string
+        pnl_pct:
+          type: string
+        calendar_days_since_start:
+          type: integer
+        active_days:
+          type: integer
+        compliant_days:
+          type: integer
+        crown_eligible:
+          type: boolean
+        claim_eligible:
+          type: boolean
+        status:
+          enum:
+          - PENDING
+          - FUNDED
+          - ACTIVE
+          - BUSTED
+          - COMPLETED
+          - PRIZE_CLAIMED
+          type: string
+        crown:
+          enum:
+          - NONE
+          - PNL_GOLD
+          - PNL_SILVER
+          - PNL_BRONZE
+          - VOLUME_GOLD
+          - VOLUME_SILVER
+          - VOLUME_BRONZE
+          - IRON_GOLD
+          - IRON_SILVER
+          - IRON_BRONZE
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        current_day_daily_volume:
+          type: string
+        current_day_daily_pnl:
+          type: string
+        current_day_trading_date:
+          format: date
+          type: string
+        cum_trades:
+          type: integer
+    TradingChallengeResultsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/TradingChallengeResult"
+            type: array
+            default: null
+      example:
+        data:
+        - trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_name: user_name
+          cum_volume: cum_volume
+          cum_pnl: cum_pnl
+          pnl_pct: pnl_pct
+          calendar_days_since_start: 0
+          active_days: 6
+          compliant_days: 1
+          crown_eligible: true
+          claim_eligible: true
+          status: PENDING
+          crown: NONE
+          created_at: 2000-01-23T04:56:07.000+00:00
+          current_day_daily_volume: current_day_daily_volume
+          current_day_daily_pnl: current_day_daily_pnl
+          current_day_trading_date: 2000-01-23
+          cum_trades: 5
+        - trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_name: user_name
+          cum_volume: cum_volume
+          cum_pnl: cum_pnl
+          pnl_pct: pnl_pct
+          calendar_days_since_start: 0
+          active_days: 6
+          compliant_days: 1
+          crown_eligible: true
+          claim_eligible: true
+          status: PENDING
+          crown: NONE
+          created_at: 2000-01-23T04:56:07.000+00:00
+          current_day_daily_volume: current_day_daily_volume
+          current_day_daily_pnl: current_day_daily_pnl
+          current_day_trading_date: 2000-01-23
+          cum_trades: 5
+        error: error
+        metadata: ""
+    ClaimTradingChallengeResponse:
+      example:
+        trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        status: status
+      properties:
+        trading_challenge_id:
+          format: uuid
+          type: string
+        user_id:
+          format: uuid
+          type: string
+        status:
+          type: string
+      required:
+      - status
+      - trading_challenge_id
+      - user_id
+    ClaimTradingChallengeResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/ClaimTradingChallengeResponse"
+      example:
+        data:
+          trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          status: status
+        error: error
+        metadata: ""
     PositionAsset:
       example:
         asset_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91

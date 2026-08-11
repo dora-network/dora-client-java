@@ -4,17 +4,20 @@ All URIs are relative to *https://staging.dora.co*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**addTradingChallengeUsers**](DefaultApi.md#addTradingChallengeUsers) | **PUT** /v1/trading_challenges/add_users | Add users to a trading challenge |
 | [**approveLedgerWithdrawRequest**](DefaultApi.md#approveLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/approve | Approve a pending withdrawal request |
 | [**cancelAllOpenOrders**](DefaultApi.md#cancelAllOpenOrders) | **DELETE** /v1/orders | Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook |
 | [**cancelLedgerWithdrawRequest**](DefaultApi.md#cancelLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request |
 | [**cancelOrderById**](DefaultApi.md#cancelOrderById) | **DELETE** /v1/orders/{order_id} | Cancel an order by ID |
 | [**claimLeverageGetAccruedInterest**](DefaultApi.md#claimLeverageGetAccruedInterest) | **POST** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user |
+| [**claimTradingChallengePrize**](DefaultApi.md#claimTradingChallengePrize) | **POST** /v1/trading_challenges/{trading_challenge_id}/claim | Claim challenge prize |
 | [**closeIsolatedAccountV2**](DefaultApi.md#closeIsolatedAccountV2) | **POST** /v2/accounts/close | Close an isolated account, repaying the borrowed |
 | [**closeIsolatedPosition**](DefaultApi.md#closeIsolatedPosition) | **POST** /v1/positions/close | Close isolated positions, repaying the borrowed |
 | [**createAPIKeyForUser**](DefaultApi.md#createAPIKeyForUser) | **POST** /v1/user/apikey | Create apikey for a user |
 | [**createAPIKeyForUserID**](DefaultApi.md#createAPIKeyForUserID) | **POST** /v1/user/{user_id}/apikey | Create apikey for a user |
 | [**createConditionalOrder**](DefaultApi.md#createConditionalOrder) | **POST** /v1/orders/conditional | Create a new conditional orders |
 | [**createOrder**](DefaultApi.md#createOrder) | **POST** /v1/orders | Create a new order |
+| [**createTradingChallenge**](DefaultApi.md#createTradingChallenge) | **POST** /v1/trading_challenges | Create a trading challenge |
 | [**createUser**](DefaultApi.md#createUser) | **POST** /v1/integrators/user | Create a new user |
 | [**deleteUser**](DefaultApi.md#deleteUser) | **DELETE** /v1/user/{user_id} | Delete user by ID |
 | [**getAPIKeysForUserID**](DefaultApi.md#getAPIKeysForUserID) | **GET** /v1/user/{user_id}/apikey | Get user&#39;s api keys: admin or integrator only |
@@ -27,7 +30,9 @@ All URIs are relative to *https://staging.dora.co*
 | [**getAssetYieldData**](DefaultApi.md#getAssetYieldData) | **GET** /v1/charts/{asset_id}/yield | Get yield chart data for an asset |
 | [**getAssetsStream**](DefaultApi.md#getAssetsStream) | **GET** /v1/assets/stream | Get all inserts or updates for assets |
 | [**getCandleData**](DefaultApi.md#getCandleData) | **GET** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook |
-| [**getCopyTraders**](DefaultApi.md#getCopyTraders) | **GET** /v1/user/copy_traders | Get list of user IDs with copy trading enabled |
+| [**getCashReserveByUserID**](DefaultApi.md#getCashReserveByUserID) | **GET** /v1/accounts/{user_id}/cash_reserve | Get the minimum USD cash reserve requirement for the given user |
+| [**getCashReserveSelf**](DefaultApi.md#getCashReserveSelf) | **GET** /v1/accounts/self/cash_reserve | Get the minimum USD cash reserve requirement for the logged in user |
+| [**getCopyTraders**](DefaultApi.md#getCopyTraders) | **GET** /v1/user/copy_traders | Get list of users with copy trading enabled |
 | [**getCouponPaymentsByAssetId**](DefaultApi.md#getCouponPaymentsByAssetId) | **GET** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset |
 | [**getDepositInstructions**](DefaultApi.md#getDepositInstructions) | **GET** /v1/web3/deposit-instructions | Get per-chain instructions for depositing USDC into the Dora vault |
 | [**getL1Depth**](DefaultApi.md#getL1Depth) | **GET** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth) |
@@ -56,6 +61,9 @@ All URIs are relative to *https://staging.dora.co*
 | [**getTopTradersByPnL**](DefaultApi.md#getTopTradersByPnL) | **GET** /v1/user/ranking | Get top traders by PnL |
 | [**getTradeById**](DefaultApi.md#getTradeById) | **GET** /v1/trades/{trade_id} | Get a trade by ID |
 | [**getTrades**](DefaultApi.md#getTrades) | **GET** /v1/trades | Get a filtered, paginated list of trades |
+| [**getTradingChallengeByID**](DefaultApi.md#getTradingChallengeByID) | **GET** /v1/trading_challenges/{trading_challenge_id} | Get trading challenge by ID |
+| [**getTradingChallengeDailySnapshots**](DefaultApi.md#getTradingChallengeDailySnapshots) | **GET** /v1/trading_challenges/{trading_challenge_id}/daily_snapshots | Get trading challenge daily snapshots |
+| [**getTradingChallengeResults**](DefaultApi.md#getTradingChallengeResults) | **GET** /v1/trading_challenges/{trading_challenge_id}/results | Get trading challenge results |
 | [**getTransactionById**](DefaultApi.md#getTransactionById) | **GET** /v1/transactions/{transaction_id} | Get a transaction by ID |
 | [**getTransactions**](DefaultApi.md#getTransactions) | **GET** /v1/transactions | Get a filtered, paginated list of transactions |
 | [**getTransactionsSettlements**](DefaultApi.md#getTransactionsSettlements) | **GET** /v1/transactions/settlements | Get transactions settlements with filters |
@@ -89,8 +97,10 @@ All URIs are relative to *https://staging.dora.co*
 | [**listOrderBooks**](DefaultApi.md#listOrderBooks) | **GET** /v1/orderbooks | List order books |
 | [**listOrders**](DefaultApi.md#listOrders) | **GET** /v1/orders | List all orders |
 | [**listPositionAccountsSelf**](DefaultApi.md#listPositionAccountsSelf) | **GET** /v1/user/self/position_accounts | List all position accounts for the authenticated user |
+| [**listTradingChallenges**](DefaultApi.md#listTradingChallenges) | **GET** /v1/trading_challenges | List trading challenges |
 | [**payLeverageGetAccruedInterest**](DefaultApi.md#payLeverageGetAccruedInterest) | **POST** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user |
 | [**rejectLedgerWithdrawRequest**](DefaultApi.md#rejectLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/reject | Reject a pending withdrawal request |
+| [**removeTradingChallengeUsers**](DefaultApi.md#removeTradingChallengeUsers) | **PUT** /v1/trading_challenges/remove_users | Remove users from a trading challenge |
 | [**repayUSD**](DefaultApi.md#repayUSD) | **POST** /v1/positions/repay_usd | Repay borrowed USD, then accrue and pay leverage interest |
 | [**revokeAPIKeyForUser**](DefaultApi.md#revokeAPIKeyForUser) | **PUT** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user |
 | [**revokeAPIKeyForUserID**](DefaultApi.md#revokeAPIKeyForUserID) | **PUT** /v1/user/{user_id}/apikey/{key_id}/revoke | Revoke apikey for a user: admin or integrator only |
@@ -109,6 +119,80 @@ All URIs are relative to *https://staging.dora.co*
 | [**validateSubmitOrder**](DefaultApi.md#validateSubmitOrder) | **POST** /v1/orders/validate | Validate submit order request data |
 | [**verifyUser**](DefaultApi.md#verifyUser) | **PUT** /v1/user/{user_id}/verify | Verify a user by ID |
 
+
+<a id="addTradingChallengeUsers"></a>
+# **addTradingChallengeUsers**
+> TradingChallengeResponseEnvelope addTradingChallengeUsers(addTradingChallengeUsersRequest)
+
+Add users to a trading challenge
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    AddTradingChallengeUsersRequest addTradingChallengeUsersRequest = new AddTradingChallengeUsersRequest(); // AddTradingChallengeUsersRequest | 
+    try {
+      TradingChallengeResponseEnvelope result = apiInstance.addTradingChallengeUsers(addTradingChallengeUsersRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#addTradingChallengeUsers");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **addTradingChallengeUsersRequest** | [**AddTradingChallengeUsersRequest**](AddTradingChallengeUsersRequest.md)|  | |
+
+### Return type
+
+[**TradingChallengeResponseEnvelope**](TradingChallengeResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Users added |  -  |
+| **400** | Bad request |  -  |
+| **409** | Conflict |  -  |
+| **500** | Internal server error |  -  |
 
 <a id="approveLedgerWithdrawRequest"></a>
 # **approveLedgerWithdrawRequest**
@@ -494,6 +578,80 @@ public class Example {
 | **200** | Current leverage accrued interest claimed successfully |  -  |
 | **400** | Bad request, e.g. invalid parameters |  -  |
 | **401** | Unauthorized, e.g. user not logged in or invalid credentials |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="claimTradingChallengePrize"></a>
+# **claimTradingChallengePrize**
+> ClaimTradingChallengeResponseEnvelope claimTradingChallengePrize(tradingChallengeId)
+
+Claim challenge prize
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID tradingChallengeId = UUID.randomUUID(); // UUID | 
+    try {
+      ClaimTradingChallengeResponseEnvelope result = apiInstance.claimTradingChallengePrize(tradingChallengeId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#claimTradingChallengePrize");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tradingChallengeId** | **UUID**|  | |
+
+### Return type
+
+[**ClaimTradingChallengeResponseEnvelope**](ClaimTradingChallengeResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Prize claimed |  -  |
+| **403** | Forbidden |  -  |
+| **409** | Conflict |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="closeIsolatedAccountV2"></a>
@@ -940,6 +1098,81 @@ public class Example {
 | **201** | Order created |  -  |
 | **400** | Bad request, e.g. missing required fields |  -  |
 | **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
+| **403** | Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="createTradingChallenge"></a>
+# **createTradingChallenge**
+> TradingChallengeResponseEnvelope createTradingChallenge(createTradingChallengeRequest)
+
+Create a trading challenge
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    CreateTradingChallengeRequest createTradingChallengeRequest = new CreateTradingChallengeRequest(); // CreateTradingChallengeRequest | 
+    try {
+      TradingChallengeResponseEnvelope result = apiInstance.createTradingChallenge(createTradingChallengeRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#createTradingChallenge");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **createTradingChallengeRequest** | [**CreateTradingChallengeRequest**](CreateTradingChallengeRequest.md)|  | |
+
+### Return type
+
+[**TradingChallengeResponseEnvelope**](TradingChallengeResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Trading challenge created |  -  |
+| **400** | Bad request |  -  |
+| **409** | Conflict |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="createUser"></a>
@@ -1774,11 +2007,161 @@ No authorization required
 | **404** | Orderbook not found |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="getCashReserveByUserID"></a>
+# **getCashReserveByUserID**
+> CashReserveResponseEnvelope getCashReserveByUserID(userId)
+
+Get the minimum USD cash reserve requirement for the given user
+
+Returns the user&#39;s available Global Account USD balance alongside their minimum cash reserve requirement and its breakdown. While available_usd is below required_usd the user may not open new leveraged positions, submit buy orders, transfer assets out of their Global Account or withdraw.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    try {
+      CashReserveResponseEnvelope result = apiInstance.getCashReserveByUserID(userId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getCashReserveByUserID");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
+
+### Return type
+
+[**CashReserveResponseEnvelope**](CashReserveResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The user&#39;s minimum USD cash reserve state |  -  |
+| **400** | Bad request, e.g. invalid user ID format |  -  |
+| **401** | Unauthorized, user not logged in |  -  |
+| **403** | Forbidden, the caller may only read their own cash reserve |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getCashReserveSelf"></a>
+# **getCashReserveSelf**
+> CashReserveResponseEnvelope getCashReserveSelf()
+
+Get the minimum USD cash reserve requirement for the logged in user
+
+Returns the user&#39;s available Global Account USD balance alongside their minimum cash reserve requirement and its breakdown. While available_usd is below required_usd the user may not open new leveraged positions, submit buy orders, transfer assets out of their Global Account or withdraw.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      CashReserveResponseEnvelope result = apiInstance.getCashReserveSelf();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getCashReserveSelf");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**CashReserveResponseEnvelope**](CashReserveResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The user&#39;s minimum USD cash reserve state |  -  |
+| **400** | Bad request, e.g. invalid user ID format |  -  |
+| **401** | Unauthorized, user not logged in |  -  |
+| **403** | Forbidden, the caller may only read their own cash reserve |  -  |
+| **500** | Internal server error |  -  |
+
 <a id="getCopyTraders"></a>
 # **getCopyTraders**
 > GetCopyTradersResponse getCopyTraders(page, limit)
 
-Get list of user IDs with copy trading enabled
+Get list of users with copy trading enabled
 
 ### Example
 ```java
@@ -1845,7 +2228,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of user IDs who have allow_copy_trading enabled |  -  |
+| **200** | List of users who have allow_copy_trading enabled |  -  |
 | **400** | Bad request, e.g. invalid pagination parameters |  -  |
 | **500** | Internal server error |  -  |
 
@@ -1917,7 +2300,7 @@ No authorization required
 
 Get per-chain instructions for depositing USDC into the Dora vault
 
-Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry.
+Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry. Restricted to DORA tenant users whose native asset is USDC.
 
 ### Example
 ```java
@@ -1991,6 +2374,7 @@ public class Example {
 | **200** | Per-chain deposit instructions for the authenticated user |  -  |
 | **400** | Bad request, e.g. invalid or missing quantity, owner_address, or nonce, or an invalid client_reference_id |  -  |
 | **401** | Unauthorized, user not logged in |  -  |
+| **403** | Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="getL1Depth"></a>
@@ -3842,6 +4226,233 @@ public class Example {
 | **404** | No trades found |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="getTradingChallengeByID"></a>
+# **getTradingChallengeByID**
+> TradingChallengeResponseEnvelope getTradingChallengeByID(tradingChallengeId)
+
+Get trading challenge by ID
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID tradingChallengeId = UUID.randomUUID(); // UUID | 
+    try {
+      TradingChallengeResponseEnvelope result = apiInstance.getTradingChallengeByID(tradingChallengeId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getTradingChallengeByID");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tradingChallengeId** | **UUID**|  | |
+
+### Return type
+
+[**TradingChallengeResponseEnvelope**](TradingChallengeResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Trading challenge |  -  |
+| **400** | Bad request |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getTradingChallengeDailySnapshots"></a>
+# **getTradingChallengeDailySnapshots**
+> TradingChallengeDailySnapshotsResponseEnvelope getTradingChallengeDailySnapshots(tradingChallengeId)
+
+Get trading challenge daily snapshots
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID tradingChallengeId = UUID.randomUUID(); // UUID | 
+    try {
+      TradingChallengeDailySnapshotsResponseEnvelope result = apiInstance.getTradingChallengeDailySnapshots(tradingChallengeId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getTradingChallengeDailySnapshots");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tradingChallengeId** | **UUID**|  | |
+
+### Return type
+
+[**TradingChallengeDailySnapshotsResponseEnvelope**](TradingChallengeDailySnapshotsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Daily snapshots |  -  |
+| **400** | Bad request |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getTradingChallengeResults"></a>
+# **getTradingChallengeResults**
+> TradingChallengeResultsResponseEnvelope getTradingChallengeResults(tradingChallengeId, board)
+
+Get trading challenge results
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID tradingChallengeId = UUID.randomUUID(); // UUID | 
+    String board = "TOP_PNL"; // String | Leaderboard board selector. Defaults to TOP_PNL.
+    try {
+      TradingChallengeResultsResponseEnvelope result = apiInstance.getTradingChallengeResults(tradingChallengeId, board);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getTradingChallengeResults");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tradingChallengeId** | **UUID**|  | |
+| **board** | **String**| Leaderboard board selector. Defaults to TOP_PNL. | [optional] [default to TOP_PNL] [enum: TOP_PNL, TOP_VOLUME, IRON_TRADER] |
+
+### Return type
+
+[**TradingChallengeResultsResponseEnvelope**](TradingChallengeResultsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Challenge results |  -  |
+| **400** | Bad request |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not found |  -  |
+| **500** | Internal server error |  -  |
+
 <a id="getTransactionById"></a>
 # **getTransactionById**
 > TransactionResponseEnvelope getTransactionById(transactionId)
@@ -4939,6 +5550,7 @@ public class Example {
 |-------------|-------------|------------------|
 | **201** | Deposit successful |  -  |
 | **400** | Bad request, e.g. invalid parameters or insufficient funds |  -  |
+| **403** | Forbidden, e.g. an integrator depositing a non-USD asset, or a USD deposit to a user whose native asset is USDC (their USD only moves on chain, as USDC) |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="ledgerWithdraw"></a>
@@ -5018,6 +5630,7 @@ public class Example {
 |-------------|-------------|------------------|
 | **201** | Withdraw successful |  -  |
 | **400** | Bad request, e.g. invalid parameters or insufficient funds |  -  |
+| **403** | Forbidden: the acting user is not permitted, or the target user&#39;s native asset is USDC - their USD only moves on chain, as a USDC deposit or withdrawal |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="ledgerWithdrawRequest"></a>
@@ -5095,6 +5708,7 @@ public class Example {
 |-------------|-------------|------------------|
 | **201** | Withdraw request initiation successful |  -  |
 | **400** | Bad request, e.g. invalid parameters or insufficient funds |  -  |
+| **403** | Forbidden: the acting user is not permitted, or the target user&#39;s native asset is USDC - their USD only moves on chain, as an USDC deposit or withdrawal |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="ledgerWithdrawRequestSelf"></a>
@@ -5172,6 +5786,7 @@ public class Example {
 |-------------|-------------|------------------|
 | **201** | Withdraw request initiation successful |  -  |
 | **400** | Bad request, e.g. invalid parameters or insufficient funds |  -  |
+| **403** | Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="leverageGetAccruedInterestByUser"></a>
@@ -6339,6 +6954,87 @@ This endpoint does not need any parameter.
 | **404** | User not found |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="listTradingChallenges"></a>
+# **listTradingChallenges**
+> TradingChallengeListResponseEnvelope listTradingChallenges(tenantId, type, status, start, end)
+
+List trading challenges
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String tenantId = "tenantId_example"; // String | 
+    TradingChallengeType type = TradingChallengeType.fromValue("TOURNAMENT"); // TradingChallengeType | 
+    TradingChallengeStatus status = TradingChallengeStatus.fromValue("PENDING"); // TradingChallengeStatus | 
+    OffsetDateTime start = OffsetDateTime.now(); // OffsetDateTime | 
+    OffsetDateTime end = OffsetDateTime.now(); // OffsetDateTime | 
+    try {
+      TradingChallengeListResponseEnvelope result = apiInstance.listTradingChallenges(tenantId, type, status, start, end);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#listTradingChallenges");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | **String**|  | [optional] |
+| **type** | [**TradingChallengeType**](.md)|  | [optional] [enum: TOURNAMENT, CASH] |
+| **status** | [**TradingChallengeStatus**](.md)|  | [optional] [enum: PENDING, ACTIVE, COMPLETED] |
+| **start** | **OffsetDateTime**|  | [optional] |
+| **end** | **OffsetDateTime**|  | [optional] |
+
+### Return type
+
+[**TradingChallengeListResponseEnvelope**](TradingChallengeListResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Trading challenges list |  -  |
+| **400** | Bad request |  -  |
+| **500** | Internal server error |  -  |
+
 <a id="payLeverageGetAccruedInterest"></a>
 # **payLeverageGetAccruedInterest**
 > PayLeverageAccruedInterestResponseEnvelope payLeverageGetAccruedInterest(payLeverageAccruedInterestRequest)
@@ -6490,6 +7186,80 @@ public class Example {
 | **400** | Bad request, e.g. invalid withdrawal ID format or request is not in a pending state |  -  |
 | **404** | Withdrawal request not found |  -  |
 | **403** | Forbidden, user does not have permission to reject this withdrawal request |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="removeTradingChallengeUsers"></a>
+# **removeTradingChallengeUsers**
+> TradingChallengeResponseEnvelope removeTradingChallengeUsers(removeTradingChallengeUsersRequest)
+
+Remove users from a trading challenge
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest = new RemoveTradingChallengeUsersRequest(); // RemoveTradingChallengeUsersRequest | 
+    try {
+      TradingChallengeResponseEnvelope result = apiInstance.removeTradingChallengeUsers(removeTradingChallengeUsersRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#removeTradingChallengeUsers");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **removeTradingChallengeUsersRequest** | [**RemoveTradingChallengeUsersRequest**](RemoveTradingChallengeUsersRequest.md)|  | |
+
+### Return type
+
+[**TradingChallengeResponseEnvelope**](TradingChallengeResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Users removed |  -  |
+| **400** | Bad request |  -  |
+| **409** | Conflict |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="repayUSD"></a>
@@ -7335,6 +8105,7 @@ public class Example {
 | **201** | Isolated account created |  -  |
 | **400** | Bad request, e.g. missing required fields |  -  |
 | **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
+| **403** | Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve |  -  |
 | **409** | Conflict, e.g. the requested amount is not available to transfer |  -  |
 | **500** | Internal server error |  -  |
 
@@ -7410,6 +8181,7 @@ public class Example {
 | **201** | Isolated Position Created |  -  |
 | **400** | Bad request, e.g. missing required fields |  -  |
 | **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
+| **403** | Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve |  -  |
 | **409** | Conflict, e.g. the requested amount is not available to transfer |  -  |
 | **500** | Internal server error |  -  |
 

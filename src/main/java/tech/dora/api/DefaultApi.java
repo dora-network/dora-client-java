@@ -28,6 +28,7 @@ import java.io.IOException;
 
 
 import tech.dora.model.APIKeyResponseEnvelope;
+import tech.dora.model.AddTradingChallengeUsersRequest;
 import tech.dora.model.AllPositionsResponseEnvelope;
 import tech.dora.model.AllWithdrawalInitiationsResponseEnvelope;
 import tech.dora.model.AssetKind;
@@ -37,8 +38,10 @@ import tech.dora.model.AssetRequestError;
 import tech.dora.model.AssetYieldResolution;
 import tech.dora.model.CancelOrderResponseEnvelope;
 import tech.dora.model.CandleResolution;
+import tech.dora.model.CashReserveResponseEnvelope;
 import tech.dora.model.ClaimLeverageAccruedInterestRequest;
 import tech.dora.model.ClaimLeverageAccruedInterestResponseEnvelope;
+import tech.dora.model.ClaimTradingChallengeResponseEnvelope;
 import tech.dora.model.CloseAccountRequest;
 import tech.dora.model.ClosePositionRequest;
 import tech.dora.model.ClosePositionResponseEnvelope;
@@ -50,6 +53,7 @@ import tech.dora.model.CreateConditionalOrderResponseEnvelope;
 import tech.dora.model.CreateIntegratorUserRequest;
 import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponseEnvelope;
+import tech.dora.model.CreateTradingChallengeRequest;
 import tech.dora.model.CurrentLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.DefundUserRequest;
 import tech.dora.model.DepositInstructionsResponseEnvelope;
@@ -99,6 +103,7 @@ import tech.dora.model.PayLeverageAccruedInterestRequest;
 import tech.dora.model.PayLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.PoolPriceResponseEnvelope;
 import tech.dora.model.PoolRequestError;
+import tech.dora.model.RemoveTradingChallengeUsersRequest;
 import tech.dora.model.RepayUSDRequest;
 import tech.dora.model.RepayUSDResponseEnvelope;
 import tech.dora.model.ResponseEnvelope;
@@ -121,6 +126,12 @@ import tech.dora.model.SupplyRequest;
 import tech.dora.model.SupplyResponseEnvelope;
 import tech.dora.model.TradeRequestError;
 import tech.dora.model.TradeResponseEnvelope;
+import tech.dora.model.TradingChallengeDailySnapshotsResponseEnvelope;
+import tech.dora.model.TradingChallengeListResponseEnvelope;
+import tech.dora.model.TradingChallengeResponseEnvelope;
+import tech.dora.model.TradingChallengeResultsResponseEnvelope;
+import tech.dora.model.TradingChallengeStatus;
+import tech.dora.model.TradingChallengeType;
 import tech.dora.model.TransactionKind;
 import tech.dora.model.TransactionRequestError;
 import tech.dora.model.TransactionResponseEnvelope;
@@ -193,6 +204,145 @@ public class DefaultApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
+    /**
+     * Build call for addTradingChallengeUsers
+     * @param addTradingChallengeUsersRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Users added </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call addTradingChallengeUsersCall(@javax.annotation.Nonnull AddTradingChallengeUsersRequest addTradingChallengeUsersRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = addTradingChallengeUsersRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges/add_users";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call addTradingChallengeUsersValidateBeforeCall(@javax.annotation.Nonnull AddTradingChallengeUsersRequest addTradingChallengeUsersRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'addTradingChallengeUsersRequest' is set
+        if (addTradingChallengeUsersRequest == null) {
+            throw new ApiException("Missing the required parameter 'addTradingChallengeUsersRequest' when calling addTradingChallengeUsers(Async)");
+        }
+
+        return addTradingChallengeUsersCall(addTradingChallengeUsersRequest, _callback);
+
+    }
+
+    /**
+     * Add users to a trading challenge
+     * 
+     * @param addTradingChallengeUsersRequest  (required)
+     * @return TradingChallengeResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Users added </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingChallengeResponseEnvelope addTradingChallengeUsers(@javax.annotation.Nonnull AddTradingChallengeUsersRequest addTradingChallengeUsersRequest) throws ApiException {
+        ApiResponse<TradingChallengeResponseEnvelope> localVarResp = addTradingChallengeUsersWithHttpInfo(addTradingChallengeUsersRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Add users to a trading challenge
+     * 
+     * @param addTradingChallengeUsersRequest  (required)
+     * @return ApiResponse&lt;TradingChallengeResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Users added </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TradingChallengeResponseEnvelope> addTradingChallengeUsersWithHttpInfo(@javax.annotation.Nonnull AddTradingChallengeUsersRequest addTradingChallengeUsersRequest) throws ApiException {
+        okhttp3.Call localVarCall = addTradingChallengeUsersValidateBeforeCall(addTradingChallengeUsersRequest, null);
+        Type localVarReturnType = new TypeToken<TradingChallengeResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Add users to a trading challenge (asynchronously)
+     * 
+     * @param addTradingChallengeUsersRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Users added </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call addTradingChallengeUsersAsync(@javax.annotation.Nonnull AddTradingChallengeUsersRequest addTradingChallengeUsersRequest, final ApiCallback<TradingChallengeResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = addTradingChallengeUsersValidateBeforeCall(addTradingChallengeUsersRequest, _callback);
+        Type localVarReturnType = new TypeToken<TradingChallengeResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
     /**
      * Build call for approveLedgerWithdrawRequest
      * @param withdrawalId  (required)
@@ -929,6 +1079,145 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for claimTradingChallengePrize
+     * @param tradingChallengeId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Prize claimed </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call claimTradingChallengePrizeCall(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges/{trading_challenge_id}/claim"
+            .replace("{" + "trading_challenge_id" + "}", localVarApiClient.escapeString(tradingChallengeId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call claimTradingChallengePrizeValidateBeforeCall(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'tradingChallengeId' is set
+        if (tradingChallengeId == null) {
+            throw new ApiException("Missing the required parameter 'tradingChallengeId' when calling claimTradingChallengePrize(Async)");
+        }
+
+        return claimTradingChallengePrizeCall(tradingChallengeId, _callback);
+
+    }
+
+    /**
+     * Claim challenge prize
+     * 
+     * @param tradingChallengeId  (required)
+     * @return ClaimTradingChallengeResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Prize claimed </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ClaimTradingChallengeResponseEnvelope claimTradingChallengePrize(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
+        ApiResponse<ClaimTradingChallengeResponseEnvelope> localVarResp = claimTradingChallengePrizeWithHttpInfo(tradingChallengeId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Claim challenge prize
+     * 
+     * @param tradingChallengeId  (required)
+     * @return ApiResponse&lt;ClaimTradingChallengeResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Prize claimed </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ClaimTradingChallengeResponseEnvelope> claimTradingChallengePrizeWithHttpInfo(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
+        okhttp3.Call localVarCall = claimTradingChallengePrizeValidateBeforeCall(tradingChallengeId, null);
+        Type localVarReturnType = new TypeToken<ClaimTradingChallengeResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Claim challenge prize (asynchronously)
+     * 
+     * @param tradingChallengeId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Prize claimed </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call claimTradingChallengePrizeAsync(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback<ClaimTradingChallengeResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = claimTradingChallengePrizeValidateBeforeCall(tradingChallengeId, _callback);
+        Type localVarReturnType = new TypeToken<ClaimTradingChallengeResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for closeIsolatedAccountV2
      * @param closeAccountRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -1646,6 +1935,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Order created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -1718,6 +2008,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Order created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -1739,6 +2030,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Order created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -1762,6 +2054,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Order created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -1769,6 +2062,145 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = createOrderValidateBeforeCall(createOrderRequest, _callback);
         Type localVarReturnType = new TypeToken<CreateOrderResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for createTradingChallenge
+     * @param createTradingChallengeRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Trading challenge created </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createTradingChallengeCall(@javax.annotation.Nonnull CreateTradingChallengeRequest createTradingChallengeRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = createTradingChallengeRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createTradingChallengeValidateBeforeCall(@javax.annotation.Nonnull CreateTradingChallengeRequest createTradingChallengeRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'createTradingChallengeRequest' is set
+        if (createTradingChallengeRequest == null) {
+            throw new ApiException("Missing the required parameter 'createTradingChallengeRequest' when calling createTradingChallenge(Async)");
+        }
+
+        return createTradingChallengeCall(createTradingChallengeRequest, _callback);
+
+    }
+
+    /**
+     * Create a trading challenge
+     * 
+     * @param createTradingChallengeRequest  (required)
+     * @return TradingChallengeResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Trading challenge created </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingChallengeResponseEnvelope createTradingChallenge(@javax.annotation.Nonnull CreateTradingChallengeRequest createTradingChallengeRequest) throws ApiException {
+        ApiResponse<TradingChallengeResponseEnvelope> localVarResp = createTradingChallengeWithHttpInfo(createTradingChallengeRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Create a trading challenge
+     * 
+     * @param createTradingChallengeRequest  (required)
+     * @return ApiResponse&lt;TradingChallengeResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Trading challenge created </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TradingChallengeResponseEnvelope> createTradingChallengeWithHttpInfo(@javax.annotation.Nonnull CreateTradingChallengeRequest createTradingChallengeRequest) throws ApiException {
+        okhttp3.Call localVarCall = createTradingChallengeValidateBeforeCall(createTradingChallengeRequest, null);
+        Type localVarReturnType = new TypeToken<TradingChallengeResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Create a trading challenge (asynchronously)
+     * 
+     * @param createTradingChallengeRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Trading challenge created </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createTradingChallengeAsync(@javax.annotation.Nonnull CreateTradingChallengeRequest createTradingChallengeRequest, final ApiCallback<TradingChallengeResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createTradingChallengeValidateBeforeCall(createTradingChallengeRequest, _callback);
+        Type localVarReturnType = new TypeToken<TradingChallengeResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -3462,6 +3894,282 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for getCashReserveByUserID
+     * @param userId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The user&#39;s minimum USD cash reserve state </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid user ID format </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, the caller may only read their own cash reserve </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getCashReserveByUserIDCall(@javax.annotation.Nonnull UUID userId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/accounts/{user_id}/cash_reserve"
+            .replace("{" + "user_id" + "}", localVarApiClient.escapeString(userId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getCashReserveByUserIDValidateBeforeCall(@javax.annotation.Nonnull UUID userId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling getCashReserveByUserID(Async)");
+        }
+
+        return getCashReserveByUserIDCall(userId, _callback);
+
+    }
+
+    /**
+     * Get the minimum USD cash reserve requirement for the given user
+     * Returns the user&#39;s available Global Account USD balance alongside their minimum cash reserve requirement and its breakdown. While available_usd is below required_usd the user may not open new leveraged positions, submit buy orders, transfer assets out of their Global Account or withdraw.
+     * @param userId  (required)
+     * @return CashReserveResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The user&#39;s minimum USD cash reserve state </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid user ID format </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, the caller may only read their own cash reserve </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public CashReserveResponseEnvelope getCashReserveByUserID(@javax.annotation.Nonnull UUID userId) throws ApiException {
+        ApiResponse<CashReserveResponseEnvelope> localVarResp = getCashReserveByUserIDWithHttpInfo(userId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get the minimum USD cash reserve requirement for the given user
+     * Returns the user&#39;s available Global Account USD balance alongside their minimum cash reserve requirement and its breakdown. While available_usd is below required_usd the user may not open new leveraged positions, submit buy orders, transfer assets out of their Global Account or withdraw.
+     * @param userId  (required)
+     * @return ApiResponse&lt;CashReserveResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The user&#39;s minimum USD cash reserve state </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid user ID format </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, the caller may only read their own cash reserve </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<CashReserveResponseEnvelope> getCashReserveByUserIDWithHttpInfo(@javax.annotation.Nonnull UUID userId) throws ApiException {
+        okhttp3.Call localVarCall = getCashReserveByUserIDValidateBeforeCall(userId, null);
+        Type localVarReturnType = new TypeToken<CashReserveResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get the minimum USD cash reserve requirement for the given user (asynchronously)
+     * Returns the user&#39;s available Global Account USD balance alongside their minimum cash reserve requirement and its breakdown. While available_usd is below required_usd the user may not open new leveraged positions, submit buy orders, transfer assets out of their Global Account or withdraw.
+     * @param userId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The user&#39;s minimum USD cash reserve state </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid user ID format </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, the caller may only read their own cash reserve </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getCashReserveByUserIDAsync(@javax.annotation.Nonnull UUID userId, final ApiCallback<CashReserveResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getCashReserveByUserIDValidateBeforeCall(userId, _callback);
+        Type localVarReturnType = new TypeToken<CashReserveResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getCashReserveSelf
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The user&#39;s minimum USD cash reserve state </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid user ID format </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, the caller may only read their own cash reserve </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getCashReserveSelfCall(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/accounts/self/cash_reserve";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getCashReserveSelfValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return getCashReserveSelfCall(_callback);
+
+    }
+
+    /**
+     * Get the minimum USD cash reserve requirement for the logged in user
+     * Returns the user&#39;s available Global Account USD balance alongside their minimum cash reserve requirement and its breakdown. While available_usd is below required_usd the user may not open new leveraged positions, submit buy orders, transfer assets out of their Global Account or withdraw.
+     * @return CashReserveResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The user&#39;s minimum USD cash reserve state </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid user ID format </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, the caller may only read their own cash reserve </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public CashReserveResponseEnvelope getCashReserveSelf() throws ApiException {
+        ApiResponse<CashReserveResponseEnvelope> localVarResp = getCashReserveSelfWithHttpInfo();
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get the minimum USD cash reserve requirement for the logged in user
+     * Returns the user&#39;s available Global Account USD balance alongside their minimum cash reserve requirement and its breakdown. While available_usd is below required_usd the user may not open new leveraged positions, submit buy orders, transfer assets out of their Global Account or withdraw.
+     * @return ApiResponse&lt;CashReserveResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The user&#39;s minimum USD cash reserve state </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid user ID format </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, the caller may only read their own cash reserve </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<CashReserveResponseEnvelope> getCashReserveSelfWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = getCashReserveSelfValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<CashReserveResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get the minimum USD cash reserve requirement for the logged in user (asynchronously)
+     * Returns the user&#39;s available Global Account USD balance alongside their minimum cash reserve requirement and its breakdown. While available_usd is below required_usd the user may not open new leveraged positions, submit buy orders, transfer assets out of their Global Account or withdraw.
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The user&#39;s minimum USD cash reserve state </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid user ID format </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, the caller may only read their own cash reserve </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getCashReserveSelfAsync(final ApiCallback<CashReserveResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getCashReserveSelfValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<CashReserveResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for getCopyTraders
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
@@ -3472,7 +4180,7 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List of user IDs who have allow_copy_trading enabled </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> List of users who have allow_copy_trading enabled </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid pagination parameters </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
@@ -3536,7 +4244,7 @@ public class DefaultApi {
     }
 
     /**
-     * Get list of user IDs with copy trading enabled
+     * Get list of users with copy trading enabled
      * 
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
@@ -3546,7 +4254,7 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List of user IDs who have allow_copy_trading enabled </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> List of users who have allow_copy_trading enabled </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid pagination parameters </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
@@ -3557,7 +4265,7 @@ public class DefaultApi {
     }
 
     /**
-     * Get list of user IDs with copy trading enabled
+     * Get list of users with copy trading enabled
      * 
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
@@ -3567,7 +4275,7 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List of user IDs who have allow_copy_trading enabled </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> List of users who have allow_copy_trading enabled </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid pagination parameters </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
@@ -3579,7 +4287,7 @@ public class DefaultApi {
     }
 
     /**
-     * Get list of user IDs with copy trading enabled (asynchronously)
+     * Get list of users with copy trading enabled (asynchronously)
      * 
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
@@ -3590,7 +4298,7 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List of user IDs who have allow_copy_trading enabled </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> List of users who have allow_copy_trading enabled </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid pagination parameters </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
@@ -3753,6 +4461,7 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Per-chain deposit instructions for the authenticated user </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid or missing quantity, owner_address, or nonce, or an invalid client_reference_id </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -3839,7 +4548,7 @@ public class DefaultApi {
 
     /**
      * Get per-chain instructions for depositing USDC into the Dora vault
-     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry.
+     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry. Restricted to DORA tenant users whose native asset is USDC.
      * @param quantity Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. (required)
      * @param ownerAddress The user&#39;s wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner. (required)
      * @param nonce The owner&#39;s current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain. (required)
@@ -3853,6 +4562,7 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Per-chain deposit instructions for the authenticated user </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid or missing quantity, owner_address, or nonce, or an invalid client_reference_id </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -3863,7 +4573,7 @@ public class DefaultApi {
 
     /**
      * Get per-chain instructions for depositing USDC into the Dora vault
-     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry.
+     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry. Restricted to DORA tenant users whose native asset is USDC.
      * @param quantity Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. (required)
      * @param ownerAddress The user&#39;s wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner. (required)
      * @param nonce The owner&#39;s current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain. (required)
@@ -3877,6 +4587,7 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Per-chain deposit instructions for the authenticated user </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid or missing quantity, owner_address, or nonce, or an invalid client_reference_id </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -3888,7 +4599,7 @@ public class DefaultApi {
 
     /**
      * Get per-chain instructions for depositing USDC into the Dora vault (asynchronously)
-     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry.
+     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry. Restricted to DORA tenant users whose native asset is USDC.
      * @param quantity Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. (required)
      * @param ownerAddress The user&#39;s wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner. (required)
      * @param nonce The owner&#39;s current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain. (required)
@@ -3903,6 +4614,7 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Per-chain deposit instructions for the authenticated user </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid or missing quantity, owner_address, or nonce, or an invalid client_reference_id </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -7608,6 +8320,443 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for getTradingChallengeByID
+     * @param tradingChallengeId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Trading challenge </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getTradingChallengeByIDCall(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges/{trading_challenge_id}"
+            .replace("{" + "trading_challenge_id" + "}", localVarApiClient.escapeString(tradingChallengeId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getTradingChallengeByIDValidateBeforeCall(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'tradingChallengeId' is set
+        if (tradingChallengeId == null) {
+            throw new ApiException("Missing the required parameter 'tradingChallengeId' when calling getTradingChallengeByID(Async)");
+        }
+
+        return getTradingChallengeByIDCall(tradingChallengeId, _callback);
+
+    }
+
+    /**
+     * Get trading challenge by ID
+     * 
+     * @param tradingChallengeId  (required)
+     * @return TradingChallengeResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Trading challenge </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingChallengeResponseEnvelope getTradingChallengeByID(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
+        ApiResponse<TradingChallengeResponseEnvelope> localVarResp = getTradingChallengeByIDWithHttpInfo(tradingChallengeId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get trading challenge by ID
+     * 
+     * @param tradingChallengeId  (required)
+     * @return ApiResponse&lt;TradingChallengeResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Trading challenge </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TradingChallengeResponseEnvelope> getTradingChallengeByIDWithHttpInfo(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
+        okhttp3.Call localVarCall = getTradingChallengeByIDValidateBeforeCall(tradingChallengeId, null);
+        Type localVarReturnType = new TypeToken<TradingChallengeResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get trading challenge by ID (asynchronously)
+     * 
+     * @param tradingChallengeId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Trading challenge </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getTradingChallengeByIDAsync(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback<TradingChallengeResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getTradingChallengeByIDValidateBeforeCall(tradingChallengeId, _callback);
+        Type localVarReturnType = new TypeToken<TradingChallengeResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getTradingChallengeDailySnapshots
+     * @param tradingChallengeId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Daily snapshots </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getTradingChallengeDailySnapshotsCall(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges/{trading_challenge_id}/daily_snapshots"
+            .replace("{" + "trading_challenge_id" + "}", localVarApiClient.escapeString(tradingChallengeId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getTradingChallengeDailySnapshotsValidateBeforeCall(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'tradingChallengeId' is set
+        if (tradingChallengeId == null) {
+            throw new ApiException("Missing the required parameter 'tradingChallengeId' when calling getTradingChallengeDailySnapshots(Async)");
+        }
+
+        return getTradingChallengeDailySnapshotsCall(tradingChallengeId, _callback);
+
+    }
+
+    /**
+     * Get trading challenge daily snapshots
+     * 
+     * @param tradingChallengeId  (required)
+     * @return TradingChallengeDailySnapshotsResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Daily snapshots </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingChallengeDailySnapshotsResponseEnvelope getTradingChallengeDailySnapshots(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
+        ApiResponse<TradingChallengeDailySnapshotsResponseEnvelope> localVarResp = getTradingChallengeDailySnapshotsWithHttpInfo(tradingChallengeId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get trading challenge daily snapshots
+     * 
+     * @param tradingChallengeId  (required)
+     * @return ApiResponse&lt;TradingChallengeDailySnapshotsResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Daily snapshots </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TradingChallengeDailySnapshotsResponseEnvelope> getTradingChallengeDailySnapshotsWithHttpInfo(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
+        okhttp3.Call localVarCall = getTradingChallengeDailySnapshotsValidateBeforeCall(tradingChallengeId, null);
+        Type localVarReturnType = new TypeToken<TradingChallengeDailySnapshotsResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get trading challenge daily snapshots (asynchronously)
+     * 
+     * @param tradingChallengeId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Daily snapshots </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getTradingChallengeDailySnapshotsAsync(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback<TradingChallengeDailySnapshotsResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getTradingChallengeDailySnapshotsValidateBeforeCall(tradingChallengeId, _callback);
+        Type localVarReturnType = new TypeToken<TradingChallengeDailySnapshotsResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getTradingChallengeResults
+     * @param tradingChallengeId  (required)
+     * @param board Leaderboard board selector. Defaults to TOP_PNL. (optional, default to TOP_PNL)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Challenge results </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getTradingChallengeResultsCall(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nullable String board, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges/{trading_challenge_id}/results"
+            .replace("{" + "trading_challenge_id" + "}", localVarApiClient.escapeString(tradingChallengeId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (board != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("board", board));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getTradingChallengeResultsValidateBeforeCall(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nullable String board, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'tradingChallengeId' is set
+        if (tradingChallengeId == null) {
+            throw new ApiException("Missing the required parameter 'tradingChallengeId' when calling getTradingChallengeResults(Async)");
+        }
+
+        return getTradingChallengeResultsCall(tradingChallengeId, board, _callback);
+
+    }
+
+    /**
+     * Get trading challenge results
+     * 
+     * @param tradingChallengeId  (required)
+     * @param board Leaderboard board selector. Defaults to TOP_PNL. (optional, default to TOP_PNL)
+     * @return TradingChallengeResultsResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Challenge results </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingChallengeResultsResponseEnvelope getTradingChallengeResults(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nullable String board) throws ApiException {
+        ApiResponse<TradingChallengeResultsResponseEnvelope> localVarResp = getTradingChallengeResultsWithHttpInfo(tradingChallengeId, board);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get trading challenge results
+     * 
+     * @param tradingChallengeId  (required)
+     * @param board Leaderboard board selector. Defaults to TOP_PNL. (optional, default to TOP_PNL)
+     * @return ApiResponse&lt;TradingChallengeResultsResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Challenge results </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TradingChallengeResultsResponseEnvelope> getTradingChallengeResultsWithHttpInfo(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nullable String board) throws ApiException {
+        okhttp3.Call localVarCall = getTradingChallengeResultsValidateBeforeCall(tradingChallengeId, board, null);
+        Type localVarReturnType = new TypeToken<TradingChallengeResultsResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get trading challenge results (asynchronously)
+     * 
+     * @param tradingChallengeId  (required)
+     * @param board Leaderboard board selector. Defaults to TOP_PNL. (optional, default to TOP_PNL)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Challenge results </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getTradingChallengeResultsAsync(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nullable String board, final ApiCallback<TradingChallengeResultsResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getTradingChallengeResultsValidateBeforeCall(tradingChallengeId, board, _callback);
+        Type localVarReturnType = new TypeToken<TradingChallengeResultsResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for getTransactionById
      * @param transactionId  (required)
      * @param _callback Callback for upload/download progress
@@ -9744,6 +10893,7 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Deposit successful </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or insufficient funds </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. an integrator depositing a non-USD asset, or a USD deposit to a user whose native asset is USDC (their USD only moves on chain, as USDC) </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -9822,6 +10972,7 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Deposit successful </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or insufficient funds </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. an integrator depositing a non-USD asset, or a USD deposit to a user whose native asset is USDC (their USD only moves on chain, as USDC) </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -9843,6 +10994,7 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Deposit successful </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or insufficient funds </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. an integrator depositing a non-USD asset, or a USD deposit to a user whose native asset is USDC (their USD only moves on chain, as USDC) </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -9866,6 +11018,7 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Deposit successful </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or insufficient funds </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. an integrator depositing a non-USD asset, or a USD deposit to a user whose native asset is USDC (their USD only moves on chain, as USDC) </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -9890,6 +11043,7 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Withdraw successful </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or insufficient funds </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the acting user is not permitted, or the target user&#39;s native asset is USDC - their USD only moves on chain, as a USDC deposit or withdrawal </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -9973,6 +11127,7 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Withdraw successful </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or insufficient funds </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the acting user is not permitted, or the target user&#39;s native asset is USDC - their USD only moves on chain, as a USDC deposit or withdrawal </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -9995,6 +11150,7 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Withdraw successful </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or insufficient funds </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the acting user is not permitted, or the target user&#39;s native asset is USDC - their USD only moves on chain, as a USDC deposit or withdrawal </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -10019,6 +11175,7 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Withdraw successful </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or insufficient funds </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the acting user is not permitted, or the target user&#39;s native asset is USDC - their USD only moves on chain, as a USDC deposit or withdrawal </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -10042,6 +11199,7 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Withdraw request initiation successful </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or insufficient funds </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the acting user is not permitted, or the target user&#39;s native asset is USDC - their USD only moves on chain, as an USDC deposit or withdrawal </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -10120,6 +11278,7 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Withdraw request initiation successful </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or insufficient funds </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the acting user is not permitted, or the target user&#39;s native asset is USDC - their USD only moves on chain, as an USDC deposit or withdrawal </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -10141,6 +11300,7 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Withdraw request initiation successful </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or insufficient funds </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the acting user is not permitted, or the target user&#39;s native asset is USDC - their USD only moves on chain, as an USDC deposit or withdrawal </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -10164,6 +11324,7 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Withdraw request initiation successful </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or insufficient funds </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the acting user is not permitted, or the target user&#39;s native asset is USDC - their USD only moves on chain, as an USDC deposit or withdrawal </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -10187,6 +11348,7 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Withdraw request initiation successful </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or insufficient funds </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -10265,6 +11427,7 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Withdraw request initiation successful </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or insufficient funds </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -10286,6 +11449,7 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Withdraw request initiation successful </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or insufficient funds </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -10309,6 +11473,7 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Withdraw request initiation successful </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid parameters or insufficient funds </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -12677,6 +13842,171 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for listTradingChallenges
+     * @param tenantId  (optional)
+     * @param type  (optional)
+     * @param status  (optional)
+     * @param start  (optional)
+     * @param end  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Trading challenges list </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listTradingChallengesCall(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable TradingChallengeType type, @javax.annotation.Nullable TradingChallengeStatus status, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (tenantId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("tenant_id", tenantId));
+        }
+
+        if (type != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("type", type));
+        }
+
+        if (status != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("status", status));
+        }
+
+        if (start != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("start", start));
+        }
+
+        if (end != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("end", end));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listTradingChallengesValidateBeforeCall(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable TradingChallengeType type, @javax.annotation.Nullable TradingChallengeStatus status, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, final ApiCallback _callback) throws ApiException {
+        return listTradingChallengesCall(tenantId, type, status, start, end, _callback);
+
+    }
+
+    /**
+     * List trading challenges
+     * 
+     * @param tenantId  (optional)
+     * @param type  (optional)
+     * @param status  (optional)
+     * @param start  (optional)
+     * @param end  (optional)
+     * @return TradingChallengeListResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Trading challenges list </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingChallengeListResponseEnvelope listTradingChallenges(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable TradingChallengeType type, @javax.annotation.Nullable TradingChallengeStatus status, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end) throws ApiException {
+        ApiResponse<TradingChallengeListResponseEnvelope> localVarResp = listTradingChallengesWithHttpInfo(tenantId, type, status, start, end);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List trading challenges
+     * 
+     * @param tenantId  (optional)
+     * @param type  (optional)
+     * @param status  (optional)
+     * @param start  (optional)
+     * @param end  (optional)
+     * @return ApiResponse&lt;TradingChallengeListResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Trading challenges list </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TradingChallengeListResponseEnvelope> listTradingChallengesWithHttpInfo(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable TradingChallengeType type, @javax.annotation.Nullable TradingChallengeStatus status, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end) throws ApiException {
+        okhttp3.Call localVarCall = listTradingChallengesValidateBeforeCall(tenantId, type, status, start, end, null);
+        Type localVarReturnType = new TypeToken<TradingChallengeListResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List trading challenges (asynchronously)
+     * 
+     * @param tenantId  (optional)
+     * @param type  (optional)
+     * @param status  (optional)
+     * @param start  (optional)
+     * @param end  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Trading challenges list </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listTradingChallengesAsync(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable TradingChallengeType type, @javax.annotation.Nullable TradingChallengeStatus status, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, final ApiCallback<TradingChallengeListResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listTradingChallengesValidateBeforeCall(tenantId, type, status, start, end, _callback);
+        Type localVarReturnType = new TypeToken<TradingChallengeListResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for payLeverageGetAccruedInterest
      * @param payLeverageAccruedInterestRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -12965,6 +14295,145 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = rejectLedgerWithdrawRequestValidateBeforeCall(withdrawalId, withdrawalRequestReason, _callback);
         Type localVarReturnType = new TypeToken<WithdrawalInitiationResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for removeTradingChallengeUsers
+     * @param removeTradingChallengeUsersRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Users removed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call removeTradingChallengeUsersCall(@javax.annotation.Nonnull RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = removeTradingChallengeUsersRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges/remove_users";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call removeTradingChallengeUsersValidateBeforeCall(@javax.annotation.Nonnull RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'removeTradingChallengeUsersRequest' is set
+        if (removeTradingChallengeUsersRequest == null) {
+            throw new ApiException("Missing the required parameter 'removeTradingChallengeUsersRequest' when calling removeTradingChallengeUsers(Async)");
+        }
+
+        return removeTradingChallengeUsersCall(removeTradingChallengeUsersRequest, _callback);
+
+    }
+
+    /**
+     * Remove users from a trading challenge
+     * 
+     * @param removeTradingChallengeUsersRequest  (required)
+     * @return TradingChallengeResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Users removed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingChallengeResponseEnvelope removeTradingChallengeUsers(@javax.annotation.Nonnull RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest) throws ApiException {
+        ApiResponse<TradingChallengeResponseEnvelope> localVarResp = removeTradingChallengeUsersWithHttpInfo(removeTradingChallengeUsersRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Remove users from a trading challenge
+     * 
+     * @param removeTradingChallengeUsersRequest  (required)
+     * @return ApiResponse&lt;TradingChallengeResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Users removed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TradingChallengeResponseEnvelope> removeTradingChallengeUsersWithHttpInfo(@javax.annotation.Nonnull RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest) throws ApiException {
+        okhttp3.Call localVarCall = removeTradingChallengeUsersValidateBeforeCall(removeTradingChallengeUsersRequest, null);
+        Type localVarReturnType = new TypeToken<TradingChallengeResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Remove users from a trading challenge (asynchronously)
+     * 
+     * @param removeTradingChallengeUsersRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Users removed </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call removeTradingChallengeUsersAsync(@javax.annotation.Nonnull RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest, final ApiCallback<TradingChallengeResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = removeTradingChallengeUsersValidateBeforeCall(removeTradingChallengeUsersRequest, _callback);
+        Type localVarReturnType = new TypeToken<TradingChallengeResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -14550,6 +16019,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Isolated account created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
@@ -14623,6 +16093,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Isolated account created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
@@ -14645,6 +16116,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Isolated account created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
@@ -14669,6 +16141,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Isolated account created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
@@ -14693,6 +16166,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Isolated Position Created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
@@ -14766,6 +16240,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Isolated Position Created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
@@ -14788,6 +16263,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Isolated Position Created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
@@ -14812,6 +16288,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Isolated Position Created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict, e.g. the requested amount is not available to transfer </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>

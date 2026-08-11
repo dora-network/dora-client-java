@@ -77,4 +77,20 @@ public class PLSummaryTest {
         // TODO: test ltv
     }
 
+    /**
+     * Test the property 'realizedPl'
+     */
+    @Test
+    public void realizedPlTest() {
+        // TODO: test realizedPl
+    }
+
+    /**
+     * Test the property 'unrealizedPl'
+     */
+    @Test
+    public void unrealizedPlTest() {
+        // TODO: test unrealizedPl
+    }
+
 }

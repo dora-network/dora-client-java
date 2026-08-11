@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
+import tech.dora.model.CopyTrader;
 import tech.dora.model.Metadata;
 
 import com.google.gson.Gson;
@@ -52,12 +52,12 @@ import tech.dora.JSON;
 /**
  * GetCopyTradersResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-29T17:20:21.055505839+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-11T05:07:16.172658393+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class GetCopyTradersResponse {
   public static final String SERIALIZED_NAME_DATA = "data";
   @SerializedName(SERIALIZED_NAME_DATA)
   @javax.annotation.Nullable
-  private List<UUID> data = new ArrayList<>();
+  private List<CopyTrader> data = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_ERROR = "error";
   @SerializedName(SERIALIZED_NAME_ERROR)
@@ -72,12 +72,12 @@ public class GetCopyTradersResponse {
   public GetCopyTradersResponse() {
   }
 
-  public GetCopyTradersResponse data(@javax.annotation.Nullable List<UUID> data) {
+  public GetCopyTradersResponse data(@javax.annotation.Nullable List<CopyTrader> data) {
     this.data = data;
     return this;
   }
 
-  public GetCopyTradersResponse addDataItem(UUID dataItem) {
+  public GetCopyTradersResponse addDataItem(CopyTrader dataItem) {
     if (this.data == null) {
       this.data = new ArrayList<>();
     }
@@ -90,11 +90,11 @@ public class GetCopyTradersResponse {
    * @return data
    */
   @javax.annotation.Nullable
-  public List<UUID> getData() {
+  public List<CopyTrader> getData() {
     return data;
   }
 
-  public void setData(@javax.annotation.Nullable List<UUID> data) {
+  public void setData(@javax.annotation.Nullable List<CopyTrader> data) {
     this.data = data;
   }
 
@@ -216,9 +216,19 @@ public class GetCopyTradersResponse {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("data") != null && !jsonObj.get("data").isJsonNull() && !jsonObj.get("data").isJsonArray()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `data` to be an array in the JSON string but got `%s`", jsonObj.get("data").toString()));
+      if (jsonObj.get("data") != null && !jsonObj.get("data").isJsonNull()) {
+        JsonArray jsonArraydata = jsonObj.getAsJsonArray("data");
+        if (jsonArraydata != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("data").isJsonArray()) {
+            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `data` to be an array in the JSON string but got `%s`", jsonObj.get("data").toString()));
+          }
+
+          // validate the optional field `data` (array)
+          for (int i = 0; i < jsonArraydata.size(); i++) {
+            CopyTrader.validateJsonElement(jsonArraydata.get(i));
+          };
+        }
       }
       if ((jsonObj.get("error") != null && !jsonObj.get("error").isJsonNull()) && !jsonObj.get("error").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `error` to be a primitive type in the JSON string but got `%s`", jsonObj.get("error").toString()));

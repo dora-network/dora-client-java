@@ -13,6 +13,7 @@
 |**email** | **String** |  |  |
 |**firstName** | **String** |  |  |
 |**lastName** | **String** |  |  |
+|**userName** | **String** |  |  |
 |**countryOfDomicile** | **CountryCode** |  |  |
 |**nativeAssetId** | **UUID** |  |  |
 |**photoUrl** | **String** |  |  [optional] |

@@ -92,6 +92,14 @@ public class UserTest {
     }
 
     /**
+     * Test the property 'userName'
+     */
+    @Test
+    public void userNameTest() {
+        // TODO: test userName
+    }
+
+    /**
      * Test the property 'countryOfDomicile'
      */
     @Test

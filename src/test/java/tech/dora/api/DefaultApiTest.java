@@ -15,6 +15,7 @@ package tech.dora.api;
 
 import tech.dora.ApiException;
 import tech.dora.model.APIKeyResponseEnvelope;
+import tech.dora.model.AddTradingChallengeUsersRequest;
 import tech.dora.model.AllPositionsResponseEnvelope;
 import tech.dora.model.AllWithdrawalInitiationsResponseEnvelope;
 import tech.dora.model.AssetKind;
@@ -24,8 +25,10 @@ import tech.dora.model.AssetRequestError;
 import tech.dora.model.AssetYieldResolution;
 import tech.dora.model.CancelOrderResponseEnvelope;
 import tech.dora.model.CandleResolution;
+import tech.dora.model.CashReserveResponseEnvelope;
 import tech.dora.model.ClaimLeverageAccruedInterestRequest;
 import tech.dora.model.ClaimLeverageAccruedInterestResponseEnvelope;
+import tech.dora.model.ClaimTradingChallengeResponseEnvelope;
 import tech.dora.model.CloseAccountRequest;
 import tech.dora.model.ClosePositionRequest;
 import tech.dora.model.ClosePositionResponseEnvelope;
@@ -37,6 +40,7 @@ import tech.dora.model.CreateConditionalOrderResponseEnvelope;
 import tech.dora.model.CreateIntegratorUserRequest;
 import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponseEnvelope;
+import tech.dora.model.CreateTradingChallengeRequest;
 import tech.dora.model.CurrentLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.DefundUserRequest;
 import tech.dora.model.DepositInstructionsResponseEnvelope;
@@ -86,6 +90,7 @@ import tech.dora.model.PayLeverageAccruedInterestRequest;
 import tech.dora.model.PayLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.PoolPriceResponseEnvelope;
 import tech.dora.model.PoolRequestError;
+import tech.dora.model.RemoveTradingChallengeUsersRequest;
 import tech.dora.model.RepayUSDRequest;
 import tech.dora.model.RepayUSDResponseEnvelope;
 import tech.dora.model.ResponseEnvelope;
@@ -108,6 +113,12 @@ import tech.dora.model.SupplyRequest;
 import tech.dora.model.SupplyResponseEnvelope;
 import tech.dora.model.TradeRequestError;
 import tech.dora.model.TradeResponseEnvelope;
+import tech.dora.model.TradingChallengeDailySnapshotsResponseEnvelope;
+import tech.dora.model.TradingChallengeListResponseEnvelope;
+import tech.dora.model.TradingChallengeResponseEnvelope;
+import tech.dora.model.TradingChallengeResultsResponseEnvelope;
+import tech.dora.model.TradingChallengeStatus;
+import tech.dora.model.TradingChallengeType;
 import tech.dora.model.TransactionKind;
 import tech.dora.model.TransactionRequestError;
 import tech.dora.model.TransactionResponseEnvelope;
@@ -151,6 +162,18 @@ import java.util.Map;
 public class DefaultApiTest {
 
     private final DefaultApi api = new DefaultApi();
+
+    /**
+     * Add users to a trading challenge
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void addTradingChallengeUsersTest() throws ApiException {
+        AddTradingChallengeUsersRequest addTradingChallengeUsersRequest = null;
+        TradingChallengeResponseEnvelope response = api.addTradingChallengeUsers(addTradingChallengeUsersRequest);
+        // TODO: test validations
+    }
 
     /**
      * Approve a pending withdrawal request
@@ -218,6 +241,18 @@ public class DefaultApiTest {
     public void claimLeverageGetAccruedInterestTest() throws ApiException {
         ClaimLeverageAccruedInterestRequest claimLeverageAccruedInterestRequest = null;
         ClaimLeverageAccruedInterestResponseEnvelope response = api.claimLeverageGetAccruedInterest(claimLeverageAccruedInterestRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Claim challenge prize
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void claimTradingChallengePrizeTest() throws ApiException {
+        UUID tradingChallengeId = null;
+        ClaimTradingChallengeResponseEnvelope response = api.claimTradingChallengePrize(tradingChallengeId);
         // TODO: test validations
     }
 
@@ -291,6 +326,18 @@ public class DefaultApiTest {
     public void createOrderTest() throws ApiException {
         CreateOrderRequest createOrderRequest = null;
         CreateOrderResponseEnvelope response = api.createOrder(createOrderRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Create a trading challenge
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void createTradingChallengeTest() throws ApiException {
+        CreateTradingChallengeRequest createTradingChallengeRequest = null;
+        TradingChallengeResponseEnvelope response = api.createTradingChallenge(createTradingChallengeRequest);
         // TODO: test validations
     }
 
@@ -446,7 +493,34 @@ public class DefaultApiTest {
     }
 
     /**
-     * Get list of user IDs with copy trading enabled
+     * Get the minimum USD cash reserve requirement for the given user
+     *
+     * Returns the user&#39;s available Global Account USD balance alongside their minimum cash reserve requirement and its breakdown. While available_usd is below required_usd the user may not open new leveraged positions, submit buy orders, transfer assets out of their Global Account or withdraw.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getCashReserveByUserIDTest() throws ApiException {
+        UUID userId = null;
+        CashReserveResponseEnvelope response = api.getCashReserveByUserID(userId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get the minimum USD cash reserve requirement for the logged in user
+     *
+     * Returns the user&#39;s available Global Account USD balance alongside their minimum cash reserve requirement and its breakdown. While available_usd is below required_usd the user may not open new leveraged positions, submit buy orders, transfer assets out of their Global Account or withdraw.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getCashReserveSelfTest() throws ApiException {
+        CashReserveResponseEnvelope response = api.getCashReserveSelf();
+        // TODO: test validations
+    }
+
+    /**
+     * Get list of users with copy trading enabled
      *
      * @throws ApiException if the Api call fails
      */
@@ -473,7 +547,7 @@ public class DefaultApiTest {
     /**
      * Get per-chain instructions for depositing USDC into the Dora vault
      *
-     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry.
+     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry. Restricted to DORA tenant users whose native asset is USDC.
      *
      * @throws ApiException if the Api call fails
      */
@@ -810,6 +884,43 @@ public class DefaultApiTest {
         Integer page = null;
         Integer limit = null;
         ListTradeResponseEnvelope response = api.getTrades(orderBookIds, userIds, start, end, page, limit);
+        // TODO: test validations
+    }
+
+    /**
+     * Get trading challenge by ID
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getTradingChallengeByIDTest() throws ApiException {
+        UUID tradingChallengeId = null;
+        TradingChallengeResponseEnvelope response = api.getTradingChallengeByID(tradingChallengeId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get trading challenge daily snapshots
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getTradingChallengeDailySnapshotsTest() throws ApiException {
+        UUID tradingChallengeId = null;
+        TradingChallengeDailySnapshotsResponseEnvelope response = api.getTradingChallengeDailySnapshots(tradingChallengeId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get trading challenge results
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getTradingChallengeResultsTest() throws ApiException {
+        UUID tradingChallengeId = null;
+        String board = null;
+        TradingChallengeResultsResponseEnvelope response = api.getTradingChallengeResults(tradingChallengeId, board);
         // TODO: test validations
     }
 
@@ -1278,6 +1389,22 @@ public class DefaultApiTest {
     }
 
     /**
+     * List trading challenges
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listTradingChallengesTest() throws ApiException {
+        String tenantId = null;
+        TradingChallengeType type = null;
+        TradingChallengeStatus status = null;
+        OffsetDateTime start = null;
+        OffsetDateTime end = null;
+        TradingChallengeListResponseEnvelope response = api.listTradingChallenges(tenantId, type, status, start, end);
+        // TODO: test validations
+    }
+
+    /**
      * Pay current accrued leverage interest for a specific user
      *
      * @throws ApiException if the Api call fails
@@ -1301,6 +1428,18 @@ public class DefaultApiTest {
         UUID withdrawalId = null;
         WithdrawalRequestReason withdrawalRequestReason = null;
         WithdrawalInitiationResponseEnvelope response = api.rejectLedgerWithdrawRequest(withdrawalId, withdrawalRequestReason);
+        // TODO: test validations
+    }
+
+    /**
+     * Remove users from a trading challenge
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void removeTradingChallengeUsersTest() throws ApiException {
+        RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest = null;
+        TradingChallengeResponseEnvelope response = api.removeTradingChallengeUsers(removeTradingChallengeUsersRequest);
         // TODO: test validations
     }
 

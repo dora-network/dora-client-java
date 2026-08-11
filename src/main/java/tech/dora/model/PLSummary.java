@@ -48,7 +48,7 @@ import tech.dora.JSON;
 /**
  * PLSummary
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-29T17:20:21.055505839+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-11T05:07:16.172658393+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class PLSummary {
   public static final String SERIALIZED_NAME_LEVERAGE = "leverage";
   @SerializedName(SERIALIZED_NAME_LEVERAGE)
@@ -74,6 +74,16 @@ public class PLSummary {
   @SerializedName(SERIALIZED_NAME_LTV)
   @javax.annotation.Nonnull
   private String ltv;
+
+  public static final String SERIALIZED_NAME_REALIZED_PL = "realized_pl";
+  @SerializedName(SERIALIZED_NAME_REALIZED_PL)
+  @javax.annotation.Nonnull
+  private String realizedPl;
+
+  public static final String SERIALIZED_NAME_UNREALIZED_PL = "unrealized_pl";
+  @SerializedName(SERIALIZED_NAME_UNREALIZED_PL)
+  @javax.annotation.Nonnull
+  private String unrealizedPl;
 
   public PLSummary() {
   }
@@ -173,6 +183,44 @@ public class PLSummary {
   }
 
 
+  public PLSummary realizedPl(@javax.annotation.Nonnull String realizedPl) {
+    this.realizedPl = realizedPl;
+    return this;
+  }
+
+  /**
+   * The realized profit or loss since account inception
+   * @return realizedPl
+   */
+  @javax.annotation.Nonnull
+  public String getRealizedPl() {
+    return realizedPl;
+  }
+
+  public void setRealizedPl(@javax.annotation.Nonnull String realizedPl) {
+    this.realizedPl = realizedPl;
+  }
+
+
+  public PLSummary unrealizedPl(@javax.annotation.Nonnull String unrealizedPl) {
+    this.unrealizedPl = unrealizedPl;
+    return this;
+  }
+
+  /**
+   * The unrealized profit or loss for the account&#39;s current open positions
+   * @return unrealizedPl
+   */
+  @javax.annotation.Nonnull
+  public String getUnrealizedPl() {
+    return unrealizedPl;
+  }
+
+  public void setUnrealizedPl(@javax.annotation.Nonnull String unrealizedPl) {
+    this.unrealizedPl = unrealizedPl;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -187,12 +235,14 @@ public class PLSummary {
         Objects.equals(this.accountEquity, plSummary.accountEquity) &&
         Objects.equals(this.available, plSummary.available) &&
         Objects.equals(this.health, plSummary.health) &&
-        Objects.equals(this.ltv, plSummary.ltv);
+        Objects.equals(this.ltv, plSummary.ltv) &&
+        Objects.equals(this.realizedPl, plSummary.realizedPl) &&
+        Objects.equals(this.unrealizedPl, plSummary.unrealizedPl);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(leverage, accountEquity, available, health, ltv);
+    return Objects.hash(leverage, accountEquity, available, health, ltv, realizedPl, unrealizedPl);
   }
 
   @Override
@@ -204,6 +254,8 @@ public class PLSummary {
     sb.append("    available: ").append(toIndentedString(available)).append("\n");
     sb.append("    health: ").append(toIndentedString(health)).append("\n");
     sb.append("    ltv: ").append(toIndentedString(ltv)).append("\n");
+    sb.append("    realizedPl: ").append(toIndentedString(realizedPl)).append("\n");
+    sb.append("    unrealizedPl: ").append(toIndentedString(unrealizedPl)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -222,10 +274,10 @@ public class PLSummary {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("leverage", "account_equity", "available", "health", "ltv"));
+    openapiFields = new HashSet<String>(Arrays.asList("leverage", "account_equity", "available", "health", "ltv", "realized_pl", "unrealized_pl"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("leverage", "account_equity", "available", "health", "ltv"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("leverage", "account_equity", "available", "health", "ltv", "realized_pl", "unrealized_pl"));
   }
 
   /**
@@ -270,6 +322,12 @@ public class PLSummary {
       }
       if (!jsonObj.get("ltv").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `ltv` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ltv").toString()));
+      }
+      if (!jsonObj.get("realized_pl").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `realized_pl` to be a primitive type in the JSON string but got `%s`", jsonObj.get("realized_pl").toString()));
+      }
+      if (!jsonObj.get("unrealized_pl").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `unrealized_pl` to be a primitive type in the JSON string but got `%s`", jsonObj.get("unrealized_pl").toString()));
       }
   }
 

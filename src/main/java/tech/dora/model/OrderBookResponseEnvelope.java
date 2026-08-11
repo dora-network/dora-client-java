@@ -50,7 +50,7 @@ import tech.dora.JSON;
 /**
  * OrderBookResponseEnvelope
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-29T17:20:21.055505839+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-11T05:07:16.172658393+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class OrderBookResponseEnvelope {
   public static final String SERIALIZED_NAME_DATA = "data";
   @SerializedName(SERIALIZED_NAME_DATA)

@@ -50,7 +50,7 @@ import tech.dora.JSON;
 /**
  * CreateIntegratorUserRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-29T17:20:21.055505839+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-11T05:07:16.172658393+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class CreateIntegratorUserRequest {
   public static final String SERIALIZED_NAME_EMAIL = "email";
   @SerializedName(SERIALIZED_NAME_EMAIL)
@@ -66,6 +66,11 @@ public class CreateIntegratorUserRequest {
   @SerializedName(SERIALIZED_NAME_LAST_NAME)
   @javax.annotation.Nullable
   private String lastName;
+
+  public static final String SERIALIZED_NAME_USER_NAME = "user_name";
+  @SerializedName(SERIALIZED_NAME_USER_NAME)
+  @javax.annotation.Nullable
+  private String userName;
 
   public static final String SERIALIZED_NAME_COUNTRY_OF_DOMICILE = "country_of_domicile";
   @SerializedName(SERIALIZED_NAME_COUNTRY_OF_DOMICILE)
@@ -157,6 +162,25 @@ public class CreateIntegratorUserRequest {
   }
 
 
+  public CreateIntegratorUserRequest userName(@javax.annotation.Nullable String userName) {
+    this.userName = userName;
+    return this;
+  }
+
+  /**
+   * Get userName
+   * @return userName
+   */
+  @javax.annotation.Nullable
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(@javax.annotation.Nullable String userName) {
+    this.userName = userName;
+  }
+
+
   public CreateIntegratorUserRequest countryOfDomicile(@javax.annotation.Nullable CountryCode countryOfDomicile) {
     this.countryOfDomicile = countryOfDomicile;
     return this;
@@ -182,7 +206,7 @@ public class CreateIntegratorUserRequest {
   }
 
   /**
-   * Get nativeAssetId
+   * Optional: the user&#39;s native asset ID. Must be a CURRENCY asset; defaults to USD. The USDC asset is never allowed for integrator-created users.
    * @return nativeAssetId
    */
   @javax.annotation.Nullable
@@ -284,6 +308,7 @@ public class CreateIntegratorUserRequest {
     return Objects.equals(this.email, createIntegratorUserRequest.email) &&
         Objects.equals(this.firstName, createIntegratorUserRequest.firstName) &&
         Objects.equals(this.lastName, createIntegratorUserRequest.lastName) &&
+        Objects.equals(this.userName, createIntegratorUserRequest.userName) &&
         Objects.equals(this.countryOfDomicile, createIntegratorUserRequest.countryOfDomicile) &&
         Objects.equals(this.nativeAssetId, createIntegratorUserRequest.nativeAssetId) &&
         Objects.equals(this.photoUrl, createIntegratorUserRequest.photoUrl) &&
@@ -294,7 +319,7 @@ public class CreateIntegratorUserRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(email, firstName, lastName, countryOfDomicile, nativeAssetId, photoUrl, provider, providerId, timezone);
+    return Objects.hash(email, firstName, lastName, userName, countryOfDomicile, nativeAssetId, photoUrl, provider, providerId, timezone);
   }
 
   @Override
@@ -304,6 +329,7 @@ public class CreateIntegratorUserRequest {
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
+    sb.append("    userName: ").append(toIndentedString(userName)).append("\n");
     sb.append("    countryOfDomicile: ").append(toIndentedString(countryOfDomicile)).append("\n");
     sb.append("    nativeAssetId: ").append(toIndentedString(nativeAssetId)).append("\n");
     sb.append("    photoUrl: ").append(toIndentedString(photoUrl)).append("\n");
@@ -363,6 +389,9 @@ public class CreateIntegratorUserRequest {
       }
       if ((jsonObj.get("last_name") != null && !jsonObj.get("last_name").isJsonNull()) && !jsonObj.get("last_name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `last_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("last_name").toString()));
+      }
+      if ((jsonObj.get("user_name") != null && !jsonObj.get("user_name").isJsonNull()) && !jsonObj.get("user_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `user_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user_name").toString()));
       }
       // validate the optional field `country_of_domicile`
       if (jsonObj.get("country_of_domicile") != null && !jsonObj.get("country_of_domicile").isJsonNull()) {

@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
+import tech.dora.model.CopyTrader;
 import tech.dora.model.Metadata;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
