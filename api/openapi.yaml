@@ -256,6 +256,65 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /v1/integrators/user/{user_id}/kyc:
+    post:
+      operationId: updateUserKYC
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserKYCRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateUserKYCResponseEnvelope"
+          description: User KYC status updated
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid user id or request body"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: User not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Set or clear a user's KYC completion timestamp
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /v1/user:
     get:
       operationId: getUsers
@@ -1370,6 +1429,14 @@ paths:
           default: 100
           minimum: 1
           type: integer
+        style: form
+      - description: Filter by client order ID prefix (max 256 characters)
+        explode: true
+        in: query
+        name: client_order_id
+        required: false
+        schema:
+          type: string
         style: form
       responses:
         "200":
@@ -6688,6 +6755,7 @@ components:
           allow_deposit_withdrawal_notifications: true
           allow_orders_notifications: true
           allow_copy_trading: true
+          kyc_completed_at: 2000-01-23T04:56:07.000+00:00
         - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           closed_at: 2000-01-23T04:56:07.000+00:00
           disabled_at: 2000-01-23T04:56:07.000+00:00
@@ -6714,6 +6782,7 @@ components:
           allow_deposit_withdrawal_notifications: true
           allow_orders_notifications: true
           allow_copy_trading: true
+          kyc_completed_at: 2000-01-23T04:56:07.000+00:00
         error: error
         metadata: ""
     ListUsersResponse:
@@ -6758,6 +6827,40 @@ components:
           type: string
         timezone:
           type: string
+    UpdateUserKYCRequest:
+      example:
+        completed_kyc: true
+      properties:
+        completed_kyc:
+          description: "If true, sets kyc_completed_at to now; if false, clears it."
+          type: boolean
+      required:
+      - completed_kyc
+    UpdateUserKYCResponse:
+      example:
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        kyc_completed: true
+      properties:
+        user_id:
+          format: uuid
+          type: string
+        kyc_completed:
+          type: boolean
+      required:
+      - kyc_completed
+      - user_id
+    UpdateUserKYCResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/UpdateUserKYCResponse"
+      example:
+        data:
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          kyc_completed: true
+        error: error
+        metadata: ""
     UserCreatedResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -6805,6 +6908,7 @@ components:
           allow_deposit_withdrawal_notifications: true
           allow_orders_notifications: true
           allow_copy_trading: true
+          kyc_completed_at: 2000-01-23T04:56:07.000+00:00
         error: error
         metadata: ""
     GetUserResponse:
@@ -6871,6 +6975,7 @@ components:
         allow_deposit_withdrawal_notifications: true
         allow_orders_notifications: true
         allow_copy_trading: true
+        kyc_completed_at: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
           format: uuid
@@ -6934,6 +7039,12 @@ components:
           type: boolean
         allow_copy_trading:
           type: boolean
+        kyc_completed_at:
+          description: "When the user completed KYC. Omitted/null if KYC has not been\
+            \ completed. Set via POST /v1/integrators/user/{user_id}/kyc."
+          format: date-time
+          type: string
+          nullable: true
       required:
       - allow_copy_trading
       - allow_deposit_withdrawal_notifications

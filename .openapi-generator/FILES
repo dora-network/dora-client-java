@@ -228,6 +228,9 @@ docs/UpdateFieldBoolean.md
 docs/UpdateFieldString.md
 docs/UpdateRolesString.md
 docs/UpdateUserConfigRequest.md
+docs/UpdateUserKYCRequest.md
+docs/UpdateUserKYCResponse.md
+docs/UpdateUserKYCResponseEnvelope.md
 docs/User.md
 docs/UserBalanceResponseEnvelope.md
 docs/UserConfig.md
@@ -506,6 +509,9 @@ src/main/java/tech/dora/model/UpdateFieldBoolean.java
 src/main/java/tech/dora/model/UpdateFieldString.java
 src/main/java/tech/dora/model/UpdateRolesString.java
 src/main/java/tech/dora/model/UpdateUserConfigRequest.java
+src/main/java/tech/dora/model/UpdateUserKYCRequest.java
+src/main/java/tech/dora/model/UpdateUserKYCResponse.java
+src/main/java/tech/dora/model/UpdateUserKYCResponseEnvelope.java
 src/main/java/tech/dora/model/User.java
 src/main/java/tech/dora/model/UserBalanceResponseEnvelope.java
 src/main/java/tech/dora/model/UserConfig.java
@@ -757,6 +763,9 @@ src/test/java/tech/dora/model/UpdateFieldBooleanTest.java
 src/test/java/tech/dora/model/UpdateFieldStringTest.java
 src/test/java/tech/dora/model/UpdateRolesStringTest.java
 src/test/java/tech/dora/model/UpdateUserConfigRequestTest.java
+src/test/java/tech/dora/model/UpdateUserKYCRequestTest.java
+src/test/java/tech/dora/model/UpdateUserKYCResponseEnvelopeTest.java
+src/test/java/tech/dora/model/UpdateUserKYCResponseTest.java
 src/test/java/tech/dora/model/UserBalanceResponseEnvelopeTest.java
 src/test/java/tech/dora/model/UserConfigResponseEnvelopeTest.java
 src/test/java/tech/dora/model/UserConfigTest.java

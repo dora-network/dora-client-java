@@ -133,6 +133,8 @@ import java.util.UUID;
 import tech.dora.model.UnitePositionRequest;
 import tech.dora.model.UnitePositionResponseEnvelope;
 import tech.dora.model.UpdateUserConfigRequest;
+import tech.dora.model.UpdateUserKYCRequest;
+import tech.dora.model.UpdateUserKYCResponseEnvelope;
 import tech.dora.model.UserBalanceResponseEnvelope;
 import tech.dora.model.UserCreatedResponseEnvelope;
 import tech.dora.model.UserDeletedResponseEnvelope;
@@ -1373,7 +1375,8 @@ public class DefaultApiTest {
         OffsetDateTime to = null;
         Integer page = null;
         Integer limit = null;
-        ListOrdersResponseEnvelope response = api.listOrders(userId, orderBookId, kind, status, side, from, to, page, limit);
+        String clientOrderId = null;
+        ListOrdersResponseEnvelope response = api.listOrders(userId, orderBookId, kind, status, side, from, to, page, limit, clientOrderId);
         // TODO: test validations
     }
 
@@ -1629,6 +1632,19 @@ public class DefaultApiTest {
     public void updateUserConfigSelfTest() throws ApiException {
         UpdateUserConfigRequest updateUserConfigRequest = null;
         UserUpdatedResponseEnvelope response = api.updateUserConfigSelf(updateUserConfigRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Set or clear a user&#39;s KYC completion timestamp
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateUserKYCTest() throws ApiException {
+        UUID userId = null;
+        UpdateUserKYCRequest updateUserKYCRequest = null;
+        UpdateUserKYCResponseEnvelope response = api.updateUserKYC(userId, updateUserKYCRequest);
         // TODO: test validations
     }
 

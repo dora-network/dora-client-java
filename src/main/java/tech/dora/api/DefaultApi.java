@@ -146,6 +146,8 @@ import java.util.UUID;
 import tech.dora.model.UnitePositionRequest;
 import tech.dora.model.UnitePositionResponseEnvelope;
 import tech.dora.model.UpdateUserConfigRequest;
+import tech.dora.model.UpdateUserKYCRequest;
+import tech.dora.model.UpdateUserKYCResponseEnvelope;
 import tech.dora.model.UserBalanceResponseEnvelope;
 import tech.dora.model.UserCreatedResponseEnvelope;
 import tech.dora.model.UserDeletedResponseEnvelope;
@@ -13518,6 +13520,7 @@ public class DefaultApi {
      * @param to  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
+     * @param clientOrderId Filter by client order ID prefix (max 256 characters) (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -13532,7 +13535,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listOrdersCall(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call listOrdersCall(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String clientOrderId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -13593,6 +13596,10 @@ public class DefaultApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
         }
 
+        if (clientOrderId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("client_order_id", clientOrderId));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -13613,8 +13620,8 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listOrdersValidateBeforeCall(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
-        return listOrdersCall(userId, orderBookId, kind, status, side, from, to, page, limit, _callback);
+    private okhttp3.Call listOrdersValidateBeforeCall(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String clientOrderId, final ApiCallback _callback) throws ApiException {
+        return listOrdersCall(userId, orderBookId, kind, status, side, from, to, page, limit, clientOrderId, _callback);
 
     }
 
@@ -13630,6 +13637,7 @@ public class DefaultApi {
      * @param to  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
+     * @param clientOrderId Filter by client order ID prefix (max 256 characters) (optional)
      * @return ListOrdersResponseEnvelope
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -13643,8 +13651,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ListOrdersResponseEnvelope listOrders(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
-        ApiResponse<ListOrdersResponseEnvelope> localVarResp = listOrdersWithHttpInfo(userId, orderBookId, kind, status, side, from, to, page, limit);
+    public ListOrdersResponseEnvelope listOrders(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String clientOrderId) throws ApiException {
+        ApiResponse<ListOrdersResponseEnvelope> localVarResp = listOrdersWithHttpInfo(userId, orderBookId, kind, status, side, from, to, page, limit, clientOrderId);
         return localVarResp.getData();
     }
 
@@ -13660,6 +13668,7 @@ public class DefaultApi {
      * @param to  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
+     * @param clientOrderId Filter by client order ID prefix (max 256 characters) (optional)
      * @return ApiResponse&lt;ListOrdersResponseEnvelope&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -13673,8 +13682,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ListOrdersResponseEnvelope> listOrdersWithHttpInfo(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
-        okhttp3.Call localVarCall = listOrdersValidateBeforeCall(userId, orderBookId, kind, status, side, from, to, page, limit, null);
+    public ApiResponse<ListOrdersResponseEnvelope> listOrdersWithHttpInfo(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String clientOrderId) throws ApiException {
+        okhttp3.Call localVarCall = listOrdersValidateBeforeCall(userId, orderBookId, kind, status, side, from, to, page, limit, clientOrderId, null);
         Type localVarReturnType = new TypeToken<ListOrdersResponseEnvelope>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -13691,6 +13700,7 @@ public class DefaultApi {
      * @param to  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 100)
+     * @param clientOrderId Filter by client order ID prefix (max 256 characters) (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -13705,9 +13715,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listOrdersAsync(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback<ListOrdersResponseEnvelope> _callback) throws ApiException {
+    public okhttp3.Call listOrdersAsync(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable List<UUID> orderBookId, @javax.annotation.Nullable List<OrderKind> kind, @javax.annotation.Nullable List<OrderStatus> status, @javax.annotation.Nullable Side side, @javax.annotation.Nullable OffsetDateTime from, @javax.annotation.Nullable OffsetDateTime to, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String clientOrderId, final ApiCallback<ListOrdersResponseEnvelope> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listOrdersValidateBeforeCall(userId, orderBookId, kind, status, side, from, to, page, limit, _callback);
+        okhttp3.Call localVarCall = listOrdersValidateBeforeCall(userId, orderBookId, kind, status, side, from, to, page, limit, clientOrderId, _callback);
         Type localVarReturnType = new TypeToken<ListOrdersResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -16585,6 +16595,163 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = updateUserConfigSelfValidateBeforeCall(updateUserConfigRequest, _callback);
         Type localVarReturnType = new TypeToken<UserUpdatedResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateUserKYC
+     * @param userId  (required)
+     * @param updateUserKYCRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> User KYC status updated </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid user id or request body </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateUserKYCCall(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nonnull UpdateUserKYCRequest updateUserKYCRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateUserKYCRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/integrators/user/{user_id}/kyc"
+            .replace("{" + "user_id" + "}", localVarApiClient.escapeString(userId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateUserKYCValidateBeforeCall(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nonnull UpdateUserKYCRequest updateUserKYCRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling updateUserKYC(Async)");
+        }
+
+        // verify the required parameter 'updateUserKYCRequest' is set
+        if (updateUserKYCRequest == null) {
+            throw new ApiException("Missing the required parameter 'updateUserKYCRequest' when calling updateUserKYC(Async)");
+        }
+
+        return updateUserKYCCall(userId, updateUserKYCRequest, _callback);
+
+    }
+
+    /**
+     * Set or clear a user&#39;s KYC completion timestamp
+     * 
+     * @param userId  (required)
+     * @param updateUserKYCRequest  (required)
+     * @return UpdateUserKYCResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> User KYC status updated </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid user id or request body </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public UpdateUserKYCResponseEnvelope updateUserKYC(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nonnull UpdateUserKYCRequest updateUserKYCRequest) throws ApiException {
+        ApiResponse<UpdateUserKYCResponseEnvelope> localVarResp = updateUserKYCWithHttpInfo(userId, updateUserKYCRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Set or clear a user&#39;s KYC completion timestamp
+     * 
+     * @param userId  (required)
+     * @param updateUserKYCRequest  (required)
+     * @return ApiResponse&lt;UpdateUserKYCResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> User KYC status updated </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid user id or request body </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<UpdateUserKYCResponseEnvelope> updateUserKYCWithHttpInfo(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nonnull UpdateUserKYCRequest updateUserKYCRequest) throws ApiException {
+        okhttp3.Call localVarCall = updateUserKYCValidateBeforeCall(userId, updateUserKYCRequest, null);
+        Type localVarReturnType = new TypeToken<UpdateUserKYCResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Set or clear a user&#39;s KYC completion timestamp (asynchronously)
+     * 
+     * @param userId  (required)
+     * @param updateUserKYCRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> User KYC status updated </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid user id or request body </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> User not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateUserKYCAsync(@javax.annotation.Nonnull UUID userId, @javax.annotation.Nonnull UpdateUserKYCRequest updateUserKYCRequest, final ApiCallback<UpdateUserKYCResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updateUserKYCValidateBeforeCall(userId, updateUserKYCRequest, _callback);
+        Type localVarReturnType = new TypeToken<UpdateUserKYCResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

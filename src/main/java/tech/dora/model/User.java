@@ -54,7 +54,7 @@ import tech.dora.JSON;
 /**
  * User
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-11T05:07:16.172658393+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-12T18:49:23.367489785+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class User {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -175,6 +175,11 @@ public class User {
   @SerializedName(SERIALIZED_NAME_ALLOW_COPY_TRADING)
   @javax.annotation.Nonnull
   private Boolean allowCopyTrading;
+
+  public static final String SERIALIZED_NAME_KYC_COMPLETED_AT = "kyc_completed_at";
+  @SerializedName(SERIALIZED_NAME_KYC_COMPLETED_AT)
+  @javax.annotation.Nullable
+  private OffsetDateTime kycCompletedAt;
 
   public User() {
   }
@@ -643,6 +648,25 @@ public class User {
   }
 
 
+  public User kycCompletedAt(@javax.annotation.Nullable OffsetDateTime kycCompletedAt) {
+    this.kycCompletedAt = kycCompletedAt;
+    return this;
+  }
+
+  /**
+   * When the user completed KYC. Omitted/null if KYC has not been completed. Set via POST /v1/integrators/user/{user_id}/kyc.
+   * @return kycCompletedAt
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getKycCompletedAt() {
+    return kycCompletedAt;
+  }
+
+  public void setKycCompletedAt(@javax.annotation.Nullable OffsetDateTime kycCompletedAt) {
+    this.kycCompletedAt = kycCompletedAt;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -676,12 +700,13 @@ public class User {
         Objects.equals(this.allowLiquidationsNotifications, user.allowLiquidationsNotifications) &&
         Objects.equals(this.allowDepositWithdrawalNotifications, user.allowDepositWithdrawalNotifications) &&
         Objects.equals(this.allowOrdersNotifications, user.allowOrdersNotifications) &&
-        Objects.equals(this.allowCopyTrading, user.allowCopyTrading);
+        Objects.equals(this.allowCopyTrading, user.allowCopyTrading) &&
+        Objects.equals(this.kycCompletedAt, user.kycCompletedAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, closedAt, disabledAt, email, firstName, lastName, userName, countryOfDomicile, nativeAssetId, photoUrl, provider, providerId, roles, timezone, timezoneOffset, verifiedAt, showTutorialCards, notificationsEnabled, tenantId, allowEmailNotifications, allowLiquidationsNotifications, allowDepositWithdrawalNotifications, allowOrdersNotifications, allowCopyTrading);
+    return Objects.hash(id, closedAt, disabledAt, email, firstName, lastName, userName, countryOfDomicile, nativeAssetId, photoUrl, provider, providerId, roles, timezone, timezoneOffset, verifiedAt, showTutorialCards, notificationsEnabled, tenantId, allowEmailNotifications, allowLiquidationsNotifications, allowDepositWithdrawalNotifications, allowOrdersNotifications, allowCopyTrading, kycCompletedAt);
   }
 
   @Override
@@ -712,6 +737,7 @@ public class User {
     sb.append("    allowDepositWithdrawalNotifications: ").append(toIndentedString(allowDepositWithdrawalNotifications)).append("\n");
     sb.append("    allowOrdersNotifications: ").append(toIndentedString(allowOrdersNotifications)).append("\n");
     sb.append("    allowCopyTrading: ").append(toIndentedString(allowCopyTrading)).append("\n");
+    sb.append("    kycCompletedAt: ").append(toIndentedString(kycCompletedAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -730,7 +756,7 @@ public class User {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "closed_at", "disabled_at", "email", "first_name", "last_name", "user_name", "country_of_domicile", "native_asset_id", "photo_url", "provider", "provider_id", "roles", "timezone", "timezone_offset", "verified_at", "show_tutorial_cards", "notifications_enabled", "tenant_id", "allow_email_notifications", "allow_liquidations_notifications", "allow_deposit_withdrawal_notifications", "allow_orders_notifications", "allow_copy_trading"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "closed_at", "disabled_at", "email", "first_name", "last_name", "user_name", "country_of_domicile", "native_asset_id", "photo_url", "provider", "provider_id", "roles", "timezone", "timezone_offset", "verified_at", "show_tutorial_cards", "notifications_enabled", "tenant_id", "allow_email_notifications", "allow_liquidations_notifications", "allow_deposit_withdrawal_notifications", "allow_orders_notifications", "allow_copy_trading", "kyc_completed_at"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "email", "first_name", "last_name", "user_name", "country_of_domicile", "native_asset_id", "roles", "show_tutorial_cards", "notifications_enabled", "tenant_id", "allow_email_notifications", "allow_liquidations_notifications", "allow_deposit_withdrawal_notifications", "allow_orders_notifications", "allow_copy_trading"));

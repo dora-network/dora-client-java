@@ -31,6 +31,7 @@
 |**allowDepositWithdrawalNotifications** | **Boolean** |  |  |
 |**allowOrdersNotifications** | **Boolean** |  |  |
 |**allowCopyTrading** | **Boolean** |  |  |
+|**kycCompletedAt** | **OffsetDateTime** | When the user completed KYC. Omitted/null if KYC has not been completed. Set via POST /v1/integrators/user/{user_id}/kyc. |  [optional] |
 
 
 

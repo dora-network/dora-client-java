@@ -235,4 +235,12 @@ public class UserTest {
         // TODO: test allowCopyTrading
     }
 
+    /**
+     * Test the property 'kycCompletedAt'
+     */
+    @Test
+    public void kycCompletedAtTest() {
+        // TODO: test kycCompletedAt
+    }
+
 }

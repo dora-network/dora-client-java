@@ -116,6 +116,7 @@ All URIs are relative to *https://staging.dora.co*
 | [**transferAvailableBalances**](DefaultApi.md#transferAvailableBalances) | **POST** /v1/positions/transfer_balances | Transfer available balance between a user&#39;s accounts (e.g. global to isolated position) |
 | [**updateUserConfig**](DefaultApi.md#updateUserConfig) | **PUT** /v1/user/{user_id}/config | Update user configuration by ID |
 | [**updateUserConfigSelf**](DefaultApi.md#updateUserConfigSelf) | **PUT** /v1/user/config/self | Update user configuration for the authenticated user |
+| [**updateUserKYC**](DefaultApi.md#updateUserKYC) | **POST** /v1/integrators/user/{user_id}/kyc | Set or clear a user&#39;s KYC completion timestamp |
 | [**validateSubmitOrder**](DefaultApi.md#validateSubmitOrder) | **POST** /v1/orders/validate | Validate submit order request data |
 | [**verifyUser**](DefaultApi.md#verifyUser) | **PUT** /v1/user/{user_id}/verify | Verify a user by ID |
 
@@ -6795,7 +6796,7 @@ public class Example {
 
 <a id="listOrders"></a>
 # **listOrders**
-> ListOrdersResponseEnvelope listOrders(userId, orderBookId, kind, status, side, from, to, page, limit)
+> ListOrdersResponseEnvelope listOrders(userId, orderBookId, kind, status, side, from, to, page, limit, clientOrderId)
 
 List all orders
 
@@ -6834,8 +6835,9 @@ public class Example {
     OffsetDateTime to = OffsetDateTime.now(); // OffsetDateTime | 
     Integer page = 1; // Integer | 
     Integer limit = 100; // Integer | 
+    String clientOrderId = "clientOrderId_example"; // String | Filter by client order ID prefix (max 256 characters)
     try {
-      ListOrdersResponseEnvelope result = apiInstance.listOrders(userId, orderBookId, kind, status, side, from, to, page, limit);
+      ListOrdersResponseEnvelope result = apiInstance.listOrders(userId, orderBookId, kind, status, side, from, to, page, limit, clientOrderId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#listOrders");
@@ -6861,6 +6863,7 @@ public class Example {
 | **to** | **OffsetDateTime**|  | [optional] |
 | **page** | **Integer**|  | [optional] [default to 1] |
 | **limit** | **Integer**|  | [optional] [default to 100] |
+| **clientOrderId** | **String**| Filter by client order ID prefix (max 256 characters) | [optional] |
 
 ### Return type
 
@@ -8332,6 +8335,84 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | User configuration updated |  -  |
 | **400** | Bad request, e.g. invalid query parameters |  -  |
+| **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="updateUserKYC"></a>
+# **updateUserKYC**
+> UpdateUserKYCResponseEnvelope updateUserKYC(userId, updateUserKYCRequest)
+
+Set or clear a user&#39;s KYC completion timestamp
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    UpdateUserKYCRequest updateUserKYCRequest = new UpdateUserKYCRequest(); // UpdateUserKYCRequest | 
+    try {
+      UpdateUserKYCResponseEnvelope result = apiInstance.updateUserKYC(userId, updateUserKYCRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#updateUserKYC");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
+| **updateUserKYCRequest** | [**UpdateUserKYCRequest**](UpdateUserKYCRequest.md)|  | |
+
+### Return type
+
+[**UpdateUserKYCResponseEnvelope**](UpdateUserKYCResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | User KYC status updated |  -  |
+| **400** | Bad request, e.g. invalid user id or request body |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
 | **404** | User not found |  -  |
 | **500** | Internal server error |  -  |
 
