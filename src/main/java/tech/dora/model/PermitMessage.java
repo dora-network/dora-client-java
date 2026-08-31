@@ -48,7 +48,7 @@ import tech.dora.JSON;
 /**
  * The EIP-2612 Permit struct the user signs. The uint256 fields are decimal strings to avoid JSON number precision loss.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-12T18:49:23.367489785+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-31T11:19:20.004337973+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class PermitMessage {
   public static final String SERIALIZED_NAME_OWNER = "owner";
   @SerializedName(SERIALIZED_NAME_OWNER)

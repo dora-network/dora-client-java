@@ -148,6 +148,14 @@ public class UserTest {
     }
 
     /**
+     * Test the property 'managedCompetitionIds'
+     */
+    @Test
+    public void managedCompetitionIdsTest() {
+        // TODO: test managedCompetitionIds
+    }
+
+    /**
      * Test the property 'timezone'
      */
     @Test

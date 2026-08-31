@@ -6,6 +6,7 @@ All URIs are relative to *https://staging.dora.co*
 |------------- | ------------- | -------------|
 | [**addTradingChallengeUsers**](DefaultApi.md#addTradingChallengeUsers) | **PUT** /v1/trading_challenges/add_users | Add users to a trading challenge |
 | [**approveLedgerWithdrawRequest**](DefaultApi.md#approveLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/approve | Approve a pending withdrawal request |
+| [**approveTradingChallengeRegistrationRequest**](DefaultApi.md#approveTradingChallengeRegistrationRequest) | **POST** /v1/trading_challenges/registration_requests/{request_id}/approve | Approve a trading challenge registration request |
 | [**cancelAllOpenOrders**](DefaultApi.md#cancelAllOpenOrders) | **DELETE** /v1/orders | Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook |
 | [**cancelLedgerWithdrawRequest**](DefaultApi.md#cancelLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request |
 | [**cancelOrderById**](DefaultApi.md#cancelOrderById) | **DELETE** /v1/orders/{order_id} | Cancel an order by ID |
@@ -70,6 +71,7 @@ All URIs are relative to *https://staging.dora.co*
 | [**getTransactionsStream**](DefaultApi.md#getTransactionsStream) | **GET** /v1/transactions/stream | Get transactions since a specific time, and open a stream for further updates |
 | [**getUserById**](DefaultApi.md#getUserById) | **GET** /v1/user/{user_id} | Get user by ID (admin only) |
 | [**getUserCouponPaymentsStream**](DefaultApi.md#getUserCouponPaymentsStream) | **GET** /v1/user/{user_id}/coupon_payments/stream | Stream user&#39;s coupon payment accruals in real time |
+| [**getUserDeactivation**](DefaultApi.md#getUserDeactivation) | **GET** /v1/user/{user_id}/deactivation | Get the latest account deactivation request for a user |
 | [**getUserLedgerStream**](DefaultApi.md#getUserLedgerStream) | **GET** /v1/user/{user_id}/ledger/stream | Get a snapshot of user&#39;s ledger updates since a specific time, and opens a stream for further updates |
 | [**getUserLeverageAccruedInterestStream**](DefaultApi.md#getUserLeverageAccruedInterestStream) | **GET** /v1/user/{user_id}/leverage/accrued_interest/stream | Stream user&#39;s current leverage accrued interest in real time |
 | [**getUserOrderUpdatesStream**](DefaultApi.md#getUserOrderUpdatesStream) | **GET** /v1/user/{user_id}/orders/{order_book_id}/updates/stream | Get a snapshot of user&#39;s order updates for the given order book since a specific time, and opens a stream for further updates |
@@ -97,9 +99,12 @@ All URIs are relative to *https://staging.dora.co*
 | [**listOrderBooks**](DefaultApi.md#listOrderBooks) | **GET** /v1/orderbooks | List order books |
 | [**listOrders**](DefaultApi.md#listOrders) | **GET** /v1/orders | List all orders |
 | [**listPositionAccountsSelf**](DefaultApi.md#listPositionAccountsSelf) | **GET** /v1/user/self/position_accounts | List all position accounts for the authenticated user |
+| [**listTradingChallengeRegistrationRequests**](DefaultApi.md#listTradingChallengeRegistrationRequests) | **GET** /v1/trading_challenges/registration_requests | List trading challenge registration requests |
 | [**listTradingChallenges**](DefaultApi.md#listTradingChallenges) | **GET** /v1/trading_challenges | List trading challenges |
+| [**listUserDeactivations**](DefaultApi.md#listUserDeactivations) | **GET** /v1/user/deactivations | Get the current deactivation status across all users |
 | [**payLeverageGetAccruedInterest**](DefaultApi.md#payLeverageGetAccruedInterest) | **POST** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user |
 | [**rejectLedgerWithdrawRequest**](DefaultApi.md#rejectLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/reject | Reject a pending withdrawal request |
+| [**rejectTradingChallengeRegistrationRequest**](DefaultApi.md#rejectTradingChallengeRegistrationRequest) | **POST** /v1/trading_challenges/registration_requests/{request_id}/reject | Reject a trading challenge registration request |
 | [**removeTradingChallengeUsers**](DefaultApi.md#removeTradingChallengeUsers) | **PUT** /v1/trading_challenges/remove_users | Remove users from a trading challenge |
 | [**repayUSD**](DefaultApi.md#repayUSD) | **POST** /v1/positions/repay_usd | Repay borrowed USD, then accrue and pay leverage interest |
 | [**revokeAPIKeyForUser**](DefaultApi.md#revokeAPIKeyForUser) | **PUT** /v1/user/apikey/{key_id}/revoke | Revoke apikey for a user |
@@ -112,8 +117,11 @@ All URIs are relative to *https://staging.dora.co*
 | [**streamOrderBookBalances**](DefaultApi.md#streamOrderBookBalances) | **GET** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates |
 | [**streamOrderbookOpenOrders**](DefaultApi.md#streamOrderbookOpenOrders) | **GET** /v1/orderbooks/{order_book_id}/open/stream | Get a snapshot of open orders in an order book and open a stream for real-time updates |
 | [**streamTrades**](DefaultApi.md#streamTrades) | **GET** /v1/trades/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates |
+| [**terminateOwnTradingChallengeParticipation**](DefaultApi.md#terminateOwnTradingChallengeParticipation) | **POST** /v1/trading_challenges/{trading_challenge_id}/participants/self/terminate | Leave a trading challenge |
+| [**terminateTradingChallengeParticipation**](DefaultApi.md#terminateTradingChallengeParticipation) | **POST** /v1/trading_challenges/{trading_challenge_id}/participants/{user_id}/terminate | Terminate a participation in a trading challenge |
 | [**transferAccountBalancesV2**](DefaultApi.md#transferAccountBalancesV2) | **POST** /v2/accounts/transfer_balances | Transfer available balance between a user&#39;s accounts |
 | [**transferAvailableBalances**](DefaultApi.md#transferAvailableBalances) | **POST** /v1/positions/transfer_balances | Transfer available balance between a user&#39;s accounts (e.g. global to isolated position) |
+| [**updateTradingChallenge**](DefaultApi.md#updateTradingChallenge) | **PUT** /v1/trading_challenges/{trading_challenge_id} | Update a trading challenge |
 | [**updateUserConfig**](DefaultApi.md#updateUserConfig) | **PUT** /v1/user/{user_id}/config | Update user configuration by ID |
 | [**updateUserConfigSelf**](DefaultApi.md#updateUserConfigSelf) | **PUT** /v1/user/config/self | Update user configuration for the authenticated user |
 | [**updateUserKYC**](DefaultApi.md#updateUserKYC) | **POST** /v1/integrators/user/{user_id}/kyc | Set or clear a user&#39;s KYC completion timestamp |
@@ -126,6 +134,8 @@ All URIs are relative to *https://staging.dora.co*
 > TradingChallengeResponseEnvelope addTradingChallengeUsers(addTradingChallengeUsersRequest)
 
 Add users to a trading challenge
+
+Add existing users to a trading challenge. For COMPETITION_MANAGER, the challenge must be assigned in managed_competition_ids. A user must have an empty ledger to join: deposits and withdrawals are barred from enrolment until the challenge is over, so that challenge credits are the only thing a participant holds and the teardown sweep cannot destroy funds of their own.
 
 ### Example
 ```java
@@ -272,6 +282,87 @@ public class Example {
 | **400** | Bad request, e.g. invalid withdrawal ID format or request is not in a pending state |  -  |
 | **404** | Withdrawal request not found |  -  |
 | **403** | Forbidden, user does not have permission to approve this withdrawal request |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="approveTradingChallengeRegistrationRequest"></a>
+# **approveTradingChallengeRegistrationRequest**
+> TradingChallengeRegistrationRequestResponseEnvelope approveTradingChallengeRegistrationRequest(requestId, reviewTradingChallengeRegistrationRequest)
+
+Approve a trading challenge registration request
+
+Accessible to admins (any challenge), integrators (their own tenant only) and competition managers (their assigned challenges only). Enrolment runs the same checks as add_users, so a challenge that filled up, now overlaps another of the user&#39;s challenges, or whose applicant no longer has an empty ledger is rejected with a 409 and the request stays open.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID requestId = UUID.randomUUID(); // UUID | 
+    ReviewTradingChallengeRegistrationRequest reviewTradingChallengeRegistrationRequest = new ReviewTradingChallengeRegistrationRequest(); // ReviewTradingChallengeRegistrationRequest | 
+    try {
+      TradingChallengeRegistrationRequestResponseEnvelope result = apiInstance.approveTradingChallengeRegistrationRequest(requestId, reviewTradingChallengeRegistrationRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#approveTradingChallengeRegistrationRequest");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **requestId** | **UUID**|  | |
+| **reviewTradingChallengeRegistrationRequest** | [**ReviewTradingChallengeRegistrationRequest**](ReviewTradingChallengeRegistrationRequest.md)|  | [optional] |
+
+### Return type
+
+[**TradingChallengeRegistrationRequestResponseEnvelope**](TradingChallengeRegistrationRequestResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The settled request |  -  |
+| **400** | Bad request, e.g. an invalid filter or an over-long reason |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden: the caller may not administer this challenge |  -  |
+| **404** | Registration request not found |  -  |
+| **409** | The request was already settled, or the challenge cannot take the user |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="cancelAllOpenOrders"></a>
@@ -586,6 +677,8 @@ public class Example {
 > ClaimTradingChallengeResponseEnvelope claimTradingChallengePrize(tradingChallengeId)
 
 Claim challenge prize
+
+Claim the prize of a challenge the caller is eligible for. A TOURNAMENT claim credits the prize matching the crown and reactivates the account. A CASH claim winds the account down, sweeps every remaining challenge credit and awards the CASH_CROWN: the account is left deactivated with a zero balance, and the reward is redeemed out of band. Both mark the participation PRIZE_CLAIMED.
 
 ### Example
 ```java
@@ -1107,6 +1200,8 @@ public class Example {
 > TradingChallengeResponseEnvelope createTradingChallenge(createTradingChallengeRequest)
 
 Create a trading challenge
+
+Create a new trading challenge. Allowed for ADMIN and INTEGRATOR only.
 
 ### Example
 ```java
@@ -4233,6 +4328,8 @@ public class Example {
 
 Get trading challenge by ID
 
+Fetch one trading challenge. COMPETITION_MANAGER can access only assigned challenge IDs.
+
 ### Example
 ```java
 // Import classes:
@@ -4308,6 +4405,8 @@ public class Example {
 
 Get trading challenge daily snapshots
 
+List participant daily snapshots for a challenge. COMPETITION_MANAGER can access only assigned challenge IDs.
+
 ### Example
 ```java
 // Import classes:
@@ -4382,6 +4481,8 @@ public class Example {
 > TradingChallengeResultsResponseEnvelope getTradingChallengeResults(tradingChallengeId, board)
 
 Get trading challenge results
+
+List challenge leaderboard/results. COMPETITION_MANAGER can access only assigned challenge IDs.
 
 ### Example
 ```java
@@ -4543,7 +4644,7 @@ public class Example {
     List<TransactionKind> txKinds = Arrays.asList(); // List<TransactionKind> | 
     OffsetDateTime start = OffsetDateTime.now(); // OffsetDateTime | 
     OffsetDateTime end = OffsetDateTime.now(); // OffsetDateTime | 
-    UUID tenantId = UUID.randomUUID(); // UUID | 
+    String tenantId = "tenantId_example"; // String | 
     Integer page = 1; // Integer | 
     Integer limit = 100; // Integer | 
     try {
@@ -4569,7 +4670,7 @@ public class Example {
 | **txKinds** | [**List&lt;TransactionKind&gt;**](TransactionKind.md)|  | [optional] |
 | **start** | **OffsetDateTime**|  | [optional] |
 | **end** | **OffsetDateTime**|  | [optional] |
-| **tenantId** | **UUID**|  | [optional] |
+| **tenantId** | **String**|  | [optional] |
 | **page** | **Integer**|  | [optional] [default to 1] |
 | **limit** | **Integer**|  | [optional] [default to 100] |
 
@@ -4888,6 +4989,83 @@ public class Example {
 | **400** | Bad request, e.g. invalid query parameters |  -  |
 | **401** | Unauthorized, user not logged in or does not have access to this data |  -  |
 | **404** | User not found or no coupon payments available |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getUserDeactivation"></a>
+# **getUserDeactivation**
+> UserDeactivationResponseEnvelope getUserDeactivation(userId)
+
+Get the latest account deactivation request for a user
+
+Returns the user&#39;s latest deactivation request, i.e. their current deactivation status. Integrators may only request users belonging to their own tenant.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID userId = UUID.randomUUID(); // UUID | 
+    try {
+      UserDeactivationResponseEnvelope result = apiInstance.getUserDeactivation(userId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getUserDeactivation");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **UUID**|  | |
+
+### Return type
+
+[**UserDeactivationResponseEnvelope**](UserDeactivationResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Latest deactivation request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden, e.g. the user does not belong to the integrator&#39;s tenant |  -  |
+| **404** | No deactivation found for this user |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="getUserLedgerStream"></a>
@@ -6957,11 +7135,100 @@ This endpoint does not need any parameter.
 | **404** | User not found |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="listTradingChallengeRegistrationRequests"></a>
+# **listTradingChallengeRegistrationRequests**
+> TradingChallengeRegistrationRequestListResponseEnvelope listTradingChallengeRegistrationRequests(tradingChallengeId, userId, status, tenantId, limit, offset)
+
+List trading challenge registration requests
+
+The review queue. Admins see every tenant and may filter to one, an integrator is pinned to their own tenant, and a competition manager only sees the requests of the challenges assigned to them.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID tradingChallengeId = UUID.randomUUID(); // UUID | Only requests for this challenge.
+    UUID userId = UUID.randomUUID(); // UUID | Only requests from this user.
+    String status = "PENDING"; // String | Only requests in this state.
+    String tenantId = "tenantId_example"; // String | Admins only; an integrator may only name their own tenant.
+    Integer limit = 100; // Integer | Page size, capped at 1000.
+    Integer offset = 0; // Integer | Rows to skip.
+    try {
+      TradingChallengeRegistrationRequestListResponseEnvelope result = apiInstance.listTradingChallengeRegistrationRequests(tradingChallengeId, userId, status, tenantId, limit, offset);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#listTradingChallengeRegistrationRequests");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tradingChallengeId** | **UUID**| Only requests for this challenge. | [optional] |
+| **userId** | **UUID**| Only requests from this user. | [optional] |
+| **status** | **String**| Only requests in this state. | [optional] [enum: PENDING, APPROVED, REJECTED] |
+| **tenantId** | **String**| Admins only; an integrator may only name their own tenant. | [optional] |
+| **limit** | **Integer**| Page size, capped at 1000. | [optional] [default to 100] |
+| **offset** | **Integer**| Rows to skip. | [optional] [default to 0] |
+
+### Return type
+
+[**TradingChallengeRegistrationRequestListResponseEnvelope**](TradingChallengeRegistrationRequestListResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The matching requests, newest first |  -  |
+| **400** | Bad request, e.g. an invalid filter or an over-long reason |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden: the caller may not administer this challenge |  -  |
+| **500** | Internal server error |  -  |
+
 <a id="listTradingChallenges"></a>
 # **listTradingChallenges**
 > TradingChallengeListResponseEnvelope listTradingChallenges(tenantId, type, status, start, end)
 
 List trading challenges
+
+List trading challenges. COMPETITION_MANAGER callers only receive challenges present in their managed_competition_ids.
 
 ### Example
 ```java
@@ -7036,6 +7303,89 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | Trading challenges list |  -  |
 | **400** | Bad request |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="listUserDeactivations"></a>
+# **listUserDeactivations**
+> UserDeactivationListResponseEnvelope listUserDeactivations(status, tenantId, tradingChallengeId, userIds)
+
+Get the current deactivation status across all users
+
+Returns each user&#39;s latest deactivation request, i.e. their current status. Users with no deactivation history are absent. Ordered by request creation time, newest first. Integrators only see users of their own tenant, unless that tenant is global.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String status = "PENDING"; // String | Only return users whose latest request has this status.
+    String tenantId = "tenantId_example"; // String | Only return users belonging to this tenant. At most one of tenant_id, trading_challenge_id and user_ids may be passed; combining them is rejected. An integrator whose tenant is not global may only pass their own tenant.
+    UUID tradingChallengeId = UUID.randomUUID(); // UUID | Only return participants of this trading challenge. Mutually exclusive with tenant_id and user_ids.
+    String userIds = "userIds_example"; // String | Comma-separated user IDs to return. Mutually exclusive with tenant_id and trading_challenge_id.
+    try {
+      UserDeactivationListResponseEnvelope result = apiInstance.listUserDeactivations(status, tenantId, tradingChallengeId, userIds);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#listUserDeactivations");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **status** | **String**| Only return users whose latest request has this status. | [optional] [enum: PENDING, FAILED, COMPLETED, REACTIVATED] |
+| **tenantId** | **String**| Only return users belonging to this tenant. At most one of tenant_id, trading_challenge_id and user_ids may be passed; combining them is rejected. An integrator whose tenant is not global may only pass their own tenant. | [optional] |
+| **tradingChallengeId** | **UUID**| Only return participants of this trading challenge. Mutually exclusive with tenant_id and user_ids. | [optional] |
+| **userIds** | **String**| Comma-separated user IDs to return. Mutually exclusive with tenant_id and trading_challenge_id. | [optional] |
+
+### Return type
+
+[**UserDeactivationListResponseEnvelope**](UserDeactivationListResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Latest deactivation request per user |  -  |
+| **400** | Invalid status, trading_challenge_id or user_ids value, or multiple selectors passed |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Integrator requested a tenant other than their own |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="payLeverageGetAccruedInterest"></a>
@@ -7191,11 +7541,94 @@ public class Example {
 | **403** | Forbidden, user does not have permission to reject this withdrawal request |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="rejectTradingChallengeRegistrationRequest"></a>
+# **rejectTradingChallengeRegistrationRequest**
+> TradingChallengeRegistrationRequestResponseEnvelope rejectTradingChallengeRegistrationRequest(requestId, reviewTradingChallengeRegistrationRequest)
+
+Reject a trading challenge registration request
+
+Accessible to admins (any challenge), integrators (their own tenant only) and competition managers (their assigned challenges only).
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID requestId = UUID.randomUUID(); // UUID | 
+    ReviewTradingChallengeRegistrationRequest reviewTradingChallengeRegistrationRequest = new ReviewTradingChallengeRegistrationRequest(); // ReviewTradingChallengeRegistrationRequest | 
+    try {
+      TradingChallengeRegistrationRequestResponseEnvelope result = apiInstance.rejectTradingChallengeRegistrationRequest(requestId, reviewTradingChallengeRegistrationRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#rejectTradingChallengeRegistrationRequest");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **requestId** | **UUID**|  | |
+| **reviewTradingChallengeRegistrationRequest** | [**ReviewTradingChallengeRegistrationRequest**](ReviewTradingChallengeRegistrationRequest.md)|  | [optional] |
+
+### Return type
+
+[**TradingChallengeRegistrationRequestResponseEnvelope**](TradingChallengeRegistrationRequestResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The settled request |  -  |
+| **400** | Bad request, e.g. an invalid filter or an over-long reason |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden: the caller may not administer this challenge |  -  |
+| **404** | Registration request not found |  -  |
+| **409** | The request was already settled, or the challenge cannot take the user |  -  |
+| **500** | Internal server error |  -  |
+
 <a id="removeTradingChallengeUsers"></a>
 # **removeTradingChallengeUsers**
 > TradingChallengeResponseEnvelope removeTradingChallengeUsers(removeTradingChallengeUsersRequest)
 
 Remove users from a trading challenge
+
+Remove users from a trading challenge. For COMPETITION_MANAGER, the challenge must be assigned in managed_competition_ids.
 
 ### Example
 ```java
@@ -8036,6 +8469,162 @@ No authorization required
 | **400** | Bad request, e.g. invalid parameters |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="terminateOwnTradingChallengeParticipation"></a>
+# **terminateOwnTradingChallengeParticipation**
+> TerminateTradingChallengeResponseEnvelope terminateOwnTradingChallengeParticipation(tradingChallengeId)
+
+Leave a trading challenge
+
+Convenience alias that terminates the caller&#39;s own participation; redirects to /v1/trading_challenges/{trading_challenge_id}/participants/{user_id}/terminate. End a participant&#39;s run in a challenge before its own rules would: the participant leaves, or an operator removes them. No prize is paid, even to a participant who could have claimed one -- claim the prize first if that is what you want. The account is wound down, every remaining challenge credit is swept, and the participation is marked TERMINATED and frozen: from then on it takes no further daily snapshots and never appears in the results ranking again. The user is left deactivated with no challenge balance, and is free to register for another challenge. Participants may only terminate their own run; terminating someone else&#39;s requires admin, integrator (same tenant) or challenge manager (assigned challenge) rights.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID tradingChallengeId = UUID.randomUUID(); // UUID | 
+    try {
+      TerminateTradingChallengeResponseEnvelope result = apiInstance.terminateOwnTradingChallengeParticipation(tradingChallengeId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#terminateOwnTradingChallengeParticipation");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tradingChallengeId** | **UUID**|  | |
+
+### Return type
+
+[**TerminateTradingChallengeResponseEnvelope**](TerminateTradingChallengeResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Participation terminated |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Challenge, user or participation not found |  -  |
+| **409** | Conflict, e.g. the participation already settled or another deactivation is in progress |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="terminateTradingChallengeParticipation"></a>
+# **terminateTradingChallengeParticipation**
+> TerminateTradingChallengeResponseEnvelope terminateTradingChallengeParticipation(tradingChallengeId, userId)
+
+Terminate a participation in a trading challenge
+
+End a participant&#39;s run in a challenge before its own rules would: the participant leaves, or an operator removes them. No prize is paid, even to a participant who could have claimed one -- claim the prize first if that is what you want. The account is wound down, every remaining challenge credit is swept, and the participation is marked TERMINATED and frozen: from then on it takes no further daily snapshots and never appears in the results ranking again. The user is left deactivated with no challenge balance, and is free to register for another challenge. Participants may only terminate their own run; terminating someone else&#39;s requires admin, integrator (same tenant) or challenge manager (assigned challenge) rights.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID tradingChallengeId = UUID.randomUUID(); // UUID | 
+    UUID userId = UUID.randomUUID(); // UUID | 
+    try {
+      TerminateTradingChallengeResponseEnvelope result = apiInstance.terminateTradingChallengeParticipation(tradingChallengeId, userId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#terminateTradingChallengeParticipation");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tradingChallengeId** | **UUID**|  | |
+| **userId** | **UUID**|  | |
+
+### Return type
+
+[**TerminateTradingChallengeResponseEnvelope**](TerminateTradingChallengeResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Participation terminated |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Challenge, user or participation not found |  -  |
+| **409** | Conflict, e.g. the participation already settled or another deactivation is in progress |  -  |
+| **500** | Internal server error |  -  |
+
 <a id="transferAccountBalancesV2"></a>
 # **transferAccountBalancesV2**
 > TransferAccountBalancesResponseEnvelope transferAccountBalancesV2(transferAccountBalancesRequest)
@@ -8186,6 +8775,86 @@ public class Example {
 | **401** | Unauthorized, user not logged in or does not have access to this orderbook |  -  |
 | **403** | Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve |  -  |
 | **409** | Conflict, e.g. the requested amount is not available to transfer |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="updateTradingChallenge"></a>
+# **updateTradingChallenge**
+> TradingChallengeResponseEnvelope updateTradingChallenge(tradingChallengeId, updateTradingChallengeRequest)
+
+Update a trading challenge
+
+Partially update a trading challenge: a field that is absent from the body is left unchanged. Which fields may be updated depends on the challenge status. PENDING accepts every field. ACTIVE accepts only name, max_users, end and the three prize quantities, because participants are already funded and being measured. COMPLETED accepts none. A request that touches a field the current status does not allow is rejected as a whole with 409. ADMIN may update any challenge, INTEGRATOR only challenges of its own tenant, and COMPETITION_MANAGER only assigned challenge IDs.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID tradingChallengeId = UUID.randomUUID(); // UUID | 
+    UpdateTradingChallengeRequest updateTradingChallengeRequest = new UpdateTradingChallengeRequest(); // UpdateTradingChallengeRequest | 
+    try {
+      TradingChallengeResponseEnvelope result = apiInstance.updateTradingChallenge(tradingChallengeId, updateTradingChallengeRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#updateTradingChallenge");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tradingChallengeId** | **UUID**|  | |
+| **updateTradingChallengeRequest** | [**UpdateTradingChallengeRequest**](UpdateTradingChallengeRequest.md)|  | |
+
+### Return type
+
+[**TradingChallengeResponseEnvelope**](TradingChallengeResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Trading challenge updated |  -  |
+| **400** | Bad request |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not found |  -  |
+| **409** | Conflict: the field is not updatable in the current status, or the update clashes with another challenge or its participants |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="updateUserConfig"></a>

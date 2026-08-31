@@ -51,7 +51,7 @@ import tech.dora.JSON;
 /**
  * StreamCurrentLeverageAccruedInterestResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-12T18:49:23.367489785+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-31T11:19:20.004337973+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class StreamCurrentLeverageAccruedInterestResponse {
   public static final String SERIALIZED_NAME_CURRENT_LEVERAGE_ACCRUED_INTEREST = "current_leverage_accrued_interest";
   @SerializedName(SERIALIZED_NAME_CURRENT_LEVERAGE_ACCRUED_INTEREST)

@@ -108,6 +108,7 @@ import tech.dora.model.RepayUSDRequest;
 import tech.dora.model.RepayUSDResponseEnvelope;
 import tech.dora.model.ResponseEnvelope;
 import tech.dora.model.ResponseEnvelopeOfListAssets;
+import tech.dora.model.ReviewTradingChallengeRegistrationRequest;
 import tech.dora.model.RevokeAPIKeyResponseEnvelope;
 import tech.dora.model.SettleLeverageAccruedInterestRequest;
 import tech.dora.model.SettleLeverageAccruedInterestResponseEnvelope;
@@ -124,10 +125,13 @@ import tech.dora.model.StreamTransactionsEntry;
 import tech.dora.model.StreamUserCouponPaymentsResponse;
 import tech.dora.model.SupplyRequest;
 import tech.dora.model.SupplyResponseEnvelope;
+import tech.dora.model.TerminateTradingChallengeResponseEnvelope;
 import tech.dora.model.TradeRequestError;
 import tech.dora.model.TradeResponseEnvelope;
 import tech.dora.model.TradingChallengeDailySnapshotsResponseEnvelope;
 import tech.dora.model.TradingChallengeListResponseEnvelope;
+import tech.dora.model.TradingChallengeRegistrationRequestListResponseEnvelope;
+import tech.dora.model.TradingChallengeRegistrationRequestResponseEnvelope;
 import tech.dora.model.TradingChallengeResponseEnvelope;
 import tech.dora.model.TradingChallengeResultsResponseEnvelope;
 import tech.dora.model.TradingChallengeStatus;
@@ -145,11 +149,14 @@ import tech.dora.model.TransferBalancesResponseEnvelope;
 import java.util.UUID;
 import tech.dora.model.UnitePositionRequest;
 import tech.dora.model.UnitePositionResponseEnvelope;
+import tech.dora.model.UpdateTradingChallengeRequest;
 import tech.dora.model.UpdateUserConfigRequest;
 import tech.dora.model.UpdateUserKYCRequest;
 import tech.dora.model.UpdateUserKYCResponseEnvelope;
 import tech.dora.model.UserBalanceResponseEnvelope;
 import tech.dora.model.UserCreatedResponseEnvelope;
+import tech.dora.model.UserDeactivationListResponseEnvelope;
+import tech.dora.model.UserDeactivationResponseEnvelope;
 import tech.dora.model.UserDeletedResponseEnvelope;
 import tech.dora.model.UserEnvelope;
 import tech.dora.model.UserInterestResponseEnvelope;
@@ -280,7 +287,7 @@ public class DefaultApi {
 
     /**
      * Add users to a trading challenge
-     * 
+     * Add existing users to a trading challenge. For COMPETITION_MANAGER, the challenge must be assigned in managed_competition_ids. A user must have an empty ledger to join: deposits and withdrawals are barred from enrolment until the challenge is over, so that challenge credits are the only thing a participant holds and the teardown sweep cannot destroy funds of their own.
      * @param addTradingChallengeUsersRequest  (required)
      * @return TradingChallengeResponseEnvelope
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -301,7 +308,7 @@ public class DefaultApi {
 
     /**
      * Add users to a trading challenge
-     * 
+     * Add existing users to a trading challenge. For COMPETITION_MANAGER, the challenge must be assigned in managed_competition_ids. A user must have an empty ledger to join: deposits and withdrawals are barred from enrolment until the challenge is over, so that challenge credits are the only thing a participant holds and the teardown sweep cannot destroy funds of their own.
      * @param addTradingChallengeUsersRequest  (required)
      * @return ApiResponse&lt;TradingChallengeResponseEnvelope&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -323,7 +330,7 @@ public class DefaultApi {
 
     /**
      * Add users to a trading challenge (asynchronously)
-     * 
+     * Add existing users to a trading challenge. For COMPETITION_MANAGER, the challenge must be assigned in managed_competition_ids. A user must have an empty ledger to join: deposits and withdrawals are barred from enrolment until the challenge is over, so that challenge credits are the only thing a participant holds and the teardown sweep cannot destroy funds of their own.
      * @param addTradingChallengeUsersRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -490,6 +497,162 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = approveLedgerWithdrawRequestValidateBeforeCall(withdrawalId, withdrawalRequestReason, _callback);
         Type localVarReturnType = new TypeToken<WithdrawalInitiationResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for approveTradingChallengeRegistrationRequest
+     * @param requestId  (required)
+     * @param reviewTradingChallengeRegistrationRequest  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The settled request </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid filter or an over-long reason </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the caller may not administer this challenge </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Registration request not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> The request was already settled, or the challenge cannot take the user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call approveTradingChallengeRegistrationRequestCall(@javax.annotation.Nonnull UUID requestId, @javax.annotation.Nullable ReviewTradingChallengeRegistrationRequest reviewTradingChallengeRegistrationRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = reviewTradingChallengeRegistrationRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges/registration_requests/{request_id}/approve"
+            .replace("{" + "request_id" + "}", localVarApiClient.escapeString(requestId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call approveTradingChallengeRegistrationRequestValidateBeforeCall(@javax.annotation.Nonnull UUID requestId, @javax.annotation.Nullable ReviewTradingChallengeRegistrationRequest reviewTradingChallengeRegistrationRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'requestId' is set
+        if (requestId == null) {
+            throw new ApiException("Missing the required parameter 'requestId' when calling approveTradingChallengeRegistrationRequest(Async)");
+        }
+
+        return approveTradingChallengeRegistrationRequestCall(requestId, reviewTradingChallengeRegistrationRequest, _callback);
+
+    }
+
+    /**
+     * Approve a trading challenge registration request
+     * Accessible to admins (any challenge), integrators (their own tenant only) and competition managers (their assigned challenges only). Enrolment runs the same checks as add_users, so a challenge that filled up, now overlaps another of the user&#39;s challenges, or whose applicant no longer has an empty ledger is rejected with a 409 and the request stays open.
+     * @param requestId  (required)
+     * @param reviewTradingChallengeRegistrationRequest  (optional)
+     * @return TradingChallengeRegistrationRequestResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The settled request </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid filter or an over-long reason </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the caller may not administer this challenge </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Registration request not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> The request was already settled, or the challenge cannot take the user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingChallengeRegistrationRequestResponseEnvelope approveTradingChallengeRegistrationRequest(@javax.annotation.Nonnull UUID requestId, @javax.annotation.Nullable ReviewTradingChallengeRegistrationRequest reviewTradingChallengeRegistrationRequest) throws ApiException {
+        ApiResponse<TradingChallengeRegistrationRequestResponseEnvelope> localVarResp = approveTradingChallengeRegistrationRequestWithHttpInfo(requestId, reviewTradingChallengeRegistrationRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Approve a trading challenge registration request
+     * Accessible to admins (any challenge), integrators (their own tenant only) and competition managers (their assigned challenges only). Enrolment runs the same checks as add_users, so a challenge that filled up, now overlaps another of the user&#39;s challenges, or whose applicant no longer has an empty ledger is rejected with a 409 and the request stays open.
+     * @param requestId  (required)
+     * @param reviewTradingChallengeRegistrationRequest  (optional)
+     * @return ApiResponse&lt;TradingChallengeRegistrationRequestResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The settled request </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid filter or an over-long reason </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the caller may not administer this challenge </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Registration request not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> The request was already settled, or the challenge cannot take the user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TradingChallengeRegistrationRequestResponseEnvelope> approveTradingChallengeRegistrationRequestWithHttpInfo(@javax.annotation.Nonnull UUID requestId, @javax.annotation.Nullable ReviewTradingChallengeRegistrationRequest reviewTradingChallengeRegistrationRequest) throws ApiException {
+        okhttp3.Call localVarCall = approveTradingChallengeRegistrationRequestValidateBeforeCall(requestId, reviewTradingChallengeRegistrationRequest, null);
+        Type localVarReturnType = new TypeToken<TradingChallengeRegistrationRequestResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Approve a trading challenge registration request (asynchronously)
+     * Accessible to admins (any challenge), integrators (their own tenant only) and competition managers (their assigned challenges only). Enrolment runs the same checks as add_users, so a challenge that filled up, now overlaps another of the user&#39;s challenges, or whose applicant no longer has an empty ledger is rejected with a 409 and the request stays open.
+     * @param requestId  (required)
+     * @param reviewTradingChallengeRegistrationRequest  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The settled request </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid filter or an over-long reason </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the caller may not administer this challenge </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Registration request not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> The request was already settled, or the challenge cannot take the user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call approveTradingChallengeRegistrationRequestAsync(@javax.annotation.Nonnull UUID requestId, @javax.annotation.Nullable ReviewTradingChallengeRegistrationRequest reviewTradingChallengeRegistrationRequest, final ApiCallback<TradingChallengeRegistrationRequestResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = approveTradingChallengeRegistrationRequestValidateBeforeCall(requestId, reviewTradingChallengeRegistrationRequest, _callback);
+        Type localVarReturnType = new TypeToken<TradingChallengeRegistrationRequestResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -1154,7 +1317,7 @@ public class DefaultApi {
 
     /**
      * Claim challenge prize
-     * 
+     * Claim the prize of a challenge the caller is eligible for. A TOURNAMENT claim credits the prize matching the crown and reactivates the account. A CASH claim winds the account down, sweeps every remaining challenge credit and awards the CASH_CROWN: the account is left deactivated with a zero balance, and the reward is redeemed out of band. Both mark the participation PRIZE_CLAIMED.
      * @param tradingChallengeId  (required)
      * @return ClaimTradingChallengeResponseEnvelope
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1175,7 +1338,7 @@ public class DefaultApi {
 
     /**
      * Claim challenge prize
-     * 
+     * Claim the prize of a challenge the caller is eligible for. A TOURNAMENT claim credits the prize matching the crown and reactivates the account. A CASH claim winds the account down, sweeps every remaining challenge credit and awards the CASH_CROWN: the account is left deactivated with a zero balance, and the reward is redeemed out of band. Both mark the participation PRIZE_CLAIMED.
      * @param tradingChallengeId  (required)
      * @return ApiResponse&lt;ClaimTradingChallengeResponseEnvelope&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1197,7 +1360,7 @@ public class DefaultApi {
 
     /**
      * Claim challenge prize (asynchronously)
-     * 
+     * Claim the prize of a challenge the caller is eligible for. A TOURNAMENT claim credits the prize matching the crown and reactivates the account. A CASH claim winds the account down, sweeps every remaining challenge credit and awards the CASH_CROWN: the account is left deactivated with a zero balance, and the reward is redeemed out of band. Both mark the participation PRIZE_CLAIMED.
      * @param tradingChallengeId  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -2141,7 +2304,7 @@ public class DefaultApi {
 
     /**
      * Create a trading challenge
-     * 
+     * Create a new trading challenge. Allowed for ADMIN and INTEGRATOR only.
      * @param createTradingChallengeRequest  (required)
      * @return TradingChallengeResponseEnvelope
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2162,7 +2325,7 @@ public class DefaultApi {
 
     /**
      * Create a trading challenge
-     * 
+     * Create a new trading challenge. Allowed for ADMIN and INTEGRATOR only.
      * @param createTradingChallengeRequest  (required)
      * @return ApiResponse&lt;TradingChallengeResponseEnvelope&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2184,7 +2347,7 @@ public class DefaultApi {
 
     /**
      * Create a trading challenge (asynchronously)
-     * 
+     * Create a new trading challenge. Allowed for ADMIN and INTEGRATOR only.
      * @param createTradingChallengeRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -8396,7 +8559,7 @@ public class DefaultApi {
 
     /**
      * Get trading challenge by ID
-     * 
+     * Fetch one trading challenge. COMPETITION_MANAGER can access only assigned challenge IDs.
      * @param tradingChallengeId  (required)
      * @return TradingChallengeResponseEnvelope
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -8418,7 +8581,7 @@ public class DefaultApi {
 
     /**
      * Get trading challenge by ID
-     * 
+     * Fetch one trading challenge. COMPETITION_MANAGER can access only assigned challenge IDs.
      * @param tradingChallengeId  (required)
      * @return ApiResponse&lt;TradingChallengeResponseEnvelope&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -8441,7 +8604,7 @@ public class DefaultApi {
 
     /**
      * Get trading challenge by ID (asynchronously)
-     * 
+     * Fetch one trading challenge. COMPETITION_MANAGER can access only assigned challenge IDs.
      * @param tradingChallengeId  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -8539,7 +8702,7 @@ public class DefaultApi {
 
     /**
      * Get trading challenge daily snapshots
-     * 
+     * List participant daily snapshots for a challenge. COMPETITION_MANAGER can access only assigned challenge IDs.
      * @param tradingChallengeId  (required)
      * @return TradingChallengeDailySnapshotsResponseEnvelope
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -8561,7 +8724,7 @@ public class DefaultApi {
 
     /**
      * Get trading challenge daily snapshots
-     * 
+     * List participant daily snapshots for a challenge. COMPETITION_MANAGER can access only assigned challenge IDs.
      * @param tradingChallengeId  (required)
      * @return ApiResponse&lt;TradingChallengeDailySnapshotsResponseEnvelope&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -8584,7 +8747,7 @@ public class DefaultApi {
 
     /**
      * Get trading challenge daily snapshots (asynchronously)
-     * 
+     * List participant daily snapshots for a challenge. COMPETITION_MANAGER can access only assigned challenge IDs.
      * @param tradingChallengeId  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -8687,7 +8850,7 @@ public class DefaultApi {
 
     /**
      * Get trading challenge results
-     * 
+     * List challenge leaderboard/results. COMPETITION_MANAGER can access only assigned challenge IDs.
      * @param tradingChallengeId  (required)
      * @param board Leaderboard board selector. Defaults to TOP_PNL. (optional, default to TOP_PNL)
      * @return TradingChallengeResultsResponseEnvelope
@@ -8710,7 +8873,7 @@ public class DefaultApi {
 
     /**
      * Get trading challenge results
-     * 
+     * List challenge leaderboard/results. COMPETITION_MANAGER can access only assigned challenge IDs.
      * @param tradingChallengeId  (required)
      * @param board Leaderboard board selector. Defaults to TOP_PNL. (optional, default to TOP_PNL)
      * @return ApiResponse&lt;TradingChallengeResultsResponseEnvelope&gt;
@@ -8734,7 +8897,7 @@ public class DefaultApi {
 
     /**
      * Get trading challenge results (asynchronously)
-     * 
+     * List challenge leaderboard/results. COMPETITION_MANAGER can access only assigned challenge IDs.
      * @param tradingChallengeId  (required)
      * @param board Leaderboard board selector. Defaults to TOP_PNL. (optional, default to TOP_PNL)
      * @param _callback The callback to be executed when the API call finishes
@@ -8919,7 +9082,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getTransactionsCall(@javax.annotation.Nullable List<String> pools, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable List<TransactionKind> txKinds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable UUID tenantId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getTransactionsCall(@javax.annotation.Nullable List<String> pools, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable List<TransactionKind> txKinds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable String tenantId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -8996,7 +9159,7 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getTransactionsValidateBeforeCall(@javax.annotation.Nullable List<String> pools, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable List<TransactionKind> txKinds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable UUID tenantId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getTransactionsValidateBeforeCall(@javax.annotation.Nullable List<String> pools, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable List<TransactionKind> txKinds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable String tenantId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
         return getTransactionsCall(pools, userIds, txKinds, start, end, tenantId, page, limit, _callback);
 
     }
@@ -9023,7 +9186,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ListTransactionsResponseEnvelope getTransactions(@javax.annotation.Nullable List<String> pools, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable List<TransactionKind> txKinds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable UUID tenantId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
+    public ListTransactionsResponseEnvelope getTransactions(@javax.annotation.Nullable List<String> pools, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable List<TransactionKind> txKinds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable String tenantId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
         ApiResponse<ListTransactionsResponseEnvelope> localVarResp = getTransactionsWithHttpInfo(pools, userIds, txKinds, start, end, tenantId, page, limit);
         return localVarResp.getData();
     }
@@ -9050,7 +9213,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ListTransactionsResponseEnvelope> getTransactionsWithHttpInfo(@javax.annotation.Nullable List<String> pools, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable List<TransactionKind> txKinds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable UUID tenantId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
+    public ApiResponse<ListTransactionsResponseEnvelope> getTransactionsWithHttpInfo(@javax.annotation.Nullable List<String> pools, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable List<TransactionKind> txKinds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable String tenantId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
         okhttp3.Call localVarCall = getTransactionsValidateBeforeCall(pools, userIds, txKinds, start, end, tenantId, page, limit, null);
         Type localVarReturnType = new TypeToken<ListTransactionsResponseEnvelope>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -9079,7 +9242,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getTransactionsAsync(@javax.annotation.Nullable List<String> pools, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable List<TransactionKind> txKinds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable UUID tenantId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback<ListTransactionsResponseEnvelope> _callback) throws ApiException {
+    public okhttp3.Call getTransactionsAsync(@javax.annotation.Nullable List<String> pools, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable List<TransactionKind> txKinds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable String tenantId, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback<ListTransactionsResponseEnvelope> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getTransactionsValidateBeforeCall(pools, userIds, txKinds, start, end, tenantId, page, limit, _callback);
         Type localVarReturnType = new TypeToken<ListTransactionsResponseEnvelope>(){}.getType();
@@ -9699,6 +9862,149 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = getUserCouponPaymentsStreamValidateBeforeCall(userId, _callback);
         Type localVarReturnType = new TypeToken<StreamUserCouponPaymentsResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getUserDeactivation
+     * @param userId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Latest deactivation request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user does not belong to the integrator&#39;s tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No deactivation found for this user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getUserDeactivationCall(@javax.annotation.Nonnull UUID userId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/user/{user_id}/deactivation"
+            .replace("{" + "user_id" + "}", localVarApiClient.escapeString(userId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getUserDeactivationValidateBeforeCall(@javax.annotation.Nonnull UUID userId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling getUserDeactivation(Async)");
+        }
+
+        return getUserDeactivationCall(userId, _callback);
+
+    }
+
+    /**
+     * Get the latest account deactivation request for a user
+     * Returns the user&#39;s latest deactivation request, i.e. their current deactivation status. Integrators may only request users belonging to their own tenant.
+     * @param userId  (required)
+     * @return UserDeactivationResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Latest deactivation request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user does not belong to the integrator&#39;s tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No deactivation found for this user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public UserDeactivationResponseEnvelope getUserDeactivation(@javax.annotation.Nonnull UUID userId) throws ApiException {
+        ApiResponse<UserDeactivationResponseEnvelope> localVarResp = getUserDeactivationWithHttpInfo(userId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get the latest account deactivation request for a user
+     * Returns the user&#39;s latest deactivation request, i.e. their current deactivation status. Integrators may only request users belonging to their own tenant.
+     * @param userId  (required)
+     * @return ApiResponse&lt;UserDeactivationResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Latest deactivation request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user does not belong to the integrator&#39;s tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No deactivation found for this user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<UserDeactivationResponseEnvelope> getUserDeactivationWithHttpInfo(@javax.annotation.Nonnull UUID userId) throws ApiException {
+        okhttp3.Call localVarCall = getUserDeactivationValidateBeforeCall(userId, null);
+        Type localVarReturnType = new TypeToken<UserDeactivationResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get the latest account deactivation request for a user (asynchronously)
+     * Returns the user&#39;s latest deactivation request, i.e. their current deactivation status. Integrators may only request users belonging to their own tenant.
+     * @param userId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Latest deactivation request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user does not belong to the integrator&#39;s tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No deactivation found for this user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getUserDeactivationAsync(@javax.annotation.Nonnull UUID userId, final ApiCallback<UserDeactivationResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getUserDeactivationValidateBeforeCall(userId, _callback);
+        Type localVarReturnType = new TypeToken<UserDeactivationResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -13852,6 +14158,187 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for listTradingChallengeRegistrationRequests
+     * @param tradingChallengeId Only requests for this challenge. (optional)
+     * @param userId Only requests from this user. (optional)
+     * @param status Only requests in this state. (optional)
+     * @param tenantId Admins only; an integrator may only name their own tenant. (optional)
+     * @param limit Page size, capped at 1000. (optional, default to 100)
+     * @param offset Rows to skip. (optional, default to 0)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The matching requests, newest first </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid filter or an over-long reason </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the caller may not administer this challenge </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listTradingChallengeRegistrationRequestsCall(@javax.annotation.Nullable UUID tradingChallengeId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable String status, @javax.annotation.Nullable String tenantId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer offset, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges/registration_requests";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (tradingChallengeId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("trading_challenge_id", tradingChallengeId));
+        }
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("user_id", userId));
+        }
+
+        if (status != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("status", status));
+        }
+
+        if (tenantId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("tenant_id", tenantId));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (offset != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("offset", offset));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listTradingChallengeRegistrationRequestsValidateBeforeCall(@javax.annotation.Nullable UUID tradingChallengeId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable String status, @javax.annotation.Nullable String tenantId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer offset, final ApiCallback _callback) throws ApiException {
+        return listTradingChallengeRegistrationRequestsCall(tradingChallengeId, userId, status, tenantId, limit, offset, _callback);
+
+    }
+
+    /**
+     * List trading challenge registration requests
+     * The review queue. Admins see every tenant and may filter to one, an integrator is pinned to their own tenant, and a competition manager only sees the requests of the challenges assigned to them.
+     * @param tradingChallengeId Only requests for this challenge. (optional)
+     * @param userId Only requests from this user. (optional)
+     * @param status Only requests in this state. (optional)
+     * @param tenantId Admins only; an integrator may only name their own tenant. (optional)
+     * @param limit Page size, capped at 1000. (optional, default to 100)
+     * @param offset Rows to skip. (optional, default to 0)
+     * @return TradingChallengeRegistrationRequestListResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The matching requests, newest first </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid filter or an over-long reason </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the caller may not administer this challenge </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingChallengeRegistrationRequestListResponseEnvelope listTradingChallengeRegistrationRequests(@javax.annotation.Nullable UUID tradingChallengeId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable String status, @javax.annotation.Nullable String tenantId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer offset) throws ApiException {
+        ApiResponse<TradingChallengeRegistrationRequestListResponseEnvelope> localVarResp = listTradingChallengeRegistrationRequestsWithHttpInfo(tradingChallengeId, userId, status, tenantId, limit, offset);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List trading challenge registration requests
+     * The review queue. Admins see every tenant and may filter to one, an integrator is pinned to their own tenant, and a competition manager only sees the requests of the challenges assigned to them.
+     * @param tradingChallengeId Only requests for this challenge. (optional)
+     * @param userId Only requests from this user. (optional)
+     * @param status Only requests in this state. (optional)
+     * @param tenantId Admins only; an integrator may only name their own tenant. (optional)
+     * @param limit Page size, capped at 1000. (optional, default to 100)
+     * @param offset Rows to skip. (optional, default to 0)
+     * @return ApiResponse&lt;TradingChallengeRegistrationRequestListResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The matching requests, newest first </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid filter or an over-long reason </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the caller may not administer this challenge </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TradingChallengeRegistrationRequestListResponseEnvelope> listTradingChallengeRegistrationRequestsWithHttpInfo(@javax.annotation.Nullable UUID tradingChallengeId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable String status, @javax.annotation.Nullable String tenantId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer offset) throws ApiException {
+        okhttp3.Call localVarCall = listTradingChallengeRegistrationRequestsValidateBeforeCall(tradingChallengeId, userId, status, tenantId, limit, offset, null);
+        Type localVarReturnType = new TypeToken<TradingChallengeRegistrationRequestListResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List trading challenge registration requests (asynchronously)
+     * The review queue. Admins see every tenant and may filter to one, an integrator is pinned to their own tenant, and a competition manager only sees the requests of the challenges assigned to them.
+     * @param tradingChallengeId Only requests for this challenge. (optional)
+     * @param userId Only requests from this user. (optional)
+     * @param status Only requests in this state. (optional)
+     * @param tenantId Admins only; an integrator may only name their own tenant. (optional)
+     * @param limit Page size, capped at 1000. (optional, default to 100)
+     * @param offset Rows to skip. (optional, default to 0)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The matching requests, newest first </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid filter or an over-long reason </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the caller may not administer this challenge </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listTradingChallengeRegistrationRequestsAsync(@javax.annotation.Nullable UUID tradingChallengeId, @javax.annotation.Nullable UUID userId, @javax.annotation.Nullable String status, @javax.annotation.Nullable String tenantId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer offset, final ApiCallback<TradingChallengeRegistrationRequestListResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listTradingChallengeRegistrationRequestsValidateBeforeCall(tradingChallengeId, userId, status, tenantId, limit, offset, _callback);
+        Type localVarReturnType = new TypeToken<TradingChallengeRegistrationRequestListResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for listTradingChallenges
      * @param tenantId  (optional)
      * @param type  (optional)
@@ -13942,7 +14429,7 @@ public class DefaultApi {
 
     /**
      * List trading challenges
-     * 
+     * List trading challenges. COMPETITION_MANAGER callers only receive challenges present in their managed_competition_ids.
      * @param tenantId  (optional)
      * @param type  (optional)
      * @param status  (optional)
@@ -13966,7 +14453,7 @@ public class DefaultApi {
 
     /**
      * List trading challenges
-     * 
+     * List trading challenges. COMPETITION_MANAGER callers only receive challenges present in their managed_competition_ids.
      * @param tenantId  (optional)
      * @param type  (optional)
      * @param status  (optional)
@@ -13991,7 +14478,7 @@ public class DefaultApi {
 
     /**
      * List trading challenges (asynchronously)
-     * 
+     * List trading challenges. COMPETITION_MANAGER callers only receive challenges present in their managed_competition_ids.
      * @param tenantId  (optional)
      * @param type  (optional)
      * @param status  (optional)
@@ -14013,6 +14500,171 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = listTradingChallengesValidateBeforeCall(tenantId, type, status, start, end, _callback);
         Type localVarReturnType = new TypeToken<TradingChallengeListResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listUserDeactivations
+     * @param status Only return users whose latest request has this status. (optional)
+     * @param tenantId Only return users belonging to this tenant. At most one of tenant_id, trading_challenge_id and user_ids may be passed; combining them is rejected. An integrator whose tenant is not global may only pass their own tenant. (optional)
+     * @param tradingChallengeId Only return participants of this trading challenge. Mutually exclusive with tenant_id and user_ids. (optional)
+     * @param userIds Comma-separated user IDs to return. Mutually exclusive with tenant_id and trading_challenge_id. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Latest deactivation request per user </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid status, trading_challenge_id or user_ids value, or multiple selectors passed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Integrator requested a tenant other than their own </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listUserDeactivationsCall(@javax.annotation.Nullable String status, @javax.annotation.Nullable String tenantId, @javax.annotation.Nullable UUID tradingChallengeId, @javax.annotation.Nullable String userIds, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/user/deactivations";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (status != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("status", status));
+        }
+
+        if (tenantId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("tenant_id", tenantId));
+        }
+
+        if (tradingChallengeId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("trading_challenge_id", tradingChallengeId));
+        }
+
+        if (userIds != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("user_ids", userIds));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listUserDeactivationsValidateBeforeCall(@javax.annotation.Nullable String status, @javax.annotation.Nullable String tenantId, @javax.annotation.Nullable UUID tradingChallengeId, @javax.annotation.Nullable String userIds, final ApiCallback _callback) throws ApiException {
+        return listUserDeactivationsCall(status, tenantId, tradingChallengeId, userIds, _callback);
+
+    }
+
+    /**
+     * Get the current deactivation status across all users
+     * Returns each user&#39;s latest deactivation request, i.e. their current status. Users with no deactivation history are absent. Ordered by request creation time, newest first. Integrators only see users of their own tenant, unless that tenant is global.
+     * @param status Only return users whose latest request has this status. (optional)
+     * @param tenantId Only return users belonging to this tenant. At most one of tenant_id, trading_challenge_id and user_ids may be passed; combining them is rejected. An integrator whose tenant is not global may only pass their own tenant. (optional)
+     * @param tradingChallengeId Only return participants of this trading challenge. Mutually exclusive with tenant_id and user_ids. (optional)
+     * @param userIds Comma-separated user IDs to return. Mutually exclusive with tenant_id and trading_challenge_id. (optional)
+     * @return UserDeactivationListResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Latest deactivation request per user </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid status, trading_challenge_id or user_ids value, or multiple selectors passed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Integrator requested a tenant other than their own </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public UserDeactivationListResponseEnvelope listUserDeactivations(@javax.annotation.Nullable String status, @javax.annotation.Nullable String tenantId, @javax.annotation.Nullable UUID tradingChallengeId, @javax.annotation.Nullable String userIds) throws ApiException {
+        ApiResponse<UserDeactivationListResponseEnvelope> localVarResp = listUserDeactivationsWithHttpInfo(status, tenantId, tradingChallengeId, userIds);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get the current deactivation status across all users
+     * Returns each user&#39;s latest deactivation request, i.e. their current status. Users with no deactivation history are absent. Ordered by request creation time, newest first. Integrators only see users of their own tenant, unless that tenant is global.
+     * @param status Only return users whose latest request has this status. (optional)
+     * @param tenantId Only return users belonging to this tenant. At most one of tenant_id, trading_challenge_id and user_ids may be passed; combining them is rejected. An integrator whose tenant is not global may only pass their own tenant. (optional)
+     * @param tradingChallengeId Only return participants of this trading challenge. Mutually exclusive with tenant_id and user_ids. (optional)
+     * @param userIds Comma-separated user IDs to return. Mutually exclusive with tenant_id and trading_challenge_id. (optional)
+     * @return ApiResponse&lt;UserDeactivationListResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Latest deactivation request per user </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid status, trading_challenge_id or user_ids value, or multiple selectors passed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Integrator requested a tenant other than their own </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<UserDeactivationListResponseEnvelope> listUserDeactivationsWithHttpInfo(@javax.annotation.Nullable String status, @javax.annotation.Nullable String tenantId, @javax.annotation.Nullable UUID tradingChallengeId, @javax.annotation.Nullable String userIds) throws ApiException {
+        okhttp3.Call localVarCall = listUserDeactivationsValidateBeforeCall(status, tenantId, tradingChallengeId, userIds, null);
+        Type localVarReturnType = new TypeToken<UserDeactivationListResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get the current deactivation status across all users (asynchronously)
+     * Returns each user&#39;s latest deactivation request, i.e. their current status. Users with no deactivation history are absent. Ordered by request creation time, newest first. Integrators only see users of their own tenant, unless that tenant is global.
+     * @param status Only return users whose latest request has this status. (optional)
+     * @param tenantId Only return users belonging to this tenant. At most one of tenant_id, trading_challenge_id and user_ids may be passed; combining them is rejected. An integrator whose tenant is not global may only pass their own tenant. (optional)
+     * @param tradingChallengeId Only return participants of this trading challenge. Mutually exclusive with tenant_id and user_ids. (optional)
+     * @param userIds Comma-separated user IDs to return. Mutually exclusive with tenant_id and trading_challenge_id. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Latest deactivation request per user </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid status, trading_challenge_id or user_ids value, or multiple selectors passed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Integrator requested a tenant other than their own </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listUserDeactivationsAsync(@javax.annotation.Nullable String status, @javax.annotation.Nullable String tenantId, @javax.annotation.Nullable UUID tradingChallengeId, @javax.annotation.Nullable String userIds, final ApiCallback<UserDeactivationListResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listUserDeactivationsValidateBeforeCall(status, tenantId, tradingChallengeId, userIds, _callback);
+        Type localVarReturnType = new TypeToken<UserDeactivationListResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -14309,6 +14961,162 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for rejectTradingChallengeRegistrationRequest
+     * @param requestId  (required)
+     * @param reviewTradingChallengeRegistrationRequest  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The settled request </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid filter or an over-long reason </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the caller may not administer this challenge </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Registration request not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> The request was already settled, or the challenge cannot take the user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call rejectTradingChallengeRegistrationRequestCall(@javax.annotation.Nonnull UUID requestId, @javax.annotation.Nullable ReviewTradingChallengeRegistrationRequest reviewTradingChallengeRegistrationRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = reviewTradingChallengeRegistrationRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges/registration_requests/{request_id}/reject"
+            .replace("{" + "request_id" + "}", localVarApiClient.escapeString(requestId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call rejectTradingChallengeRegistrationRequestValidateBeforeCall(@javax.annotation.Nonnull UUID requestId, @javax.annotation.Nullable ReviewTradingChallengeRegistrationRequest reviewTradingChallengeRegistrationRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'requestId' is set
+        if (requestId == null) {
+            throw new ApiException("Missing the required parameter 'requestId' when calling rejectTradingChallengeRegistrationRequest(Async)");
+        }
+
+        return rejectTradingChallengeRegistrationRequestCall(requestId, reviewTradingChallengeRegistrationRequest, _callback);
+
+    }
+
+    /**
+     * Reject a trading challenge registration request
+     * Accessible to admins (any challenge), integrators (their own tenant only) and competition managers (their assigned challenges only).
+     * @param requestId  (required)
+     * @param reviewTradingChallengeRegistrationRequest  (optional)
+     * @return TradingChallengeRegistrationRequestResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The settled request </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid filter or an over-long reason </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the caller may not administer this challenge </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Registration request not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> The request was already settled, or the challenge cannot take the user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingChallengeRegistrationRequestResponseEnvelope rejectTradingChallengeRegistrationRequest(@javax.annotation.Nonnull UUID requestId, @javax.annotation.Nullable ReviewTradingChallengeRegistrationRequest reviewTradingChallengeRegistrationRequest) throws ApiException {
+        ApiResponse<TradingChallengeRegistrationRequestResponseEnvelope> localVarResp = rejectTradingChallengeRegistrationRequestWithHttpInfo(requestId, reviewTradingChallengeRegistrationRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Reject a trading challenge registration request
+     * Accessible to admins (any challenge), integrators (their own tenant only) and competition managers (their assigned challenges only).
+     * @param requestId  (required)
+     * @param reviewTradingChallengeRegistrationRequest  (optional)
+     * @return ApiResponse&lt;TradingChallengeRegistrationRequestResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The settled request </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid filter or an over-long reason </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the caller may not administer this challenge </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Registration request not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> The request was already settled, or the challenge cannot take the user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TradingChallengeRegistrationRequestResponseEnvelope> rejectTradingChallengeRegistrationRequestWithHttpInfo(@javax.annotation.Nonnull UUID requestId, @javax.annotation.Nullable ReviewTradingChallengeRegistrationRequest reviewTradingChallengeRegistrationRequest) throws ApiException {
+        okhttp3.Call localVarCall = rejectTradingChallengeRegistrationRequestValidateBeforeCall(requestId, reviewTradingChallengeRegistrationRequest, null);
+        Type localVarReturnType = new TypeToken<TradingChallengeRegistrationRequestResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Reject a trading challenge registration request (asynchronously)
+     * Accessible to admins (any challenge), integrators (their own tenant only) and competition managers (their assigned challenges only).
+     * @param requestId  (required)
+     * @param reviewTradingChallengeRegistrationRequest  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The settled request </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid filter or an over-long reason </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: the caller may not administer this challenge </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Registration request not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> The request was already settled, or the challenge cannot take the user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call rejectTradingChallengeRegistrationRequestAsync(@javax.annotation.Nonnull UUID requestId, @javax.annotation.Nullable ReviewTradingChallengeRegistrationRequest reviewTradingChallengeRegistrationRequest, final ApiCallback<TradingChallengeRegistrationRequestResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = rejectTradingChallengeRegistrationRequestValidateBeforeCall(requestId, reviewTradingChallengeRegistrationRequest, _callback);
+        Type localVarReturnType = new TypeToken<TradingChallengeRegistrationRequestResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for removeTradingChallengeUsers
      * @param removeTradingChallengeUsersRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -14382,7 +15190,7 @@ public class DefaultApi {
 
     /**
      * Remove users from a trading challenge
-     * 
+     * Remove users from a trading challenge. For COMPETITION_MANAGER, the challenge must be assigned in managed_competition_ids.
      * @param removeTradingChallengeUsersRequest  (required)
      * @return TradingChallengeResponseEnvelope
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -14403,7 +15211,7 @@ public class DefaultApi {
 
     /**
      * Remove users from a trading challenge
-     * 
+     * Remove users from a trading challenge. For COMPETITION_MANAGER, the challenge must be assigned in managed_competition_ids.
      * @param removeTradingChallengeUsersRequest  (required)
      * @return ApiResponse&lt;TradingChallengeResponseEnvelope&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -14425,7 +15233,7 @@ public class DefaultApi {
 
     /**
      * Remove users from a trading challenge (asynchronously)
-     * 
+     * Remove users from a trading challenge. For COMPETITION_MANAGER, the challenge must be assigned in managed_competition_ids.
      * @param removeTradingChallengeUsersRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -16017,6 +16825,302 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for terminateOwnTradingChallengeParticipation
+     * @param tradingChallengeId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Participation terminated </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Challenge, user or participation not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the participation already settled or another deactivation is in progress </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call terminateOwnTradingChallengeParticipationCall(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges/{trading_challenge_id}/participants/self/terminate"
+            .replace("{" + "trading_challenge_id" + "}", localVarApiClient.escapeString(tradingChallengeId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call terminateOwnTradingChallengeParticipationValidateBeforeCall(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'tradingChallengeId' is set
+        if (tradingChallengeId == null) {
+            throw new ApiException("Missing the required parameter 'tradingChallengeId' when calling terminateOwnTradingChallengeParticipation(Async)");
+        }
+
+        return terminateOwnTradingChallengeParticipationCall(tradingChallengeId, _callback);
+
+    }
+
+    /**
+     * Leave a trading challenge
+     * Convenience alias that terminates the caller&#39;s own participation; redirects to /v1/trading_challenges/{trading_challenge_id}/participants/{user_id}/terminate. End a participant&#39;s run in a challenge before its own rules would: the participant leaves, or an operator removes them. No prize is paid, even to a participant who could have claimed one -- claim the prize first if that is what you want. The account is wound down, every remaining challenge credit is swept, and the participation is marked TERMINATED and frozen: from then on it takes no further daily snapshots and never appears in the results ranking again. The user is left deactivated with no challenge balance, and is free to register for another challenge. Participants may only terminate their own run; terminating someone else&#39;s requires admin, integrator (same tenant) or challenge manager (assigned challenge) rights.
+     * @param tradingChallengeId  (required)
+     * @return TerminateTradingChallengeResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Participation terminated </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Challenge, user or participation not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the participation already settled or another deactivation is in progress </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TerminateTradingChallengeResponseEnvelope terminateOwnTradingChallengeParticipation(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
+        ApiResponse<TerminateTradingChallengeResponseEnvelope> localVarResp = terminateOwnTradingChallengeParticipationWithHttpInfo(tradingChallengeId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Leave a trading challenge
+     * Convenience alias that terminates the caller&#39;s own participation; redirects to /v1/trading_challenges/{trading_challenge_id}/participants/{user_id}/terminate. End a participant&#39;s run in a challenge before its own rules would: the participant leaves, or an operator removes them. No prize is paid, even to a participant who could have claimed one -- claim the prize first if that is what you want. The account is wound down, every remaining challenge credit is swept, and the participation is marked TERMINATED and frozen: from then on it takes no further daily snapshots and never appears in the results ranking again. The user is left deactivated with no challenge balance, and is free to register for another challenge. Participants may only terminate their own run; terminating someone else&#39;s requires admin, integrator (same tenant) or challenge manager (assigned challenge) rights.
+     * @param tradingChallengeId  (required)
+     * @return ApiResponse&lt;TerminateTradingChallengeResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Participation terminated </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Challenge, user or participation not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the participation already settled or another deactivation is in progress </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TerminateTradingChallengeResponseEnvelope> terminateOwnTradingChallengeParticipationWithHttpInfo(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
+        okhttp3.Call localVarCall = terminateOwnTradingChallengeParticipationValidateBeforeCall(tradingChallengeId, null);
+        Type localVarReturnType = new TypeToken<TerminateTradingChallengeResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Leave a trading challenge (asynchronously)
+     * Convenience alias that terminates the caller&#39;s own participation; redirects to /v1/trading_challenges/{trading_challenge_id}/participants/{user_id}/terminate. End a participant&#39;s run in a challenge before its own rules would: the participant leaves, or an operator removes them. No prize is paid, even to a participant who could have claimed one -- claim the prize first if that is what you want. The account is wound down, every remaining challenge credit is swept, and the participation is marked TERMINATED and frozen: from then on it takes no further daily snapshots and never appears in the results ranking again. The user is left deactivated with no challenge balance, and is free to register for another challenge. Participants may only terminate their own run; terminating someone else&#39;s requires admin, integrator (same tenant) or challenge manager (assigned challenge) rights.
+     * @param tradingChallengeId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Participation terminated </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Challenge, user or participation not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the participation already settled or another deactivation is in progress </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call terminateOwnTradingChallengeParticipationAsync(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback<TerminateTradingChallengeResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = terminateOwnTradingChallengeParticipationValidateBeforeCall(tradingChallengeId, _callback);
+        Type localVarReturnType = new TypeToken<TerminateTradingChallengeResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for terminateTradingChallengeParticipation
+     * @param tradingChallengeId  (required)
+     * @param userId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Participation terminated </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Challenge, user or participation not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the participation already settled or another deactivation is in progress </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call terminateTradingChallengeParticipationCall(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UUID userId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges/{trading_challenge_id}/participants/{user_id}/terminate"
+            .replace("{" + "trading_challenge_id" + "}", localVarApiClient.escapeString(tradingChallengeId.toString()))
+            .replace("{" + "user_id" + "}", localVarApiClient.escapeString(userId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call terminateTradingChallengeParticipationValidateBeforeCall(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UUID userId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'tradingChallengeId' is set
+        if (tradingChallengeId == null) {
+            throw new ApiException("Missing the required parameter 'tradingChallengeId' when calling terminateTradingChallengeParticipation(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling terminateTradingChallengeParticipation(Async)");
+        }
+
+        return terminateTradingChallengeParticipationCall(tradingChallengeId, userId, _callback);
+
+    }
+
+    /**
+     * Terminate a participation in a trading challenge
+     * End a participant&#39;s run in a challenge before its own rules would: the participant leaves, or an operator removes them. No prize is paid, even to a participant who could have claimed one -- claim the prize first if that is what you want. The account is wound down, every remaining challenge credit is swept, and the participation is marked TERMINATED and frozen: from then on it takes no further daily snapshots and never appears in the results ranking again. The user is left deactivated with no challenge balance, and is free to register for another challenge. Participants may only terminate their own run; terminating someone else&#39;s requires admin, integrator (same tenant) or challenge manager (assigned challenge) rights.
+     * @param tradingChallengeId  (required)
+     * @param userId  (required)
+     * @return TerminateTradingChallengeResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Participation terminated </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Challenge, user or participation not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the participation already settled or another deactivation is in progress </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TerminateTradingChallengeResponseEnvelope terminateTradingChallengeParticipation(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UUID userId) throws ApiException {
+        ApiResponse<TerminateTradingChallengeResponseEnvelope> localVarResp = terminateTradingChallengeParticipationWithHttpInfo(tradingChallengeId, userId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Terminate a participation in a trading challenge
+     * End a participant&#39;s run in a challenge before its own rules would: the participant leaves, or an operator removes them. No prize is paid, even to a participant who could have claimed one -- claim the prize first if that is what you want. The account is wound down, every remaining challenge credit is swept, and the participation is marked TERMINATED and frozen: from then on it takes no further daily snapshots and never appears in the results ranking again. The user is left deactivated with no challenge balance, and is free to register for another challenge. Participants may only terminate their own run; terminating someone else&#39;s requires admin, integrator (same tenant) or challenge manager (assigned challenge) rights.
+     * @param tradingChallengeId  (required)
+     * @param userId  (required)
+     * @return ApiResponse&lt;TerminateTradingChallengeResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Participation terminated </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Challenge, user or participation not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the participation already settled or another deactivation is in progress </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TerminateTradingChallengeResponseEnvelope> terminateTradingChallengeParticipationWithHttpInfo(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UUID userId) throws ApiException {
+        okhttp3.Call localVarCall = terminateTradingChallengeParticipationValidateBeforeCall(tradingChallengeId, userId, null);
+        Type localVarReturnType = new TypeToken<TerminateTradingChallengeResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Terminate a participation in a trading challenge (asynchronously)
+     * End a participant&#39;s run in a challenge before its own rules would: the participant leaves, or an operator removes them. No prize is paid, even to a participant who could have claimed one -- claim the prize first if that is what you want. The account is wound down, every remaining challenge credit is swept, and the participation is marked TERMINATED and frozen: from then on it takes no further daily snapshots and never appears in the results ranking again. The user is left deactivated with no challenge balance, and is free to register for another challenge. Participants may only terminate their own run; terminating someone else&#39;s requires admin, integrator (same tenant) or challenge manager (assigned challenge) rights.
+     * @param tradingChallengeId  (required)
+     * @param userId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Participation terminated </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Challenge, user or participation not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the participation already settled or another deactivation is in progress </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call terminateTradingChallengeParticipationAsync(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UUID userId, final ApiCallback<TerminateTradingChallengeResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = terminateTradingChallengeParticipationValidateBeforeCall(tradingChallengeId, userId, _callback);
+        Type localVarReturnType = new TypeToken<TerminateTradingChallengeResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for transferAccountBalancesV2
      * @param transferAccountBalancesRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -16307,6 +17411,163 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = transferAvailableBalancesValidateBeforeCall(transferBalancesRequest, _callback);
         Type localVarReturnType = new TypeToken<TransferBalancesResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateTradingChallenge
+     * @param tradingChallengeId  (required)
+     * @param updateTradingChallengeRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Trading challenge updated </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: the field is not updatable in the current status, or the update clashes with another challenge or its participants </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateTradingChallengeCall(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UpdateTradingChallengeRequest updateTradingChallengeRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateTradingChallengeRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges/{trading_challenge_id}"
+            .replace("{" + "trading_challenge_id" + "}", localVarApiClient.escapeString(tradingChallengeId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateTradingChallengeValidateBeforeCall(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UpdateTradingChallengeRequest updateTradingChallengeRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'tradingChallengeId' is set
+        if (tradingChallengeId == null) {
+            throw new ApiException("Missing the required parameter 'tradingChallengeId' when calling updateTradingChallenge(Async)");
+        }
+
+        // verify the required parameter 'updateTradingChallengeRequest' is set
+        if (updateTradingChallengeRequest == null) {
+            throw new ApiException("Missing the required parameter 'updateTradingChallengeRequest' when calling updateTradingChallenge(Async)");
+        }
+
+        return updateTradingChallengeCall(tradingChallengeId, updateTradingChallengeRequest, _callback);
+
+    }
+
+    /**
+     * Update a trading challenge
+     * Partially update a trading challenge: a field that is absent from the body is left unchanged. Which fields may be updated depends on the challenge status. PENDING accepts every field. ACTIVE accepts only name, max_users, end and the three prize quantities, because participants are already funded and being measured. COMPLETED accepts none. A request that touches a field the current status does not allow is rejected as a whole with 409. ADMIN may update any challenge, INTEGRATOR only challenges of its own tenant, and COMPETITION_MANAGER only assigned challenge IDs.
+     * @param tradingChallengeId  (required)
+     * @param updateTradingChallengeRequest  (required)
+     * @return TradingChallengeResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Trading challenge updated </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: the field is not updatable in the current status, or the update clashes with another challenge or its participants </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingChallengeResponseEnvelope updateTradingChallenge(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UpdateTradingChallengeRequest updateTradingChallengeRequest) throws ApiException {
+        ApiResponse<TradingChallengeResponseEnvelope> localVarResp = updateTradingChallengeWithHttpInfo(tradingChallengeId, updateTradingChallengeRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Update a trading challenge
+     * Partially update a trading challenge: a field that is absent from the body is left unchanged. Which fields may be updated depends on the challenge status. PENDING accepts every field. ACTIVE accepts only name, max_users, end and the three prize quantities, because participants are already funded and being measured. COMPLETED accepts none. A request that touches a field the current status does not allow is rejected as a whole with 409. ADMIN may update any challenge, INTEGRATOR only challenges of its own tenant, and COMPETITION_MANAGER only assigned challenge IDs.
+     * @param tradingChallengeId  (required)
+     * @param updateTradingChallengeRequest  (required)
+     * @return ApiResponse&lt;TradingChallengeResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Trading challenge updated </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: the field is not updatable in the current status, or the update clashes with another challenge or its participants </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TradingChallengeResponseEnvelope> updateTradingChallengeWithHttpInfo(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UpdateTradingChallengeRequest updateTradingChallengeRequest) throws ApiException {
+        okhttp3.Call localVarCall = updateTradingChallengeValidateBeforeCall(tradingChallengeId, updateTradingChallengeRequest, null);
+        Type localVarReturnType = new TypeToken<TradingChallengeResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Update a trading challenge (asynchronously)
+     * Partially update a trading challenge: a field that is absent from the body is left unchanged. Which fields may be updated depends on the challenge status. PENDING accepts every field. ACTIVE accepts only name, max_users, end and the three prize quantities, because participants are already funded and being measured. COMPLETED accepts none. A request that touches a field the current status does not allow is rejected as a whole with 409. ADMIN may update any challenge, INTEGRATOR only challenges of its own tenant, and COMPETITION_MANAGER only assigned challenge IDs.
+     * @param tradingChallengeId  (required)
+     * @param updateTradingChallengeRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Trading challenge updated </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: the field is not updatable in the current status, or the update clashes with another challenge or its participants </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateTradingChallengeAsync(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UpdateTradingChallengeRequest updateTradingChallengeRequest, final ApiCallback<TradingChallengeResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updateTradingChallengeValidateBeforeCall(tradingChallengeId, updateTradingChallengeRequest, _callback);
+        Type localVarReturnType = new TypeToken<TradingChallengeResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

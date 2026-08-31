@@ -41,7 +41,11 @@ public enum UserRole {
   
   TRADER("TRADER"),
   
-  INTEGRATOR("INTEGRATOR");
+  INTEGRATOR("INTEGRATOR"),
+  
+  INDEXER("INDEXER"),
+  
+  COMPETITION_MANAGER("COMPETITION_MANAGER");
 
   private String value;
 

@@ -11,6 +11,8 @@
 |**kind** | **CouponKind** |  |  |
 |**couponKind** | **CouponKind** |  |  [optional] |
 |**bondKind** | **BondKind** |  |  [optional] |
+|**bondRunStatus** | **BondRunStatus** |  |  [optional] |
+|**creditRating** | **CreditRating** |  |  [optional] |
 |**couponStartAt** | **OffsetDateTime** |  |  [optional] |
 |**createdAt** | **OffsetDateTime** |  |  |
 |**finalCouponAt** | **OffsetDateTime** |  |  [optional] |

@@ -95,6 +95,7 @@ import tech.dora.model.RepayUSDRequest;
 import tech.dora.model.RepayUSDResponseEnvelope;
 import tech.dora.model.ResponseEnvelope;
 import tech.dora.model.ResponseEnvelopeOfListAssets;
+import tech.dora.model.ReviewTradingChallengeRegistrationRequest;
 import tech.dora.model.RevokeAPIKeyResponseEnvelope;
 import tech.dora.model.SettleLeverageAccruedInterestRequest;
 import tech.dora.model.SettleLeverageAccruedInterestResponseEnvelope;
@@ -111,10 +112,13 @@ import tech.dora.model.StreamTransactionsEntry;
 import tech.dora.model.StreamUserCouponPaymentsResponse;
 import tech.dora.model.SupplyRequest;
 import tech.dora.model.SupplyResponseEnvelope;
+import tech.dora.model.TerminateTradingChallengeResponseEnvelope;
 import tech.dora.model.TradeRequestError;
 import tech.dora.model.TradeResponseEnvelope;
 import tech.dora.model.TradingChallengeDailySnapshotsResponseEnvelope;
 import tech.dora.model.TradingChallengeListResponseEnvelope;
+import tech.dora.model.TradingChallengeRegistrationRequestListResponseEnvelope;
+import tech.dora.model.TradingChallengeRegistrationRequestResponseEnvelope;
 import tech.dora.model.TradingChallengeResponseEnvelope;
 import tech.dora.model.TradingChallengeResultsResponseEnvelope;
 import tech.dora.model.TradingChallengeStatus;
@@ -132,11 +136,14 @@ import tech.dora.model.TransferBalancesResponseEnvelope;
 import java.util.UUID;
 import tech.dora.model.UnitePositionRequest;
 import tech.dora.model.UnitePositionResponseEnvelope;
+import tech.dora.model.UpdateTradingChallengeRequest;
 import tech.dora.model.UpdateUserConfigRequest;
 import tech.dora.model.UpdateUserKYCRequest;
 import tech.dora.model.UpdateUserKYCResponseEnvelope;
 import tech.dora.model.UserBalanceResponseEnvelope;
 import tech.dora.model.UserCreatedResponseEnvelope;
+import tech.dora.model.UserDeactivationListResponseEnvelope;
+import tech.dora.model.UserDeactivationResponseEnvelope;
 import tech.dora.model.UserDeletedResponseEnvelope;
 import tech.dora.model.UserEnvelope;
 import tech.dora.model.UserInterestResponseEnvelope;
@@ -168,6 +175,8 @@ public class DefaultApiTest {
     /**
      * Add users to a trading challenge
      *
+     * Add existing users to a trading challenge. For COMPETITION_MANAGER, the challenge must be assigned in managed_competition_ids. A user must have an empty ledger to join: deposits and withdrawals are barred from enrolment until the challenge is over, so that challenge credits are the only thing a participant holds and the teardown sweep cannot destroy funds of their own.
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -189,6 +198,21 @@ public class DefaultApiTest {
         UUID withdrawalId = null;
         WithdrawalRequestReason withdrawalRequestReason = null;
         WithdrawalInitiationResponseEnvelope response = api.approveLedgerWithdrawRequest(withdrawalId, withdrawalRequestReason);
+        // TODO: test validations
+    }
+
+    /**
+     * Approve a trading challenge registration request
+     *
+     * Accessible to admins (any challenge), integrators (their own tenant only) and competition managers (their assigned challenges only). Enrolment runs the same checks as add_users, so a challenge that filled up, now overlaps another of the user&#39;s challenges, or whose applicant no longer has an empty ledger is rejected with a 409 and the request stays open.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void approveTradingChallengeRegistrationRequestTest() throws ApiException {
+        UUID requestId = null;
+        ReviewTradingChallengeRegistrationRequest reviewTradingChallengeRegistrationRequest = null;
+        TradingChallengeRegistrationRequestResponseEnvelope response = api.approveTradingChallengeRegistrationRequest(requestId, reviewTradingChallengeRegistrationRequest);
         // TODO: test validations
     }
 
@@ -248,6 +272,8 @@ public class DefaultApiTest {
 
     /**
      * Claim challenge prize
+     *
+     * Claim the prize of a challenge the caller is eligible for. A TOURNAMENT claim credits the prize matching the crown and reactivates the account. A CASH claim winds the account down, sweeps every remaining challenge credit and awards the CASH_CROWN: the account is left deactivated with a zero balance, and the reward is redeemed out of band. Both mark the participation PRIZE_CLAIMED.
      *
      * @throws ApiException if the Api call fails
      */
@@ -333,6 +359,8 @@ public class DefaultApiTest {
 
     /**
      * Create a trading challenge
+     *
+     * Create a new trading challenge. Allowed for ADMIN and INTEGRATOR only.
      *
      * @throws ApiException if the Api call fails
      */
@@ -892,6 +920,8 @@ public class DefaultApiTest {
     /**
      * Get trading challenge by ID
      *
+     * Fetch one trading challenge. COMPETITION_MANAGER can access only assigned challenge IDs.
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -904,6 +934,8 @@ public class DefaultApiTest {
     /**
      * Get trading challenge daily snapshots
      *
+     * List participant daily snapshots for a challenge. COMPETITION_MANAGER can access only assigned challenge IDs.
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -915,6 +947,8 @@ public class DefaultApiTest {
 
     /**
      * Get trading challenge results
+     *
+     * List challenge leaderboard/results. COMPETITION_MANAGER can access only assigned challenge IDs.
      *
      * @throws ApiException if the Api call fails
      */
@@ -950,7 +984,7 @@ public class DefaultApiTest {
         List<TransactionKind> txKinds = null;
         OffsetDateTime start = null;
         OffsetDateTime end = null;
-        UUID tenantId = null;
+        String tenantId = null;
         Integer page = null;
         Integer limit = null;
         ListTransactionsResponseEnvelope response = api.getTransactions(pools, userIds, txKinds, start, end, tenantId, page, limit);
@@ -1010,6 +1044,20 @@ public class DefaultApiTest {
     public void getUserCouponPaymentsStreamTest() throws ApiException {
         UUID userId = null;
         StreamUserCouponPaymentsResponse response = api.getUserCouponPaymentsStream(userId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get the latest account deactivation request for a user
+     *
+     * Returns the user&#39;s latest deactivation request, i.e. their current deactivation status. Integrators may only request users belonging to their own tenant.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getUserDeactivationTest() throws ApiException {
+        UUID userId = null;
+        UserDeactivationResponseEnvelope response = api.getUserDeactivation(userId);
         // TODO: test validations
     }
 
@@ -1392,7 +1440,28 @@ public class DefaultApiTest {
     }
 
     /**
+     * List trading challenge registration requests
+     *
+     * The review queue. Admins see every tenant and may filter to one, an integrator is pinned to their own tenant, and a competition manager only sees the requests of the challenges assigned to them.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listTradingChallengeRegistrationRequestsTest() throws ApiException {
+        UUID tradingChallengeId = null;
+        UUID userId = null;
+        String status = null;
+        String tenantId = null;
+        Integer limit = null;
+        Integer offset = null;
+        TradingChallengeRegistrationRequestListResponseEnvelope response = api.listTradingChallengeRegistrationRequests(tradingChallengeId, userId, status, tenantId, limit, offset);
+        // TODO: test validations
+    }
+
+    /**
      * List trading challenges
+     *
+     * List trading challenges. COMPETITION_MANAGER callers only receive challenges present in their managed_competition_ids.
      *
      * @throws ApiException if the Api call fails
      */
@@ -1404,6 +1473,23 @@ public class DefaultApiTest {
         OffsetDateTime start = null;
         OffsetDateTime end = null;
         TradingChallengeListResponseEnvelope response = api.listTradingChallenges(tenantId, type, status, start, end);
+        // TODO: test validations
+    }
+
+    /**
+     * Get the current deactivation status across all users
+     *
+     * Returns each user&#39;s latest deactivation request, i.e. their current status. Users with no deactivation history are absent. Ordered by request creation time, newest first. Integrators only see users of their own tenant, unless that tenant is global.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listUserDeactivationsTest() throws ApiException {
+        String status = null;
+        String tenantId = null;
+        UUID tradingChallengeId = null;
+        String userIds = null;
+        UserDeactivationListResponseEnvelope response = api.listUserDeactivations(status, tenantId, tradingChallengeId, userIds);
         // TODO: test validations
     }
 
@@ -1435,7 +1521,24 @@ public class DefaultApiTest {
     }
 
     /**
+     * Reject a trading challenge registration request
+     *
+     * Accessible to admins (any challenge), integrators (their own tenant only) and competition managers (their assigned challenges only).
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void rejectTradingChallengeRegistrationRequestTest() throws ApiException {
+        UUID requestId = null;
+        ReviewTradingChallengeRegistrationRequest reviewTradingChallengeRegistrationRequest = null;
+        TradingChallengeRegistrationRequestResponseEnvelope response = api.rejectTradingChallengeRegistrationRequest(requestId, reviewTradingChallengeRegistrationRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Remove users from a trading challenge
+     *
+     * Remove users from a trading challenge. For COMPETITION_MANAGER, the challenge must be assigned in managed_competition_ids.
      *
      * @throws ApiException if the Api call fails
      */
@@ -1587,6 +1690,35 @@ public class DefaultApiTest {
     }
 
     /**
+     * Leave a trading challenge
+     *
+     * Convenience alias that terminates the caller&#39;s own participation; redirects to /v1/trading_challenges/{trading_challenge_id}/participants/{user_id}/terminate. End a participant&#39;s run in a challenge before its own rules would: the participant leaves, or an operator removes them. No prize is paid, even to a participant who could have claimed one -- claim the prize first if that is what you want. The account is wound down, every remaining challenge credit is swept, and the participation is marked TERMINATED and frozen: from then on it takes no further daily snapshots and never appears in the results ranking again. The user is left deactivated with no challenge balance, and is free to register for another challenge. Participants may only terminate their own run; terminating someone else&#39;s requires admin, integrator (same tenant) or challenge manager (assigned challenge) rights.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void terminateOwnTradingChallengeParticipationTest() throws ApiException {
+        UUID tradingChallengeId = null;
+        TerminateTradingChallengeResponseEnvelope response = api.terminateOwnTradingChallengeParticipation(tradingChallengeId);
+        // TODO: test validations
+    }
+
+    /**
+     * Terminate a participation in a trading challenge
+     *
+     * End a participant&#39;s run in a challenge before its own rules would: the participant leaves, or an operator removes them. No prize is paid, even to a participant who could have claimed one -- claim the prize first if that is what you want. The account is wound down, every remaining challenge credit is swept, and the participation is marked TERMINATED and frozen: from then on it takes no further daily snapshots and never appears in the results ranking again. The user is left deactivated with no challenge balance, and is free to register for another challenge. Participants may only terminate their own run; terminating someone else&#39;s requires admin, integrator (same tenant) or challenge manager (assigned challenge) rights.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void terminateTradingChallengeParticipationTest() throws ApiException {
+        UUID tradingChallengeId = null;
+        UUID userId = null;
+        TerminateTradingChallengeResponseEnvelope response = api.terminateTradingChallengeParticipation(tradingChallengeId, userId);
+        // TODO: test validations
+    }
+
+    /**
      * Transfer available balance between a user&#39;s accounts
      *
      * @throws ApiException if the Api call fails
@@ -1607,6 +1739,21 @@ public class DefaultApiTest {
     public void transferAvailableBalancesTest() throws ApiException {
         TransferBalancesRequest transferBalancesRequest = null;
         TransferBalancesResponseEnvelope response = api.transferAvailableBalances(transferBalancesRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Update a trading challenge
+     *
+     * Partially update a trading challenge: a field that is absent from the body is left unchanged. Which fields may be updated depends on the challenge status. PENDING accepts every field. ACTIVE accepts only name, max_users, end and the three prize quantities, because participants are already funded and being measured. COMPLETED accepts none. A request that touches a field the current status does not allow is rejected as a whole with 409. ADMIN may update any challenge, INTEGRATOR only challenges of its own tenant, and COMPETITION_MANAGER only assigned challenge IDs.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateTradingChallengeTest() throws ApiException {
+        UUID tradingChallengeId = null;
+        UpdateTradingChallengeRequest updateTradingChallengeRequest = null;
+        TradingChallengeResponseEnvelope response = api.updateTradingChallenge(tradingChallengeId, updateTradingChallengeRequest);
         // TODO: test validations
     }
 

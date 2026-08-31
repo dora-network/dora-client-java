@@ -48,7 +48,7 @@ import tech.dora.JSON;
 /**
  * A generic struct to handle optional updates for boolean fields in user requests.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-12T18:49:23.367489785+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-31T11:19:20.004337973+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class UpdateFieldBoolean {
   public static final String SERIALIZED_NAME_UPDATE = "update";
   @SerializedName(SERIALIZED_NAME_UPDATE)

@@ -153,6 +153,14 @@ public class TradingChallengeResultTest {
     }
 
     /**
+     * Test the property 'deactivationStatus'
+     */
+    @Test
+    public void deactivationStatusTest() {
+        // TODO: test deactivationStatus
+    }
+
+    /**
      * Test the property 'currentDayDailyVolume'
      */
     @Test

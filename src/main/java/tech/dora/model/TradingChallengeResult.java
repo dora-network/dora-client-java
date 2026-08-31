@@ -51,7 +51,7 @@ import tech.dora.JSON;
 /**
  * TradingChallengeResult
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-12T18:49:23.367489785+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-31T11:19:20.004337973+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class TradingChallengeResult {
   public static final String SERIALIZED_NAME_TRADING_CHALLENGE_ID = "trading_challenge_id";
   @SerializedName(SERIALIZED_NAME_TRADING_CHALLENGE_ID)
@@ -123,7 +123,9 @@ public class TradingChallengeResult {
     
     COMPLETED("COMPLETED"),
     
-    PRIZE_CLAIMED("PRIZE_CLAIMED");
+    PRIZE_CLAIMED("PRIZE_CLAIMED"),
+    
+    TERMINATED("TERMINATED");
 
     private String value;
 
@@ -196,7 +198,9 @@ public class TradingChallengeResult {
     
     IRON_SILVER("IRON_SILVER"),
     
-    IRON_BRONZE("IRON_BRONZE");
+    IRON_BRONZE("IRON_BRONZE"),
+    
+    CASH_CROWN("CASH_CROWN");
 
     private String value;
 
@@ -250,6 +254,63 @@ public class TradingChallengeResult {
   @SerializedName(SERIALIZED_NAME_CREATED_AT)
   @javax.annotation.Nullable
   private OffsetDateTime createdAt;
+
+  /**
+   * Gets or Sets deactivationStatus
+   */
+  @JsonAdapter(DeactivationStatusEnum.Adapter.class)
+  public enum DeactivationStatusEnum {
+    ACTIVE("ACTIVE"),
+    
+    DEACTIVATED("DEACTIVATED");
+
+    private String value;
+
+    DeactivationStatusEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static DeactivationStatusEnum fromValue(String value) {
+      for (DeactivationStatusEnum b : DeactivationStatusEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<DeactivationStatusEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final DeactivationStatusEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public DeactivationStatusEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return DeactivationStatusEnum.fromValue(value);
+      }
+    }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      DeactivationStatusEnum.fromValue(value);
+    }
+  }
+
+  public static final String SERIALIZED_NAME_DEACTIVATION_STATUS = "deactivation_status";
+  @SerializedName(SERIALIZED_NAME_DEACTIVATION_STATUS)
+  @javax.annotation.Nullable
+  private DeactivationStatusEnum deactivationStatus;
 
   public static final String SERIALIZED_NAME_CURRENT_DAY_DAILY_VOLUME = "current_day_daily_volume";
   @SerializedName(SERIALIZED_NAME_CURRENT_DAY_DAILY_VOLUME)
@@ -540,6 +601,25 @@ public class TradingChallengeResult {
   }
 
 
+  public TradingChallengeResult deactivationStatus(@javax.annotation.Nullable DeactivationStatusEnum deactivationStatus) {
+    this.deactivationStatus = deactivationStatus;
+    return this;
+  }
+
+  /**
+   * Get deactivationStatus
+   * @return deactivationStatus
+   */
+  @javax.annotation.Nullable
+  public DeactivationStatusEnum getDeactivationStatus() {
+    return deactivationStatus;
+  }
+
+  public void setDeactivationStatus(@javax.annotation.Nullable DeactivationStatusEnum deactivationStatus) {
+    this.deactivationStatus = deactivationStatus;
+  }
+
+
   public TradingChallengeResult currentDayDailyVolume(@javax.annotation.Nullable String currentDayDailyVolume) {
     this.currentDayDailyVolume = currentDayDailyVolume;
     return this;
@@ -640,6 +720,7 @@ public class TradingChallengeResult {
         Objects.equals(this.status, tradingChallengeResult.status) &&
         Objects.equals(this.crown, tradingChallengeResult.crown) &&
         Objects.equals(this.createdAt, tradingChallengeResult.createdAt) &&
+        Objects.equals(this.deactivationStatus, tradingChallengeResult.deactivationStatus) &&
         Objects.equals(this.currentDayDailyVolume, tradingChallengeResult.currentDayDailyVolume) &&
         Objects.equals(this.currentDayDailyPnl, tradingChallengeResult.currentDayDailyPnl) &&
         Objects.equals(this.currentDayTradingDate, tradingChallengeResult.currentDayTradingDate) &&
@@ -648,7 +729,7 @@ public class TradingChallengeResult {
 
   @Override
   public int hashCode() {
-    return Objects.hash(tradingChallengeId, userId, userName, cumVolume, cumPnl, pnlPct, calendarDaysSinceStart, activeDays, compliantDays, crownEligible, claimEligible, status, crown, createdAt, currentDayDailyVolume, currentDayDailyPnl, currentDayTradingDate, cumTrades);
+    return Objects.hash(tradingChallengeId, userId, userName, cumVolume, cumPnl, pnlPct, calendarDaysSinceStart, activeDays, compliantDays, crownEligible, claimEligible, status, crown, createdAt, deactivationStatus, currentDayDailyVolume, currentDayDailyPnl, currentDayTradingDate, cumTrades);
   }
 
   @Override
@@ -669,6 +750,7 @@ public class TradingChallengeResult {
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    crown: ").append(toIndentedString(crown)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    deactivationStatus: ").append(toIndentedString(deactivationStatus)).append("\n");
     sb.append("    currentDayDailyVolume: ").append(toIndentedString(currentDayDailyVolume)).append("\n");
     sb.append("    currentDayDailyPnl: ").append(toIndentedString(currentDayDailyPnl)).append("\n");
     sb.append("    currentDayTradingDate: ").append(toIndentedString(currentDayTradingDate)).append("\n");
@@ -691,7 +773,7 @@ public class TradingChallengeResult {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("trading_challenge_id", "user_id", "user_name", "cum_volume", "cum_pnl", "pnl_pct", "calendar_days_since_start", "active_days", "compliant_days", "crown_eligible", "claim_eligible", "status", "crown", "created_at", "current_day_daily_volume", "current_day_daily_pnl", "current_day_trading_date", "cum_trades"));
+    openapiFields = new HashSet<String>(Arrays.asList("trading_challenge_id", "user_id", "user_name", "cum_volume", "cum_pnl", "pnl_pct", "calendar_days_since_start", "active_days", "compliant_days", "crown_eligible", "claim_eligible", "status", "crown", "created_at", "deactivation_status", "current_day_daily_volume", "current_day_daily_pnl", "current_day_trading_date", "cum_trades"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(0);
@@ -749,6 +831,13 @@ public class TradingChallengeResult {
       // validate the optional field `crown`
       if (jsonObj.get("crown") != null && !jsonObj.get("crown").isJsonNull()) {
         CrownEnum.validateJsonElement(jsonObj.get("crown"));
+      }
+      if ((jsonObj.get("deactivation_status") != null && !jsonObj.get("deactivation_status").isJsonNull()) && !jsonObj.get("deactivation_status").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `deactivation_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("deactivation_status").toString()));
+      }
+      // validate the optional field `deactivation_status`
+      if (jsonObj.get("deactivation_status") != null && !jsonObj.get("deactivation_status").isJsonNull()) {
+        DeactivationStatusEnum.validateJsonElement(jsonObj.get("deactivation_status"));
       }
       if ((jsonObj.get("current_day_daily_volume") != null && !jsonObj.get("current_day_daily_volume").isJsonNull()) && !jsonObj.get("current_day_daily_volume").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `current_day_daily_volume` to be a primitive type in the JSON string but got `%s`", jsonObj.get("current_day_daily_volume").toString()));

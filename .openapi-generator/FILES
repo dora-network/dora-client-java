@@ -30,6 +30,7 @@ docs/BalanceTransfer.md
 docs/BalancesResponse.md
 docs/Bond.md
 docs/BondKind.md
+docs/BondRunStatus.md
 docs/CancelOrderResponseEnvelope.md
 docs/Candle.md
 docs/CandleResolution.md
@@ -61,6 +62,7 @@ docs/CreateOrUpdateUserResponse.md
 docs/CreateOrderRequest.md
 docs/CreateOrderResponseEnvelope.md
 docs/CreateTradingChallengeRequest.md
+docs/CreditRating.md
 docs/CurrentLeverageAccruedInterest.md
 docs/CurrentLeverageAccruedInterestResponseEnvelope.md
 docs/DefaultApi.md
@@ -170,6 +172,7 @@ docs/RepayUSDResponseEnvelope.md
 docs/RepayUSDResult.md
 docs/ResponseEnvelope.md
 docs/ResponseEnvelopeOfListAssets.md
+docs/ReviewTradingChallengeRegistrationRequest.md
 docs/RevokeAPIKeyData.md
 docs/RevokeAPIKeyResponseEnvelope.md
 docs/SettleLeverageAccruedInterest.md
@@ -193,6 +196,8 @@ docs/Supply.md
 docs/SupplyRequest.md
 docs/SupplyResponseEnvelope.md
 docs/TenantRestrictions.md
+docs/TerminateTradingChallengeResponse.md
+docs/TerminateTradingChallengeResponseEnvelope.md
 docs/Trade.md
 docs/TradeRequestError.md
 docs/TradeResponseEnvelope.md
@@ -200,6 +205,9 @@ docs/TradingChallenge.md
 docs/TradingChallengeDailySnapshot.md
 docs/TradingChallengeDailySnapshotsResponseEnvelope.md
 docs/TradingChallengeListResponseEnvelope.md
+docs/TradingChallengeRegistrationRequest.md
+docs/TradingChallengeRegistrationRequestListResponseEnvelope.md
+docs/TradingChallengeRegistrationRequestResponseEnvelope.md
 docs/TradingChallengeResponseEnvelope.md
 docs/TradingChallengeResult.md
 docs/TradingChallengeResultsResponseEnvelope.md
@@ -225,8 +233,12 @@ docs/UnitePositionRequest.md
 docs/UnitePositionResponseEnvelope.md
 docs/UnitedPosition.md
 docs/UpdateFieldBoolean.md
+docs/UpdateFieldDateTime.md
+docs/UpdateFieldDecimal.md
+docs/UpdateFieldInteger.md
 docs/UpdateFieldString.md
 docs/UpdateRolesString.md
+docs/UpdateTradingChallengeRequest.md
 docs/UpdateUserConfigRequest.md
 docs/UpdateUserKYCRequest.md
 docs/UpdateUserKYCResponse.md
@@ -239,6 +251,9 @@ docs/UserCouponPayment.md
 docs/UserCouponPaymentAssetSummary.md
 docs/UserCouponPaymentsResponseData.md
 docs/UserCreatedResponseEnvelope.md
+docs/UserDeactivation.md
+docs/UserDeactivationListResponseEnvelope.md
+docs/UserDeactivationResponseEnvelope.md
 docs/UserDeletedResponseEnvelope.md
 docs/UserEnvelope.md
 docs/UserExistsResponse.md
@@ -312,6 +327,7 @@ src/main/java/tech/dora/model/BalanceTransfer.java
 src/main/java/tech/dora/model/BalancesResponse.java
 src/main/java/tech/dora/model/Bond.java
 src/main/java/tech/dora/model/BondKind.java
+src/main/java/tech/dora/model/BondRunStatus.java
 src/main/java/tech/dora/model/CancelOrderResponseEnvelope.java
 src/main/java/tech/dora/model/Candle.java
 src/main/java/tech/dora/model/CandleResolution.java
@@ -343,6 +359,7 @@ src/main/java/tech/dora/model/CreateOrUpdateUserResponse.java
 src/main/java/tech/dora/model/CreateOrderRequest.java
 src/main/java/tech/dora/model/CreateOrderResponseEnvelope.java
 src/main/java/tech/dora/model/CreateTradingChallengeRequest.java
+src/main/java/tech/dora/model/CreditRating.java
 src/main/java/tech/dora/model/CurrentLeverageAccruedInterest.java
 src/main/java/tech/dora/model/CurrentLeverageAccruedInterestResponseEnvelope.java
 src/main/java/tech/dora/model/DefundUserRequest.java
@@ -451,6 +468,7 @@ src/main/java/tech/dora/model/RepayUSDResponseEnvelope.java
 src/main/java/tech/dora/model/RepayUSDResult.java
 src/main/java/tech/dora/model/ResponseEnvelope.java
 src/main/java/tech/dora/model/ResponseEnvelopeOfListAssets.java
+src/main/java/tech/dora/model/ReviewTradingChallengeRegistrationRequest.java
 src/main/java/tech/dora/model/RevokeAPIKeyData.java
 src/main/java/tech/dora/model/RevokeAPIKeyResponseEnvelope.java
 src/main/java/tech/dora/model/SettleLeverageAccruedInterest.java
@@ -474,6 +492,8 @@ src/main/java/tech/dora/model/Supply.java
 src/main/java/tech/dora/model/SupplyRequest.java
 src/main/java/tech/dora/model/SupplyResponseEnvelope.java
 src/main/java/tech/dora/model/TenantRestrictions.java
+src/main/java/tech/dora/model/TerminateTradingChallengeResponse.java
+src/main/java/tech/dora/model/TerminateTradingChallengeResponseEnvelope.java
 src/main/java/tech/dora/model/Trade.java
 src/main/java/tech/dora/model/TradeRequestError.java
 src/main/java/tech/dora/model/TradeResponseEnvelope.java
@@ -481,6 +501,9 @@ src/main/java/tech/dora/model/TradingChallenge.java
 src/main/java/tech/dora/model/TradingChallengeDailySnapshot.java
 src/main/java/tech/dora/model/TradingChallengeDailySnapshotsResponseEnvelope.java
 src/main/java/tech/dora/model/TradingChallengeListResponseEnvelope.java
+src/main/java/tech/dora/model/TradingChallengeRegistrationRequest.java
+src/main/java/tech/dora/model/TradingChallengeRegistrationRequestListResponseEnvelope.java
+src/main/java/tech/dora/model/TradingChallengeRegistrationRequestResponseEnvelope.java
 src/main/java/tech/dora/model/TradingChallengeResponseEnvelope.java
 src/main/java/tech/dora/model/TradingChallengeResult.java
 src/main/java/tech/dora/model/TradingChallengeResultsResponseEnvelope.java
@@ -506,8 +529,12 @@ src/main/java/tech/dora/model/UnitePositionRequest.java
 src/main/java/tech/dora/model/UnitePositionResponseEnvelope.java
 src/main/java/tech/dora/model/UnitedPosition.java
 src/main/java/tech/dora/model/UpdateFieldBoolean.java
+src/main/java/tech/dora/model/UpdateFieldDateTime.java
+src/main/java/tech/dora/model/UpdateFieldDecimal.java
+src/main/java/tech/dora/model/UpdateFieldInteger.java
 src/main/java/tech/dora/model/UpdateFieldString.java
 src/main/java/tech/dora/model/UpdateRolesString.java
+src/main/java/tech/dora/model/UpdateTradingChallengeRequest.java
 src/main/java/tech/dora/model/UpdateUserConfigRequest.java
 src/main/java/tech/dora/model/UpdateUserKYCRequest.java
 src/main/java/tech/dora/model/UpdateUserKYCResponse.java
@@ -520,6 +547,9 @@ src/main/java/tech/dora/model/UserCouponPayment.java
 src/main/java/tech/dora/model/UserCouponPaymentAssetSummary.java
 src/main/java/tech/dora/model/UserCouponPaymentsResponseData.java
 src/main/java/tech/dora/model/UserCreatedResponseEnvelope.java
+src/main/java/tech/dora/model/UserDeactivation.java
+src/main/java/tech/dora/model/UserDeactivationListResponseEnvelope.java
+src/main/java/tech/dora/model/UserDeactivationResponseEnvelope.java
 src/main/java/tech/dora/model/UserDeletedResponseEnvelope.java
 src/main/java/tech/dora/model/UserEnvelope.java
 src/main/java/tech/dora/model/UserExistsResponse.java
@@ -565,6 +595,7 @@ src/test/java/tech/dora/model/AssetYieldTest.java
 src/test/java/tech/dora/model/BalanceTransferTest.java
 src/test/java/tech/dora/model/BalancesResponseTest.java
 src/test/java/tech/dora/model/BondKindTest.java
+src/test/java/tech/dora/model/BondRunStatusTest.java
 src/test/java/tech/dora/model/BondTest.java
 src/test/java/tech/dora/model/CancelOrderResponseEnvelopeTest.java
 src/test/java/tech/dora/model/CandleResolutionTest.java
@@ -597,6 +628,7 @@ src/test/java/tech/dora/model/CreateOrUpdateUserResponseTest.java
 src/test/java/tech/dora/model/CreateOrderRequestTest.java
 src/test/java/tech/dora/model/CreateOrderResponseEnvelopeTest.java
 src/test/java/tech/dora/model/CreateTradingChallengeRequestTest.java
+src/test/java/tech/dora/model/CreditRatingTest.java
 src/test/java/tech/dora/model/CurrentLeverageAccruedInterestResponseEnvelopeTest.java
 src/test/java/tech/dora/model/CurrentLeverageAccruedInterestTest.java
 src/test/java/tech/dora/model/DefundUserRequestTest.java
@@ -705,6 +737,7 @@ src/test/java/tech/dora/model/RepayUSDResponseEnvelopeTest.java
 src/test/java/tech/dora/model/RepayUSDResultTest.java
 src/test/java/tech/dora/model/ResponseEnvelopeOfListAssetsTest.java
 src/test/java/tech/dora/model/ResponseEnvelopeTest.java
+src/test/java/tech/dora/model/ReviewTradingChallengeRegistrationRequestTest.java
 src/test/java/tech/dora/model/RevokeAPIKeyDataTest.java
 src/test/java/tech/dora/model/RevokeAPIKeyResponseEnvelopeTest.java
 src/test/java/tech/dora/model/SettleLeverageAccruedInterestRequestTest.java
@@ -728,12 +761,17 @@ src/test/java/tech/dora/model/SupplyRequestTest.java
 src/test/java/tech/dora/model/SupplyResponseEnvelopeTest.java
 src/test/java/tech/dora/model/SupplyTest.java
 src/test/java/tech/dora/model/TenantRestrictionsTest.java
+src/test/java/tech/dora/model/TerminateTradingChallengeResponseEnvelopeTest.java
+src/test/java/tech/dora/model/TerminateTradingChallengeResponseTest.java
 src/test/java/tech/dora/model/TradeRequestErrorTest.java
 src/test/java/tech/dora/model/TradeResponseEnvelopeTest.java
 src/test/java/tech/dora/model/TradeTest.java
 src/test/java/tech/dora/model/TradingChallengeDailySnapshotTest.java
 src/test/java/tech/dora/model/TradingChallengeDailySnapshotsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/TradingChallengeListResponseEnvelopeTest.java
+src/test/java/tech/dora/model/TradingChallengeRegistrationRequestListResponseEnvelopeTest.java
+src/test/java/tech/dora/model/TradingChallengeRegistrationRequestResponseEnvelopeTest.java
+src/test/java/tech/dora/model/TradingChallengeRegistrationRequestTest.java
 src/test/java/tech/dora/model/TradingChallengeResponseEnvelopeTest.java
 src/test/java/tech/dora/model/TradingChallengeResultTest.java
 src/test/java/tech/dora/model/TradingChallengeResultsResponseEnvelopeTest.java
@@ -760,8 +798,12 @@ src/test/java/tech/dora/model/UnitePositionRequestTest.java
 src/test/java/tech/dora/model/UnitePositionResponseEnvelopeTest.java
 src/test/java/tech/dora/model/UnitedPositionTest.java
 src/test/java/tech/dora/model/UpdateFieldBooleanTest.java
+src/test/java/tech/dora/model/UpdateFieldDateTimeTest.java
+src/test/java/tech/dora/model/UpdateFieldDecimalTest.java
+src/test/java/tech/dora/model/UpdateFieldIntegerTest.java
 src/test/java/tech/dora/model/UpdateFieldStringTest.java
 src/test/java/tech/dora/model/UpdateRolesStringTest.java
+src/test/java/tech/dora/model/UpdateTradingChallengeRequestTest.java
 src/test/java/tech/dora/model/UpdateUserConfigRequestTest.java
 src/test/java/tech/dora/model/UpdateUserKYCRequestTest.java
 src/test/java/tech/dora/model/UpdateUserKYCResponseEnvelopeTest.java
@@ -773,6 +815,9 @@ src/test/java/tech/dora/model/UserCouponPaymentAssetSummaryTest.java
 src/test/java/tech/dora/model/UserCouponPaymentTest.java
 src/test/java/tech/dora/model/UserCouponPaymentsResponseDataTest.java
 src/test/java/tech/dora/model/UserCreatedResponseEnvelopeTest.java
+src/test/java/tech/dora/model/UserDeactivationListResponseEnvelopeTest.java
+src/test/java/tech/dora/model/UserDeactivationResponseEnvelopeTest.java
+src/test/java/tech/dora/model/UserDeactivationTest.java
 src/test/java/tech/dora/model/UserDeletedResponseEnvelopeTest.java
 src/test/java/tech/dora/model/UserEnvelopeTest.java
 src/test/java/tech/dora/model/UserExistsResponseTest.java

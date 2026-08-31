@@ -49,7 +49,7 @@ import tech.dora.JSON;
 /**
  * PnLRankingResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-12T18:49:23.367489785+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-31T11:19:20.004337973+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class PnLRankingResponse {
   public static final String SERIALIZED_NAME_USER_ID = "user_id";
   @SerializedName(SERIALIZED_NAME_USER_ID)
@@ -65,6 +65,11 @@ public class PnLRankingResponse {
   @SerializedName(SERIALIZED_NAME_TOTAL_PNL)
   @javax.annotation.Nonnull
   private String totalPnl;
+
+  public static final String SERIALIZED_NAME_REALIZED_PNL = "realized_pnl";
+  @SerializedName(SERIALIZED_NAME_REALIZED_PNL)
+  @javax.annotation.Nonnull
+  private String realizedPnl;
 
   public static final String SERIALIZED_NAME_TOTAL_TRADES = "total_trades";
   @SerializedName(SERIALIZED_NAME_TOTAL_TRADES)
@@ -85,6 +90,31 @@ public class PnLRankingResponse {
   @SerializedName(SERIALIZED_NAME_WIN_RATE)
   @javax.annotation.Nonnull
   private String winRate;
+
+  public static final String SERIALIZED_NAME_DAILY_TRADING_VOLUME = "daily_trading_volume";
+  @SerializedName(SERIALIZED_NAME_DAILY_TRADING_VOLUME)
+  @javax.annotation.Nonnull
+  private String dailyTradingVolume;
+
+  public static final String SERIALIZED_NAME_TOTAL_TRADING_VOLUME = "total_trading_volume";
+  @SerializedName(SERIALIZED_NAME_TOTAL_TRADING_VOLUME)
+  @javax.annotation.Nonnull
+  private String totalTradingVolume;
+
+  public static final String SERIALIZED_NAME_ACTIVE_TRADING_DAYS = "active_trading_days";
+  @SerializedName(SERIALIZED_NAME_ACTIVE_TRADING_DAYS)
+  @javax.annotation.Nonnull
+  private Integer activeTradingDays;
+
+  public static final String SERIALIZED_NAME_ACTIVATED = "activated";
+  @SerializedName(SERIALIZED_NAME_ACTIVATED)
+  @javax.annotation.Nonnull
+  private Boolean activated;
+
+  public static final String SERIALIZED_NAME_KYC_APPROVED = "kyc_approved";
+  @SerializedName(SERIALIZED_NAME_KYC_APPROVED)
+  @javax.annotation.Nonnull
+  private Boolean kycApproved;
 
   public PnLRankingResponse() {
   }
@@ -143,6 +173,25 @@ public class PnLRankingResponse {
 
   public void setTotalPnl(@javax.annotation.Nonnull String totalPnl) {
     this.totalPnl = totalPnl;
+  }
+
+
+  public PnLRankingResponse realizedPnl(@javax.annotation.Nonnull String realizedPnl) {
+    this.realizedPnl = realizedPnl;
+    return this;
+  }
+
+  /**
+   * Cumulative realized PnL across the user&#39;s full trading lifetime.
+   * @return realizedPnl
+   */
+  @javax.annotation.Nonnull
+  public String getRealizedPnl() {
+    return realizedPnl;
+  }
+
+  public void setRealizedPnl(@javax.annotation.Nonnull String realizedPnl) {
+    this.realizedPnl = realizedPnl;
   }
 
 
@@ -222,6 +271,101 @@ public class PnLRankingResponse {
   }
 
 
+  public PnLRankingResponse dailyTradingVolume(@javax.annotation.Nonnull String dailyTradingVolume) {
+    this.dailyTradingVolume = dailyTradingVolume;
+    return this;
+  }
+
+  /**
+   * Executed trading volume for the current UTC day.
+   * @return dailyTradingVolume
+   */
+  @javax.annotation.Nonnull
+  public String getDailyTradingVolume() {
+    return dailyTradingVolume;
+  }
+
+  public void setDailyTradingVolume(@javax.annotation.Nonnull String dailyTradingVolume) {
+    this.dailyTradingVolume = dailyTradingVolume;
+  }
+
+
+  public PnLRankingResponse totalTradingVolume(@javax.annotation.Nonnull String totalTradingVolume) {
+    this.totalTradingVolume = totalTradingVolume;
+    return this;
+  }
+
+  /**
+   * Cumulative executed trading volume across all UTC trading days.
+   * @return totalTradingVolume
+   */
+  @javax.annotation.Nonnull
+  public String getTotalTradingVolume() {
+    return totalTradingVolume;
+  }
+
+  public void setTotalTradingVolume(@javax.annotation.Nonnull String totalTradingVolume) {
+    this.totalTradingVolume = totalTradingVolume;
+  }
+
+
+  public PnLRankingResponse activeTradingDays(@javax.annotation.Nonnull Integer activeTradingDays) {
+    this.activeTradingDays = activeTradingDays;
+    return this;
+  }
+
+  /**
+   * Number of distinct UTC days on which the user has at least one executed fill.
+   * @return activeTradingDays
+   */
+  @javax.annotation.Nonnull
+  public Integer getActiveTradingDays() {
+    return activeTradingDays;
+  }
+
+  public void setActiveTradingDays(@javax.annotation.Nonnull Integer activeTradingDays) {
+    this.activeTradingDays = activeTradingDays;
+  }
+
+
+  public PnLRankingResponse activated(@javax.annotation.Nonnull Boolean activated) {
+    this.activated = activated;
+    return this;
+  }
+
+  /**
+   * True once the user has traded on at least 5 distinct UTC days.
+   * @return activated
+   */
+  @javax.annotation.Nonnull
+  public Boolean getActivated() {
+    return activated;
+  }
+
+  public void setActivated(@javax.annotation.Nonnull Boolean activated) {
+    this.activated = activated;
+  }
+
+
+  public PnLRankingResponse kycApproved(@javax.annotation.Nonnull Boolean kycApproved) {
+    this.kycApproved = kycApproved;
+    return this;
+  }
+
+  /**
+   * Whether the user is currently considered KYC/verification approved.
+   * @return kycApproved
+   */
+  @javax.annotation.Nonnull
+  public Boolean getKycApproved() {
+    return kycApproved;
+  }
+
+  public void setKycApproved(@javax.annotation.Nonnull Boolean kycApproved) {
+    this.kycApproved = kycApproved;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -235,15 +379,21 @@ public class PnLRankingResponse {
     return Objects.equals(this.userId, pnLRankingResponse.userId) &&
         Objects.equals(this.firstName, pnLRankingResponse.firstName) &&
         Objects.equals(this.totalPnl, pnLRankingResponse.totalPnl) &&
+        Objects.equals(this.realizedPnl, pnLRankingResponse.realizedPnl) &&
         Objects.equals(this.totalTrades, pnLRankingResponse.totalTrades) &&
         Objects.equals(this.winningTrades, pnLRankingResponse.winningTrades) &&
         Objects.equals(this.losingTrades, pnLRankingResponse.losingTrades) &&
-        Objects.equals(this.winRate, pnLRankingResponse.winRate);
+        Objects.equals(this.winRate, pnLRankingResponse.winRate) &&
+        Objects.equals(this.dailyTradingVolume, pnLRankingResponse.dailyTradingVolume) &&
+        Objects.equals(this.totalTradingVolume, pnLRankingResponse.totalTradingVolume) &&
+        Objects.equals(this.activeTradingDays, pnLRankingResponse.activeTradingDays) &&
+        Objects.equals(this.activated, pnLRankingResponse.activated) &&
+        Objects.equals(this.kycApproved, pnLRankingResponse.kycApproved);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, firstName, totalPnl, totalTrades, winningTrades, losingTrades, winRate);
+    return Objects.hash(userId, firstName, totalPnl, realizedPnl, totalTrades, winningTrades, losingTrades, winRate, dailyTradingVolume, totalTradingVolume, activeTradingDays, activated, kycApproved);
   }
 
   @Override
@@ -253,10 +403,16 @@ public class PnLRankingResponse {
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    totalPnl: ").append(toIndentedString(totalPnl)).append("\n");
+    sb.append("    realizedPnl: ").append(toIndentedString(realizedPnl)).append("\n");
     sb.append("    totalTrades: ").append(toIndentedString(totalTrades)).append("\n");
     sb.append("    winningTrades: ").append(toIndentedString(winningTrades)).append("\n");
     sb.append("    losingTrades: ").append(toIndentedString(losingTrades)).append("\n");
     sb.append("    winRate: ").append(toIndentedString(winRate)).append("\n");
+    sb.append("    dailyTradingVolume: ").append(toIndentedString(dailyTradingVolume)).append("\n");
+    sb.append("    totalTradingVolume: ").append(toIndentedString(totalTradingVolume)).append("\n");
+    sb.append("    activeTradingDays: ").append(toIndentedString(activeTradingDays)).append("\n");
+    sb.append("    activated: ").append(toIndentedString(activated)).append("\n");
+    sb.append("    kycApproved: ").append(toIndentedString(kycApproved)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -275,10 +431,10 @@ public class PnLRankingResponse {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("user_id", "first_name", "total_pnl", "total_trades", "winning_trades", "losing_trades", "win_rate"));
+    openapiFields = new HashSet<String>(Arrays.asList("user_id", "first_name", "total_pnl", "realized_pnl", "total_trades", "winning_trades", "losing_trades", "win_rate", "daily_trading_volume", "total_trading_volume", "active_trading_days", "activated", "kyc_approved"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("user_id", "first_name", "total_pnl", "total_trades", "winning_trades", "losing_trades", "win_rate"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("user_id", "first_name", "total_pnl", "realized_pnl", "total_trades", "winning_trades", "losing_trades", "win_rate", "daily_trading_volume", "total_trading_volume", "active_trading_days", "activated", "kyc_approved"));
   }
 
   /**
@@ -318,8 +474,17 @@ public class PnLRankingResponse {
       if (!jsonObj.get("total_pnl").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `total_pnl` to be a primitive type in the JSON string but got `%s`", jsonObj.get("total_pnl").toString()));
       }
+      if (!jsonObj.get("realized_pnl").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `realized_pnl` to be a primitive type in the JSON string but got `%s`", jsonObj.get("realized_pnl").toString()));
+      }
       if (!jsonObj.get("win_rate").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `win_rate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("win_rate").toString()));
+      }
+      if (!jsonObj.get("daily_trading_volume").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `daily_trading_volume` to be a primitive type in the JSON string but got `%s`", jsonObj.get("daily_trading_volume").toString()));
+      }
+      if (!jsonObj.get("total_trading_volume").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `total_trading_volume` to be a primitive type in the JSON string but got `%s`", jsonObj.get("total_trading_volume").toString()));
       }
   }
 

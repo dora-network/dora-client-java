@@ -50,7 +50,7 @@ import tech.dora.JSON;
 /**
  * CreateIntegratorUserRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-12T18:49:23.367489785+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-31T11:19:20.004337973+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class CreateIntegratorUserRequest {
   public static final String SERIALIZED_NAME_EMAIL = "email";
   @SerializedName(SERIALIZED_NAME_EMAIL)
@@ -101,6 +101,11 @@ public class CreateIntegratorUserRequest {
   @SerializedName(SERIALIZED_NAME_TIMEZONE)
   @javax.annotation.Nullable
   private String timezone;
+
+  public static final String SERIALIZED_NAME_CHALLENGE_ID = "challenge_id";
+  @SerializedName(SERIALIZED_NAME_CHALLENGE_ID)
+  @javax.annotation.Nullable
+  private UUID challengeId;
 
   public CreateIntegratorUserRequest() {
   }
@@ -295,6 +300,25 @@ public class CreateIntegratorUserRequest {
   }
 
 
+  public CreateIntegratorUserRequest challengeId(@javax.annotation.Nullable UUID challengeId) {
+    this.challengeId = challengeId;
+    return this;
+  }
+
+  /**
+   * Optional: sign the new user up for this trading challenge. This creates a PENDING registration request that an admin, the tenant&#39;s integrator or one of the challenge&#39;s managers must approve before the user is actually enrolled. The challenge must belong to the new user&#39;s tenant and still be open for entries, otherwise the whole sign-up fails.
+   * @return challengeId
+   */
+  @javax.annotation.Nullable
+  public UUID getChallengeId() {
+    return challengeId;
+  }
+
+  public void setChallengeId(@javax.annotation.Nullable UUID challengeId) {
+    this.challengeId = challengeId;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -314,12 +338,13 @@ public class CreateIntegratorUserRequest {
         Objects.equals(this.photoUrl, createIntegratorUserRequest.photoUrl) &&
         Objects.equals(this.provider, createIntegratorUserRequest.provider) &&
         Objects.equals(this.providerId, createIntegratorUserRequest.providerId) &&
-        Objects.equals(this.timezone, createIntegratorUserRequest.timezone);
+        Objects.equals(this.timezone, createIntegratorUserRequest.timezone) &&
+        Objects.equals(this.challengeId, createIntegratorUserRequest.challengeId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(email, firstName, lastName, userName, countryOfDomicile, nativeAssetId, photoUrl, provider, providerId, timezone);
+    return Objects.hash(email, firstName, lastName, userName, countryOfDomicile, nativeAssetId, photoUrl, provider, providerId, timezone, challengeId);
   }
 
   @Override
@@ -336,6 +361,7 @@ public class CreateIntegratorUserRequest {
     sb.append("    provider: ").append(toIndentedString(provider)).append("\n");
     sb.append("    providerId: ").append(toIndentedString(providerId)).append("\n");
     sb.append("    timezone: ").append(toIndentedString(timezone)).append("\n");
+    sb.append("    challengeId: ").append(toIndentedString(challengeId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -411,6 +437,9 @@ public class CreateIntegratorUserRequest {
       }
       if ((jsonObj.get("timezone") != null && !jsonObj.get("timezone").isJsonNull()) && !jsonObj.get("timezone").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `timezone` to be a primitive type in the JSON string but got `%s`", jsonObj.get("timezone").toString()));
+      }
+      if ((jsonObj.get("challenge_id") != null && !jsonObj.get("challenge_id").isJsonNull()) && !jsonObj.get("challenge_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `challenge_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("challenge_id").toString()));
       }
   }
 

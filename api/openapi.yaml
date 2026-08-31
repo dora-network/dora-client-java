@@ -659,6 +659,141 @@ paths:
       summary: Verify a user by ID
       x-accepts:
       - application/json
+  /v1/user/{user_id}/deactivation:
+    get:
+      description: "Returns the user's latest deactivation request, i.e. their current\
+        \ deactivation status. Integrators may only request users belonging to their\
+        \ own tenant."
+      operationId: getUserDeactivation
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDeactivationResponseEnvelope"
+          description: Latest deactivation request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden, e.g. the user does not belong to the integrator's\
+            \ tenant"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: No deactivation found for this user
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get the latest account deactivation request for a user
+      x-accepts:
+      - application/json
+  /v1/user/deactivations:
+    get:
+      description: "Returns each user's latest deactivation request, i.e. their current\
+        \ status. Users with no deactivation history are absent. Ordered by request\
+        \ creation time, newest first. Integrators only see users of their own tenant,\
+        \ unless that tenant is global."
+      operationId: listUserDeactivations
+      parameters:
+      - description: Only return users whose latest request has this status.
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          enum:
+          - PENDING
+          - FAILED
+          - COMPLETED
+          - REACTIVATED
+          type: string
+        style: form
+      - description: "Only return users belonging to this tenant. At most one of tenant_id,\
+          \ trading_challenge_id and user_ids may be passed; combining them is rejected.\
+          \ An integrator whose tenant is not global may only pass their own tenant."
+        explode: true
+        in: query
+        name: tenant_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Only return participants of this trading challenge. Mutually
+          exclusive with tenant_id and user_ids.
+        explode: true
+        in: query
+        name: trading_challenge_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: Comma-separated user IDs to return. Mutually exclusive with tenant_id
+          and trading_challenge_id.
+        explode: true
+        in: query
+        name: user_ids
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDeactivationListResponseEnvelope"
+          description: Latest deactivation request per user
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Invalid status, trading_challenge_id or user_ids value, or\
+            \ multiple selectors passed"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Integrator requested a tenant other than their own
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get the current deactivation status across all users
+      x-accepts:
+      - application/json
   /v1/user/ranking:
     get:
       description: Returns user PnL ranking for the provided time range. By default
@@ -3344,7 +3479,6 @@ paths:
         name: tenant_id
         required: false
         schema:
-          format: uuid
           type: string
         style: form
       - explode: true
@@ -5246,6 +5380,8 @@ paths:
       - application/json
   /v1/trading_challenges:
     get:
+      description: List trading challenges. COMPETITION_MANAGER callers only receive
+        challenges present in their managed_competition_ids.
       operationId: listTradingChallenges
       parameters:
       - explode: true
@@ -5308,6 +5444,8 @@ paths:
       x-accepts:
       - application/json
     post:
+      description: Create a new trading challenge. Allowed for ADMIN and INTEGRATOR
+        only.
       operationId: createTradingChallenge
       requestBody:
         content:
@@ -5346,6 +5484,12 @@ paths:
       - application/json
   /v1/trading_challenges/add_users:
     put:
+      description: "Add existing users to a trading challenge. For COMPETITION_MANAGER,\
+        \ the challenge must be assigned in managed_competition_ids. A user must have\
+        \ an empty ledger to join: deposits and withdrawals are barred from enrolment\
+        \ until the challenge is over, so that challenge credits are the only thing\
+        \ a participant holds and the teardown sweep cannot destroy funds of their\
+        \ own."
       operationId: addTradingChallengeUsers
       requestBody:
         content:
@@ -5384,6 +5528,8 @@ paths:
       - application/json
   /v1/trading_challenges/remove_users:
     put:
+      description: "Remove users from a trading challenge. For COMPETITION_MANAGER,\
+        \ the challenge must be assigned in managed_competition_ids."
       operationId: removeTradingChallengeUsers
       requestBody:
         content:
@@ -5422,6 +5568,8 @@ paths:
       - application/json
   /v1/trading_challenges/{trading_challenge_id}:
     get:
+      description: Fetch one trading challenge. COMPETITION_MANAGER can access only
+        assigned challenge IDs.
       operationId: getTradingChallengeByID
       parameters:
       - explode: false
@@ -5466,8 +5614,77 @@ paths:
       summary: Get trading challenge by ID
       x-accepts:
       - application/json
+    put:
+      description: "Partially update a trading challenge: a field that is absent from\
+        \ the body is left unchanged. Which fields may be updated depends on the challenge\
+        \ status. PENDING accepts every field. ACTIVE accepts only name, max_users,\
+        \ end and the three prize quantities, because participants are already funded\
+        \ and being measured. COMPLETED accepts none. A request that touches a field\
+        \ the current status does not allow is rejected as a whole with 409. ADMIN\
+        \ may update any challenge, INTEGRATOR only challenges of its own tenant,\
+        \ and COMPETITION_MANAGER only assigned challenge IDs."
+      operationId: updateTradingChallenge
+      parameters:
+      - explode: false
+        in: path
+        name: trading_challenge_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTradingChallengeRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradingChallengeResponseEnvelope"
+          description: Trading challenge updated
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Bad request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Conflict: the field is not updatable in the current status,\
+            \ or the update clashes with another challenge or its participants"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Update a trading challenge
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /v1/trading_challenges/{trading_challenge_id}/daily_snapshots:
     get:
+      description: List participant daily snapshots for a challenge. COMPETITION_MANAGER
+        can access only assigned challenge IDs.
       operationId: getTradingChallengeDailySnapshots
       parameters:
       - explode: false
@@ -5514,6 +5731,8 @@ paths:
       - application/json
   /v1/trading_challenges/{trading_challenge_id}/results:
     get:
+      description: List challenge leaderboard/results. COMPETITION_MANAGER can access
+        only assigned challenge IDs.
       operationId: getTradingChallengeResults
       parameters:
       - explode: false
@@ -5573,6 +5792,11 @@ paths:
       - application/json
   /v1/trading_challenges/{trading_challenge_id}/claim:
     post:
+      description: "Claim the prize of a challenge the caller is eligible for. A TOURNAMENT\
+        \ claim credits the prize matching the crown and reactivates the account.\
+        \ A CASH claim winds the account down, sweeps every remaining challenge credit\
+        \ and awards the CASH_CROWN: the account is left deactivated with a zero balance,\
+        \ and the reward is redeemed out of band. Both mark the participation PRIZE_CLAIMED."
       operationId: claimTradingChallengePrize
       parameters:
       - explode: false
@@ -5609,6 +5833,367 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       summary: Claim challenge prize
+      x-accepts:
+      - application/json
+  /v1/trading_challenges/{trading_challenge_id}/participants/{user_id}/terminate:
+    post:
+      description: "End a participant's run in a challenge before its own rules would:\
+        \ the participant leaves, or an operator removes them. No prize is paid, even\
+        \ to a participant who could have claimed one -- claim the prize first if\
+        \ that is what you want. The account is wound down, every remaining challenge\
+        \ credit is swept, and the participation is marked TERMINATED and frozen:\
+        \ from then on it takes no further daily snapshots and never appears in the\
+        \ results ranking again. The user is left deactivated with no challenge balance,\
+        \ and is free to register for another challenge. Participants may only terminate\
+        \ their own run; terminating someone else's requires admin, integrator (same\
+        \ tenant) or challenge manager (assigned challenge) rights."
+      operationId: terminateTradingChallengeParticipation
+      parameters:
+      - explode: false
+        in: path
+        name: trading_challenge_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TerminateTradingChallengeResponseEnvelope"
+          description: Participation terminated
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Challenge, user or participation not found"
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Conflict, e.g. the participation already settled or another\
+            \ deactivation is in progress"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Terminate a participation in a trading challenge
+      x-accepts:
+      - application/json
+  /v1/trading_challenges/{trading_challenge_id}/participants/self/terminate:
+    post:
+      description: "Convenience alias that terminates the caller's own participation;\
+        \ redirects to /v1/trading_challenges/{trading_challenge_id}/participants/{user_id}/terminate.\
+        \ End a participant's run in a challenge before its own rules would: the participant\
+        \ leaves, or an operator removes them. No prize is paid, even to a participant\
+        \ who could have claimed one -- claim the prize first if that is what you\
+        \ want. The account is wound down, every remaining challenge credit is swept,\
+        \ and the participation is marked TERMINATED and frozen: from then on it takes\
+        \ no further daily snapshots and never appears in the results ranking again.\
+        \ The user is left deactivated with no challenge balance, and is free to register\
+        \ for another challenge. Participants may only terminate their own run; terminating\
+        \ someone else's requires admin, integrator (same tenant) or challenge manager\
+        \ (assigned challenge) rights."
+      operationId: terminateOwnTradingChallengeParticipation
+      parameters:
+      - explode: false
+        in: path
+        name: trading_challenge_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TerminateTradingChallengeResponseEnvelope"
+          description: Participation terminated
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Challenge, user or participation not found"
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Conflict, e.g. the participation already settled or another\
+            \ deactivation is in progress"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Leave a trading challenge
+      x-accepts:
+      - application/json
+  /v1/trading_challenges/registration_requests:
+    get:
+      description: "The review queue. Admins see every tenant and may filter to one,\
+        \ an integrator is pinned to their own tenant, and a competition manager only\
+        \ sees the requests of the challenges assigned to them."
+      operationId: listTradingChallengeRegistrationRequests
+      parameters:
+      - description: Only requests for this challenge.
+        explode: true
+        in: query
+        name: trading_challenge_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: Only requests from this user.
+        explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: Only requests in this state.
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          enum:
+          - PENDING
+          - APPROVED
+          - REJECTED
+          type: string
+        style: form
+      - description: Admins only; an integrator may only name their own tenant.
+        explode: true
+        in: query
+        name: tenant_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Page size, capped at 1000."
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          type: integer
+        style: form
+      - description: Rows to skip.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradingChallengeRegistrationRequestListResponseEnvelope"
+          description: "The matching requests, newest first"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. an invalid filter or an over-long reason"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden: the caller may not administer this challenge"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: List trading challenge registration requests
+      x-accepts:
+      - application/json
+  /v1/trading_challenges/registration_requests/{request_id}/approve:
+    post:
+      description: "Accessible to admins (any challenge), integrators (their own tenant\
+        \ only) and competition managers (their assigned challenges only). Enrolment\
+        \ runs the same checks as add_users, so a challenge that filled up, now overlaps\
+        \ another of the user's challenges, or whose applicant no longer has an empty\
+        \ ledger is rejected with a 409 and the request stays open."
+      operationId: approveTradingChallengeRegistrationRequest
+      parameters:
+      - explode: false
+        in: path
+        name: request_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewTradingChallengeRegistrationRequest"
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradingChallengeRegistrationRequestResponseEnvelope"
+          description: The settled request
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. an invalid filter or an over-long reason"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden: the caller may not administer this challenge"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Registration request not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "The request was already settled, or the challenge cannot take\
+            \ the user"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Approve a trading challenge registration request
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v1/trading_challenges/registration_requests/{request_id}/reject:
+    post:
+      description: "Accessible to admins (any challenge), integrators (their own tenant\
+        \ only) and competition managers (their assigned challenges only)."
+      operationId: rejectTradingChallengeRegistrationRequest
+      parameters:
+      - explode: false
+        in: path
+        name: request_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewTradingChallengeRegistrationRequest"
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradingChallengeRegistrationRequestResponseEnvelope"
+          description: The settled request
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. an invalid filter or an over-long reason"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden: the caller may not administer this challenge"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Registration request not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "The request was already settled, or the challenge cannot take\
+            \ the user"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Reject a trading challenge registration request
+      x-content-type: application/json
       x-accepts:
       - application/json
 components:
@@ -6320,6 +6905,14 @@ components:
           $ref: "#/components/schemas/CouponKind"
         bond_kind:
           $ref: "#/components/schemas/BondKind"
+        bond_run_status:
+          allOf:
+          - $ref: "#/components/schemas/BondRunStatus"
+          nullable: true
+        credit_rating:
+          allOf:
+          - $ref: "#/components/schemas/CreditRating"
+          nullable: true
         coupon_start_at:
           format: date-time
           type: string
@@ -6703,6 +7296,36 @@ components:
       - CORPORATE
       - TREASURY
       type: string
+    BondRunStatus:
+      enum:
+      - ON_THE_RUN
+      - OFF_THE_RUN
+      type: string
+    CreditRating:
+      enum:
+      - AAA
+      - AA+
+      - AA
+      - AA-
+      - A+
+      - A
+      - A-
+      - BBB+
+      - BBB
+      - BBB-
+      - BB+
+      - BB
+      - BB-
+      - B+
+      - B
+      - B-
+      - CCC+
+      - CCC
+      - CCC-
+      - CC
+      - C
+      - D
+      type: string
     CouponKind:
       enum:
       - COUPON-PAYING
@@ -6717,6 +7340,8 @@ components:
       - LIQUIDITY_PROVIDER
       - TRADER
       - INTEGRATOR
+      - INDEXER
+      - COMPETITION_MANAGER
       type: string
     ListUsersResponseEnvelope:
       allOf:
@@ -6744,6 +7369,9 @@ components:
           roles:
           - PUBLIC
           - PUBLIC
+          managed_competition_ids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           timezone: timezone
           timezone_offset: 0
           verified_at: 2000-01-23T04:56:07.000+00:00
@@ -6771,6 +7399,9 @@ components:
           roles:
           - PUBLIC
           - PUBLIC
+          managed_competition_ids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           timezone: timezone
           timezone_offset: 0
           verified_at: 2000-01-23T04:56:07.000+00:00
@@ -6799,6 +7430,7 @@ components:
         provider: provider
         provider_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         timezone: timezone
+        challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       nullable: true
       oneOf: []
       properties:
@@ -6826,6 +7458,14 @@ components:
           format: uuid
           type: string
         timezone:
+          type: string
+        challenge_id:
+          description: "Optional: sign the new user up for this trading challenge.\
+            \ This creates a PENDING registration request that an admin, the tenant's\
+            \ integrator or one of the challenge's managers must approve before the\
+            \ user is actually enrolled. The challenge must belong to the new user's\
+            \ tenant and still be open for entries, otherwise the whole sign-up fails."
+          format: uuid
           type: string
     UpdateUserKYCRequest:
       example:
@@ -6897,6 +7537,9 @@ components:
           roles:
           - PUBLIC
           - PUBLIC
+          managed_competition_ids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           timezone: timezone
           timezone_offset: 0
           verified_at: 2000-01-23T04:56:07.000+00:00
@@ -6947,6 +7590,138 @@ components:
             $ref: "#/components/schemas/UserConfig"
     GetUserConfigResponse:
       $ref: "#/components/schemas/UserConfigResponseEnvelope"
+    UserDeactivation:
+      description: "An admin-requested account deactivation. A non-REACTIVATED request\
+        \ blocks the user's trading, funding, and transfers."
+      example:
+        deactivation_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        requested_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        reason: reason
+        status: PENDING
+        attempts: 0
+        result: result
+        created_at: 2000-01-23T04:56:07.000+00:00
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        completed_at: 2000-01-23T04:56:07.000+00:00
+        reactivated_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        reactivated_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        deactivation_id:
+          format: uuid
+          type: string
+        user_id:
+          format: uuid
+          type: string
+        requested_by:
+          description: Admin that requested the deactivation.
+          format: uuid
+          type: string
+        reason:
+          type: string
+        status:
+          description: "PENDING: wind-down in progress. FAILED: wind-down gave up;\
+            \ admin can re-trigger. COMPLETED: account deactivated. REACTIVATED: blocks\
+            \ lifted."
+          enum:
+          - PENDING
+          - FAILED
+          - COMPLETED
+          - REACTIVATED
+          type: string
+        attempts:
+          description: Wind-down attempts performed so far.
+          type: integer
+        result:
+          description: Latest wind-down outcome or error summary.
+          type: string
+          nullable: true
+        created_at:
+          format: date-time
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        completed_at:
+          format: date-time
+          type: string
+          nullable: true
+        reactivated_by:
+          format: uuid
+          type: string
+          nullable: true
+        reactivated_at:
+          format: date-time
+          type: string
+          nullable: true
+      required:
+      - attempts
+      - created_at
+      - deactivation_id
+      - reason
+      - requested_by
+      - status
+      - updated_at
+      - user_id
+    UserDeactivationResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/UserDeactivation"
+      example:
+        data:
+          deactivation_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          requested_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          reason: reason
+          status: PENDING
+          attempts: 0
+          result: result
+          created_at: 2000-01-23T04:56:07.000+00:00
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          completed_at: 2000-01-23T04:56:07.000+00:00
+          reactivated_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          reactivated_at: 2000-01-23T04:56:07.000+00:00
+        error: error
+        metadata: ""
+    UserDeactivationListResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/UserDeactivation"
+            type: array
+            default: null
+      example:
+        data:
+        - deactivation_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          requested_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          reason: reason
+          status: PENDING
+          attempts: 0
+          result: result
+          created_at: 2000-01-23T04:56:07.000+00:00
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          completed_at: 2000-01-23T04:56:07.000+00:00
+          reactivated_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          reactivated_at: 2000-01-23T04:56:07.000+00:00
+        - deactivation_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          requested_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          reason: reason
+          status: PENDING
+          attempts: 0
+          result: result
+          created_at: 2000-01-23T04:56:07.000+00:00
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          completed_at: 2000-01-23T04:56:07.000+00:00
+          reactivated_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          reactivated_at: 2000-01-23T04:56:07.000+00:00
+        error: error
+        metadata: ""
     User:
       example:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -6964,6 +7739,9 @@ components:
         roles:
         - PUBLIC
         - PUBLIC
+        managed_competition_ids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         timezone: timezone
         timezone_offset: 0
         verified_at: 2000-01-23T04:56:07.000+00:00
@@ -7011,6 +7789,15 @@ components:
         roles:
           items:
             $ref: "#/components/schemas/UserRole"
+          type: array
+          default: null
+        managed_competition_ids:
+          description: Competition IDs this user is explicitly allowed to manage when
+            they have COMPETITION_MANAGER role. Empty means no competition-management
+            access.
+          items:
+            format: uuid
+            type: string
           type: array
           default: null
         timezone:
@@ -7203,6 +7990,43 @@ components:
         value:
           description: The new value to set for the field.
           type: boolean
+      required:
+      - update
+    UpdateFieldDateTime:
+      description: A generic struct to handle optional updates for date-time fields
+        in user requests.
+      properties:
+        update:
+          description: Whether to update the field.
+          type: boolean
+        value:
+          description: The new value to set for the field.
+          format: date-time
+          type: string
+      required:
+      - update
+    UpdateFieldInteger:
+      description: A generic struct to handle optional updates for integer fields
+        in user requests.
+      properties:
+        update:
+          description: Whether to update the field.
+          type: boolean
+        value:
+          description: The new value to set for the field.
+          type: integer
+      required:
+      - update
+    UpdateFieldDecimal:
+      description: A generic struct to handle optional updates for decimal fields
+        in user requests.
+      properties:
+        update:
+          description: Whether to update the field.
+          type: boolean
+        value:
+          description: The new value to set for the field.
+          type: string
       required:
       - update
     CountryCode:
@@ -7464,10 +8288,16 @@ components:
         user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         first_name: first_name
         total_pnl: total_pnl
+        realized_pnl: realized_pnl
         total_trades: 0
         winning_trades: 6
         losing_trades: 1
         win_rate: win_rate
+        daily_trading_volume: daily_trading_volume
+        total_trading_volume: total_trading_volume
+        active_trading_days: 5
+        activated: true
+        kyc_approved: true
       properties:
         user_id:
           format: uuid
@@ -7475,6 +8305,9 @@ components:
         first_name:
           type: string
         total_pnl:
+          type: string
+        realized_pnl:
+          description: Cumulative realized PnL across the user's full trading lifetime.
           type: string
         total_trades:
           type: integer
@@ -7484,11 +8317,33 @@ components:
           type: integer
         win_rate:
           type: string
+        daily_trading_volume:
+          description: Executed trading volume for the current UTC day.
+          type: string
+        total_trading_volume:
+          description: Cumulative executed trading volume across all UTC trading days.
+          type: string
+        active_trading_days:
+          description: Number of distinct UTC days on which the user has at least
+            one executed fill.
+          type: integer
+        activated:
+          description: True once the user has traded on at least 5 distinct UTC days.
+          type: boolean
+        kyc_approved:
+          description: Whether the user is currently considered KYC/verification approved.
+          type: boolean
       required:
+      - activated
+      - active_trading_days
+      - daily_trading_volume
       - first_name
+      - kyc_approved
       - losing_trades
+      - realized_pnl
       - total_pnl
       - total_trades
+      - total_trading_volume
       - user_id
       - win_rate
       - winning_trades
@@ -7506,17 +8361,29 @@ components:
         - user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           first_name: first_name
           total_pnl: total_pnl
+          realized_pnl: realized_pnl
           total_trades: 0
           winning_trades: 6
           losing_trades: 1
           win_rate: win_rate
+          daily_trading_volume: daily_trading_volume
+          total_trading_volume: total_trading_volume
+          active_trading_days: 5
+          activated: true
+          kyc_approved: true
         - user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           first_name: first_name
           total_pnl: total_pnl
+          realized_pnl: realized_pnl
           total_trades: 0
           winning_trades: 6
           losing_trades: 1
           win_rate: win_rate
+          daily_trading_volume: daily_trading_volume
+          total_trading_volume: total_trading_volume
+          active_trading_days: 5
+          activated: true
+          kyc_approved: true
         error: error
         metadata: ""
     OrderBookStatus:
@@ -9944,6 +10811,11 @@ components:
       - DE-COLLATERALIZE
       - COUPON_PAYMENT
       - INTERNAL_TRANSFER
+      - ISOLATE_AVAILABLE
+      - BORROW
+      - TRADING_CHALLENGE_DEPOSIT
+      - TRADING_CHALLENGE_WITHDRAW
+      - TRADING_FEE
       type: string
     TransactionInternalTransfer:
       example:
@@ -12694,6 +13566,83 @@ components:
       - start
       - tenant_id
       - type
+    UpdateTradingChallengeRequest:
+      description: "Request body for PUT /v1/trading_challenges/{trading_challenge_id}:\
+        \ partially update a trading challenge. A field that is omitted, or sent as\
+        \ null, is left unchanged. Each field accepts either the {update, value} object\
+        \ or the bare value on its own. PENDING challenges accept every field; ACTIVE\
+        \ challenges accept only name, max_users, end and the prize quantities; COMPLETED\
+        \ challenges accept none. tenant_id and status are never updatable, and the\
+        \ participant list is managed by add_users and remove_users."
+      example:
+        name: ""
+        type: ""
+        max_users: ""
+        start: ""
+        end: ""
+        initial_user_balance: ""
+        gold_prize_quantity: ""
+        silver_prize_quantity: ""
+        bronze_prize_quantity: ""
+        pnl_condition: ""
+        total_volume_condition: ""
+        avg_daily_volume_condition: ""
+        minimum_equity_percentage_condition: ""
+      properties:
+        name:
+          allOf:
+          - $ref: "#/components/schemas/UpdateFieldString"
+          description: Trading challenge name.
+        type:
+          allOf:
+          - $ref: "#/components/schemas/UpdateFieldString"
+          description: CASH or TOURNAMENT. Only updatable while the challenge is PENDING.
+        max_users:
+          allOf:
+          - $ref: "#/components/schemas/UpdateFieldInteger"
+          description: Must be > 0 and cannot be lowered below the number of users
+            already registered.
+        start:
+          allOf:
+          - $ref: "#/components/schemas/UpdateFieldDateTime"
+          description: Only updatable while the challenge is PENDING.
+        end:
+          allOf:
+          - $ref: "#/components/schemas/UpdateFieldDateTime"
+          description: Must be after start and in the future.
+        initial_user_balance:
+          allOf:
+          - $ref: "#/components/schemas/UpdateFieldDecimal"
+          description: Must be > 0. Only updatable while the challenge is PENDING.
+        gold_prize_quantity:
+          allOf:
+          - $ref: "#/components/schemas/UpdateFieldDecimal"
+          description: Must be > 0 for a TOURNAMENT challenge.
+        silver_prize_quantity:
+          allOf:
+          - $ref: "#/components/schemas/UpdateFieldDecimal"
+          description: Must be >= 0.
+        bronze_prize_quantity:
+          allOf:
+          - $ref: "#/components/schemas/UpdateFieldDecimal"
+          description: Must be >= 0.
+        pnl_condition:
+          allOf:
+          - $ref: "#/components/schemas/UpdateFieldDecimal"
+          description: Must be >= 0. Only updatable while the challenge is PENDING.
+        total_volume_condition:
+          allOf:
+          - $ref: "#/components/schemas/UpdateFieldDecimal"
+          description: Must be >= 0. Only updatable while the challenge is PENDING.
+        avg_daily_volume_condition:
+          allOf:
+          - $ref: "#/components/schemas/UpdateFieldDecimal"
+          description: Must be >= 0. Only updatable while the challenge is PENDING.
+        minimum_equity_percentage_condition:
+          allOf:
+          - $ref: "#/components/schemas/UpdateFieldInteger"
+          description: "In the range [0,100). Only updatable while the challenge is\
+            \ PENDING."
     AddTradingChallengeUsersRequest:
       example:
         trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -13005,6 +13954,7 @@ components:
         status: PENDING
         crown: NONE
         created_at: 2000-01-23T04:56:07.000+00:00
+        deactivation_status: ACTIVE
         current_day_daily_volume: current_day_daily_volume
         current_day_daily_pnl: current_day_daily_pnl
         current_day_trading_date: 2000-01-23
@@ -13042,6 +13992,7 @@ components:
           - BUSTED
           - COMPLETED
           - PRIZE_CLAIMED
+          - TERMINATED
           type: string
         crown:
           enum:
@@ -13055,9 +14006,15 @@ components:
           - IRON_GOLD
           - IRON_SILVER
           - IRON_BRONZE
+          - CASH_CROWN
           type: string
         created_at:
           format: date-time
+          type: string
+        deactivation_status:
+          enum:
+          - ACTIVE
+          - DEACTIVATED
           type: string
         current_day_daily_volume:
           type: string
@@ -13093,6 +14050,7 @@ components:
           status: PENDING
           crown: NONE
           created_at: 2000-01-23T04:56:07.000+00:00
+          deactivation_status: ACTIVE
           current_day_daily_volume: current_day_daily_volume
           current_day_daily_pnl: current_day_daily_pnl
           current_day_trading_date: 2000-01-23
@@ -13111,6 +14069,7 @@ components:
           status: PENDING
           crown: NONE
           created_at: 2000-01-23T04:56:07.000+00:00
+          deactivation_status: ACTIVE
           current_day_daily_volume: current_day_daily_volume
           current_day_daily_pnl: current_day_daily_pnl
           current_day_trading_date: 2000-01-23
@@ -13146,6 +14105,197 @@ components:
           trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           status: status
+        error: error
+        metadata: ""
+    TerminateTradingChallengeResponse:
+      example:
+        trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        status: TERMINATED
+      properties:
+        trading_challenge_id:
+          format: uuid
+          type: string
+        user_id:
+          format: uuid
+          type: string
+        status:
+          enum:
+          - TERMINATED
+          type: string
+      required:
+      - status
+      - trading_challenge_id
+      - user_id
+    TerminateTradingChallengeResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/TerminateTradingChallengeResponse"
+      example:
+        data:
+          trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          status: TERMINATED
+        error: error
+        metadata: ""
+    TradingChallengeRegistrationRequest:
+      description: "A user's request to take part in a trading challenge, raised at\
+        \ sign-up and settled by an admin, the tenant's integrator or one of the challenge's\
+        \ managers. Approving it enrols the user; the row is kept after the decision\
+        \ as an audit trail."
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        trading_challenge_name: trading_challenge_name
+        trading_challenge_type: TOURNAMENT
+        trading_challenge_status: PENDING
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        user_email: user_email
+        user_name: user_name
+        tenant_id: tenant_id
+        status: PENDING
+        reviewed_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        reviewed_at: 2000-01-23T04:56:07.000+00:00
+        review_reason: review_reason
+        created_at: 2000-01-23T04:56:07.000+00:00
+        updated_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: uuid
+          type: string
+        trading_challenge_id:
+          format: uuid
+          type: string
+        trading_challenge_name:
+          type: string
+        trading_challenge_type:
+          enum:
+          - TOURNAMENT
+          - CASH
+          type: string
+        trading_challenge_status:
+          enum:
+          - PENDING
+          - ACTIVE
+          - COMPLETED
+          type: string
+        user_id:
+          format: uuid
+          type: string
+        user_email:
+          type: string
+        user_name:
+          type: string
+        tenant_id:
+          type: string
+        status:
+          enum:
+          - PENDING
+          - APPROVED
+          - REJECTED
+          type: string
+        reviewed_by:
+          description: Who settled the request. Absent while it is PENDING.
+          format: uuid
+          type: string
+        reviewed_at:
+          description: When it was settled. Absent while it is PENDING.
+          format: date-time
+          type: string
+        review_reason:
+          description: Free-text note kept for the audit trail. Optional on both decisions.
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - created_at
+      - id
+      - status
+      - tenant_id
+      - trading_challenge_id
+      - updated_at
+      - user_id
+    ReviewTradingChallengeRegistrationRequest:
+      description: "Body of approve and reject. Optional: an empty body is accepted."
+      example:
+        reason: reason
+      properties:
+        reason:
+          description: Free-text note kept for the audit trail.
+          maxLength: 1024
+          type: string
+    TradingChallengeRegistrationRequestResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/TradingChallengeRegistrationRequest"
+      example:
+        data:
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          trading_challenge_name: trading_challenge_name
+          trading_challenge_type: TOURNAMENT
+          trading_challenge_status: PENDING
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_email: user_email
+          user_name: user_name
+          tenant_id: tenant_id
+          status: PENDING
+          reviewed_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          reviewed_at: 2000-01-23T04:56:07.000+00:00
+          review_reason: review_reason
+          created_at: 2000-01-23T04:56:07.000+00:00
+          updated_at: 2000-01-23T04:56:07.000+00:00
+        error: error
+        metadata: ""
+    TradingChallengeRegistrationRequestListResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/TradingChallengeRegistrationRequest"
+            type: array
+            default: null
+      example:
+        data:
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          trading_challenge_name: trading_challenge_name
+          trading_challenge_type: TOURNAMENT
+          trading_challenge_status: PENDING
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_email: user_email
+          user_name: user_name
+          tenant_id: tenant_id
+          status: PENDING
+          reviewed_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          reviewed_at: 2000-01-23T04:56:07.000+00:00
+          review_reason: review_reason
+          created_at: 2000-01-23T04:56:07.000+00:00
+          updated_at: 2000-01-23T04:56:07.000+00:00
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          trading_challenge_name: trading_challenge_name
+          trading_challenge_type: TOURNAMENT
+          trading_challenge_status: PENDING
+          user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_email: user_email
+          user_name: user_name
+          tenant_id: tenant_id
+          status: PENDING
+          reviewed_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          reviewed_at: 2000-01-23T04:56:07.000+00:00
+          review_reason: review_reason
+          created_at: 2000-01-23T04:56:07.000+00:00
+          updated_at: 2000-01-23T04:56:07.000+00:00
         error: error
         metadata: ""
     PositionAsset:

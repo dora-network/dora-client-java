@@ -23,7 +23,9 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.UUID;
 import tech.dora.model.BondKind;
+import tech.dora.model.BondRunStatus;
 import tech.dora.model.CouponKind;
+import tech.dora.model.CreditRating;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -71,6 +73,22 @@ public class BondTest {
     @Test
     public void bondKindTest() {
         // TODO: test bondKind
+    }
+
+    /**
+     * Test the property 'bondRunStatus'
+     */
+    @Test
+    public void bondRunStatusTest() {
+        // TODO: test bondRunStatus
+    }
+
+    /**
+     * Test the property 'creditRating'
+     */
+    @Test
+    public void creditRatingTest() {
+        // TODO: test creditRating
     }
 
     /**

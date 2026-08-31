@@ -21,6 +21,7 @@
 |**status** | [**StatusEnum**](#StatusEnum) |  |  [optional] |
 |**crown** | [**CrownEnum**](#CrownEnum) |  |  [optional] |
 |**createdAt** | **OffsetDateTime** |  |  [optional] |
+|**deactivationStatus** | [**DeactivationStatusEnum**](#DeactivationStatusEnum) |  |  [optional] |
 |**currentDayDailyVolume** | **String** |  |  [optional] |
 |**currentDayDailyPnl** | **String** |  |  [optional] |
 |**currentDayTradingDate** | **LocalDate** |  |  [optional] |
@@ -38,6 +39,7 @@
 | BUSTED | &quot;BUSTED&quot; |
 | COMPLETED | &quot;COMPLETED&quot; |
 | PRIZE_CLAIMED | &quot;PRIZE_CLAIMED&quot; |
+| TERMINATED | &quot;TERMINATED&quot; |
 
 
 
@@ -55,6 +57,16 @@
 | IRON_GOLD | &quot;IRON_GOLD&quot; |
 | IRON_SILVER | &quot;IRON_SILVER&quot; |
 | IRON_BRONZE | &quot;IRON_BRONZE&quot; |
+| CASH_CROWN | &quot;CASH_CROWN&quot; |
+
+
+
+## Enum: DeactivationStatusEnum
+
+| Name | Value |
+|---- | -----|
+| ACTIVE | &quot;ACTIVE&quot; |
+| DEACTIVATED | &quot;DEACTIVATED&quot; |
 
 
 

@@ -63,6 +63,14 @@ public class PnLRankingResponseTest {
     }
 
     /**
+     * Test the property 'realizedPnl'
+     */
+    @Test
+    public void realizedPnlTest() {
+        // TODO: test realizedPnl
+    }
+
+    /**
      * Test the property 'totalTrades'
      */
     @Test
@@ -92,6 +100,46 @@ public class PnLRankingResponseTest {
     @Test
     public void winRateTest() {
         // TODO: test winRate
+    }
+
+    /**
+     * Test the property 'dailyTradingVolume'
+     */
+    @Test
+    public void dailyTradingVolumeTest() {
+        // TODO: test dailyTradingVolume
+    }
+
+    /**
+     * Test the property 'totalTradingVolume'
+     */
+    @Test
+    public void totalTradingVolumeTest() {
+        // TODO: test totalTradingVolume
+    }
+
+    /**
+     * Test the property 'activeTradingDays'
+     */
+    @Test
+    public void activeTradingDaysTest() {
+        // TODO: test activeTradingDays
+    }
+
+    /**
+     * Test the property 'activated'
+     */
+    @Test
+    public void activatedTest() {
+        // TODO: test activated
+    }
+
+    /**
+     * Test the property 'kycApproved'
+     */
+    @Test
+    public void kycApprovedTest() {
+        // TODO: test kycApproved
     }
 
 }

@@ -24,7 +24,9 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.UUID;
 import tech.dora.model.BondKind;
+import tech.dora.model.BondRunStatus;
 import tech.dora.model.CouponKind;
+import tech.dora.model.CreditRating;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,7 +54,7 @@ import tech.dora.JSON;
 /**
  * Bond
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-12T18:49:23.367489785+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-31T11:19:20.004337973+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class Bond {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -73,6 +75,16 @@ public class Bond {
   @SerializedName(SERIALIZED_NAME_BOND_KIND)
   @javax.annotation.Nullable
   private BondKind bondKind;
+
+  public static final String SERIALIZED_NAME_BOND_RUN_STATUS = "bond_run_status";
+  @SerializedName(SERIALIZED_NAME_BOND_RUN_STATUS)
+  @javax.annotation.Nullable
+  private BondRunStatus bondRunStatus;
+
+  public static final String SERIALIZED_NAME_CREDIT_RATING = "credit_rating";
+  @SerializedName(SERIALIZED_NAME_CREDIT_RATING)
+  @javax.annotation.Nullable
+  private CreditRating creditRating;
 
   public static final String SERIALIZED_NAME_COUPON_START_AT = "coupon_start_at";
   @SerializedName(SERIALIZED_NAME_COUPON_START_AT)
@@ -205,6 +217,44 @@ public class Bond {
 
   public void setBondKind(@javax.annotation.Nullable BondKind bondKind) {
     this.bondKind = bondKind;
+  }
+
+
+  public Bond bondRunStatus(@javax.annotation.Nullable BondRunStatus bondRunStatus) {
+    this.bondRunStatus = bondRunStatus;
+    return this;
+  }
+
+  /**
+   * Get bondRunStatus
+   * @return bondRunStatus
+   */
+  @javax.annotation.Nullable
+  public BondRunStatus getBondRunStatus() {
+    return bondRunStatus;
+  }
+
+  public void setBondRunStatus(@javax.annotation.Nullable BondRunStatus bondRunStatus) {
+    this.bondRunStatus = bondRunStatus;
+  }
+
+
+  public Bond creditRating(@javax.annotation.Nullable CreditRating creditRating) {
+    this.creditRating = creditRating;
+    return this;
+  }
+
+  /**
+   * Get creditRating
+   * @return creditRating
+   */
+  @javax.annotation.Nullable
+  public CreditRating getCreditRating() {
+    return creditRating;
+  }
+
+  public void setCreditRating(@javax.annotation.Nullable CreditRating creditRating) {
+    this.creditRating = creditRating;
   }
 
 
@@ -433,6 +483,8 @@ public class Bond {
         Objects.equals(this.kind, bond.kind) &&
         Objects.equals(this.couponKind, bond.couponKind) &&
         Objects.equals(this.bondKind, bond.bondKind) &&
+        Objects.equals(this.bondRunStatus, bond.bondRunStatus) &&
+        Objects.equals(this.creditRating, bond.creditRating) &&
         Objects.equals(this.couponStartAt, bond.couponStartAt) &&
         Objects.equals(this.createdAt, bond.createdAt) &&
         Objects.equals(this.finalCouponAt, bond.finalCouponAt) &&
@@ -448,7 +500,7 @@ public class Bond {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, kind, couponKind, bondKind, couponStartAt, createdAt, finalCouponAt, isin, issuedAt, issuer, maturityAt, principalValue, paymentsPerYear, paymentsEvery, nextCouponPayment);
+    return Objects.hash(id, kind, couponKind, bondKind, bondRunStatus, creditRating, couponStartAt, createdAt, finalCouponAt, isin, issuedAt, issuer, maturityAt, principalValue, paymentsPerYear, paymentsEvery, nextCouponPayment);
   }
 
   @Override
@@ -459,6 +511,8 @@ public class Bond {
     sb.append("    kind: ").append(toIndentedString(kind)).append("\n");
     sb.append("    couponKind: ").append(toIndentedString(couponKind)).append("\n");
     sb.append("    bondKind: ").append(toIndentedString(bondKind)).append("\n");
+    sb.append("    bondRunStatus: ").append(toIndentedString(bondRunStatus)).append("\n");
+    sb.append("    creditRating: ").append(toIndentedString(creditRating)).append("\n");
     sb.append("    couponStartAt: ").append(toIndentedString(couponStartAt)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    finalCouponAt: ").append(toIndentedString(finalCouponAt)).append("\n");
@@ -488,7 +542,7 @@ public class Bond {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "kind", "coupon_kind", "bond_kind", "coupon_start_at", "created_at", "final_coupon_at", "isin", "issued_at", "issuer", "maturity_at", "principal_value", "payments_per_year", "payments_every", "next_coupon_payment"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "kind", "coupon_kind", "bond_kind", "bond_run_status", "credit_rating", "coupon_start_at", "created_at", "final_coupon_at", "isin", "issued_at", "issuer", "maturity_at", "principal_value", "payments_per_year", "payments_every", "next_coupon_payment"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "kind", "created_at", "isin", "issued_at", "issuer", "maturity_at", "principal_value", "payments_per_year"));
@@ -534,6 +588,14 @@ public class Bond {
       // validate the optional field `bond_kind`
       if (jsonObj.get("bond_kind") != null && !jsonObj.get("bond_kind").isJsonNull()) {
         BondKind.validateJsonElement(jsonObj.get("bond_kind"));
+      }
+      // validate the optional field `bond_run_status`
+      if (jsonObj.get("bond_run_status") != null && !jsonObj.get("bond_run_status").isJsonNull()) {
+        BondRunStatus.validateJsonElement(jsonObj.get("bond_run_status"));
+      }
+      // validate the optional field `credit_rating`
+      if (jsonObj.get("credit_rating") != null && !jsonObj.get("credit_rating").isJsonNull()) {
+        CreditRating.validateJsonElement(jsonObj.get("credit_rating"));
       }
       if (!jsonObj.get("isin").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `isin` to be a primitive type in the JSON string but got `%s`", jsonObj.get("isin").toString()));
