@@ -51,7 +51,7 @@ import tech.dora.JSON;
 /**
  * AddTradingChallengeUsersRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-31T11:19:20.004337973+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-04T17:02:20.472678984+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class AddTradingChallengeUsersRequest {
   public static final String SERIALIZED_NAME_TRADING_CHALLENGE_ID = "trading_challenge_id";
   @SerializedName(SERIALIZED_NAME_TRADING_CHALLENGE_ID)
@@ -60,8 +60,13 @@ public class AddTradingChallengeUsersRequest {
 
   public static final String SERIALIZED_NAME_USERS = "users";
   @SerializedName(SERIALIZED_NAME_USERS)
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private List<UUID> users = new ArrayList<>();
+
+  public static final String SERIALIZED_NAME_EMAILS = "emails";
+  @SerializedName(SERIALIZED_NAME_EMAILS)
+  @javax.annotation.Nullable
+  private List<String> emails = new ArrayList<>();
 
   public AddTradingChallengeUsersRequest() {
   }
@@ -85,7 +90,7 @@ public class AddTradingChallengeUsersRequest {
   }
 
 
-  public AddTradingChallengeUsersRequest users(@javax.annotation.Nonnull List<UUID> users) {
+  public AddTradingChallengeUsersRequest users(@javax.annotation.Nullable List<UUID> users) {
     this.users = users;
     return this;
   }
@@ -99,16 +104,43 @@ public class AddTradingChallengeUsersRequest {
   }
 
   /**
-   * Get users
+   * List of user IDs to add. Provide exactly one of users or emails.
    * @return users
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public List<UUID> getUsers() {
     return users;
   }
 
-  public void setUsers(@javax.annotation.Nonnull List<UUID> users) {
+  public void setUsers(@javax.annotation.Nullable List<UUID> users) {
     this.users = users;
+  }
+
+
+  public AddTradingChallengeUsersRequest emails(@javax.annotation.Nullable List<String> emails) {
+    this.emails = emails;
+    return this;
+  }
+
+  public AddTradingChallengeUsersRequest addEmailsItem(String emailsItem) {
+    if (this.emails == null) {
+      this.emails = new ArrayList<>();
+    }
+    this.emails.add(emailsItem);
+    return this;
+  }
+
+  /**
+   * List of user emails to add. Provide exactly one of users or emails.
+   * @return emails
+   */
+  @javax.annotation.Nullable
+  public List<String> getEmails() {
+    return emails;
+  }
+
+  public void setEmails(@javax.annotation.Nullable List<String> emails) {
+    this.emails = emails;
   }
 
 
@@ -123,12 +155,13 @@ public class AddTradingChallengeUsersRequest {
     }
     AddTradingChallengeUsersRequest addTradingChallengeUsersRequest = (AddTradingChallengeUsersRequest) o;
     return Objects.equals(this.tradingChallengeId, addTradingChallengeUsersRequest.tradingChallengeId) &&
-        Objects.equals(this.users, addTradingChallengeUsersRequest.users);
+        Objects.equals(this.users, addTradingChallengeUsersRequest.users) &&
+        Objects.equals(this.emails, addTradingChallengeUsersRequest.emails);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(tradingChallengeId, users);
+    return Objects.hash(tradingChallengeId, users, emails);
   }
 
   @Override
@@ -137,6 +170,7 @@ public class AddTradingChallengeUsersRequest {
     sb.append("class AddTradingChallengeUsersRequest {\n");
     sb.append("    tradingChallengeId: ").append(toIndentedString(tradingChallengeId)).append("\n");
     sb.append("    users: ").append(toIndentedString(users)).append("\n");
+    sb.append("    emails: ").append(toIndentedString(emails)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -155,10 +189,10 @@ public class AddTradingChallengeUsersRequest {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("trading_challenge_id", "users"));
+    openapiFields = new HashSet<String>(Arrays.asList());
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("trading_challenge_id", "users"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("trading_challenge_id"));
   }
 
   /**
@@ -192,11 +226,13 @@ public class AddTradingChallengeUsersRequest {
       if (!jsonObj.get("trading_challenge_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `trading_challenge_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("trading_challenge_id").toString()));
       }
-      // ensure the required json array is present
-      if (jsonObj.get("users") == null) {
-        throw new IllegalArgumentException("Expected the field `linkedContent` to be an array in the JSON string but got `null`");
-      } else if (!jsonObj.get("users").isJsonArray()) {
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("users") != null && !jsonObj.get("users").isJsonNull() && !jsonObj.get("users").isJsonArray()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `users` to be an array in the JSON string but got `%s`", jsonObj.get("users").toString()));
+      }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("emails") != null && !jsonObj.get("emails").isJsonNull() && !jsonObj.get("emails").isJsonArray()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `emails` to be an array in the JSON string but got `%s`", jsonObj.get("emails").toString()));
       }
   }
 

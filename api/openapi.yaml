@@ -6196,6 +6196,92 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /v1/web3/withdrawals/fee-quote:
+    get:
+      description: Examines on-chain conditions and simulates a withdrawal transaction
+        to estimate the fee a user needs to pay when they make their withdrawal request.
+        Restricted to DORA tenant users whose native asset is USDC.
+      operationId: getWithdrawalFeeQuote
+      parameters:
+      - description: The destination wallet address as a 0x-prefixed 20-byte hex string.
+          Must not be the zero address.
+        explode: true
+        in: query
+        name: to
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: "Human-decimal USDC quantity to withdraw, e.g. '100.50'. Must\
+          \ be positive."
+        explode: true
+        in: query
+        name: quantity
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeeQuoteResponseEnvelope"
+          description: Fee quote for the requested withdrawal
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid or missing to address, or invalid\
+            \ or non-positive quantity"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden: access is restricted to DORA tenant users whose\
+            \ native asset is USDC. Admin and indexer API keys have no native asset\
+            \ and are also denied."
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Rate limit exceeded; this endpoint is limited to 1 request
+            per minute per user
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad gateway, e.g. the withdrawal simulation reverted (insufficient\
+            \ vault liquidity, paused vault) or the web3 data provider (gas estimation\
+            \ or price feed) failed"
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Service unavailable: this deployment is not configured to\
+            \ handle web3 withdrawals. The fee quote handler could not be wired up\
+            \ at startup (e.g. missing web3 data provider or quote signing configuration),\
+            \ so the route exists but always reports this error."
+      summary: Estimate the network fee to withdraw USDC via web3
+      x-accepts:
+      - application/json
 components:
   schemas:
     Web3EventStatus:
@@ -13402,7 +13488,8 @@ components:
         estimated_fees:
           description: "Estimated trading fees for the current settlement period,\
             \ capped at a configured fraction (1% by default) of the user's traded\
-            \ USD volume since 00:00:00 UTC."
+            \ USD volume since 00:00:00 UTC plus the USD notional their open orders\
+            \ are still going to trade."
           type: string
         borrowed_portion:
           description: "Configured fraction (10% by default) of the user's total outstanding\
@@ -13429,6 +13516,8 @@ components:
         committed_usd: committed_usd
         required_usd: required_usd
         satisfied: true
+        max_volume_usd: max_volume_usd
+        max_borrow_usd: max_borrow_usd
         breakdown:
           completed_pac: completed_pac
           outstanding_lai: outstanding_lai
@@ -13456,6 +13545,23 @@ components:
         satisfied:
           description: Whether available_usd minus committed_usd is at least required_usd.
           type: boolean
+        max_volume_usd:
+          description: "How much more traded USD notional the user can add to the\
+            \ current settlement period before the reserve stops being covered, for\
+            \ an order that borrows nothing. Null means the fee leg does not constrain\
+            \ the user, because the guard is disabled or the trading fee volume cap\
+            \ is zero."
+          type: string
+          nullable: true
+        max_borrow_usd:
+          description: "How much more the user can borrow before the reserve stops\
+            \ being covered, for an order that adds no traded volume. Null means the\
+            \ borrow leg does not constrain the user, because the guard is disabled\
+            \ or the borrowed fraction is zero. The two caps are single axis: a leveraged\
+            \ order consumes both at once and is admissible when notional/max_volume_usd\
+            \ + borrowed/max_borrow_usd <= 1."
+          type: string
+          nullable: true
         breakdown:
           $ref: "#/components/schemas/CashReserveBreakdown"
       required:
@@ -13463,6 +13569,8 @@ components:
       - breakdown
       - committed_usd
       - enforced
+      - max_borrow_usd
+      - max_volume_usd
       - required_usd
       - satisfied
     CashReserveResponseEnvelope:
@@ -13478,6 +13586,8 @@ components:
           committed_usd: committed_usd
           required_usd: required_usd
           satisfied: true
+          max_volume_usd: max_volume_usd
+          max_borrow_usd: max_borrow_usd
           breakdown:
             completed_pac: completed_pac
             outstanding_lai: outstanding_lai
@@ -13649,38 +13759,77 @@ components:
         users:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        emails:
+        - emails
+        - emails
+      not:
+        required:
+        - emails
+        - users
+      nullable: true
+      oneOf: []
       properties:
         trading_challenge_id:
           format: uuid
           type: string
         users:
+          description: List of user IDs to add. Provide exactly one of users or emails.
           items:
             format: uuid
             type: string
+          minItems: 1
+          type: array
+          default: null
+        emails:
+          description: List of user emails to add. Provide exactly one of users or
+            emails.
+          items:
+            format: email
+            type: string
+          minItems: 1
           type: array
           default: null
       required:
       - trading_challenge_id
-      - users
     RemoveTradingChallengeUsersRequest:
       example:
         trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         users:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        emails:
+        - emails
+        - emails
+      not:
+        required:
+        - emails
+        - users
+      nullable: true
+      oneOf: []
       properties:
         trading_challenge_id:
           format: uuid
           type: string
         users:
+          description: List of user IDs to remove. Provide exactly one of users or
+            emails.
           items:
             format: uuid
             type: string
+          minItems: 1
+          type: array
+          default: null
+        emails:
+          description: List of user emails to remove. Provide exactly one of users
+            or emails.
+          items:
+            format: email
+            type: string
+          minItems: 1
           type: array
           default: null
       required:
       - trading_challenge_id
-      - users
     TradingChallenge:
       example:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -14105,6 +14254,67 @@ components:
           trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           status: status
+        error: error
+        metadata: ""
+    FeeQuoteResponse:
+      description: "The estimated network fee to withdraw USDC via web3, alongside\
+        \ a signed, TTL-bound quote token the client submits with a later withdrawal\
+        \ so the server can validate the fee it was quoted."
+      example:
+        to: to
+        quantity: quantity
+        fee: fee
+        fee_base_units: fee_base_units
+        chain_id: chain_id
+        quote_token: quote_token
+        expires_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        to:
+          description: "The withdrawal destination address, echoed from the request."
+          type: string
+        quantity:
+          description: "Human-decimal USDC withdrawal quantity, echoed from the request."
+          type: string
+        fee:
+          description: "The estimated network fee, in human USDC."
+          type: string
+        fee_base_units:
+          description: "The estimated network fee, in micro-USDC base units."
+          type: string
+        chain_id:
+          description: EVM chain ID the quote was computed for.
+          type: string
+        quote_token:
+          description: "Signed, TTL-bound quote token to submit with a later withdrawal\
+            \ so the server can validate the fee it was quoted."
+          type: string
+        expires_at:
+          description: When the quote token expires.
+          format: date-time
+          type: string
+      required:
+      - chain_id
+      - expires_at
+      - fee
+      - fee_base_units
+      - quantity
+      - quote_token
+      - to
+    FeeQuoteResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/FeeQuoteResponse"
+      example:
+        data:
+          to: to
+          quantity: quantity
+          fee: fee
+          fee_base_units: fee_base_units
+          chain_id: chain_id
+          quote_token: quote_token
+          expires_at: 2000-01-23T04:56:07.000+00:00
         error: error
         metadata: ""
     TerminateTradingChallengeResponse:

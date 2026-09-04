@@ -57,6 +57,7 @@ import tech.dora.model.CreateTradingChallengeRequest;
 import tech.dora.model.CurrentLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.DefundUserRequest;
 import tech.dora.model.DepositInstructionsResponseEnvelope;
+import tech.dora.model.FeeQuoteResponseEnvelope;
 import tech.dora.model.FundUserRequest;
 import tech.dora.model.FundUserResponseEnvelope;
 import tech.dora.model.GetAssetByIDResponseEnvelope;
@@ -229,7 +230,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call addTradingChallengeUsersCall(@javax.annotation.Nonnull AddTradingChallengeUsersRequest addTradingChallengeUsersRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call addTradingChallengeUsersCall(@javax.annotation.Nullable AddTradingChallengeUsersRequest addTradingChallengeUsersRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -275,7 +276,7 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call addTradingChallengeUsersValidateBeforeCall(@javax.annotation.Nonnull AddTradingChallengeUsersRequest addTradingChallengeUsersRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call addTradingChallengeUsersValidateBeforeCall(@javax.annotation.Nullable AddTradingChallengeUsersRequest addTradingChallengeUsersRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'addTradingChallengeUsersRequest' is set
         if (addTradingChallengeUsersRequest == null) {
             throw new ApiException("Missing the required parameter 'addTradingChallengeUsersRequest' when calling addTradingChallengeUsers(Async)");
@@ -301,7 +302,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public TradingChallengeResponseEnvelope addTradingChallengeUsers(@javax.annotation.Nonnull AddTradingChallengeUsersRequest addTradingChallengeUsersRequest) throws ApiException {
+    public TradingChallengeResponseEnvelope addTradingChallengeUsers(@javax.annotation.Nullable AddTradingChallengeUsersRequest addTradingChallengeUsersRequest) throws ApiException {
         ApiResponse<TradingChallengeResponseEnvelope> localVarResp = addTradingChallengeUsersWithHttpInfo(addTradingChallengeUsersRequest);
         return localVarResp.getData();
     }
@@ -322,7 +323,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<TradingChallengeResponseEnvelope> addTradingChallengeUsersWithHttpInfo(@javax.annotation.Nonnull AddTradingChallengeUsersRequest addTradingChallengeUsersRequest) throws ApiException {
+    public ApiResponse<TradingChallengeResponseEnvelope> addTradingChallengeUsersWithHttpInfo(@javax.annotation.Nullable AddTradingChallengeUsersRequest addTradingChallengeUsersRequest) throws ApiException {
         okhttp3.Call localVarCall = addTradingChallengeUsersValidateBeforeCall(addTradingChallengeUsersRequest, null);
         Type localVarReturnType = new TypeToken<TradingChallengeResponseEnvelope>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -345,7 +346,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call addTradingChallengeUsersAsync(@javax.annotation.Nonnull AddTradingChallengeUsersRequest addTradingChallengeUsersRequest, final ApiCallback<TradingChallengeResponseEnvelope> _callback) throws ApiException {
+    public okhttp3.Call addTradingChallengeUsersAsync(@javax.annotation.Nullable AddTradingChallengeUsersRequest addTradingChallengeUsersRequest, final ApiCallback<TradingChallengeResponseEnvelope> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = addTradingChallengeUsersValidateBeforeCall(addTradingChallengeUsersRequest, _callback);
         Type localVarReturnType = new TypeToken<TradingChallengeResponseEnvelope>(){}.getType();
@@ -11189,6 +11190,177 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for getWithdrawalFeeQuote
+     * @param to The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address. (required)
+     * @param quantity Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Fee quote for the requested withdrawal </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid or missing to address, or invalid or non-positive quantity </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Rate limit exceeded; this endpoint is limited to 1 request per minute per user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad gateway, e.g. the withdrawal simulation reverted (insufficient vault liquidity, paused vault) or the web3 data provider (gas estimation or price feed) failed </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service unavailable: this deployment is not configured to handle web3 withdrawals. The fee quote handler could not be wired up at startup (e.g. missing web3 data provider or quote signing configuration), so the route exists but always reports this error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getWithdrawalFeeQuoteCall(@javax.annotation.Nonnull String to, @javax.annotation.Nonnull String quantity, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/web3/withdrawals/fee-quote";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (to != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("to", to));
+        }
+
+        if (quantity != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("quantity", quantity));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getWithdrawalFeeQuoteValidateBeforeCall(@javax.annotation.Nonnull String to, @javax.annotation.Nonnull String quantity, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'to' is set
+        if (to == null) {
+            throw new ApiException("Missing the required parameter 'to' when calling getWithdrawalFeeQuote(Async)");
+        }
+
+        // verify the required parameter 'quantity' is set
+        if (quantity == null) {
+            throw new ApiException("Missing the required parameter 'quantity' when calling getWithdrawalFeeQuote(Async)");
+        }
+
+        return getWithdrawalFeeQuoteCall(to, quantity, _callback);
+
+    }
+
+    /**
+     * Estimate the network fee to withdraw USDC via web3
+     * Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay when they make their withdrawal request. Restricted to DORA tenant users whose native asset is USDC.
+     * @param to The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address. (required)
+     * @param quantity Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive. (required)
+     * @return FeeQuoteResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Fee quote for the requested withdrawal </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid or missing to address, or invalid or non-positive quantity </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Rate limit exceeded; this endpoint is limited to 1 request per minute per user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad gateway, e.g. the withdrawal simulation reverted (insufficient vault liquidity, paused vault) or the web3 data provider (gas estimation or price feed) failed </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service unavailable: this deployment is not configured to handle web3 withdrawals. The fee quote handler could not be wired up at startup (e.g. missing web3 data provider or quote signing configuration), so the route exists but always reports this error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public FeeQuoteResponseEnvelope getWithdrawalFeeQuote(@javax.annotation.Nonnull String to, @javax.annotation.Nonnull String quantity) throws ApiException {
+        ApiResponse<FeeQuoteResponseEnvelope> localVarResp = getWithdrawalFeeQuoteWithHttpInfo(to, quantity);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Estimate the network fee to withdraw USDC via web3
+     * Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay when they make their withdrawal request. Restricted to DORA tenant users whose native asset is USDC.
+     * @param to The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address. (required)
+     * @param quantity Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive. (required)
+     * @return ApiResponse&lt;FeeQuoteResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Fee quote for the requested withdrawal </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid or missing to address, or invalid or non-positive quantity </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Rate limit exceeded; this endpoint is limited to 1 request per minute per user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad gateway, e.g. the withdrawal simulation reverted (insufficient vault liquidity, paused vault) or the web3 data provider (gas estimation or price feed) failed </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service unavailable: this deployment is not configured to handle web3 withdrawals. The fee quote handler could not be wired up at startup (e.g. missing web3 data provider or quote signing configuration), so the route exists but always reports this error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<FeeQuoteResponseEnvelope> getWithdrawalFeeQuoteWithHttpInfo(@javax.annotation.Nonnull String to, @javax.annotation.Nonnull String quantity) throws ApiException {
+        okhttp3.Call localVarCall = getWithdrawalFeeQuoteValidateBeforeCall(to, quantity, null);
+        Type localVarReturnType = new TypeToken<FeeQuoteResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Estimate the network fee to withdraw USDC via web3 (asynchronously)
+     * Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay when they make their withdrawal request. Restricted to DORA tenant users whose native asset is USDC.
+     * @param to The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address. (required)
+     * @param quantity Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Fee quote for the requested withdrawal </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid or missing to address, or invalid or non-positive quantity </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Rate limit exceeded; this endpoint is limited to 1 request per minute per user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad gateway, e.g. the withdrawal simulation reverted (insufficient vault liquidity, paused vault) or the web3 data provider (gas estimation or price feed) failed </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service unavailable: this deployment is not configured to handle web3 withdrawals. The fee quote handler could not be wired up at startup (e.g. missing web3 data provider or quote signing configuration), so the route exists but always reports this error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getWithdrawalFeeQuoteAsync(@javax.annotation.Nonnull String to, @javax.annotation.Nonnull String quantity, final ApiCallback<FeeQuoteResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getWithdrawalFeeQuoteValidateBeforeCall(to, quantity, _callback);
+        Type localVarReturnType = new TypeToken<FeeQuoteResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for ledgerDeposit
      * @param userId  (required)
      * @param fundUserRequest  (required)
@@ -15132,7 +15304,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call removeTradingChallengeUsersCall(@javax.annotation.Nonnull RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call removeTradingChallengeUsersCall(@javax.annotation.Nullable RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -15178,7 +15350,7 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call removeTradingChallengeUsersValidateBeforeCall(@javax.annotation.Nonnull RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call removeTradingChallengeUsersValidateBeforeCall(@javax.annotation.Nullable RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'removeTradingChallengeUsersRequest' is set
         if (removeTradingChallengeUsersRequest == null) {
             throw new ApiException("Missing the required parameter 'removeTradingChallengeUsersRequest' when calling removeTradingChallengeUsers(Async)");
@@ -15204,7 +15376,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public TradingChallengeResponseEnvelope removeTradingChallengeUsers(@javax.annotation.Nonnull RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest) throws ApiException {
+    public TradingChallengeResponseEnvelope removeTradingChallengeUsers(@javax.annotation.Nullable RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest) throws ApiException {
         ApiResponse<TradingChallengeResponseEnvelope> localVarResp = removeTradingChallengeUsersWithHttpInfo(removeTradingChallengeUsersRequest);
         return localVarResp.getData();
     }
@@ -15225,7 +15397,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<TradingChallengeResponseEnvelope> removeTradingChallengeUsersWithHttpInfo(@javax.annotation.Nonnull RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest) throws ApiException {
+    public ApiResponse<TradingChallengeResponseEnvelope> removeTradingChallengeUsersWithHttpInfo(@javax.annotation.Nullable RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest) throws ApiException {
         okhttp3.Call localVarCall = removeTradingChallengeUsersValidateBeforeCall(removeTradingChallengeUsersRequest, null);
         Type localVarReturnType = new TypeToken<TradingChallengeResponseEnvelope>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -15248,7 +15420,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call removeTradingChallengeUsersAsync(@javax.annotation.Nonnull RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest, final ApiCallback<TradingChallengeResponseEnvelope> _callback) throws ApiException {
+    public okhttp3.Call removeTradingChallengeUsersAsync(@javax.annotation.Nullable RemoveTradingChallengeUsersRequest removeTradingChallengeUsersRequest, final ApiCallback<TradingChallengeResponseEnvelope> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = removeTradingChallengeUsersValidateBeforeCall(removeTradingChallengeUsersRequest, _callback);
         Type localVarReturnType = new TypeToken<TradingChallengeResponseEnvelope>(){}.getType();

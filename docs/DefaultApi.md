@@ -80,6 +80,7 @@ All URIs are relative to *https://staging.dora.co*
 | [**getUserTransactionsStream**](DefaultApi.md#getUserTransactionsStream) | **GET** /v1/user/{user_id}/transactions/stream | Get a snapshot of user&#39;s executed transactions since a specific time, and opens a stream for further updates |
 | [**getUsers**](DefaultApi.md#getUsers) | **GET** /v1/user | Get all users (admin only) |
 | [**getUsersAPIKeys**](DefaultApi.md#getUsersAPIKeys) | **GET** /v1/user/apikey | Get user&#39;s api keys |
+| [**getWithdrawalFeeQuote**](DefaultApi.md#getWithdrawalFeeQuote) | **GET** /v1/web3/withdrawals/fee-quote | Estimate the network fee to withdraw USDC via web3 |
 | [**ledgerDeposit**](DefaultApi.md#ledgerDeposit) | **POST** /v1/ledger/deposit/{user_id} | Deposit assets into this user&#39;s account from the outside world |
 | [**ledgerWithdraw**](DefaultApi.md#ledgerWithdraw) | **POST** /v1/ledger/withdraw/{user_id} | Withdraw assets from this user to the outside world |
 | [**ledgerWithdrawRequest**](DefaultApi.md#ledgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{user_id} | Initiate a withdrawal request for this user to the outside world |
@@ -5653,6 +5654,88 @@ This endpoint does not need any parameter.
 | **200** | A list of existing api-keys |  -  |
 | **400** | Bad request, e.g. invalid path parameters |  -  |
 | **500** | Internal server error |  -  |
+
+<a id="getWithdrawalFeeQuote"></a>
+# **getWithdrawalFeeQuote**
+> FeeQuoteResponseEnvelope getWithdrawalFeeQuote(to, quantity)
+
+Estimate the network fee to withdraw USDC via web3
+
+Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay when they make their withdrawal request. Restricted to DORA tenant users whose native asset is USDC.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String to = "to_example"; // String | The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address.
+    String quantity = "quantity_example"; // String | Human-decimal USDC quantity to withdraw, e.g. '100.50'. Must be positive.
+    try {
+      FeeQuoteResponseEnvelope result = apiInstance.getWithdrawalFeeQuote(to, quantity);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getWithdrawalFeeQuote");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **to** | **String**| The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address. | |
+| **quantity** | **String**| Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive. | |
+
+### Return type
+
+[**FeeQuoteResponseEnvelope**](FeeQuoteResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Fee quote for the requested withdrawal |  -  |
+| **400** | Bad request, e.g. invalid or missing to address, or invalid or non-positive quantity |  -  |
+| **401** | Unauthorized, user not logged in |  -  |
+| **403** | Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. |  -  |
+| **429** | Rate limit exceeded; this endpoint is limited to 1 request per minute per user |  -  |
+| **500** | Internal server error |  -  |
+| **502** | Bad gateway, e.g. the withdrawal simulation reverted (insufficient vault liquidity, paused vault) or the web3 data provider (gas estimation or price feed) failed |  -  |
+| **503** | Service unavailable: this deployment is not configured to handle web3 withdrawals. The fee quote handler could not be wired up at startup (e.g. missing web3 data provider or quote signing configuration), so the route exists but always reports this error. |  -  |
 
 <a id="ledgerDeposit"></a>
 # **ledgerDeposit**

@@ -44,6 +44,7 @@ import tech.dora.model.CreateTradingChallengeRequest;
 import tech.dora.model.CurrentLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.DefundUserRequest;
 import tech.dora.model.DepositInstructionsResponseEnvelope;
+import tech.dora.model.FeeQuoteResponseEnvelope;
 import tech.dora.model.FundUserRequest;
 import tech.dora.model.FundUserResponseEnvelope;
 import tech.dora.model.GetAssetByIDResponseEnvelope;
@@ -1162,6 +1163,21 @@ public class DefaultApiTest {
     @Test
     public void getUsersAPIKeysTest() throws ApiException {
         APIKeyResponseEnvelope response = api.getUsersAPIKeys();
+        // TODO: test validations
+    }
+
+    /**
+     * Estimate the network fee to withdraw USDC via web3
+     *
+     * Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay when they make their withdrawal request. Restricted to DORA tenant users whose native asset is USDC.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getWithdrawalFeeQuoteTest() throws ApiException {
+        String to = null;
+        String quantity = null;
+        FeeQuoteResponseEnvelope response = api.getWithdrawalFeeQuote(to, quantity);
         // TODO: test validations
     }
 

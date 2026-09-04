@@ -40,20 +40,4 @@ public class RemoveTradingChallengeUsersRequestTest {
         // TODO: test RemoveTradingChallengeUsersRequest
     }
 
-    /**
-     * Test the property 'tradingChallengeId'
-     */
-    @Test
-    public void tradingChallengeIdTest() {
-        // TODO: test tradingChallengeId
-    }
-
-    /**
-     * Test the property 'users'
-     */
-    @Test
-    public void usersTest() {
-        // TODO: test users
-    }
-
 }

@@ -73,6 +73,8 @@ docs/DepositInstructionForChain.md
 docs/DepositInstructionsResponse.md
 docs/DepositInstructionsResponseEnvelope.md
 docs/DepositResponse.md
+docs/FeeQuoteResponse.md
+docs/FeeQuoteResponseEnvelope.md
 docs/FundUser.md
 docs/FundUserRequest.md
 docs/FundUserResponseEnvelope.md
@@ -369,6 +371,8 @@ src/main/java/tech/dora/model/DepositInstructionForChain.java
 src/main/java/tech/dora/model/DepositInstructionsResponse.java
 src/main/java/tech/dora/model/DepositInstructionsResponseEnvelope.java
 src/main/java/tech/dora/model/DepositResponse.java
+src/main/java/tech/dora/model/FeeQuoteResponse.java
+src/main/java/tech/dora/model/FeeQuoteResponseEnvelope.java
 src/main/java/tech/dora/model/FundUser.java
 src/main/java/tech/dora/model/FundUserRequest.java
 src/main/java/tech/dora/model/FundUserResponseEnvelope.java
@@ -638,6 +642,8 @@ src/test/java/tech/dora/model/DepositInstructionForChainTest.java
 src/test/java/tech/dora/model/DepositInstructionsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/DepositInstructionsResponseTest.java
 src/test/java/tech/dora/model/DepositResponseTest.java
+src/test/java/tech/dora/model/FeeQuoteResponseEnvelopeTest.java
+src/test/java/tech/dora/model/FeeQuoteResponseTest.java
 src/test/java/tech/dora/model/FundUserRequestTest.java
 src/test/java/tech/dora/model/FundUserResponseEnvelopeTest.java
 src/test/java/tech/dora/model/FundUserTest.java

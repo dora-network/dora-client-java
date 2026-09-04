@@ -49,7 +49,7 @@ import tech.dora.JSON;
 /**
  * Descriptor of the vault deposit() transaction the client builds after signing the permit. The client splits the permit signature into v/r/s and ABI-encodes function_signature with args plus (v, r, s) to produce the calldata sent to &#39;to&#39;.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-31T11:19:20.004337973+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-04T17:02:20.472678984+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class DepositCall {
   public static final String SERIALIZED_NAME_TO = "to";
   @SerializedName(SERIALIZED_NAME_TO)

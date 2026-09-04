@@ -79,6 +79,22 @@ public class CashReserveResponseTest {
     }
 
     /**
+     * Test the property 'maxVolumeUsd'
+     */
+    @Test
+    public void maxVolumeUsdTest() {
+        // TODO: test maxVolumeUsd
+    }
+
+    /**
+     * Test the property 'maxBorrowUsd'
+     */
+    @Test
+    public void maxBorrowUsdTest() {
+        // TODO: test maxBorrowUsd
+    }
+
+    /**
      * Test the property 'breakdown'
      */
     @Test

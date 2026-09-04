@@ -49,7 +49,7 @@ import tech.dora.JSON;
 /**
  * CashReserveResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-31T11:19:20.004337973+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-04T17:02:20.472678984+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class CashReserveResponse {
   public static final String SERIALIZED_NAME_ENFORCED = "enforced";
   @SerializedName(SERIALIZED_NAME_ENFORCED)
@@ -75,6 +75,16 @@ public class CashReserveResponse {
   @SerializedName(SERIALIZED_NAME_SATISFIED)
   @javax.annotation.Nonnull
   private Boolean satisfied;
+
+  public static final String SERIALIZED_NAME_MAX_VOLUME_USD = "max_volume_usd";
+  @SerializedName(SERIALIZED_NAME_MAX_VOLUME_USD)
+  @javax.annotation.Nonnull
+  private String maxVolumeUsd;
+
+  public static final String SERIALIZED_NAME_MAX_BORROW_USD = "max_borrow_usd";
+  @SerializedName(SERIALIZED_NAME_MAX_BORROW_USD)
+  @javax.annotation.Nonnull
+  private String maxBorrowUsd;
 
   public static final String SERIALIZED_NAME_BREAKDOWN = "breakdown";
   @SerializedName(SERIALIZED_NAME_BREAKDOWN)
@@ -179,6 +189,44 @@ public class CashReserveResponse {
   }
 
 
+  public CashReserveResponse maxVolumeUsd(@javax.annotation.Nonnull String maxVolumeUsd) {
+    this.maxVolumeUsd = maxVolumeUsd;
+    return this;
+  }
+
+  /**
+   * How much more traded USD notional the user can add to the current settlement period before the reserve stops being covered, for an order that borrows nothing. Null means the fee leg does not constrain the user, because the guard is disabled or the trading fee volume cap is zero.
+   * @return maxVolumeUsd
+   */
+  @javax.annotation.Nonnull
+  public String getMaxVolumeUsd() {
+    return maxVolumeUsd;
+  }
+
+  public void setMaxVolumeUsd(@javax.annotation.Nonnull String maxVolumeUsd) {
+    this.maxVolumeUsd = maxVolumeUsd;
+  }
+
+
+  public CashReserveResponse maxBorrowUsd(@javax.annotation.Nonnull String maxBorrowUsd) {
+    this.maxBorrowUsd = maxBorrowUsd;
+    return this;
+  }
+
+  /**
+   * How much more the user can borrow before the reserve stops being covered, for an order that adds no traded volume. Null means the borrow leg does not constrain the user, because the guard is disabled or the borrowed fraction is zero. The two caps are single axis: a leveraged order consumes both at once and is admissible when notional/max_volume_usd + borrowed/max_borrow_usd &lt;&#x3D; 1.
+   * @return maxBorrowUsd
+   */
+  @javax.annotation.Nonnull
+  public String getMaxBorrowUsd() {
+    return maxBorrowUsd;
+  }
+
+  public void setMaxBorrowUsd(@javax.annotation.Nonnull String maxBorrowUsd) {
+    this.maxBorrowUsd = maxBorrowUsd;
+  }
+
+
   public CashReserveResponse breakdown(@javax.annotation.Nonnull CashReserveBreakdown breakdown) {
     this.breakdown = breakdown;
     return this;
@@ -213,12 +261,14 @@ public class CashReserveResponse {
         Objects.equals(this.committedUsd, cashReserveResponse.committedUsd) &&
         Objects.equals(this.requiredUsd, cashReserveResponse.requiredUsd) &&
         Objects.equals(this.satisfied, cashReserveResponse.satisfied) &&
+        Objects.equals(this.maxVolumeUsd, cashReserveResponse.maxVolumeUsd) &&
+        Objects.equals(this.maxBorrowUsd, cashReserveResponse.maxBorrowUsd) &&
         Objects.equals(this.breakdown, cashReserveResponse.breakdown);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(enforced, availableUsd, committedUsd, requiredUsd, satisfied, breakdown);
+    return Objects.hash(enforced, availableUsd, committedUsd, requiredUsd, satisfied, maxVolumeUsd, maxBorrowUsd, breakdown);
   }
 
   @Override
@@ -230,6 +280,8 @@ public class CashReserveResponse {
     sb.append("    committedUsd: ").append(toIndentedString(committedUsd)).append("\n");
     sb.append("    requiredUsd: ").append(toIndentedString(requiredUsd)).append("\n");
     sb.append("    satisfied: ").append(toIndentedString(satisfied)).append("\n");
+    sb.append("    maxVolumeUsd: ").append(toIndentedString(maxVolumeUsd)).append("\n");
+    sb.append("    maxBorrowUsd: ").append(toIndentedString(maxBorrowUsd)).append("\n");
     sb.append("    breakdown: ").append(toIndentedString(breakdown)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -249,10 +301,10 @@ public class CashReserveResponse {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("enforced", "available_usd", "committed_usd", "required_usd", "satisfied", "breakdown"));
+    openapiFields = new HashSet<String>(Arrays.asList("enforced", "available_usd", "committed_usd", "required_usd", "satisfied", "max_volume_usd", "max_borrow_usd", "breakdown"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("enforced", "available_usd", "committed_usd", "required_usd", "satisfied", "breakdown"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("enforced", "available_usd", "committed_usd", "required_usd", "satisfied", "max_volume_usd", "max_borrow_usd", "breakdown"));
   }
 
   /**
@@ -291,6 +343,12 @@ public class CashReserveResponse {
       }
       if (!jsonObj.get("required_usd").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `required_usd` to be a primitive type in the JSON string but got `%s`", jsonObj.get("required_usd").toString()));
+      }
+      if (!jsonObj.get("max_volume_usd").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `max_volume_usd` to be a primitive type in the JSON string but got `%s`", jsonObj.get("max_volume_usd").toString()));
+      }
+      if (!jsonObj.get("max_borrow_usd").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `max_borrow_usd` to be a primitive type in the JSON string but got `%s`", jsonObj.get("max_borrow_usd").toString()));
       }
       // validate the required field `breakdown`
       CashReserveBreakdown.validateJsonElement(jsonObj.get("breakdown"));
