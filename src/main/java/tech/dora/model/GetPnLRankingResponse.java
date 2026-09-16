@@ -20,11 +20,9 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import tech.dora.model.Metadata;
-import tech.dora.model.PnLRankingResponse;
+import tech.dora.model.PnLRankingResponses;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,12 +50,12 @@ import tech.dora.JSON;
 /**
  * GetPnLRankingResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-04T17:02:20.472678984+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-16T18:17:13.950531673+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class GetPnLRankingResponse {
   public static final String SERIALIZED_NAME_DATA = "data";
   @SerializedName(SERIALIZED_NAME_DATA)
   @javax.annotation.Nullable
-  private List<PnLRankingResponse> data = new ArrayList<>();
+  private PnLRankingResponses data;
 
   public static final String SERIALIZED_NAME_ERROR = "error";
   @SerializedName(SERIALIZED_NAME_ERROR)
@@ -72,16 +70,8 @@ public class GetPnLRankingResponse {
   public GetPnLRankingResponse() {
   }
 
-  public GetPnLRankingResponse data(@javax.annotation.Nullable List<PnLRankingResponse> data) {
+  public GetPnLRankingResponse data(@javax.annotation.Nullable PnLRankingResponses data) {
     this.data = data;
-    return this;
-  }
-
-  public GetPnLRankingResponse addDataItem(PnLRankingResponse dataItem) {
-    if (this.data == null) {
-      this.data = new ArrayList<>();
-    }
-    this.data.add(dataItem);
     return this;
   }
 
@@ -90,11 +80,11 @@ public class GetPnLRankingResponse {
    * @return data
    */
   @javax.annotation.Nullable
-  public List<PnLRankingResponse> getData() {
+  public PnLRankingResponses getData() {
     return data;
   }
 
-  public void setData(@javax.annotation.Nullable List<PnLRankingResponse> data) {
+  public void setData(@javax.annotation.Nullable PnLRankingResponses data) {
     this.data = data;
   }
 
@@ -216,19 +206,9 @@ public class GetPnLRankingResponse {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+      // validate the optional field `data`
       if (jsonObj.get("data") != null && !jsonObj.get("data").isJsonNull()) {
-        JsonArray jsonArraydata = jsonObj.getAsJsonArray("data");
-        if (jsonArraydata != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("data").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `data` to be an array in the JSON string but got `%s`", jsonObj.get("data").toString()));
-          }
-
-          // validate the optional field `data` (array)
-          for (int i = 0; i < jsonArraydata.size(); i++) {
-            PnLRankingResponse.validateJsonElement(jsonArraydata.get(i));
-          };
-        }
+        PnLRankingResponses.validateJsonElement(jsonObj.get("data"));
       }
       if ((jsonObj.get("error") != null && !jsonObj.get("error").isJsonNull()) && !jsonObj.get("error").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `error` to be a primitive type in the JSON string but got `%s`", jsonObj.get("error").toString()));

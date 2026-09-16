@@ -50,9 +50,9 @@ import java.util.Set;
 import tech.dora.JSON;
 
 /**
- * Request body for PUT /v1/trading_challenges/{trading_challenge_id}: partially update a trading challenge. A field that is omitted, or sent as null, is left unchanged. Each field accepts either the {update, value} object or the bare value on its own. PENDING challenges accept every field; ACTIVE challenges accept only name, max_users, end and the prize quantities; COMPLETED challenges accept none. tenant_id and status are never updatable, and the participant list is managed by add_users and remove_users.
+ * Request body for PUT /v1/trading_challenges/{trading_challenge_id}: partially update a trading challenge. A field that is omitted, or sent as null, is left unchanged. Each field accepts either the {update, value} object or the bare value on its own. PENDING CASH and TOURNAMENT challenges accept every field; ACTIVE CASH and TOURNAMENT challenges accept only name, max_users, end and the prize quantities; QR_PROMO challenges accept only name, max_users and end while PENDING or ACTIVE; COMPLETED challenges accept none. tenant_id and status are never updatable, and the participant list is managed by add_users and remove_users.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-04T17:02:20.472678984+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-16T18:17:13.950531673+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class UpdateTradingChallengeRequest {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)

@@ -20,6 +20,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.UUID;
 import tech.dora.model.CountryCode;
@@ -50,8 +51,18 @@ import tech.dora.JSON;
 /**
  * CreateIntegratorUserRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-04T17:02:20.472678984+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-16T18:17:13.950531673+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class CreateIntegratorUserRequest {
+  public static final String SERIALIZED_NAME_REFERRAL_CODE = "referral_code";
+  @SerializedName(SERIALIZED_NAME_REFERRAL_CODE)
+  @javax.annotation.Nullable
+  private String referralCode;
+
+  public static final String SERIALIZED_NAME_SIGNUP_SOURCE = "signup_source";
+  @SerializedName(SERIALIZED_NAME_SIGNUP_SOURCE)
+  @javax.annotation.Nullable
+  private URI signupSource;
+
   public static final String SERIALIZED_NAME_EMAIL = "email";
   @SerializedName(SERIALIZED_NAME_EMAIL)
   @javax.annotation.Nullable
@@ -109,6 +120,44 @@ public class CreateIntegratorUserRequest {
 
   public CreateIntegratorUserRequest() {
   }
+
+  public CreateIntegratorUserRequest referralCode(@javax.annotation.Nullable String referralCode) {
+    this.referralCode = referralCode;
+    return this;
+  }
+
+  /**
+   * Optional affiliate code, normalized to uppercase. Accepted only when creating a new account in the program owning tenant. One immutable attribution per user account; a later signup/linking call cannot add or replace it. Invalid or inactive codes fail signup atomically. Independent of QR acquisition attribution. Existing unassigned users can instead use POST /v1/affiliate_referrals/self; earlier activity is excluded.
+   * @return referralCode
+   */
+  @javax.annotation.Nullable
+  public String getReferralCode() {
+    return referralCode;
+  }
+
+  public void setReferralCode(@javax.annotation.Nullable String referralCode) {
+    this.referralCode = referralCode;
+  }
+
+
+  public CreateIntegratorUserRequest signupSource(@javax.annotation.Nullable URI signupSource) {
+    this.signupSource = signupSource;
+    return this;
+  }
+
+  /**
+   * Optional client-reported HTTP(S) signup site URL, used only with referral_code. When omitted, a valid HTTP(S) Origin header is used; other origins are ignored. Only the hostname is stored, without path, query, credentials or fragment. Unknown if neither supplies a usable hostname. Ignored when referral_code is empty. It does not select or authenticate the tenant.
+   * @return signupSource
+   */
+  @javax.annotation.Nullable
+  public URI getSignupSource() {
+    return signupSource;
+  }
+
+  public void setSignupSource(@javax.annotation.Nullable URI signupSource) {
+    this.signupSource = signupSource;
+  }
+
 
   public CreateIntegratorUserRequest email(@javax.annotation.Nullable String email) {
     this.email = email;
@@ -329,7 +378,9 @@ public class CreateIntegratorUserRequest {
       return false;
     }
     CreateIntegratorUserRequest createIntegratorUserRequest = (CreateIntegratorUserRequest) o;
-    return Objects.equals(this.email, createIntegratorUserRequest.email) &&
+    return Objects.equals(this.referralCode, createIntegratorUserRequest.referralCode) &&
+        Objects.equals(this.signupSource, createIntegratorUserRequest.signupSource) &&
+        Objects.equals(this.email, createIntegratorUserRequest.email) &&
         Objects.equals(this.firstName, createIntegratorUserRequest.firstName) &&
         Objects.equals(this.lastName, createIntegratorUserRequest.lastName) &&
         Objects.equals(this.userName, createIntegratorUserRequest.userName) &&
@@ -344,13 +395,15 @@ public class CreateIntegratorUserRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(email, firstName, lastName, userName, countryOfDomicile, nativeAssetId, photoUrl, provider, providerId, timezone, challengeId);
+    return Objects.hash(referralCode, signupSource, email, firstName, lastName, userName, countryOfDomicile, nativeAssetId, photoUrl, provider, providerId, timezone, challengeId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateIntegratorUserRequest {\n");
+    sb.append("    referralCode: ").append(toIndentedString(referralCode)).append("\n");
+    sb.append("    signupSource: ").append(toIndentedString(signupSource)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
@@ -407,6 +460,12 @@ public class CreateIntegratorUserRequest {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+      if ((jsonObj.get("referral_code") != null && !jsonObj.get("referral_code").isJsonNull()) && !jsonObj.get("referral_code").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `referral_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("referral_code").toString()));
+      }
+      if ((jsonObj.get("signup_source") != null && !jsonObj.get("signup_source").isJsonNull()) && !jsonObj.get("signup_source").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `signup_source` to be a primitive type in the JSON string but got `%s`", jsonObj.get("signup_source").toString()));
+      }
       if ((jsonObj.get("email") != null && !jsonObj.get("email").isJsonNull()) && !jsonObj.get("email").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email").toString()));
       }

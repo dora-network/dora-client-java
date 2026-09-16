@@ -9,5 +9,7 @@
 
 * `CASH` (value: `"CASH"`)
 
+* `QR_PROMO` (value: `"QR_PROMO"`)
+
 
 

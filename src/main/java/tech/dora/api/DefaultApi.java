@@ -29,6 +29,15 @@ import java.io.IOException;
 
 import tech.dora.model.APIKeyResponseEnvelope;
 import tech.dora.model.AddTradingChallengeUsersRequest;
+import tech.dora.model.AffiliateAttributionEnvelope;
+import tech.dora.model.AffiliateCashFlowReportEnvelope;
+import tech.dora.model.AffiliateError;
+import tech.dora.model.AffiliateMembershipListEnvelope;
+import tech.dora.model.AffiliateProgramEnvelope;
+import tech.dora.model.AffiliateProgramListEnvelope;
+import tech.dora.model.AffiliateReferralReportEnvelope;
+import tech.dora.model.AffiliateReferrerEnvelope;
+import tech.dora.model.AffiliateReferrerListEnvelope;
 import tech.dora.model.AllPositionsResponseEnvelope;
 import tech.dora.model.AllWithdrawalInitiationsResponseEnvelope;
 import tech.dora.model.AssetKind;
@@ -36,11 +45,13 @@ import tech.dora.model.AssetPrice;
 import tech.dora.model.AssetPriceResponseEnvelope;
 import tech.dora.model.AssetRequestError;
 import tech.dora.model.AssetYieldResolution;
+import tech.dora.model.AssignAffiliateReferralRequest;
 import tech.dora.model.CancelOrderResponseEnvelope;
 import tech.dora.model.CandleResolution;
 import tech.dora.model.CashReserveResponseEnvelope;
 import tech.dora.model.ClaimLeverageAccruedInterestRequest;
 import tech.dora.model.ClaimLeverageAccruedInterestResponseEnvelope;
+import tech.dora.model.ClaimPromoLinkRequest;
 import tech.dora.model.ClaimTradingChallengeResponseEnvelope;
 import tech.dora.model.CloseAccountRequest;
 import tech.dora.model.ClosePositionRequest;
@@ -48,12 +59,14 @@ import tech.dora.model.ClosePositionResponseEnvelope;
 import tech.dora.model.CountryCode;
 import tech.dora.model.CreateAPIKeyRequest;
 import tech.dora.model.CreateAPIKeyResponseEnvelope;
+import tech.dora.model.CreateAffiliateProgramRequest;
 import tech.dora.model.CreateConditionalOrderRequest;
 import tech.dora.model.CreateConditionalOrderResponseEnvelope;
 import tech.dora.model.CreateIntegratorUserRequest;
 import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponseEnvelope;
 import tech.dora.model.CreateTradingChallengeRequest;
+import tech.dora.model.CreateWithdrawalRequest;
 import tech.dora.model.CurrentLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.DefundUserRequest;
 import tech.dora.model.DepositInstructionsResponseEnvelope;
@@ -69,6 +82,8 @@ import tech.dora.model.GetTopOfBookResponseEnvelope;
 import tech.dora.model.HistoricalLeverageInterestRatesResponseEnvelope;
 import tech.dora.model.IsolateCollateralRequest;
 import tech.dora.model.IsolateCollateralResponse;
+import tech.dora.model.IssuePromoLinkBatchRequest;
+import tech.dora.model.IssuePromoLinkBatchResponse;
 import tech.dora.model.LedgerAccountsResponseV2Envelope;
 import tech.dora.model.LedgerModuleByAssetResponseEnvelope;
 import tech.dora.model.LedgerModuleResponseEnvelope;
@@ -89,7 +104,9 @@ import tech.dora.model.ListPositionAccountsResponseEnvelope;
 import tech.dora.model.ListTradeResponseEnvelope;
 import tech.dora.model.ListTransactionsResponseEnvelope;
 import tech.dora.model.ListUsersResponseEnvelope;
+import tech.dora.model.ListWithdrawalsResponseEnvelope;
 import tech.dora.model.LiveOrderbook;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import tech.dora.model.OrderBookResponseEnvelope;
 import tech.dora.model.OrderBookStatus;
@@ -104,6 +121,12 @@ import tech.dora.model.PayLeverageAccruedInterestRequest;
 import tech.dora.model.PayLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.PoolPriceResponseEnvelope;
 import tech.dora.model.PoolRequestError;
+import tech.dora.model.PromoAttributionResponse;
+import tech.dora.model.PromoClaimResponseEnvelope;
+import tech.dora.model.PromoLinkBatchListResponse;
+import tech.dora.model.PromoLinkListResponse;
+import tech.dora.model.PromoLinkStatus;
+import tech.dora.model.RegisterAffiliateReferrerRequest;
 import tech.dora.model.RemoveTradingChallengeUsersRequest;
 import tech.dora.model.RepayUSDRequest;
 import tech.dora.model.RepayUSDResponseEnvelope;
@@ -111,6 +134,8 @@ import tech.dora.model.ResponseEnvelope;
 import tech.dora.model.ResponseEnvelopeOfListAssets;
 import tech.dora.model.ReviewTradingChallengeRegistrationRequest;
 import tech.dora.model.RevokeAPIKeyResponseEnvelope;
+import tech.dora.model.RevokePromoLinkRequest;
+import tech.dora.model.RevokePromoLinkResponse;
 import tech.dora.model.SettleLeverageAccruedInterestRequest;
 import tech.dora.model.SettleLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.SettleRealizedPnlRecordResponseEnvelope;
@@ -150,6 +175,7 @@ import tech.dora.model.TransferBalancesResponseEnvelope;
 import java.util.UUID;
 import tech.dora.model.UnitePositionRequest;
 import tech.dora.model.UnitePositionResponseEnvelope;
+import tech.dora.model.UpdateAffiliateProgramRequest;
 import tech.dora.model.UpdateTradingChallengeRequest;
 import tech.dora.model.UpdateUserConfigRequest;
 import tech.dora.model.UpdateUserKYCRequest;
@@ -166,10 +192,12 @@ import tech.dora.model.UserUpdatedResponseEnvelope;
 import tech.dora.model.UserValueResponseEnvelope;
 import tech.dora.model.ValidateSubmitOrderRequest;
 import tech.dora.model.ValidateSubmitOrderResponse;
+import tech.dora.model.Web3WithdrawalStatus;
 import tech.dora.model.WithdrawRequest;
 import tech.dora.model.WithdrawResponseEnvelope;
 import tech.dora.model.WithdrawalInitiationResponseEnvelope;
 import tech.dora.model.WithdrawalRequestReason;
+import tech.dora.model.WithdrawalResponseEnvelope;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -654,6 +682,161 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = approveTradingChallengeRegistrationRequestValidateBeforeCall(requestId, reviewTradingChallengeRegistrationRequest, _callback);
         Type localVarReturnType = new TypeToken<TradingChallengeRegistrationRequestResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for assignAffiliateReferral
+     * @param assignAffiliateReferralRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Referral assigned </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Missing or invalid code, inactive program, code from another tenant, or self-referral </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A different referrer is already assigned </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Same code was already assigned; original assignment is returned </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call assignAffiliateReferralCall(@javax.annotation.Nonnull AssignAffiliateReferralRequest assignAffiliateReferralRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = assignAffiliateReferralRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/affiliate_referrals/self";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call assignAffiliateReferralValidateBeforeCall(@javax.annotation.Nonnull AssignAffiliateReferralRequest assignAffiliateReferralRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'assignAffiliateReferralRequest' is set
+        if (assignAffiliateReferralRequest == null) {
+            throw new ApiException("Missing the required parameter 'assignAffiliateReferralRequest' when calling assignAffiliateReferral(Async)");
+        }
+
+        return assignAffiliateReferralCall(assignAffiliateReferralRequest, _callback);
+
+    }
+
+    /**
+     * Assign your affiliate referrer
+     * Authenticated existing users may assign a referral code once, within their own tenant. No user_id or tenant_id override is accepted. New assignments reject self-referral and require an active program. Repeating the same code returns the original assignment without changing its timestamp; changing the code returns 409. Only activity from assignment onward counts. This does not change signup_source.
+     * @param assignAffiliateReferralRequest  (required)
+     * @return AffiliateAttributionEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Referral assigned </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Missing or invalid code, inactive program, code from another tenant, or self-referral </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A different referrer is already assigned </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Same code was already assigned; original assignment is returned </td><td>  -  </td></tr>
+     </table>
+     */
+    public AffiliateAttributionEnvelope assignAffiliateReferral(@javax.annotation.Nonnull AssignAffiliateReferralRequest assignAffiliateReferralRequest) throws ApiException {
+        ApiResponse<AffiliateAttributionEnvelope> localVarResp = assignAffiliateReferralWithHttpInfo(assignAffiliateReferralRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Assign your affiliate referrer
+     * Authenticated existing users may assign a referral code once, within their own tenant. No user_id or tenant_id override is accepted. New assignments reject self-referral and require an active program. Repeating the same code returns the original assignment without changing its timestamp; changing the code returns 409. Only activity from assignment onward counts. This does not change signup_source.
+     * @param assignAffiliateReferralRequest  (required)
+     * @return ApiResponse&lt;AffiliateAttributionEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Referral assigned </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Missing or invalid code, inactive program, code from another tenant, or self-referral </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A different referrer is already assigned </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Same code was already assigned; original assignment is returned </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AffiliateAttributionEnvelope> assignAffiliateReferralWithHttpInfo(@javax.annotation.Nonnull AssignAffiliateReferralRequest assignAffiliateReferralRequest) throws ApiException {
+        okhttp3.Call localVarCall = assignAffiliateReferralValidateBeforeCall(assignAffiliateReferralRequest, null);
+        Type localVarReturnType = new TypeToken<AffiliateAttributionEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Assign your affiliate referrer (asynchronously)
+     * Authenticated existing users may assign a referral code once, within their own tenant. No user_id or tenant_id override is accepted. New assignments reject self-referral and require an active program. Repeating the same code returns the original assignment without changing its timestamp; changing the code returns 409. Only activity from assignment onward counts. This does not change signup_source.
+     * @param assignAffiliateReferralRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Referral assigned </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Missing or invalid code, inactive program, code from another tenant, or self-referral </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A different referrer is already assigned </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Same code was already assigned; original assignment is returned </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call assignAffiliateReferralAsync(@javax.annotation.Nonnull AssignAffiliateReferralRequest assignAffiliateReferralRequest, final ApiCallback<AffiliateAttributionEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = assignAffiliateReferralValidateBeforeCall(assignAffiliateReferralRequest, _callback);
+        Type localVarReturnType = new TypeToken<AffiliateAttributionEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -1241,6 +1424,171 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = claimLeverageGetAccruedInterestValidateBeforeCall(claimLeverageAccruedInterestRequest, _callback);
         Type localVarReturnType = new TypeToken<ClaimLeverageAccruedInterestResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for claimPromoLink
+     * @param token Opaque bearer claim token (required)
+     * @param claimPromoLinkRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Claim accepted and a pending challenge account created </td><td>  * Cache-Control -  <br>  </td></tr>
+        <tr><td> 400 </td><td> Invalid or non-email-only request </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Claim link not found or not yet safely disclosable </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Link, campaign, or email can no longer be claimed </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> Link revoked or campaign ended </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Per-IP or durable per-token attempt limit exceeded </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Claim processing failed without committing account state </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Encrypted login delivery is not configured </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call claimPromoLinkCall(@javax.annotation.Nonnull String token, @javax.annotation.Nonnull ClaimPromoLinkRequest claimPromoLinkRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = claimPromoLinkRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/promo/claim/{token}"
+            .replace("{" + "token" + "}", localVarApiClient.escapeString(token.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call claimPromoLinkValidateBeforeCall(@javax.annotation.Nonnull String token, @javax.annotation.Nonnull ClaimPromoLinkRequest claimPromoLinkRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'token' is set
+        if (token == null) {
+            throw new ApiException("Missing the required parameter 'token' when calling claimPromoLink(Async)");
+        }
+
+        // verify the required parameter 'claimPromoLinkRequest' is set
+        if (claimPromoLinkRequest == null) {
+            throw new ApiException("Missing the required parameter 'claimPromoLinkRequest' when calling claimPromoLink(Async)");
+        }
+
+        return claimPromoLinkCall(token, claimPromoLinkRequest, _callback);
+
+    }
+
+    /**
+     * Claim a public QR promotion link
+     * 
+     * @param token Opaque bearer claim token (required)
+     * @param claimPromoLinkRequest  (required)
+     * @return PromoClaimResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Claim accepted and a pending challenge account created </td><td>  * Cache-Control -  <br>  </td></tr>
+        <tr><td> 400 </td><td> Invalid or non-email-only request </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Claim link not found or not yet safely disclosable </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Link, campaign, or email can no longer be claimed </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> Link revoked or campaign ended </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Per-IP or durable per-token attempt limit exceeded </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Claim processing failed without committing account state </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Encrypted login delivery is not configured </td><td>  -  </td></tr>
+     </table>
+     */
+    public PromoClaimResponseEnvelope claimPromoLink(@javax.annotation.Nonnull String token, @javax.annotation.Nonnull ClaimPromoLinkRequest claimPromoLinkRequest) throws ApiException {
+        ApiResponse<PromoClaimResponseEnvelope> localVarResp = claimPromoLinkWithHttpInfo(token, claimPromoLinkRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Claim a public QR promotion link
+     * 
+     * @param token Opaque bearer claim token (required)
+     * @param claimPromoLinkRequest  (required)
+     * @return ApiResponse&lt;PromoClaimResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Claim accepted and a pending challenge account created </td><td>  * Cache-Control -  <br>  </td></tr>
+        <tr><td> 400 </td><td> Invalid or non-email-only request </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Claim link not found or not yet safely disclosable </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Link, campaign, or email can no longer be claimed </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> Link revoked or campaign ended </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Per-IP or durable per-token attempt limit exceeded </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Claim processing failed without committing account state </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Encrypted login delivery is not configured </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<PromoClaimResponseEnvelope> claimPromoLinkWithHttpInfo(@javax.annotation.Nonnull String token, @javax.annotation.Nonnull ClaimPromoLinkRequest claimPromoLinkRequest) throws ApiException {
+        okhttp3.Call localVarCall = claimPromoLinkValidateBeforeCall(token, claimPromoLinkRequest, null);
+        Type localVarReturnType = new TypeToken<PromoClaimResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Claim a public QR promotion link (asynchronously)
+     * 
+     * @param token Opaque bearer claim token (required)
+     * @param claimPromoLinkRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Claim accepted and a pending challenge account created </td><td>  * Cache-Control -  <br>  </td></tr>
+        <tr><td> 400 </td><td> Invalid or non-email-only request </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Claim link not found or not yet safely disclosable </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Link, campaign, or email can no longer be claimed </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> Link revoked or campaign ended </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Per-IP or durable per-token attempt limit exceeded </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Claim processing failed without committing account state </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Encrypted login delivery is not configured </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call claimPromoLinkAsync(@javax.annotation.Nonnull String token, @javax.annotation.Nonnull ClaimPromoLinkRequest claimPromoLinkRequest, final ApiCallback<PromoClaimResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = claimPromoLinkValidateBeforeCall(token, claimPromoLinkRequest, _callback);
+        Type localVarReturnType = new TypeToken<PromoClaimResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -1950,6 +2298,149 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for createAffiliateProgram
+     * @param createAffiliateProgramRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Create an affiliate program </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createAffiliateProgramCall(@javax.annotation.Nonnull CreateAffiliateProgramRequest createAffiliateProgramRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = createAffiliateProgramRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/affiliate_programs";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createAffiliateProgramValidateBeforeCall(@javax.annotation.Nonnull CreateAffiliateProgramRequest createAffiliateProgramRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'createAffiliateProgramRequest' is set
+        if (createAffiliateProgramRequest == null) {
+            throw new ApiException("Missing the required parameter 'createAffiliateProgramRequest' when calling createAffiliateProgram(Async)");
+        }
+
+        return createAffiliateProgramCall(createAffiliateProgramRequest, _callback);
+
+    }
+
+    /**
+     * Create an affiliate program
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. tenant_id is required. Set is_active to true to create an active program.
+     * @param createAffiliateProgramRequest  (required)
+     * @return AffiliateProgramEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Create an affiliate program </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AffiliateProgramEnvelope createAffiliateProgram(@javax.annotation.Nonnull CreateAffiliateProgramRequest createAffiliateProgramRequest) throws ApiException {
+        ApiResponse<AffiliateProgramEnvelope> localVarResp = createAffiliateProgramWithHttpInfo(createAffiliateProgramRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Create an affiliate program
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. tenant_id is required. Set is_active to true to create an active program.
+     * @param createAffiliateProgramRequest  (required)
+     * @return ApiResponse&lt;AffiliateProgramEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Create an affiliate program </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AffiliateProgramEnvelope> createAffiliateProgramWithHttpInfo(@javax.annotation.Nonnull CreateAffiliateProgramRequest createAffiliateProgramRequest) throws ApiException {
+        okhttp3.Call localVarCall = createAffiliateProgramValidateBeforeCall(createAffiliateProgramRequest, null);
+        Type localVarReturnType = new TypeToken<AffiliateProgramEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Create an affiliate program (asynchronously)
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. tenant_id is required. Set is_active to true to create an active program.
+     * @param createAffiliateProgramRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Create an affiliate program </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createAffiliateProgramAsync(@javax.annotation.Nonnull CreateAffiliateProgramRequest createAffiliateProgramRequest, final ApiCallback<AffiliateProgramEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createAffiliateProgramValidateBeforeCall(createAffiliateProgramRequest, _callback);
+        Type localVarReturnType = new TypeToken<AffiliateProgramEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for createConditionalOrder
      * @param createConditionalOrderRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -2101,7 +2592,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Order created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve, or the order would take their position in the order book&#39;s base asset above the tenant limit for that asset </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -2174,7 +2665,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Order created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve, or the order would take their position in the order book&#39;s base asset above the tenant limit for that asset </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -2196,7 +2687,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Order created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve, or the order would take their position in the order book&#39;s base asset above the tenant limit for that asset </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -2220,7 +2711,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Order created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. missing required fields </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this orderbook </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s Global Account USD balance is below the required minimum cash reserve, or the order would take their position in the order book&#39;s base asset above the tenant limit for that asset </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -2380,6 +2871,7 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 409 </td><td> User already exists or attempted addition/reassignment of signup attribution. </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> User created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
@@ -2451,6 +2943,7 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 409 </td><td> User already exists or attempted addition/reassignment of signup attribution. </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> User created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
@@ -2471,6 +2964,7 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 409 </td><td> User already exists or attempted addition/reassignment of signup attribution. </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> User created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
@@ -2493,6 +2987,7 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 409 </td><td> User already exists or attempted addition/reassignment of signup attribution. </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> User created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid query parameters </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
@@ -2502,6 +2997,157 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = createUserValidateBeforeCall(createIntegratorUserRequest, _callback);
         Type localVarReturnType = new TypeToken<UserCreatedResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for createWithdrawal
+     * @param createWithdrawalRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Withdrawal created and funds reserved </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Idempotent replay: a request with the same withdrawal_id, to_address and quantity; the existing withdrawal is returned unchanged </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid body, destination address, or quantity </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or the withdrawal would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. insufficient available balance, no USD ledger account to withdraw from, an unhealthy account, overdue coupon payments, a withdrawal_id already in use by another user, or a withdrawal_id reused with a to_address or quantity that does not match the existing withdrawal </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createWithdrawalCall(@javax.annotation.Nonnull CreateWithdrawalRequest createWithdrawalRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = createWithdrawalRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/web3/withdrawals";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createWithdrawalValidateBeforeCall(@javax.annotation.Nonnull CreateWithdrawalRequest createWithdrawalRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'createWithdrawalRequest' is set
+        if (createWithdrawalRequest == null) {
+            throw new ApiException("Missing the required parameter 'createWithdrawalRequest' when calling createWithdrawal(Async)");
+        }
+
+        return createWithdrawalCall(createWithdrawalRequest, _callback);
+
+    }
+
+    /**
+     * Create a USDC withdrawal request
+     * Reserves the requested quantity against the caller&#39;s available balance (moving it to pending_withdrawal) and creates a PENDING withdrawal. No fee quote is required and no fee is reserved: the withdrawal&#39;s fee is quoted and locked later, as part of approval. Idempotent on withdrawal_id: a repeat request carrying the same to_address and quantity reserves nothing further and returns the existing withdrawal with 200. Reusing a withdrawal_id with a different to_address or quantity is a conflict (409), not a replay, and reserves nothing. Restricted to DORA tenant users whose native asset is USDC.
+     * @param createWithdrawalRequest  (required)
+     * @return WithdrawalResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Withdrawal created and funds reserved </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Idempotent replay: a request with the same withdrawal_id, to_address and quantity; the existing withdrawal is returned unchanged </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid body, destination address, or quantity </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or the withdrawal would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. insufficient available balance, no USD ledger account to withdraw from, an unhealthy account, overdue coupon payments, a withdrawal_id already in use by another user, or a withdrawal_id reused with a to_address or quantity that does not match the existing withdrawal </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public WithdrawalResponseEnvelope createWithdrawal(@javax.annotation.Nonnull CreateWithdrawalRequest createWithdrawalRequest) throws ApiException {
+        ApiResponse<WithdrawalResponseEnvelope> localVarResp = createWithdrawalWithHttpInfo(createWithdrawalRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Create a USDC withdrawal request
+     * Reserves the requested quantity against the caller&#39;s available balance (moving it to pending_withdrawal) and creates a PENDING withdrawal. No fee quote is required and no fee is reserved: the withdrawal&#39;s fee is quoted and locked later, as part of approval. Idempotent on withdrawal_id: a repeat request carrying the same to_address and quantity reserves nothing further and returns the existing withdrawal with 200. Reusing a withdrawal_id with a different to_address or quantity is a conflict (409), not a replay, and reserves nothing. Restricted to DORA tenant users whose native asset is USDC.
+     * @param createWithdrawalRequest  (required)
+     * @return ApiResponse&lt;WithdrawalResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Withdrawal created and funds reserved </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Idempotent replay: a request with the same withdrawal_id, to_address and quantity; the existing withdrawal is returned unchanged </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid body, destination address, or quantity </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or the withdrawal would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. insufficient available balance, no USD ledger account to withdraw from, an unhealthy account, overdue coupon payments, a withdrawal_id already in use by another user, or a withdrawal_id reused with a to_address or quantity that does not match the existing withdrawal </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<WithdrawalResponseEnvelope> createWithdrawalWithHttpInfo(@javax.annotation.Nonnull CreateWithdrawalRequest createWithdrawalRequest) throws ApiException {
+        okhttp3.Call localVarCall = createWithdrawalValidateBeforeCall(createWithdrawalRequest, null);
+        Type localVarReturnType = new TypeToken<WithdrawalResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Create a USDC withdrawal request (asynchronously)
+     * Reserves the requested quantity against the caller&#39;s available balance (moving it to pending_withdrawal) and creates a PENDING withdrawal. No fee quote is required and no fee is reserved: the withdrawal&#39;s fee is quoted and locked later, as part of approval. Idempotent on withdrawal_id: a repeat request carrying the same to_address and quantity reserves nothing further and returns the existing withdrawal with 200. Reusing a withdrawal_id with a different to_address or quantity is a conflict (409), not a replay, and reserves nothing. Restricted to DORA tenant users whose native asset is USDC.
+     * @param createWithdrawalRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Withdrawal created and funds reserved </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Idempotent replay: a request with the same withdrawal_id, to_address and quantity; the existing withdrawal is returned unchanged </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid body, destination address, or quantity </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or the withdrawal would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. insufficient available balance, no USD ledger account to withdraw from, an unhealthy account, overdue coupon payments, a withdrawal_id already in use by another user, or a withdrawal_id reused with a to_address or quantity that does not match the existing withdrawal </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createWithdrawalAsync(@javax.annotation.Nonnull CreateWithdrawalRequest createWithdrawalRequest, final ApiCallback<WithdrawalResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createWithdrawalValidateBeforeCall(createWithdrawalRequest, _callback);
+        Type localVarReturnType = new TypeToken<WithdrawalResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -2645,6 +3291,149 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for exportPromoLinksCSV
+     * @param batchId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> CSV stream. Read the X-Promo-Export-Status trailer after consuming the body; only complete confirms a full export. HTTP 200 alone does not indicate success. </td><td>  * Cache-Control -  <br>  * Trailer - Declares the export-status trailer before streaming starts. <br>  * X-Promo-Export-Status - HTTP trailer sent after the CSV body, not an initial response header. complete means the full export was written; error means the stream failed. A missing trailer must not be treated as success. <br>  </td></tr>
+        <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Batch not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call exportPromoLinksCSVCall(@javax.annotation.Nonnull UUID batchId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/link_batches/{batch_id}/links.csv"
+            .replace("{" + "batch_id" + "}", localVarApiClient.escapeString(batchId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/csv"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call exportPromoLinksCSVValidateBeforeCall(@javax.annotation.Nonnull UUID batchId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'batchId' is set
+        if (batchId == null) {
+            throw new ApiException("Missing the required parameter 'batchId' when calling exportPromoLinksCSV(Async)");
+        }
+
+        return exportPromoLinksCSVCall(batchId, _callback);
+
+    }
+
+    /**
+     * Export promotional links as CSV
+     * Stream private claim URLs with Cache-Control private, no-store. ADMIN and same-tenant INTEGRATOR only.
+     * @param batchId  (required)
+     * @return String
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> CSV stream. Read the X-Promo-Export-Status trailer after consuming the body; only complete confirms a full export. HTTP 200 alone does not indicate success. </td><td>  * Cache-Control -  <br>  * Trailer - Declares the export-status trailer before streaming starts. <br>  * X-Promo-Export-Status - HTTP trailer sent after the CSV body, not an initial response header. complete means the full export was written; error means the stream failed. A missing trailer must not be treated as success. <br>  </td></tr>
+        <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Batch not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public String exportPromoLinksCSV(@javax.annotation.Nonnull UUID batchId) throws ApiException {
+        ApiResponse<String> localVarResp = exportPromoLinksCSVWithHttpInfo(batchId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Export promotional links as CSV
+     * Stream private claim URLs with Cache-Control private, no-store. ADMIN and same-tenant INTEGRATOR only.
+     * @param batchId  (required)
+     * @return ApiResponse&lt;String&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> CSV stream. Read the X-Promo-Export-Status trailer after consuming the body; only complete confirms a full export. HTTP 200 alone does not indicate success. </td><td>  * Cache-Control -  <br>  * Trailer - Declares the export-status trailer before streaming starts. <br>  * X-Promo-Export-Status - HTTP trailer sent after the CSV body, not an initial response header. complete means the full export was written; error means the stream failed. A missing trailer must not be treated as success. <br>  </td></tr>
+        <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Batch not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<String> exportPromoLinksCSVWithHttpInfo(@javax.annotation.Nonnull UUID batchId) throws ApiException {
+        okhttp3.Call localVarCall = exportPromoLinksCSVValidateBeforeCall(batchId, null);
+        Type localVarReturnType = new TypeToken<String>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Export promotional links as CSV (asynchronously)
+     * Stream private claim URLs with Cache-Control private, no-store. ADMIN and same-tenant INTEGRATOR only.
+     * @param batchId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> CSV stream. Read the X-Promo-Export-Status trailer after consuming the body; only complete confirms a full export. HTTP 200 alone does not indicate success. </td><td>  * Cache-Control -  <br>  * Trailer - Declares the export-status trailer before streaming starts. <br>  * X-Promo-Export-Status - HTTP trailer sent after the CSV body, not an initial response header. complete means the full export was written; error means the stream failed. A missing trailer must not be treated as success. <br>  </td></tr>
+        <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Batch not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call exportPromoLinksCSVAsync(@javax.annotation.Nonnull UUID batchId, final ApiCallback<String> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = exportPromoLinksCSVValidateBeforeCall(batchId, _callback);
+        Type localVarReturnType = new TypeToken<String>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for getAPIKeysForUserID
      * @param userId  (required)
      * @param _callback Callback for upload/download progress
@@ -2776,6 +3565,153 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = getAPIKeysForUserIDValidateBeforeCall(userId, _callback);
         Type localVarReturnType = new TypeToken<APIKeyResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getAffiliateProgram
+     * @param programId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Get an affiliate program </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getAffiliateProgramCall(@javax.annotation.Nonnull UUID programId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/affiliate_programs/{program_id}"
+            .replace("{" + "program_id" + "}", localVarApiClient.escapeString(programId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getAffiliateProgramValidateBeforeCall(@javax.annotation.Nonnull UUID programId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'programId' is set
+        if (programId == null) {
+            throw new ApiException("Missing the required parameter 'programId' when calling getAffiliateProgram(Async)");
+        }
+
+        return getAffiliateProgramCall(programId, _callback);
+
+    }
+
+    /**
+     * Get an affiliate program
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. 
+     * @param programId  (required)
+     * @return AffiliateProgramEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Get an affiliate program </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AffiliateProgramEnvelope getAffiliateProgram(@javax.annotation.Nonnull UUID programId) throws ApiException {
+        ApiResponse<AffiliateProgramEnvelope> localVarResp = getAffiliateProgramWithHttpInfo(programId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get an affiliate program
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. 
+     * @param programId  (required)
+     * @return ApiResponse&lt;AffiliateProgramEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Get an affiliate program </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AffiliateProgramEnvelope> getAffiliateProgramWithHttpInfo(@javax.annotation.Nonnull UUID programId) throws ApiException {
+        okhttp3.Call localVarCall = getAffiliateProgramValidateBeforeCall(programId, null);
+        Type localVarReturnType = new TypeToken<AffiliateProgramEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get an affiliate program (asynchronously)
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. 
+     * @param programId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Get an affiliate program </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getAffiliateProgramAsync(@javax.annotation.Nonnull UUID programId, final ApiCallback<AffiliateProgramEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getAffiliateProgramValidateBeforeCall(programId, _callback);
+        Type localVarReturnType = new TypeToken<AffiliateProgramEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -3985,7 +4921,7 @@ public class DefaultApi {
 
     /**
      * Get candlestick data for an orderbook
-     * 
+     * Returns candle data in the requested [start, end) range for the selected resolution. Responses are capped to the most recent 5,000 candles per request.
      * @param orderBookId  (required)
      * @param start  (required)
      * @param end  (required)
@@ -4009,7 +4945,7 @@ public class DefaultApi {
 
     /**
      * Get candlestick data for an orderbook
-     * 
+     * Returns candle data in the requested [start, end) range for the selected resolution. Responses are capped to the most recent 5,000 candles per request.
      * @param orderBookId  (required)
      * @param start  (required)
      * @param end  (required)
@@ -4034,7 +4970,7 @@ public class DefaultApi {
 
     /**
      * Get candlestick data for an orderbook (asynchronously)
-     * 
+     * Returns candle data in the requested [start, end) range for the selected resolution. Responses are capped to the most recent 5,000 candles per request.
      * @param orderBookId  (required)
      * @param start  (required)
      * @param end  (required)
@@ -7794,6 +8730,149 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for getPromoAttribution
+     * @param tradingChallengeId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Source attribution funnel </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getPromoAttributionCall(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges/{trading_challenge_id}/attribution"
+            .replace("{" + "trading_challenge_id" + "}", localVarApiClient.escapeString(tradingChallengeId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getPromoAttributionValidateBeforeCall(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'tradingChallengeId' is set
+        if (tradingChallengeId == null) {
+            throw new ApiException("Missing the required parameter 'tradingChallengeId' when calling getPromoAttribution(Async)");
+        }
+
+        return getPromoAttributionCall(tradingChallengeId, _callback);
+
+    }
+
+    /**
+     * Get promotional source attribution
+     * Return the QR source funnel and decimal totals in one bounded aggregate query. ADMIN and same-tenant INTEGRATOR only.
+     * @param tradingChallengeId  (required)
+     * @return PromoAttributionResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Source attribution funnel </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public PromoAttributionResponse getPromoAttribution(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
+        ApiResponse<PromoAttributionResponse> localVarResp = getPromoAttributionWithHttpInfo(tradingChallengeId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get promotional source attribution
+     * Return the QR source funnel and decimal totals in one bounded aggregate query. ADMIN and same-tenant INTEGRATOR only.
+     * @param tradingChallengeId  (required)
+     * @return ApiResponse&lt;PromoAttributionResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Source attribution funnel </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<PromoAttributionResponse> getPromoAttributionWithHttpInfo(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
+        okhttp3.Call localVarCall = getPromoAttributionValidateBeforeCall(tradingChallengeId, null);
+        Type localVarReturnType = new TypeToken<PromoAttributionResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get promotional source attribution (asynchronously)
+     * Return the QR source funnel and decimal totals in one bounded aggregate query. ADMIN and same-tenant INTEGRATOR only.
+     * @param tradingChallengeId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Source attribution funnel </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getPromoAttributionAsync(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback<PromoAttributionResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getPromoAttributionValidateBeforeCall(tradingChallengeId, _callback);
+        Type localVarReturnType = new TypeToken<PromoAttributionResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for getRealizedPnlSettlements
      * @param userId  (optional)
      * @param tenantId  (optional)
@@ -11190,6 +12269,149 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for getWithdrawal
+     * @param withdrawalId The withdrawal ID. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The withdrawal </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid withdrawal_id </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Withdrawal not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getWithdrawalCall(@javax.annotation.Nonnull UUID withdrawalId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/web3/withdrawals/{withdrawal_id}"
+            .replace("{" + "withdrawal_id" + "}", localVarApiClient.escapeString(withdrawalId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getWithdrawalValidateBeforeCall(@javax.annotation.Nonnull UUID withdrawalId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'withdrawalId' is set
+        if (withdrawalId == null) {
+            throw new ApiException("Missing the required parameter 'withdrawalId' when calling getWithdrawal(Async)");
+        }
+
+        return getWithdrawalCall(withdrawalId, _callback);
+
+    }
+
+    /**
+     * Get a USDC withdrawal by ID
+     * Returns a single USDC withdrawal. A caller may read its own withdrawals; admins may read any user&#39;s.
+     * @param withdrawalId The withdrawal ID. (required)
+     * @return WithdrawalResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The withdrawal </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid withdrawal_id </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Withdrawal not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public WithdrawalResponseEnvelope getWithdrawal(@javax.annotation.Nonnull UUID withdrawalId) throws ApiException {
+        ApiResponse<WithdrawalResponseEnvelope> localVarResp = getWithdrawalWithHttpInfo(withdrawalId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get a USDC withdrawal by ID
+     * Returns a single USDC withdrawal. A caller may read its own withdrawals; admins may read any user&#39;s.
+     * @param withdrawalId The withdrawal ID. (required)
+     * @return ApiResponse&lt;WithdrawalResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The withdrawal </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid withdrawal_id </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Withdrawal not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<WithdrawalResponseEnvelope> getWithdrawalWithHttpInfo(@javax.annotation.Nonnull UUID withdrawalId) throws ApiException {
+        okhttp3.Call localVarCall = getWithdrawalValidateBeforeCall(withdrawalId, null);
+        Type localVarReturnType = new TypeToken<WithdrawalResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get a USDC withdrawal by ID (asynchronously)
+     * Returns a single USDC withdrawal. A caller may read its own withdrawals; admins may read any user&#39;s.
+     * @param withdrawalId The withdrawal ID. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The withdrawal </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid withdrawal_id </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Withdrawal not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getWithdrawalAsync(@javax.annotation.Nonnull UUID withdrawalId, final ApiCallback<WithdrawalResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getWithdrawalValidateBeforeCall(withdrawalId, _callback);
+        Type localVarReturnType = new TypeToken<WithdrawalResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for getWithdrawalFeeQuote
      * @param to The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address. (required)
      * @param quantity Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive. (required)
@@ -11280,7 +12502,7 @@ public class DefaultApi {
 
     /**
      * Estimate the network fee to withdraw USDC via web3
-     * Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay when they make their withdrawal request. Restricted to DORA tenant users whose native asset is USDC.
+     * Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay for a withdrawal. The fee is not charged when the withdrawal is requested; the quote is redeemed later, when the fee is locked as part of approval. Restricted to DORA tenant users whose native asset is USDC.
      * @param to The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address. (required)
      * @param quantity Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive. (required)
      * @return FeeQuoteResponseEnvelope
@@ -11306,7 +12528,7 @@ public class DefaultApi {
 
     /**
      * Estimate the network fee to withdraw USDC via web3
-     * Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay when they make their withdrawal request. Restricted to DORA tenant users whose native asset is USDC.
+     * Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay for a withdrawal. The fee is not charged when the withdrawal is requested; the quote is redeemed later, when the fee is locked as part of approval. Restricted to DORA tenant users whose native asset is USDC.
      * @param to The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address. (required)
      * @param quantity Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive. (required)
      * @return ApiResponse&lt;FeeQuoteResponseEnvelope&gt;
@@ -11333,7 +12555,7 @@ public class DefaultApi {
 
     /**
      * Estimate the network fee to withdraw USDC via web3 (asynchronously)
-     * Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay when they make their withdrawal request. Restricted to DORA tenant users whose native asset is USDC.
+     * Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay for a withdrawal. The fee is not charged when the withdrawal is requested; the quote is redeemed later, when the fee is locked as part of approval. Restricted to DORA tenant users whose native asset is USDC.
      * @param to The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address. (required)
      * @param quantity Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive. (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -11357,6 +12579,181 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = getWithdrawalFeeQuoteValidateBeforeCall(to, quantity, _callback);
         Type localVarReturnType = new TypeToken<FeeQuoteResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for issuePromoLinkBatch
+     * @param tradingChallengeId  (required)
+     * @param idempotencyKey  (required)
+     * @param issuePromoLinkBatchRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Exact idempotent replay </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Batch and links created </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed request or missing/duplicate idempotency key </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Capacity exceeded, campaign completed, or idempotency key reused with a different payload </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call issuePromoLinkBatchCall(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull String idempotencyKey, @javax.annotation.Nonnull IssuePromoLinkBatchRequest issuePromoLinkBatchRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = issuePromoLinkBatchRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges/{trading_challenge_id}/link_batches"
+            .replace("{" + "trading_challenge_id" + "}", localVarApiClient.escapeString(tradingChallengeId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        if (idempotencyKey != null) {
+            localVarHeaderParams.put("Idempotency-Key", localVarApiClient.parameterToString(idempotencyKey));
+        }
+
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call issuePromoLinkBatchValidateBeforeCall(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull String idempotencyKey, @javax.annotation.Nonnull IssuePromoLinkBatchRequest issuePromoLinkBatchRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'tradingChallengeId' is set
+        if (tradingChallengeId == null) {
+            throw new ApiException("Missing the required parameter 'tradingChallengeId' when calling issuePromoLinkBatch(Async)");
+        }
+
+        // verify the required parameter 'idempotencyKey' is set
+        if (idempotencyKey == null) {
+            throw new ApiException("Missing the required parameter 'idempotencyKey' when calling issuePromoLinkBatch(Async)");
+        }
+
+        // verify the required parameter 'issuePromoLinkBatchRequest' is set
+        if (issuePromoLinkBatchRequest == null) {
+            throw new ApiException("Missing the required parameter 'issuePromoLinkBatchRequest' when calling issuePromoLinkBatch(Async)");
+        }
+
+        return issuePromoLinkBatchCall(tradingChallengeId, idempotencyKey, issuePromoLinkBatchRequest, _callback);
+
+    }
+
+    /**
+     * Issue a promotional link batch
+     * Atomically reserve QR campaign capacity and create opaque, encrypted promotional links. ADMIN and same-tenant INTEGRATOR only. Exact idempotent replays return 200; first creation returns 201; key reuse with another payload returns 409.
+     * @param tradingChallengeId  (required)
+     * @param idempotencyKey  (required)
+     * @param issuePromoLinkBatchRequest  (required)
+     * @return IssuePromoLinkBatchResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Exact idempotent replay </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Batch and links created </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed request or missing/duplicate idempotency key </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Capacity exceeded, campaign completed, or idempotency key reused with a different payload </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public IssuePromoLinkBatchResponse issuePromoLinkBatch(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull String idempotencyKey, @javax.annotation.Nonnull IssuePromoLinkBatchRequest issuePromoLinkBatchRequest) throws ApiException {
+        ApiResponse<IssuePromoLinkBatchResponse> localVarResp = issuePromoLinkBatchWithHttpInfo(tradingChallengeId, idempotencyKey, issuePromoLinkBatchRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Issue a promotional link batch
+     * Atomically reserve QR campaign capacity and create opaque, encrypted promotional links. ADMIN and same-tenant INTEGRATOR only. Exact idempotent replays return 200; first creation returns 201; key reuse with another payload returns 409.
+     * @param tradingChallengeId  (required)
+     * @param idempotencyKey  (required)
+     * @param issuePromoLinkBatchRequest  (required)
+     * @return ApiResponse&lt;IssuePromoLinkBatchResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Exact idempotent replay </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Batch and links created </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed request or missing/duplicate idempotency key </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Capacity exceeded, campaign completed, or idempotency key reused with a different payload </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<IssuePromoLinkBatchResponse> issuePromoLinkBatchWithHttpInfo(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull String idempotencyKey, @javax.annotation.Nonnull IssuePromoLinkBatchRequest issuePromoLinkBatchRequest) throws ApiException {
+        okhttp3.Call localVarCall = issuePromoLinkBatchValidateBeforeCall(tradingChallengeId, idempotencyKey, issuePromoLinkBatchRequest, null);
+        Type localVarReturnType = new TypeToken<IssuePromoLinkBatchResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Issue a promotional link batch (asynchronously)
+     * Atomically reserve QR campaign capacity and create opaque, encrypted promotional links. ADMIN and same-tenant INTEGRATOR only. Exact idempotent replays return 200; first creation returns 201; key reuse with another payload returns 409.
+     * @param tradingChallengeId  (required)
+     * @param idempotencyKey  (required)
+     * @param issuePromoLinkBatchRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Exact idempotent replay </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Batch and links created </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed request or missing/duplicate idempotency key </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Capacity exceeded, campaign completed, or idempotency key reused with a different payload </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call issuePromoLinkBatchAsync(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull String idempotencyKey, @javax.annotation.Nonnull IssuePromoLinkBatchRequest issuePromoLinkBatchRequest, final ApiCallback<IssuePromoLinkBatchResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = issuePromoLinkBatchValidateBeforeCall(tradingChallengeId, idempotencyKey, issuePromoLinkBatchRequest, _callback);
+        Type localVarReturnType = new TypeToken<IssuePromoLinkBatchResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -13457,6 +14854,678 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for listAffiliateCashFlows
+     * @param programId  (required)
+     * @param userId  (required)
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List a referred user&#39;s customer cash flows </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Program, referrer or referred user is not visible to the caller. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAffiliateCashFlowsCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/affiliate_programs/{program_id}/referrals/{user_id}/cash_flows"
+            .replace("{" + "program_id" + "}", localVarApiClient.escapeString(programId.toString()))
+            .replace("{" + "user_id" + "}", localVarApiClient.escapeString(userId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listAffiliateCashFlowsValidateBeforeCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'programId' is set
+        if (programId == null) {
+            throw new ApiException("Missing the required parameter 'programId' when calling listAffiliateCashFlows(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling listAffiliateCashFlows(Async)");
+        }
+
+        return listAffiliateCashFlowsCall(programId, userId, limit, page, _callback);
+
+    }
+
+    /**
+     * List a referred user&#39;s customer cash flows
+     * Authenticated access. ADMIN can inspect all programs. INTEGRATOR is limited to its own tenant. Other users must be registered referrers and see only their own referrals. Deactivation retains historical reports. Currency EXTERNAL_DEPOSIT and EXTERNAL_WITHDRAW ledger events only. Pending withdrawals and promotional credits are excluded. Amounts are positive native asset units identified by asset_symbol. The date is when the completed movement was recorded in the ledger. Only events at or after the user&#39;s referral assignment are included.
+     * @param programId  (required)
+     * @param userId  (required)
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @return AffiliateCashFlowReportEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List a referred user&#39;s customer cash flows </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Program, referrer or referred user is not visible to the caller. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AffiliateCashFlowReportEnvelope listAffiliateCashFlows(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page) throws ApiException {
+        ApiResponse<AffiliateCashFlowReportEnvelope> localVarResp = listAffiliateCashFlowsWithHttpInfo(programId, userId, limit, page);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List a referred user&#39;s customer cash flows
+     * Authenticated access. ADMIN can inspect all programs. INTEGRATOR is limited to its own tenant. Other users must be registered referrers and see only their own referrals. Deactivation retains historical reports. Currency EXTERNAL_DEPOSIT and EXTERNAL_WITHDRAW ledger events only. Pending withdrawals and promotional credits are excluded. Amounts are positive native asset units identified by asset_symbol. The date is when the completed movement was recorded in the ledger. Only events at or after the user&#39;s referral assignment are included.
+     * @param programId  (required)
+     * @param userId  (required)
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @return ApiResponse&lt;AffiliateCashFlowReportEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List a referred user&#39;s customer cash flows </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Program, referrer or referred user is not visible to the caller. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AffiliateCashFlowReportEnvelope> listAffiliateCashFlowsWithHttpInfo(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page) throws ApiException {
+        okhttp3.Call localVarCall = listAffiliateCashFlowsValidateBeforeCall(programId, userId, limit, page, null);
+        Type localVarReturnType = new TypeToken<AffiliateCashFlowReportEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List a referred user&#39;s customer cash flows (asynchronously)
+     * Authenticated access. ADMIN can inspect all programs. INTEGRATOR is limited to its own tenant. Other users must be registered referrers and see only their own referrals. Deactivation retains historical reports. Currency EXTERNAL_DEPOSIT and EXTERNAL_WITHDRAW ledger events only. Pending withdrawals and promotional credits are excluded. Amounts are positive native asset units identified by asset_symbol. The date is when the completed movement was recorded in the ledger. Only events at or after the user&#39;s referral assignment are included.
+     * @param programId  (required)
+     * @param userId  (required)
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List a referred user&#39;s customer cash flows </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Program, referrer or referred user is not visible to the caller. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAffiliateCashFlowsAsync(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UUID userId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback<AffiliateCashFlowReportEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listAffiliateCashFlowsValidateBeforeCall(programId, userId, limit, page, _callback);
+        Type localVarReturnType = new TypeToken<AffiliateCashFlowReportEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listAffiliatePrograms
+     * @param tenantId Integrators default to their own tenant and cannot select another. Admins may select any tenant. (optional)
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List affiliate programs </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAffiliateProgramsCall(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/affiliate_programs";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (tenantId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("tenant_id", tenantId));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listAffiliateProgramsValidateBeforeCall(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback _callback) throws ApiException {
+        return listAffiliateProgramsCall(tenantId, limit, page, _callback);
+
+    }
+
+    /**
+     * List affiliate programs
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. Admins without a tenant filter list all tenants. Inactive programs are included.
+     * @param tenantId Integrators default to their own tenant and cannot select another. Admins may select any tenant. (optional)
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @return AffiliateProgramListEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List affiliate programs </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AffiliateProgramListEnvelope listAffiliatePrograms(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page) throws ApiException {
+        ApiResponse<AffiliateProgramListEnvelope> localVarResp = listAffiliateProgramsWithHttpInfo(tenantId, limit, page);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List affiliate programs
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. Admins without a tenant filter list all tenants. Inactive programs are included.
+     * @param tenantId Integrators default to their own tenant and cannot select another. Admins may select any tenant. (optional)
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @return ApiResponse&lt;AffiliateProgramListEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List affiliate programs </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AffiliateProgramListEnvelope> listAffiliateProgramsWithHttpInfo(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page) throws ApiException {
+        okhttp3.Call localVarCall = listAffiliateProgramsValidateBeforeCall(tenantId, limit, page, null);
+        Type localVarReturnType = new TypeToken<AffiliateProgramListEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List affiliate programs (asynchronously)
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. Admins without a tenant filter list all tenants. Inactive programs are included.
+     * @param tenantId Integrators default to their own tenant and cannot select another. Admins may select any tenant. (optional)
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List affiliate programs </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAffiliateProgramsAsync(@javax.annotation.Nullable String tenantId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback<AffiliateProgramListEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listAffiliateProgramsValidateBeforeCall(tenantId, limit, page, _callback);
+        Type localVarReturnType = new TypeToken<AffiliateProgramListEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listAffiliateReferrals
+     * @param programId  (required)
+     * @param date  (optional)
+     * @param referrerId  (optional)
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by attribution created_at then user_id descending. (optional, default to 1)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List referred users and activity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Program, referrer or referred user is not visible to the caller. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAffiliateReferralsCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable LocalDate date, @javax.annotation.Nullable UUID referrerId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/affiliate_programs/{program_id}/referrals"
+            .replace("{" + "program_id" + "}", localVarApiClient.escapeString(programId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (date != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("date", date));
+        }
+
+        if (referrerId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("referrer_id", referrerId));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listAffiliateReferralsValidateBeforeCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable LocalDate date, @javax.annotation.Nullable UUID referrerId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'programId' is set
+        if (programId == null) {
+            throw new ApiException("Missing the required parameter 'programId' when calling listAffiliateReferrals(Async)");
+        }
+
+        return listAffiliateReferralsCall(programId, date, referrerId, limit, page, _callback);
+
+    }
+
+    /**
+     * List referred users and activity
+     * Authenticated access. ADMIN can inspect all programs. INTEGRATOR is limited to its own tenant. Other users must be registered referrers and see only their own referrals. Deactivation retains historical reports. date defaults to the current UTC day. Daily volume and realized PnL use the selected UTC day; monthly volume and realized PnL use its UTC calendar month. Trade activity, PnL and currency cash-flow counts/dates include only events at or after attributed_at. Signup and KYC fields describe the user profile. Promotional and trading-challenge credits, non-currency assets, pending and rejected withdrawals are excluded from customer cash flows. Discord status is unknown until an integration exists.
+     * @param programId  (required)
+     * @param date  (optional)
+     * @param referrerId  (optional)
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by attribution created_at then user_id descending. (optional, default to 1)
+     * @return AffiliateReferralReportEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List referred users and activity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Program, referrer or referred user is not visible to the caller. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AffiliateReferralReportEnvelope listAffiliateReferrals(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable LocalDate date, @javax.annotation.Nullable UUID referrerId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page) throws ApiException {
+        ApiResponse<AffiliateReferralReportEnvelope> localVarResp = listAffiliateReferralsWithHttpInfo(programId, date, referrerId, limit, page);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List referred users and activity
+     * Authenticated access. ADMIN can inspect all programs. INTEGRATOR is limited to its own tenant. Other users must be registered referrers and see only their own referrals. Deactivation retains historical reports. date defaults to the current UTC day. Daily volume and realized PnL use the selected UTC day; monthly volume and realized PnL use its UTC calendar month. Trade activity, PnL and currency cash-flow counts/dates include only events at or after attributed_at. Signup and KYC fields describe the user profile. Promotional and trading-challenge credits, non-currency assets, pending and rejected withdrawals are excluded from customer cash flows. Discord status is unknown until an integration exists.
+     * @param programId  (required)
+     * @param date  (optional)
+     * @param referrerId  (optional)
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by attribution created_at then user_id descending. (optional, default to 1)
+     * @return ApiResponse&lt;AffiliateReferralReportEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List referred users and activity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Program, referrer or referred user is not visible to the caller. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AffiliateReferralReportEnvelope> listAffiliateReferralsWithHttpInfo(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable LocalDate date, @javax.annotation.Nullable UUID referrerId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page) throws ApiException {
+        okhttp3.Call localVarCall = listAffiliateReferralsValidateBeforeCall(programId, date, referrerId, limit, page, null);
+        Type localVarReturnType = new TypeToken<AffiliateReferralReportEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List referred users and activity (asynchronously)
+     * Authenticated access. ADMIN can inspect all programs. INTEGRATOR is limited to its own tenant. Other users must be registered referrers and see only their own referrals. Deactivation retains historical reports. date defaults to the current UTC day. Daily volume and realized PnL use the selected UTC day; monthly volume and realized PnL use its UTC calendar month. Trade activity, PnL and currency cash-flow counts/dates include only events at or after attributed_at. Signup and KYC fields describe the user profile. Promotional and trading-challenge credits, non-currency assets, pending and rejected withdrawals are excluded from customer cash flows. Discord status is unknown until an integration exists.
+     * @param programId  (required)
+     * @param date  (optional)
+     * @param referrerId  (optional)
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by attribution created_at then user_id descending. (optional, default to 1)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List referred users and activity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Program, referrer or referred user is not visible to the caller. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAffiliateReferralsAsync(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable LocalDate date, @javax.annotation.Nullable UUID referrerId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback<AffiliateReferralReportEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listAffiliateReferralsValidateBeforeCall(programId, date, referrerId, limit, page, _callback);
+        Type localVarReturnType = new TypeToken<AffiliateReferralReportEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listAffiliateReferrers
+     * @param programId  (required)
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List program referrers </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAffiliateReferrersCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/affiliate_programs/{program_id}/referrers"
+            .replace("{" + "program_id" + "}", localVarApiClient.escapeString(programId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listAffiliateReferrersValidateBeforeCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'programId' is set
+        if (programId == null) {
+            throw new ApiException("Missing the required parameter 'programId' when calling listAffiliateReferrers(Async)");
+        }
+
+        return listAffiliateReferrersCall(programId, limit, page, _callback);
+
+    }
+
+    /**
+     * List program referrers
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. Includes registrations in inactive programs.
+     * @param programId  (required)
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @return AffiliateReferrerListEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List program referrers </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AffiliateReferrerListEnvelope listAffiliateReferrers(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page) throws ApiException {
+        ApiResponse<AffiliateReferrerListEnvelope> localVarResp = listAffiliateReferrersWithHttpInfo(programId, limit, page);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List program referrers
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. Includes registrations in inactive programs.
+     * @param programId  (required)
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @return ApiResponse&lt;AffiliateReferrerListEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List program referrers </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AffiliateReferrerListEnvelope> listAffiliateReferrersWithHttpInfo(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page) throws ApiException {
+        okhttp3.Call localVarCall = listAffiliateReferrersValidateBeforeCall(programId, limit, page, null);
+        Type localVarReturnType = new TypeToken<AffiliateReferrerListEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List program referrers (asynchronously)
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. Includes registrations in inactive programs.
+     * @param programId  (required)
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List program referrers </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAffiliateReferrersAsync(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback<AffiliateReferrerListEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listAffiliateReferrersValidateBeforeCall(programId, limit, page, _callback);
+        Type localVarReturnType = new TypeToken<AffiliateReferrerListEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for listAssets
      * @param createdAfter  (optional)
      * @param createdBefore  (optional)
@@ -14201,6 +16270,155 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for listOwnAffiliateMemberships
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List your affiliate memberships </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listOwnAffiliateMembershipsCall(@javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/affiliate_referrers/self";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listOwnAffiliateMembershipsValidateBeforeCall(@javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback _callback) throws ApiException {
+        return listOwnAffiliateMembershipsCall(limit, page, _callback);
+
+    }
+
+    /**
+     * List your affiliate memberships
+     * Returns only the authenticated user&#39;s memberships and reusable codes, including inactive programs.
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @return AffiliateMembershipListEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List your affiliate memberships </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AffiliateMembershipListEnvelope listOwnAffiliateMemberships(@javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page) throws ApiException {
+        ApiResponse<AffiliateMembershipListEnvelope> localVarResp = listOwnAffiliateMembershipsWithHttpInfo(limit, page);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List your affiliate memberships
+     * Returns only the authenticated user&#39;s memberships and reusable codes, including inactive programs.
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @return ApiResponse&lt;AffiliateMembershipListEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List your affiliate memberships </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AffiliateMembershipListEnvelope> listOwnAffiliateMembershipsWithHttpInfo(@javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page) throws ApiException {
+        okhttp3.Call localVarCall = listOwnAffiliateMembershipsValidateBeforeCall(limit, page, null);
+        Type localVarReturnType = new TypeToken<AffiliateMembershipListEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List your affiliate memberships (asynchronously)
+     * Returns only the authenticated user&#39;s memberships and reusable codes, including inactive programs.
+     * @param limit  (optional, default to 100)
+     * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List your affiliate memberships </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listOwnAffiliateMembershipsAsync(@javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback<AffiliateMembershipListEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listOwnAffiliateMembershipsValidateBeforeCall(limit, page, _callback);
+        Type localVarReturnType = new TypeToken<AffiliateMembershipListEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for listPositionAccountsSelf
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -14326,6 +16544,324 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = listPositionAccountsSelfValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<ListPositionAccountsResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listPromoLinkBatches
+     * @param tradingChallengeId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Promotional link batches </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listPromoLinkBatchesCall(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges/{trading_challenge_id}/link_batches"
+            .replace("{" + "trading_challenge_id" + "}", localVarApiClient.escapeString(tradingChallengeId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listPromoLinkBatchesValidateBeforeCall(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'tradingChallengeId' is set
+        if (tradingChallengeId == null) {
+            throw new ApiException("Missing the required parameter 'tradingChallengeId' when calling listPromoLinkBatches(Async)");
+        }
+
+        return listPromoLinkBatchesCall(tradingChallengeId, _callback);
+
+    }
+
+    /**
+     * List promotional link batches
+     * Return source metadata and ISSUED, CLAIMED, and REVOKED counts for each batch. ADMIN and same-tenant INTEGRATOR only.
+     * @param tradingChallengeId  (required)
+     * @return PromoLinkBatchListResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Promotional link batches </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public PromoLinkBatchListResponse listPromoLinkBatches(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
+        ApiResponse<PromoLinkBatchListResponse> localVarResp = listPromoLinkBatchesWithHttpInfo(tradingChallengeId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List promotional link batches
+     * Return source metadata and ISSUED, CLAIMED, and REVOKED counts for each batch. ADMIN and same-tenant INTEGRATOR only.
+     * @param tradingChallengeId  (required)
+     * @return ApiResponse&lt;PromoLinkBatchListResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Promotional link batches </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<PromoLinkBatchListResponse> listPromoLinkBatchesWithHttpInfo(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
+        okhttp3.Call localVarCall = listPromoLinkBatchesValidateBeforeCall(tradingChallengeId, null);
+        Type localVarReturnType = new TypeToken<PromoLinkBatchListResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List promotional link batches (asynchronously)
+     * Return source metadata and ISSUED, CLAIMED, and REVOKED counts for each batch. ADMIN and same-tenant INTEGRATOR only.
+     * @param tradingChallengeId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Promotional link batches </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listPromoLinkBatchesAsync(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback<PromoLinkBatchListResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listPromoLinkBatchesValidateBeforeCall(tradingChallengeId, _callback);
+        Type localVarReturnType = new TypeToken<PromoLinkBatchListResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listPromoLinks
+     * @param batchId  (required)
+     * @param limit  (optional, default to 100)
+     * @param cursor  (optional)
+     * @param status  (optional)
+     * @param reveal  (optional, default to false)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Promotional links </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed filter or cursor </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Batch not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listPromoLinksCall(@javax.annotation.Nonnull UUID batchId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String cursor, @javax.annotation.Nullable PromoLinkStatus status, @javax.annotation.Nullable Boolean reveal, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/link_batches/{batch_id}/links"
+            .replace("{" + "batch_id" + "}", localVarApiClient.escapeString(batchId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (cursor != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("cursor", cursor));
+        }
+
+        if (status != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("status", status));
+        }
+
+        if (reveal != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("reveal", reveal));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listPromoLinksValidateBeforeCall(@javax.annotation.Nonnull UUID batchId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String cursor, @javax.annotation.Nullable PromoLinkStatus status, @javax.annotation.Nullable Boolean reveal, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'batchId' is set
+        if (batchId == null) {
+            throw new ApiException("Missing the required parameter 'batchId' when calling listPromoLinks(Async)");
+        }
+
+        return listPromoLinksCall(batchId, limit, cursor, status, reveal, _callback);
+
+    }
+
+    /**
+     * List promotional links
+     * Keyset-paginated batch links. URLs are omitted by default and decrypted only when reveal&#x3D;true. ADMIN and same-tenant INTEGRATOR only.
+     * @param batchId  (required)
+     * @param limit  (optional, default to 100)
+     * @param cursor  (optional)
+     * @param status  (optional)
+     * @param reveal  (optional, default to false)
+     * @return PromoLinkListResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Promotional links </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed filter or cursor </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Batch not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public PromoLinkListResponse listPromoLinks(@javax.annotation.Nonnull UUID batchId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String cursor, @javax.annotation.Nullable PromoLinkStatus status, @javax.annotation.Nullable Boolean reveal) throws ApiException {
+        ApiResponse<PromoLinkListResponse> localVarResp = listPromoLinksWithHttpInfo(batchId, limit, cursor, status, reveal);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List promotional links
+     * Keyset-paginated batch links. URLs are omitted by default and decrypted only when reveal&#x3D;true. ADMIN and same-tenant INTEGRATOR only.
+     * @param batchId  (required)
+     * @param limit  (optional, default to 100)
+     * @param cursor  (optional)
+     * @param status  (optional)
+     * @param reveal  (optional, default to false)
+     * @return ApiResponse&lt;PromoLinkListResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Promotional links </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed filter or cursor </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Batch not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<PromoLinkListResponse> listPromoLinksWithHttpInfo(@javax.annotation.Nonnull UUID batchId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String cursor, @javax.annotation.Nullable PromoLinkStatus status, @javax.annotation.Nullable Boolean reveal) throws ApiException {
+        okhttp3.Call localVarCall = listPromoLinksValidateBeforeCall(batchId, limit, cursor, status, reveal, null);
+        Type localVarReturnType = new TypeToken<PromoLinkListResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List promotional links (asynchronously)
+     * Keyset-paginated batch links. URLs are omitted by default and decrypted only when reveal&#x3D;true. ADMIN and same-tenant INTEGRATOR only.
+     * @param batchId  (required)
+     * @param limit  (optional, default to 100)
+     * @param cursor  (optional)
+     * @param status  (optional)
+     * @param reveal  (optional, default to false)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Promotional links </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed filter or cursor </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Batch not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listPromoLinksAsync(@javax.annotation.Nonnull UUID batchId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String cursor, @javax.annotation.Nullable PromoLinkStatus status, @javax.annotation.Nullable Boolean reveal, final ApiCallback<PromoLinkListResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listPromoLinksValidateBeforeCall(batchId, limit, cursor, status, reveal, _callback);
+        Type localVarReturnType = new TypeToken<PromoLinkListResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -14841,6 +17377,326 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for listWithdrawals
+     * @param userId Filter by user ID. Non-admin callers may only specify their own user ID. (optional)
+     * @param status Filter by withdrawal status. (optional)
+     * @param page  (optional, default to 1)
+     * @param limit  (optional, default to 50)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of withdrawals </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid user_id, status, or pagination parameter </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. a non-admin user requesting another user&#39;s withdrawals </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listWithdrawalsCall(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable Web3WithdrawalStatus status, @javax.annotation.Nullable Long page, @javax.annotation.Nullable Long limit, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/web3/withdrawals";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("user_id", userId));
+        }
+
+        if (status != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("status", status));
+        }
+
+        if (page != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listWithdrawalsValidateBeforeCall(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable Web3WithdrawalStatus status, @javax.annotation.Nullable Long page, @javax.annotation.Nullable Long limit, final ApiCallback _callback) throws ApiException {
+        return listWithdrawalsCall(userId, status, page, limit, _callback);
+
+    }
+
+    /**
+     * List USDC withdrawals
+     * Lists USDC withdrawals ordered by created_at descending. Non-admin callers are always scoped to their own withdrawals. Admin callers get every user&#39;s withdrawals by default, and may narrow to one user with &#x60;user_id&#x60;.
+     * @param userId Filter by user ID. Non-admin callers may only specify their own user ID. (optional)
+     * @param status Filter by withdrawal status. (optional)
+     * @param page  (optional, default to 1)
+     * @param limit  (optional, default to 50)
+     * @return ListWithdrawalsResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of withdrawals </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid user_id, status, or pagination parameter </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. a non-admin user requesting another user&#39;s withdrawals </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ListWithdrawalsResponseEnvelope listWithdrawals(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable Web3WithdrawalStatus status, @javax.annotation.Nullable Long page, @javax.annotation.Nullable Long limit) throws ApiException {
+        ApiResponse<ListWithdrawalsResponseEnvelope> localVarResp = listWithdrawalsWithHttpInfo(userId, status, page, limit);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List USDC withdrawals
+     * Lists USDC withdrawals ordered by created_at descending. Non-admin callers are always scoped to their own withdrawals. Admin callers get every user&#39;s withdrawals by default, and may narrow to one user with &#x60;user_id&#x60;.
+     * @param userId Filter by user ID. Non-admin callers may only specify their own user ID. (optional)
+     * @param status Filter by withdrawal status. (optional)
+     * @param page  (optional, default to 1)
+     * @param limit  (optional, default to 50)
+     * @return ApiResponse&lt;ListWithdrawalsResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of withdrawals </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid user_id, status, or pagination parameter </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. a non-admin user requesting another user&#39;s withdrawals </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ListWithdrawalsResponseEnvelope> listWithdrawalsWithHttpInfo(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable Web3WithdrawalStatus status, @javax.annotation.Nullable Long page, @javax.annotation.Nullable Long limit) throws ApiException {
+        okhttp3.Call localVarCall = listWithdrawalsValidateBeforeCall(userId, status, page, limit, null);
+        Type localVarReturnType = new TypeToken<ListWithdrawalsResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List USDC withdrawals (asynchronously)
+     * Lists USDC withdrawals ordered by created_at descending. Non-admin callers are always scoped to their own withdrawals. Admin callers get every user&#39;s withdrawals by default, and may narrow to one user with &#x60;user_id&#x60;.
+     * @param userId Filter by user ID. Non-admin callers may only specify their own user ID. (optional)
+     * @param status Filter by withdrawal status. (optional)
+     * @param page  (optional, default to 1)
+     * @param limit  (optional, default to 50)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of withdrawals </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid user_id, status, or pagination parameter </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. a non-admin user requesting another user&#39;s withdrawals </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listWithdrawalsAsync(@javax.annotation.Nullable UUID userId, @javax.annotation.Nullable Web3WithdrawalStatus status, @javax.annotation.Nullable Long page, @javax.annotation.Nullable Long limit, final ApiCallback<ListWithdrawalsResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listWithdrawalsValidateBeforeCall(userId, status, page, limit, _callback);
+        Type localVarReturnType = new TypeToken<ListWithdrawalsResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for lookupAffiliateCode
+     * @param code  (required)
+     * @param tenantId Integrators default to their own tenant and cannot select another. Admins may select any tenant. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Look up a reusable referral code </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions; code lookup also excludes inactive programs </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call lookupAffiliateCodeCall(@javax.annotation.Nonnull String code, @javax.annotation.Nullable String tenantId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/affiliate_codes/{code}"
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (tenantId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("tenant_id", tenantId));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call lookupAffiliateCodeValidateBeforeCall(@javax.annotation.Nonnull String code, @javax.annotation.Nullable String tenantId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling lookupAffiliateCode(Async)");
+        }
+
+        return lookupAffiliateCodeCall(code, tenantId, _callback);
+
+    }
+
+    /**
+     * Look up a reusable referral code
+     * ADMIN or INTEGRATOR required, within tenant permissions. Admins must supply tenant_id. Case-insensitive lookup requires an active program and never consumes the code. Attribution happens separately at signup or through POST /v1/affiliate_referrals/self.
+     * @param code  (required)
+     * @param tenantId Integrators default to their own tenant and cannot select another. Admins may select any tenant. (optional)
+     * @return AffiliateReferrerEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Look up a reusable referral code </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions; code lookup also excludes inactive programs </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AffiliateReferrerEnvelope lookupAffiliateCode(@javax.annotation.Nonnull String code, @javax.annotation.Nullable String tenantId) throws ApiException {
+        ApiResponse<AffiliateReferrerEnvelope> localVarResp = lookupAffiliateCodeWithHttpInfo(code, tenantId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Look up a reusable referral code
+     * ADMIN or INTEGRATOR required, within tenant permissions. Admins must supply tenant_id. Case-insensitive lookup requires an active program and never consumes the code. Attribution happens separately at signup or through POST /v1/affiliate_referrals/self.
+     * @param code  (required)
+     * @param tenantId Integrators default to their own tenant and cannot select another. Admins may select any tenant. (optional)
+     * @return ApiResponse&lt;AffiliateReferrerEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Look up a reusable referral code </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions; code lookup also excludes inactive programs </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AffiliateReferrerEnvelope> lookupAffiliateCodeWithHttpInfo(@javax.annotation.Nonnull String code, @javax.annotation.Nullable String tenantId) throws ApiException {
+        okhttp3.Call localVarCall = lookupAffiliateCodeValidateBeforeCall(code, tenantId, null);
+        Type localVarReturnType = new TypeToken<AffiliateReferrerEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Look up a reusable referral code (asynchronously)
+     * ADMIN or INTEGRATOR required, within tenant permissions. Admins must supply tenant_id. Case-insensitive lookup requires an active program and never consumes the code. Attribution happens separately at signup or through POST /v1/affiliate_referrals/self.
+     * @param code  (required)
+     * @param tenantId Integrators default to their own tenant and cannot select another. Admins may select any tenant. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Look up a reusable referral code </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions; code lookup also excludes inactive programs </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call lookupAffiliateCodeAsync(@javax.annotation.Nonnull String code, @javax.annotation.Nullable String tenantId, final ApiCallback<AffiliateReferrerEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = lookupAffiliateCodeValidateBeforeCall(code, tenantId, _callback);
+        Type localVarReturnType = new TypeToken<AffiliateReferrerEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for payLeverageGetAccruedInterest
      * @param payLeverageAccruedInterestRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -14976,6 +17832,167 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = payLeverageGetAccruedInterestValidateBeforeCall(payLeverageAccruedInterestRequest, _callback);
         Type localVarReturnType = new TypeToken<PayLeverageAccruedInterestResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for registerAffiliateReferrer
+     * @param programId  (required)
+     * @param registerAffiliateReferrerRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Register an existing user as a referrer </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Inactive program, duplicate membership, or referral code already in use </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call registerAffiliateReferrerCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull RegisterAffiliateReferrerRequest registerAffiliateReferrerRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = registerAffiliateReferrerRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/affiliate_programs/{program_id}/referrers"
+            .replace("{" + "program_id" + "}", localVarApiClient.escapeString(programId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call registerAffiliateReferrerValidateBeforeCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull RegisterAffiliateReferrerRequest registerAffiliateReferrerRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'programId' is set
+        if (programId == null) {
+            throw new ApiException("Missing the required parameter 'programId' when calling registerAffiliateReferrer(Async)");
+        }
+
+        // verify the required parameter 'registerAffiliateReferrerRequest' is set
+        if (registerAffiliateReferrerRequest == null) {
+            throw new ApiException("Missing the required parameter 'registerAffiliateReferrerRequest' when calling registerAffiliateReferrer(Async)");
+        }
+
+        return registerAffiliateReferrerCall(programId, registerAffiliateReferrerRequest, _callback);
+
+    }
+
+    /**
+     * Register an existing user as a referrer
+     * ADMIN or INTEGRATOR required, within tenant permissions. Accepts an optional custom referral_code and generates one when omitted or empty. Codes are stored uppercase and globally unique. Duplicate membership or code returns 409. Users may supply the code at signup or assign it later through POST /v1/affiliate_referrals/self.
+     * @param programId  (required)
+     * @param registerAffiliateReferrerRequest  (required)
+     * @return AffiliateReferrerEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Register an existing user as a referrer </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Inactive program, duplicate membership, or referral code already in use </td><td>  -  </td></tr>
+     </table>
+     */
+    public AffiliateReferrerEnvelope registerAffiliateReferrer(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull RegisterAffiliateReferrerRequest registerAffiliateReferrerRequest) throws ApiException {
+        ApiResponse<AffiliateReferrerEnvelope> localVarResp = registerAffiliateReferrerWithHttpInfo(programId, registerAffiliateReferrerRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Register an existing user as a referrer
+     * ADMIN or INTEGRATOR required, within tenant permissions. Accepts an optional custom referral_code and generates one when omitted or empty. Codes are stored uppercase and globally unique. Duplicate membership or code returns 409. Users may supply the code at signup or assign it later through POST /v1/affiliate_referrals/self.
+     * @param programId  (required)
+     * @param registerAffiliateReferrerRequest  (required)
+     * @return ApiResponse&lt;AffiliateReferrerEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Register an existing user as a referrer </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Inactive program, duplicate membership, or referral code already in use </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AffiliateReferrerEnvelope> registerAffiliateReferrerWithHttpInfo(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull RegisterAffiliateReferrerRequest registerAffiliateReferrerRequest) throws ApiException {
+        okhttp3.Call localVarCall = registerAffiliateReferrerValidateBeforeCall(programId, registerAffiliateReferrerRequest, null);
+        Type localVarReturnType = new TypeToken<AffiliateReferrerEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Register an existing user as a referrer (asynchronously)
+     * ADMIN or INTEGRATOR required, within tenant permissions. Accepts an optional custom referral_code and generates one when omitted or empty. Codes are stored uppercase and globally unique. Duplicate membership or code returns 409. Users may supply the code at signup or assign it later through POST /v1/affiliate_referrals/self.
+     * @param programId  (required)
+     * @param registerAffiliateReferrerRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Register an existing user as a referrer </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Inactive program, duplicate membership, or referral code already in use </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call registerAffiliateReferrerAsync(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull RegisterAffiliateReferrerRequest registerAffiliateReferrerRequest, final ApiCallback<AffiliateReferrerEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = registerAffiliateReferrerValidateBeforeCall(programId, registerAffiliateReferrerRequest, _callback);
+        Type localVarReturnType = new TypeToken<AffiliateReferrerEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -15428,6 +18445,173 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for renderPromoLinkQR
+     * @param linkId  (required)
+     * @param size  (optional, default to 512)
+     * @param format  (optional, default to png)
+     * @param ec  (optional, default to M)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> QR PNG </td><td>  * Cache-Control -  <br>  </td></tr>
+        <tr><td> 400 </td><td> Malformed QR parameter </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Link not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call renderPromoLinkQRCall(@javax.annotation.Nonnull UUID linkId, @javax.annotation.Nullable Integer size, @javax.annotation.Nullable String format, @javax.annotation.Nullable String ec, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/promo_links/{link_id}/qr"
+            .replace("{" + "link_id" + "}", localVarApiClient.escapeString(linkId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (size != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("size", size));
+        }
+
+        if (format != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("format", format));
+        }
+
+        if (ec != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("ec", ec));
+        }
+
+        final String[] localVarAccepts = {
+            "image/png"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call renderPromoLinkQRValidateBeforeCall(@javax.annotation.Nonnull UUID linkId, @javax.annotation.Nullable Integer size, @javax.annotation.Nullable String format, @javax.annotation.Nullable String ec, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'linkId' is set
+        if (linkId == null) {
+            throw new ApiException("Missing the required parameter 'linkId' when calling renderPromoLinkQR(Async)");
+        }
+
+        return renderPromoLinkQRCall(linkId, size, format, ec, _callback);
+
+    }
+
+    /**
+     * Render a promotional link QR code
+     * Render the exact private claim URL as PNG with Cache-Control private, no-store. ADMIN and same-tenant INTEGRATOR only.
+     * @param linkId  (required)
+     * @param size  (optional, default to 512)
+     * @param format  (optional, default to png)
+     * @param ec  (optional, default to M)
+     * @return String
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> QR PNG </td><td>  * Cache-Control -  <br>  </td></tr>
+        <tr><td> 400 </td><td> Malformed QR parameter </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Link not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public String renderPromoLinkQR(@javax.annotation.Nonnull UUID linkId, @javax.annotation.Nullable Integer size, @javax.annotation.Nullable String format, @javax.annotation.Nullable String ec) throws ApiException {
+        ApiResponse<String> localVarResp = renderPromoLinkQRWithHttpInfo(linkId, size, format, ec);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Render a promotional link QR code
+     * Render the exact private claim URL as PNG with Cache-Control private, no-store. ADMIN and same-tenant INTEGRATOR only.
+     * @param linkId  (required)
+     * @param size  (optional, default to 512)
+     * @param format  (optional, default to png)
+     * @param ec  (optional, default to M)
+     * @return ApiResponse&lt;String&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> QR PNG </td><td>  * Cache-Control -  <br>  </td></tr>
+        <tr><td> 400 </td><td> Malformed QR parameter </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Link not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<String> renderPromoLinkQRWithHttpInfo(@javax.annotation.Nonnull UUID linkId, @javax.annotation.Nullable Integer size, @javax.annotation.Nullable String format, @javax.annotation.Nullable String ec) throws ApiException {
+        okhttp3.Call localVarCall = renderPromoLinkQRValidateBeforeCall(linkId, size, format, ec, null);
+        Type localVarReturnType = new TypeToken<String>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Render a promotional link QR code (asynchronously)
+     * Render the exact private claim URL as PNG with Cache-Control private, no-store. ADMIN and same-tenant INTEGRATOR only.
+     * @param linkId  (required)
+     * @param size  (optional, default to 512)
+     * @param format  (optional, default to png)
+     * @param ec  (optional, default to M)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> QR PNG </td><td>  * Cache-Control -  <br>  </td></tr>
+        <tr><td> 400 </td><td> Malformed QR parameter </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Link not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call renderPromoLinkQRAsync(@javax.annotation.Nonnull UUID linkId, @javax.annotation.Nullable Integer size, @javax.annotation.Nullable String format, @javax.annotation.Nullable String ec, final ApiCallback<String> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = renderPromoLinkQRValidateBeforeCall(linkId, size, format, ec, _callback);
+        Type localVarReturnType = new TypeToken<String>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for repayUSD
      * @param repayUSDRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -15571,6 +18755,141 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = repayUSDValidateBeforeCall(repayUSDRequest, _callback);
         Type localVarReturnType = new TypeToken<RepayUSDResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for resolvePromoClaim
+     * @param token Opaque bearer claim token (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Current claim-link state and offer details when disclosure is safe </td><td>  * Cache-Control -  <br>  </td></tr>
+        <tr><td> 429 </td><td> Per-IP rate limit exceeded </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Claim resolution temporarily unavailable </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call resolvePromoClaimCall(@javax.annotation.Nonnull String token, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/promo/claim/{token}"
+            .replace("{" + "token" + "}", localVarApiClient.escapeString(token.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call resolvePromoClaimValidateBeforeCall(@javax.annotation.Nonnull String token, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'token' is set
+        if (token == null) {
+            throw new ApiException("Missing the required parameter 'token' when calling resolvePromoClaim(Async)");
+        }
+
+        return resolvePromoClaimCall(token, _callback);
+
+    }
+
+    /**
+     * Resolve a public QR promotion claim link
+     * 
+     * @param token Opaque bearer claim token (required)
+     * @return PromoClaimResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Current claim-link state and offer details when disclosure is safe </td><td>  * Cache-Control -  <br>  </td></tr>
+        <tr><td> 429 </td><td> Per-IP rate limit exceeded </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Claim resolution temporarily unavailable </td><td>  -  </td></tr>
+     </table>
+     */
+    public PromoClaimResponseEnvelope resolvePromoClaim(@javax.annotation.Nonnull String token) throws ApiException {
+        ApiResponse<PromoClaimResponseEnvelope> localVarResp = resolvePromoClaimWithHttpInfo(token);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Resolve a public QR promotion claim link
+     * 
+     * @param token Opaque bearer claim token (required)
+     * @return ApiResponse&lt;PromoClaimResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Current claim-link state and offer details when disclosure is safe </td><td>  * Cache-Control -  <br>  </td></tr>
+        <tr><td> 429 </td><td> Per-IP rate limit exceeded </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Claim resolution temporarily unavailable </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<PromoClaimResponseEnvelope> resolvePromoClaimWithHttpInfo(@javax.annotation.Nonnull String token) throws ApiException {
+        okhttp3.Call localVarCall = resolvePromoClaimValidateBeforeCall(token, null);
+        Type localVarReturnType = new TypeToken<PromoClaimResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Resolve a public QR promotion claim link (asynchronously)
+     * 
+     * @param token Opaque bearer claim token (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Current claim-link state and offer details when disclosure is safe </td><td>  * Cache-Control -  <br>  </td></tr>
+        <tr><td> 429 </td><td> Per-IP rate limit exceeded </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Claim resolution temporarily unavailable </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call resolvePromoClaimAsync(@javax.annotation.Nonnull String token, final ApiCallback<PromoClaimResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = resolvePromoClaimValidateBeforeCall(token, _callback);
+        Type localVarReturnType = new TypeToken<PromoClaimResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -15851,6 +19170,163 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = revokeAPIKeyForUserIDValidateBeforeCall(userId, keyId, _callback);
         Type localVarReturnType = new TypeToken<RevokeAPIKeyResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for revokePromoLink
+     * @param linkId  (required)
+     * @param revokePromoLinkRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Link revoked or already revoked </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed request or reason </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Link not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Claimed link or inconsistent campaign capacity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call revokePromoLinkCall(@javax.annotation.Nonnull UUID linkId, @javax.annotation.Nonnull RevokePromoLinkRequest revokePromoLinkRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = revokePromoLinkRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/promo_links/{link_id}/revoke"
+            .replace("{" + "link_id" + "}", localVarApiClient.escapeString(linkId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call revokePromoLinkValidateBeforeCall(@javax.annotation.Nonnull UUID linkId, @javax.annotation.Nonnull RevokePromoLinkRequest revokePromoLinkRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'linkId' is set
+        if (linkId == null) {
+            throw new ApiException("Missing the required parameter 'linkId' when calling revokePromoLink(Async)");
+        }
+
+        // verify the required parameter 'revokePromoLinkRequest' is set
+        if (revokePromoLinkRequest == null) {
+            throw new ApiException("Missing the required parameter 'revokePromoLinkRequest' when calling revokePromoLink(Async)");
+        }
+
+        return revokePromoLinkCall(linkId, revokePromoLinkRequest, _callback);
+
+    }
+
+    /**
+     * Revoke a promotional link
+     * Revoke an unclaimed link and return one unit of QR campaign capacity. Repeating an already-revoked request is idempotent; claimed links return 409.
+     * @param linkId  (required)
+     * @param revokePromoLinkRequest  (required)
+     * @return RevokePromoLinkResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Link revoked or already revoked </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed request or reason </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Link not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Claimed link or inconsistent campaign capacity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public RevokePromoLinkResponse revokePromoLink(@javax.annotation.Nonnull UUID linkId, @javax.annotation.Nonnull RevokePromoLinkRequest revokePromoLinkRequest) throws ApiException {
+        ApiResponse<RevokePromoLinkResponse> localVarResp = revokePromoLinkWithHttpInfo(linkId, revokePromoLinkRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Revoke a promotional link
+     * Revoke an unclaimed link and return one unit of QR campaign capacity. Repeating an already-revoked request is idempotent; claimed links return 409.
+     * @param linkId  (required)
+     * @param revokePromoLinkRequest  (required)
+     * @return ApiResponse&lt;RevokePromoLinkResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Link revoked or already revoked </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed request or reason </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Link not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Claimed link or inconsistent campaign capacity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<RevokePromoLinkResponse> revokePromoLinkWithHttpInfo(@javax.annotation.Nonnull UUID linkId, @javax.annotation.Nonnull RevokePromoLinkRequest revokePromoLinkRequest) throws ApiException {
+        okhttp3.Call localVarCall = revokePromoLinkValidateBeforeCall(linkId, revokePromoLinkRequest, null);
+        Type localVarReturnType = new TypeToken<RevokePromoLinkResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Revoke a promotional link (asynchronously)
+     * Revoke an unclaimed link and return one unit of QR campaign capacity. Repeating an already-revoked request is idempotent; claimed links return 409.
+     * @param linkId  (required)
+     * @param revokePromoLinkRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Link revoked or already revoked </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed request or reason </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Link not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Claimed link or inconsistent campaign capacity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call revokePromoLinkAsync(@javax.annotation.Nonnull UUID linkId, @javax.annotation.Nonnull RevokePromoLinkRequest revokePromoLinkRequest, final ApiCallback<RevokePromoLinkResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = revokePromoLinkValidateBeforeCall(linkId, revokePromoLinkRequest, _callback);
+        Type localVarReturnType = new TypeToken<RevokePromoLinkResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -17583,6 +21059,163 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = transferAvailableBalancesValidateBeforeCall(transferBalancesRequest, _callback);
         Type localVarReturnType = new TypeToken<TransferBalancesResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateAffiliateProgram
+     * @param programId  (required)
+     * @param updateAffiliateProgramRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Update an affiliate program </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateAffiliateProgramCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UpdateAffiliateProgramRequest updateAffiliateProgramRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateAffiliateProgramRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/affiliate_programs/{program_id}"
+            .replace("{" + "program_id" + "}", localVarApiClient.escapeString(programId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateAffiliateProgramValidateBeforeCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UpdateAffiliateProgramRequest updateAffiliateProgramRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'programId' is set
+        if (programId == null) {
+            throw new ApiException("Missing the required parameter 'programId' when calling updateAffiliateProgram(Async)");
+        }
+
+        // verify the required parameter 'updateAffiliateProgramRequest' is set
+        if (updateAffiliateProgramRequest == null) {
+            throw new ApiException("Missing the required parameter 'updateAffiliateProgramRequest' when calling updateAffiliateProgram(Async)");
+        }
+
+        return updateAffiliateProgramCall(programId, updateAffiliateProgramRequest, _callback);
+
+    }
+
+    /**
+     * Update an affiliate program
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. Omitted and null fields are preserved. Fields accept direct values or {update, value} objects. Tenant ownership cannot be changed. Deactivation preserves codes and registrations.
+     * @param programId  (required)
+     * @param updateAffiliateProgramRequest  (required)
+     * @return AffiliateProgramEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Update an affiliate program </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AffiliateProgramEnvelope updateAffiliateProgram(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UpdateAffiliateProgramRequest updateAffiliateProgramRequest) throws ApiException {
+        ApiResponse<AffiliateProgramEnvelope> localVarResp = updateAffiliateProgramWithHttpInfo(programId, updateAffiliateProgramRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Update an affiliate program
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. Omitted and null fields are preserved. Fields accept direct values or {update, value} objects. Tenant ownership cannot be changed. Deactivation preserves codes and registrations.
+     * @param programId  (required)
+     * @param updateAffiliateProgramRequest  (required)
+     * @return ApiResponse&lt;AffiliateProgramEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Update an affiliate program </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AffiliateProgramEnvelope> updateAffiliateProgramWithHttpInfo(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UpdateAffiliateProgramRequest updateAffiliateProgramRequest) throws ApiException {
+        okhttp3.Call localVarCall = updateAffiliateProgramValidateBeforeCall(programId, updateAffiliateProgramRequest, null);
+        Type localVarReturnType = new TypeToken<AffiliateProgramEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Update an affiliate program (asynchronously)
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. Omitted and null fields are preserved. Fields accept direct values or {update, value} objects. Tenant ownership cannot be changed. Deactivation preserves codes and registrations.
+     * @param programId  (required)
+     * @param updateAffiliateProgramRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Update an affiliate program </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request or missing tenant/user </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Role or requested tenant is forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Resource not found within tenant permissions </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateAffiliateProgramAsync(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UpdateAffiliateProgramRequest updateAffiliateProgramRequest, final ApiCallback<AffiliateProgramEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updateAffiliateProgramValidateBeforeCall(programId, updateAffiliateProgramRequest, _callback);
+        Type localVarReturnType = new TypeToken<AffiliateProgramEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

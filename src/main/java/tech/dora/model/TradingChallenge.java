@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import tech.dora.model.TradingChallengeQR;
 import tech.dora.model.TradingChallengeStatus;
 import tech.dora.model.TradingChallengeType;
 
@@ -54,7 +55,7 @@ import tech.dora.JSON;
 /**
  * TradingChallenge
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-04T17:02:20.472678984+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-16T18:17:13.950531673+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class TradingChallenge {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -155,6 +156,16 @@ public class TradingChallenge {
   @SerializedName(SERIALIZED_NAME_USERS_COUNT)
   @javax.annotation.Nonnull
   private Integer usersCount;
+
+  public static final String SERIALIZED_NAME_QR = "qr";
+  @SerializedName(SERIALIZED_NAME_QR)
+  @javax.annotation.Nullable
+  private TradingChallengeQR qr;
+
+  public static final String SERIALIZED_NAME_WORST_CASE_EXPOSURE = "worst_case_exposure";
+  @SerializedName(SERIALIZED_NAME_WORST_CASE_EXPOSURE)
+  @javax.annotation.Nullable
+  private String worstCaseExposure;
 
   public TradingChallenge() {
   }
@@ -547,6 +558,44 @@ public class TradingChallenge {
   }
 
 
+  public TradingChallenge qr(@javax.annotation.Nullable TradingChallengeQR qr) {
+    this.qr = qr;
+    return this;
+  }
+
+  /**
+   * Get qr
+   * @return qr
+   */
+  @javax.annotation.Nullable
+  public TradingChallengeQR getQr() {
+    return qr;
+  }
+
+  public void setQr(@javax.annotation.Nullable TradingChallengeQR qr) {
+    this.qr = qr;
+  }
+
+
+  public TradingChallenge worstCaseExposure(@javax.annotation.Nullable String worstCaseExposure) {
+    this.worstCaseExposure = worstCaseExposure;
+    return this;
+  }
+
+  /**
+   * For QR_PROMO, max_users multiplied by initial_user_balance plus max_reward_amount.
+   * @return worstCaseExposure
+   */
+  @javax.annotation.Nullable
+  public String getWorstCaseExposure() {
+    return worstCaseExposure;
+  }
+
+  public void setWorstCaseExposure(@javax.annotation.Nullable String worstCaseExposure) {
+    this.worstCaseExposure = worstCaseExposure;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -576,12 +625,14 @@ public class TradingChallenge {
         Objects.equals(this.createdAt, tradingChallenge.createdAt) &&
         Objects.equals(this.lastProcessedAt, tradingChallenge.lastProcessedAt) &&
         Objects.equals(this.users, tradingChallenge.users) &&
-        Objects.equals(this.usersCount, tradingChallenge.usersCount);
+        Objects.equals(this.usersCount, tradingChallenge.usersCount) &&
+        Objects.equals(this.qr, tradingChallenge.qr) &&
+        Objects.equals(this.worstCaseExposure, tradingChallenge.worstCaseExposure);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, tenantId, type, status, maxUsers, startAt, endAt, initialUserBalance, goldPrizeQuantity, silverPrizeQuantity, bronzePrizeQuantity, pnlCondition, totalVolumeCondition, avgDailyVolumeCondition, minimumEquityPercentageCondition, createdAt, lastProcessedAt, users, usersCount);
+    return Objects.hash(id, name, tenantId, type, status, maxUsers, startAt, endAt, initialUserBalance, goldPrizeQuantity, silverPrizeQuantity, bronzePrizeQuantity, pnlCondition, totalVolumeCondition, avgDailyVolumeCondition, minimumEquityPercentageCondition, createdAt, lastProcessedAt, users, usersCount, qr, worstCaseExposure);
   }
 
   @Override
@@ -608,6 +659,8 @@ public class TradingChallenge {
     sb.append("    lastProcessedAt: ").append(toIndentedString(lastProcessedAt)).append("\n");
     sb.append("    users: ").append(toIndentedString(users)).append("\n");
     sb.append("    usersCount: ").append(toIndentedString(usersCount)).append("\n");
+    sb.append("    qr: ").append(toIndentedString(qr)).append("\n");
+    sb.append("    worstCaseExposure: ").append(toIndentedString(worstCaseExposure)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -626,7 +679,7 @@ public class TradingChallenge {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "name", "tenant_id", "type", "status", "max_users", "start_at", "end_at", "initial_user_balance", "gold_prize_quantity", "silver_prize_quantity", "bronze_prize_quantity", "pnl_condition", "total_volume_condition", "avg_daily_volume_condition", "minimum_equity_percentage_condition", "created_at", "last_processed_at", "users", "users_count"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "name", "tenant_id", "type", "status", "max_users", "start_at", "end_at", "initial_user_balance", "gold_prize_quantity", "silver_prize_quantity", "bronze_prize_quantity", "pnl_condition", "total_volume_condition", "avg_daily_volume_condition", "minimum_equity_percentage_condition", "created_at", "last_processed_at", "users", "users_count", "qr", "worst_case_exposure"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "tenant_id", "type", "status", "max_users", "start_at", "end_at", "initial_user_balance", "gold_prize_quantity", "silver_prize_quantity", "bronze_prize_quantity", "pnl_condition", "total_volume_condition", "avg_daily_volume_condition", "minimum_equity_percentage_condition", "created_at", "users_count"));
@@ -697,6 +750,13 @@ public class TradingChallenge {
       // ensure the optional json data is an array if present
       if (jsonObj.get("users") != null && !jsonObj.get("users").isJsonNull() && !jsonObj.get("users").isJsonArray()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `users` to be an array in the JSON string but got `%s`", jsonObj.get("users").toString()));
+      }
+      // validate the optional field `qr`
+      if (jsonObj.get("qr") != null && !jsonObj.get("qr").isJsonNull()) {
+        TradingChallengeQR.validateJsonElement(jsonObj.get("qr"));
+      }
+      if ((jsonObj.get("worst_case_exposure") != null && !jsonObj.get("worst_case_exposure").isJsonNull()) && !jsonObj.get("worst_case_exposure").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `worst_case_exposure` to be a primitive type in the JSON string but got `%s`", jsonObj.get("worst_case_exposure").toString()));
       }
   }
 

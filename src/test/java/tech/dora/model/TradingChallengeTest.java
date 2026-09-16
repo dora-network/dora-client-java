@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import tech.dora.model.TradingChallengeQR;
 import tech.dora.model.TradingChallengeStatus;
 import tech.dora.model.TradingChallengeType;
 import org.junit.jupiter.api.Disabled;
@@ -201,6 +202,22 @@ public class TradingChallengeTest {
     @Test
     public void usersCountTest() {
         // TODO: test usersCount
+    }
+
+    /**
+     * Test the property 'qr'
+     */
+    @Test
+    public void qrTest() {
+        // TODO: test qr
+    }
+
+    /**
+     * Test the property 'worstCaseExposure'
+     */
+    @Test
+    public void worstCaseExposureTest() {
+        // TODO: test worstCaseExposure
     }
 
 }

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import tech.dora.model.CreateTradingChallengeQRRequest;
 import tech.dora.model.TradingChallengeType;
 
 import com.google.gson.Gson;
@@ -53,7 +54,7 @@ import tech.dora.JSON;
 /**
  * CreateTradingChallengeRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-04T17:02:20.472678984+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-16T18:17:13.950531673+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class CreateTradingChallengeRequest {
   public static final String SERIALIZED_NAME_TENANT_ID = "tenant_id";
   @SerializedName(SERIALIZED_NAME_TENANT_ID)
@@ -129,6 +130,11 @@ public class CreateTradingChallengeRequest {
   @SerializedName(SERIALIZED_NAME_USERS)
   @javax.annotation.Nullable
   private List<UUID> users = new ArrayList<>();
+
+  public static final String SERIALIZED_NAME_QR = "qr";
+  @SerializedName(SERIALIZED_NAME_QR)
+  @javax.annotation.Nullable
+  private CreateTradingChallengeQRRequest qr;
 
   public CreateTradingChallengeRequest() {
   }
@@ -429,6 +435,25 @@ public class CreateTradingChallengeRequest {
   }
 
 
+  public CreateTradingChallengeRequest qr(@javax.annotation.Nullable CreateTradingChallengeQRRequest qr) {
+    this.qr = qr;
+    return this;
+  }
+
+  /**
+   * Required for QR_PROMO and rejected for other challenge types. QR_PROMO requests must omit users.
+   * @return qr
+   */
+  @javax.annotation.Nullable
+  public CreateTradingChallengeQRRequest getQr() {
+    return qr;
+  }
+
+  public void setQr(@javax.annotation.Nullable CreateTradingChallengeQRRequest qr) {
+    this.qr = qr;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -453,12 +478,13 @@ public class CreateTradingChallengeRequest {
         Objects.equals(this.totalVolumeCondition, createTradingChallengeRequest.totalVolumeCondition) &&
         Objects.equals(this.avgDailyVolumeCondition, createTradingChallengeRequest.avgDailyVolumeCondition) &&
         Objects.equals(this.minimumEquityPercentageCondition, createTradingChallengeRequest.minimumEquityPercentageCondition) &&
-        Objects.equals(this.users, createTradingChallengeRequest.users);
+        Objects.equals(this.users, createTradingChallengeRequest.users) &&
+        Objects.equals(this.qr, createTradingChallengeRequest.qr);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(tenantId, name, type, maxUsers, start, end, initialUserBalance, goldPrizeQuantity, silverPrizeQuantity, bronzePrizeQuantity, pnlCondition, totalVolumeCondition, avgDailyVolumeCondition, minimumEquityPercentageCondition, users);
+    return Objects.hash(tenantId, name, type, maxUsers, start, end, initialUserBalance, goldPrizeQuantity, silverPrizeQuantity, bronzePrizeQuantity, pnlCondition, totalVolumeCondition, avgDailyVolumeCondition, minimumEquityPercentageCondition, users, qr);
   }
 
   @Override
@@ -480,6 +506,7 @@ public class CreateTradingChallengeRequest {
     sb.append("    avgDailyVolumeCondition: ").append(toIndentedString(avgDailyVolumeCondition)).append("\n");
     sb.append("    minimumEquityPercentageCondition: ").append(toIndentedString(minimumEquityPercentageCondition)).append("\n");
     sb.append("    users: ").append(toIndentedString(users)).append("\n");
+    sb.append("    qr: ").append(toIndentedString(qr)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -498,7 +525,7 @@ public class CreateTradingChallengeRequest {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("tenant_id", "name", "type", "max_users", "start", "end", "initial_user_balance", "gold_prize_quantity", "silver_prize_quantity", "bronze_prize_quantity", "pnl_condition", "total_volume_condition", "avg_daily_volume_condition", "minimum_equity_percentage_condition", "users"));
+    openapiFields = new HashSet<String>(Arrays.asList("tenant_id", "name", "type", "max_users", "start", "end", "initial_user_balance", "gold_prize_quantity", "silver_prize_quantity", "bronze_prize_quantity", "pnl_condition", "total_volume_condition", "avg_daily_volume_condition", "minimum_equity_percentage_condition", "users", "qr"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("tenant_id", "name", "type", "max_users", "start", "end", "initial_user_balance"));
@@ -564,6 +591,10 @@ public class CreateTradingChallengeRequest {
       // ensure the optional json data is an array if present
       if (jsonObj.get("users") != null && !jsonObj.get("users").isJsonNull() && !jsonObj.get("users").isJsonArray()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `users` to be an array in the JSON string but got `%s`", jsonObj.get("users").toString()));
+      }
+      // validate the optional field `qr`
+      if (jsonObj.get("qr") != null && !jsonObj.get("qr").isJsonNull()) {
+        CreateTradingChallengeQRRequest.validateJsonElement(jsonObj.get("qr"));
       }
   }
 

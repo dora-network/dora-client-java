@@ -49,17 +49,17 @@ import tech.dora.JSON;
 /**
  * TenantRestrictions
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-04T17:02:20.472678984+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-16T18:17:13.950531673+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class TenantRestrictions {
   public static final String SERIALIZED_NAME_TENANT_ID = "tenant_id";
   @SerializedName(SERIALIZED_NAME_TENANT_ID)
   @javax.annotation.Nonnull
   private String tenantId;
 
-  public static final String SERIALIZED_NAME_DEPOSIT_LIMIT = "deposit_limit";
-  @SerializedName(SERIALIZED_NAME_DEPOSIT_LIMIT)
+  public static final String SERIALIZED_NAME_DAILY_DEPOSIT_LIMIT = "daily_deposit_limit";
+  @SerializedName(SERIALIZED_NAME_DAILY_DEPOSIT_LIMIT)
   @javax.annotation.Nonnull
-  private String depositLimit;
+  private String dailyDepositLimit;
 
   public static final String SERIALIZED_NAME_TRADE_LIMIT = "trade_limit";
   @SerializedName(SERIALIZED_NAME_TRADE_LIMIT)
@@ -93,22 +93,22 @@ public class TenantRestrictions {
   }
 
 
-  public TenantRestrictions depositLimit(@javax.annotation.Nonnull String depositLimit) {
-    this.depositLimit = depositLimit;
+  public TenantRestrictions dailyDepositLimit(@javax.annotation.Nonnull String dailyDepositLimit) {
+    this.dailyDepositLimit = dailyDepositLimit;
     return this;
   }
 
   /**
-   * Maximum allowed deposit for the tenant.
-   * @return depositLimit
+   * Maximum allowed deposit for the tenant per day.
+   * @return dailyDepositLimit
    */
   @javax.annotation.Nonnull
-  public String getDepositLimit() {
-    return depositLimit;
+  public String getDailyDepositLimit() {
+    return dailyDepositLimit;
   }
 
-  public void setDepositLimit(@javax.annotation.Nonnull String depositLimit) {
-    this.depositLimit = depositLimit;
+  public void setDailyDepositLimit(@javax.annotation.Nonnull String dailyDepositLimit) {
+    this.dailyDepositLimit = dailyDepositLimit;
   }
 
 
@@ -161,14 +161,14 @@ public class TenantRestrictions {
     }
     TenantRestrictions tenantRestrictions = (TenantRestrictions) o;
     return Objects.equals(this.tenantId, tenantRestrictions.tenantId) &&
-        Objects.equals(this.depositLimit, tenantRestrictions.depositLimit) &&
+        Objects.equals(this.dailyDepositLimit, tenantRestrictions.dailyDepositLimit) &&
         Objects.equals(this.tradeLimit, tenantRestrictions.tradeLimit) &&
         Objects.equals(this.updatedAt, tenantRestrictions.updatedAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(tenantId, depositLimit, tradeLimit, updatedAt);
+    return Objects.hash(tenantId, dailyDepositLimit, tradeLimit, updatedAt);
   }
 
   @Override
@@ -176,7 +176,7 @@ public class TenantRestrictions {
     StringBuilder sb = new StringBuilder();
     sb.append("class TenantRestrictions {\n");
     sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
-    sb.append("    depositLimit: ").append(toIndentedString(depositLimit)).append("\n");
+    sb.append("    dailyDepositLimit: ").append(toIndentedString(dailyDepositLimit)).append("\n");
     sb.append("    tradeLimit: ").append(toIndentedString(tradeLimit)).append("\n");
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
     sb.append("}");
@@ -197,10 +197,10 @@ public class TenantRestrictions {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("tenant_id", "deposit_limit", "trade_limit", "updated_at"));
+    openapiFields = new HashSet<String>(Arrays.asList("tenant_id", "daily_deposit_limit", "trade_limit", "updated_at"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("tenant_id", "deposit_limit", "trade_limit", "updated_at"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("tenant_id", "daily_deposit_limit", "trade_limit", "updated_at"));
   }
 
   /**
@@ -234,8 +234,8 @@ public class TenantRestrictions {
       if (!jsonObj.get("tenant_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tenant_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tenant_id").toString()));
       }
-      if (!jsonObj.get("deposit_limit").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `deposit_limit` to be a primitive type in the JSON string but got `%s`", jsonObj.get("deposit_limit").toString()));
+      if (!jsonObj.get("daily_deposit_limit").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `daily_deposit_limit` to be a primitive type in the JSON string but got `%s`", jsonObj.get("daily_deposit_limit").toString()));
       }
       if (!jsonObj.get("trade_limit").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `trade_limit` to be a primitive type in the JSON string but got `%s`", jsonObj.get("trade_limit").toString()));

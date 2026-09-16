@@ -31,7 +31,9 @@ public enum TradingChallengeType {
   
   TOURNAMENT("TOURNAMENT"),
   
-  CASH("CASH");
+  CASH("CASH"),
+  
+  QR_PROMO("QR_PROMO");
 
   private String value;
 

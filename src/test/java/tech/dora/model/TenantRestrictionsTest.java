@@ -47,11 +47,11 @@ public class TenantRestrictionsTest {
     }
 
     /**
-     * Test the property 'depositLimit'
+     * Test the property 'dailyDepositLimit'
      */
     @Test
-    public void depositLimitTest() {
-        // TODO: test depositLimit
+    public void dailyDepositLimitTest() {
+        // TODO: test dailyDepositLimit
     }
 
     /**

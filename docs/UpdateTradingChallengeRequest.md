@@ -2,7 +2,7 @@
 
 # UpdateTradingChallengeRequest
 
-Request body for PUT /v1/trading_challenges/{trading_challenge_id}: partially update a trading challenge. A field that is omitted, or sent as null, is left unchanged. Each field accepts either the {update, value} object or the bare value on its own. PENDING challenges accept every field; ACTIVE challenges accept only name, max_users, end and the prize quantities; COMPLETED challenges accept none. tenant_id and status are never updatable, and the participant list is managed by add_users and remove_users.
+Request body for PUT /v1/trading_challenges/{trading_challenge_id}: partially update a trading challenge. A field that is omitted, or sent as null, is left unchanged. Each field accepts either the {update, value} object or the bare value on its own. PENDING CASH and TOURNAMENT challenges accept every field; ACTIVE CASH and TOURNAMENT challenges accept only name, max_users, end and the prize quantities; QR_PROMO challenges accept only name, max_users and end while PENDING or ACTIVE; COMPLETED challenges accept none. tenant_id and status are never updatable, and the participant list is managed by add_users and remove_users.
 
 ## Properties
 

@@ -16,6 +16,15 @@ package tech.dora.api;
 import tech.dora.ApiException;
 import tech.dora.model.APIKeyResponseEnvelope;
 import tech.dora.model.AddTradingChallengeUsersRequest;
+import tech.dora.model.AffiliateAttributionEnvelope;
+import tech.dora.model.AffiliateCashFlowReportEnvelope;
+import tech.dora.model.AffiliateError;
+import tech.dora.model.AffiliateMembershipListEnvelope;
+import tech.dora.model.AffiliateProgramEnvelope;
+import tech.dora.model.AffiliateProgramListEnvelope;
+import tech.dora.model.AffiliateReferralReportEnvelope;
+import tech.dora.model.AffiliateReferrerEnvelope;
+import tech.dora.model.AffiliateReferrerListEnvelope;
 import tech.dora.model.AllPositionsResponseEnvelope;
 import tech.dora.model.AllWithdrawalInitiationsResponseEnvelope;
 import tech.dora.model.AssetKind;
@@ -23,11 +32,13 @@ import tech.dora.model.AssetPrice;
 import tech.dora.model.AssetPriceResponseEnvelope;
 import tech.dora.model.AssetRequestError;
 import tech.dora.model.AssetYieldResolution;
+import tech.dora.model.AssignAffiliateReferralRequest;
 import tech.dora.model.CancelOrderResponseEnvelope;
 import tech.dora.model.CandleResolution;
 import tech.dora.model.CashReserveResponseEnvelope;
 import tech.dora.model.ClaimLeverageAccruedInterestRequest;
 import tech.dora.model.ClaimLeverageAccruedInterestResponseEnvelope;
+import tech.dora.model.ClaimPromoLinkRequest;
 import tech.dora.model.ClaimTradingChallengeResponseEnvelope;
 import tech.dora.model.CloseAccountRequest;
 import tech.dora.model.ClosePositionRequest;
@@ -35,12 +46,14 @@ import tech.dora.model.ClosePositionResponseEnvelope;
 import tech.dora.model.CountryCode;
 import tech.dora.model.CreateAPIKeyRequest;
 import tech.dora.model.CreateAPIKeyResponseEnvelope;
+import tech.dora.model.CreateAffiliateProgramRequest;
 import tech.dora.model.CreateConditionalOrderRequest;
 import tech.dora.model.CreateConditionalOrderResponseEnvelope;
 import tech.dora.model.CreateIntegratorUserRequest;
 import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponseEnvelope;
 import tech.dora.model.CreateTradingChallengeRequest;
+import tech.dora.model.CreateWithdrawalRequest;
 import tech.dora.model.CurrentLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.DefundUserRequest;
 import tech.dora.model.DepositInstructionsResponseEnvelope;
@@ -56,6 +69,8 @@ import tech.dora.model.GetTopOfBookResponseEnvelope;
 import tech.dora.model.HistoricalLeverageInterestRatesResponseEnvelope;
 import tech.dora.model.IsolateCollateralRequest;
 import tech.dora.model.IsolateCollateralResponse;
+import tech.dora.model.IssuePromoLinkBatchRequest;
+import tech.dora.model.IssuePromoLinkBatchResponse;
 import tech.dora.model.LedgerAccountsResponseV2Envelope;
 import tech.dora.model.LedgerModuleByAssetResponseEnvelope;
 import tech.dora.model.LedgerModuleResponseEnvelope;
@@ -76,7 +91,9 @@ import tech.dora.model.ListPositionAccountsResponseEnvelope;
 import tech.dora.model.ListTradeResponseEnvelope;
 import tech.dora.model.ListTransactionsResponseEnvelope;
 import tech.dora.model.ListUsersResponseEnvelope;
+import tech.dora.model.ListWithdrawalsResponseEnvelope;
 import tech.dora.model.LiveOrderbook;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import tech.dora.model.OrderBookResponseEnvelope;
 import tech.dora.model.OrderBookStatus;
@@ -91,6 +108,12 @@ import tech.dora.model.PayLeverageAccruedInterestRequest;
 import tech.dora.model.PayLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.PoolPriceResponseEnvelope;
 import tech.dora.model.PoolRequestError;
+import tech.dora.model.PromoAttributionResponse;
+import tech.dora.model.PromoClaimResponseEnvelope;
+import tech.dora.model.PromoLinkBatchListResponse;
+import tech.dora.model.PromoLinkListResponse;
+import tech.dora.model.PromoLinkStatus;
+import tech.dora.model.RegisterAffiliateReferrerRequest;
 import tech.dora.model.RemoveTradingChallengeUsersRequest;
 import tech.dora.model.RepayUSDRequest;
 import tech.dora.model.RepayUSDResponseEnvelope;
@@ -98,6 +121,8 @@ import tech.dora.model.ResponseEnvelope;
 import tech.dora.model.ResponseEnvelopeOfListAssets;
 import tech.dora.model.ReviewTradingChallengeRegistrationRequest;
 import tech.dora.model.RevokeAPIKeyResponseEnvelope;
+import tech.dora.model.RevokePromoLinkRequest;
+import tech.dora.model.RevokePromoLinkResponse;
 import tech.dora.model.SettleLeverageAccruedInterestRequest;
 import tech.dora.model.SettleLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.SettleRealizedPnlRecordResponseEnvelope;
@@ -137,6 +162,7 @@ import tech.dora.model.TransferBalancesResponseEnvelope;
 import java.util.UUID;
 import tech.dora.model.UnitePositionRequest;
 import tech.dora.model.UnitePositionResponseEnvelope;
+import tech.dora.model.UpdateAffiliateProgramRequest;
 import tech.dora.model.UpdateTradingChallengeRequest;
 import tech.dora.model.UpdateUserConfigRequest;
 import tech.dora.model.UpdateUserKYCRequest;
@@ -153,10 +179,12 @@ import tech.dora.model.UserUpdatedResponseEnvelope;
 import tech.dora.model.UserValueResponseEnvelope;
 import tech.dora.model.ValidateSubmitOrderRequest;
 import tech.dora.model.ValidateSubmitOrderResponse;
+import tech.dora.model.Web3WithdrawalStatus;
 import tech.dora.model.WithdrawRequest;
 import tech.dora.model.WithdrawResponseEnvelope;
 import tech.dora.model.WithdrawalInitiationResponseEnvelope;
 import tech.dora.model.WithdrawalRequestReason;
+import tech.dora.model.WithdrawalResponseEnvelope;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -218,6 +246,20 @@ public class DefaultApiTest {
     }
 
     /**
+     * Assign your affiliate referrer
+     *
+     * Authenticated existing users may assign a referral code once, within their own tenant. No user_id or tenant_id override is accepted. New assignments reject self-referral and require an active program. Repeating the same code returns the original assignment without changing its timestamp; changing the code returns 409. Only activity from assignment onward counts. This does not change signup_source.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void assignAffiliateReferralTest() throws ApiException {
+        AssignAffiliateReferralRequest assignAffiliateReferralRequest = null;
+        AffiliateAttributionEnvelope response = api.assignAffiliateReferral(assignAffiliateReferralRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook
      *
      * @throws ApiException if the Api call fails
@@ -268,6 +310,19 @@ public class DefaultApiTest {
     public void claimLeverageGetAccruedInterestTest() throws ApiException {
         ClaimLeverageAccruedInterestRequest claimLeverageAccruedInterestRequest = null;
         ClaimLeverageAccruedInterestResponseEnvelope response = api.claimLeverageGetAccruedInterest(claimLeverageAccruedInterestRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Claim a public QR promotion link
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void claimPromoLinkTest() throws ApiException {
+        String token = null;
+        ClaimPromoLinkRequest claimPromoLinkRequest = null;
+        PromoClaimResponseEnvelope response = api.claimPromoLink(token, claimPromoLinkRequest);
         // TODO: test validations
     }
 
@@ -335,6 +390,20 @@ public class DefaultApiTest {
     }
 
     /**
+     * Create an affiliate program
+     *
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. tenant_id is required. Set is_active to true to create an active program.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void createAffiliateProgramTest() throws ApiException {
+        CreateAffiliateProgramRequest createAffiliateProgramRequest = null;
+        AffiliateProgramEnvelope response = api.createAffiliateProgram(createAffiliateProgramRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Create a new conditional orders
      *
      * @throws ApiException if the Api call fails
@@ -385,6 +454,20 @@ public class DefaultApiTest {
     }
 
     /**
+     * Create a USDC withdrawal request
+     *
+     * Reserves the requested quantity against the caller&#39;s available balance (moving it to pending_withdrawal) and creates a PENDING withdrawal. No fee quote is required and no fee is reserved: the withdrawal&#39;s fee is quoted and locked later, as part of approval. Idempotent on withdrawal_id: a repeat request carrying the same to_address and quantity reserves nothing further and returns the existing withdrawal with 200. Reusing a withdrawal_id with a different to_address or quantity is a conflict (409), not a replay, and reserves nothing. Restricted to DORA tenant users whose native asset is USDC.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void createWithdrawalTest() throws ApiException {
+        CreateWithdrawalRequest createWithdrawalRequest = null;
+        WithdrawalResponseEnvelope response = api.createWithdrawal(createWithdrawalRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Delete user by ID
      *
      * @throws ApiException if the Api call fails
@@ -397,6 +480,20 @@ public class DefaultApiTest {
     }
 
     /**
+     * Export promotional links as CSV
+     *
+     * Stream private claim URLs with Cache-Control private, no-store. ADMIN and same-tenant INTEGRATOR only.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void exportPromoLinksCSVTest() throws ApiException {
+        UUID batchId = null;
+        String response = api.exportPromoLinksCSV(batchId);
+        // TODO: test validations
+    }
+
+    /**
      * Get user&#39;s api keys: admin or integrator only
      *
      * @throws ApiException if the Api call fails
@@ -405,6 +502,20 @@ public class DefaultApiTest {
     public void getAPIKeysForUserIDTest() throws ApiException {
         String userId = null;
         APIKeyResponseEnvelope response = api.getAPIKeysForUserID(userId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get an affiliate program
+     *
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getAffiliateProgramTest() throws ApiException {
+        UUID programId = null;
+        AffiliateProgramEnvelope response = api.getAffiliateProgram(programId);
         // TODO: test validations
     }
 
@@ -510,6 +621,8 @@ public class DefaultApiTest {
 
     /**
      * Get candlestick data for an orderbook
+     *
+     * Returns candle data in the requested [start, end) range for the selected resolution. Responses are capped to the most recent 5,000 candles per request.
      *
      * @throws ApiException if the Api call fails
      */
@@ -853,6 +966,20 @@ public class DefaultApiTest {
     }
 
     /**
+     * Get promotional source attribution
+     *
+     * Return the QR source funnel and decimal totals in one bounded aggregate query. ADMIN and same-tenant INTEGRATOR only.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getPromoAttributionTest() throws ApiException {
+        UUID tradingChallengeId = null;
+        PromoAttributionResponse response = api.getPromoAttribution(tradingChallengeId);
+        // TODO: test validations
+    }
+
+    /**
      * Get realized P&amp;L settlements with filters
      *
      * @throws ApiException if the Api call fails
@@ -1167,9 +1294,23 @@ public class DefaultApiTest {
     }
 
     /**
+     * Get a USDC withdrawal by ID
+     *
+     * Returns a single USDC withdrawal. A caller may read its own withdrawals; admins may read any user&#39;s.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getWithdrawalTest() throws ApiException {
+        UUID withdrawalId = null;
+        WithdrawalResponseEnvelope response = api.getWithdrawal(withdrawalId);
+        // TODO: test validations
+    }
+
+    /**
      * Estimate the network fee to withdraw USDC via web3
      *
-     * Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay when they make their withdrawal request. Restricted to DORA tenant users whose native asset is USDC.
+     * Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay for a withdrawal. The fee is not charged when the withdrawal is requested; the quote is redeemed later, when the fee is locked as part of approval. Restricted to DORA tenant users whose native asset is USDC.
      *
      * @throws ApiException if the Api call fails
      */
@@ -1178,6 +1319,22 @@ public class DefaultApiTest {
         String to = null;
         String quantity = null;
         FeeQuoteResponseEnvelope response = api.getWithdrawalFeeQuote(to, quantity);
+        // TODO: test validations
+    }
+
+    /**
+     * Issue a promotional link batch
+     *
+     * Atomically reserve QR campaign capacity and create opaque, encrypted promotional links. ADMIN and same-tenant INTEGRATOR only. Exact idempotent replays return 200; first creation returns 201; key reuse with another payload returns 409.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void issuePromoLinkBatchTest() throws ApiException {
+        UUID tradingChallengeId = null;
+        String idempotencyKey = null;
+        IssuePromoLinkBatchRequest issuePromoLinkBatchRequest = null;
+        IssuePromoLinkBatchResponse response = api.issuePromoLinkBatch(tradingChallengeId, idempotencyKey, issuePromoLinkBatchRequest);
         // TODO: test validations
     }
 
@@ -1371,6 +1528,73 @@ public class DefaultApiTest {
     }
 
     /**
+     * List a referred user&#39;s customer cash flows
+     *
+     * Authenticated access. ADMIN can inspect all programs. INTEGRATOR is limited to its own tenant. Other users must be registered referrers and see only their own referrals. Deactivation retains historical reports. Currency EXTERNAL_DEPOSIT and EXTERNAL_WITHDRAW ledger events only. Pending withdrawals and promotional credits are excluded. Amounts are positive native asset units identified by asset_symbol. The date is when the completed movement was recorded in the ledger. Only events at or after the user&#39;s referral assignment are included.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listAffiliateCashFlowsTest() throws ApiException {
+        UUID programId = null;
+        UUID userId = null;
+        Integer limit = null;
+        Integer page = null;
+        AffiliateCashFlowReportEnvelope response = api.listAffiliateCashFlows(programId, userId, limit, page);
+        // TODO: test validations
+    }
+
+    /**
+     * List affiliate programs
+     *
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. Admins without a tenant filter list all tenants. Inactive programs are included.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listAffiliateProgramsTest() throws ApiException {
+        String tenantId = null;
+        Integer limit = null;
+        Integer page = null;
+        AffiliateProgramListEnvelope response = api.listAffiliatePrograms(tenantId, limit, page);
+        // TODO: test validations
+    }
+
+    /**
+     * List referred users and activity
+     *
+     * Authenticated access. ADMIN can inspect all programs. INTEGRATOR is limited to its own tenant. Other users must be registered referrers and see only their own referrals. Deactivation retains historical reports. date defaults to the current UTC day. Daily volume and realized PnL use the selected UTC day; monthly volume and realized PnL use its UTC calendar month. Trade activity, PnL and currency cash-flow counts/dates include only events at or after attributed_at. Signup and KYC fields describe the user profile. Promotional and trading-challenge credits, non-currency assets, pending and rejected withdrawals are excluded from customer cash flows. Discord status is unknown until an integration exists.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listAffiliateReferralsTest() throws ApiException {
+        UUID programId = null;
+        LocalDate date = null;
+        UUID referrerId = null;
+        Integer limit = null;
+        Integer page = null;
+        AffiliateReferralReportEnvelope response = api.listAffiliateReferrals(programId, date, referrerId, limit, page);
+        // TODO: test validations
+    }
+
+    /**
+     * List program referrers
+     *
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. Includes registrations in inactive programs.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listAffiliateReferrersTest() throws ApiException {
+        UUID programId = null;
+        Integer limit = null;
+        Integer page = null;
+        AffiliateReferrerListEnvelope response = api.listAffiliateReferrers(programId, limit, page);
+        // TODO: test validations
+    }
+
+    /**
      * List assets
      *
      * @throws ApiException if the Api call fails
@@ -1445,6 +1669,21 @@ public class DefaultApiTest {
     }
 
     /**
+     * List your affiliate memberships
+     *
+     * Returns only the authenticated user&#39;s memberships and reusable codes, including inactive programs.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listOwnAffiliateMembershipsTest() throws ApiException {
+        Integer limit = null;
+        Integer page = null;
+        AffiliateMembershipListEnvelope response = api.listOwnAffiliateMemberships(limit, page);
+        // TODO: test validations
+    }
+
+    /**
      * List all position accounts for the authenticated user
      *
      * @throws ApiException if the Api call fails
@@ -1452,6 +1691,38 @@ public class DefaultApiTest {
     @Test
     public void listPositionAccountsSelfTest() throws ApiException {
         ListPositionAccountsResponseEnvelope response = api.listPositionAccountsSelf();
+        // TODO: test validations
+    }
+
+    /**
+     * List promotional link batches
+     *
+     * Return source metadata and ISSUED, CLAIMED, and REVOKED counts for each batch. ADMIN and same-tenant INTEGRATOR only.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listPromoLinkBatchesTest() throws ApiException {
+        UUID tradingChallengeId = null;
+        PromoLinkBatchListResponse response = api.listPromoLinkBatches(tradingChallengeId);
+        // TODO: test validations
+    }
+
+    /**
+     * List promotional links
+     *
+     * Keyset-paginated batch links. URLs are omitted by default and decrypted only when reveal&#x3D;true. ADMIN and same-tenant INTEGRATOR only.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listPromoLinksTest() throws ApiException {
+        UUID batchId = null;
+        Integer limit = null;
+        String cursor = null;
+        PromoLinkStatus status = null;
+        Boolean reveal = null;
+        PromoLinkListResponse response = api.listPromoLinks(batchId, limit, cursor, status, reveal);
         // TODO: test validations
     }
 
@@ -1510,6 +1781,38 @@ public class DefaultApiTest {
     }
 
     /**
+     * List USDC withdrawals
+     *
+     * Lists USDC withdrawals ordered by created_at descending. Non-admin callers are always scoped to their own withdrawals. Admin callers get every user&#39;s withdrawals by default, and may narrow to one user with &#x60;user_id&#x60;.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listWithdrawalsTest() throws ApiException {
+        UUID userId = null;
+        Web3WithdrawalStatus status = null;
+        Long page = null;
+        Long limit = null;
+        ListWithdrawalsResponseEnvelope response = api.listWithdrawals(userId, status, page, limit);
+        // TODO: test validations
+    }
+
+    /**
+     * Look up a reusable referral code
+     *
+     * ADMIN or INTEGRATOR required, within tenant permissions. Admins must supply tenant_id. Case-insensitive lookup requires an active program and never consumes the code. Attribution happens separately at signup or through POST /v1/affiliate_referrals/self.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void lookupAffiliateCodeTest() throws ApiException {
+        String code = null;
+        String tenantId = null;
+        AffiliateReferrerEnvelope response = api.lookupAffiliateCode(code, tenantId);
+        // TODO: test validations
+    }
+
+    /**
      * Pay current accrued leverage interest for a specific user
      *
      * @throws ApiException if the Api call fails
@@ -1518,6 +1821,21 @@ public class DefaultApiTest {
     public void payLeverageGetAccruedInterestTest() throws ApiException {
         PayLeverageAccruedInterestRequest payLeverageAccruedInterestRequest = null;
         PayLeverageAccruedInterestResponseEnvelope response = api.payLeverageGetAccruedInterest(payLeverageAccruedInterestRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Register an existing user as a referrer
+     *
+     * ADMIN or INTEGRATOR required, within tenant permissions. Accepts an optional custom referral_code and generates one when omitted or empty. Codes are stored uppercase and globally unique. Duplicate membership or code returns 409. Users may supply the code at signup or assign it later through POST /v1/affiliate_referrals/self.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void registerAffiliateReferrerTest() throws ApiException {
+        UUID programId = null;
+        RegisterAffiliateReferrerRequest registerAffiliateReferrerRequest = null;
+        AffiliateReferrerEnvelope response = api.registerAffiliateReferrer(programId, registerAffiliateReferrerRequest);
         // TODO: test validations
     }
 
@@ -1566,6 +1884,23 @@ public class DefaultApiTest {
     }
 
     /**
+     * Render a promotional link QR code
+     *
+     * Render the exact private claim URL as PNG with Cache-Control private, no-store. ADMIN and same-tenant INTEGRATOR only.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void renderPromoLinkQRTest() throws ApiException {
+        UUID linkId = null;
+        Integer size = null;
+        String format = null;
+        String ec = null;
+        String response = api.renderPromoLinkQR(linkId, size, format, ec);
+        // TODO: test validations
+    }
+
+    /**
      * Repay borrowed USD, then accrue and pay leverage interest
      *
      * @throws ApiException if the Api call fails
@@ -1574,6 +1909,18 @@ public class DefaultApiTest {
     public void repayUSDTest() throws ApiException {
         RepayUSDRequest repayUSDRequest = null;
         RepayUSDResponseEnvelope response = api.repayUSD(repayUSDRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Resolve a public QR promotion claim link
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void resolvePromoClaimTest() throws ApiException {
+        String token = null;
+        PromoClaimResponseEnvelope response = api.resolvePromoClaim(token);
         // TODO: test validations
     }
 
@@ -1599,6 +1946,21 @@ public class DefaultApiTest {
         String userId = null;
         String keyId = null;
         RevokeAPIKeyResponseEnvelope response = api.revokeAPIKeyForUserID(userId, keyId);
+        // TODO: test validations
+    }
+
+    /**
+     * Revoke a promotional link
+     *
+     * Revoke an unclaimed link and return one unit of QR campaign capacity. Repeating an already-revoked request is idempotent; claimed links return 409.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void revokePromoLinkTest() throws ApiException {
+        UUID linkId = null;
+        RevokePromoLinkRequest revokePromoLinkRequest = null;
+        RevokePromoLinkResponse response = api.revokePromoLink(linkId, revokePromoLinkRequest);
         // TODO: test validations
     }
 
@@ -1755,6 +2117,21 @@ public class DefaultApiTest {
     public void transferAvailableBalancesTest() throws ApiException {
         TransferBalancesRequest transferBalancesRequest = null;
         TransferBalancesResponseEnvelope response = api.transferAvailableBalances(transferBalancesRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Update an affiliate program
+     *
+     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. Omitted and null fields are preserved. Fields accept direct values or {update, value} objects. Tenant ownership cannot be changed. Deactivation preserves codes and registrations.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateAffiliateProgramTest() throws ApiException {
+        UUID programId = null;
+        UpdateAffiliateProgramRequest updateAffiliateProgramRequest = null;
+        AffiliateProgramEnvelope response = api.updateAffiliateProgram(programId, updateAffiliateProgramRequest);
         // TODO: test validations
     }
 
