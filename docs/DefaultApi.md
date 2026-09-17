@@ -69,6 +69,7 @@ All URIs are relative to *https://staging.dora.co*
 | [**getTopTradersByPnL**](DefaultApi.md#getTopTradersByPnL) | **GET** /v1/user/ranking | Get top traders by PnL |
 | [**getTradeById**](DefaultApi.md#getTradeById) | **GET** /v1/trades/{trade_id} | Get a trade by ID |
 | [**getTrades**](DefaultApi.md#getTrades) | **GET** /v1/trades | Get a filtered, paginated list of trades |
+| [**getTradingChallengeAllResults**](DefaultApi.md#getTradingChallengeAllResults) | **GET** /v1/trading_challenges/all/results | Get combined results across all trading challenge |
 | [**getTradingChallengeByID**](DefaultApi.md#getTradingChallengeByID) | **GET** /v1/trading_challenges/{trading_challenge_id} | Get trading challenge by ID |
 | [**getTradingChallengeDailySnapshots**](DefaultApi.md#getTradingChallengeDailySnapshots) | **GET** /v1/trading_challenges/{trading_challenge_id}/daily_snapshots | Get trading challenge daily snapshots |
 | [**getTradingChallengeResults**](DefaultApi.md#getTradingChallengeResults) | **GET** /v1/trading_challenges/{trading_challenge_id}/results | Get trading challenge results |
@@ -4886,6 +4887,76 @@ public class Example {
 | **404** | No trades found |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="getTradingChallengeAllResults"></a>
+# **getTradingChallengeAllResults**
+> TradingChallengeAllResultsResponseEnvelope getTradingChallengeAllResults(board, start, end, tradingChallengeType)
+
+Get combined results across all trading challenge
+
+List trading challenge leaderboard/results filtered by board, trading_challenge_type, start date and end date across all challenges.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String board = "TOP_PNL"; // String | Leaderboard board selector.
+    LocalDate start = LocalDate.now(); // LocalDate | Inclusive start date in YYYY-MM-DD format.
+    LocalDate end = LocalDate.now(); // LocalDate | Inclusive end date in YYYY-MM-DD format.
+    TradingChallengeType tradingChallengeType = TradingChallengeType.fromValue("TOURNAMENT"); // TradingChallengeType | Challenge type to include in aggregation.
+    try {
+      TradingChallengeAllResultsResponseEnvelope result = apiInstance.getTradingChallengeAllResults(board, start, end, tradingChallengeType);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getTradingChallengeAllResults");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **board** | **String**| Leaderboard board selector. | [enum: TOP_PNL, TOP_VOLUME, IRON_TRADER] |
+| **start** | **LocalDate**| Inclusive start date in YYYY-MM-DD format. | |
+| **end** | **LocalDate**| Inclusive end date in YYYY-MM-DD format. | |
+| **tradingChallengeType** | [**TradingChallengeType**](.md)| Challenge type to include in aggregation. | [enum: TOURNAMENT, CASH, QR_PROMO] |
+
+### Return type
+
+[**TradingChallengeAllResultsResponseEnvelope**](TradingChallengeAllResultsResponseEnvelope.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | All trading challenge results |  -  |
+| **400** | Bad request |  -  |
+| **500** | Internal server error |  -  |
+
 <a id="getTradingChallengeByID"></a>
 # **getTradingChallengeByID**
 > TradingChallengeResponseEnvelope getTradingChallengeByID(tradingChallengeId)
@@ -5046,7 +5117,7 @@ public class Example {
 
 Get trading challenge results
 
-List challenge leaderboard/results. COMPETITION_MANAGER can access only assigned challenge IDs.
+List challenge leaderboard/results. Public endpoint.
 
 ### Example
 ```java
@@ -5054,7 +5125,6 @@ List challenge leaderboard/results. COMPETITION_MANAGER can access only assigned
 import tech.dora.ApiClient;
 import tech.dora.ApiException;
 import tech.dora.Configuration;
-import tech.dora.auth.*;
 import tech.dora.models.*;
 import tech.dora.api.DefaultApi;
 
@@ -5062,16 +5132,6 @@ public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("https://staging.dora.co");
-    
-    // Configure API key authorization: apiKeyAuthHeader
-    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
-    apiKeyAuthHeader.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //apiKeyAuthHeader.setApiKeyPrefix("Token");
-
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
     UUID tradingChallengeId = UUID.randomUUID(); // UUID | 
@@ -5103,7 +5163,7 @@ public class Example {
 
 ### Authorization
 
-[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -5115,7 +5175,6 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | Challenge results |  -  |
 | **400** | Bad request |  -  |
-| **403** | Forbidden |  -  |
 | **404** | Not found |  -  |
 | **500** | Internal server error |  -  |
 

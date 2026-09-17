@@ -53,7 +53,7 @@ import tech.dora.JSON;
 /**
  * RealizedPnlSettlements
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-16T18:17:13.950531673+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T04:39:55.054936532+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class RealizedPnlSettlements {
   public static final String SERIALIZED_NAME_SETTLEMENTS = "settlements";
   @SerializedName(SERIALIZED_NAME_SETTLEMENTS)

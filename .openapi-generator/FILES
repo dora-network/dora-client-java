@@ -251,6 +251,8 @@ docs/Trade.md
 docs/TradeRequestError.md
 docs/TradeResponseEnvelope.md
 docs/TradingChallenge.md
+docs/TradingChallengeAllResult.md
+docs/TradingChallengeAllResultsResponseEnvelope.md
 docs/TradingChallengeDailySnapshot.md
 docs/TradingChallengeDailySnapshotsResponseEnvelope.md
 docs/TradingChallengeListResponseEnvelope.md
@@ -604,6 +606,8 @@ src/main/java/tech/dora/model/Trade.java
 src/main/java/tech/dora/model/TradeRequestError.java
 src/main/java/tech/dora/model/TradeResponseEnvelope.java
 src/main/java/tech/dora/model/TradingChallenge.java
+src/main/java/tech/dora/model/TradingChallengeAllResult.java
+src/main/java/tech/dora/model/TradingChallengeAllResultsResponseEnvelope.java
 src/main/java/tech/dora/model/TradingChallengeDailySnapshot.java
 src/main/java/tech/dora/model/TradingChallengeDailySnapshotsResponseEnvelope.java
 src/main/java/tech/dora/model/TradingChallengeListResponseEnvelope.java
@@ -929,6 +933,8 @@ src/test/java/tech/dora/model/TerminateTradingChallengeResponseTest.java
 src/test/java/tech/dora/model/TradeRequestErrorTest.java
 src/test/java/tech/dora/model/TradeResponseEnvelopeTest.java
 src/test/java/tech/dora/model/TradeTest.java
+src/test/java/tech/dora/model/TradingChallengeAllResultTest.java
+src/test/java/tech/dora/model/TradingChallengeAllResultsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/TradingChallengeDailySnapshotTest.java
 src/test/java/tech/dora/model/TradingChallengeDailySnapshotsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/TradingChallengeListResponseEnvelopeTest.java

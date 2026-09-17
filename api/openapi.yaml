@@ -7003,8 +7003,7 @@ paths:
       - application/json
   /v1/trading_challenges/{trading_challenge_id}/results:
     get:
-      description: List challenge leaderboard/results. COMPETITION_MANAGER can access
-        only assigned challenge IDs.
+      description: List challenge leaderboard/results. Public endpoint.
       operationId: getTradingChallengeResults
       parameters:
       - explode: false
@@ -7041,12 +7040,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseEnvelope"
-          description: Forbidden
         "404":
           content:
             application/json:
@@ -7059,7 +7052,75 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
+      security: []
       summary: Get trading challenge results
+      x-accepts:
+      - application/json
+  /v1/trading_challenges/all/results:
+    get:
+      description: "List trading challenge leaderboard/results filtered by board,\
+        \ trading_challenge_type, start date and end date across all challenges."
+      operationId: getTradingChallengeAllResults
+      parameters:
+      - description: Leaderboard board selector.
+        explode: true
+        in: query
+        name: board
+        required: true
+        schema:
+          enum:
+          - TOP_PNL
+          - TOP_VOLUME
+          - IRON_TRADER
+          type: string
+        style: form
+      - description: Inclusive start date in YYYY-MM-DD format.
+        explode: true
+        in: query
+        name: start
+        required: true
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: Inclusive end date in YYYY-MM-DD format.
+        explode: true
+        in: query
+        name: end
+        required: true
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: Challenge type to include in aggregation.
+        explode: true
+        in: query
+        name: trading_challenge_type
+        required: true
+        schema:
+          $ref: "#/components/schemas/TradingChallengeType"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradingChallengeAllResultsResponseEnvelope"
+          description: All trading challenge results
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Bad request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      security: []
+      summary: Get combined results across all trading challenge
       x-accepts:
       - application/json
   /v1/trading_challenges/{trading_challenge_id}/claim:
@@ -17024,6 +17085,34 @@ components:
           type: string
         cum_trades:
           type: integer
+    TradingChallengeAllResult:
+      example:
+        user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        user_name: user_name
+        cum_volume: cum_volume
+        cum_pnl: cum_pnl
+        active_days: 0
+        cum_trades: 6
+        account_value: account_value
+        pnl_pct: pnl_pct
+      properties:
+        user_id:
+          format: uuid
+          type: string
+        user_name:
+          type: string
+        cum_volume:
+          type: string
+        cum_pnl:
+          type: string
+        active_days:
+          type: integer
+        cum_trades:
+          type: integer
+        account_value:
+          type: string
+        pnl_pct:
+          type: string
     TradingChallengeResultsResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -17073,6 +17162,35 @@ components:
           current_day_daily_pnl: current_day_daily_pnl
           current_day_trading_date: 2000-01-23
           cum_trades: 5
+        error: error
+        metadata: ""
+    TradingChallengeAllResultsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/TradingChallengeAllResult"
+            type: array
+            default: null
+      example:
+        data:
+        - user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_name: user_name
+          cum_volume: cum_volume
+          cum_pnl: cum_pnl
+          active_days: 0
+          cum_trades: 6
+          account_value: account_value
+          pnl_pct: pnl_pct
+        - user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user_name: user_name
+          cum_volume: cum_volume
+          cum_pnl: cum_pnl
+          active_days: 0
+          cum_trades: 6
+          account_value: account_value
+          pnl_pct: pnl_pct
         error: error
         metadata: ""
     ClaimTradingChallengeResponse:

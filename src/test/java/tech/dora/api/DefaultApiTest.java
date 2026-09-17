@@ -141,6 +141,7 @@ import tech.dora.model.SupplyResponseEnvelope;
 import tech.dora.model.TerminateTradingChallengeResponseEnvelope;
 import tech.dora.model.TradeRequestError;
 import tech.dora.model.TradeResponseEnvelope;
+import tech.dora.model.TradingChallengeAllResultsResponseEnvelope;
 import tech.dora.model.TradingChallengeDailySnapshotsResponseEnvelope;
 import tech.dora.model.TradingChallengeListResponseEnvelope;
 import tech.dora.model.TradingChallengeRegistrationRequestListResponseEnvelope;
@@ -1046,6 +1047,23 @@ public class DefaultApiTest {
     }
 
     /**
+     * Get combined results across all trading challenge
+     *
+     * List trading challenge leaderboard/results filtered by board, trading_challenge_type, start date and end date across all challenges.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getTradingChallengeAllResultsTest() throws ApiException {
+        String board = null;
+        LocalDate start = null;
+        LocalDate end = null;
+        TradingChallengeType tradingChallengeType = null;
+        TradingChallengeAllResultsResponseEnvelope response = api.getTradingChallengeAllResults(board, start, end, tradingChallengeType);
+        // TODO: test validations
+    }
+
+    /**
      * Get trading challenge by ID
      *
      * Fetch one trading challenge. COMPETITION_MANAGER can access only assigned challenge IDs.
@@ -1076,7 +1094,7 @@ public class DefaultApiTest {
     /**
      * Get trading challenge results
      *
-     * List challenge leaderboard/results. COMPETITION_MANAGER can access only assigned challenge IDs.
+     * List challenge leaderboard/results. Public endpoint.
      *
      * @throws ApiException if the Api call fails
      */
