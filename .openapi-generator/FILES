@@ -147,6 +147,7 @@ docs/ListUserCouponPaymentsResponseEnvelope.md
 docs/ListUsersResponseEnvelope.md
 docs/ListWithdrawalsResponseEnvelope.md
 docs/LiveOrderbook.md
+docs/LockWithdrawalFeeRequest.md
 docs/Margin.md
 docs/Metadata.md
 docs/ModuleBalance.md
@@ -244,6 +245,10 @@ docs/StreamUserCouponPaymentsResponse.md
 docs/Supply.md
 docs/SupplyRequest.md
 docs/SupplyResponseEnvelope.md
+docs/TenantGuaranteeFundHistory.md
+docs/TenantGuaranteeFundHistoryResponseEnvelope.md
+docs/TenantGuaranteeFundRow.md
+docs/TenantGuaranteeFundSummary.md
 docs/TenantRestrictions.md
 docs/TerminateTradingChallengeResponse.md
 docs/TerminateTradingChallengeResponseEnvelope.md
@@ -502,6 +507,7 @@ src/main/java/tech/dora/model/ListUserCouponPaymentsResponseEnvelope.java
 src/main/java/tech/dora/model/ListUsersResponseEnvelope.java
 src/main/java/tech/dora/model/ListWithdrawalsResponseEnvelope.java
 src/main/java/tech/dora/model/LiveOrderbook.java
+src/main/java/tech/dora/model/LockWithdrawalFeeRequest.java
 src/main/java/tech/dora/model/Margin.java
 src/main/java/tech/dora/model/Metadata.java
 src/main/java/tech/dora/model/ModuleBalance.java
@@ -599,6 +605,10 @@ src/main/java/tech/dora/model/StreamUserCouponPaymentsResponse.java
 src/main/java/tech/dora/model/Supply.java
 src/main/java/tech/dora/model/SupplyRequest.java
 src/main/java/tech/dora/model/SupplyResponseEnvelope.java
+src/main/java/tech/dora/model/TenantGuaranteeFundHistory.java
+src/main/java/tech/dora/model/TenantGuaranteeFundHistoryResponseEnvelope.java
+src/main/java/tech/dora/model/TenantGuaranteeFundRow.java
+src/main/java/tech/dora/model/TenantGuaranteeFundSummary.java
 src/main/java/tech/dora/model/TenantRestrictions.java
 src/main/java/tech/dora/model/TerminateTradingChallengeResponse.java
 src/main/java/tech/dora/model/TerminateTradingChallengeResponseEnvelope.java
@@ -830,6 +840,7 @@ src/test/java/tech/dora/model/ListUserCouponPaymentsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListUsersResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListWithdrawalsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/LiveOrderbookTest.java
+src/test/java/tech/dora/model/LockWithdrawalFeeRequestTest.java
 src/test/java/tech/dora/model/MarginTest.java
 src/test/java/tech/dora/model/MetadataTest.java
 src/test/java/tech/dora/model/ModuleBalanceTest.java
@@ -927,6 +938,10 @@ src/test/java/tech/dora/model/StreamUserCouponPaymentsResponseTest.java
 src/test/java/tech/dora/model/SupplyRequestTest.java
 src/test/java/tech/dora/model/SupplyResponseEnvelopeTest.java
 src/test/java/tech/dora/model/SupplyTest.java
+src/test/java/tech/dora/model/TenantGuaranteeFundHistoryResponseEnvelopeTest.java
+src/test/java/tech/dora/model/TenantGuaranteeFundHistoryTest.java
+src/test/java/tech/dora/model/TenantGuaranteeFundRowTest.java
+src/test/java/tech/dora/model/TenantGuaranteeFundSummaryTest.java
 src/test/java/tech/dora/model/TenantRestrictionsTest.java
 src/test/java/tech/dora/model/TerminateTradingChallengeResponseEnvelopeTest.java
 src/test/java/tech/dora/model/TerminateTradingChallengeResponseTest.java

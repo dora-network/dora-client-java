@@ -49,7 +49,7 @@ import tech.dora.JSON;
 /**
  * A generic struct to handle optional updates for date-time fields in user requests.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T04:39:55.054936532+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-18T18:29:04.763912996+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class UpdateFieldDateTime {
   public static final String SERIALIZED_NAME_UPDATE = "update";
   @SerializedName(SERIALIZED_NAME_UPDATE)

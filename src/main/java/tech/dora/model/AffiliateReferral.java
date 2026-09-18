@@ -50,7 +50,7 @@ import tech.dora.JSON;
 /**
  * User profile and affiliate activity. Trade metrics, realized PnL and cash-flow counts/dates include only events at or after attributed_at. Signup and KYC fields describe the user profile.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T04:39:55.054936532+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-18T18:29:04.763912996+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class AffiliateReferral {
   public static final String SERIALIZED_NAME_USER_ID = "user_id";
   @SerializedName(SERIALIZED_NAME_USER_ID)

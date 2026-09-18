@@ -107,6 +107,7 @@ import tech.dora.model.ListUsersResponseEnvelope;
 import tech.dora.model.ListWithdrawalsResponseEnvelope;
 import tech.dora.model.LiveOrderbook;
 import java.time.LocalDate;
+import tech.dora.model.LockWithdrawalFeeRequest;
 import java.time.OffsetDateTime;
 import tech.dora.model.OrderBookResponseEnvelope;
 import tech.dora.model.OrderBookStatus;
@@ -151,6 +152,7 @@ import tech.dora.model.StreamTransactionsEntry;
 import tech.dora.model.StreamUserCouponPaymentsResponse;
 import tech.dora.model.SupplyRequest;
 import tech.dora.model.SupplyResponseEnvelope;
+import tech.dora.model.TenantGuaranteeFundHistoryResponseEnvelope;
 import tech.dora.model.TerminateTradingChallengeResponseEnvelope;
 import tech.dora.model.TradeRequestError;
 import tech.dora.model.TradeResponseEnvelope;
@@ -4569,7 +4571,7 @@ public class DefaultApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -4601,7 +4603,7 @@ public class DefaultApi {
 
     /**
      * Get yield chart data for an asset
-     * Returns complete yield buckets starting at &#x60;start&#x60;; &#x60;end&#x60; is exclusive and a trailing partial bucket is omitted. Requests are limited to 10,000 complete buckets.
+     * Returns complete yield buckets starting at &#x60;start&#x60;; &#x60;end&#x60; is exclusive and a trailing partial bucket is omitted. Requests are limited to 10,000 complete buckets. Public callers may query only the last month. Authenticated callers may query up to the last six months. If credentials are supplied but invalid, the request is rejected as unauthorized.
      * @param assetId  (required)
      * @param start  (required)
      * @param end  (required)
@@ -4626,7 +4628,7 @@ public class DefaultApi {
 
     /**
      * Get yield chart data for an asset
-     * Returns complete yield buckets starting at &#x60;start&#x60;; &#x60;end&#x60; is exclusive and a trailing partial bucket is omitted. Requests are limited to 10,000 complete buckets.
+     * Returns complete yield buckets starting at &#x60;start&#x60;; &#x60;end&#x60; is exclusive and a trailing partial bucket is omitted. Requests are limited to 10,000 complete buckets. Public callers may query only the last month. Authenticated callers may query up to the last six months. If credentials are supplied but invalid, the request is rejected as unauthorized.
      * @param assetId  (required)
      * @param start  (required)
      * @param end  (required)
@@ -4652,7 +4654,7 @@ public class DefaultApi {
 
     /**
      * Get yield chart data for an asset (asynchronously)
-     * Returns complete yield buckets starting at &#x60;start&#x60;; &#x60;end&#x60; is exclusive and a trailing partial bucket is omitted. Requests are limited to 10,000 complete buckets.
+     * Returns complete yield buckets starting at &#x60;start&#x60;; &#x60;end&#x60; is exclusive and a trailing partial bucket is omitted. Requests are limited to 10,000 complete buckets. Public callers may query only the last month. Authenticated callers may query up to the last six months. If credentials are supplied but invalid, the request is rejected as unauthorized.
      * @param assetId  (required)
      * @param start  (required)
      * @param end  (required)
@@ -4895,7 +4897,7 @@ public class DefaultApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -4922,7 +4924,7 @@ public class DefaultApi {
 
     /**
      * Get candlestick data for an orderbook
-     * Returns candle data in the requested [start, end) range for the selected resolution. Responses are capped to the most recent 5,000 candles per request.
+     * Returns candle data in the requested [start, end) range for the selected resolution, capped to the most recent 5,000 candles per request. Public callers may query data from up to the last month, while authenticated callers may query up to the last six months (requests with invalid credentials will be rejected as unauthorized).
      * @param orderBookId  (required)
      * @param start  (required)
      * @param end  (required)
@@ -4946,7 +4948,7 @@ public class DefaultApi {
 
     /**
      * Get candlestick data for an orderbook
-     * Returns candle data in the requested [start, end) range for the selected resolution. Responses are capped to the most recent 5,000 candles per request.
+     * Returns candle data in the requested [start, end) range for the selected resolution, capped to the most recent 5,000 candles per request. Public callers may query data from up to the last month, while authenticated callers may query up to the last six months (requests with invalid credentials will be rejected as unauthorized).
      * @param orderBookId  (required)
      * @param start  (required)
      * @param end  (required)
@@ -4971,7 +4973,7 @@ public class DefaultApi {
 
     /**
      * Get candlestick data for an orderbook (asynchronously)
-     * Returns candle data in the requested [start, end) range for the selected resolution. Responses are capped to the most recent 5,000 candles per request.
+     * Returns candle data in the requested [start, end) range for the selected resolution, capped to the most recent 5,000 candles per request. Public callers may query data from up to the last month, while authenticated callers may query up to the last six months (requests with invalid credentials will be rejected as unauthorized).
      * @param orderBookId  (required)
      * @param start  (required)
      * @param end  (required)
@@ -9485,7 +9487,7 @@ public class DefaultApi {
 
     /**
      * Get a filtered, paginated list of trades
-     * 
+     * Role-based date window: public callers are limited to the last month; authenticated callers may query up to the last six months. If &#x60;start&#x60; is omitted it defaults to the role-based minimum. If credentials are supplied but invalid, the request is rejected as unauthorized.
      * @param orderBookIds  (optional)
      * @param userIds  (optional)
      * @param start  (optional)
@@ -9511,7 +9513,7 @@ public class DefaultApi {
 
     /**
      * Get a filtered, paginated list of trades
-     * 
+     * Role-based date window: public callers are limited to the last month; authenticated callers may query up to the last six months. If &#x60;start&#x60; is omitted it defaults to the role-based minimum. If credentials are supplied but invalid, the request is rejected as unauthorized.
      * @param orderBookIds  (optional)
      * @param userIds  (optional)
      * @param start  (optional)
@@ -9538,7 +9540,7 @@ public class DefaultApi {
 
     /**
      * Get a filtered, paginated list of trades (asynchronously)
-     * 
+     * Role-based date window: public callers are limited to the last month; authenticated callers may query up to the last six months. If &#x60;start&#x60; is omitted it defaults to the role-based minimum. If credentials are supplied but invalid, the request is rejected as unauthorized.
      * @param orderBookIds  (optional)
      * @param userIds  (optional)
      * @param start  (optional)
@@ -10408,7 +10410,7 @@ public class DefaultApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -10420,7 +10422,7 @@ public class DefaultApi {
 
     /**
      * Get a filtered, paginated list of transactions
-     * 
+     * Role-based date window: public callers are limited to the last month; authenticated callers may query up to the last six months. If &#x60;start&#x60; is omitted it defaults to the role-based minimum. If credentials are supplied but invalid, the request is rejected as unauthorized.
      * @param pools  (optional)
      * @param userIds  (optional)
      * @param txKinds  (optional)
@@ -10447,7 +10449,7 @@ public class DefaultApi {
 
     /**
      * Get a filtered, paginated list of transactions
-     * 
+     * Role-based date window: public callers are limited to the last month; authenticated callers may query up to the last six months. If &#x60;start&#x60; is omitted it defaults to the role-based minimum. If credentials are supplied but invalid, the request is rejected as unauthorized.
      * @param pools  (optional)
      * @param userIds  (optional)
      * @param txKinds  (optional)
@@ -10475,7 +10477,7 @@ public class DefaultApi {
 
     /**
      * Get a filtered, paginated list of transactions (asynchronously)
-     * 
+     * Role-based date window: public callers are limited to the last month; authenticated callers may query up to the last six months. If &#x60;start&#x60; is omitted it defaults to the role-based minimum. If credentials are supplied but invalid, the request is rejected as unauthorized.
      * @param pools  (optional)
      * @param userIds  (optional)
      * @param txKinds  (optional)
@@ -12587,8 +12589,7 @@ public class DefaultApi {
     }
     /**
      * Build call for getWithdrawalFeeQuote
-     * @param to The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address. (required)
-     * @param quantity Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive. (required)
+     * @param withdrawalId The withdrawal to quote a fee for. It must belong to the caller and be in status APPROVED_WITHOUT_FEE; the destination and quantity are read from it rather than supplied here. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -12597,16 +12598,18 @@ public class DefaultApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Fee quote for the requested withdrawal </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. invalid or missing to address, or invalid or non-positive quantity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request: the withdrawal_id query parameter is missing or is not a UUID </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), or it is bound to a chain other than the registered one </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Rate limit exceeded; this endpoint is limited to 1 request per minute per user </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
         <tr><td> 502 </td><td> Bad gateway, e.g. the withdrawal simulation reverted (insufficient vault liquidity, paused vault) or the web3 data provider (gas estimation or price feed) failed </td><td>  -  </td></tr>
         <tr><td> 503 </td><td> Service unavailable: this deployment is not configured to handle web3 withdrawals. The fee quote handler could not be wired up at startup (e.g. missing web3 data provider or quote signing configuration), so the route exists but always reports this error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getWithdrawalFeeQuoteCall(@javax.annotation.Nonnull String to, @javax.annotation.Nonnull String quantity, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getWithdrawalFeeQuoteCall(@javax.annotation.Nonnull UUID withdrawalId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -12631,12 +12634,8 @@ public class DefaultApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        if (to != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("to", to));
-        }
-
-        if (quantity != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("quantity", quantity));
+        if (withdrawalId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("withdrawal_id", withdrawalId));
         }
 
         final String[] localVarAccepts = {
@@ -12659,26 +12658,20 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getWithdrawalFeeQuoteValidateBeforeCall(@javax.annotation.Nonnull String to, @javax.annotation.Nonnull String quantity, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'to' is set
-        if (to == null) {
-            throw new ApiException("Missing the required parameter 'to' when calling getWithdrawalFeeQuote(Async)");
+    private okhttp3.Call getWithdrawalFeeQuoteValidateBeforeCall(@javax.annotation.Nonnull UUID withdrawalId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'withdrawalId' is set
+        if (withdrawalId == null) {
+            throw new ApiException("Missing the required parameter 'withdrawalId' when calling getWithdrawalFeeQuote(Async)");
         }
 
-        // verify the required parameter 'quantity' is set
-        if (quantity == null) {
-            throw new ApiException("Missing the required parameter 'quantity' when calling getWithdrawalFeeQuote(Async)");
-        }
-
-        return getWithdrawalFeeQuoteCall(to, quantity, _callback);
+        return getWithdrawalFeeQuoteCall(withdrawalId, _callback);
 
     }
 
     /**
      * Estimate the network fee to withdraw USDC via web3
-     * Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay for a withdrawal. The fee is not charged when the withdrawal is requested; the quote is redeemed later, when the fee is locked as part of approval. Restricted to DORA tenant users whose native asset is USDC.
-     * @param to The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address. (required)
-     * @param quantity Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive. (required)
+     * Examines on-chain conditions and simulates the named withdrawal to estimate the network fee the user must reserve before it can be submitted on-chain. The withdrawal must already exist, belong to the caller, and have been approved by an admin (status APPROVED_WITHOUT_FEE); its destination and quantity are read from the row, not taken from the request. The returned quote token is bound to that one withdrawal and is redeemed at PUT /v1/web3/withdrawals/{withdrawal_id}, which reserves the fee and moves the withdrawal to APPROVED. Restricted to DORA tenant users whose native asset is USDC.
+     * @param withdrawalId The withdrawal to quote a fee for. It must belong to the caller and be in status APPROVED_WITHOUT_FEE; the destination and quantity are read from it rather than supplied here. (required)
      * @return FeeQuoteResponseEnvelope
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -12686,25 +12679,26 @@ public class DefaultApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Fee quote for the requested withdrawal </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. invalid or missing to address, or invalid or non-positive quantity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request: the withdrawal_id query parameter is missing or is not a UUID </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), or it is bound to a chain other than the registered one </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Rate limit exceeded; this endpoint is limited to 1 request per minute per user </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
         <tr><td> 502 </td><td> Bad gateway, e.g. the withdrawal simulation reverted (insufficient vault liquidity, paused vault) or the web3 data provider (gas estimation or price feed) failed </td><td>  -  </td></tr>
         <tr><td> 503 </td><td> Service unavailable: this deployment is not configured to handle web3 withdrawals. The fee quote handler could not be wired up at startup (e.g. missing web3 data provider or quote signing configuration), so the route exists but always reports this error. </td><td>  -  </td></tr>
      </table>
      */
-    public FeeQuoteResponseEnvelope getWithdrawalFeeQuote(@javax.annotation.Nonnull String to, @javax.annotation.Nonnull String quantity) throws ApiException {
-        ApiResponse<FeeQuoteResponseEnvelope> localVarResp = getWithdrawalFeeQuoteWithHttpInfo(to, quantity);
+    public FeeQuoteResponseEnvelope getWithdrawalFeeQuote(@javax.annotation.Nonnull UUID withdrawalId) throws ApiException {
+        ApiResponse<FeeQuoteResponseEnvelope> localVarResp = getWithdrawalFeeQuoteWithHttpInfo(withdrawalId);
         return localVarResp.getData();
     }
 
     /**
      * Estimate the network fee to withdraw USDC via web3
-     * Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay for a withdrawal. The fee is not charged when the withdrawal is requested; the quote is redeemed later, when the fee is locked as part of approval. Restricted to DORA tenant users whose native asset is USDC.
-     * @param to The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address. (required)
-     * @param quantity Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive. (required)
+     * Examines on-chain conditions and simulates the named withdrawal to estimate the network fee the user must reserve before it can be submitted on-chain. The withdrawal must already exist, belong to the caller, and have been approved by an admin (status APPROVED_WITHOUT_FEE); its destination and quantity are read from the row, not taken from the request. The returned quote token is bound to that one withdrawal and is redeemed at PUT /v1/web3/withdrawals/{withdrawal_id}, which reserves the fee and moves the withdrawal to APPROVED. Restricted to DORA tenant users whose native asset is USDC.
+     * @param withdrawalId The withdrawal to quote a fee for. It must belong to the caller and be in status APPROVED_WITHOUT_FEE; the destination and quantity are read from it rather than supplied here. (required)
      * @return ApiResponse&lt;FeeQuoteResponseEnvelope&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -12712,26 +12706,27 @@ public class DefaultApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Fee quote for the requested withdrawal </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. invalid or missing to address, or invalid or non-positive quantity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request: the withdrawal_id query parameter is missing or is not a UUID </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), or it is bound to a chain other than the registered one </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Rate limit exceeded; this endpoint is limited to 1 request per minute per user </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
         <tr><td> 502 </td><td> Bad gateway, e.g. the withdrawal simulation reverted (insufficient vault liquidity, paused vault) or the web3 data provider (gas estimation or price feed) failed </td><td>  -  </td></tr>
         <tr><td> 503 </td><td> Service unavailable: this deployment is not configured to handle web3 withdrawals. The fee quote handler could not be wired up at startup (e.g. missing web3 data provider or quote signing configuration), so the route exists but always reports this error. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<FeeQuoteResponseEnvelope> getWithdrawalFeeQuoteWithHttpInfo(@javax.annotation.Nonnull String to, @javax.annotation.Nonnull String quantity) throws ApiException {
-        okhttp3.Call localVarCall = getWithdrawalFeeQuoteValidateBeforeCall(to, quantity, null);
+    public ApiResponse<FeeQuoteResponseEnvelope> getWithdrawalFeeQuoteWithHttpInfo(@javax.annotation.Nonnull UUID withdrawalId) throws ApiException {
+        okhttp3.Call localVarCall = getWithdrawalFeeQuoteValidateBeforeCall(withdrawalId, null);
         Type localVarReturnType = new TypeToken<FeeQuoteResponseEnvelope>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * Estimate the network fee to withdraw USDC via web3 (asynchronously)
-     * Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay for a withdrawal. The fee is not charged when the withdrawal is requested; the quote is redeemed later, when the fee is locked as part of approval. Restricted to DORA tenant users whose native asset is USDC.
-     * @param to The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address. (required)
-     * @param quantity Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive. (required)
+     * Examines on-chain conditions and simulates the named withdrawal to estimate the network fee the user must reserve before it can be submitted on-chain. The withdrawal must already exist, belong to the caller, and have been approved by an admin (status APPROVED_WITHOUT_FEE); its destination and quantity are read from the row, not taken from the request. The returned quote token is bound to that one withdrawal and is redeemed at PUT /v1/web3/withdrawals/{withdrawal_id}, which reserves the fee and moves the withdrawal to APPROVED. Restricted to DORA tenant users whose native asset is USDC.
+     * @param withdrawalId The withdrawal to quote a fee for. It must belong to the caller and be in status APPROVED_WITHOUT_FEE; the destination and quantity are read from it rather than supplied here. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -12740,18 +12735,20 @@ public class DefaultApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Fee quote for the requested withdrawal </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request, e.g. invalid or missing to address, or invalid or non-positive quantity </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request: the withdrawal_id query parameter is missing or is not a UUID </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), or it is bound to a chain other than the registered one </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Rate limit exceeded; this endpoint is limited to 1 request per minute per user </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
         <tr><td> 502 </td><td> Bad gateway, e.g. the withdrawal simulation reverted (insufficient vault liquidity, paused vault) or the web3 data provider (gas estimation or price feed) failed </td><td>  -  </td></tr>
         <tr><td> 503 </td><td> Service unavailable: this deployment is not configured to handle web3 withdrawals. The fee quote handler could not be wired up at startup (e.g. missing web3 data provider or quote signing configuration), so the route exists but always reports this error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getWithdrawalFeeQuoteAsync(@javax.annotation.Nonnull String to, @javax.annotation.Nonnull String quantity, final ApiCallback<FeeQuoteResponseEnvelope> _callback) throws ApiException {
+    public okhttp3.Call getWithdrawalFeeQuoteAsync(@javax.annotation.Nonnull UUID withdrawalId, final ApiCallback<FeeQuoteResponseEnvelope> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getWithdrawalFeeQuoteValidateBeforeCall(to, quantity, _callback);
+        okhttp3.Call localVarCall = getWithdrawalFeeQuoteValidateBeforeCall(withdrawalId, _callback);
         Type localVarReturnType = new TypeToken<FeeQuoteResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -17716,6 +17713,175 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for lockWithdrawalFee
+     * @param withdrawalId The withdrawal to redeem the quote against. It must be owned by the caller and be in status APPROVED_WITHOUT_FEE. (required)
+     * @param lockWithdrawalFeeRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Fee reserved; the withdrawal is now APPROVED and eligible for submission </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid body or withdrawal_id, an unparseable or unauthentic quote token, or a quote issued for a different destination, quantity, or chain </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or reserving the fee would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), the available balance cannot cover the fee, there is no USD ledger account to reserve the fee from, an unhealthy account, overdue coupon payments, or a concurrent balance change kept the reservation from being recorded </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> The quote token has expired; request a new fee quote </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Fee locking is not configured on this deployment </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call lockWithdrawalFeeCall(@javax.annotation.Nonnull UUID withdrawalId, @javax.annotation.Nonnull LockWithdrawalFeeRequest lockWithdrawalFeeRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = lockWithdrawalFeeRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/web3/withdrawals/{withdrawal_id}"
+            .replace("{" + "withdrawal_id" + "}", localVarApiClient.escapeString(withdrawalId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call lockWithdrawalFeeValidateBeforeCall(@javax.annotation.Nonnull UUID withdrawalId, @javax.annotation.Nonnull LockWithdrawalFeeRequest lockWithdrawalFeeRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'withdrawalId' is set
+        if (withdrawalId == null) {
+            throw new ApiException("Missing the required parameter 'withdrawalId' when calling lockWithdrawalFee(Async)");
+        }
+
+        // verify the required parameter 'lockWithdrawalFeeRequest' is set
+        if (lockWithdrawalFeeRequest == null) {
+            throw new ApiException("Missing the required parameter 'lockWithdrawalFeeRequest' when calling lockWithdrawalFee(Async)");
+        }
+
+        return lockWithdrawalFeeCall(withdrawalId, lockWithdrawalFeeRequest, _callback);
+
+    }
+
+    /**
+     * Lock the network fee for an approved USDC withdrawal
+     * Redeems a fee quote against a withdrawal an admin has approved. The quoted fee is reserved on top of the quantity reserved when the request was created, so the same risk checks the request cleared are run again for it: an active trading challenge, a deactivated account, account health, the minimum cash reserve, and overdue coupon payments. A fee that would take the caller below the minimum cash reserve is refused and nothing is reserved.
+     * @param withdrawalId The withdrawal to redeem the quote against. It must be owned by the caller and be in status APPROVED_WITHOUT_FEE. (required)
+     * @param lockWithdrawalFeeRequest  (required)
+     * @return WithdrawalResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Fee reserved; the withdrawal is now APPROVED and eligible for submission </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid body or withdrawal_id, an unparseable or unauthentic quote token, or a quote issued for a different destination, quantity, or chain </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or reserving the fee would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), the available balance cannot cover the fee, there is no USD ledger account to reserve the fee from, an unhealthy account, overdue coupon payments, or a concurrent balance change kept the reservation from being recorded </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> The quote token has expired; request a new fee quote </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Fee locking is not configured on this deployment </td><td>  -  </td></tr>
+     </table>
+     */
+    public WithdrawalResponseEnvelope lockWithdrawalFee(@javax.annotation.Nonnull UUID withdrawalId, @javax.annotation.Nonnull LockWithdrawalFeeRequest lockWithdrawalFeeRequest) throws ApiException {
+        ApiResponse<WithdrawalResponseEnvelope> localVarResp = lockWithdrawalFeeWithHttpInfo(withdrawalId, lockWithdrawalFeeRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Lock the network fee for an approved USDC withdrawal
+     * Redeems a fee quote against a withdrawal an admin has approved. The quoted fee is reserved on top of the quantity reserved when the request was created, so the same risk checks the request cleared are run again for it: an active trading challenge, a deactivated account, account health, the minimum cash reserve, and overdue coupon payments. A fee that would take the caller below the minimum cash reserve is refused and nothing is reserved.
+     * @param withdrawalId The withdrawal to redeem the quote against. It must be owned by the caller and be in status APPROVED_WITHOUT_FEE. (required)
+     * @param lockWithdrawalFeeRequest  (required)
+     * @return ApiResponse&lt;WithdrawalResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Fee reserved; the withdrawal is now APPROVED and eligible for submission </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid body or withdrawal_id, an unparseable or unauthentic quote token, or a quote issued for a different destination, quantity, or chain </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or reserving the fee would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), the available balance cannot cover the fee, there is no USD ledger account to reserve the fee from, an unhealthy account, overdue coupon payments, or a concurrent balance change kept the reservation from being recorded </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> The quote token has expired; request a new fee quote </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Fee locking is not configured on this deployment </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<WithdrawalResponseEnvelope> lockWithdrawalFeeWithHttpInfo(@javax.annotation.Nonnull UUID withdrawalId, @javax.annotation.Nonnull LockWithdrawalFeeRequest lockWithdrawalFeeRequest) throws ApiException {
+        okhttp3.Call localVarCall = lockWithdrawalFeeValidateBeforeCall(withdrawalId, lockWithdrawalFeeRequest, null);
+        Type localVarReturnType = new TypeToken<WithdrawalResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Lock the network fee for an approved USDC withdrawal (asynchronously)
+     * Redeems a fee quote against a withdrawal an admin has approved. The quoted fee is reserved on top of the quantity reserved when the request was created, so the same risk checks the request cleared are run again for it: an active trading challenge, a deactivated account, account health, the minimum cash reserve, and overdue coupon payments. A fee that would take the caller below the minimum cash reserve is refused and nothing is reserved.
+     * @param withdrawalId The withdrawal to redeem the quote against. It must be owned by the caller and be in status APPROVED_WITHOUT_FEE. (required)
+     * @param lockWithdrawalFeeRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Fee reserved; the withdrawal is now APPROVED and eligible for submission </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. an invalid body or withdrawal_id, an unparseable or unauthentic quote token, or a quote issued for a different destination, quantity, or chain </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or reserving the fee would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), the available balance cannot cover the fee, there is no USD ledger account to reserve the fee from, an unhealthy account, overdue coupon payments, or a concurrent balance change kept the reservation from being recorded </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> The quote token has expired; request a new fee quote </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Fee locking is not configured on this deployment </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call lockWithdrawalFeeAsync(@javax.annotation.Nonnull UUID withdrawalId, @javax.annotation.Nonnull LockWithdrawalFeeRequest lockWithdrawalFeeRequest, final ApiCallback<WithdrawalResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = lockWithdrawalFeeValidateBeforeCall(withdrawalId, lockWithdrawalFeeRequest, _callback);
+        Type localVarReturnType = new TypeToken<WithdrawalResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for lookupAffiliateCode
      * @param code  (required)
      * @param tenantId Integrators default to their own tenant and cannot select another. Admins may select any tenant. (optional)
@@ -20643,6 +20809,173 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = streamTradesValidateBeforeCall(orderBookId, since, _callback);
         Type localVarReturnType = new TypeToken<List<StreamTradesEntry>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for tenantGuaranteeFundHistory
+     * @param tenantId  (required)
+     * @param startDate Optional inclusive lower bound for updated_at (RFC3339). (optional)
+     * @param endDate Optional inclusive upper bound for updated_at (RFC3339). (optional)
+     * @param txKind Optional transaction kind filter. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Tenant guarantee fund history and summary. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call tenantGuaranteeFundHistoryCall(@javax.annotation.Nonnull String tenantId, @javax.annotation.Nullable OffsetDateTime startDate, @javax.annotation.Nullable OffsetDateTime endDate, @javax.annotation.Nullable String txKind, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/tenants/{tenant_id}/guarantee_fund"
+            .replace("{" + "tenant_id" + "}", localVarApiClient.escapeString(tenantId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (startDate != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("start_date", startDate));
+        }
+
+        if (endDate != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("end_date", endDate));
+        }
+
+        if (txKind != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("tx_kind", txKind));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call tenantGuaranteeFundHistoryValidateBeforeCall(@javax.annotation.Nonnull String tenantId, @javax.annotation.Nullable OffsetDateTime startDate, @javax.annotation.Nullable OffsetDateTime endDate, @javax.annotation.Nullable String txKind, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'tenantId' is set
+        if (tenantId == null) {
+            throw new ApiException("Missing the required parameter 'tenantId' when calling tenantGuaranteeFundHistory(Async)");
+        }
+
+        return tenantGuaranteeFundHistoryCall(tenantId, startDate, endDate, txKind, _callback);
+
+    }
+
+    /**
+     * List guarantee fund ledger rows and totals by transaction kind for a tenant.
+     * Returns guarantee fund ledger rows for a tenant filtered by updated_at range and tx_kind, with totals_by_tx_kind summary.
+     * @param tenantId  (required)
+     * @param startDate Optional inclusive lower bound for updated_at (RFC3339). (optional)
+     * @param endDate Optional inclusive upper bound for updated_at (RFC3339). (optional)
+     * @param txKind Optional transaction kind filter. (optional)
+     * @return TenantGuaranteeFundHistoryResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Tenant guarantee fund history and summary. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TenantGuaranteeFundHistoryResponseEnvelope tenantGuaranteeFundHistory(@javax.annotation.Nonnull String tenantId, @javax.annotation.Nullable OffsetDateTime startDate, @javax.annotation.Nullable OffsetDateTime endDate, @javax.annotation.Nullable String txKind) throws ApiException {
+        ApiResponse<TenantGuaranteeFundHistoryResponseEnvelope> localVarResp = tenantGuaranteeFundHistoryWithHttpInfo(tenantId, startDate, endDate, txKind);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List guarantee fund ledger rows and totals by transaction kind for a tenant.
+     * Returns guarantee fund ledger rows for a tenant filtered by updated_at range and tx_kind, with totals_by_tx_kind summary.
+     * @param tenantId  (required)
+     * @param startDate Optional inclusive lower bound for updated_at (RFC3339). (optional)
+     * @param endDate Optional inclusive upper bound for updated_at (RFC3339). (optional)
+     * @param txKind Optional transaction kind filter. (optional)
+     * @return ApiResponse&lt;TenantGuaranteeFundHistoryResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Tenant guarantee fund history and summary. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TenantGuaranteeFundHistoryResponseEnvelope> tenantGuaranteeFundHistoryWithHttpInfo(@javax.annotation.Nonnull String tenantId, @javax.annotation.Nullable OffsetDateTime startDate, @javax.annotation.Nullable OffsetDateTime endDate, @javax.annotation.Nullable String txKind) throws ApiException {
+        okhttp3.Call localVarCall = tenantGuaranteeFundHistoryValidateBeforeCall(tenantId, startDate, endDate, txKind, null);
+        Type localVarReturnType = new TypeToken<TenantGuaranteeFundHistoryResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List guarantee fund ledger rows and totals by transaction kind for a tenant. (asynchronously)
+     * Returns guarantee fund ledger rows for a tenant filtered by updated_at range and tx_kind, with totals_by_tx_kind summary.
+     * @param tenantId  (required)
+     * @param startDate Optional inclusive lower bound for updated_at (RFC3339). (optional)
+     * @param endDate Optional inclusive upper bound for updated_at (RFC3339). (optional)
+     * @param txKind Optional transaction kind filter. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Tenant guarantee fund history and summary. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call tenantGuaranteeFundHistoryAsync(@javax.annotation.Nonnull String tenantId, @javax.annotation.Nullable OffsetDateTime startDate, @javax.annotation.Nullable OffsetDateTime endDate, @javax.annotation.Nullable String txKind, final ApiCallback<TenantGuaranteeFundHistoryResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = tenantGuaranteeFundHistoryValidateBeforeCall(tenantId, startDate, endDate, txKind, _callback);
+        Type localVarReturnType = new TypeToken<TenantGuaranteeFundHistoryResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

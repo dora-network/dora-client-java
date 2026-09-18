@@ -2738,8 +2738,10 @@ paths:
   /v1/charts/{order_book_id}/candle:
     get:
       description: "Returns candle data in the requested [start, end) range for the\
-        \ selected resolution. Responses are capped to the most recent 5,000 candles\
-        \ per request."
+        \ selected resolution, capped to the most recent 5,000 candles per request.\
+        \ Public callers may query data from up to the last month, while authenticated\
+        \ callers may query up to the last six months (requests with invalid credentials\
+        \ will be rejected as unauthorized)."
       operationId: getCandleData
       parameters:
       - explode: false
@@ -2797,7 +2799,10 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
-      security: []
+      security:
+      - {}
+      - bearerAuth: []
+      - apiKeyAuthHeader: []
       summary: Get candlestick data for an orderbook
       x-accepts:
       - application/json
@@ -2805,7 +2810,9 @@ paths:
     get:
       description: "Returns complete yield buckets starting at `start`; `end` is exclusive\
         \ and a trailing partial bucket is omitted. Requests are limited to 10,000\
-        \ complete buckets."
+        \ complete buckets. Public callers may query only the last month. Authenticated\
+        \ callers may query up to the last six months. If credentials are supplied\
+        \ but invalid, the request is rejected as unauthorized."
       operationId: getAssetYieldData
       parameters:
       - explode: false
@@ -2871,7 +2878,10 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Yield query exceeded its execution deadline
-      security: []
+      security:
+      - {}
+      - bearerAuth: []
+      - apiKeyAuthHeader: []
       summary: Get yield chart data for an asset
       x-accepts:
       - application/json
@@ -4336,6 +4346,10 @@ paths:
       - application/json
   /v1/transactions:
     get:
+      description: "Role-based date window: public callers are limited to the last\
+        \ month; authenticated callers may query up to the last six months. If `start`\
+        \ is omitted it defaults to the role-based minimum. If credentials are supplied\
+        \ but invalid, the request is rejected as unauthorized."
       operationId: getTransactions
       parameters:
       - explode: true
@@ -4429,7 +4443,10 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
-      security: []
+      security:
+      - {}
+      - bearerAuth: []
+      - apiKeyAuthHeader: []
       summary: "Get a filtered, paginated list of transactions"
       x-accepts:
       - application/json
@@ -4623,6 +4640,10 @@ paths:
       - application/json
   /v1/trades:
     get:
+      description: "Role-based date window: public callers are limited to the last\
+        \ month; authenticated callers may query up to the last six months. If `start`\
+        \ is omitted it defaults to the role-based minimum. If credentials are supplied\
+        \ but invalid, the request is rejected as unauthorized."
       operationId: getTrades
       parameters:
       - explode: true
@@ -4705,6 +4726,10 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
+      security:
+      - {}
+      - bearerAuth: []
+      - apiKeyAuthHeader: []
       summary: "Get a filtered, paginated list of trades"
       x-accepts:
       - application/json
@@ -7531,29 +7556,25 @@ paths:
       - application/json
   /v1/web3/withdrawals/fee-quote:
     get:
-      description: "Examines on-chain conditions and simulates a withdrawal transaction\
-        \ to estimate the fee a user needs to pay for a withdrawal. The fee is not\
-        \ charged when the withdrawal is requested; the quote is redeemed later, when\
-        \ the fee is locked as part of approval. Restricted to DORA tenant users whose\
-        \ native asset is USDC."
+      description: "Examines on-chain conditions and simulates the named withdrawal\
+        \ to estimate the network fee the user must reserve before it can be submitted\
+        \ on-chain. The withdrawal must already exist, belong to the caller, and have\
+        \ been approved by an admin (status APPROVED_WITHOUT_FEE); its destination\
+        \ and quantity are read from the row, not taken from the request. The returned\
+        \ quote token is bound to that one withdrawal and is redeemed at PUT /v1/web3/withdrawals/{withdrawal_id},\
+        \ which reserves the fee and moves the withdrawal to APPROVED. Restricted\
+        \ to DORA tenant users whose native asset is USDC."
       operationId: getWithdrawalFeeQuote
       parameters:
-      - description: The destination wallet address as a 0x-prefixed 20-byte hex string.
-          Must not be the zero address.
+      - description: The withdrawal to quote a fee for. It must belong to the caller
+          and be in status APPROVED_WITHOUT_FEE; the destination and quantity are
+          read from it rather than supplied here.
         explode: true
         in: query
-        name: to
+        name: withdrawal_id
         required: true
         schema:
-          type: string
-        style: form
-      - description: "Human-decimal USDC quantity to withdraw, e.g. '100.50'. Must\
-          \ be positive."
-        explode: true
-        in: query
-        name: quantity
-        required: true
-        schema:
+          format: uuid
           type: string
         style: form
       responses:
@@ -7568,8 +7589,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-          description: "Bad request, e.g. invalid or missing to address, or invalid\
-            \ or non-positive quantity"
+          description: "Bad request: the withdrawal_id query parameter is missing\
+            \ or is not a UUID"
         "401":
           content:
             application/json:
@@ -7584,6 +7605,20 @@ paths:
           description: "Forbidden: access is restricted to DORA tenant users whose\
             \ native asset is USDC. Admin and indexer API keys have no native asset\
             \ and are also denied."
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Withdrawal not found, or it belongs to another user"
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Conflict: the withdrawal is not APPROVED_WITHOUT_FEE (not\
+            \ yet approved, already paid for, or terminal), or it is bound to a chain\
+            \ other than the registered one"
         "429":
           content:
             application/json:
@@ -7819,6 +7854,180 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       summary: Get a USDC withdrawal by ID
+      x-accepts:
+      - application/json
+    put:
+      description: "Redeems a fee quote against a withdrawal an admin has approved.\
+        \ The quoted fee is reserved on top of the quantity reserved when the request\
+        \ was created, so the same risk checks the request cleared are run again for\
+        \ it: an active trading challenge, a deactivated account, account health,\
+        \ the minimum cash reserve, and overdue coupon payments. A fee that would\
+        \ take the caller below the minimum cash reserve is refused and nothing is\
+        \ reserved."
+      operationId: lockWithdrawalFee
+      parameters:
+      - description: The withdrawal to redeem the quote against. It must be owned
+          by the caller and be in status APPROVED_WITHOUT_FEE.
+        explode: false
+        in: path
+        name: withdrawal_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LockWithdrawalFeeRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WithdrawalResponseEnvelope"
+          description: Fee reserved; the withdrawal is now APPROVED and eligible for
+            submission
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. an invalid body or withdrawal_id, an unparseable\
+            \ or unauthentic quote token, or a quote issued for a different destination,\
+            \ quantity, or chain"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden: access is restricted to DORA tenant users whose\
+            \ native asset is USDC (admin and indexer API keys have no native asset\
+            \ and are also denied); the caller is taking part in an active trading\
+            \ challenge; the caller's account is deactivated or being deactivated;\
+            \ or reserving the fee would leave the caller below the minimum cash reserve."
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Withdrawal not found, or it belongs to another user"
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Conflict, e.g. the withdrawal is not APPROVED_WITHOUT_FEE\
+            \ (not yet approved, already paid for, or terminal), the available balance\
+            \ cannot cover the fee, there is no USD ledger account to reserve the\
+            \ fee from, an unhealthy account, overdue coupon payments, or a concurrent\
+            \ balance change kept the reservation from being recorded"
+        "410":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: The quote token has expired; request a new fee quote
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Fee locking is not configured on this deployment
+      summary: Lock the network fee for an approved USDC withdrawal
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v1/tenants/{tenant_id}/guarantee_fund:
+    get:
+      description: "Returns guarantee fund ledger rows for a tenant filtered by updated_at\
+        \ range and tx_kind, with totals_by_tx_kind summary."
+      operationId: tenantGuaranteeFundHistory
+      parameters:
+      - explode: false
+        in: path
+        name: tenant_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Optional inclusive lower bound for updated_at (RFC3339).
+        explode: true
+        in: query
+        name: start_date
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: Optional inclusive upper bound for updated_at (RFC3339).
+        explode: true
+        in: query
+        name: end_date
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: Optional transaction kind filter.
+        explode: true
+        in: query
+        name: tx_kind
+        required: false
+        schema:
+          enum:
+          - DEPOSIT
+          - WITHDRAWAL
+          - SETTLEMENT
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TenantGuaranteeFundHistoryResponseEnvelope"
+          description: Tenant guarantee fund history and summary.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Bad request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: List guarantee fund ledger rows and totals by transaction kind for
+        a tenant.
       x-accepts:
       - application/json
 components:
@@ -13337,14 +13546,13 @@ components:
       - REPAY
       - SUPPLY
       - WITHDRAW
-      - ISOLATE_COLLATERAL
+      - ISOLATE_AVAILABLE
       - ISOLATE_POSITION
       - UNITE_POSITION
       - COLLATERALIZE
       - DE-COLLATERALIZE
       - COUPON_PAYMENT
       - INTERNAL_TRANSFER
-      - ISOLATE_AVAILABLE
       - BORROW
       - TRADING_CHALLENGE_DEPOSIT
       - TRADING_CHALLENGE_WITHDRAW
@@ -17225,10 +17433,11 @@ components:
         error: error
         metadata: ""
     FeeQuoteResponse:
-      description: "The estimated network fee to withdraw USDC via web3, alongside\
-        \ a signed, TTL-bound quote token the client submits with a later withdrawal\
-        \ so the server can validate the fee it was quoted."
+      description: "The estimated network fee for one approved USDC withdrawal, alongside\
+        \ a signed, TTL-bound quote token bound to that withdrawal. Submit the token\
+        \ to PUT /v1/web3/withdrawals/{withdrawal_id} to reserve the quoted fee."
       example:
+        withdrawal_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         to: to
         quantity: quantity
         fee: fee
@@ -17237,11 +17446,18 @@ components:
         quote_token: quote_token
         expires_at: 2000-01-23T04:56:07.000+00:00
       properties:
+        withdrawal_id:
+          description: The withdrawal this quote was issued for. The quote token is
+            bound to it and cannot be redeemed against any other withdrawal.
+          format: uuid
+          type: string
         to:
-          description: "The withdrawal destination address, echoed from the request."
+          description: "The withdrawal destination address, read from the withdrawal\
+            \ row."
           type: string
         quantity:
-          description: "Human-decimal USDC withdrawal quantity, echoed from the request."
+          description: "Human-decimal USDC withdrawal quantity, read from the withdrawal\
+            \ row."
           type: string
         fee:
           description: "The estimated network fee, in human USDC."
@@ -17253,8 +17469,9 @@ components:
           description: EVM chain ID the quote was computed for.
           type: string
         quote_token:
-          description: "Signed, TTL-bound quote token to submit with a later withdrawal\
-            \ so the server can validate the fee it was quoted."
+          description: "Signed, TTL-bound quote token to submit to PUT /v1/web3/withdrawals/{withdrawal_id}\
+            \ so the server can validate the fee it quoted. It names the withdrawal\
+            \ it was issued for."
           type: string
         expires_at:
           description: When the quote token expires.
@@ -17268,6 +17485,7 @@ components:
       - quantity
       - quote_token
       - to
+      - withdrawal_id
     FeeQuoteResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -17276,6 +17494,7 @@ components:
             $ref: "#/components/schemas/FeeQuoteResponse"
       example:
         data:
+          withdrawal_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           to: to
           quantity: quantity
           fee: fee
@@ -17338,6 +17557,21 @@ components:
       - quantity
       - to_address
       - withdrawal_id
+    LockWithdrawalFeeRequest:
+      description: "Request to lock the network fee for an approved USDC withdrawal.\
+        \ The withdrawal is named by the path, and the fee itself is not part of the\
+        \ body: it is read from the signed quote token, so a client cannot choose\
+        \ what its own withdrawal costs."
+      example:
+        quote_token: quote_token
+      properties:
+        quote_token:
+          description: "The signed quote token returned by GET /v1/web3/withdrawals/fee-quote.\
+            \ It must still be within its TTL and must have been issued for this withdrawal's\
+            \ destination, quantity, and chain."
+          type: string
+      required:
+      - quote_token
     WithdrawalResponse:
       description: A single USDC withdrawal request.
       example:
@@ -17679,6 +17913,108 @@ components:
           review_reason: review_reason
           created_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
+        error: error
+        metadata: ""
+    TenantGuaranteeFundRow:
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tenant_id: tenant_id
+        seq: 0
+        available: available
+        tx_kind: DEPOSIT
+        updated_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: uuid
+          type: string
+        tenant_id:
+          type: string
+        seq:
+          format: int64
+          type: integer
+        available:
+          type: string
+        tx_kind:
+          enum:
+          - DEPOSIT
+          - WITHDRAWAL
+          - SETTLEMENT
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - available
+      - id
+      - seq
+      - tenant_id
+      - tx_kind
+      - updated_at
+    TenantGuaranteeFundSummary:
+      example:
+        totals_by_tx_kind:
+          key: totals_by_tx_kind
+      properties:
+        totals_by_tx_kind:
+          additionalProperties:
+            type: string
+          description: Summed balance movement amounts by tx_kind for the filtered
+            result set.
+      required:
+      - totals_by_tx_kind
+    TenantGuaranteeFundHistory:
+      example:
+        rows:
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tenant_id: tenant_id
+          seq: 0
+          available: available
+          tx_kind: DEPOSIT
+          updated_at: 2000-01-23T04:56:07.000+00:00
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tenant_id: tenant_id
+          seq: 0
+          available: available
+          tx_kind: DEPOSIT
+          updated_at: 2000-01-23T04:56:07.000+00:00
+        summary:
+          totals_by_tx_kind:
+            key: totals_by_tx_kind
+      properties:
+        rows:
+          items:
+            $ref: "#/components/schemas/TenantGuaranteeFundRow"
+          type: array
+          default: null
+        summary:
+          $ref: "#/components/schemas/TenantGuaranteeFundSummary"
+      required:
+      - rows
+      - summary
+    TenantGuaranteeFundHistoryResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/TenantGuaranteeFundHistory"
+      example:
+        data:
+          rows:
+          - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            tenant_id: tenant_id
+            seq: 0
+            available: available
+            tx_kind: DEPOSIT
+            updated_at: 2000-01-23T04:56:07.000+00:00
+          - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            tenant_id: tenant_id
+            seq: 0
+            available: available
+            tx_kind: DEPOSIT
+            updated_at: 2000-01-23T04:56:07.000+00:00
+          summary:
+            totals_by_tx_kind:
+              key: totals_by_tx_kind
         error: error
         metadata: ""
     claimPromoLink_request:

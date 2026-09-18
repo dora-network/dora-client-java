@@ -121,6 +121,7 @@ All URIs are relative to *https://staging.dora.co*
 | [**listTradingChallenges**](DefaultApi.md#listTradingChallenges) | **GET** /v1/trading_challenges | List trading challenges |
 | [**listUserDeactivations**](DefaultApi.md#listUserDeactivations) | **GET** /v1/user/deactivations | Get the current deactivation status across all users |
 | [**listWithdrawals**](DefaultApi.md#listWithdrawals) | **GET** /v1/web3/withdrawals | List USDC withdrawals |
+| [**lockWithdrawalFee**](DefaultApi.md#lockWithdrawalFee) | **PUT** /v1/web3/withdrawals/{withdrawal_id} | Lock the network fee for an approved USDC withdrawal |
 | [**lookupAffiliateCode**](DefaultApi.md#lookupAffiliateCode) | **GET** /v1/affiliate_codes/{code} | Look up a reusable referral code |
 | [**payLeverageGetAccruedInterest**](DefaultApi.md#payLeverageGetAccruedInterest) | **POST** /v1/leverage/accrued_interest/pay | Pay current accrued leverage interest for a specific user |
 | [**registerAffiliateReferrer**](DefaultApi.md#registerAffiliateReferrer) | **POST** /v1/affiliate_programs/{program_id}/referrers | Register an existing user as a referrer |
@@ -141,6 +142,7 @@ All URIs are relative to *https://staging.dora.co*
 | [**streamOrderBookBalances**](DefaultApi.md#streamOrderBookBalances) | **GET** /v1/orderbooks/{order_book_id}/balances/stream | Get a snapshot of base and quote balances for an order book and open a stream for real-time updates |
 | [**streamOrderbookOpenOrders**](DefaultApi.md#streamOrderbookOpenOrders) | **GET** /v1/orderbooks/{order_book_id}/open/stream | Get a snapshot of open orders in an order book and open a stream for real-time updates |
 | [**streamTrades**](DefaultApi.md#streamTrades) | **GET** /v1/trades/{order_book_id}/stream | Get a snapshot of trades executed on the given order book from a specific date and open a stream for real-time updates |
+| [**tenantGuaranteeFundHistory**](DefaultApi.md#tenantGuaranteeFundHistory) | **GET** /v1/tenants/{tenant_id}/guarantee_fund | List guarantee fund ledger rows and totals by transaction kind for a tenant. |
 | [**terminateOwnTradingChallengeParticipation**](DefaultApi.md#terminateOwnTradingChallengeParticipation) | **POST** /v1/trading_challenges/{trading_challenge_id}/participants/self/terminate | Leave a trading challenge |
 | [**terminateTradingChallengeParticipation**](DefaultApi.md#terminateTradingChallengeParticipation) | **POST** /v1/trading_challenges/{trading_challenge_id}/participants/{user_id}/terminate | Terminate a participation in a trading challenge |
 | [**transferAccountBalancesV2**](DefaultApi.md#transferAccountBalancesV2) | **POST** /v2/accounts/transfer_balances | Transfer available balance between a user&#39;s accounts |
@@ -2389,7 +2391,7 @@ No authorization required
 
 Get yield chart data for an asset
 
-Returns complete yield buckets starting at &#x60;start&#x60;; &#x60;end&#x60; is exclusive and a trailing partial bucket is omitted. Requests are limited to 10,000 complete buckets.
+Returns complete yield buckets starting at &#x60;start&#x60;; &#x60;end&#x60; is exclusive and a trailing partial bucket is omitted. Requests are limited to 10,000 complete buckets. Public callers may query only the last month. Authenticated callers may query up to the last six months. If credentials are supplied but invalid, the request is rejected as unauthorized.
 
 ### Example
 ```java
@@ -2397,6 +2399,7 @@ Returns complete yield buckets starting at &#x60;start&#x60;; &#x60;end&#x60; is
 import tech.dora.ApiClient;
 import tech.dora.ApiException;
 import tech.dora.Configuration;
+import tech.dora.auth.*;
 import tech.dora.models.*;
 import tech.dora.api.DefaultApi;
 
@@ -2404,6 +2407,16 @@ public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
     UUID assetId = UUID.randomUUID(); // UUID | 
@@ -2439,7 +2452,7 @@ public class Example {
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2526,7 +2539,7 @@ No authorization required
 
 Get candlestick data for an orderbook
 
-Returns candle data in the requested [start, end) range for the selected resolution. Responses are capped to the most recent 5,000 candles per request.
+Returns candle data in the requested [start, end) range for the selected resolution, capped to the most recent 5,000 candles per request. Public callers may query data from up to the last month, while authenticated callers may query up to the last six months (requests with invalid credentials will be rejected as unauthorized).
 
 ### Example
 ```java
@@ -2534,6 +2547,7 @@ Returns candle data in the requested [start, end) range for the selected resolut
 import tech.dora.ApiClient;
 import tech.dora.ApiException;
 import tech.dora.Configuration;
+import tech.dora.auth.*;
 import tech.dora.models.*;
 import tech.dora.api.DefaultApi;
 
@@ -2541,6 +2555,16 @@ public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
     String orderBookId = "orderBookId_example"; // String | 
@@ -2576,7 +2600,7 @@ public class Example {
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -4809,6 +4833,8 @@ No authorization required
 
 Get a filtered, paginated list of trades
 
+Role-based date window: public callers are limited to the last month; authenticated callers may query up to the last six months. If &#x60;start&#x60; is omitted it defaults to the role-based minimum. If credentials are supplied but invalid, the request is rejected as unauthorized.
+
 ### Example
 ```java
 // Import classes:
@@ -5247,12 +5273,15 @@ No authorization required
 
 Get a filtered, paginated list of transactions
 
+Role-based date window: public callers are limited to the last month; authenticated callers may query up to the last six months. If &#x60;start&#x60; is omitted it defaults to the role-based minimum. If credentials are supplied but invalid, the request is rejected as unauthorized.
+
 ### Example
 ```java
 // Import classes:
 import tech.dora.ApiClient;
 import tech.dora.ApiException;
 import tech.dora.Configuration;
+import tech.dora.auth.*;
 import tech.dora.models.*;
 import tech.dora.api.DefaultApi;
 
@@ -5260,6 +5289,16 @@ public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
     List<String> pools = Arrays.asList(); // List<String> | 
@@ -5303,7 +5342,7 @@ public class Example {
 
 ### Authorization
 
-No authorization required
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -6356,11 +6395,11 @@ public class Example {
 
 <a id="getWithdrawalFeeQuote"></a>
 # **getWithdrawalFeeQuote**
-> FeeQuoteResponseEnvelope getWithdrawalFeeQuote(to, quantity)
+> FeeQuoteResponseEnvelope getWithdrawalFeeQuote(withdrawalId)
 
 Estimate the network fee to withdraw USDC via web3
 
-Examines on-chain conditions and simulates a withdrawal transaction to estimate the fee a user needs to pay for a withdrawal. The fee is not charged when the withdrawal is requested; the quote is redeemed later, when the fee is locked as part of approval. Restricted to DORA tenant users whose native asset is USDC.
+Examines on-chain conditions and simulates the named withdrawal to estimate the network fee the user must reserve before it can be submitted on-chain. The withdrawal must already exist, belong to the caller, and have been approved by an admin (status APPROVED_WITHOUT_FEE); its destination and quantity are read from the row, not taken from the request. The returned quote token is bound to that one withdrawal and is redeemed at PUT /v1/web3/withdrawals/{withdrawal_id}, which reserves the fee and moves the withdrawal to APPROVED. Restricted to DORA tenant users whose native asset is USDC.
 
 ### Example
 ```java
@@ -6388,10 +6427,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
-    String to = "to_example"; // String | The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address.
-    String quantity = "quantity_example"; // String | Human-decimal USDC quantity to withdraw, e.g. '100.50'. Must be positive.
+    UUID withdrawalId = UUID.randomUUID(); // UUID | The withdrawal to quote a fee for. It must belong to the caller and be in status APPROVED_WITHOUT_FEE; the destination and quantity are read from it rather than supplied here.
     try {
-      FeeQuoteResponseEnvelope result = apiInstance.getWithdrawalFeeQuote(to, quantity);
+      FeeQuoteResponseEnvelope result = apiInstance.getWithdrawalFeeQuote(withdrawalId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DefaultApi#getWithdrawalFeeQuote");
@@ -6408,8 +6446,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **to** | **String**| The destination wallet address as a 0x-prefixed 20-byte hex string. Must not be the zero address. | |
-| **quantity** | **String**| Human-decimal USDC quantity to withdraw, e.g. &#39;100.50&#39;. Must be positive. | |
+| **withdrawalId** | **UUID**| The withdrawal to quote a fee for. It must belong to the caller and be in status APPROVED_WITHOUT_FEE; the destination and quantity are read from it rather than supplied here. | |
 
 ### Return type
 
@@ -6428,9 +6465,11 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Fee quote for the requested withdrawal |  -  |
-| **400** | Bad request, e.g. invalid or missing to address, or invalid or non-positive quantity |  -  |
+| **400** | Bad request: the withdrawal_id query parameter is missing or is not a UUID |  -  |
 | **401** | Unauthorized, user not logged in |  -  |
 | **403** | Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. |  -  |
+| **404** | Withdrawal not found, or it belongs to another user |  -  |
+| **409** | Conflict: the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), or it is bound to a chain other than the registered one |  -  |
 | **429** | Rate limit exceeded; this endpoint is limited to 1 request per minute per user |  -  |
 | **500** | Internal server error |  -  |
 | **502** | Bad gateway, e.g. the withdrawal simulation reverted (insufficient vault liquidity, paused vault) or the web3 data provider (gas estimation or price feed) failed |  -  |
@@ -8910,6 +8949,89 @@ public class Example {
 | **403** | Forbidden, e.g. a non-admin user requesting another user&#39;s withdrawals |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="lockWithdrawalFee"></a>
+# **lockWithdrawalFee**
+> WithdrawalResponseEnvelope lockWithdrawalFee(withdrawalId, lockWithdrawalFeeRequest)
+
+Lock the network fee for an approved USDC withdrawal
+
+Redeems a fee quote against a withdrawal an admin has approved. The quoted fee is reserved on top of the quantity reserved when the request was created, so the same risk checks the request cleared are run again for it: an active trading challenge, a deactivated account, account health, the minimum cash reserve, and overdue coupon payments. A fee that would take the caller below the minimum cash reserve is refused and nothing is reserved.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID withdrawalId = UUID.randomUUID(); // UUID | The withdrawal to redeem the quote against. It must be owned by the caller and be in status APPROVED_WITHOUT_FEE.
+    LockWithdrawalFeeRequest lockWithdrawalFeeRequest = new LockWithdrawalFeeRequest(); // LockWithdrawalFeeRequest | 
+    try {
+      WithdrawalResponseEnvelope result = apiInstance.lockWithdrawalFee(withdrawalId, lockWithdrawalFeeRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#lockWithdrawalFee");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **withdrawalId** | **UUID**| The withdrawal to redeem the quote against. It must be owned by the caller and be in status APPROVED_WITHOUT_FEE. | |
+| **lockWithdrawalFeeRequest** | [**LockWithdrawalFeeRequest**](LockWithdrawalFeeRequest.md)|  | |
+
+### Return type
+
+[**WithdrawalResponseEnvelope**](WithdrawalResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Fee reserved; the withdrawal is now APPROVED and eligible for submission |  -  |
+| **400** | Bad request, e.g. an invalid body or withdrawal_id, an unparseable or unauthentic quote token, or a quote issued for a different destination, quantity, or chain |  -  |
+| **401** | Unauthorized, user not logged in |  -  |
+| **403** | Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or reserving the fee would leave the caller below the minimum cash reserve. |  -  |
+| **404** | Withdrawal not found, or it belongs to another user |  -  |
+| **409** | Conflict, e.g. the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), the available balance cannot cover the fee, there is no USD ledger account to reserve the fee from, an unhealthy account, overdue coupon payments, or a concurrent balance change kept the reservation from being recorded |  -  |
+| **410** | The quote token has expired; request a new fee quote |  -  |
+| **500** | Internal server error |  -  |
+| **503** | Fee locking is not configured on this deployment |  -  |
+
 <a id="lookupAffiliateCode"></a>
 # **lookupAffiliateCode**
 > AffiliateReferrerEnvelope lookupAffiliateCode(code, tenantId)
@@ -10375,6 +10497,89 @@ No authorization required
 |-------------|-------------|------------------|
 | **200** | Real-time trade updates |  -  |
 | **400** | Bad request, e.g. invalid parameters |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="tenantGuaranteeFundHistory"></a>
+# **tenantGuaranteeFundHistory**
+> TenantGuaranteeFundHistoryResponseEnvelope tenantGuaranteeFundHistory(tenantId, startDate, endDate, txKind)
+
+List guarantee fund ledger rows and totals by transaction kind for a tenant.
+
+Returns guarantee fund ledger rows for a tenant filtered by updated_at range and tx_kind, with totals_by_tx_kind summary.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String tenantId = "tenantId_example"; // String | 
+    OffsetDateTime startDate = OffsetDateTime.now(); // OffsetDateTime | Optional inclusive lower bound for updated_at (RFC3339).
+    OffsetDateTime endDate = OffsetDateTime.now(); // OffsetDateTime | Optional inclusive upper bound for updated_at (RFC3339).
+    String txKind = "DEPOSIT"; // String | Optional transaction kind filter.
+    try {
+      TenantGuaranteeFundHistoryResponseEnvelope result = apiInstance.tenantGuaranteeFundHistory(tenantId, startDate, endDate, txKind);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#tenantGuaranteeFundHistory");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | **String**|  | |
+| **startDate** | **OffsetDateTime**| Optional inclusive lower bound for updated_at (RFC3339). | [optional] |
+| **endDate** | **OffsetDateTime**| Optional inclusive upper bound for updated_at (RFC3339). | [optional] |
+| **txKind** | **String**| Optional transaction kind filter. | [optional] [enum: DEPOSIT, WITHDRAWAL, SETTLEMENT] |
+
+### Return type
+
+[**TenantGuaranteeFundHistoryResponseEnvelope**](TenantGuaranteeFundHistoryResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Tenant guarantee fund history and summary. |  -  |
+| **400** | Bad request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="terminateOwnTradingChallengeParticipation"></a>

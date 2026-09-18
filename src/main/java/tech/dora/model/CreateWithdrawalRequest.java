@@ -49,7 +49,7 @@ import tech.dora.JSON;
 /**
  * Request to create a USDC withdrawal. No fee quote is required: creating the request reserves the quantity only, and the withdrawal&#39;s fee is quoted and locked later, as part of approval.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T04:39:55.054936532+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-18T18:29:04.763912996+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class CreateWithdrawalRequest {
   public static final String SERIALIZED_NAME_WITHDRAWAL_ID = "withdrawal_id";
   @SerializedName(SERIALIZED_NAME_WITHDRAWAL_ID)

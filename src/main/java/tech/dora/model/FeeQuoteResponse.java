@@ -22,6 +22,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
+import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -47,10 +48,15 @@ import java.util.Set;
 import tech.dora.JSON;
 
 /**
- * The estimated network fee to withdraw USDC via web3, alongside a signed, TTL-bound quote token the client submits with a later withdrawal so the server can validate the fee it was quoted.
+ * The estimated network fee for one approved USDC withdrawal, alongside a signed, TTL-bound quote token bound to that withdrawal. Submit the token to PUT /v1/web3/withdrawals/{withdrawal_id} to reserve the quoted fee.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-17T04:39:55.054936532+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-18T18:29:04.763912996+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class FeeQuoteResponse {
+  public static final String SERIALIZED_NAME_WITHDRAWAL_ID = "withdrawal_id";
+  @SerializedName(SERIALIZED_NAME_WITHDRAWAL_ID)
+  @javax.annotation.Nonnull
+  private UUID withdrawalId;
+
   public static final String SERIALIZED_NAME_TO = "to";
   @SerializedName(SERIALIZED_NAME_TO)
   @javax.annotation.Nonnull
@@ -89,13 +95,32 @@ public class FeeQuoteResponse {
   public FeeQuoteResponse() {
   }
 
+  public FeeQuoteResponse withdrawalId(@javax.annotation.Nonnull UUID withdrawalId) {
+    this.withdrawalId = withdrawalId;
+    return this;
+  }
+
+  /**
+   * The withdrawal this quote was issued for. The quote token is bound to it and cannot be redeemed against any other withdrawal.
+   * @return withdrawalId
+   */
+  @javax.annotation.Nonnull
+  public UUID getWithdrawalId() {
+    return withdrawalId;
+  }
+
+  public void setWithdrawalId(@javax.annotation.Nonnull UUID withdrawalId) {
+    this.withdrawalId = withdrawalId;
+  }
+
+
   public FeeQuoteResponse to(@javax.annotation.Nonnull String to) {
     this.to = to;
     return this;
   }
 
   /**
-   * The withdrawal destination address, echoed from the request.
+   * The withdrawal destination address, read from the withdrawal row.
    * @return to
    */
   @javax.annotation.Nonnull
@@ -114,7 +139,7 @@ public class FeeQuoteResponse {
   }
 
   /**
-   * Human-decimal USDC withdrawal quantity, echoed from the request.
+   * Human-decimal USDC withdrawal quantity, read from the withdrawal row.
    * @return quantity
    */
   @javax.annotation.Nonnull
@@ -190,7 +215,7 @@ public class FeeQuoteResponse {
   }
 
   /**
-   * Signed, TTL-bound quote token to submit with a later withdrawal so the server can validate the fee it was quoted.
+   * Signed, TTL-bound quote token to submit to PUT /v1/web3/withdrawals/{withdrawal_id} so the server can validate the fee it quoted. It names the withdrawal it was issued for.
    * @return quoteToken
    */
   @javax.annotation.Nonnull
@@ -232,7 +257,8 @@ public class FeeQuoteResponse {
       return false;
     }
     FeeQuoteResponse feeQuoteResponse = (FeeQuoteResponse) o;
-    return Objects.equals(this.to, feeQuoteResponse.to) &&
+    return Objects.equals(this.withdrawalId, feeQuoteResponse.withdrawalId) &&
+        Objects.equals(this.to, feeQuoteResponse.to) &&
         Objects.equals(this.quantity, feeQuoteResponse.quantity) &&
         Objects.equals(this.fee, feeQuoteResponse.fee) &&
         Objects.equals(this.feeBaseUnits, feeQuoteResponse.feeBaseUnits) &&
@@ -243,13 +269,14 @@ public class FeeQuoteResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(to, quantity, fee, feeBaseUnits, chainId, quoteToken, expiresAt);
+    return Objects.hash(withdrawalId, to, quantity, fee, feeBaseUnits, chainId, quoteToken, expiresAt);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class FeeQuoteResponse {\n");
+    sb.append("    withdrawalId: ").append(toIndentedString(withdrawalId)).append("\n");
     sb.append("    to: ").append(toIndentedString(to)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("    fee: ").append(toIndentedString(fee)).append("\n");
@@ -275,10 +302,10 @@ public class FeeQuoteResponse {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("to", "quantity", "fee", "fee_base_units", "chain_id", "quote_token", "expires_at"));
+    openapiFields = new HashSet<String>(Arrays.asList("withdrawal_id", "to", "quantity", "fee", "fee_base_units", "chain_id", "quote_token", "expires_at"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("to", "quantity", "fee", "fee_base_units", "chain_id", "quote_token", "expires_at"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("withdrawal_id", "to", "quantity", "fee", "fee_base_units", "chain_id", "quote_token", "expires_at"));
   }
 
   /**
@@ -309,6 +336,9 @@ public class FeeQuoteResponse {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+      if (!jsonObj.get("withdrawal_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `withdrawal_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("withdrawal_id").toString()));
+      }
       if (!jsonObj.get("to").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `to` to be a primitive type in the JSON string but got `%s`", jsonObj.get("to").toString()));
       }

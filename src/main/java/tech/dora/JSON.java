@@ -228,6 +228,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.ListUsersResponseEnvelope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.ListWithdrawalsResponseEnvelope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.LiveOrderbook.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.LockWithdrawalFeeRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.Margin.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.Metadata.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.ModuleBalance.CustomTypeAdapterFactory());
@@ -315,6 +316,10 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.Supply.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.SupplyRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.SupplyResponseEnvelope.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.TenantGuaranteeFundHistory.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.TenantGuaranteeFundHistoryResponseEnvelope.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.TenantGuaranteeFundRow.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.TenantGuaranteeFundSummary.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.TenantRestrictions.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.TerminateTradingChallengeResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new tech.dora.model.TerminateTradingChallengeResponseEnvelope.CustomTypeAdapterFactory());
