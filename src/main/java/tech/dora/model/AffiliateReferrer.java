@@ -50,7 +50,7 @@ import tech.dora.JSON;
 /**
  * AffiliateReferrer
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-18T18:29:04.763912996+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class AffiliateReferrer {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -81,6 +81,11 @@ public class AffiliateReferrer {
   @SerializedName(SERIALIZED_NAME_CREATED_AT)
   @javax.annotation.Nonnull
   private OffsetDateTime createdAt;
+
+  public static final String SERIALIZED_NAME_CUSTOMIZED_AT = "customized_at";
+  @SerializedName(SERIALIZED_NAME_CUSTOMIZED_AT)
+  @javax.annotation.Nullable
+  private OffsetDateTime customizedAt;
 
   public AffiliateReferrer() {
   }
@@ -167,7 +172,7 @@ public class AffiliateReferrer {
   }
 
   /**
-   * Reusable referral code, stored uppercase. Letters, digits, hyphens and underscores are accepted; the first character must be a letter or digit. Matching is case-insensitive. Separate from QR claim tokens.
+   * Current code to share; previously issued codes remain valid. Stored uppercase and unique across all programs and tenants.
    * @return referralCode
    */
   @javax.annotation.Nonnull
@@ -199,6 +204,25 @@ public class AffiliateReferrer {
   }
 
 
+  public AffiliateReferrer customizedAt(@javax.annotation.Nullable OffsetDateTime customizedAt) {
+    this.customizedAt = customizedAt;
+    return this;
+  }
+
+  /**
+   * When the owner used their one code change; null until then.
+   * @return customizedAt
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getCustomizedAt() {
+    return customizedAt;
+  }
+
+  public void setCustomizedAt(@javax.annotation.Nullable OffsetDateTime customizedAt) {
+    this.customizedAt = customizedAt;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -214,12 +238,13 @@ public class AffiliateReferrer {
         Objects.equals(this.tenantId, affiliateReferrer.tenantId) &&
         Objects.equals(this.userId, affiliateReferrer.userId) &&
         Objects.equals(this.referralCode, affiliateReferrer.referralCode) &&
-        Objects.equals(this.createdAt, affiliateReferrer.createdAt);
+        Objects.equals(this.createdAt, affiliateReferrer.createdAt) &&
+        Objects.equals(this.customizedAt, affiliateReferrer.customizedAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, programId, tenantId, userId, referralCode, createdAt);
+    return Objects.hash(id, programId, tenantId, userId, referralCode, createdAt, customizedAt);
   }
 
   @Override
@@ -232,6 +257,7 @@ public class AffiliateReferrer {
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    referralCode: ").append(toIndentedString(referralCode)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    customizedAt: ").append(toIndentedString(customizedAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -250,10 +276,10 @@ public class AffiliateReferrer {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "program_id", "tenant_id", "user_id", "referral_code", "created_at"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "program_id", "tenant_id", "user_id", "referral_code", "created_at", "customized_at"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "program_id", "tenant_id", "user_id", "referral_code", "created_at"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "program_id", "tenant_id", "user_id", "referral_code", "created_at", "customized_at"));
   }
 
   /**

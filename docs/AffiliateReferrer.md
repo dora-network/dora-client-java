@@ -11,8 +11,9 @@
 |**programId** | **UUID** |  |  |
 |**tenantId** | **String** | Owning tenant for administration. This does not define a referral destination. |  |
 |**userId** | **UUID** |  |  |
-|**referralCode** | **String** | Reusable referral code, stored uppercase. Letters, digits, hyphens and underscores are accepted; the first character must be a letter or digit. Matching is case-insensitive. Separate from QR claim tokens. |  |
+|**referralCode** | **String** | Current code to share; previously issued codes remain valid. Stored uppercase and unique across all programs and tenants. |  |
 |**createdAt** | **OffsetDateTime** |  |  |
+|**customizedAt** | **OffsetDateTime** | When the owner used their one code change; null until then. |  |
 
 
 

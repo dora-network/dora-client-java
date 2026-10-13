@@ -19,6 +19,8 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.net.URI;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
@@ -60,6 +62,30 @@ public class ClaimTradingChallengeResponseTest {
     @Test
     public void statusTest() {
         // TODO: test status
+    }
+
+    /**
+     * Test the property 'rewardAmount'
+     */
+    @Test
+    public void rewardAmountTest() {
+        // TODO: test rewardAmount
+    }
+
+    /**
+     * Test the property 'kycUrl'
+     */
+    @Test
+    public void kycUrlTest() {
+        // TODO: test kycUrl
+    }
+
+    /**
+     * Test the property 'rewardDeadlineAt'
+     */
+    @Test
+    public void rewardDeadlineAtTest() {
+        // TODO: test rewardDeadlineAt
     }
 
 }

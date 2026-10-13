@@ -48,7 +48,7 @@ import tech.dora.JSON;
 /**
  * Request to lock the network fee for an approved USDC withdrawal. The withdrawal is named by the path, and the fee itself is not part of the body: it is read from the signed quote token, so a client cannot choose what its own withdrawal costs.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-18T18:29:04.763912996+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class LockWithdrawalFeeRequest {
   public static final String SERIALIZED_NAME_QUOTE_TOKEN = "quote_token";
   @SerializedName(SERIALIZED_NAME_QUOTE_TOKEN)

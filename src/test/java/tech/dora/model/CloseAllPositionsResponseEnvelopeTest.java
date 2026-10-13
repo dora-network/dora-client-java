@@ -22,23 +22,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import tech.dora.model.CloseAllPositionsItem;
 import tech.dora.model.Metadata;
-import tech.dora.model.TradingChallengeAllResult;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for TradingChallengeAllResultsResponseEnvelope
+ * Model tests for CloseAllPositionsResponseEnvelope
  */
-public class TradingChallengeAllResultsResponseEnvelopeTest {
-    private final TradingChallengeAllResultsResponseEnvelope model = new TradingChallengeAllResultsResponseEnvelope();
+public class CloseAllPositionsResponseEnvelopeTest {
+    private final CloseAllPositionsResponseEnvelope model = new CloseAllPositionsResponseEnvelope();
 
     /**
-     * Model tests for TradingChallengeAllResultsResponseEnvelope
+     * Model tests for CloseAllPositionsResponseEnvelope
      */
     @Test
-    public void testTradingChallengeAllResultsResponseEnvelope() {
-        // TODO: test TradingChallengeAllResultsResponseEnvelope
+    public void testCloseAllPositionsResponseEnvelope() {
+        // TODO: test CloseAllPositionsResponseEnvelope
     }
 
     /**

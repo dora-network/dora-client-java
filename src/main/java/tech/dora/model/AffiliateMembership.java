@@ -50,7 +50,7 @@ import tech.dora.JSON;
 /**
  * AffiliateMembership
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-18T18:29:04.763912996+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class AffiliateMembership {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -91,6 +91,16 @@ public class AffiliateMembership {
   @SerializedName(SERIALIZED_NAME_IS_ACTIVE)
   @javax.annotation.Nonnull
   private Boolean isActive;
+
+  public static final String SERIALIZED_NAME_CUSTOMIZED_AT = "customized_at";
+  @SerializedName(SERIALIZED_NAME_CUSTOMIZED_AT)
+  @javax.annotation.Nullable
+  private OffsetDateTime customizedAt;
+
+  public static final String SERIALIZED_NAME_CAN_CUSTOMIZE = "can_customize";
+  @SerializedName(SERIALIZED_NAME_CAN_CUSTOMIZE)
+  @javax.annotation.Nonnull
+  private Boolean canCustomize;
 
   public AffiliateMembership() {
   }
@@ -177,7 +187,7 @@ public class AffiliateMembership {
   }
 
   /**
-   * Reusable referral code, stored uppercase. Letters, digits, hyphens and underscores are accepted; the first character must be a letter or digit. Matching is case-insensitive. Separate from QR claim tokens.
+   * Current code to share; previously issued codes remain valid.
    * @return referralCode
    */
   @javax.annotation.Nonnull
@@ -247,6 +257,44 @@ public class AffiliateMembership {
   }
 
 
+  public AffiliateMembership customizedAt(@javax.annotation.Nullable OffsetDateTime customizedAt) {
+    this.customizedAt = customizedAt;
+    return this;
+  }
+
+  /**
+   * Get customizedAt
+   * @return customizedAt
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getCustomizedAt() {
+    return customizedAt;
+  }
+
+  public void setCustomizedAt(@javax.annotation.Nullable OffsetDateTime customizedAt) {
+    this.customizedAt = customizedAt;
+  }
+
+
+  public AffiliateMembership canCustomize(@javax.annotation.Nonnull Boolean canCustomize) {
+    this.canCustomize = canCustomize;
+    return this;
+  }
+
+  /**
+   * True when this membership has not used its one-time code change, including while the program is inactive.
+   * @return canCustomize
+   */
+  @javax.annotation.Nonnull
+  public Boolean getCanCustomize() {
+    return canCustomize;
+  }
+
+  public void setCanCustomize(@javax.annotation.Nonnull Boolean canCustomize) {
+    this.canCustomize = canCustomize;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -264,12 +312,14 @@ public class AffiliateMembership {
         Objects.equals(this.referralCode, affiliateMembership.referralCode) &&
         Objects.equals(this.createdAt, affiliateMembership.createdAt) &&
         Objects.equals(this.programName, affiliateMembership.programName) &&
-        Objects.equals(this.isActive, affiliateMembership.isActive);
+        Objects.equals(this.isActive, affiliateMembership.isActive) &&
+        Objects.equals(this.customizedAt, affiliateMembership.customizedAt) &&
+        Objects.equals(this.canCustomize, affiliateMembership.canCustomize);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, programId, tenantId, userId, referralCode, createdAt, programName, isActive);
+    return Objects.hash(id, programId, tenantId, userId, referralCode, createdAt, programName, isActive, customizedAt, canCustomize);
   }
 
   @Override
@@ -284,6 +334,8 @@ public class AffiliateMembership {
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    programName: ").append(toIndentedString(programName)).append("\n");
     sb.append("    isActive: ").append(toIndentedString(isActive)).append("\n");
+    sb.append("    customizedAt: ").append(toIndentedString(customizedAt)).append("\n");
+    sb.append("    canCustomize: ").append(toIndentedString(canCustomize)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -302,10 +354,10 @@ public class AffiliateMembership {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "program_id", "tenant_id", "user_id", "referral_code", "created_at", "program_name", "is_active"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "program_id", "tenant_id", "user_id", "referral_code", "created_at", "program_name", "is_active", "customized_at", "can_customize"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "program_id", "tenant_id", "user_id", "referral_code", "created_at", "program_name", "is_active"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "program_id", "tenant_id", "user_id", "referral_code", "created_at", "program_name", "is_active", "customized_at", "can_customize"));
   }
 
   /**

@@ -87,4 +87,12 @@ public class AffiliateReferrerTest {
         // TODO: test createdAt
     }
 
+    /**
+     * Test the property 'customizedAt'
+     */
+    @Test
+    public void customizedAtTest() {
+        // TODO: test customizedAt
+    }
+
 }

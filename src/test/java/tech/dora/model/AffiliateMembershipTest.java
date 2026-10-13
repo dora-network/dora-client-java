@@ -103,4 +103,20 @@ public class AffiliateMembershipTest {
         // TODO: test isActive
     }
 
+    /**
+     * Test the property 'customizedAt'
+     */
+    @Test
+    public void customizedAtTest() {
+        // TODO: test customizedAt
+    }
+
+    /**
+     * Test the property 'canCustomize'
+     */
+    @Test
+    public void canCustomizeTest() {
+        // TODO: test canCustomize
+    }
+
 }

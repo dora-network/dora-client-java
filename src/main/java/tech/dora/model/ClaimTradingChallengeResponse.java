@@ -20,6 +20,8 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.net.URI;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -49,7 +51,7 @@ import tech.dora.JSON;
 /**
  * ClaimTradingChallengeResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-18T18:29:04.763912996+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class ClaimTradingChallengeResponse {
   public static final String SERIALIZED_NAME_TRADING_CHALLENGE_ID = "trading_challenge_id";
   @SerializedName(SERIALIZED_NAME_TRADING_CHALLENGE_ID)
@@ -65,6 +67,21 @@ public class ClaimTradingChallengeResponse {
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nonnull
   private String status;
+
+  public static final String SERIALIZED_NAME_REWARD_AMOUNT = "reward_amount";
+  @SerializedName(SERIALIZED_NAME_REWARD_AMOUNT)
+  @javax.annotation.Nullable
+  private String rewardAmount;
+
+  public static final String SERIALIZED_NAME_KYC_URL = "kyc_url";
+  @SerializedName(SERIALIZED_NAME_KYC_URL)
+  @javax.annotation.Nullable
+  private URI kycUrl;
+
+  public static final String SERIALIZED_NAME_REWARD_DEADLINE_AT = "reward_deadline_at";
+  @SerializedName(SERIALIZED_NAME_REWARD_DEADLINE_AT)
+  @javax.annotation.Nullable
+  private OffsetDateTime rewardDeadlineAt;
 
   public ClaimTradingChallengeResponse() {
   }
@@ -126,6 +143,63 @@ public class ClaimTradingChallengeResponse {
   }
 
 
+  public ClaimTradingChallengeResponse rewardAmount(@javax.annotation.Nullable String rewardAmount) {
+    this.rewardAmount = rewardAmount;
+    return this;
+  }
+
+  /**
+   * Fixed QR reward, present for REWARD_PENDING_KYC.
+   * @return rewardAmount
+   */
+  @javax.annotation.Nullable
+  public String getRewardAmount() {
+    return rewardAmount;
+  }
+
+  public void setRewardAmount(@javax.annotation.Nullable String rewardAmount) {
+    this.rewardAmount = rewardAmount;
+  }
+
+
+  public ClaimTradingChallengeResponse kycUrl(@javax.annotation.Nullable URI kycUrl) {
+    this.kycUrl = kycUrl;
+    return this;
+  }
+
+  /**
+   * Get kycUrl
+   * @return kycUrl
+   */
+  @javax.annotation.Nullable
+  public URI getKycUrl() {
+    return kycUrl;
+  }
+
+  public void setKycUrl(@javax.annotation.Nullable URI kycUrl) {
+    this.kycUrl = kycUrl;
+  }
+
+
+  public ClaimTradingChallengeResponse rewardDeadlineAt(@javax.annotation.Nullable OffsetDateTime rewardDeadlineAt) {
+    this.rewardDeadlineAt = rewardDeadlineAt;
+    return this;
+  }
+
+  /**
+   * Get rewardDeadlineAt
+   * @return rewardDeadlineAt
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getRewardDeadlineAt() {
+    return rewardDeadlineAt;
+  }
+
+  public void setRewardDeadlineAt(@javax.annotation.Nullable OffsetDateTime rewardDeadlineAt) {
+    this.rewardDeadlineAt = rewardDeadlineAt;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -138,12 +212,15 @@ public class ClaimTradingChallengeResponse {
     ClaimTradingChallengeResponse claimTradingChallengeResponse = (ClaimTradingChallengeResponse) o;
     return Objects.equals(this.tradingChallengeId, claimTradingChallengeResponse.tradingChallengeId) &&
         Objects.equals(this.userId, claimTradingChallengeResponse.userId) &&
-        Objects.equals(this.status, claimTradingChallengeResponse.status);
+        Objects.equals(this.status, claimTradingChallengeResponse.status) &&
+        Objects.equals(this.rewardAmount, claimTradingChallengeResponse.rewardAmount) &&
+        Objects.equals(this.kycUrl, claimTradingChallengeResponse.kycUrl) &&
+        Objects.equals(this.rewardDeadlineAt, claimTradingChallengeResponse.rewardDeadlineAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(tradingChallengeId, userId, status);
+    return Objects.hash(tradingChallengeId, userId, status, rewardAmount, kycUrl, rewardDeadlineAt);
   }
 
   @Override
@@ -153,6 +230,9 @@ public class ClaimTradingChallengeResponse {
     sb.append("    tradingChallengeId: ").append(toIndentedString(tradingChallengeId)).append("\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    rewardAmount: ").append(toIndentedString(rewardAmount)).append("\n");
+    sb.append("    kycUrl: ").append(toIndentedString(kycUrl)).append("\n");
+    sb.append("    rewardDeadlineAt: ").append(toIndentedString(rewardDeadlineAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -171,7 +251,7 @@ public class ClaimTradingChallengeResponse {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("trading_challenge_id", "user_id", "status"));
+    openapiFields = new HashSet<String>(Arrays.asList("trading_challenge_id", "user_id", "status", "reward_amount", "kyc_url", "reward_deadline_at"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("trading_challenge_id", "user_id", "status"));
@@ -213,6 +293,12 @@ public class ClaimTradingChallengeResponse {
       }
       if (!jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
+      }
+      if ((jsonObj.get("reward_amount") != null && !jsonObj.get("reward_amount").isJsonNull()) && !jsonObj.get("reward_amount").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `reward_amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("reward_amount").toString()));
+      }
+      if ((jsonObj.get("kyc_url") != null && !jsonObj.get("kyc_url").isJsonNull()) && !jsonObj.get("kyc_url").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `kyc_url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("kyc_url").toString()));
       }
   }
 

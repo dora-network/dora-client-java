@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.UUID;
 import tech.dora.model.CountryCode;
 import tech.dora.model.UserRole;
+import tech.dora.model.UsersTag;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -54,7 +55,7 @@ import tech.dora.JSON;
 /**
  * User
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-18T18:29:04.763912996+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class User {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -156,6 +157,11 @@ public class User {
   @javax.annotation.Nonnull
   private String tenantId;
 
+  public static final String SERIALIZED_NAME_USED_REFERRAL_CODE = "used_referral_code";
+  @SerializedName(SERIALIZED_NAME_USED_REFERRAL_CODE)
+  @javax.annotation.Nonnull
+  private String usedReferralCode;
+
   public static final String SERIALIZED_NAME_ALLOW_EMAIL_NOTIFICATIONS = "allow_email_notifications";
   @SerializedName(SERIALIZED_NAME_ALLOW_EMAIL_NOTIFICATIONS)
   @javax.annotation.Nonnull
@@ -185,6 +191,11 @@ public class User {
   @SerializedName(SERIALIZED_NAME_KYC_COMPLETED_AT)
   @javax.annotation.Nullable
   private OffsetDateTime kycCompletedAt;
+
+  public static final String SERIALIZED_NAME_TAG = "tag";
+  @SerializedName(SERIALIZED_NAME_TAG)
+  @javax.annotation.Nullable
+  private List<UsersTag> tag = new ArrayList<>();
 
   public User() {
   }
@@ -585,6 +596,25 @@ public class User {
   }
 
 
+  public User usedReferralCode(@javax.annotation.Nonnull String usedReferralCode) {
+    this.usedReferralCode = usedReferralCode;
+    return this;
+  }
+
+  /**
+   * Exact affiliate code this user applied at signup or later. Empty when no code has been applied; distinct from codes the user owns.
+   * @return usedReferralCode
+   */
+  @javax.annotation.Nonnull
+  public String getUsedReferralCode() {
+    return usedReferralCode;
+  }
+
+  public void setUsedReferralCode(@javax.annotation.Nonnull String usedReferralCode) {
+    this.usedReferralCode = usedReferralCode;
+  }
+
+
   public User allowEmailNotifications(@javax.annotation.Nonnull Boolean allowEmailNotifications) {
     this.allowEmailNotifications = allowEmailNotifications;
     return this;
@@ -699,6 +729,33 @@ public class User {
   }
 
 
+  public User tag(@javax.annotation.Nullable List<UsersTag> tag) {
+    this.tag = tag;
+    return this;
+  }
+
+  public User addTagItem(UsersTag tagItem) {
+    if (this.tag == null) {
+      this.tag = new ArrayList<>();
+    }
+    this.tag.add(tagItem);
+    return this;
+  }
+
+  /**
+   * Tags assigned to the user by an admin. Set via PUT /v1/users/{user_id}/tag.
+   * @return tag
+   */
+  @javax.annotation.Nullable
+  public List<UsersTag> getTag() {
+    return tag;
+  }
+
+  public void setTag(@javax.annotation.Nullable List<UsersTag> tag) {
+    this.tag = tag;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -729,17 +786,19 @@ public class User {
         Objects.equals(this.showTutorialCards, user.showTutorialCards) &&
         Objects.equals(this.notificationsEnabled, user.notificationsEnabled) &&
         Objects.equals(this.tenantId, user.tenantId) &&
+        Objects.equals(this.usedReferralCode, user.usedReferralCode) &&
         Objects.equals(this.allowEmailNotifications, user.allowEmailNotifications) &&
         Objects.equals(this.allowLiquidationsNotifications, user.allowLiquidationsNotifications) &&
         Objects.equals(this.allowDepositWithdrawalNotifications, user.allowDepositWithdrawalNotifications) &&
         Objects.equals(this.allowOrdersNotifications, user.allowOrdersNotifications) &&
         Objects.equals(this.allowCopyTrading, user.allowCopyTrading) &&
-        Objects.equals(this.kycCompletedAt, user.kycCompletedAt);
+        Objects.equals(this.kycCompletedAt, user.kycCompletedAt) &&
+        Objects.equals(this.tag, user.tag);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, closedAt, disabledAt, email, firstName, lastName, userName, countryOfDomicile, nativeAssetId, photoUrl, provider, providerId, roles, managedCompetitionIds, timezone, timezoneOffset, verifiedAt, showTutorialCards, notificationsEnabled, tenantId, allowEmailNotifications, allowLiquidationsNotifications, allowDepositWithdrawalNotifications, allowOrdersNotifications, allowCopyTrading, kycCompletedAt);
+    return Objects.hash(id, closedAt, disabledAt, email, firstName, lastName, userName, countryOfDomicile, nativeAssetId, photoUrl, provider, providerId, roles, managedCompetitionIds, timezone, timezoneOffset, verifiedAt, showTutorialCards, notificationsEnabled, tenantId, usedReferralCode, allowEmailNotifications, allowLiquidationsNotifications, allowDepositWithdrawalNotifications, allowOrdersNotifications, allowCopyTrading, kycCompletedAt, tag);
   }
 
   @Override
@@ -766,12 +825,14 @@ public class User {
     sb.append("    showTutorialCards: ").append(toIndentedString(showTutorialCards)).append("\n");
     sb.append("    notificationsEnabled: ").append(toIndentedString(notificationsEnabled)).append("\n");
     sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
+    sb.append("    usedReferralCode: ").append(toIndentedString(usedReferralCode)).append("\n");
     sb.append("    allowEmailNotifications: ").append(toIndentedString(allowEmailNotifications)).append("\n");
     sb.append("    allowLiquidationsNotifications: ").append(toIndentedString(allowLiquidationsNotifications)).append("\n");
     sb.append("    allowDepositWithdrawalNotifications: ").append(toIndentedString(allowDepositWithdrawalNotifications)).append("\n");
     sb.append("    allowOrdersNotifications: ").append(toIndentedString(allowOrdersNotifications)).append("\n");
     sb.append("    allowCopyTrading: ").append(toIndentedString(allowCopyTrading)).append("\n");
     sb.append("    kycCompletedAt: ").append(toIndentedString(kycCompletedAt)).append("\n");
+    sb.append("    tag: ").append(toIndentedString(tag)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -790,10 +851,10 @@ public class User {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "closed_at", "disabled_at", "email", "first_name", "last_name", "user_name", "country_of_domicile", "native_asset_id", "photo_url", "provider", "provider_id", "roles", "managed_competition_ids", "timezone", "timezone_offset", "verified_at", "show_tutorial_cards", "notifications_enabled", "tenant_id", "allow_email_notifications", "allow_liquidations_notifications", "allow_deposit_withdrawal_notifications", "allow_orders_notifications", "allow_copy_trading", "kyc_completed_at"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "closed_at", "disabled_at", "email", "first_name", "last_name", "user_name", "country_of_domicile", "native_asset_id", "photo_url", "provider", "provider_id", "roles", "managed_competition_ids", "timezone", "timezone_offset", "verified_at", "show_tutorial_cards", "notifications_enabled", "tenant_id", "used_referral_code", "allow_email_notifications", "allow_liquidations_notifications", "allow_deposit_withdrawal_notifications", "allow_orders_notifications", "allow_copy_trading", "kyc_completed_at", "tag"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "email", "first_name", "last_name", "user_name", "country_of_domicile", "native_asset_id", "roles", "show_tutorial_cards", "notifications_enabled", "tenant_id", "allow_email_notifications", "allow_liquidations_notifications", "allow_deposit_withdrawal_notifications", "allow_orders_notifications", "allow_copy_trading"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "email", "first_name", "last_name", "user_name", "country_of_domicile", "native_asset_id", "roles", "show_tutorial_cards", "notifications_enabled", "tenant_id", "used_referral_code", "allow_email_notifications", "allow_liquidations_notifications", "allow_deposit_withdrawal_notifications", "allow_orders_notifications", "allow_copy_trading"));
   }
 
   /**
@@ -868,6 +929,13 @@ public class User {
       }
       if (!jsonObj.get("tenant_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tenant_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tenant_id").toString()));
+      }
+      if (!jsonObj.get("used_referral_code").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `used_referral_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("used_referral_code").toString()));
+      }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("tag") != null && !jsonObj.get("tag").isJsonNull() && !jsonObj.get("tag").isJsonArray()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tag` to be an array in the JSON string but got `%s`", jsonObj.get("tag").toString()));
       }
   }
 

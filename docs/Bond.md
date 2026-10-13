@@ -20,6 +20,7 @@
 |**issuedAt** | **OffsetDateTime** |  |  |
 |**issuer** | **String** |  |  |
 |**maturityAt** | **OffsetDateTime** |  |  |
+|**tenor** | **BigDecimal** | Years until maturity from the current date (negative for matured bonds) |  |
 |**principalValue** | **String** |  |  |
 |**paymentsPerYear** | **Integer** |  |  |
 |**paymentsEvery** | **Long** | Coupon payment frequency in nanoseconds (minimum 1000 i.e. 1 microsecond) |  [optional] |

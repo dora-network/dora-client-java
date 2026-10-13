@@ -20,6 +20,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.UUID;
@@ -54,7 +55,7 @@ import tech.dora.JSON;
 /**
  * Bond
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-18T18:29:04.763912996+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class Bond {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -120,6 +121,11 @@ public class Bond {
   @SerializedName(SERIALIZED_NAME_MATURITY_AT)
   @javax.annotation.Nonnull
   private OffsetDateTime maturityAt;
+
+  public static final String SERIALIZED_NAME_TENOR = "tenor";
+  @SerializedName(SERIALIZED_NAME_TENOR)
+  @javax.annotation.Nonnull
+  private BigDecimal tenor;
 
   public static final String SERIALIZED_NAME_PRINCIPAL_VALUE = "principal_value";
   @SerializedName(SERIALIZED_NAME_PRINCIPAL_VALUE)
@@ -391,6 +397,25 @@ public class Bond {
   }
 
 
+  public Bond tenor(@javax.annotation.Nonnull BigDecimal tenor) {
+    this.tenor = tenor;
+    return this;
+  }
+
+  /**
+   * Years until maturity from the current date (negative for matured bonds)
+   * @return tenor
+   */
+  @javax.annotation.Nonnull
+  public BigDecimal getTenor() {
+    return tenor;
+  }
+
+  public void setTenor(@javax.annotation.Nonnull BigDecimal tenor) {
+    this.tenor = tenor;
+  }
+
+
   public Bond principalValue(@javax.annotation.Nonnull String principalValue) {
     this.principalValue = principalValue;
     return this;
@@ -492,6 +517,7 @@ public class Bond {
         Objects.equals(this.issuedAt, bond.issuedAt) &&
         Objects.equals(this.issuer, bond.issuer) &&
         Objects.equals(this.maturityAt, bond.maturityAt) &&
+        Objects.equals(this.tenor, bond.tenor) &&
         Objects.equals(this.principalValue, bond.principalValue) &&
         Objects.equals(this.paymentsPerYear, bond.paymentsPerYear) &&
         Objects.equals(this.paymentsEvery, bond.paymentsEvery) &&
@@ -500,7 +526,7 @@ public class Bond {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, kind, couponKind, bondKind, bondRunStatus, creditRating, couponStartAt, createdAt, finalCouponAt, isin, issuedAt, issuer, maturityAt, principalValue, paymentsPerYear, paymentsEvery, nextCouponPayment);
+    return Objects.hash(id, kind, couponKind, bondKind, bondRunStatus, creditRating, couponStartAt, createdAt, finalCouponAt, isin, issuedAt, issuer, maturityAt, tenor, principalValue, paymentsPerYear, paymentsEvery, nextCouponPayment);
   }
 
   @Override
@@ -520,6 +546,7 @@ public class Bond {
     sb.append("    issuedAt: ").append(toIndentedString(issuedAt)).append("\n");
     sb.append("    issuer: ").append(toIndentedString(issuer)).append("\n");
     sb.append("    maturityAt: ").append(toIndentedString(maturityAt)).append("\n");
+    sb.append("    tenor: ").append(toIndentedString(tenor)).append("\n");
     sb.append("    principalValue: ").append(toIndentedString(principalValue)).append("\n");
     sb.append("    paymentsPerYear: ").append(toIndentedString(paymentsPerYear)).append("\n");
     sb.append("    paymentsEvery: ").append(toIndentedString(paymentsEvery)).append("\n");
@@ -542,10 +569,10 @@ public class Bond {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "kind", "coupon_kind", "bond_kind", "bond_run_status", "credit_rating", "coupon_start_at", "created_at", "final_coupon_at", "isin", "issued_at", "issuer", "maturity_at", "principal_value", "payments_per_year", "payments_every", "next_coupon_payment"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "kind", "coupon_kind", "bond_kind", "bond_run_status", "credit_rating", "coupon_start_at", "created_at", "final_coupon_at", "isin", "issued_at", "issuer", "maturity_at", "tenor", "principal_value", "payments_per_year", "payments_every", "next_coupon_payment"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "kind", "created_at", "isin", "issued_at", "issuer", "maturity_at", "principal_value", "payments_per_year"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "kind", "created_at", "isin", "issued_at", "issuer", "maturity_at", "tenor", "principal_value", "payments_per_year"));
   }
 
   /**

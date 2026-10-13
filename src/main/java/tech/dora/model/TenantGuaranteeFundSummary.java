@@ -50,7 +50,7 @@ import tech.dora.JSON;
 /**
  * TenantGuaranteeFundSummary
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-18T18:29:04.763912996+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class TenantGuaranteeFundSummary {
   public static final String SERIALIZED_NAME_TOTALS_BY_TX_KIND = "totals_by_tx_kind";
   @SerializedName(SERIALIZED_NAME_TOTALS_BY_TX_KIND)

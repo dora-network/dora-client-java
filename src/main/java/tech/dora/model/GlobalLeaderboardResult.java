@@ -47,10 +47,10 @@ import java.util.Set;
 import tech.dora.JSON;
 
 /**
- * TradingChallengeAllResult
+ * GlobalLeaderboardResult
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-18T18:29:04.763912996+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
-public class TradingChallengeAllResult {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+public class GlobalLeaderboardResult {
   public static final String SERIALIZED_NAME_USER_ID = "user_id";
   @SerializedName(SERIALIZED_NAME_USER_ID)
   @javax.annotation.Nullable
@@ -91,10 +91,10 @@ public class TradingChallengeAllResult {
   @javax.annotation.Nullable
   private String pnlPct;
 
-  public TradingChallengeAllResult() {
+  public GlobalLeaderboardResult() {
   }
 
-  public TradingChallengeAllResult userId(@javax.annotation.Nullable UUID userId) {
+  public GlobalLeaderboardResult userId(@javax.annotation.Nullable UUID userId) {
     this.userId = userId;
     return this;
   }
@@ -113,7 +113,7 @@ public class TradingChallengeAllResult {
   }
 
 
-  public TradingChallengeAllResult userName(@javax.annotation.Nullable String userName) {
+  public GlobalLeaderboardResult userName(@javax.annotation.Nullable String userName) {
     this.userName = userName;
     return this;
   }
@@ -132,7 +132,7 @@ public class TradingChallengeAllResult {
   }
 
 
-  public TradingChallengeAllResult cumVolume(@javax.annotation.Nullable String cumVolume) {
+  public GlobalLeaderboardResult cumVolume(@javax.annotation.Nullable String cumVolume) {
     this.cumVolume = cumVolume;
     return this;
   }
@@ -151,7 +151,7 @@ public class TradingChallengeAllResult {
   }
 
 
-  public TradingChallengeAllResult cumPnl(@javax.annotation.Nullable String cumPnl) {
+  public GlobalLeaderboardResult cumPnl(@javax.annotation.Nullable String cumPnl) {
     this.cumPnl = cumPnl;
     return this;
   }
@@ -170,7 +170,7 @@ public class TradingChallengeAllResult {
   }
 
 
-  public TradingChallengeAllResult activeDays(@javax.annotation.Nullable Integer activeDays) {
+  public GlobalLeaderboardResult activeDays(@javax.annotation.Nullable Integer activeDays) {
     this.activeDays = activeDays;
     return this;
   }
@@ -189,7 +189,7 @@ public class TradingChallengeAllResult {
   }
 
 
-  public TradingChallengeAllResult cumTrades(@javax.annotation.Nullable Integer cumTrades) {
+  public GlobalLeaderboardResult cumTrades(@javax.annotation.Nullable Integer cumTrades) {
     this.cumTrades = cumTrades;
     return this;
   }
@@ -208,7 +208,7 @@ public class TradingChallengeAllResult {
   }
 
 
-  public TradingChallengeAllResult accountValue(@javax.annotation.Nullable String accountValue) {
+  public GlobalLeaderboardResult accountValue(@javax.annotation.Nullable String accountValue) {
     this.accountValue = accountValue;
     return this;
   }
@@ -227,13 +227,13 @@ public class TradingChallengeAllResult {
   }
 
 
-  public TradingChallengeAllResult pnlPct(@javax.annotation.Nullable String pnlPct) {
+  public GlobalLeaderboardResult pnlPct(@javax.annotation.Nullable String pnlPct) {
     this.pnlPct = pnlPct;
     return this;
   }
 
   /**
-   * Get pnlPct
+   * Cumulative pnl as a percentage of total TRADING_CHALLENGE_DEPOSIT and EXTERNAL_DEPOSIT quantities.
    * @return pnlPct
    */
   @javax.annotation.Nullable
@@ -255,15 +255,15 @@ public class TradingChallengeAllResult {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    TradingChallengeAllResult tradingChallengeAllResult = (TradingChallengeAllResult) o;
-    return Objects.equals(this.userId, tradingChallengeAllResult.userId) &&
-        Objects.equals(this.userName, tradingChallengeAllResult.userName) &&
-        Objects.equals(this.cumVolume, tradingChallengeAllResult.cumVolume) &&
-        Objects.equals(this.cumPnl, tradingChallengeAllResult.cumPnl) &&
-        Objects.equals(this.activeDays, tradingChallengeAllResult.activeDays) &&
-        Objects.equals(this.cumTrades, tradingChallengeAllResult.cumTrades) &&
-        Objects.equals(this.accountValue, tradingChallengeAllResult.accountValue) &&
-        Objects.equals(this.pnlPct, tradingChallengeAllResult.pnlPct);
+    GlobalLeaderboardResult globalLeaderboardResult = (GlobalLeaderboardResult) o;
+    return Objects.equals(this.userId, globalLeaderboardResult.userId) &&
+        Objects.equals(this.userName, globalLeaderboardResult.userName) &&
+        Objects.equals(this.cumVolume, globalLeaderboardResult.cumVolume) &&
+        Objects.equals(this.cumPnl, globalLeaderboardResult.cumPnl) &&
+        Objects.equals(this.activeDays, globalLeaderboardResult.activeDays) &&
+        Objects.equals(this.cumTrades, globalLeaderboardResult.cumTrades) &&
+        Objects.equals(this.accountValue, globalLeaderboardResult.accountValue) &&
+        Objects.equals(this.pnlPct, globalLeaderboardResult.pnlPct);
   }
 
   @Override
@@ -274,7 +274,7 @@ public class TradingChallengeAllResult {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class TradingChallengeAllResult {\n");
+    sb.append("class GlobalLeaderboardResult {\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    userName: ").append(toIndentedString(userName)).append("\n");
     sb.append("    cumVolume: ").append(toIndentedString(cumVolume)).append("\n");
@@ -311,20 +311,20 @@ public class TradingChallengeAllResult {
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to TradingChallengeAllResult
+   * @throws IOException if the JSON Element is invalid with respect to GlobalLeaderboardResult
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!TradingChallengeAllResult.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in TradingChallengeAllResult is not found in the empty JSON string", TradingChallengeAllResult.openapiRequiredFields.toString()));
+        if (!GlobalLeaderboardResult.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in GlobalLeaderboardResult is not found in the empty JSON string", GlobalLeaderboardResult.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!TradingChallengeAllResult.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `TradingChallengeAllResult` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!GlobalLeaderboardResult.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `GlobalLeaderboardResult` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -352,22 +352,22 @@ public class TradingChallengeAllResult {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!TradingChallengeAllResult.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'TradingChallengeAllResult' and its subtypes
+       if (!GlobalLeaderboardResult.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'GlobalLeaderboardResult' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<TradingChallengeAllResult> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(TradingChallengeAllResult.class));
+       final TypeAdapter<GlobalLeaderboardResult> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(GlobalLeaderboardResult.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<TradingChallengeAllResult>() {
+       return (TypeAdapter<T>) new TypeAdapter<GlobalLeaderboardResult>() {
            @Override
-           public void write(JsonWriter out, TradingChallengeAllResult value) throws IOException {
+           public void write(JsonWriter out, GlobalLeaderboardResult value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public TradingChallengeAllResult read(JsonReader in) throws IOException {
+           public GlobalLeaderboardResult read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -378,18 +378,18 @@ public class TradingChallengeAllResult {
   }
 
   /**
-   * Create an instance of TradingChallengeAllResult given an JSON string
+   * Create an instance of GlobalLeaderboardResult given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of TradingChallengeAllResult
-   * @throws IOException if the JSON string is invalid with respect to TradingChallengeAllResult
+   * @return An instance of GlobalLeaderboardResult
+   * @throws IOException if the JSON string is invalid with respect to GlobalLeaderboardResult
    */
-  public static TradingChallengeAllResult fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, TradingChallengeAllResult.class);
+  public static GlobalLeaderboardResult fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, GlobalLeaderboardResult.class);
   }
 
   /**
-   * Convert an instance of TradingChallengeAllResult to an JSON string
+   * Convert an instance of GlobalLeaderboardResult to an JSON string
    *
    * @return JSON string
    */

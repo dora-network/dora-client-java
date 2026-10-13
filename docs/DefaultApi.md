@@ -11,9 +11,11 @@ All URIs are relative to *https://staging.dora.co*
 | [**cancelAllOpenOrders**](DefaultApi.md#cancelAllOpenOrders) | **DELETE** /v1/orders | Cancel all open orders, if user passes orderbook or account_id on query params it will cancel all orders on specific orderbook or account, admin can cancel user&#39;s orders on specific orderbook |
 | [**cancelLedgerWithdrawRequest**](DefaultApi.md#cancelLedgerWithdrawRequest) | **POST** /v1/ledger/withdraw/requests/{withdrawal_id}/cancel | Cancel a pending withdrawal request |
 | [**cancelOrderById**](DefaultApi.md#cancelOrderById) | **DELETE** /v1/orders/{order_id} | Cancel an order by ID |
+| [**cancelWithdrawal**](DefaultApi.md#cancelWithdrawal) | **DELETE** /v1/web3/withdrawals/{withdrawal_id} | Cancel the caller&#39;s own USDC withdrawal |
 | [**claimLeverageGetAccruedInterest**](DefaultApi.md#claimLeverageGetAccruedInterest) | **POST** /v1/leverage/accrued_interest/claim | Claim current accrued leverage interest for a specific user |
 | [**claimPromoLink**](DefaultApi.md#claimPromoLink) | **POST** /v1/promo/claim/{token} | Claim a public QR promotion link |
 | [**claimTradingChallengePrize**](DefaultApi.md#claimTradingChallengePrize) | **POST** /v1/trading_challenges/{trading_challenge_id}/claim | Claim challenge prize |
+| [**closeAllIsolatedPositions**](DefaultApi.md#closeAllIsolatedPositions) | **POST** /v1/positions/close/all | Close all open isolated positions in one request |
 | [**closeIsolatedAccountV2**](DefaultApi.md#closeIsolatedAccountV2) | **POST** /v2/accounts/close | Close an isolated account, repaying the borrowed |
 | [**closeIsolatedPosition**](DefaultApi.md#closeIsolatedPosition) | **POST** /v1/positions/close | Close isolated positions, repaying the borrowed |
 | [**createAPIKeyForUser**](DefaultApi.md#createAPIKeyForUser) | **POST** /v1/user/apikey | Create apikey for a user |
@@ -24,6 +26,7 @@ All URIs are relative to *https://staging.dora.co*
 | [**createTradingChallenge**](DefaultApi.md#createTradingChallenge) | **POST** /v1/trading_challenges | Create a trading challenge |
 | [**createUser**](DefaultApi.md#createUser) | **POST** /v1/integrators/user | Create a new user |
 | [**createWithdrawal**](DefaultApi.md#createWithdrawal) | **POST** /v1/web3/withdrawals | Create a USDC withdrawal request |
+| [**customizeAffiliateReferrerCode**](DefaultApi.md#customizeAffiliateReferrerCode) | **PUT** /v1/affiliate_referrers/{referrer_id}/code | Change an affiliate referral code |
 | [**deleteUser**](DefaultApi.md#deleteUser) | **DELETE** /v1/user/{user_id} | Delete user by ID |
 | [**exportPromoLinksCSV**](DefaultApi.md#exportPromoLinksCSV) | **GET** /v1/link_batches/{batch_id}/links.csv | Export promotional links as CSV |
 | [**getAPIKeysForUserID**](DefaultApi.md#getAPIKeysForUserID) | **GET** /v1/user/{user_id}/apikey | Get user&#39;s api keys: admin or integrator only |
@@ -36,12 +39,14 @@ All URIs are relative to *https://staging.dora.co*
 | [**getAssetYTMById**](DefaultApi.md#getAssetYTMById) | **GET** /v1/assets/{asset_id}/ytm | Get annualized yield to maturity for a bond asset |
 | [**getAssetYieldData**](DefaultApi.md#getAssetYieldData) | **GET** /v1/charts/{asset_id}/yield | Get yield chart data for an asset |
 | [**getAssetsStream**](DefaultApi.md#getAssetsStream) | **GET** /v1/assets/stream | Get all inserts or updates for assets |
+| [**getAutoRebalanceAccountStatusV2**](DefaultApi.md#getAutoRebalanceAccountStatusV2) | **GET** /v2/accounts/auto_rebalance/config/{account_id} | Get auto-rebalance configuration and live status for one isolated account |
 | [**getCandleData**](DefaultApi.md#getCandleData) | **GET** /v1/charts/{order_book_id}/candle | Get candlestick data for an orderbook |
 | [**getCashReserveByUserID**](DefaultApi.md#getCashReserveByUserID) | **GET** /v1/accounts/{user_id}/cash_reserve | Get the minimum USD cash reserve requirement for the given user |
 | [**getCashReserveSelf**](DefaultApi.md#getCashReserveSelf) | **GET** /v1/accounts/self/cash_reserve | Get the minimum USD cash reserve requirement for the logged in user |
 | [**getCopyTraders**](DefaultApi.md#getCopyTraders) | **GET** /v1/user/copy_traders | Get list of users with copy trading enabled |
 | [**getCouponPaymentsByAssetId**](DefaultApi.md#getCouponPaymentsByAssetId) | **GET** /v1/assets/{asset_id}/coupon_payments | Get coupon payments for a bond asset |
 | [**getDepositInstructions**](DefaultApi.md#getDepositInstructions) | **GET** /v1/web3/deposit-instructions | Get per-chain instructions for depositing USDC into the Dora vault |
+| [**getGlobalLeaderboard**](DefaultApi.md#getGlobalLeaderboard) | **GET** /v1/trading/global_leaderboard | Get global leaderboard |
 | [**getL1Depth**](DefaultApi.md#getL1Depth) | **GET** /v1/orderbooks/{order_book_id}/L1 | Get the top price levels for a specific orderbook (L1 market depth) |
 | [**getL2Depth**](DefaultApi.md#getL2Depth) | **GET** /v1/orderbooks/{order_book_id}/L2 | Get the aggregated price levels for a specific orderbook (L2 market depth) |
 | [**getL3Depth**](DefaultApi.md#getL3Depth) | **GET** /v1/orderbooks/{order_book_id}/L3 | Get all open orders for a specific orderbook (L3 market depth) |
@@ -65,11 +70,11 @@ All URIs are relative to *https://staging.dora.co*
 | [**getPLForSelfByAccount**](DefaultApi.md#getPLForSelfByAccount) | **GET** /v1/pl/self | Get account-by-account PL breakdown for the logged in user |
 | [**getPoolPrice**](DefaultApi.md#getPoolPrice) | **GET** /v1/price/pool/{pool_id} | Get the current price of a pool |
 | [**getPromoAttribution**](DefaultApi.md#getPromoAttribution) | **GET** /v1/trading_challenges/{trading_challenge_id}/attribution | Get promotional source attribution |
+| [**getQRRewardPreview**](DefaultApi.md#getQRRewardPreview) | **GET** /v1/trading_challenges/{trading_challenge_id}/reward | Preview QR reward eligibility |
 | [**getRealizedPnlSettlements**](DefaultApi.md#getRealizedPnlSettlements) | **GET** /v1/realized_pnl_settlements | Get realized P&amp;L settlements with filters |
 | [**getTopTradersByPnL**](DefaultApi.md#getTopTradersByPnL) | **GET** /v1/user/ranking | Get top traders by PnL |
 | [**getTradeById**](DefaultApi.md#getTradeById) | **GET** /v1/trades/{trade_id} | Get a trade by ID |
 | [**getTrades**](DefaultApi.md#getTrades) | **GET** /v1/trades | Get a filtered, paginated list of trades |
-| [**getTradingChallengeAllResults**](DefaultApi.md#getTradingChallengeAllResults) | **GET** /v1/trading_challenges/all/results | Get combined results across all trading challenge |
 | [**getTradingChallengeByID**](DefaultApi.md#getTradingChallengeByID) | **GET** /v1/trading_challenges/{trading_challenge_id} | Get trading challenge by ID |
 | [**getTradingChallengeDailySnapshots**](DefaultApi.md#getTradingChallengeDailySnapshots) | **GET** /v1/trading_challenges/{trading_challenge_id}/daily_snapshots | Get trading challenge daily snapshots |
 | [**getTradingChallengeResults**](DefaultApi.md#getTradingChallengeResults) | **GET** /v1/trading_challenges/{trading_challenge_id}/results | Get trading challenge results |
@@ -110,6 +115,8 @@ All URIs are relative to *https://staging.dora.co*
 | [**listAffiliateReferrals**](DefaultApi.md#listAffiliateReferrals) | **GET** /v1/affiliate_programs/{program_id}/referrals | List referred users and activity |
 | [**listAffiliateReferrers**](DefaultApi.md#listAffiliateReferrers) | **GET** /v1/affiliate_programs/{program_id}/referrers | List program referrers |
 | [**listAssets**](DefaultApi.md#listAssets) | **GET** /v1/assets | List assets |
+| [**listAutoRebalanceConfigsV2**](DefaultApi.md#listAutoRebalanceConfigsV2) | **GET** /v2/accounts/auto_rebalance/config | List auto-rebalance configuration for the authenticated user&#39;s isolated accounts |
+| [**listAutoRebalanceStatusesV2**](DefaultApi.md#listAutoRebalanceStatusesV2) | **GET** /v2/accounts/auto_rebalance/status | List auto-rebalance status for the authenticated user&#39;s isolated accounts, including disabled configs |
 | [**listDeposits**](DefaultApi.md#listDeposits) | **GET** /v1/web3/deposits | List USDC deposits |
 | [**listOrderBooks**](DefaultApi.md#listOrderBooks) | **GET** /v1/orderbooks | List order books |
 | [**listOrders**](DefaultApi.md#listOrders) | **GET** /v1/orders | List all orders |
@@ -152,6 +159,7 @@ All URIs are relative to *https://staging.dora.co*
 | [**updateUserConfig**](DefaultApi.md#updateUserConfig) | **PUT** /v1/user/{user_id}/config | Update user configuration by ID |
 | [**updateUserConfigSelf**](DefaultApi.md#updateUserConfigSelf) | **PUT** /v1/user/config/self | Update user configuration for the authenticated user |
 | [**updateUserKYC**](DefaultApi.md#updateUserKYC) | **POST** /v1/integrators/user/{user_id}/kyc | Set or clear a user&#39;s KYC completion timestamp |
+| [**upsertAutoRebalanceConfigsV2**](DefaultApi.md#upsertAutoRebalanceConfigsV2) | **PUT** /v2/accounts/auto_rebalance/config | Create or update auto-rebalance configuration for one or more isolated accounts |
 | [**validateSubmitOrder**](DefaultApi.md#validateSubmitOrder) | **POST** /v1/orders/validate | Validate submit order request data |
 | [**verifyUser**](DefaultApi.md#verifyUser) | **PUT** /v1/user/{user_id}/verify | Verify a user by ID |
 
@@ -705,6 +713,86 @@ public class Example {
 | **404** | Order not found |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="cancelWithdrawal"></a>
+# **cancelWithdrawal**
+> WithdrawalResponseEnvelope cancelWithdrawal(withdrawalId)
+
+Cancel the caller&#39;s own USDC withdrawal
+
+Cancels the caller&#39;s own withdrawal and returns its held quantity to their available balance. Only PENDING or APPROVED_WITHOUT_FEE withdrawals can be cancelled. Restricted to users whose native asset is USDC.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID withdrawalId = UUID.randomUUID(); // UUID | The withdrawal to cancel. It must be owned by the caller and be in status PENDING or APPROVED_WITHOUT_FEE.
+    try {
+      WithdrawalResponseEnvelope result = apiInstance.cancelWithdrawal(withdrawalId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#cancelWithdrawal");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **withdrawalId** | **UUID**| The withdrawal to cancel. It must be owned by the caller and be in status PENDING or APPROVED_WITHOUT_FEE. | |
+
+### Return type
+
+[**WithdrawalResponseEnvelope**](WithdrawalResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Withdrawal cancelled; it is now REJECTED and its reservation is back in available |  -  |
+| **400** | Bad request: withdrawal_id is not a valid UUID |  -  |
+| **401** | Unauthorized, user not logged in |  -  |
+| **403** | Forbidden: access is restricted to users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied) |  -  |
+| **404** | Withdrawal not found, or it belongs to another user |  -  |
+| **409** | Conflict: the withdrawal is not PENDING or APPROVED_WITHOUT_FEE. It has either already been approved for on-chain submission (a fee is locked, or a transaction is in flight) or already finished, and in neither case can it be cancelled |  -  |
+| **429** | Too many requests: this route is rate limited per user |  -  |
+| **500** | Internal server error |  -  |
+
 <a id="claimLeverageGetAccruedInterest"></a>
 # **claimLeverageGetAccruedInterest**
 > ClaimLeverageAccruedInterestResponseEnvelope claimLeverageGetAccruedInterest(claimLeverageAccruedInterestRequest)
@@ -854,7 +942,7 @@ No authorization required
 
 Claim challenge prize
 
-Claim the prize of a challenge the caller is eligible for. A TOURNAMENT claim credits the prize matching the crown and reactivates the account. A CASH claim winds the account down, sweeps every remaining challenge credit and awards the CASH_CROWN: the account is left deactivated with a zero balance, and the reward is redeemed out of band. Both mark the participation PRIZE_CLAIMED.
+Claim an eligible trading challenge prize. TOURNAMENT requires completed KYC, credits the crown prize, reactivates the account, and marks the result PRIZE_CLAIMED. CASH requires completed KYC, winds down the account, sweeps remaining challenge credit, awards CASH_CROWN, and marks the result PRIZE_CLAIMED; the account stays deactivated with a zero balance. QR_PROMO accepts an eligible reward request before KYC, winds down the account, fixes the capped reward, queues a KYC email, and records REWARD_PENDING_KYC without paying the reward or reactivating the account.
 
 ### Example
 ```java
@@ -919,9 +1007,82 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Prize claimed |  -  |
+| **200** | Prize claimed or QR reward fixed pending KYC |  -  |
 | **403** | Forbidden |  -  |
-| **409** | Conflict |  -  |
+| **409** | Conflict, including when another funded challenge may contribute to account equity or when the reward request account lock was released; retry the request after the latter |  -  |
+| **500** | Internal server error |  -  |
+| **410** | QR reward deadline passed |  -  |
+| **504** | Wind-down timed out |  -  |
+
+<a id="closeAllIsolatedPositions"></a>
+# **closeAllIsolatedPositions**
+> CloseAllPositionsResponseEnvelope closeAllIsolatedPositions()
+
+Close all open isolated positions in one request
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      CloseAllPositionsResponseEnvelope result = apiInstance.closeAllIsolatedPositions();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#closeAllIsolatedPositions");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**CloseAllPositionsResponseEnvelope**](CloseAllPositionsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | All open isolated positions are queued for close |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this route |  -  |
+| **400** | Bad request, e.g. invalid isolated position shape |  -  |
+| **404** | Not found, e.g. an isolated position has no matching order book |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="closeIsolatedAccountV2"></a>
@@ -1604,7 +1765,7 @@ public class Example {
 
 Create a USDC withdrawal request
 
-Reserves the requested quantity against the caller&#39;s available balance (moving it to pending_withdrawal) and creates a PENDING withdrawal. No fee quote is required and no fee is reserved: the withdrawal&#39;s fee is quoted and locked later, as part of approval. Idempotent on withdrawal_id: a repeat request carrying the same to_address and quantity reserves nothing further and returns the existing withdrawal with 200. Reusing a withdrawal_id with a different to_address or quantity is a conflict (409), not a replay, and reserves nothing. Restricted to DORA tenant users whose native asset is USDC.
+Requests a USDC withdrawal, holding the quantity from the caller&#39;s available balance until it completes or is cancelled. The fee is quoted and locked after admin approval. Idempotent on withdrawal_id; only one withdrawal may be in progress at a time. Restricted to users whose native asset is USDC.
 
 ### Example
 ```java
@@ -1673,8 +1834,89 @@ public class Example {
 | **200** | Idempotent replay: a request with the same withdrawal_id, to_address and quantity; the existing withdrawal is returned unchanged |  -  |
 | **400** | Bad request, e.g. an invalid body, destination address, or quantity |  -  |
 | **401** | Unauthorized, user not logged in |  -  |
-| **403** | Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or the withdrawal would leave the caller below the minimum cash reserve. |  -  |
-| **409** | Conflict, e.g. insufficient available balance, no USD ledger account to withdraw from, an unhealthy account, overdue coupon payments, a withdrawal_id already in use by another user, or a withdrawal_id reused with a to_address or quantity that does not match the existing withdrawal |  -  |
+| **403** | Forbidden: access is restricted to users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or the withdrawal would leave the caller below the minimum cash reserve. |  -  |
+| **409** | Conflict, e.g. insufficient available balance, no USD ledger account to withdraw from, an unhealthy account, overdue coupon payments, a withdrawal_id already in use by another user, a withdrawal_id reused with a to_address or quantity that does not match the existing withdrawal, or the caller already having another withdrawal still in progress (only one at a time is allowed; the error names the withdrawal that is in the way) |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="customizeAffiliateReferrerCode"></a>
+# **customizeAffiliateReferrerCode**
+> AffiliateReferrerEnvelope customizeAffiliateReferrerCode(referrerId, customizeAffiliateReferrerCodeRequest)
+
+Change an affiliate referral code
+
+The owner of this affiliate membership may change its primary code once. ADMIN callers may change any membership&#39;s code repeatedly across tenants. Admin changes preserve the owner&#39;s remaining one-time change. Changes are allowed while the program is inactive. Its initial code, whether generated or chosen by an admin, does not count as the change. Previous codes remain aliases and cannot be reused; codes resolve only while the program is active. Codes are unique across all programs and tenants, including for admins.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID referrerId = UUID.randomUUID(); // UUID | 
+    CustomizeAffiliateReferrerCodeRequest customizeAffiliateReferrerCodeRequest = new CustomizeAffiliateReferrerCodeRequest(); // CustomizeAffiliateReferrerCodeRequest | 
+    try {
+      AffiliateReferrerEnvelope result = apiInstance.customizeAffiliateReferrerCode(referrerId, customizeAffiliateReferrerCodeRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#customizeAffiliateReferrerCode");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **referrerId** | **UUID**|  | |
+| **customizeAffiliateReferrerCodeRequest** | [**CustomizeAffiliateReferrerCodeRequest**](CustomizeAffiliateReferrerCodeRequest.md)|  | |
+
+### Return type
+
+[**AffiliateReferrerEnvelope**](AffiliateReferrerEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Updated affiliate membership |  -  |
+| **400** | Invalid referral code or request |  -  |
+| **401** | Authentication required |  -  |
+| **403** | User or tenant context required |  -  |
+| **404** | Affiliate membership not found or not owned by a non-admin caller |  -  |
+| **409** | Code already in use or unchanged, or membership already customized |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="deleteUser"></a>
@@ -2533,6 +2775,81 @@ No authorization required
 | **401** | Unauthorized, user not logged in or does not have access to this route |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="getAutoRebalanceAccountStatusV2"></a>
+# **getAutoRebalanceAccountStatusV2**
+> GetAutoRebalanceAccountStatusResponseEnvelope getAutoRebalanceAccountStatusV2(accountId)
+
+Get auto-rebalance configuration and live status for one isolated account
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID accountId = UUID.randomUUID(); // UUID | 
+    try {
+      GetAutoRebalanceAccountStatusResponseEnvelope result = apiInstance.getAutoRebalanceAccountStatusV2(accountId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getAutoRebalanceAccountStatusV2");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **accountId** | **UUID**|  | |
+
+### Return type
+
+[**GetAutoRebalanceAccountStatusResponseEnvelope**](GetAutoRebalanceAccountStatusResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Auto-rebalance configuration with current collateral status |  -  |
+| **400** | Bad request, e.g. invalid account ID |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this route |  -  |
+| **404** | Auto-rebalance config was not found for this account or caller |  -  |
+| **500** | Internal server error |  -  |
+
 <a id="getCandleData"></a>
 # **getCandleData**
 > ListCandlesResponseEnvelope getCandleData(orderBookId, start, end, resolution)
@@ -2908,7 +3225,7 @@ No authorization required
 
 Get per-chain instructions for depositing USDC into the Dora vault
 
-Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry. Restricted to DORA tenant users whose native asset is USDC.
+Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry. Restricted to users whose native asset is USDC, under a tenant with web3 enabled.
 
 ### Example
 ```java
@@ -2982,7 +3299,75 @@ public class Example {
 | **200** | Per-chain deposit instructions for the authenticated user |  -  |
 | **400** | Bad request, e.g. invalid or missing quantity, owner_address, or nonce, or an invalid client_reference_id |  -  |
 | **401** | Unauthorized, user not logged in |  -  |
-| **403** | Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. |  -  |
+| **403** | Forbidden: access is restricted to users whose native asset is USDC, under a tenant with web3 enabled. Admin and indexer API keys have no native asset and are also denied. |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="getGlobalLeaderboard"></a>
+# **getGlobalLeaderboard**
+> GlobalLeaderboardResponseEnvelope getGlobalLeaderboard(start, end, limit, offset)
+
+Get global leaderboard
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    LocalDate start = LocalDate.now(); // LocalDate | Inclusive start date in YYYY-MM-DD format.
+    LocalDate end = LocalDate.now(); // LocalDate | Inclusive end date in YYYY-MM-DD format.
+    Integer limit = 100; // Integer | Maximum number of rows to return. Defaults to 100.
+    Integer offset = 0; // Integer | Number of rows to skip before collecting the result set.
+    try {
+      GlobalLeaderboardResponseEnvelope result = apiInstance.getGlobalLeaderboard(start, end, limit, offset);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getGlobalLeaderboard");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **start** | **LocalDate**| Inclusive start date in YYYY-MM-DD format. | |
+| **end** | **LocalDate**| Inclusive end date in YYYY-MM-DD format. | |
+| **limit** | **Integer**| Maximum number of rows to return. Defaults to 100. | [optional] [default to 100] |
+| **offset** | **Integer**| Number of rows to skip before collecting the result set. | [optional] [default to 0] |
+
+### Return type
+
+[**GlobalLeaderboardResponseEnvelope**](GlobalLeaderboardResponseEnvelope.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Global leaderboard results |  -  |
+| **400** | Bad request |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="getL1Depth"></a>
@@ -4591,6 +4976,84 @@ public class Example {
 | **404** | QR campaign not found |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="getQRRewardPreview"></a>
+# **getQRRewardPreview**
+> QRRewardPreviewEnvelope getQRRewardPreview(tradingChallengeId)
+
+Preview QR reward eligibility
+
+Read-only projection for the authenticated QR participant. Request recomputes eligibility after wind-down; KYC is not a request blocker.
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UUID tradingChallengeId = UUID.randomUUID(); // UUID | 
+    try {
+      QRRewardPreviewEnvelope result = apiInstance.getQRRewardPreview(tradingChallengeId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#getQRRewardPreview");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tradingChallengeId** | **UUID**|  | |
+
+### Return type
+
+[**QRRewardPreviewEnvelope**](QRRewardPreviewEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Live eligibility or fixed reward state |  -  |
+| **400** | Reward preview is available only for QR challenges |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Not a participant |  -  |
+| **404** | Challenge not found |  -  |
+| **500** | Internal server error |  -  |
+
 <a id="getRealizedPnlSettlements"></a>
 # **getRealizedPnlSettlements**
 > GetRealizedPnlSettlementsResponseEnvelope getRealizedPnlSettlements(userId, tenantId, positionId, createdAfter, createdBefore, settledAfter, settledBefore, isSettled)
@@ -4911,76 +5374,6 @@ public class Example {
 | **200** | List of trades |  -  |
 | **400** | Bad request, e.g. invalid parameters |  -  |
 | **404** | No trades found |  -  |
-| **500** | Internal server error |  -  |
-
-<a id="getTradingChallengeAllResults"></a>
-# **getTradingChallengeAllResults**
-> TradingChallengeAllResultsResponseEnvelope getTradingChallengeAllResults(board, start, end, tradingChallengeType)
-
-Get combined results across all trading challenge
-
-List trading challenge leaderboard/results filtered by board, trading_challenge_type, start date and end date across all challenges.
-
-### Example
-```java
-// Import classes:
-import tech.dora.ApiClient;
-import tech.dora.ApiException;
-import tech.dora.Configuration;
-import tech.dora.models.*;
-import tech.dora.api.DefaultApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://staging.dora.co");
-
-    DefaultApi apiInstance = new DefaultApi(defaultClient);
-    String board = "TOP_PNL"; // String | Leaderboard board selector.
-    LocalDate start = LocalDate.now(); // LocalDate | Inclusive start date in YYYY-MM-DD format.
-    LocalDate end = LocalDate.now(); // LocalDate | Inclusive end date in YYYY-MM-DD format.
-    TradingChallengeType tradingChallengeType = TradingChallengeType.fromValue("TOURNAMENT"); // TradingChallengeType | Challenge type to include in aggregation.
-    try {
-      TradingChallengeAllResultsResponseEnvelope result = apiInstance.getTradingChallengeAllResults(board, start, end, tradingChallengeType);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling DefaultApi#getTradingChallengeAllResults");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **board** | **String**| Leaderboard board selector. | [enum: TOP_PNL, TOP_VOLUME, IRON_TRADER] |
-| **start** | **LocalDate**| Inclusive start date in YYYY-MM-DD format. | |
-| **end** | **LocalDate**| Inclusive end date in YYYY-MM-DD format. | |
-| **tradingChallengeType** | [**TradingChallengeType**](.md)| Challenge type to include in aggregation. | [enum: TOURNAMENT, CASH, QR_PROMO] |
-
-### Return type
-
-[**TradingChallengeAllResultsResponseEnvelope**](TradingChallengeAllResultsResponseEnvelope.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | All trading challenge results |  -  |
-| **400** | Bad request |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="getTradingChallengeByID"></a>
@@ -6399,7 +6792,7 @@ public class Example {
 
 Estimate the network fee to withdraw USDC via web3
 
-Examines on-chain conditions and simulates the named withdrawal to estimate the network fee the user must reserve before it can be submitted on-chain. The withdrawal must already exist, belong to the caller, and have been approved by an admin (status APPROVED_WITHOUT_FEE); its destination and quantity are read from the row, not taken from the request. The returned quote token is bound to that one withdrawal and is redeemed at PUT /v1/web3/withdrawals/{withdrawal_id}, which reserves the fee and moves the withdrawal to APPROVED. Restricted to DORA tenant users whose native asset is USDC.
+Estimates the network fee for an existing, admin-approved (APPROVED_WITHOUT_FEE) withdrawal owned by the caller. Redeem the returned quote token at PUT /v1/web3/withdrawals/{withdrawal_id} to reserve the fee. Restricted to USDC native-asset users.
 
 ### Example
 ```java
@@ -6467,7 +6860,7 @@ public class Example {
 | **200** | Fee quote for the requested withdrawal |  -  |
 | **400** | Bad request: the withdrawal_id query parameter is missing or is not a UUID |  -  |
 | **401** | Unauthorized, user not logged in |  -  |
-| **403** | Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. |  -  |
+| **403** | Forbidden: access is restricted to users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. |  -  |
 | **404** | Withdrawal not found, or it belongs to another user |  -  |
 | **409** | Conflict: the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), or it is bound to a chain other than the registered one |  -  |
 | **429** | Rate limit exceeded; this endpoint is limited to 1 request per minute per user |  -  |
@@ -8046,6 +8439,144 @@ No authorization required
 | **400** | Bad request, e.g. invalid query parameters |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="listAutoRebalanceConfigsV2"></a>
+# **listAutoRebalanceConfigsV2**
+> ListAutoRebalanceConfigsResponseEnvelope listAutoRebalanceConfigsV2()
+
+List auto-rebalance configuration for the authenticated user&#39;s isolated accounts
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      ListAutoRebalanceConfigsResponseEnvelope result = apiInstance.listAutoRebalanceConfigsV2();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#listAutoRebalanceConfigsV2");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ListAutoRebalanceConfigsResponseEnvelope**](ListAutoRebalanceConfigsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Persisted auto-rebalance configurations |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this route |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="listAutoRebalanceStatusesV2"></a>
+# **listAutoRebalanceStatusesV2**
+> ListAutoRebalanceConfigsResponseEnvelope listAutoRebalanceStatusesV2()
+
+List auto-rebalance status for the authenticated user&#39;s isolated accounts, including disabled configs
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      ListAutoRebalanceConfigsResponseEnvelope result = apiInstance.listAutoRebalanceStatusesV2();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#listAutoRebalanceStatusesV2");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ListAutoRebalanceConfigsResponseEnvelope**](ListAutoRebalanceConfigsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Auto-rebalance configurations with current collateral status |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this route |  -  |
+| **500** | Internal server error |  -  |
+
 <a id="listDeposits"></a>
 # **listDeposits**
 > ListDepositsResponseEnvelope listDeposits(userId, page, limit)
@@ -8955,7 +9486,7 @@ public class Example {
 
 Lock the network fee for an approved USDC withdrawal
 
-Redeems a fee quote against a withdrawal an admin has approved. The quoted fee is reserved on top of the quantity reserved when the request was created, so the same risk checks the request cleared are run again for it: an active trading challenge, a deactivated account, account health, the minimum cash reserve, and overdue coupon payments. A fee that would take the caller below the minimum cash reserve is refused and nothing is reserved.
+Redeems a fee quote from GET /v1/web3/withdrawals/fee-quote against an admin-approved withdrawal, holding the quoted fee from the caller&#39;s available balance and making the withdrawal eligible for on-chain submission. Restricted to users whose native asset is USDC.
 
 ### Example
 ```java
@@ -9025,7 +9556,7 @@ public class Example {
 | **200** | Fee reserved; the withdrawal is now APPROVED and eligible for submission |  -  |
 | **400** | Bad request, e.g. an invalid body or withdrawal_id, an unparseable or unauthentic quote token, or a quote issued for a different destination, quantity, or chain |  -  |
 | **401** | Unauthorized, user not logged in |  -  |
-| **403** | Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or reserving the fee would leave the caller below the minimum cash reserve. |  -  |
+| **403** | Forbidden: access is restricted to users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or reserving the fee would leave the caller below the minimum cash reserve. |  -  |
 | **404** | Withdrawal not found, or it belongs to another user |  -  |
 | **409** | Conflict, e.g. the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), the available balance cannot cover the fee, there is no USD ledger account to reserve the fee from, an unhealthy account, overdue coupon payments, or a concurrent balance change kept the reservation from being recorded |  -  |
 | **410** | The quote token has expired; request a new fee quote |  -  |
@@ -11276,6 +11807,81 @@ public class Example {
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
 | **404** | User not found |  -  |
+| **500** | Internal server error |  -  |
+
+<a id="upsertAutoRebalanceConfigsV2"></a>
+# **upsertAutoRebalanceConfigsV2**
+> UpsertAutoRebalanceConfigsResponseEnvelope upsertAutoRebalanceConfigsV2(upsertAutoRebalanceConfigsRequest)
+
+Create or update auto-rebalance configuration for one or more isolated accounts
+
+### Example
+```java
+// Import classes:
+import tech.dora.ApiClient;
+import tech.dora.ApiException;
+import tech.dora.Configuration;
+import tech.dora.auth.*;
+import tech.dora.models.*;
+import tech.dora.api.DefaultApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://staging.dora.co");
+    
+    // Configure API key authorization: apiKeyAuthHeader
+    ApiKeyAuth apiKeyAuthHeader = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyAuthHeader");
+    apiKeyAuthHeader.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //apiKeyAuthHeader.setApiKeyPrefix("Token");
+
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    UpsertAutoRebalanceConfigsRequest upsertAutoRebalanceConfigsRequest = new UpsertAutoRebalanceConfigsRequest(); // UpsertAutoRebalanceConfigsRequest | 
+    try {
+      UpsertAutoRebalanceConfigsResponseEnvelope result = apiInstance.upsertAutoRebalanceConfigsV2(upsertAutoRebalanceConfigsRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#upsertAutoRebalanceConfigsV2");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **upsertAutoRebalanceConfigsRequest** | [**UpsertAutoRebalanceConfigsRequest**](UpsertAutoRebalanceConfigsRequest.md)|  | |
+
+### Return type
+
+[**UpsertAutoRebalanceConfigsResponseEnvelope**](UpsertAutoRebalanceConfigsResponseEnvelope.md)
+
+### Authorization
+
+[apiKeyAuthHeader](../README.md#apiKeyAuthHeader), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Updated auto-rebalance configurations |  -  |
+| **400** | Bad request, e.g. invalid thresholds or duplicate account IDs |  -  |
+| **401** | Unauthorized, user not logged in or does not have access to this route |  -  |
+| **404** | One or more accounts were not found or are not isolated accounts |  -  |
 | **500** | Internal server error |  -  |
 
 <a id="validateSubmitOrder"></a>

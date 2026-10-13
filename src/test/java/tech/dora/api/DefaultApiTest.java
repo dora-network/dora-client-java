@@ -41,6 +41,7 @@ import tech.dora.model.ClaimLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.ClaimPromoLinkRequest;
 import tech.dora.model.ClaimTradingChallengeResponseEnvelope;
 import tech.dora.model.CloseAccountRequest;
+import tech.dora.model.CloseAllPositionsResponseEnvelope;
 import tech.dora.model.ClosePositionRequest;
 import tech.dora.model.ClosePositionResponseEnvelope;
 import tech.dora.model.CountryCode;
@@ -55,6 +56,7 @@ import tech.dora.model.CreateOrderResponseEnvelope;
 import tech.dora.model.CreateTradingChallengeRequest;
 import tech.dora.model.CreateWithdrawalRequest;
 import tech.dora.model.CurrentLeverageAccruedInterestResponseEnvelope;
+import tech.dora.model.CustomizeAffiliateReferrerCodeRequest;
 import tech.dora.model.DefundUserRequest;
 import tech.dora.model.DepositInstructionsResponseEnvelope;
 import tech.dora.model.FeeQuoteResponseEnvelope;
@@ -62,10 +64,12 @@ import tech.dora.model.FundUserRequest;
 import tech.dora.model.FundUserResponseEnvelope;
 import tech.dora.model.GetAssetByIDResponseEnvelope;
 import tech.dora.model.GetAssetYTMByIDResponseEnvelope;
+import tech.dora.model.GetAutoRebalanceAccountStatusResponseEnvelope;
 import tech.dora.model.GetCopyTradersResponse;
 import tech.dora.model.GetPnLRankingResponse;
 import tech.dora.model.GetRealizedPnlSettlementsResponseEnvelope;
 import tech.dora.model.GetTopOfBookResponseEnvelope;
+import tech.dora.model.GlobalLeaderboardResponseEnvelope;
 import tech.dora.model.HistoricalLeverageInterestRatesResponseEnvelope;
 import tech.dora.model.IsolateCollateralRequest;
 import tech.dora.model.IsolateCollateralResponse;
@@ -81,6 +85,7 @@ import tech.dora.model.LiquidityResponseEnvelope;
 import tech.dora.model.ListAccountsResponseV2Envelope;
 import tech.dora.model.ListAssetPriceResponseEnvelope;
 import tech.dora.model.ListAssetYieldResponseEnvelope;
+import tech.dora.model.ListAutoRebalanceConfigsResponseEnvelope;
 import tech.dora.model.ListCandlesResponseEnvelope;
 import tech.dora.model.ListCouponPaymentsResponseEnvelope;
 import tech.dora.model.ListDepositsResponseEnvelope;
@@ -114,6 +119,7 @@ import tech.dora.model.PromoClaimResponseEnvelope;
 import tech.dora.model.PromoLinkBatchListResponse;
 import tech.dora.model.PromoLinkListResponse;
 import tech.dora.model.PromoLinkStatus;
+import tech.dora.model.QRRewardPreviewEnvelope;
 import tech.dora.model.RegisterAffiliateReferrerRequest;
 import tech.dora.model.RemoveTradingChallengeUsersRequest;
 import tech.dora.model.RepayUSDRequest;
@@ -143,7 +149,6 @@ import tech.dora.model.TenantGuaranteeFundHistoryResponseEnvelope;
 import tech.dora.model.TerminateTradingChallengeResponseEnvelope;
 import tech.dora.model.TradeRequestError;
 import tech.dora.model.TradeResponseEnvelope;
-import tech.dora.model.TradingChallengeAllResultsResponseEnvelope;
 import tech.dora.model.TradingChallengeDailySnapshotsResponseEnvelope;
 import tech.dora.model.TradingChallengeListResponseEnvelope;
 import tech.dora.model.TradingChallengeRegistrationRequestListResponseEnvelope;
@@ -170,6 +175,8 @@ import tech.dora.model.UpdateTradingChallengeRequest;
 import tech.dora.model.UpdateUserConfigRequest;
 import tech.dora.model.UpdateUserKYCRequest;
 import tech.dora.model.UpdateUserKYCResponseEnvelope;
+import tech.dora.model.UpsertAutoRebalanceConfigsRequest;
+import tech.dora.model.UpsertAutoRebalanceConfigsResponseEnvelope;
 import tech.dora.model.UserBalanceResponseEnvelope;
 import tech.dora.model.UserCreatedResponseEnvelope;
 import tech.dora.model.UserDeactivationListResponseEnvelope;
@@ -305,6 +312,20 @@ public class DefaultApiTest {
     }
 
     /**
+     * Cancel the caller&#39;s own USDC withdrawal
+     *
+     * Cancels the caller&#39;s own withdrawal and returns its held quantity to their available balance. Only PENDING or APPROVED_WITHOUT_FEE withdrawals can be cancelled. Restricted to users whose native asset is USDC.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void cancelWithdrawalTest() throws ApiException {
+        UUID withdrawalId = null;
+        WithdrawalResponseEnvelope response = api.cancelWithdrawal(withdrawalId);
+        // TODO: test validations
+    }
+
+    /**
      * Claim current accrued leverage interest for a specific user
      *
      * @throws ApiException if the Api call fails
@@ -332,7 +353,7 @@ public class DefaultApiTest {
     /**
      * Claim challenge prize
      *
-     * Claim the prize of a challenge the caller is eligible for. A TOURNAMENT claim credits the prize matching the crown and reactivates the account. A CASH claim winds the account down, sweeps every remaining challenge credit and awards the CASH_CROWN: the account is left deactivated with a zero balance, and the reward is redeemed out of band. Both mark the participation PRIZE_CLAIMED.
+     * Claim an eligible trading challenge prize. TOURNAMENT requires completed KYC, credits the crown prize, reactivates the account, and marks the result PRIZE_CLAIMED. CASH requires completed KYC, winds down the account, sweeps remaining challenge credit, awards CASH_CROWN, and marks the result PRIZE_CLAIMED; the account stays deactivated with a zero balance. QR_PROMO accepts an eligible reward request before KYC, winds down the account, fixes the capped reward, queues a KYC email, and records REWARD_PENDING_KYC without paying the reward or reactivating the account.
      *
      * @throws ApiException if the Api call fails
      */
@@ -340,6 +361,17 @@ public class DefaultApiTest {
     public void claimTradingChallengePrizeTest() throws ApiException {
         UUID tradingChallengeId = null;
         ClaimTradingChallengeResponseEnvelope response = api.claimTradingChallengePrize(tradingChallengeId);
+        // TODO: test validations
+    }
+
+    /**
+     * Close all open isolated positions in one request
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void closeAllIsolatedPositionsTest() throws ApiException {
+        CloseAllPositionsResponseEnvelope response = api.closeAllIsolatedPositions();
         // TODO: test validations
     }
 
@@ -459,7 +491,7 @@ public class DefaultApiTest {
     /**
      * Create a USDC withdrawal request
      *
-     * Reserves the requested quantity against the caller&#39;s available balance (moving it to pending_withdrawal) and creates a PENDING withdrawal. No fee quote is required and no fee is reserved: the withdrawal&#39;s fee is quoted and locked later, as part of approval. Idempotent on withdrawal_id: a repeat request carrying the same to_address and quantity reserves nothing further and returns the existing withdrawal with 200. Reusing a withdrawal_id with a different to_address or quantity is a conflict (409), not a replay, and reserves nothing. Restricted to DORA tenant users whose native asset is USDC.
+     * Requests a USDC withdrawal, holding the quantity from the caller&#39;s available balance until it completes or is cancelled. The fee is quoted and locked after admin approval. Idempotent on withdrawal_id; only one withdrawal may be in progress at a time. Restricted to users whose native asset is USDC.
      *
      * @throws ApiException if the Api call fails
      */
@@ -467,6 +499,21 @@ public class DefaultApiTest {
     public void createWithdrawalTest() throws ApiException {
         CreateWithdrawalRequest createWithdrawalRequest = null;
         WithdrawalResponseEnvelope response = api.createWithdrawal(createWithdrawalRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Change an affiliate referral code
+     *
+     * The owner of this affiliate membership may change its primary code once. ADMIN callers may change any membership&#39;s code repeatedly across tenants. Admin changes preserve the owner&#39;s remaining one-time change. Changes are allowed while the program is inactive. Its initial code, whether generated or chosen by an admin, does not count as the change. Previous codes remain aliases and cannot be reused; codes resolve only while the program is active. Codes are unique across all programs and tenants, including for admins.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void customizeAffiliateReferrerCodeTest() throws ApiException {
+        UUID referrerId = null;
+        CustomizeAffiliateReferrerCodeRequest customizeAffiliateReferrerCodeRequest = null;
+        AffiliateReferrerEnvelope response = api.customizeAffiliateReferrerCode(referrerId, customizeAffiliateReferrerCodeRequest);
         // TODO: test validations
     }
 
@@ -623,6 +670,18 @@ public class DefaultApiTest {
     }
 
     /**
+     * Get auto-rebalance configuration and live status for one isolated account
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getAutoRebalanceAccountStatusV2Test() throws ApiException {
+        UUID accountId = null;
+        GetAutoRebalanceAccountStatusResponseEnvelope response = api.getAutoRebalanceAccountStatusV2(accountId);
+        // TODO: test validations
+    }
+
+    /**
      * Get candlestick data for an orderbook
      *
      * Returns candle data in the requested [start, end) range for the selected resolution, capped to the most recent 5,000 candles per request. Public callers may query data from up to the last month, while authenticated callers may query up to the last six months (requests with invalid credentials will be rejected as unauthorized).
@@ -694,7 +753,7 @@ public class DefaultApiTest {
     /**
      * Get per-chain instructions for depositing USDC into the Dora vault
      *
-     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry. Restricted to DORA tenant users whose native asset is USDC.
+     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry. Restricted to users whose native asset is USDC, under a tenant with web3 enabled.
      *
      * @throws ApiException if the Api call fails
      */
@@ -705,6 +764,21 @@ public class DefaultApiTest {
         String nonce = null;
         String clientReferenceId = null;
         DepositInstructionsResponseEnvelope response = api.getDepositInstructions(quantity, ownerAddress, nonce, clientReferenceId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get global leaderboard
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getGlobalLeaderboardTest() throws ApiException {
+        LocalDate start = null;
+        LocalDate end = null;
+        Integer limit = null;
+        Integer offset = null;
+        GlobalLeaderboardResponseEnvelope response = api.getGlobalLeaderboard(start, end, limit, offset);
         // TODO: test validations
     }
 
@@ -983,6 +1057,20 @@ public class DefaultApiTest {
     }
 
     /**
+     * Preview QR reward eligibility
+     *
+     * Read-only projection for the authenticated QR participant. Request recomputes eligibility after wind-down; KYC is not a request blocker.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getQRRewardPreviewTest() throws ApiException {
+        UUID tradingChallengeId = null;
+        QRRewardPreviewEnvelope response = api.getQRRewardPreview(tradingChallengeId);
+        // TODO: test validations
+    }
+
+    /**
      * Get realized P&amp;L settlements with filters
      *
      * @throws ApiException if the Api call fails
@@ -1047,23 +1135,6 @@ public class DefaultApiTest {
         Integer page = null;
         Integer limit = null;
         ListTradeResponseEnvelope response = api.getTrades(orderBookIds, userIds, start, end, page, limit);
-        // TODO: test validations
-    }
-
-    /**
-     * Get combined results across all trading challenge
-     *
-     * List trading challenge leaderboard/results filtered by board, trading_challenge_type, start date and end date across all challenges.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getTradingChallengeAllResultsTest() throws ApiException {
-        String board = null;
-        LocalDate start = null;
-        LocalDate end = null;
-        TradingChallengeType tradingChallengeType = null;
-        TradingChallengeAllResultsResponseEnvelope response = api.getTradingChallengeAllResults(board, start, end, tradingChallengeType);
         // TODO: test validations
     }
 
@@ -1334,7 +1405,7 @@ public class DefaultApiTest {
     /**
      * Estimate the network fee to withdraw USDC via web3
      *
-     * Examines on-chain conditions and simulates the named withdrawal to estimate the network fee the user must reserve before it can be submitted on-chain. The withdrawal must already exist, belong to the caller, and have been approved by an admin (status APPROVED_WITHOUT_FEE); its destination and quantity are read from the row, not taken from the request. The returned quote token is bound to that one withdrawal and is redeemed at PUT /v1/web3/withdrawals/{withdrawal_id}, which reserves the fee and moves the withdrawal to APPROVED. Restricted to DORA tenant users whose native asset is USDC.
+     * Estimates the network fee for an existing, admin-approved (APPROVED_WITHOUT_FEE) withdrawal owned by the caller. Redeem the returned quote token at PUT /v1/web3/withdrawals/{withdrawal_id} to reserve the fee. Restricted to USDC native-asset users.
      *
      * @throws ApiException if the Api call fails
      */
@@ -1639,6 +1710,28 @@ public class DefaultApiTest {
     }
 
     /**
+     * List auto-rebalance configuration for the authenticated user&#39;s isolated accounts
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listAutoRebalanceConfigsV2Test() throws ApiException {
+        ListAutoRebalanceConfigsResponseEnvelope response = api.listAutoRebalanceConfigsV2();
+        // TODO: test validations
+    }
+
+    /**
+     * List auto-rebalance status for the authenticated user&#39;s isolated accounts, including disabled configs
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listAutoRebalanceStatusesV2Test() throws ApiException {
+        ListAutoRebalanceConfigsResponseEnvelope response = api.listAutoRebalanceStatusesV2();
+        // TODO: test validations
+    }
+
+    /**
      * List USDC deposits
      *
      * Lists USDC deposits ordered by observed_at descending. Admin users may list deposits for any user (or all users); non-admin users may only list their own deposits.
@@ -1823,7 +1916,7 @@ public class DefaultApiTest {
     /**
      * Lock the network fee for an approved USDC withdrawal
      *
-     * Redeems a fee quote against a withdrawal an admin has approved. The quoted fee is reserved on top of the quantity reserved when the request was created, so the same risk checks the request cleared are run again for it: an active trading challenge, a deactivated account, account health, the minimum cash reserve, and overdue coupon payments. A fee that would take the caller below the minimum cash reserve is refused and nothing is reserved.
+     * Redeems a fee quote from GET /v1/web3/withdrawals/fee-quote against an admin-approved withdrawal, holding the quoted fee from the caller&#39;s available balance and making the withdrawal eligible for on-chain submission. Restricted to users whose native asset is USDC.
      *
      * @throws ApiException if the Api call fails
      */
@@ -2240,6 +2333,18 @@ public class DefaultApiTest {
         UUID userId = null;
         UpdateUserKYCRequest updateUserKYCRequest = null;
         UpdateUserKYCResponseEnvelope response = api.updateUserKYC(userId, updateUserKYCRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Create or update auto-rebalance configuration for one or more isolated accounts
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void upsertAutoRebalanceConfigsV2Test() throws ApiException {
+        UpsertAutoRebalanceConfigsRequest upsertAutoRebalanceConfigsRequest = null;
+        UpsertAutoRebalanceConfigsResponseEnvelope response = api.upsertAutoRebalanceConfigsV2(upsertAutoRebalanceConfigsRequest);
         // TODO: test validations
     }
 

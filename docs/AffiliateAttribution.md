@@ -14,7 +14,7 @@
 |**tenantId** | **String** |  |  |
 |**signupSource** | **String** | Signup hostname when assigned at signup; empty for an assignment made later. |  |
 |**createdAt** | **OffsetDateTime** | Immutable assignment time; activity begins counting from this timestamp. |  |
-|**referralCode** | **String** |  |  |
+|**referralCode** | **String** | Exact code the user entered, retained when the referrer changes their primary code. |  |
 
 
 

@@ -20,11 +20,9 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import tech.dora.model.AutoRebalanceConfigsData;
 import tech.dora.model.Metadata;
-import tech.dora.model.TradingChallengeAllResult;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -50,14 +48,14 @@ import java.util.Set;
 import tech.dora.JSON;
 
 /**
- * TradingChallengeAllResultsResponseEnvelope
+ * UpsertAutoRebalanceConfigsResponseEnvelope
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-18T18:29:04.763912996+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
-public class TradingChallengeAllResultsResponseEnvelope {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+public class UpsertAutoRebalanceConfigsResponseEnvelope {
   public static final String SERIALIZED_NAME_DATA = "data";
   @SerializedName(SERIALIZED_NAME_DATA)
   @javax.annotation.Nullable
-  private List<TradingChallengeAllResult> data = new ArrayList<>();
+  private AutoRebalanceConfigsData data;
 
   public static final String SERIALIZED_NAME_ERROR = "error";
   @SerializedName(SERIALIZED_NAME_ERROR)
@@ -69,19 +67,11 @@ public class TradingChallengeAllResultsResponseEnvelope {
   @javax.annotation.Nonnull
   private Metadata metadata;
 
-  public TradingChallengeAllResultsResponseEnvelope() {
+  public UpsertAutoRebalanceConfigsResponseEnvelope() {
   }
 
-  public TradingChallengeAllResultsResponseEnvelope data(@javax.annotation.Nullable List<TradingChallengeAllResult> data) {
+  public UpsertAutoRebalanceConfigsResponseEnvelope data(@javax.annotation.Nullable AutoRebalanceConfigsData data) {
     this.data = data;
-    return this;
-  }
-
-  public TradingChallengeAllResultsResponseEnvelope addDataItem(TradingChallengeAllResult dataItem) {
-    if (this.data == null) {
-      this.data = new ArrayList<>();
-    }
-    this.data.add(dataItem);
     return this;
   }
 
@@ -90,16 +80,16 @@ public class TradingChallengeAllResultsResponseEnvelope {
    * @return data
    */
   @javax.annotation.Nullable
-  public List<TradingChallengeAllResult> getData() {
+  public AutoRebalanceConfigsData getData() {
     return data;
   }
 
-  public void setData(@javax.annotation.Nullable List<TradingChallengeAllResult> data) {
+  public void setData(@javax.annotation.Nullable AutoRebalanceConfigsData data) {
     this.data = data;
   }
 
 
-  public TradingChallengeAllResultsResponseEnvelope error(@javax.annotation.Nullable String error) {
+  public UpsertAutoRebalanceConfigsResponseEnvelope error(@javax.annotation.Nullable String error) {
     this.error = error;
     return this;
   }
@@ -118,7 +108,7 @@ public class TradingChallengeAllResultsResponseEnvelope {
   }
 
 
-  public TradingChallengeAllResultsResponseEnvelope metadata(@javax.annotation.Nonnull Metadata metadata) {
+  public UpsertAutoRebalanceConfigsResponseEnvelope metadata(@javax.annotation.Nonnull Metadata metadata) {
     this.metadata = metadata;
     return this;
   }
@@ -146,10 +136,10 @@ public class TradingChallengeAllResultsResponseEnvelope {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    TradingChallengeAllResultsResponseEnvelope tradingChallengeAllResultsResponseEnvelope = (TradingChallengeAllResultsResponseEnvelope) o;
-    return Objects.equals(this.data, tradingChallengeAllResultsResponseEnvelope.data) &&
-        Objects.equals(this.error, tradingChallengeAllResultsResponseEnvelope.error) &&
-        Objects.equals(this.metadata, tradingChallengeAllResultsResponseEnvelope.metadata);
+    UpsertAutoRebalanceConfigsResponseEnvelope upsertAutoRebalanceConfigsResponseEnvelope = (UpsertAutoRebalanceConfigsResponseEnvelope) o;
+    return Objects.equals(this.data, upsertAutoRebalanceConfigsResponseEnvelope.data) &&
+        Objects.equals(this.error, upsertAutoRebalanceConfigsResponseEnvelope.error) &&
+        Objects.equals(this.metadata, upsertAutoRebalanceConfigsResponseEnvelope.metadata);
   }
 
   @Override
@@ -160,7 +150,7 @@ public class TradingChallengeAllResultsResponseEnvelope {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class TradingChallengeAllResultsResponseEnvelope {\n");
+    sb.append("class UpsertAutoRebalanceConfigsResponseEnvelope {\n");
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("    error: ").append(toIndentedString(error)).append("\n");
     sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
@@ -192,43 +182,33 @@ public class TradingChallengeAllResultsResponseEnvelope {
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to TradingChallengeAllResultsResponseEnvelope
+   * @throws IOException if the JSON Element is invalid with respect to UpsertAutoRebalanceConfigsResponseEnvelope
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!TradingChallengeAllResultsResponseEnvelope.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in TradingChallengeAllResultsResponseEnvelope is not found in the empty JSON string", TradingChallengeAllResultsResponseEnvelope.openapiRequiredFields.toString()));
+        if (!UpsertAutoRebalanceConfigsResponseEnvelope.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in UpsertAutoRebalanceConfigsResponseEnvelope is not found in the empty JSON string", UpsertAutoRebalanceConfigsResponseEnvelope.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!TradingChallengeAllResultsResponseEnvelope.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `TradingChallengeAllResultsResponseEnvelope` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!UpsertAutoRebalanceConfigsResponseEnvelope.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `UpsertAutoRebalanceConfigsResponseEnvelope` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : TradingChallengeAllResultsResponseEnvelope.openapiRequiredFields) {
+      for (String requiredField : UpsertAutoRebalanceConfigsResponseEnvelope.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
           throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+      // validate the optional field `data`
       if (jsonObj.get("data") != null && !jsonObj.get("data").isJsonNull()) {
-        JsonArray jsonArraydata = jsonObj.getAsJsonArray("data");
-        if (jsonArraydata != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("data").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `data` to be an array in the JSON string but got `%s`", jsonObj.get("data").toString()));
-          }
-
-          // validate the optional field `data` (array)
-          for (int i = 0; i < jsonArraydata.size(); i++) {
-            TradingChallengeAllResult.validateJsonElement(jsonArraydata.get(i));
-          };
-        }
+        AutoRebalanceConfigsData.validateJsonElement(jsonObj.get("data"));
       }
       if ((jsonObj.get("error") != null && !jsonObj.get("error").isJsonNull()) && !jsonObj.get("error").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `error` to be a primitive type in the JSON string but got `%s`", jsonObj.get("error").toString()));
@@ -241,22 +221,22 @@ public class TradingChallengeAllResultsResponseEnvelope {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!TradingChallengeAllResultsResponseEnvelope.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'TradingChallengeAllResultsResponseEnvelope' and its subtypes
+       if (!UpsertAutoRebalanceConfigsResponseEnvelope.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'UpsertAutoRebalanceConfigsResponseEnvelope' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<TradingChallengeAllResultsResponseEnvelope> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(TradingChallengeAllResultsResponseEnvelope.class));
+       final TypeAdapter<UpsertAutoRebalanceConfigsResponseEnvelope> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(UpsertAutoRebalanceConfigsResponseEnvelope.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<TradingChallengeAllResultsResponseEnvelope>() {
+       return (TypeAdapter<T>) new TypeAdapter<UpsertAutoRebalanceConfigsResponseEnvelope>() {
            @Override
-           public void write(JsonWriter out, TradingChallengeAllResultsResponseEnvelope value) throws IOException {
+           public void write(JsonWriter out, UpsertAutoRebalanceConfigsResponseEnvelope value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public TradingChallengeAllResultsResponseEnvelope read(JsonReader in) throws IOException {
+           public UpsertAutoRebalanceConfigsResponseEnvelope read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -267,18 +247,18 @@ public class TradingChallengeAllResultsResponseEnvelope {
   }
 
   /**
-   * Create an instance of TradingChallengeAllResultsResponseEnvelope given an JSON string
+   * Create an instance of UpsertAutoRebalanceConfigsResponseEnvelope given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of TradingChallengeAllResultsResponseEnvelope
-   * @throws IOException if the JSON string is invalid with respect to TradingChallengeAllResultsResponseEnvelope
+   * @return An instance of UpsertAutoRebalanceConfigsResponseEnvelope
+   * @throws IOException if the JSON string is invalid with respect to UpsertAutoRebalanceConfigsResponseEnvelope
    */
-  public static TradingChallengeAllResultsResponseEnvelope fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, TradingChallengeAllResultsResponseEnvelope.class);
+  public static UpsertAutoRebalanceConfigsResponseEnvelope fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, UpsertAutoRebalanceConfigsResponseEnvelope.class);
   }
 
   /**
-   * Convert an instance of TradingChallengeAllResultsResponseEnvelope to an JSON string
+   * Convert an instance of UpsertAutoRebalanceConfigsResponseEnvelope to an JSON string
    *
    * @return JSON string
    */

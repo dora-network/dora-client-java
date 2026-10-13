@@ -54,6 +54,7 @@ import tech.dora.model.ClaimLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.ClaimPromoLinkRequest;
 import tech.dora.model.ClaimTradingChallengeResponseEnvelope;
 import tech.dora.model.CloseAccountRequest;
+import tech.dora.model.CloseAllPositionsResponseEnvelope;
 import tech.dora.model.ClosePositionRequest;
 import tech.dora.model.ClosePositionResponseEnvelope;
 import tech.dora.model.CountryCode;
@@ -68,6 +69,7 @@ import tech.dora.model.CreateOrderResponseEnvelope;
 import tech.dora.model.CreateTradingChallengeRequest;
 import tech.dora.model.CreateWithdrawalRequest;
 import tech.dora.model.CurrentLeverageAccruedInterestResponseEnvelope;
+import tech.dora.model.CustomizeAffiliateReferrerCodeRequest;
 import tech.dora.model.DefundUserRequest;
 import tech.dora.model.DepositInstructionsResponseEnvelope;
 import tech.dora.model.FeeQuoteResponseEnvelope;
@@ -75,10 +77,12 @@ import tech.dora.model.FundUserRequest;
 import tech.dora.model.FundUserResponseEnvelope;
 import tech.dora.model.GetAssetByIDResponseEnvelope;
 import tech.dora.model.GetAssetYTMByIDResponseEnvelope;
+import tech.dora.model.GetAutoRebalanceAccountStatusResponseEnvelope;
 import tech.dora.model.GetCopyTradersResponse;
 import tech.dora.model.GetPnLRankingResponse;
 import tech.dora.model.GetRealizedPnlSettlementsResponseEnvelope;
 import tech.dora.model.GetTopOfBookResponseEnvelope;
+import tech.dora.model.GlobalLeaderboardResponseEnvelope;
 import tech.dora.model.HistoricalLeverageInterestRatesResponseEnvelope;
 import tech.dora.model.IsolateCollateralRequest;
 import tech.dora.model.IsolateCollateralResponse;
@@ -94,6 +98,7 @@ import tech.dora.model.LiquidityResponseEnvelope;
 import tech.dora.model.ListAccountsResponseV2Envelope;
 import tech.dora.model.ListAssetPriceResponseEnvelope;
 import tech.dora.model.ListAssetYieldResponseEnvelope;
+import tech.dora.model.ListAutoRebalanceConfigsResponseEnvelope;
 import tech.dora.model.ListCandlesResponseEnvelope;
 import tech.dora.model.ListCouponPaymentsResponseEnvelope;
 import tech.dora.model.ListDepositsResponseEnvelope;
@@ -127,6 +132,7 @@ import tech.dora.model.PromoClaimResponseEnvelope;
 import tech.dora.model.PromoLinkBatchListResponse;
 import tech.dora.model.PromoLinkListResponse;
 import tech.dora.model.PromoLinkStatus;
+import tech.dora.model.QRRewardPreviewEnvelope;
 import tech.dora.model.RegisterAffiliateReferrerRequest;
 import tech.dora.model.RemoveTradingChallengeUsersRequest;
 import tech.dora.model.RepayUSDRequest;
@@ -156,7 +162,6 @@ import tech.dora.model.TenantGuaranteeFundHistoryResponseEnvelope;
 import tech.dora.model.TerminateTradingChallengeResponseEnvelope;
 import tech.dora.model.TradeRequestError;
 import tech.dora.model.TradeResponseEnvelope;
-import tech.dora.model.TradingChallengeAllResultsResponseEnvelope;
 import tech.dora.model.TradingChallengeDailySnapshotsResponseEnvelope;
 import tech.dora.model.TradingChallengeListResponseEnvelope;
 import tech.dora.model.TradingChallengeRegistrationRequestListResponseEnvelope;
@@ -183,6 +188,8 @@ import tech.dora.model.UpdateTradingChallengeRequest;
 import tech.dora.model.UpdateUserConfigRequest;
 import tech.dora.model.UpdateUserKYCRequest;
 import tech.dora.model.UpdateUserKYCResponseEnvelope;
+import tech.dora.model.UpsertAutoRebalanceConfigsRequest;
+import tech.dora.model.UpsertAutoRebalanceConfigsResponseEnvelope;
 import tech.dora.model.UserBalanceResponseEnvelope;
 import tech.dora.model.UserCreatedResponseEnvelope;
 import tech.dora.model.UserDeactivationListResponseEnvelope;
@@ -1292,6 +1299,161 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for cancelWithdrawal
+     * @param withdrawalId The withdrawal to cancel. It must be owned by the caller and be in status PENDING or APPROVED_WITHOUT_FEE. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Withdrawal cancelled; it is now REJECTED and its reservation is back in available </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request: withdrawal_id is not a valid UUID </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied) </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: the withdrawal is not PENDING or APPROVED_WITHOUT_FEE. It has either already been approved for on-chain submission (a fee is locked, or a transaction is in flight) or already finished, and in neither case can it be cancelled </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too many requests: this route is rate limited per user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call cancelWithdrawalCall(@javax.annotation.Nonnull UUID withdrawalId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/web3/withdrawals/{withdrawal_id}"
+            .replace("{" + "withdrawal_id" + "}", localVarApiClient.escapeString(withdrawalId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call cancelWithdrawalValidateBeforeCall(@javax.annotation.Nonnull UUID withdrawalId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'withdrawalId' is set
+        if (withdrawalId == null) {
+            throw new ApiException("Missing the required parameter 'withdrawalId' when calling cancelWithdrawal(Async)");
+        }
+
+        return cancelWithdrawalCall(withdrawalId, _callback);
+
+    }
+
+    /**
+     * Cancel the caller&#39;s own USDC withdrawal
+     * Cancels the caller&#39;s own withdrawal and returns its held quantity to their available balance. Only PENDING or APPROVED_WITHOUT_FEE withdrawals can be cancelled. Restricted to users whose native asset is USDC.
+     * @param withdrawalId The withdrawal to cancel. It must be owned by the caller and be in status PENDING or APPROVED_WITHOUT_FEE. (required)
+     * @return WithdrawalResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Withdrawal cancelled; it is now REJECTED and its reservation is back in available </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request: withdrawal_id is not a valid UUID </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied) </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: the withdrawal is not PENDING or APPROVED_WITHOUT_FEE. It has either already been approved for on-chain submission (a fee is locked, or a transaction is in flight) or already finished, and in neither case can it be cancelled </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too many requests: this route is rate limited per user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public WithdrawalResponseEnvelope cancelWithdrawal(@javax.annotation.Nonnull UUID withdrawalId) throws ApiException {
+        ApiResponse<WithdrawalResponseEnvelope> localVarResp = cancelWithdrawalWithHttpInfo(withdrawalId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Cancel the caller&#39;s own USDC withdrawal
+     * Cancels the caller&#39;s own withdrawal and returns its held quantity to their available balance. Only PENDING or APPROVED_WITHOUT_FEE withdrawals can be cancelled. Restricted to users whose native asset is USDC.
+     * @param withdrawalId The withdrawal to cancel. It must be owned by the caller and be in status PENDING or APPROVED_WITHOUT_FEE. (required)
+     * @return ApiResponse&lt;WithdrawalResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Withdrawal cancelled; it is now REJECTED and its reservation is back in available </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request: withdrawal_id is not a valid UUID </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied) </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: the withdrawal is not PENDING or APPROVED_WITHOUT_FEE. It has either already been approved for on-chain submission (a fee is locked, or a transaction is in flight) or already finished, and in neither case can it be cancelled </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too many requests: this route is rate limited per user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<WithdrawalResponseEnvelope> cancelWithdrawalWithHttpInfo(@javax.annotation.Nonnull UUID withdrawalId) throws ApiException {
+        okhttp3.Call localVarCall = cancelWithdrawalValidateBeforeCall(withdrawalId, null);
+        Type localVarReturnType = new TypeToken<WithdrawalResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Cancel the caller&#39;s own USDC withdrawal (asynchronously)
+     * Cancels the caller&#39;s own withdrawal and returns its held quantity to their available balance. Only PENDING or APPROVED_WITHOUT_FEE withdrawals can be cancelled. Restricted to users whose native asset is USDC.
+     * @param withdrawalId The withdrawal to cancel. It must be owned by the caller and be in status PENDING or APPROVED_WITHOUT_FEE. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Withdrawal cancelled; it is now REJECTED and its reservation is back in available </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request: withdrawal_id is not a valid UUID </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied) </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: the withdrawal is not PENDING or APPROVED_WITHOUT_FEE. It has either already been approved for on-chain submission (a fee is locked, or a transaction is in flight) or already finished, and in neither case can it be cancelled </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too many requests: this route is rate limited per user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call cancelWithdrawalAsync(@javax.annotation.Nonnull UUID withdrawalId, final ApiCallback<WithdrawalResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = cancelWithdrawalValidateBeforeCall(withdrawalId, _callback);
+        Type localVarReturnType = new TypeToken<WithdrawalResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for claimLeverageGetAccruedInterest
      * @param claimLeverageAccruedInterestRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -1605,10 +1767,12 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Prize claimed </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Prize claimed or QR reward fixed pending KYC </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, including when another funded challenge may contribute to account equity or when the reward request account lock was released; retry the request after the latter </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> QR reward deadline passed </td><td>  -  </td></tr>
+        <tr><td> 504 </td><td> Wind-down timed out </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call claimTradingChallengePrizeCall(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback _callback) throws ApiException {
@@ -1669,7 +1833,7 @@ public class DefaultApi {
 
     /**
      * Claim challenge prize
-     * Claim the prize of a challenge the caller is eligible for. A TOURNAMENT claim credits the prize matching the crown and reactivates the account. A CASH claim winds the account down, sweeps every remaining challenge credit and awards the CASH_CROWN: the account is left deactivated with a zero balance, and the reward is redeemed out of band. Both mark the participation PRIZE_CLAIMED.
+     * Claim an eligible trading challenge prize. TOURNAMENT requires completed KYC, credits the crown prize, reactivates the account, and marks the result PRIZE_CLAIMED. CASH requires completed KYC, winds down the account, sweeps remaining challenge credit, awards CASH_CROWN, and marks the result PRIZE_CLAIMED; the account stays deactivated with a zero balance. QR_PROMO accepts an eligible reward request before KYC, winds down the account, fixes the capped reward, queues a KYC email, and records REWARD_PENDING_KYC without paying the reward or reactivating the account.
      * @param tradingChallengeId  (required)
      * @return ClaimTradingChallengeResponseEnvelope
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1677,10 +1841,12 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Prize claimed </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Prize claimed or QR reward fixed pending KYC </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, including when another funded challenge may contribute to account equity or when the reward request account lock was released; retry the request after the latter </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> QR reward deadline passed </td><td>  -  </td></tr>
+        <tr><td> 504 </td><td> Wind-down timed out </td><td>  -  </td></tr>
      </table>
      */
     public ClaimTradingChallengeResponseEnvelope claimTradingChallengePrize(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
@@ -1690,7 +1856,7 @@ public class DefaultApi {
 
     /**
      * Claim challenge prize
-     * Claim the prize of a challenge the caller is eligible for. A TOURNAMENT claim credits the prize matching the crown and reactivates the account. A CASH claim winds the account down, sweeps every remaining challenge credit and awards the CASH_CROWN: the account is left deactivated with a zero balance, and the reward is redeemed out of band. Both mark the participation PRIZE_CLAIMED.
+     * Claim an eligible trading challenge prize. TOURNAMENT requires completed KYC, credits the crown prize, reactivates the account, and marks the result PRIZE_CLAIMED. CASH requires completed KYC, winds down the account, sweeps remaining challenge credit, awards CASH_CROWN, and marks the result PRIZE_CLAIMED; the account stays deactivated with a zero balance. QR_PROMO accepts an eligible reward request before KYC, winds down the account, fixes the capped reward, queues a KYC email, and records REWARD_PENDING_KYC without paying the reward or reactivating the account.
      * @param tradingChallengeId  (required)
      * @return ApiResponse&lt;ClaimTradingChallengeResponseEnvelope&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1698,10 +1864,12 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Prize claimed </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Prize claimed or QR reward fixed pending KYC </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, including when another funded challenge may contribute to account equity or when the reward request account lock was released; retry the request after the latter </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> QR reward deadline passed </td><td>  -  </td></tr>
+        <tr><td> 504 </td><td> Wind-down timed out </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<ClaimTradingChallengeResponseEnvelope> claimTradingChallengePrizeWithHttpInfo(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
@@ -1712,7 +1880,7 @@ public class DefaultApi {
 
     /**
      * Claim challenge prize (asynchronously)
-     * Claim the prize of a challenge the caller is eligible for. A TOURNAMENT claim credits the prize matching the crown and reactivates the account. A CASH claim winds the account down, sweeps every remaining challenge credit and awards the CASH_CROWN: the account is left deactivated with a zero balance, and the reward is redeemed out of band. Both mark the participation PRIZE_CLAIMED.
+     * Claim an eligible trading challenge prize. TOURNAMENT requires completed KYC, credits the crown prize, reactivates the account, and marks the result PRIZE_CLAIMED. CASH requires completed KYC, winds down the account, sweeps remaining challenge credit, awards CASH_CROWN, and marks the result PRIZE_CLAIMED; the account stays deactivated with a zero balance. QR_PROMO accepts an eligible reward request before KYC, winds down the account, fixes the capped reward, queues a KYC email, and records REWARD_PENDING_KYC without paying the reward or reactivating the account.
      * @param tradingChallengeId  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -1721,16 +1889,151 @@ public class DefaultApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Prize claimed </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Prize claimed or QR reward fixed pending KYC </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, including when another funded challenge may contribute to account equity or when the reward request account lock was released; retry the request after the latter </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 410 </td><td> QR reward deadline passed </td><td>  -  </td></tr>
+        <tr><td> 504 </td><td> Wind-down timed out </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call claimTradingChallengePrizeAsync(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback<ClaimTradingChallengeResponseEnvelope> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = claimTradingChallengePrizeValidateBeforeCall(tradingChallengeId, _callback);
         Type localVarReturnType = new TypeToken<ClaimTradingChallengeResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for closeAllIsolatedPositions
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> All open isolated positions are queued for close </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid isolated position shape </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found, e.g. an isolated position has no matching order book </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call closeAllIsolatedPositionsCall(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/positions/close/all";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call closeAllIsolatedPositionsValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return closeAllIsolatedPositionsCall(_callback);
+
+    }
+
+    /**
+     * Close all open isolated positions in one request
+     * 
+     * @return CloseAllPositionsResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> All open isolated positions are queued for close </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid isolated position shape </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found, e.g. an isolated position has no matching order book </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public CloseAllPositionsResponseEnvelope closeAllIsolatedPositions() throws ApiException {
+        ApiResponse<CloseAllPositionsResponseEnvelope> localVarResp = closeAllIsolatedPositionsWithHttpInfo();
+        return localVarResp.getData();
+    }
+
+    /**
+     * Close all open isolated positions in one request
+     * 
+     * @return ApiResponse&lt;CloseAllPositionsResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> All open isolated positions are queued for close </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid isolated position shape </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found, e.g. an isolated position has no matching order book </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<CloseAllPositionsResponseEnvelope> closeAllIsolatedPositionsWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = closeAllIsolatedPositionsValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<CloseAllPositionsResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Close all open isolated positions in one request (asynchronously)
+     * 
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> All open isolated positions are queued for close </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid isolated position shape </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not found, e.g. an isolated position has no matching order book </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call closeAllIsolatedPositionsAsync(final ApiCallback<CloseAllPositionsResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = closeAllIsolatedPositionsValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<CloseAllPositionsResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -3017,8 +3320,8 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Idempotent replay: a request with the same withdrawal_id, to_address and quantity; the existing withdrawal is returned unchanged </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. an invalid body, destination address, or quantity </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or the withdrawal would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict, e.g. insufficient available balance, no USD ledger account to withdraw from, an unhealthy account, overdue coupon payments, a withdrawal_id already in use by another user, or a withdrawal_id reused with a to_address or quantity that does not match the existing withdrawal </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or the withdrawal would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. insufficient available balance, no USD ledger account to withdraw from, an unhealthy account, overdue coupon payments, a withdrawal_id already in use by another user, a withdrawal_id reused with a to_address or quantity that does not match the existing withdrawal, or the caller already having another withdrawal still in progress (only one at a time is allowed; the error names the withdrawal that is in the way) </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -3080,7 +3383,7 @@ public class DefaultApi {
 
     /**
      * Create a USDC withdrawal request
-     * Reserves the requested quantity against the caller&#39;s available balance (moving it to pending_withdrawal) and creates a PENDING withdrawal. No fee quote is required and no fee is reserved: the withdrawal&#39;s fee is quoted and locked later, as part of approval. Idempotent on withdrawal_id: a repeat request carrying the same to_address and quantity reserves nothing further and returns the existing withdrawal with 200. Reusing a withdrawal_id with a different to_address or quantity is a conflict (409), not a replay, and reserves nothing. Restricted to DORA tenant users whose native asset is USDC.
+     * Requests a USDC withdrawal, holding the quantity from the caller&#39;s available balance until it completes or is cancelled. The fee is quoted and locked after admin approval. Idempotent on withdrawal_id; only one withdrawal may be in progress at a time. Restricted to users whose native asset is USDC.
      * @param createWithdrawalRequest  (required)
      * @return WithdrawalResponseEnvelope
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -3092,8 +3395,8 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Idempotent replay: a request with the same withdrawal_id, to_address and quantity; the existing withdrawal is returned unchanged </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. an invalid body, destination address, or quantity </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or the withdrawal would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict, e.g. insufficient available balance, no USD ledger account to withdraw from, an unhealthy account, overdue coupon payments, a withdrawal_id already in use by another user, or a withdrawal_id reused with a to_address or quantity that does not match the existing withdrawal </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or the withdrawal would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. insufficient available balance, no USD ledger account to withdraw from, an unhealthy account, overdue coupon payments, a withdrawal_id already in use by another user, a withdrawal_id reused with a to_address or quantity that does not match the existing withdrawal, or the caller already having another withdrawal still in progress (only one at a time is allowed; the error names the withdrawal that is in the way) </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -3104,7 +3407,7 @@ public class DefaultApi {
 
     /**
      * Create a USDC withdrawal request
-     * Reserves the requested quantity against the caller&#39;s available balance (moving it to pending_withdrawal) and creates a PENDING withdrawal. No fee quote is required and no fee is reserved: the withdrawal&#39;s fee is quoted and locked later, as part of approval. Idempotent on withdrawal_id: a repeat request carrying the same to_address and quantity reserves nothing further and returns the existing withdrawal with 200. Reusing a withdrawal_id with a different to_address or quantity is a conflict (409), not a replay, and reserves nothing. Restricted to DORA tenant users whose native asset is USDC.
+     * Requests a USDC withdrawal, holding the quantity from the caller&#39;s available balance until it completes or is cancelled. The fee is quoted and locked after admin approval. Idempotent on withdrawal_id; only one withdrawal may be in progress at a time. Restricted to users whose native asset is USDC.
      * @param createWithdrawalRequest  (required)
      * @return ApiResponse&lt;WithdrawalResponseEnvelope&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -3116,8 +3419,8 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Idempotent replay: a request with the same withdrawal_id, to_address and quantity; the existing withdrawal is returned unchanged </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. an invalid body, destination address, or quantity </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or the withdrawal would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict, e.g. insufficient available balance, no USD ledger account to withdraw from, an unhealthy account, overdue coupon payments, a withdrawal_id already in use by another user, or a withdrawal_id reused with a to_address or quantity that does not match the existing withdrawal </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or the withdrawal would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. insufficient available balance, no USD ledger account to withdraw from, an unhealthy account, overdue coupon payments, a withdrawal_id already in use by another user, a withdrawal_id reused with a to_address or quantity that does not match the existing withdrawal, or the caller already having another withdrawal still in progress (only one at a time is allowed; the error names the withdrawal that is in the way) </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -3129,7 +3432,7 @@ public class DefaultApi {
 
     /**
      * Create a USDC withdrawal request (asynchronously)
-     * Reserves the requested quantity against the caller&#39;s available balance (moving it to pending_withdrawal) and creates a PENDING withdrawal. No fee quote is required and no fee is reserved: the withdrawal&#39;s fee is quoted and locked later, as part of approval. Idempotent on withdrawal_id: a repeat request carrying the same to_address and quantity reserves nothing further and returns the existing withdrawal with 200. Reusing a withdrawal_id with a different to_address or quantity is a conflict (409), not a replay, and reserves nothing. Restricted to DORA tenant users whose native asset is USDC.
+     * Requests a USDC withdrawal, holding the quantity from the caller&#39;s available balance until it completes or is cancelled. The fee is quoted and locked after admin approval. Idempotent on withdrawal_id; only one withdrawal may be in progress at a time. Restricted to users whose native asset is USDC.
      * @param createWithdrawalRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -3142,8 +3445,8 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Idempotent replay: a request with the same withdrawal_id, to_address and quantity; the existing withdrawal is returned unchanged </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. an invalid body, destination address, or quantity </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or the withdrawal would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict, e.g. insufficient available balance, no USD ledger account to withdraw from, an unhealthy account, overdue coupon payments, a withdrawal_id already in use by another user, or a withdrawal_id reused with a to_address or quantity that does not match the existing withdrawal </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or the withdrawal would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict, e.g. insufficient available balance, no USD ledger account to withdraw from, an unhealthy account, overdue coupon payments, a withdrawal_id already in use by another user, a withdrawal_id reused with a to_address or quantity that does not match the existing withdrawal, or the caller already having another withdrawal still in progress (only one at a time is allowed; the error names the withdrawal that is in the way) </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -3151,6 +3454,167 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = createWithdrawalValidateBeforeCall(createWithdrawalRequest, _callback);
         Type localVarReturnType = new TypeToken<WithdrawalResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for customizeAffiliateReferrerCode
+     * @param referrerId  (required)
+     * @param customizeAffiliateReferrerCodeRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updated affiliate membership </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid referral code or request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User or tenant context required </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Affiliate membership not found or not owned by a non-admin caller </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Code already in use or unchanged, or membership already customized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call customizeAffiliateReferrerCodeCall(@javax.annotation.Nonnull UUID referrerId, @javax.annotation.Nonnull CustomizeAffiliateReferrerCodeRequest customizeAffiliateReferrerCodeRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = customizeAffiliateReferrerCodeRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/affiliate_referrers/{referrer_id}/code"
+            .replace("{" + "referrer_id" + "}", localVarApiClient.escapeString(referrerId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call customizeAffiliateReferrerCodeValidateBeforeCall(@javax.annotation.Nonnull UUID referrerId, @javax.annotation.Nonnull CustomizeAffiliateReferrerCodeRequest customizeAffiliateReferrerCodeRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'referrerId' is set
+        if (referrerId == null) {
+            throw new ApiException("Missing the required parameter 'referrerId' when calling customizeAffiliateReferrerCode(Async)");
+        }
+
+        // verify the required parameter 'customizeAffiliateReferrerCodeRequest' is set
+        if (customizeAffiliateReferrerCodeRequest == null) {
+            throw new ApiException("Missing the required parameter 'customizeAffiliateReferrerCodeRequest' when calling customizeAffiliateReferrerCode(Async)");
+        }
+
+        return customizeAffiliateReferrerCodeCall(referrerId, customizeAffiliateReferrerCodeRequest, _callback);
+
+    }
+
+    /**
+     * Change an affiliate referral code
+     * The owner of this affiliate membership may change its primary code once. ADMIN callers may change any membership&#39;s code repeatedly across tenants. Admin changes preserve the owner&#39;s remaining one-time change. Changes are allowed while the program is inactive. Its initial code, whether generated or chosen by an admin, does not count as the change. Previous codes remain aliases and cannot be reused; codes resolve only while the program is active. Codes are unique across all programs and tenants, including for admins.
+     * @param referrerId  (required)
+     * @param customizeAffiliateReferrerCodeRequest  (required)
+     * @return AffiliateReferrerEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updated affiliate membership </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid referral code or request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User or tenant context required </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Affiliate membership not found or not owned by a non-admin caller </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Code already in use or unchanged, or membership already customized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AffiliateReferrerEnvelope customizeAffiliateReferrerCode(@javax.annotation.Nonnull UUID referrerId, @javax.annotation.Nonnull CustomizeAffiliateReferrerCodeRequest customizeAffiliateReferrerCodeRequest) throws ApiException {
+        ApiResponse<AffiliateReferrerEnvelope> localVarResp = customizeAffiliateReferrerCodeWithHttpInfo(referrerId, customizeAffiliateReferrerCodeRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Change an affiliate referral code
+     * The owner of this affiliate membership may change its primary code once. ADMIN callers may change any membership&#39;s code repeatedly across tenants. Admin changes preserve the owner&#39;s remaining one-time change. Changes are allowed while the program is inactive. Its initial code, whether generated or chosen by an admin, does not count as the change. Previous codes remain aliases and cannot be reused; codes resolve only while the program is active. Codes are unique across all programs and tenants, including for admins.
+     * @param referrerId  (required)
+     * @param customizeAffiliateReferrerCodeRequest  (required)
+     * @return ApiResponse&lt;AffiliateReferrerEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updated affiliate membership </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid referral code or request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User or tenant context required </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Affiliate membership not found or not owned by a non-admin caller </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Code already in use or unchanged, or membership already customized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AffiliateReferrerEnvelope> customizeAffiliateReferrerCodeWithHttpInfo(@javax.annotation.Nonnull UUID referrerId, @javax.annotation.Nonnull CustomizeAffiliateReferrerCodeRequest customizeAffiliateReferrerCodeRequest) throws ApiException {
+        okhttp3.Call localVarCall = customizeAffiliateReferrerCodeValidateBeforeCall(referrerId, customizeAffiliateReferrerCodeRequest, null);
+        Type localVarReturnType = new TypeToken<AffiliateReferrerEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Change an affiliate referral code (asynchronously)
+     * The owner of this affiliate membership may change its primary code once. ADMIN callers may change any membership&#39;s code repeatedly across tenants. Admin changes preserve the owner&#39;s remaining one-time change. Changes are allowed while the program is inactive. Its initial code, whether generated or chosen by an admin, does not count as the change. Previous codes remain aliases and cannot be reused; codes resolve only while the program is active. Codes are unique across all programs and tenants, including for admins.
+     * @param referrerId  (required)
+     * @param customizeAffiliateReferrerCodeRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updated affiliate membership </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid referral code or request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User or tenant context required </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Affiliate membership not found or not owned by a non-admin caller </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Code already in use or unchanged, or membership already customized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call customizeAffiliateReferrerCodeAsync(@javax.annotation.Nonnull UUID referrerId, @javax.annotation.Nonnull CustomizeAffiliateReferrerCodeRequest customizeAffiliateReferrerCodeRequest, final ApiCallback<AffiliateReferrerEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = customizeAffiliateReferrerCodeValidateBeforeCall(referrerId, customizeAffiliateReferrerCodeRequest, _callback);
+        Type localVarReturnType = new TypeToken<AffiliateReferrerEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -4826,6 +5290,149 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for getAutoRebalanceAccountStatusV2
+     * @param accountId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Auto-rebalance configuration with current collateral status </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid account ID </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Auto-rebalance config was not found for this account or caller </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getAutoRebalanceAccountStatusV2Call(@javax.annotation.Nonnull UUID accountId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v2/accounts/auto_rebalance/config/{account_id}"
+            .replace("{" + "account_id" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getAutoRebalanceAccountStatusV2ValidateBeforeCall(@javax.annotation.Nonnull UUID accountId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling getAutoRebalanceAccountStatusV2(Async)");
+        }
+
+        return getAutoRebalanceAccountStatusV2Call(accountId, _callback);
+
+    }
+
+    /**
+     * Get auto-rebalance configuration and live status for one isolated account
+     * 
+     * @param accountId  (required)
+     * @return GetAutoRebalanceAccountStatusResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Auto-rebalance configuration with current collateral status </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid account ID </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Auto-rebalance config was not found for this account or caller </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public GetAutoRebalanceAccountStatusResponseEnvelope getAutoRebalanceAccountStatusV2(@javax.annotation.Nonnull UUID accountId) throws ApiException {
+        ApiResponse<GetAutoRebalanceAccountStatusResponseEnvelope> localVarResp = getAutoRebalanceAccountStatusV2WithHttpInfo(accountId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get auto-rebalance configuration and live status for one isolated account
+     * 
+     * @param accountId  (required)
+     * @return ApiResponse&lt;GetAutoRebalanceAccountStatusResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Auto-rebalance configuration with current collateral status </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid account ID </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Auto-rebalance config was not found for this account or caller </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<GetAutoRebalanceAccountStatusResponseEnvelope> getAutoRebalanceAccountStatusV2WithHttpInfo(@javax.annotation.Nonnull UUID accountId) throws ApiException {
+        okhttp3.Call localVarCall = getAutoRebalanceAccountStatusV2ValidateBeforeCall(accountId, null);
+        Type localVarReturnType = new TypeToken<GetAutoRebalanceAccountStatusResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get auto-rebalance configuration and live status for one isolated account (asynchronously)
+     * 
+     * @param accountId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Auto-rebalance configuration with current collateral status </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid account ID </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Auto-rebalance config was not found for this account or caller </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getAutoRebalanceAccountStatusV2Async(@javax.annotation.Nonnull UUID accountId, final ApiCallback<GetAutoRebalanceAccountStatusResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getAutoRebalanceAccountStatusV2ValidateBeforeCall(accountId, _callback);
+        Type localVarReturnType = new TypeToken<GetAutoRebalanceAccountStatusResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for getCandleData
      * @param orderBookId  (required)
      * @param start  (required)
@@ -5566,7 +6173,7 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Per-chain deposit instructions for the authenticated user </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid or missing quantity, owner_address, or nonce, or an invalid client_reference_id </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC, under a tenant with web3 enabled. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -5653,7 +6260,7 @@ public class DefaultApi {
 
     /**
      * Get per-chain instructions for depositing USDC into the Dora vault
-     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry. Restricted to DORA tenant users whose native asset is USDC.
+     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry. Restricted to users whose native asset is USDC, under a tenant with web3 enabled.
      * @param quantity Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. (required)
      * @param ownerAddress The user&#39;s wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner. (required)
      * @param nonce The owner&#39;s current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain. (required)
@@ -5667,7 +6274,7 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Per-chain deposit instructions for the authenticated user </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid or missing quantity, owner_address, or nonce, or an invalid client_reference_id </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC, under a tenant with web3 enabled. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -5678,7 +6285,7 @@ public class DefaultApi {
 
     /**
      * Get per-chain instructions for depositing USDC into the Dora vault
-     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry. Restricted to DORA tenant users whose native asset is USDC.
+     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry. Restricted to users whose native asset is USDC, under a tenant with web3 enabled.
      * @param quantity Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. (required)
      * @param ownerAddress The user&#39;s wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner. (required)
      * @param nonce The owner&#39;s current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain. (required)
@@ -5692,7 +6299,7 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Per-chain deposit instructions for the authenticated user </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid or missing quantity, owner_address, or nonce, or an invalid client_reference_id </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC, under a tenant with web3 enabled. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -5704,7 +6311,7 @@ public class DefaultApi {
 
     /**
      * Get per-chain instructions for depositing USDC into the Dora vault (asynchronously)
-     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry. Restricted to DORA tenant users whose native asset is USDC.
+     * Returns everything the caller needs to deposit USDC into the Dora vault with a single signature and a single transaction: an EIP-712 (EIP-2612 permit) typed-data payload to sign with eth_signTypedData_v4, and the descriptor of the vault deposit() call. The client splits the permit signature into v/r/s and ABI-encodes the deposit function with the returned args plus (v, r, s); no separate approve transaction is needed. Only a single chain is currently supported: the provided nonce belongs to it, and the chains array holds at most one entry. Restricted to users whose native asset is USDC, under a tenant with web3 enabled.
      * @param quantity Human-decimal USDC quantity to deposit, e.g. &#39;100.50&#39;. Must be positive, with at most 6 decimal places. (required)
      * @param ownerAddress The user&#39;s wallet address as a 0x-prefixed 20-byte hex string. Used as the permit owner. (required)
      * @param nonce The owner&#39;s current USDC permit nonce (read client-side), as a non-negative decimal string. It belongs to the single supported chain. (required)
@@ -5719,7 +6326,7 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Per-chain deposit instructions for the authenticated user </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. invalid or missing quantity, owner_address, or nonce, or an invalid client_reference_id </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC, under a tenant with web3 enabled. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
@@ -5727,6 +6334,173 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = getDepositInstructionsValidateBeforeCall(quantity, ownerAddress, nonce, clientReferenceId, _callback);
         Type localVarReturnType = new TypeToken<DepositInstructionsResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getGlobalLeaderboard
+     * @param start Inclusive start date in YYYY-MM-DD format. (required)
+     * @param end Inclusive end date in YYYY-MM-DD format. (required)
+     * @param limit Maximum number of rows to return. Defaults to 100. (optional, default to 100)
+     * @param offset Number of rows to skip before collecting the result set. (optional, default to 0)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Global leaderboard results </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getGlobalLeaderboardCall(@javax.annotation.Nonnull LocalDate start, @javax.annotation.Nonnull LocalDate end, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer offset, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading/global_leaderboard";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (start != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("start", start));
+        }
+
+        if (end != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("end", end));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (offset != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("offset", offset));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getGlobalLeaderboardValidateBeforeCall(@javax.annotation.Nonnull LocalDate start, @javax.annotation.Nonnull LocalDate end, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer offset, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'start' is set
+        if (start == null) {
+            throw new ApiException("Missing the required parameter 'start' when calling getGlobalLeaderboard(Async)");
+        }
+
+        // verify the required parameter 'end' is set
+        if (end == null) {
+            throw new ApiException("Missing the required parameter 'end' when calling getGlobalLeaderboard(Async)");
+        }
+
+        return getGlobalLeaderboardCall(start, end, limit, offset, _callback);
+
+    }
+
+    /**
+     * Get global leaderboard
+     * 
+     * @param start Inclusive start date in YYYY-MM-DD format. (required)
+     * @param end Inclusive end date in YYYY-MM-DD format. (required)
+     * @param limit Maximum number of rows to return. Defaults to 100. (optional, default to 100)
+     * @param offset Number of rows to skip before collecting the result set. (optional, default to 0)
+     * @return GlobalLeaderboardResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Global leaderboard results </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public GlobalLeaderboardResponseEnvelope getGlobalLeaderboard(@javax.annotation.Nonnull LocalDate start, @javax.annotation.Nonnull LocalDate end, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer offset) throws ApiException {
+        ApiResponse<GlobalLeaderboardResponseEnvelope> localVarResp = getGlobalLeaderboardWithHttpInfo(start, end, limit, offset);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get global leaderboard
+     * 
+     * @param start Inclusive start date in YYYY-MM-DD format. (required)
+     * @param end Inclusive end date in YYYY-MM-DD format. (required)
+     * @param limit Maximum number of rows to return. Defaults to 100. (optional, default to 100)
+     * @param offset Number of rows to skip before collecting the result set. (optional, default to 0)
+     * @return ApiResponse&lt;GlobalLeaderboardResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Global leaderboard results </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<GlobalLeaderboardResponseEnvelope> getGlobalLeaderboardWithHttpInfo(@javax.annotation.Nonnull LocalDate start, @javax.annotation.Nonnull LocalDate end, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer offset) throws ApiException {
+        okhttp3.Call localVarCall = getGlobalLeaderboardValidateBeforeCall(start, end, limit, offset, null);
+        Type localVarReturnType = new TypeToken<GlobalLeaderboardResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get global leaderboard (asynchronously)
+     * 
+     * @param start Inclusive start date in YYYY-MM-DD format. (required)
+     * @param end Inclusive end date in YYYY-MM-DD format. (required)
+     * @param limit Maximum number of rows to return. Defaults to 100. (optional, default to 100)
+     * @param offset Number of rows to skip before collecting the result set. (optional, default to 0)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Global leaderboard results </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getGlobalLeaderboardAsync(@javax.annotation.Nonnull LocalDate start, @javax.annotation.Nonnull LocalDate end, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer offset, final ApiCallback<GlobalLeaderboardResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getGlobalLeaderboardValidateBeforeCall(start, end, limit, offset, _callback);
+        Type localVarReturnType = new TypeToken<GlobalLeaderboardResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -8876,6 +9650,153 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for getQRRewardPreview
+     * @param tradingChallengeId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Live eligibility or fixed reward state </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Reward preview is available only for QR challenges </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Not a participant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Challenge not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getQRRewardPreviewCall(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/trading_challenges/{trading_challenge_id}/reward"
+            .replace("{" + "trading_challenge_id" + "}", localVarApiClient.escapeString(tradingChallengeId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getQRRewardPreviewValidateBeforeCall(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'tradingChallengeId' is set
+        if (tradingChallengeId == null) {
+            throw new ApiException("Missing the required parameter 'tradingChallengeId' when calling getQRRewardPreview(Async)");
+        }
+
+        return getQRRewardPreviewCall(tradingChallengeId, _callback);
+
+    }
+
+    /**
+     * Preview QR reward eligibility
+     * Read-only projection for the authenticated QR participant. Request recomputes eligibility after wind-down; KYC is not a request blocker.
+     * @param tradingChallengeId  (required)
+     * @return QRRewardPreviewEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Live eligibility or fixed reward state </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Reward preview is available only for QR challenges </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Not a participant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Challenge not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public QRRewardPreviewEnvelope getQRRewardPreview(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
+        ApiResponse<QRRewardPreviewEnvelope> localVarResp = getQRRewardPreviewWithHttpInfo(tradingChallengeId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Preview QR reward eligibility
+     * Read-only projection for the authenticated QR participant. Request recomputes eligibility after wind-down; KYC is not a request blocker.
+     * @param tradingChallengeId  (required)
+     * @return ApiResponse&lt;QRRewardPreviewEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Live eligibility or fixed reward state </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Reward preview is available only for QR challenges </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Not a participant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Challenge not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<QRRewardPreviewEnvelope> getQRRewardPreviewWithHttpInfo(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
+        okhttp3.Call localVarCall = getQRRewardPreviewValidateBeforeCall(tradingChallengeId, null);
+        Type localVarReturnType = new TypeToken<QRRewardPreviewEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Preview QR reward eligibility (asynchronously)
+     * Read-only projection for the authenticated QR participant. Request recomputes eligibility after wind-down; KYC is not a request blocker.
+     * @param tradingChallengeId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Live eligibility or fixed reward state </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Reward preview is available only for QR challenges </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Not a participant </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Challenge not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getQRRewardPreviewAsync(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback<QRRewardPreviewEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getQRRewardPreviewValidateBeforeCall(tradingChallengeId, _callback);
+        Type localVarReturnType = new TypeToken<QRRewardPreviewEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for getRealizedPnlSettlements
      * @param userId  (optional)
      * @param tenantId  (optional)
@@ -9564,183 +10485,6 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = getTradesValidateBeforeCall(orderBookIds, userIds, start, end, page, limit, _callback);
         Type localVarReturnType = new TypeToken<ListTradeResponseEnvelope>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for getTradingChallengeAllResults
-     * @param board Leaderboard board selector. (required)
-     * @param start Inclusive start date in YYYY-MM-DD format. (required)
-     * @param end Inclusive end date in YYYY-MM-DD format. (required)
-     * @param tradingChallengeType Challenge type to include in aggregation. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> All trading challenge results </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getTradingChallengeAllResultsCall(@javax.annotation.Nonnull String board, @javax.annotation.Nonnull LocalDate start, @javax.annotation.Nonnull LocalDate end, @javax.annotation.Nonnull TradingChallengeType tradingChallengeType, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/v1/trading_challenges/all/results";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (board != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("board", board));
-        }
-
-        if (start != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("start", start));
-        }
-
-        if (end != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("end", end));
-        }
-
-        if (tradingChallengeType != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("trading_challenge_type", tradingChallengeType));
-        }
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call getTradingChallengeAllResultsValidateBeforeCall(@javax.annotation.Nonnull String board, @javax.annotation.Nonnull LocalDate start, @javax.annotation.Nonnull LocalDate end, @javax.annotation.Nonnull TradingChallengeType tradingChallengeType, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'board' is set
-        if (board == null) {
-            throw new ApiException("Missing the required parameter 'board' when calling getTradingChallengeAllResults(Async)");
-        }
-
-        // verify the required parameter 'start' is set
-        if (start == null) {
-            throw new ApiException("Missing the required parameter 'start' when calling getTradingChallengeAllResults(Async)");
-        }
-
-        // verify the required parameter 'end' is set
-        if (end == null) {
-            throw new ApiException("Missing the required parameter 'end' when calling getTradingChallengeAllResults(Async)");
-        }
-
-        // verify the required parameter 'tradingChallengeType' is set
-        if (tradingChallengeType == null) {
-            throw new ApiException("Missing the required parameter 'tradingChallengeType' when calling getTradingChallengeAllResults(Async)");
-        }
-
-        return getTradingChallengeAllResultsCall(board, start, end, tradingChallengeType, _callback);
-
-    }
-
-    /**
-     * Get combined results across all trading challenge
-     * List trading challenge leaderboard/results filtered by board, trading_challenge_type, start date and end date across all challenges.
-     * @param board Leaderboard board selector. (required)
-     * @param start Inclusive start date in YYYY-MM-DD format. (required)
-     * @param end Inclusive end date in YYYY-MM-DD format. (required)
-     * @param tradingChallengeType Challenge type to include in aggregation. (required)
-     * @return TradingChallengeAllResultsResponseEnvelope
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> All trading challenge results </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     </table>
-     */
-    public TradingChallengeAllResultsResponseEnvelope getTradingChallengeAllResults(@javax.annotation.Nonnull String board, @javax.annotation.Nonnull LocalDate start, @javax.annotation.Nonnull LocalDate end, @javax.annotation.Nonnull TradingChallengeType tradingChallengeType) throws ApiException {
-        ApiResponse<TradingChallengeAllResultsResponseEnvelope> localVarResp = getTradingChallengeAllResultsWithHttpInfo(board, start, end, tradingChallengeType);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Get combined results across all trading challenge
-     * List trading challenge leaderboard/results filtered by board, trading_challenge_type, start date and end date across all challenges.
-     * @param board Leaderboard board selector. (required)
-     * @param start Inclusive start date in YYYY-MM-DD format. (required)
-     * @param end Inclusive end date in YYYY-MM-DD format. (required)
-     * @param tradingChallengeType Challenge type to include in aggregation. (required)
-     * @return ApiResponse&lt;TradingChallengeAllResultsResponseEnvelope&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> All trading challenge results </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<TradingChallengeAllResultsResponseEnvelope> getTradingChallengeAllResultsWithHttpInfo(@javax.annotation.Nonnull String board, @javax.annotation.Nonnull LocalDate start, @javax.annotation.Nonnull LocalDate end, @javax.annotation.Nonnull TradingChallengeType tradingChallengeType) throws ApiException {
-        okhttp3.Call localVarCall = getTradingChallengeAllResultsValidateBeforeCall(board, start, end, tradingChallengeType, null);
-        Type localVarReturnType = new TypeToken<TradingChallengeAllResultsResponseEnvelope>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Get combined results across all trading challenge (asynchronously)
-     * List trading challenge leaderboard/results filtered by board, trading_challenge_type, start date and end date across all challenges.
-     * @param board Leaderboard board selector. (required)
-     * @param start Inclusive start date in YYYY-MM-DD format. (required)
-     * @param end Inclusive end date in YYYY-MM-DD format. (required)
-     * @param tradingChallengeType Challenge type to include in aggregation. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> All trading challenge results </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad request </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getTradingChallengeAllResultsAsync(@javax.annotation.Nonnull String board, @javax.annotation.Nonnull LocalDate start, @javax.annotation.Nonnull LocalDate end, @javax.annotation.Nonnull TradingChallengeType tradingChallengeType, final ApiCallback<TradingChallengeAllResultsResponseEnvelope> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = getTradingChallengeAllResultsValidateBeforeCall(board, start, end, tradingChallengeType, _callback);
-        Type localVarReturnType = new TypeToken<TradingChallengeAllResultsResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -12600,7 +13344,7 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Fee quote for the requested withdrawal </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request: the withdrawal_id query parameter is missing or is not a UUID </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict: the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), or it is bound to a chain other than the registered one </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Rate limit exceeded; this endpoint is limited to 1 request per minute per user </td><td>  -  </td></tr>
@@ -12670,7 +13414,7 @@ public class DefaultApi {
 
     /**
      * Estimate the network fee to withdraw USDC via web3
-     * Examines on-chain conditions and simulates the named withdrawal to estimate the network fee the user must reserve before it can be submitted on-chain. The withdrawal must already exist, belong to the caller, and have been approved by an admin (status APPROVED_WITHOUT_FEE); its destination and quantity are read from the row, not taken from the request. The returned quote token is bound to that one withdrawal and is redeemed at PUT /v1/web3/withdrawals/{withdrawal_id}, which reserves the fee and moves the withdrawal to APPROVED. Restricted to DORA tenant users whose native asset is USDC.
+     * Estimates the network fee for an existing, admin-approved (APPROVED_WITHOUT_FEE) withdrawal owned by the caller. Redeem the returned quote token at PUT /v1/web3/withdrawals/{withdrawal_id} to reserve the fee. Restricted to USDC native-asset users.
      * @param withdrawalId The withdrawal to quote a fee for. It must belong to the caller and be in status APPROVED_WITHOUT_FEE; the destination and quantity are read from it rather than supplied here. (required)
      * @return FeeQuoteResponseEnvelope
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -12681,7 +13425,7 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Fee quote for the requested withdrawal </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request: the withdrawal_id query parameter is missing or is not a UUID </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict: the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), or it is bound to a chain other than the registered one </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Rate limit exceeded; this endpoint is limited to 1 request per minute per user </td><td>  -  </td></tr>
@@ -12697,7 +13441,7 @@ public class DefaultApi {
 
     /**
      * Estimate the network fee to withdraw USDC via web3
-     * Examines on-chain conditions and simulates the named withdrawal to estimate the network fee the user must reserve before it can be submitted on-chain. The withdrawal must already exist, belong to the caller, and have been approved by an admin (status APPROVED_WITHOUT_FEE); its destination and quantity are read from the row, not taken from the request. The returned quote token is bound to that one withdrawal and is redeemed at PUT /v1/web3/withdrawals/{withdrawal_id}, which reserves the fee and moves the withdrawal to APPROVED. Restricted to DORA tenant users whose native asset is USDC.
+     * Estimates the network fee for an existing, admin-approved (APPROVED_WITHOUT_FEE) withdrawal owned by the caller. Redeem the returned quote token at PUT /v1/web3/withdrawals/{withdrawal_id} to reserve the fee. Restricted to USDC native-asset users.
      * @param withdrawalId The withdrawal to quote a fee for. It must belong to the caller and be in status APPROVED_WITHOUT_FEE; the destination and quantity are read from it rather than supplied here. (required)
      * @return ApiResponse&lt;FeeQuoteResponseEnvelope&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -12708,7 +13452,7 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Fee quote for the requested withdrawal </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request: the withdrawal_id query parameter is missing or is not a UUID </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict: the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), or it is bound to a chain other than the registered one </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Rate limit exceeded; this endpoint is limited to 1 request per minute per user </td><td>  -  </td></tr>
@@ -12725,7 +13469,7 @@ public class DefaultApi {
 
     /**
      * Estimate the network fee to withdraw USDC via web3 (asynchronously)
-     * Examines on-chain conditions and simulates the named withdrawal to estimate the network fee the user must reserve before it can be submitted on-chain. The withdrawal must already exist, belong to the caller, and have been approved by an admin (status APPROVED_WITHOUT_FEE); its destination and quantity are read from the row, not taken from the request. The returned quote token is bound to that one withdrawal and is redeemed at PUT /v1/web3/withdrawals/{withdrawal_id}, which reserves the fee and moves the withdrawal to APPROVED. Restricted to DORA tenant users whose native asset is USDC.
+     * Estimates the network fee for an existing, admin-approved (APPROVED_WITHOUT_FEE) withdrawal owned by the caller. Redeem the returned quote token at PUT /v1/web3/withdrawals/{withdrawal_id} to reserve the fee. Restricted to USDC native-asset users.
      * @param withdrawalId The withdrawal to quote a fee for. It must belong to the caller and be in status APPROVED_WITHOUT_FEE; the destination and quantity are read from it rather than supplied here. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -12737,7 +13481,7 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Fee quote for the requested withdrawal </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request: the withdrawal_id query parameter is missing or is not a UUID </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC. Admin and indexer API keys have no native asset and are also denied. </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict: the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), or it is bound to a chain other than the registered one </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Rate limit exceeded; this endpoint is limited to 1 request per minute per user </td><td>  -  </td></tr>
@@ -15902,6 +16646,256 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for listAutoRebalanceConfigsV2
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Persisted auto-rebalance configurations </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAutoRebalanceConfigsV2Call(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v2/accounts/auto_rebalance/config";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listAutoRebalanceConfigsV2ValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return listAutoRebalanceConfigsV2Call(_callback);
+
+    }
+
+    /**
+     * List auto-rebalance configuration for the authenticated user&#39;s isolated accounts
+     * 
+     * @return ListAutoRebalanceConfigsResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Persisted auto-rebalance configurations </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ListAutoRebalanceConfigsResponseEnvelope listAutoRebalanceConfigsV2() throws ApiException {
+        ApiResponse<ListAutoRebalanceConfigsResponseEnvelope> localVarResp = listAutoRebalanceConfigsV2WithHttpInfo();
+        return localVarResp.getData();
+    }
+
+    /**
+     * List auto-rebalance configuration for the authenticated user&#39;s isolated accounts
+     * 
+     * @return ApiResponse&lt;ListAutoRebalanceConfigsResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Persisted auto-rebalance configurations </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ListAutoRebalanceConfigsResponseEnvelope> listAutoRebalanceConfigsV2WithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = listAutoRebalanceConfigsV2ValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<ListAutoRebalanceConfigsResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List auto-rebalance configuration for the authenticated user&#39;s isolated accounts (asynchronously)
+     * 
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Persisted auto-rebalance configurations </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAutoRebalanceConfigsV2Async(final ApiCallback<ListAutoRebalanceConfigsResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listAutoRebalanceConfigsV2ValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<ListAutoRebalanceConfigsResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listAutoRebalanceStatusesV2
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Auto-rebalance configurations with current collateral status </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAutoRebalanceStatusesV2Call(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v2/accounts/auto_rebalance/status";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listAutoRebalanceStatusesV2ValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return listAutoRebalanceStatusesV2Call(_callback);
+
+    }
+
+    /**
+     * List auto-rebalance status for the authenticated user&#39;s isolated accounts, including disabled configs
+     * 
+     * @return ListAutoRebalanceConfigsResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Auto-rebalance configurations with current collateral status </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ListAutoRebalanceConfigsResponseEnvelope listAutoRebalanceStatusesV2() throws ApiException {
+        ApiResponse<ListAutoRebalanceConfigsResponseEnvelope> localVarResp = listAutoRebalanceStatusesV2WithHttpInfo();
+        return localVarResp.getData();
+    }
+
+    /**
+     * List auto-rebalance status for the authenticated user&#39;s isolated accounts, including disabled configs
+     * 
+     * @return ApiResponse&lt;ListAutoRebalanceConfigsResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Auto-rebalance configurations with current collateral status </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ListAutoRebalanceConfigsResponseEnvelope> listAutoRebalanceStatusesV2WithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = listAutoRebalanceStatusesV2ValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<ListAutoRebalanceConfigsResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List auto-rebalance status for the authenticated user&#39;s isolated accounts, including disabled configs (asynchronously)
+     * 
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Auto-rebalance configurations with current collateral status </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAutoRebalanceStatusesV2Async(final ApiCallback<ListAutoRebalanceConfigsResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listAutoRebalanceStatusesV2ValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<ListAutoRebalanceConfigsResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for listDeposits
      * @param userId Filter by user ID. Non-admin callers may only specify their own user ID. (optional)
      * @param page  (optional, default to 1)
@@ -17726,7 +18720,7 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Fee reserved; the withdrawal is now APPROVED and eligible for submission </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. an invalid body or withdrawal_id, an unparseable or unauthentic quote token, or a quote issued for a different destination, quantity, or chain </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or reserving the fee would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or reserving the fee would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict, e.g. the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), the available balance cannot cover the fee, there is no USD ledger account to reserve the fee from, an unhealthy account, overdue coupon payments, or a concurrent balance change kept the reservation from being recorded </td><td>  -  </td></tr>
         <tr><td> 410 </td><td> The quote token has expired; request a new fee quote </td><td>  -  </td></tr>
@@ -17798,7 +18792,7 @@ public class DefaultApi {
 
     /**
      * Lock the network fee for an approved USDC withdrawal
-     * Redeems a fee quote against a withdrawal an admin has approved. The quoted fee is reserved on top of the quantity reserved when the request was created, so the same risk checks the request cleared are run again for it: an active trading challenge, a deactivated account, account health, the minimum cash reserve, and overdue coupon payments. A fee that would take the caller below the minimum cash reserve is refused and nothing is reserved.
+     * Redeems a fee quote from GET /v1/web3/withdrawals/fee-quote against an admin-approved withdrawal, holding the quoted fee from the caller&#39;s available balance and making the withdrawal eligible for on-chain submission. Restricted to users whose native asset is USDC.
      * @param withdrawalId The withdrawal to redeem the quote against. It must be owned by the caller and be in status APPROVED_WITHOUT_FEE. (required)
      * @param lockWithdrawalFeeRequest  (required)
      * @return WithdrawalResponseEnvelope
@@ -17810,7 +18804,7 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Fee reserved; the withdrawal is now APPROVED and eligible for submission </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. an invalid body or withdrawal_id, an unparseable or unauthentic quote token, or a quote issued for a different destination, quantity, or chain </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or reserving the fee would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or reserving the fee would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict, e.g. the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), the available balance cannot cover the fee, there is no USD ledger account to reserve the fee from, an unhealthy account, overdue coupon payments, or a concurrent balance change kept the reservation from being recorded </td><td>  -  </td></tr>
         <tr><td> 410 </td><td> The quote token has expired; request a new fee quote </td><td>  -  </td></tr>
@@ -17825,7 +18819,7 @@ public class DefaultApi {
 
     /**
      * Lock the network fee for an approved USDC withdrawal
-     * Redeems a fee quote against a withdrawal an admin has approved. The quoted fee is reserved on top of the quantity reserved when the request was created, so the same risk checks the request cleared are run again for it: an active trading challenge, a deactivated account, account health, the minimum cash reserve, and overdue coupon payments. A fee that would take the caller below the minimum cash reserve is refused and nothing is reserved.
+     * Redeems a fee quote from GET /v1/web3/withdrawals/fee-quote against an admin-approved withdrawal, holding the quoted fee from the caller&#39;s available balance and making the withdrawal eligible for on-chain submission. Restricted to users whose native asset is USDC.
      * @param withdrawalId The withdrawal to redeem the quote against. It must be owned by the caller and be in status APPROVED_WITHOUT_FEE. (required)
      * @param lockWithdrawalFeeRequest  (required)
      * @return ApiResponse&lt;WithdrawalResponseEnvelope&gt;
@@ -17837,7 +18831,7 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Fee reserved; the withdrawal is now APPROVED and eligible for submission </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. an invalid body or withdrawal_id, an unparseable or unauthentic quote token, or a quote issued for a different destination, quantity, or chain </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or reserving the fee would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or reserving the fee would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict, e.g. the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), the available balance cannot cover the fee, there is no USD ledger account to reserve the fee from, an unhealthy account, overdue coupon payments, or a concurrent balance change kept the reservation from being recorded </td><td>  -  </td></tr>
         <tr><td> 410 </td><td> The quote token has expired; request a new fee quote </td><td>  -  </td></tr>
@@ -17853,7 +18847,7 @@ public class DefaultApi {
 
     /**
      * Lock the network fee for an approved USDC withdrawal (asynchronously)
-     * Redeems a fee quote against a withdrawal an admin has approved. The quoted fee is reserved on top of the quantity reserved when the request was created, so the same risk checks the request cleared are run again for it: an active trading challenge, a deactivated account, account health, the minimum cash reserve, and overdue coupon payments. A fee that would take the caller below the minimum cash reserve is refused and nothing is reserved.
+     * Redeems a fee quote from GET /v1/web3/withdrawals/fee-quote against an admin-approved withdrawal, holding the quoted fee from the caller&#39;s available balance and making the withdrawal eligible for on-chain submission. Restricted to users whose native asset is USDC.
      * @param withdrawalId The withdrawal to redeem the quote against. It must be owned by the caller and be in status APPROVED_WITHOUT_FEE. (required)
      * @param lockWithdrawalFeeRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -17866,7 +18860,7 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Fee reserved; the withdrawal is now APPROVED and eligible for submission </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Bad request, e.g. an invalid body or withdrawal_id, an unparseable or unauthentic quote token, or a quote issued for a different destination, quantity, or chain </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden: access is restricted to DORA tenant users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or reserving the fee would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden: access is restricted to users whose native asset is USDC (admin and indexer API keys have no native asset and are also denied); the caller is taking part in an active trading challenge; the caller&#39;s account is deactivated or being deactivated; or reserving the fee would leave the caller below the minimum cash reserve. </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Withdrawal not found, or it belongs to another user </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict, e.g. the withdrawal is not APPROVED_WITHOUT_FEE (not yet approved, already paid for, or terminal), the available balance cannot cover the fee, there is no USD ledger account to reserve the fee from, an unhealthy account, overdue coupon payments, or a concurrent balance change kept the reservation from being recorded </td><td>  -  </td></tr>
         <tr><td> 410 </td><td> The quote token has expired; request a new fee quote </td><td>  -  </td></tr>
@@ -22325,6 +23319,149 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = updateUserKYCValidateBeforeCall(userId, updateUserKYCRequest, _callback);
         Type localVarReturnType = new TypeToken<UpdateUserKYCResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for upsertAutoRebalanceConfigsV2
+     * @param upsertAutoRebalanceConfigsRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updated auto-rebalance configurations </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid thresholds or duplicate account IDs </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> One or more accounts were not found or are not isolated accounts </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call upsertAutoRebalanceConfigsV2Call(@javax.annotation.Nonnull UpsertAutoRebalanceConfigsRequest upsertAutoRebalanceConfigsRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = upsertAutoRebalanceConfigsRequest;
+
+        // create path and map variables
+        String localVarPath = "/v2/accounts/auto_rebalance/config";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call upsertAutoRebalanceConfigsV2ValidateBeforeCall(@javax.annotation.Nonnull UpsertAutoRebalanceConfigsRequest upsertAutoRebalanceConfigsRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'upsertAutoRebalanceConfigsRequest' is set
+        if (upsertAutoRebalanceConfigsRequest == null) {
+            throw new ApiException("Missing the required parameter 'upsertAutoRebalanceConfigsRequest' when calling upsertAutoRebalanceConfigsV2(Async)");
+        }
+
+        return upsertAutoRebalanceConfigsV2Call(upsertAutoRebalanceConfigsRequest, _callback);
+
+    }
+
+    /**
+     * Create or update auto-rebalance configuration for one or more isolated accounts
+     * 
+     * @param upsertAutoRebalanceConfigsRequest  (required)
+     * @return UpsertAutoRebalanceConfigsResponseEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updated auto-rebalance configurations </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid thresholds or duplicate account IDs </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> One or more accounts were not found or are not isolated accounts </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public UpsertAutoRebalanceConfigsResponseEnvelope upsertAutoRebalanceConfigsV2(@javax.annotation.Nonnull UpsertAutoRebalanceConfigsRequest upsertAutoRebalanceConfigsRequest) throws ApiException {
+        ApiResponse<UpsertAutoRebalanceConfigsResponseEnvelope> localVarResp = upsertAutoRebalanceConfigsV2WithHttpInfo(upsertAutoRebalanceConfigsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Create or update auto-rebalance configuration for one or more isolated accounts
+     * 
+     * @param upsertAutoRebalanceConfigsRequest  (required)
+     * @return ApiResponse&lt;UpsertAutoRebalanceConfigsResponseEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updated auto-rebalance configurations </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid thresholds or duplicate account IDs </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> One or more accounts were not found or are not isolated accounts </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<UpsertAutoRebalanceConfigsResponseEnvelope> upsertAutoRebalanceConfigsV2WithHttpInfo(@javax.annotation.Nonnull UpsertAutoRebalanceConfigsRequest upsertAutoRebalanceConfigsRequest) throws ApiException {
+        okhttp3.Call localVarCall = upsertAutoRebalanceConfigsV2ValidateBeforeCall(upsertAutoRebalanceConfigsRequest, null);
+        Type localVarReturnType = new TypeToken<UpsertAutoRebalanceConfigsResponseEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Create or update auto-rebalance configuration for one or more isolated accounts (asynchronously)
+     * 
+     * @param upsertAutoRebalanceConfigsRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updated auto-rebalance configurations </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. invalid thresholds or duplicate account IDs </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in or does not have access to this route </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> One or more accounts were not found or are not isolated accounts </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call upsertAutoRebalanceConfigsV2Async(@javax.annotation.Nonnull UpsertAutoRebalanceConfigsRequest upsertAutoRebalanceConfigsRequest, final ApiCallback<UpsertAutoRebalanceConfigsResponseEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = upsertAutoRebalanceConfigsV2ValidateBeforeCall(upsertAutoRebalanceConfigsRequest, _callback);
+        Type localVarReturnType = new TypeToken<UpsertAutoRebalanceConfigsResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

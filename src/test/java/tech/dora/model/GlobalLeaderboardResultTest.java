@@ -25,17 +25,17 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for TradingChallengeAllResult
+ * Model tests for GlobalLeaderboardResult
  */
-public class TradingChallengeAllResultTest {
-    private final TradingChallengeAllResult model = new TradingChallengeAllResult();
+public class GlobalLeaderboardResultTest {
+    private final GlobalLeaderboardResult model = new GlobalLeaderboardResult();
 
     /**
-     * Model tests for TradingChallengeAllResult
+     * Model tests for GlobalLeaderboardResult
      */
     @Test
-    public void testTradingChallengeAllResult() {
-        // TODO: test TradingChallengeAllResult
+    public void testGlobalLeaderboardResult() {
+        // TODO: test GlobalLeaderboardResult
     }
 
     /**

@@ -49,7 +49,7 @@ import tech.dora.JSON;
 /**
  * TenantRestrictions
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-18T18:29:04.763912996+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class TenantRestrictions {
   public static final String SERIALIZED_NAME_TENANT_ID = "tenant_id";
   @SerializedName(SERIALIZED_NAME_TENANT_ID)
@@ -99,7 +99,7 @@ public class TenantRestrictions {
   }
 
   /**
-   * Maximum allowed deposit for the tenant per day.
+   * Maximum allowed USD deposit per user per day for this tenant.
    * @return dailyDepositLimit
    */
   @javax.annotation.Nonnull

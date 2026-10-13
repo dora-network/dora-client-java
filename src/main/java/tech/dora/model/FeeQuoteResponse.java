@@ -50,7 +50,7 @@ import tech.dora.JSON;
 /**
  * The estimated network fee for one approved USDC withdrawal, alongside a signed, TTL-bound quote token bound to that withdrawal. Submit the token to PUT /v1/web3/withdrawals/{withdrawal_id} to reserve the quoted fee.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-18T18:29:04.763912996+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class FeeQuoteResponse {
   public static final String SERIALIZED_NAME_WITHDRAWAL_ID = "withdrawal_id";
   @SerializedName(SERIALIZED_NAME_WITHDRAWAL_ID)

@@ -1,6 +1,6 @@
 
 
-# TradingChallengeAllResult
+# GlobalLeaderboardResult
 
 
 ## Properties
@@ -14,7 +14,7 @@
 |**activeDays** | **Integer** |  |  [optional] |
 |**cumTrades** | **Integer** |  |  [optional] |
 |**accountValue** | **String** |  |  [optional] |
-|**pnlPct** | **String** |  |  [optional] |
+|**pnlPct** | **String** | Cumulative pnl as a percentage of total TRADING_CHALLENGE_DEPOSIT and EXTERNAL_DEPOSIT quantities. |  [optional] |
 
 
 

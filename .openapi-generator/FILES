@@ -44,6 +44,9 @@ docs/AssetYTM.md
 docs/AssetYield.md
 docs/AssetYieldResolution.md
 docs/AssignAffiliateReferralRequest.md
+docs/AutoRebalanceConfigStatus.md
+docs/AutoRebalanceConfigUpsert.md
+docs/AutoRebalanceConfigsData.md
 docs/BalanceTransfer.md
 docs/BalancesResponse.md
 docs/Bond.md
@@ -62,6 +65,8 @@ docs/ClaimPromoLinkRequest.md
 docs/ClaimTradingChallengeResponse.md
 docs/ClaimTradingChallengeResponseEnvelope.md
 docs/CloseAccountRequest.md
+docs/CloseAllPositionsItem.md
+docs/CloseAllPositionsResponseEnvelope.md
 docs/ClosePositionRequest.md
 docs/ClosePositionResp.md
 docs/ClosePositionResponseEnvelope.md
@@ -87,6 +92,7 @@ docs/CreateWithdrawalRequest.md
 docs/CreditRating.md
 docs/CurrentLeverageAccruedInterest.md
 docs/CurrentLeverageAccruedInterestResponseEnvelope.md
+docs/CustomizeAffiliateReferrerCodeRequest.md
 docs/DefaultApi.md
 docs/DefundUserRequest.md
 docs/DepositArgs.md
@@ -102,10 +108,13 @@ docs/FundUserRequest.md
 docs/FundUserResponseEnvelope.md
 docs/GetAssetByIDResponseEnvelope.md
 docs/GetAssetYTMByIDResponseEnvelope.md
+docs/GetAutoRebalanceAccountStatusResponseEnvelope.md
 docs/GetCopyTradersResponse.md
 docs/GetPnLRankingResponse.md
 docs/GetRealizedPnlSettlementsResponseEnvelope.md
 docs/GetTopOfBookResponseEnvelope.md
+docs/GlobalLeaderboardResponseEnvelope.md
+docs/GlobalLeaderboardResult.md
 docs/HistoricalLeverageInterestRate.md
 docs/HistoricalLeverageInterestRates.md
 docs/HistoricalLeverageInterestRatesResponseEnvelope.md
@@ -133,6 +142,7 @@ docs/LiquidityResponseEnvelope.md
 docs/ListAccountsResponseV2Envelope.md
 docs/ListAssetPriceResponseEnvelope.md
 docs/ListAssetYieldResponseEnvelope.md
+docs/ListAutoRebalanceConfigsResponseEnvelope.md
 docs/ListCandlesResponseEnvelope.md
 docs/ListCouponPaymentsResponseEnvelope.md
 docs/ListDepositsResponseEnvelope.md
@@ -210,6 +220,8 @@ docs/PromoLinkListResponse.md
 docs/PromoLinkListResponseAllOfData.md
 docs/PromoLinkStatus.md
 docs/PromoSourceType.md
+docs/QRRewardPreview.md
+docs/QRRewardPreviewEnvelope.md
 docs/RealizedPnlSettlement.md
 docs/RealizedPnlSettlements.md
 docs/RegisterAffiliateReferrerRequest.md
@@ -256,8 +268,6 @@ docs/Trade.md
 docs/TradeRequestError.md
 docs/TradeResponseEnvelope.md
 docs/TradingChallenge.md
-docs/TradingChallengeAllResult.md
-docs/TradingChallengeAllResultsResponseEnvelope.md
 docs/TradingChallengeDailySnapshot.md
 docs/TradingChallengeDailySnapshotsResponseEnvelope.md
 docs/TradingChallengeListResponseEnvelope.md
@@ -304,6 +314,8 @@ docs/UpdateUserConfigRequest.md
 docs/UpdateUserKYCRequest.md
 docs/UpdateUserKYCResponse.md
 docs/UpdateUserKYCResponseEnvelope.md
+docs/UpsertAutoRebalanceConfigsRequest.md
+docs/UpsertAutoRebalanceConfigsResponseEnvelope.md
 docs/User.md
 docs/UserBalanceResponseEnvelope.md
 docs/UserConfig.md
@@ -325,6 +337,7 @@ docs/UserRole.md
 docs/UserUpdatedResponseEnvelope.md
 docs/UserValue.md
 docs/UserValueResponseEnvelope.md
+docs/UsersTag.md
 docs/ValidateSubmitOrderRequest.md
 docs/ValidateSubmitOrderResponse.md
 docs/Web3EventStatus.md
@@ -405,6 +418,9 @@ src/main/java/tech/dora/model/AssetYTM.java
 src/main/java/tech/dora/model/AssetYield.java
 src/main/java/tech/dora/model/AssetYieldResolution.java
 src/main/java/tech/dora/model/AssignAffiliateReferralRequest.java
+src/main/java/tech/dora/model/AutoRebalanceConfigStatus.java
+src/main/java/tech/dora/model/AutoRebalanceConfigUpsert.java
+src/main/java/tech/dora/model/AutoRebalanceConfigsData.java
 src/main/java/tech/dora/model/BalanceTransfer.java
 src/main/java/tech/dora/model/BalancesResponse.java
 src/main/java/tech/dora/model/Bond.java
@@ -423,6 +439,8 @@ src/main/java/tech/dora/model/ClaimPromoLinkRequest.java
 src/main/java/tech/dora/model/ClaimTradingChallengeResponse.java
 src/main/java/tech/dora/model/ClaimTradingChallengeResponseEnvelope.java
 src/main/java/tech/dora/model/CloseAccountRequest.java
+src/main/java/tech/dora/model/CloseAllPositionsItem.java
+src/main/java/tech/dora/model/CloseAllPositionsResponseEnvelope.java
 src/main/java/tech/dora/model/ClosePositionRequest.java
 src/main/java/tech/dora/model/ClosePositionResp.java
 src/main/java/tech/dora/model/ClosePositionResponseEnvelope.java
@@ -448,6 +466,7 @@ src/main/java/tech/dora/model/CreateWithdrawalRequest.java
 src/main/java/tech/dora/model/CreditRating.java
 src/main/java/tech/dora/model/CurrentLeverageAccruedInterest.java
 src/main/java/tech/dora/model/CurrentLeverageAccruedInterestResponseEnvelope.java
+src/main/java/tech/dora/model/CustomizeAffiliateReferrerCodeRequest.java
 src/main/java/tech/dora/model/DefundUserRequest.java
 src/main/java/tech/dora/model/DepositArgs.java
 src/main/java/tech/dora/model/DepositCall.java
@@ -462,10 +481,13 @@ src/main/java/tech/dora/model/FundUserRequest.java
 src/main/java/tech/dora/model/FundUserResponseEnvelope.java
 src/main/java/tech/dora/model/GetAssetByIDResponseEnvelope.java
 src/main/java/tech/dora/model/GetAssetYTMByIDResponseEnvelope.java
+src/main/java/tech/dora/model/GetAutoRebalanceAccountStatusResponseEnvelope.java
 src/main/java/tech/dora/model/GetCopyTradersResponse.java
 src/main/java/tech/dora/model/GetPnLRankingResponse.java
 src/main/java/tech/dora/model/GetRealizedPnlSettlementsResponseEnvelope.java
 src/main/java/tech/dora/model/GetTopOfBookResponseEnvelope.java
+src/main/java/tech/dora/model/GlobalLeaderboardResponseEnvelope.java
+src/main/java/tech/dora/model/GlobalLeaderboardResult.java
 src/main/java/tech/dora/model/HistoricalLeverageInterestRate.java
 src/main/java/tech/dora/model/HistoricalLeverageInterestRates.java
 src/main/java/tech/dora/model/HistoricalLeverageInterestRatesResponseEnvelope.java
@@ -493,6 +515,7 @@ src/main/java/tech/dora/model/LiquidityResponseEnvelope.java
 src/main/java/tech/dora/model/ListAccountsResponseV2Envelope.java
 src/main/java/tech/dora/model/ListAssetPriceResponseEnvelope.java
 src/main/java/tech/dora/model/ListAssetYieldResponseEnvelope.java
+src/main/java/tech/dora/model/ListAutoRebalanceConfigsResponseEnvelope.java
 src/main/java/tech/dora/model/ListCandlesResponseEnvelope.java
 src/main/java/tech/dora/model/ListCouponPaymentsResponseEnvelope.java
 src/main/java/tech/dora/model/ListDepositsResponseEnvelope.java
@@ -570,6 +593,8 @@ src/main/java/tech/dora/model/PromoLinkListResponse.java
 src/main/java/tech/dora/model/PromoLinkListResponseAllOfData.java
 src/main/java/tech/dora/model/PromoLinkStatus.java
 src/main/java/tech/dora/model/PromoSourceType.java
+src/main/java/tech/dora/model/QRRewardPreview.java
+src/main/java/tech/dora/model/QRRewardPreviewEnvelope.java
 src/main/java/tech/dora/model/RealizedPnlSettlement.java
 src/main/java/tech/dora/model/RealizedPnlSettlements.java
 src/main/java/tech/dora/model/RegisterAffiliateReferrerRequest.java
@@ -616,8 +641,6 @@ src/main/java/tech/dora/model/Trade.java
 src/main/java/tech/dora/model/TradeRequestError.java
 src/main/java/tech/dora/model/TradeResponseEnvelope.java
 src/main/java/tech/dora/model/TradingChallenge.java
-src/main/java/tech/dora/model/TradingChallengeAllResult.java
-src/main/java/tech/dora/model/TradingChallengeAllResultsResponseEnvelope.java
 src/main/java/tech/dora/model/TradingChallengeDailySnapshot.java
 src/main/java/tech/dora/model/TradingChallengeDailySnapshotsResponseEnvelope.java
 src/main/java/tech/dora/model/TradingChallengeListResponseEnvelope.java
@@ -664,6 +687,8 @@ src/main/java/tech/dora/model/UpdateUserConfigRequest.java
 src/main/java/tech/dora/model/UpdateUserKYCRequest.java
 src/main/java/tech/dora/model/UpdateUserKYCResponse.java
 src/main/java/tech/dora/model/UpdateUserKYCResponseEnvelope.java
+src/main/java/tech/dora/model/UpsertAutoRebalanceConfigsRequest.java
+src/main/java/tech/dora/model/UpsertAutoRebalanceConfigsResponseEnvelope.java
 src/main/java/tech/dora/model/User.java
 src/main/java/tech/dora/model/UserBalanceResponseEnvelope.java
 src/main/java/tech/dora/model/UserConfig.java
@@ -685,6 +710,7 @@ src/main/java/tech/dora/model/UserRole.java
 src/main/java/tech/dora/model/UserUpdatedResponseEnvelope.java
 src/main/java/tech/dora/model/UserValue.java
 src/main/java/tech/dora/model/UserValueResponseEnvelope.java
+src/main/java/tech/dora/model/UsersTag.java
 src/main/java/tech/dora/model/ValidateSubmitOrderRequest.java
 src/main/java/tech/dora/model/ValidateSubmitOrderResponse.java
 src/main/java/tech/dora/model/Web3EventStatus.java
@@ -738,6 +764,9 @@ src/test/java/tech/dora/model/AssetYTMTest.java
 src/test/java/tech/dora/model/AssetYieldResolutionTest.java
 src/test/java/tech/dora/model/AssetYieldTest.java
 src/test/java/tech/dora/model/AssignAffiliateReferralRequestTest.java
+src/test/java/tech/dora/model/AutoRebalanceConfigStatusTest.java
+src/test/java/tech/dora/model/AutoRebalanceConfigUpsertTest.java
+src/test/java/tech/dora/model/AutoRebalanceConfigsDataTest.java
 src/test/java/tech/dora/model/BalanceTransferTest.java
 src/test/java/tech/dora/model/BalancesResponseTest.java
 src/test/java/tech/dora/model/BondKindTest.java
@@ -756,6 +785,8 @@ src/test/java/tech/dora/model/ClaimPromoLinkRequestTest.java
 src/test/java/tech/dora/model/ClaimTradingChallengeResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ClaimTradingChallengeResponseTest.java
 src/test/java/tech/dora/model/CloseAccountRequestTest.java
+src/test/java/tech/dora/model/CloseAllPositionsItemTest.java
+src/test/java/tech/dora/model/CloseAllPositionsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ClosePositionRequestTest.java
 src/test/java/tech/dora/model/ClosePositionRespTest.java
 src/test/java/tech/dora/model/ClosePositionResponseEnvelopeTest.java
@@ -781,6 +812,7 @@ src/test/java/tech/dora/model/CreateWithdrawalRequestTest.java
 src/test/java/tech/dora/model/CreditRatingTest.java
 src/test/java/tech/dora/model/CurrentLeverageAccruedInterestResponseEnvelopeTest.java
 src/test/java/tech/dora/model/CurrentLeverageAccruedInterestTest.java
+src/test/java/tech/dora/model/CustomizeAffiliateReferrerCodeRequestTest.java
 src/test/java/tech/dora/model/DefundUserRequestTest.java
 src/test/java/tech/dora/model/DepositArgsTest.java
 src/test/java/tech/dora/model/DepositCallTest.java
@@ -795,10 +827,13 @@ src/test/java/tech/dora/model/FundUserResponseEnvelopeTest.java
 src/test/java/tech/dora/model/FundUserTest.java
 src/test/java/tech/dora/model/GetAssetByIDResponseEnvelopeTest.java
 src/test/java/tech/dora/model/GetAssetYTMByIDResponseEnvelopeTest.java
+src/test/java/tech/dora/model/GetAutoRebalanceAccountStatusResponseEnvelopeTest.java
 src/test/java/tech/dora/model/GetCopyTradersResponseTest.java
 src/test/java/tech/dora/model/GetPnLRankingResponseTest.java
 src/test/java/tech/dora/model/GetRealizedPnlSettlementsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/GetTopOfBookResponseEnvelopeTest.java
+src/test/java/tech/dora/model/GlobalLeaderboardResponseEnvelopeTest.java
+src/test/java/tech/dora/model/GlobalLeaderboardResultTest.java
 src/test/java/tech/dora/model/HistoricalLeverageInterestRateTest.java
 src/test/java/tech/dora/model/HistoricalLeverageInterestRatesResponseEnvelopeTest.java
 src/test/java/tech/dora/model/HistoricalLeverageInterestRatesTest.java
@@ -826,6 +861,7 @@ src/test/java/tech/dora/model/LiquidityTest.java
 src/test/java/tech/dora/model/ListAccountsResponseV2EnvelopeTest.java
 src/test/java/tech/dora/model/ListAssetPriceResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListAssetYieldResponseEnvelopeTest.java
+src/test/java/tech/dora/model/ListAutoRebalanceConfigsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListCandlesResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListCouponPaymentsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/ListDepositsResponseEnvelopeTest.java
@@ -903,6 +939,8 @@ src/test/java/tech/dora/model/PromoLinkListResponseAllOfDataTest.java
 src/test/java/tech/dora/model/PromoLinkListResponseTest.java
 src/test/java/tech/dora/model/PromoLinkStatusTest.java
 src/test/java/tech/dora/model/PromoSourceTypeTest.java
+src/test/java/tech/dora/model/QRRewardPreviewEnvelopeTest.java
+src/test/java/tech/dora/model/QRRewardPreviewTest.java
 src/test/java/tech/dora/model/RealizedPnlSettlementTest.java
 src/test/java/tech/dora/model/RealizedPnlSettlementsTest.java
 src/test/java/tech/dora/model/RegisterAffiliateReferrerRequestTest.java
@@ -948,8 +986,6 @@ src/test/java/tech/dora/model/TerminateTradingChallengeResponseTest.java
 src/test/java/tech/dora/model/TradeRequestErrorTest.java
 src/test/java/tech/dora/model/TradeResponseEnvelopeTest.java
 src/test/java/tech/dora/model/TradeTest.java
-src/test/java/tech/dora/model/TradingChallengeAllResultTest.java
-src/test/java/tech/dora/model/TradingChallengeAllResultsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/TradingChallengeDailySnapshotTest.java
 src/test/java/tech/dora/model/TradingChallengeDailySnapshotsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/TradingChallengeListResponseEnvelopeTest.java
@@ -997,6 +1033,8 @@ src/test/java/tech/dora/model/UpdateUserConfigRequestTest.java
 src/test/java/tech/dora/model/UpdateUserKYCRequestTest.java
 src/test/java/tech/dora/model/UpdateUserKYCResponseEnvelopeTest.java
 src/test/java/tech/dora/model/UpdateUserKYCResponseTest.java
+src/test/java/tech/dora/model/UpsertAutoRebalanceConfigsRequestTest.java
+src/test/java/tech/dora/model/UpsertAutoRebalanceConfigsResponseEnvelopeTest.java
 src/test/java/tech/dora/model/UserBalanceResponseEnvelopeTest.java
 src/test/java/tech/dora/model/UserConfigResponseEnvelopeTest.java
 src/test/java/tech/dora/model/UserConfigTest.java
@@ -1018,6 +1056,7 @@ src/test/java/tech/dora/model/UserTest.java
 src/test/java/tech/dora/model/UserUpdatedResponseEnvelopeTest.java
 src/test/java/tech/dora/model/UserValueResponseEnvelopeTest.java
 src/test/java/tech/dora/model/UserValueTest.java
+src/test/java/tech/dora/model/UsersTagTest.java
 src/test/java/tech/dora/model/ValidateSubmitOrderRequestTest.java
 src/test/java/tech/dora/model/ValidateSubmitOrderResponseTest.java
 src/test/java/tech/dora/model/Web3EventStatusTest.java

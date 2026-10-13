@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.UUID;
 import tech.dora.model.CountryCode;
 import tech.dora.model.UserRole;
+import tech.dora.model.UsersTag;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -204,6 +205,14 @@ public class UserTest {
     }
 
     /**
+     * Test the property 'usedReferralCode'
+     */
+    @Test
+    public void usedReferralCodeTest() {
+        // TODO: test usedReferralCode
+    }
+
+    /**
      * Test the property 'allowEmailNotifications'
      */
     @Test
@@ -249,6 +258,14 @@ public class UserTest {
     @Test
     public void kycCompletedAtTest() {
         // TODO: test kycCompletedAt
+    }
+
+    /**
+     * Test the property 'tag'
+     */
+    @Test
+    public void tagTest() {
+        // TODO: test tag
     }
 
 }

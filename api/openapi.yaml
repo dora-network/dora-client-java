@@ -602,6 +602,79 @@ paths:
       summary: List your affiliate memberships
       x-accepts:
       - application/json
+  /v1/affiliate_referrers/{referrer_id}/code:
+    put:
+      description: "The owner of this affiliate membership may change its primary\
+        \ code once. ADMIN callers may change any membership's code repeatedly across\
+        \ tenants. Admin changes preserve the owner's remaining one-time change. Changes\
+        \ are allowed while the program is inactive. Its initial code, whether generated\
+        \ or chosen by an admin, does not count as the change. Previous codes remain\
+        \ aliases and cannot be reused; codes resolve only while the program is active.\
+        \ Codes are unique across all programs and tenants, including for admins."
+      operationId: customizeAffiliateReferrerCode
+      parameters:
+      - explode: false
+        in: path
+        name: referrer_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomizeAffiliateReferrerCodeRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateReferrerEnvelope"
+          description: Updated affiliate membership
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: Invalid referral code or request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: Authentication required
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: User or tenant context required
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: Affiliate membership not found or not owned by a non-admin
+            caller
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: "Code already in use or unchanged, or membership already customized"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: Internal server error
+      summary: Change an affiliate referral code
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /v1/affiliate_programs/{program_id}/referrals:
     get:
       description: "Authenticated access. ADMIN can inspect all programs. INTEGRATOR\
@@ -3148,6 +3221,45 @@ paths:
           description: Internal server error
       summary: "Close isolated positions, repaying the borrowed"
       x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v1/positions/close/all:
+    post:
+      operationId: closeAllIsolatedPositions
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloseAllPositionsResponse"
+          description: All open isolated positions are queued for close
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this route"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid isolated position shape"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Not found, e.g. an isolated position has no matching order\
+            \ book"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Close all open isolated positions in one request
       x-accepts:
       - application/json
   /v1/ledger/balances/self:
@@ -6030,6 +6142,153 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /v2/accounts/auto_rebalance/config:
+    get:
+      operationId: listAutoRebalanceConfigsV2
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAutoRebalanceConfigsResponse"
+          description: Persisted auto-rebalance configurations
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this route"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: List auto-rebalance configuration for the authenticated user's isolated
+        accounts
+      x-accepts:
+      - application/json
+    put:
+      operationId: upsertAutoRebalanceConfigsV2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpsertAutoRebalanceConfigsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpsertAutoRebalanceConfigsResponse"
+          description: Updated auto-rebalance configurations
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid thresholds or duplicate account\
+            \ IDs"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this route"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: One or more accounts were not found or are not isolated accounts
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Create or update auto-rebalance configuration for one or more isolated
+        accounts
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/accounts/auto_rebalance/config/{account_id}:
+    get:
+      operationId: getAutoRebalanceAccountStatusV2
+      parameters:
+      - explode: false
+        in: path
+        name: account_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAutoRebalanceAccountStatusResponse"
+          description: Auto-rebalance configuration with current collateral status
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. invalid account ID"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this route"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Auto-rebalance config was not found for this account or caller
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Get auto-rebalance configuration and live status for one isolated account
+      x-accepts:
+      - application/json
+  /v2/accounts/auto_rebalance/status:
+    get:
+      operationId: listAutoRebalanceStatusesV2
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAutoRebalanceConfigsResponse"
+          description: Auto-rebalance configurations with current collateral status
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in or does not have access to\
+            \ this route"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: "List auto-rebalance status for the authenticated user's isolated accounts,\
+        \ including disabled configs"
+      x-accepts:
+      - application/json
   /v2/user/self/accounts:
     get:
       operationId: listAccountsSelfV2
@@ -6072,8 +6331,8 @@ paths:
         \ v/r/s and ABI-encodes the deposit function with the returned args plus (v,\
         \ r, s); no separate approve transaction is needed. Only a single chain is\
         \ currently supported: the provided nonce belongs to it, and the chains array\
-        \ holds at most one entry. Restricted to DORA tenant users whose native asset\
-        \ is USDC."
+        \ holds at most one entry. Restricted to users whose native asset is USDC,\
+        \ under a tenant with web3 enabled."
       operationId: getDepositInstructions
       parameters:
       - description: "Human-decimal USDC quantity to deposit, e.g. '100.50'. Must\
@@ -6138,9 +6397,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-          description: "Forbidden: access is restricted to DORA tenant users whose\
-            \ native asset is USDC. Admin and indexer API keys have no native asset\
-            \ and are also denied."
+          description: "Forbidden: access is restricted to users whose native asset\
+            \ is USDC, under a tenant with web3 enabled. Admin and indexer API keys\
+            \ have no native asset and are also denied."
         "500":
           content:
             application/json:
@@ -7081,24 +7340,10 @@ paths:
       summary: Get trading challenge results
       x-accepts:
       - application/json
-  /v1/trading_challenges/all/results:
+  /v1/trading/global_leaderboard:
     get:
-      description: "List trading challenge leaderboard/results filtered by board,\
-        \ trading_challenge_type, start date and end date across all challenges."
-      operationId: getTradingChallengeAllResults
+      operationId: getGlobalLeaderboard
       parameters:
-      - description: Leaderboard board selector.
-        explode: true
-        in: query
-        name: board
-        required: true
-        schema:
-          enum:
-          - TOP_PNL
-          - TOP_VOLUME
-          - IRON_TRADER
-          type: string
-        style: form
       - description: Inclusive start date in YYYY-MM-DD format.
         explode: true
         in: query
@@ -7117,21 +7362,33 @@ paths:
           format: date
           type: string
         style: form
-      - description: Challenge type to include in aggregation.
+      - description: Maximum number of rows to return. Defaults to 100.
         explode: true
         in: query
-        name: trading_challenge_type
-        required: true
+        name: limit
+        required: false
         schema:
-          $ref: "#/components/schemas/TradingChallengeType"
+          default: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: Number of rows to skip before collecting the result set.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
         style: form
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TradingChallengeAllResultsResponseEnvelope"
-          description: All trading challenge results
+                $ref: "#/components/schemas/GlobalLeaderboardResponseEnvelope"
+          description: Global leaderboard results
         "400":
           content:
             application/json:
@@ -7145,16 +7402,19 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       security: []
-      summary: Get combined results across all trading challenge
+      summary: Get global leaderboard
       x-accepts:
       - application/json
   /v1/trading_challenges/{trading_challenge_id}/claim:
     post:
-      description: "Claim the prize of a challenge the caller is eligible for. A TOURNAMENT\
-        \ claim credits the prize matching the crown and reactivates the account.\
-        \ A CASH claim winds the account down, sweeps every remaining challenge credit\
-        \ and awards the CASH_CROWN: the account is left deactivated with a zero balance,\
-        \ and the reward is redeemed out of band. Both mark the participation PRIZE_CLAIMED."
+      description: "Claim an eligible trading challenge prize. TOURNAMENT requires\
+        \ completed KYC, credits the crown prize, reactivates the account, and marks\
+        \ the result PRIZE_CLAIMED. CASH requires completed KYC, winds down the account,\
+        \ sweeps remaining challenge credit, awards CASH_CROWN, and marks the result\
+        \ PRIZE_CLAIMED; the account stays deactivated with a zero balance. QR_PROMO\
+        \ accepts an eligible reward request before KYC, winds down the account, fixes\
+        \ the capped reward, queues a KYC email, and records REWARD_PENDING_KYC without\
+        \ paying the reward or reactivating the account."
       operationId: claimTradingChallengePrize
       parameters:
       - explode: false
@@ -7171,7 +7431,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ClaimTradingChallengeResponseEnvelope"
-          description: Prize claimed
+          description: Prize claimed or QR reward fixed pending KYC
         "403":
           content:
             application/json:
@@ -7183,13 +7443,27 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-          description: Conflict
+          description: "Conflict, including when another funded challenge may contribute\
+            \ to account equity or when the reward request account lock was released;\
+            \ retry the request after the latter"
         "500":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
+        "410":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: QR reward deadline passed
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Wind-down timed out
       summary: Claim challenge prize
       x-accepts:
       - application/json
@@ -7556,14 +7830,9 @@ paths:
       - application/json
   /v1/web3/withdrawals/fee-quote:
     get:
-      description: "Examines on-chain conditions and simulates the named withdrawal\
-        \ to estimate the network fee the user must reserve before it can be submitted\
-        \ on-chain. The withdrawal must already exist, belong to the caller, and have\
-        \ been approved by an admin (status APPROVED_WITHOUT_FEE); its destination\
-        \ and quantity are read from the row, not taken from the request. The returned\
-        \ quote token is bound to that one withdrawal and is redeemed at PUT /v1/web3/withdrawals/{withdrawal_id},\
-        \ which reserves the fee and moves the withdrawal to APPROVED. Restricted\
-        \ to DORA tenant users whose native asset is USDC."
+      description: "Estimates the network fee for an existing, admin-approved (APPROVED_WITHOUT_FEE)\
+        \ withdrawal owned by the caller. Redeem the returned quote token at PUT /v1/web3/withdrawals/{withdrawal_id}\
+        \ to reserve the fee. Restricted to USDC native-asset users."
       operationId: getWithdrawalFeeQuote
       parameters:
       - description: The withdrawal to quote a fee for. It must belong to the caller
@@ -7602,9 +7871,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-          description: "Forbidden: access is restricted to DORA tenant users whose\
-            \ native asset is USDC. Admin and indexer API keys have no native asset\
-            \ and are also denied."
+          description: "Forbidden: access is restricted to users whose native asset\
+            \ is USDC. Admin and indexer API keys have no native asset and are also\
+            \ denied."
         "404":
           content:
             application/json:
@@ -7735,15 +8004,11 @@ paths:
       x-accepts:
       - application/json
     post:
-      description: "Reserves the requested quantity against the caller's available\
-        \ balance (moving it to pending_withdrawal) and creates a PENDING withdrawal.\
-        \ No fee quote is required and no fee is reserved: the withdrawal's fee is\
-        \ quoted and locked later, as part of approval. Idempotent on withdrawal_id:\
-        \ a repeat request carrying the same to_address and quantity reserves nothing\
-        \ further and returns the existing withdrawal with 200. Reusing a withdrawal_id\
-        \ with a different to_address or quantity is a conflict (409), not a replay,\
-        \ and reserves nothing. Restricted to DORA tenant users whose native asset\
-        \ is USDC."
+      description: "Requests a USDC withdrawal, holding the quantity from the caller's\
+        \ available balance until it completes or is cancelled. The fee is quoted\
+        \ and locked after admin approval. Idempotent on withdrawal_id; only one withdrawal\
+        \ may be in progress at a time. Restricted to users whose native asset is\
+        \ USDC."
       operationId: createWithdrawal
       requestBody:
         content:
@@ -7783,11 +8048,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-          description: "Forbidden: access is restricted to DORA tenant users whose\
-            \ native asset is USDC (admin and indexer API keys have no native asset\
-            \ and are also denied); the caller is taking part in an active trading\
-            \ challenge; the caller's account is deactivated or being deactivated;\
-            \ or the withdrawal would leave the caller below the minimum cash reserve."
+          description: "Forbidden: access is restricted to users whose native asset\
+            \ is USDC (admin and indexer API keys have no native asset and are also\
+            \ denied); the caller is taking part in an active trading challenge; the\
+            \ caller's account is deactivated or being deactivated; or the withdrawal\
+            \ would leave the caller below the minimum cash reserve."
         "409":
           content:
             application/json:
@@ -7795,8 +8060,11 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: "Conflict, e.g. insufficient available balance, no USD ledger\
             \ account to withdraw from, an unhealthy account, overdue coupon payments,\
-            \ a withdrawal_id already in use by another user, or a withdrawal_id reused\
-            \ with a to_address or quantity that does not match the existing withdrawal"
+            \ a withdrawal_id already in use by another user, a withdrawal_id reused\
+            \ with a to_address or quantity that does not match the existing withdrawal,\
+            \ or the caller already having another withdrawal still in progress (only\
+            \ one at a time is allowed; the error names the withdrawal that is in\
+            \ the way)"
         "500":
           content:
             application/json:
@@ -7808,6 +8076,80 @@ paths:
       x-accepts:
       - application/json
   /v1/web3/withdrawals/{withdrawal_id}:
+    delete:
+      description: Cancels the caller's own withdrawal and returns its held quantity
+        to their available balance. Only PENDING or APPROVED_WITHOUT_FEE withdrawals
+        can be cancelled. Restricted to users whose native asset is USDC.
+      operationId: cancelWithdrawal
+      parameters:
+      - description: The withdrawal to cancel. It must be owned by the caller and
+          be in status PENDING or APPROVED_WITHOUT_FEE.
+        explode: false
+        in: path
+        name: withdrawal_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WithdrawalResponseEnvelope"
+          description: Withdrawal cancelled; it is now REJECTED and its reservation
+            is back in available
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request: withdrawal_id is not a valid UUID"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden: access is restricted to users whose native asset\
+            \ is USDC (admin and indexer API keys have no native asset and are also\
+            \ denied)"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Withdrawal not found, or it belongs to another user"
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Conflict: the withdrawal is not PENDING or APPROVED_WITHOUT_FEE.\
+            \ It has either already been approved for on-chain submission (a fee is\
+            \ locked, or a transaction is in flight) or already finished, and in neither\
+            \ case can it be cancelled"
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Too many requests: this route is rate limited per user"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Cancel the caller's own USDC withdrawal
+      x-accepts:
+      - application/json
     get:
       description: Returns a single USDC withdrawal. A caller may read its own withdrawals;
         admins may read any user's.
@@ -7857,13 +8199,10 @@ paths:
       x-accepts:
       - application/json
     put:
-      description: "Redeems a fee quote against a withdrawal an admin has approved.\
-        \ The quoted fee is reserved on top of the quantity reserved when the request\
-        \ was created, so the same risk checks the request cleared are run again for\
-        \ it: an active trading challenge, a deactivated account, account health,\
-        \ the minimum cash reserve, and overdue coupon payments. A fee that would\
-        \ take the caller below the minimum cash reserve is refused and nothing is\
-        \ reserved."
+      description: "Redeems a fee quote from GET /v1/web3/withdrawals/fee-quote against\
+        \ an admin-approved withdrawal, holding the quoted fee from the caller's available\
+        \ balance and making the withdrawal eligible for on-chain submission. Restricted\
+        \ to users whose native asset is USDC."
       operationId: lockWithdrawalFee
       parameters:
       - description: The withdrawal to redeem the quote against. It must be owned
@@ -7909,11 +8248,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-          description: "Forbidden: access is restricted to DORA tenant users whose\
-            \ native asset is USDC (admin and indexer API keys have no native asset\
-            \ and are also denied); the caller is taking part in an active trading\
-            \ challenge; the caller's account is deactivated or being deactivated;\
-            \ or reserving the fee would leave the caller below the minimum cash reserve."
+          description: "Forbidden: access is restricted to users whose native asset\
+            \ is USDC (admin and indexer API keys have no native asset and are also\
+            \ denied); the caller is taking part in an active trading challenge; the\
+            \ caller's account is deactivated or being deactivated; or reserving the\
+            \ fee would leave the caller below the minimum cash reserve."
         "404":
           content:
             application/json:
@@ -8030,6 +8369,60 @@ paths:
         a tenant.
       x-accepts:
       - application/json
+  /v1/trading_challenges/{trading_challenge_id}/reward:
+    get:
+      description: Read-only projection for the authenticated QR participant. Request
+        recomputes eligibility after wind-down; KYC is not a request blocker.
+      operationId: getQRRewardPreview
+      parameters:
+      - explode: false
+        in: path
+        name: trading_challenge_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QRRewardPreviewEnvelope"
+          description: Live eligibility or fixed reward state
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Reward preview is available only for QR challenges
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Not a participant
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Challenge not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Preview QR reward eligibility
+      x-accepts:
+      - application/json
 components:
   schemas:
     AssignAffiliateReferralRequest:
@@ -8079,6 +8472,8 @@ components:
           format: date-time
           type: string
         referral_code:
+          description: "Exact code the user entered, retained when the referrer changes\
+            \ their primary code."
           pattern: "^[A-Z0-9][A-Z0-9_-]{2,63}$"
           type: string
       required:
@@ -8167,6 +8562,7 @@ components:
         user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         referral_code: referral_code
         created_at: 2000-01-23T04:56:07.000+00:00
+        customized_at: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
           format: uuid
@@ -8184,17 +8580,21 @@ components:
           format: uuid
           type: string
         referral_code:
-          description: "Reusable referral code, stored uppercase. Letters, digits,\
-            \ hyphens and underscores are accepted; the first character must be a\
-            \ letter or digit. Matching is case-insensitive. Separate from QR claim\
-            \ tokens."
+          description: Current code to share; previously issued codes remain valid.
+            Stored uppercase and unique across all programs and tenants.
           pattern: "^[A-Z0-9][A-Z0-9_-]{2,63}$"
           type: string
         created_at:
           format: date-time
           type: string
+        customized_at:
+          description: When the owner used their one code change; null until then.
+          format: date-time
+          nullable: true
+          type: string
       required:
       - created_at
+      - customized_at
       - id
       - program_id
       - referral_code
@@ -8260,7 +8660,7 @@ components:
           description: "Optional custom code: 3 to 64 letters, digits, hyphens or\
             \ underscores after trimming, starting with a letter or digit. Stored\
             \ uppercase and unique across all programs and tenants. Omitted, null\
-            \ or empty generates a random code."
+            \ or empty generates a random 12-character code."
           example: TEAM-42
           nullable: true
           type: string
@@ -8344,6 +8744,7 @@ components:
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           referral_code: referral_code
           created_at: 2000-01-23T04:56:07.000+00:00
+          customized_at: 2000-01-23T04:56:07.000+00:00
         metadata:
           status_code: 0
           trace_id: trace_id
@@ -8365,12 +8766,14 @@ components:
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           referral_code: referral_code
           created_at: 2000-01-23T04:56:07.000+00:00
+          customized_at: 2000-01-23T04:56:07.000+00:00
         - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           program_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           tenant_id: tenant_id
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           referral_code: referral_code
           created_at: 2000-01-23T04:56:07.000+00:00
+          customized_at: 2000-01-23T04:56:07.000+00:00
         metadata:
           status_code: 0
           trace_id: trace_id
@@ -8664,6 +9067,8 @@ components:
         created_at: 2000-01-23T04:56:07.000+00:00
         program_name: program_name
         is_active: true
+        customized_at: 2000-01-23T04:56:07.000+00:00
+        can_customize: true
       properties:
         id:
           format: uuid
@@ -8681,10 +9086,7 @@ components:
           format: uuid
           type: string
         referral_code:
-          description: "Reusable referral code, stored uppercase. Letters, digits,\
-            \ hyphens and underscores are accepted; the first character must be a\
-            \ letter or digit. Matching is case-insensitive. Separate from QR claim\
-            \ tokens."
+          description: Current code to share; previously issued codes remain valid.
           pattern: "^[A-Z0-9][A-Z0-9_-]{2,63}$"
           type: string
         created_at:
@@ -8694,8 +9096,18 @@ components:
           type: string
         is_active:
           type: boolean
+        customized_at:
+          format: date-time
+          nullable: true
+          type: string
+        can_customize:
+          description: "True when this membership has not used its one-time code change,\
+            \ including while the program is inactive."
+          type: boolean
       required:
+      - can_customize
       - created_at
+      - customized_at
       - id
       - is_active
       - program_id
@@ -8809,6 +9221,8 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           program_name: program_name
           is_active: true
+          customized_at: 2000-01-23T04:56:07.000+00:00
+          can_customize: true
         - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           program_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           tenant_id: tenant_id
@@ -8817,6 +9231,8 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           program_name: program_name
           is_active: true
+          customized_at: 2000-01-23T04:56:07.000+00:00
+          can_customize: true
         metadata:
           status_code: 0
           trace_id: trace_id
@@ -9597,6 +10013,10 @@ components:
         maturity_at:
           format: date-time
           type: string
+        tenor:
+          description: Years until maturity from the current date (negative for matured
+            bonds)
+          type: number
         principal_value:
           type: string
         payments_per_year:
@@ -9621,6 +10041,7 @@ components:
       - maturity_at
       - payments_per_year
       - principal_value
+      - tenor
     ResponseEnvelopeOfListAssets:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -10006,6 +10427,12 @@ components:
       - INDEXER
       - COMPETITION_MANAGER
       type: string
+    UsersTag:
+      description: Admin-assignable user tag. MARKET_MAKER users are exempt from the
+        tenant trade limit and asset position restriction on POST /v1/orders.
+      enum:
+      - MARKET_MAKER
+      type: string
     ListUsersResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
@@ -10041,12 +10468,16 @@ components:
           show_tutorial_cards: true
           notifications_enabled: true
           tenant_id: tenant_id
+          used_referral_code: used_referral_code
           allow_email_notifications: true
           allow_liquidations_notifications: true
           allow_deposit_withdrawal_notifications: true
           allow_orders_notifications: true
           allow_copy_trading: true
           kyc_completed_at: 2000-01-23T04:56:07.000+00:00
+          tag:
+          - MARKET_MAKER
+          - MARKET_MAKER
         - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           closed_at: 2000-01-23T04:56:07.000+00:00
           disabled_at: 2000-01-23T04:56:07.000+00:00
@@ -10071,12 +10502,16 @@ components:
           show_tutorial_cards: true
           notifications_enabled: true
           tenant_id: tenant_id
+          used_referral_code: used_referral_code
           allow_email_notifications: true
           allow_liquidations_notifications: true
           allow_deposit_withdrawal_notifications: true
           allow_orders_notifications: true
           allow_copy_trading: true
           kyc_completed_at: 2000-01-23T04:56:07.000+00:00
+          tag:
+          - MARKET_MAKER
+          - MARKET_MAKER
         error: error
         metadata: ""
     ListUsersResponse:
@@ -10128,8 +10563,9 @@ components:
           $ref: "#/components/schemas/CountryCode"
         native_asset_id:
           description: "Optional: the user's native asset ID. Must be a CURRENCY asset;\
-            \ defaults to USD. The USDC asset is never allowed for integrator-created\
-            \ users."
+            \ defaults to USD. The USDC asset is only allowed for users created under\
+            \ a tenant with is_web3_enabled set, and their accounts and positions\
+            \ still use the USD asset."
           format: uuid
           type: string
         photo_url:
@@ -10228,12 +10664,16 @@ components:
           show_tutorial_cards: true
           notifications_enabled: true
           tenant_id: tenant_id
+          used_referral_code: used_referral_code
           allow_email_notifications: true
           allow_liquidations_notifications: true
           allow_deposit_withdrawal_notifications: true
           allow_orders_notifications: true
           allow_copy_trading: true
           kyc_completed_at: 2000-01-23T04:56:07.000+00:00
+          tag:
+          - MARKET_MAKER
+          - MARKET_MAKER
         error: error
         metadata: ""
     GetUserResponse:
@@ -10430,12 +10870,16 @@ components:
         show_tutorial_cards: true
         notifications_enabled: true
         tenant_id: tenant_id
+        used_referral_code: used_referral_code
         allow_email_notifications: true
         allow_liquidations_notifications: true
         allow_deposit_withdrawal_notifications: true
         allow_orders_notifications: true
         allow_copy_trading: true
         kyc_completed_at: 2000-01-23T04:56:07.000+00:00
+        tag:
+        - MARKET_MAKER
+        - MARKET_MAKER
       properties:
         id:
           format: uuid
@@ -10498,6 +10942,10 @@ components:
           type: boolean
         tenant_id:
           type: string
+        used_referral_code:
+          description: Exact affiliate code this user applied at signup or later.
+            Empty when no code has been applied; distinct from codes the user owns.
+          type: string
         allow_email_notifications:
           type: boolean
         allow_liquidations_notifications:
@@ -10514,6 +10962,12 @@ components:
           format: date-time
           type: string
           nullable: true
+        tag:
+          description: "Tags assigned to the user by an admin. Set via PUT /v1/users/{user_id}/tag."
+          items:
+            $ref: "#/components/schemas/UsersTag"
+          type: array
+          default: null
       required:
       - allow_copy_trading
       - allow_deposit_withdrawal_notifications
@@ -10530,6 +10984,7 @@ components:
       - roles
       - show_tutorial_cards
       - tenant_id
+      - used_referral_code
       - user_name
     UserConfig:
       properties:
@@ -11145,7 +11600,7 @@ components:
         display_name: display_name
         base_asset_fractionalized_units: 0
         quote_asset_fractionalized_units: 0
-        fee_factor: 0.5637376656633328
+        fee_factor: 0.9563737665663333
         initial_assets_ratio: 0.23021358869347652
         maturity_at: 2000-01-23T04:56:07.000+00:00
         quote_quantity: 0.7061401241503109
@@ -11186,7 +11641,7 @@ components:
           type: integer
         fee_factor:
           maximum: 1
-          minimum: 0
+          minimum: 0.9
           type: number
         initial_assets_ratio:
           maximum: 1
@@ -11258,7 +11713,7 @@ components:
           display_name: display_name
           base_asset_fractionalized_units: 0
           quote_asset_fractionalized_units: 0
-          fee_factor: 0.5637376656633328
+          fee_factor: 0.9563737665663333
           initial_assets_ratio: 0.23021358869347652
           maturity_at: 2000-01-23T04:56:07.000+00:00
           quote_quantity: 0.7061401241503109
@@ -11294,7 +11749,7 @@ components:
           display_name: display_name
           base_asset_fractionalized_units: 0
           quote_asset_fractionalized_units: 0
-          fee_factor: 0.5637376656633328
+          fee_factor: 0.9563737665663333
           initial_assets_ratio: 0.23021358869347652
           maturity_at: 2000-01-23T04:56:07.000+00:00
           quote_quantity: 0.7061401241503109
@@ -11315,7 +11770,7 @@ components:
           display_name: display_name
           base_asset_fractionalized_units: 0
           quote_asset_fractionalized_units: 0
-          fee_factor: 0.5637376656633328
+          fee_factor: 0.9563737665663333
           initial_assets_ratio: 0.23021358869347652
           maturity_at: 2000-01-23T04:56:07.000+00:00
           quote_quantity: 0.7061401241503109
@@ -11904,7 +12359,7 @@ components:
           description: Tenant ID
           type: string
         daily_deposit_limit:
-          description: Maximum allowed deposit for the tenant per day.
+          description: Maximum allowed USD deposit per user per day for this tenant.
           type: string
         trade_limit:
           description: Maximum allowed trade amount for the tenant.
@@ -15239,6 +15694,8 @@ components:
       - user_id
     ClosePositionResponse:
       $ref: "#/components/schemas/ClosePositionResponseEnvelope"
+    CloseAllPositionsResponse:
+      $ref: "#/components/schemas/CloseAllPositionsResponseEnvelope"
     ClosePositionRequest:
       example:
         position_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -15268,6 +15725,39 @@ components:
             $ref: "#/components/schemas/ClosePositionResp"
       example:
         data:
+          order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+        metadata: ""
+    CloseAllPositionsItem:
+      example:
+        account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        account_id:
+          format: uuid
+          type: string
+        order_id:
+          format: uuid
+          type: string
+      required:
+      - account_id
+      - order_id
+    CloseAllPositionsResp:
+      items:
+        $ref: "#/components/schemas/CloseAllPositionsItem"
+      type: array
+      default: null
+    CloseAllPositionsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/CloseAllPositionsResp"
+      example:
+        data:
+        - account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         error: error
         metadata: ""
@@ -16067,6 +16557,223 @@ components:
         metadata: ""
     TransferAccountBalancesResponse:
       $ref: "#/components/schemas/TransferAccountBalancesResponseEnvelope"
+    AutoRebalanceConfigUpsert:
+      example:
+        account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        enabled: true
+        min_utilization: min_utilization
+        max_utilization: max_utilization
+      properties:
+        account_id:
+          format: uuid
+          type: string
+        enabled:
+          type: boolean
+        min_utilization:
+          description: "Lower utilization threshold, greater than 0 and less than\
+            \ max_utilization."
+          type: string
+        max_utilization:
+          description: "Upper utilization threshold, greater than min_utilization\
+            \ and less than or equal to 1."
+          type: string
+      required:
+      - account_id
+      - enabled
+      - max_utilization
+      - min_utilization
+    UpsertAutoRebalanceConfigsRequest:
+      example:
+        configs:
+        - account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          enabled: true
+          min_utilization: min_utilization
+          max_utilization: max_utilization
+        - account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          enabled: true
+          min_utilization: min_utilization
+          max_utilization: max_utilization
+      properties:
+        configs:
+          items:
+            $ref: "#/components/schemas/AutoRebalanceConfigUpsert"
+          minItems: 1
+          type: array
+          default: null
+      required:
+      - configs
+    AutoRebalanceConfigStatus:
+      example:
+        account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        enabled: true
+        min_utilization: min_utilization
+        max_utilization: max_utilization
+        available_usd: available_usd
+        borrowed_value: borrowed_value
+        borrow_limit: borrow_limit
+        current_utilization: current_utilization
+        above_max: true
+        in_active_liquidation: true
+        last_rebalance_outcome: last_rebalance_outcome
+      properties:
+        account_id:
+          format: uuid
+          type: string
+        enabled:
+          type: boolean
+        min_utilization:
+          type: string
+        max_utilization:
+          type: string
+        available_usd:
+          type: string
+        borrowed_value:
+          type: string
+        borrow_limit:
+          type: string
+        current_utilization:
+          nullable: true
+          type: string
+        above_max:
+          description: True when current_utilization is greater than max_utilization.
+          type: boolean
+        in_active_liquidation:
+          type: boolean
+        last_rebalance_outcome:
+          description: "Most recent persisted auto-rebalance attempt status for this\
+            \ account, when available."
+          type: string
+      required:
+      - account_id
+      - enabled
+      - max_utilization
+      - min_utilization
+    AutoRebalanceConfigsData:
+      example:
+        configs:
+        - account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          enabled: true
+          min_utilization: min_utilization
+          max_utilization: max_utilization
+          available_usd: available_usd
+          borrowed_value: borrowed_value
+          borrow_limit: borrow_limit
+          current_utilization: current_utilization
+          above_max: true
+          in_active_liquidation: true
+          last_rebalance_outcome: last_rebalance_outcome
+        - account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          enabled: true
+          min_utilization: min_utilization
+          max_utilization: max_utilization
+          available_usd: available_usd
+          borrowed_value: borrowed_value
+          borrow_limit: borrow_limit
+          current_utilization: current_utilization
+          above_max: true
+          in_active_liquidation: true
+          last_rebalance_outcome: last_rebalance_outcome
+      properties:
+        configs:
+          items:
+            $ref: "#/components/schemas/AutoRebalanceConfigStatus"
+          type: array
+          default: null
+      required:
+      - configs
+    UpsertAutoRebalanceConfigsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/AutoRebalanceConfigsData"
+      example:
+        data:
+          configs:
+          - account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            enabled: true
+            min_utilization: min_utilization
+            max_utilization: max_utilization
+            available_usd: available_usd
+            borrowed_value: borrowed_value
+            borrow_limit: borrow_limit
+            current_utilization: current_utilization
+            above_max: true
+            in_active_liquidation: true
+            last_rebalance_outcome: last_rebalance_outcome
+          - account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            enabled: true
+            min_utilization: min_utilization
+            max_utilization: max_utilization
+            available_usd: available_usd
+            borrowed_value: borrowed_value
+            borrow_limit: borrow_limit
+            current_utilization: current_utilization
+            above_max: true
+            in_active_liquidation: true
+            last_rebalance_outcome: last_rebalance_outcome
+        error: error
+        metadata: ""
+    UpsertAutoRebalanceConfigsResponse:
+      $ref: "#/components/schemas/UpsertAutoRebalanceConfigsResponseEnvelope"
+    ListAutoRebalanceConfigsResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/AutoRebalanceConfigsData"
+      example:
+        data:
+          configs:
+          - account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            enabled: true
+            min_utilization: min_utilization
+            max_utilization: max_utilization
+            available_usd: available_usd
+            borrowed_value: borrowed_value
+            borrow_limit: borrow_limit
+            current_utilization: current_utilization
+            above_max: true
+            in_active_liquidation: true
+            last_rebalance_outcome: last_rebalance_outcome
+          - account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            enabled: true
+            min_utilization: min_utilization
+            max_utilization: max_utilization
+            available_usd: available_usd
+            borrowed_value: borrowed_value
+            borrow_limit: borrow_limit
+            current_utilization: current_utilization
+            above_max: true
+            in_active_liquidation: true
+            last_rebalance_outcome: last_rebalance_outcome
+        error: error
+        metadata: ""
+    ListAutoRebalanceConfigsResponse:
+      $ref: "#/components/schemas/ListAutoRebalanceConfigsResponseEnvelope"
+    GetAutoRebalanceAccountStatusResponseEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/AutoRebalanceConfigStatus"
+      example:
+        data:
+          account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          enabled: true
+          min_utilization: min_utilization
+          max_utilization: max_utilization
+          available_usd: available_usd
+          borrowed_value: borrowed_value
+          borrow_limit: borrow_limit
+          current_utilization: current_utilization
+          above_max: true
+          in_active_liquidation: true
+          last_rebalance_outcome: last_rebalance_outcome
+        error: error
+        metadata: ""
+    GetAutoRebalanceAccountStatusResponse:
+      $ref: "#/components/schemas/GetAutoRebalanceAccountStatusResponseEnvelope"
     CloseAccountRequest:
       example:
         account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -17293,7 +18000,7 @@ components:
           type: string
         cum_trades:
           type: integer
-    TradingChallengeAllResult:
+    GlobalLeaderboardResult:
       example:
         user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         user_name: user_name
@@ -17320,6 +18027,8 @@ components:
         account_value:
           type: string
         pnl_pct:
+          description: Cumulative pnl as a percentage of total TRADING_CHALLENGE_DEPOSIT
+            and EXTERNAL_DEPOSIT quantities.
           type: string
     TradingChallengeResultsResponseEnvelope:
       allOf:
@@ -17372,13 +18081,13 @@ components:
           cum_trades: 5
         error: error
         metadata: ""
-    TradingChallengeAllResultsResponseEnvelope:
+    GlobalLeaderboardResponseEnvelope:
       allOf:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
             items:
-              $ref: "#/components/schemas/TradingChallengeAllResult"
+              $ref: "#/components/schemas/GlobalLeaderboardResult"
             type: array
             default: null
       example:
@@ -17406,6 +18115,9 @@ components:
         trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         status: status
+        reward_amount: reward_amount
+        kyc_url: https://openapi-generator.tech
+        reward_deadline_at: 2000-01-23T04:56:07.000+00:00
       properties:
         trading_challenge_id:
           format: uuid
@@ -17414,6 +18126,15 @@ components:
           format: uuid
           type: string
         status:
+          type: string
+        reward_amount:
+          description: "Fixed QR reward, present for REWARD_PENDING_KYC."
+          type: string
+        kyc_url:
+          format: uri
+          type: string
+        reward_deadline_at:
+          format: date-time
           type: string
       required:
       - status
@@ -17430,6 +18151,9 @@ components:
           trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           status: status
+          reward_amount: reward_amount
+          kyc_url: https://openapi-generator.tech
+          reward_deadline_at: 2000-01-23T04:56:07.000+00:00
         error: error
         metadata: ""
     FeeQuoteResponse:
@@ -17915,6 +18639,18 @@ components:
           updated_at: 2000-01-23T04:56:07.000+00:00
         error: error
         metadata: ""
+    CustomizeAffiliateReferrerCodeRequest:
+      additionalProperties: false
+      example:
+        referral_code: BRENT
+      properties:
+        referral_code:
+          description: "New unique code. Trimmed and stored uppercase; 3 to 64 letters,\
+            \ digits, hyphens or underscores, starting with a letter or digit."
+          example: BRENT
+          type: string
+      required:
+      - referral_code
     TenantGuaranteeFundRow:
       example:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -18015,6 +18751,104 @@ components:
           summary:
             totals_by_tx_kind:
               key: totals_by_tx_kind
+        error: error
+        metadata: ""
+    QRRewardPreview:
+      example:
+        trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state: NOT_ELIGIBLE
+        current_equity: current_equity
+        promo_credit: promo_credit
+        eligible_profit: eligible_profit
+        projected_reward: projected_reward
+        reward_amount: reward_amount
+        min_reward_amount: min_reward_amount
+        max_reward_amount: max_reward_amount
+        reward_deadline_at: 2000-01-23T04:56:07.000+00:00
+        kyc_completed: true
+        kyc_url: https://openapi-generator.tech
+        blockers:
+        - BELOW_MINIMUM_PAYOUT
+        - BELOW_MINIMUM_PAYOUT
+      properties:
+        trading_challenge_id:
+          format: uuid
+          type: string
+        state:
+          enum:
+          - NOT_ELIGIBLE
+          - ELIGIBLE
+          - PENDING_KYC
+          - PAID
+          - LAPSED
+          type: string
+        current_equity:
+          type: string
+        promo_credit:
+          type: string
+        eligible_profit:
+          type: string
+        projected_reward:
+          type: string
+        reward_amount:
+          type: string
+        min_reward_amount:
+          type: string
+        max_reward_amount:
+          type: string
+        reward_deadline_at:
+          format: date-time
+          type: string
+        kyc_completed:
+          type: boolean
+        kyc_url:
+          format: uri
+          type: string
+        blockers:
+          items:
+            enum:
+            - BELOW_MINIMUM_PAYOUT
+            - BUSTED
+            - OTHER_CHALLENGE_FUNDED
+            - REWARD_DEADLINE_PASSED
+            - CHALLENGE_NOT_STARTED
+            - ALREADY_REQUESTED
+            - KYC_URL_UNAVAILABLE
+            type: string
+          type: array
+          default: null
+      required:
+      - blockers
+      - kyc_completed
+      - max_reward_amount
+      - min_reward_amount
+      - promo_credit
+      - reward_deadline_at
+      - state
+      - trading_challenge_id
+    QRRewardPreviewEnvelope:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/QRRewardPreview"
+      example:
+        data:
+          trading_challenge_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: NOT_ELIGIBLE
+          current_equity: current_equity
+          promo_credit: promo_credit
+          eligible_profit: eligible_profit
+          projected_reward: projected_reward
+          reward_amount: reward_amount
+          min_reward_amount: min_reward_amount
+          max_reward_amount: max_reward_amount
+          reward_deadline_at: 2000-01-23T04:56:07.000+00:00
+          kyc_completed: true
+          kyc_url: https://openapi-generator.tech
+          blockers:
+          - BELOW_MINIMUM_PAYOUT
+          - BELOW_MINIMUM_PAYOUT
         error: error
         metadata: ""
     claimPromoLink_request:

@@ -27,12 +27,14 @@
 |**showTutorialCards** | **Boolean** |  |  |
 |**notificationsEnabled** | **Boolean** |  |  |
 |**tenantId** | **String** |  |  |
+|**usedReferralCode** | **String** | Exact affiliate code this user applied at signup or later. Empty when no code has been applied; distinct from codes the user owns. |  |
 |**allowEmailNotifications** | **Boolean** |  |  |
 |**allowLiquidationsNotifications** | **Boolean** |  |  |
 |**allowDepositWithdrawalNotifications** | **Boolean** |  |  |
 |**allowOrdersNotifications** | **Boolean** |  |  |
 |**allowCopyTrading** | **Boolean** |  |  |
 |**kycCompletedAt** | **OffsetDateTime** | When the user completed KYC. Omitted/null if KYC has not been completed. Set via POST /v1/integrators/user/{user_id}/kyc. |  [optional] |
+|**tag** | **List&lt;UsersTag&gt;** | Tags assigned to the user by an admin. Set via PUT /v1/users/{user_id}/tag. |  [optional] |
 
 
 
