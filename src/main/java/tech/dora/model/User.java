@@ -55,7 +55,7 @@ import tech.dora.JSON;
 /**
  * User
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class User {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -126,6 +126,11 @@ public class User {
   @SerializedName(SERIALIZED_NAME_MANAGED_COMPETITION_IDS)
   @javax.annotation.Nullable
   private List<UUID> managedCompetitionIds = new ArrayList<>();
+
+  public static final String SERIALIZED_NAME_MANAGED_AFFILIATE_PROGRAM_IDS = "managed_affiliate_program_ids";
+  @SerializedName(SERIALIZED_NAME_MANAGED_AFFILIATE_PROGRAM_IDS)
+  @javax.annotation.Nullable
+  private List<UUID> managedAffiliateProgramIds = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_TIMEZONE = "timezone";
   @SerializedName(SERIALIZED_NAME_TIMEZONE)
@@ -482,6 +487,33 @@ public class User {
   }
 
 
+  public User managedAffiliateProgramIds(@javax.annotation.Nullable List<UUID> managedAffiliateProgramIds) {
+    this.managedAffiliateProgramIds = managedAffiliateProgramIds;
+    return this;
+  }
+
+  public User addManagedAffiliateProgramIdsItem(UUID managedAffiliateProgramIdsItem) {
+    if (this.managedAffiliateProgramIds == null) {
+      this.managedAffiliateProgramIds = new ArrayList<>();
+    }
+    this.managedAffiliateProgramIds.add(managedAffiliateProgramIdsItem);
+    return this;
+  }
+
+  /**
+   * Affiliate program IDs this user is explicitly allowed to manage when they have AFFILIATE_MANAGER role. Empty means no affiliate-management access.
+   * @return managedAffiliateProgramIds
+   */
+  @javax.annotation.Nullable
+  public List<UUID> getManagedAffiliateProgramIds() {
+    return managedAffiliateProgramIds;
+  }
+
+  public void setManagedAffiliateProgramIds(@javax.annotation.Nullable List<UUID> managedAffiliateProgramIds) {
+    this.managedAffiliateProgramIds = managedAffiliateProgramIds;
+  }
+
+
   public User timezone(@javax.annotation.Nullable String timezone) {
     this.timezone = timezone;
     return this;
@@ -780,6 +812,7 @@ public class User {
         Objects.equals(this.providerId, user.providerId) &&
         Objects.equals(this.roles, user.roles) &&
         Objects.equals(this.managedCompetitionIds, user.managedCompetitionIds) &&
+        Objects.equals(this.managedAffiliateProgramIds, user.managedAffiliateProgramIds) &&
         Objects.equals(this.timezone, user.timezone) &&
         Objects.equals(this.timezoneOffset, user.timezoneOffset) &&
         Objects.equals(this.verifiedAt, user.verifiedAt) &&
@@ -798,7 +831,7 @@ public class User {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, closedAt, disabledAt, email, firstName, lastName, userName, countryOfDomicile, nativeAssetId, photoUrl, provider, providerId, roles, managedCompetitionIds, timezone, timezoneOffset, verifiedAt, showTutorialCards, notificationsEnabled, tenantId, usedReferralCode, allowEmailNotifications, allowLiquidationsNotifications, allowDepositWithdrawalNotifications, allowOrdersNotifications, allowCopyTrading, kycCompletedAt, tag);
+    return Objects.hash(id, closedAt, disabledAt, email, firstName, lastName, userName, countryOfDomicile, nativeAssetId, photoUrl, provider, providerId, roles, managedCompetitionIds, managedAffiliateProgramIds, timezone, timezoneOffset, verifiedAt, showTutorialCards, notificationsEnabled, tenantId, usedReferralCode, allowEmailNotifications, allowLiquidationsNotifications, allowDepositWithdrawalNotifications, allowOrdersNotifications, allowCopyTrading, kycCompletedAt, tag);
   }
 
   @Override
@@ -819,6 +852,7 @@ public class User {
     sb.append("    providerId: ").append(toIndentedString(providerId)).append("\n");
     sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("    managedCompetitionIds: ").append(toIndentedString(managedCompetitionIds)).append("\n");
+    sb.append("    managedAffiliateProgramIds: ").append(toIndentedString(managedAffiliateProgramIds)).append("\n");
     sb.append("    timezone: ").append(toIndentedString(timezone)).append("\n");
     sb.append("    timezoneOffset: ").append(toIndentedString(timezoneOffset)).append("\n");
     sb.append("    verifiedAt: ").append(toIndentedString(verifiedAt)).append("\n");
@@ -851,7 +885,7 @@ public class User {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "closed_at", "disabled_at", "email", "first_name", "last_name", "user_name", "country_of_domicile", "native_asset_id", "photo_url", "provider", "provider_id", "roles", "managed_competition_ids", "timezone", "timezone_offset", "verified_at", "show_tutorial_cards", "notifications_enabled", "tenant_id", "used_referral_code", "allow_email_notifications", "allow_liquidations_notifications", "allow_deposit_withdrawal_notifications", "allow_orders_notifications", "allow_copy_trading", "kyc_completed_at", "tag"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "closed_at", "disabled_at", "email", "first_name", "last_name", "user_name", "country_of_domicile", "native_asset_id", "photo_url", "provider", "provider_id", "roles", "managed_competition_ids", "managed_affiliate_program_ids", "timezone", "timezone_offset", "verified_at", "show_tutorial_cards", "notifications_enabled", "tenant_id", "used_referral_code", "allow_email_notifications", "allow_liquidations_notifications", "allow_deposit_withdrawal_notifications", "allow_orders_notifications", "allow_copy_trading", "kyc_completed_at", "tag"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "email", "first_name", "last_name", "user_name", "country_of_domicile", "native_asset_id", "roles", "show_tutorial_cards", "notifications_enabled", "tenant_id", "used_referral_code", "allow_email_notifications", "allow_liquidations_notifications", "allow_deposit_withdrawal_notifications", "allow_orders_notifications", "allow_copy_trading"));
@@ -923,6 +957,10 @@ public class User {
       // ensure the optional json data is an array if present
       if (jsonObj.get("managed_competition_ids") != null && !jsonObj.get("managed_competition_ids").isJsonNull() && !jsonObj.get("managed_competition_ids").isJsonArray()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `managed_competition_ids` to be an array in the JSON string but got `%s`", jsonObj.get("managed_competition_ids").toString()));
+      }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("managed_affiliate_program_ids") != null && !jsonObj.get("managed_affiliate_program_ids").isJsonNull() && !jsonObj.get("managed_affiliate_program_ids").isJsonArray()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `managed_affiliate_program_ids` to be an array in the JSON string but got `%s`", jsonObj.get("managed_affiliate_program_ids").toString()));
       }
       if ((jsonObj.get("timezone") != null && !jsonObj.get("timezone").isJsonNull()) && !jsonObj.get("timezone").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `timezone` to be a primitive type in the JSON string but got `%s`", jsonObj.get("timezone").toString()));

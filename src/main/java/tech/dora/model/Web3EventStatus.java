@@ -37,7 +37,9 @@ public enum Web3EventStatus {
   
   USER_NOT_EXIST("USER_NOT_EXIST"),
   
-  DUST("DUST");
+  DUST("DUST"),
+  
+  UNMATCHED("UNMATCHED");
 
   private String value;
 

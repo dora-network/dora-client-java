@@ -119,6 +119,22 @@ public class PnLRankingResponseTest {
     }
 
     /**
+     * Test the property 'avgDailyVolume'
+     */
+    @Test
+    public void avgDailyVolumeTest() {
+        // TODO: test avgDailyVolume
+    }
+
+    /**
+     * Test the property 'avgDailyVolumeOnNDays'
+     */
+    @Test
+    public void avgDailyVolumeOnNDaysTest() {
+        // TODO: test avgDailyVolumeOnNDays
+    }
+
+    /**
      * Test the property 'activeTradingDays'
      */
     @Test

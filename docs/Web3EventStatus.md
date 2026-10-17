@@ -15,5 +15,7 @@
 
 * `DUST` (value: `"DUST"`)
 
+* `UNMATCHED` (value: `"UNMATCHED"`)
+
 
 

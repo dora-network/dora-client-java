@@ -48,7 +48,7 @@ import tech.dora.JSON;
 /**
  * PnLRankingSummary
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class PnLRankingSummary {
   public static final String SERIALIZED_NAME_ALL_USERS_DAILY_TRADING_VOLUME = "all_users_daily_trading_volume";
   @SerializedName(SERIALIZED_NAME_ALL_USERS_DAILY_TRADING_VOLUME)
@@ -59,6 +59,16 @@ public class PnLRankingSummary {
   @SerializedName(SERIALIZED_NAME_ALL_USERS_TOTAL_TRADING_VOLUME)
   @javax.annotation.Nonnull
   private String allUsersTotalTradingVolume;
+
+  public static final String SERIALIZED_NAME_ALL_USERS_AVG_DAILY_TRADING_VOLUME = "all_users_avg_daily_trading_volume";
+  @SerializedName(SERIALIZED_NAME_ALL_USERS_AVG_DAILY_TRADING_VOLUME)
+  @javax.annotation.Nonnull
+  private String allUsersAvgDailyTradingVolume;
+
+  public static final String SERIALIZED_NAME_ALL_USERS_AVG_DAILY_TRADING_VOLUME_ON_N_DAYS = "all_users_avg_daily_trading_volume_on_n_days";
+  @SerializedName(SERIALIZED_NAME_ALL_USERS_AVG_DAILY_TRADING_VOLUME_ON_N_DAYS)
+  @javax.annotation.Nonnull
+  private String allUsersAvgDailyTradingVolumeOnNDays;
 
   public PnLRankingSummary() {
   }
@@ -101,6 +111,44 @@ public class PnLRankingSummary {
   }
 
 
+  public PnLRankingSummary allUsersAvgDailyTradingVolume(@javax.annotation.Nonnull String allUsersAvgDailyTradingVolume) {
+    this.allUsersAvgDailyTradingVolume = allUsersAvgDailyTradingVolume;
+    return this;
+  }
+
+  /**
+   * all_users_total_trading_volume divided by the number of distinct UTC days on which any matching user had an executed fill. 0 if there are none.
+   * @return allUsersAvgDailyTradingVolume
+   */
+  @javax.annotation.Nonnull
+  public String getAllUsersAvgDailyTradingVolume() {
+    return allUsersAvgDailyTradingVolume;
+  }
+
+  public void setAllUsersAvgDailyTradingVolume(@javax.annotation.Nonnull String allUsersAvgDailyTradingVolume) {
+    this.allUsersAvgDailyTradingVolume = allUsersAvgDailyTradingVolume;
+  }
+
+
+  public PnLRankingSummary allUsersAvgDailyTradingVolumeOnNDays(@javax.annotation.Nonnull String allUsersAvgDailyTradingVolumeOnNDays) {
+    this.allUsersAvgDailyTradingVolumeOnNDays = allUsersAvgDailyTradingVolumeOnNDays;
+    return this;
+  }
+
+  /**
+   * Executed trading volume within [start, end) across all users matching ranking filters, divided by the number of requested days elapsed so far (end clamped to now, partial days rounded up). 0 if start is in the future.
+   * @return allUsersAvgDailyTradingVolumeOnNDays
+   */
+  @javax.annotation.Nonnull
+  public String getAllUsersAvgDailyTradingVolumeOnNDays() {
+    return allUsersAvgDailyTradingVolumeOnNDays;
+  }
+
+  public void setAllUsersAvgDailyTradingVolumeOnNDays(@javax.annotation.Nonnull String allUsersAvgDailyTradingVolumeOnNDays) {
+    this.allUsersAvgDailyTradingVolumeOnNDays = allUsersAvgDailyTradingVolumeOnNDays;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -112,12 +160,14 @@ public class PnLRankingSummary {
     }
     PnLRankingSummary pnLRankingSummary = (PnLRankingSummary) o;
     return Objects.equals(this.allUsersDailyTradingVolume, pnLRankingSummary.allUsersDailyTradingVolume) &&
-        Objects.equals(this.allUsersTotalTradingVolume, pnLRankingSummary.allUsersTotalTradingVolume);
+        Objects.equals(this.allUsersTotalTradingVolume, pnLRankingSummary.allUsersTotalTradingVolume) &&
+        Objects.equals(this.allUsersAvgDailyTradingVolume, pnLRankingSummary.allUsersAvgDailyTradingVolume) &&
+        Objects.equals(this.allUsersAvgDailyTradingVolumeOnNDays, pnLRankingSummary.allUsersAvgDailyTradingVolumeOnNDays);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(allUsersDailyTradingVolume, allUsersTotalTradingVolume);
+    return Objects.hash(allUsersDailyTradingVolume, allUsersTotalTradingVolume, allUsersAvgDailyTradingVolume, allUsersAvgDailyTradingVolumeOnNDays);
   }
 
   @Override
@@ -126,6 +176,8 @@ public class PnLRankingSummary {
     sb.append("class PnLRankingSummary {\n");
     sb.append("    allUsersDailyTradingVolume: ").append(toIndentedString(allUsersDailyTradingVolume)).append("\n");
     sb.append("    allUsersTotalTradingVolume: ").append(toIndentedString(allUsersTotalTradingVolume)).append("\n");
+    sb.append("    allUsersAvgDailyTradingVolume: ").append(toIndentedString(allUsersAvgDailyTradingVolume)).append("\n");
+    sb.append("    allUsersAvgDailyTradingVolumeOnNDays: ").append(toIndentedString(allUsersAvgDailyTradingVolumeOnNDays)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -144,10 +196,10 @@ public class PnLRankingSummary {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("all_users_daily_trading_volume", "all_users_total_trading_volume"));
+    openapiFields = new HashSet<String>(Arrays.asList("all_users_daily_trading_volume", "all_users_total_trading_volume", "all_users_avg_daily_trading_volume", "all_users_avg_daily_trading_volume_on_n_days"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("all_users_daily_trading_volume", "all_users_total_trading_volume"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("all_users_daily_trading_volume", "all_users_total_trading_volume", "all_users_avg_daily_trading_volume", "all_users_avg_daily_trading_volume_on_n_days"));
   }
 
   /**
@@ -183,6 +235,12 @@ public class PnLRankingSummary {
       }
       if (!jsonObj.get("all_users_total_trading_volume").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `all_users_total_trading_volume` to be a primitive type in the JSON string but got `%s`", jsonObj.get("all_users_total_trading_volume").toString()));
+      }
+      if (!jsonObj.get("all_users_avg_daily_trading_volume").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `all_users_avg_daily_trading_volume` to be a primitive type in the JSON string but got `%s`", jsonObj.get("all_users_avg_daily_trading_volume").toString()));
+      }
+      if (!jsonObj.get("all_users_avg_daily_trading_volume_on_n_days").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `all_users_avg_daily_trading_volume_on_n_days` to be a primitive type in the JSON string but got `%s`", jsonObj.get("all_users_avg_daily_trading_volume_on_n_days").toString()));
       }
   }
 

@@ -398,6 +398,69 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /v1/affiliate_programs/{program_id}/referrers/{referrer_id}:
+    delete:
+      description: "ADMIN, INTEGRATOR, or AFFILIATE_MANAGER required within tenant\
+        \ and assignment scope. Disables the referrer's code for new attributions\
+        \ while preserving historical attribution and reporting."
+      operationId: removeAffiliateReferrer
+      parameters:
+      - explode: false
+        in: path
+        name: program_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: referrer_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateReferrerEnvelope"
+          description: Removed affiliate referrer
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: Invalid request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: Authentication required
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: "Forbidden by role, tenant, or program assignment"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: Program or active referrer not found within scope
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: Internal server error
+      summary: Remove a referrer from a program
+      x-accepts:
+      - application/json
   /v1/affiliate_codes/{code}:
     get:
       description: "ADMIN or INTEGRATOR required, within tenant permissions. Admins\
@@ -474,12 +537,13 @@ paths:
       - application/json
   /v1/affiliate_referrals/self:
     post:
-      description: "Authenticated existing users may assign a referral code once,\
-        \ within their own tenant. No user_id or tenant_id override is accepted. New\
-        \ assignments reject self-referral and require an active program. Repeating\
-        \ the same code returns the original assignment without changing its timestamp;\
-        \ changing the code returns 409. Only activity from assignment onward counts.\
-        \ This does not change signup_source."
+      description: "Authenticated existing users may assign a referral code once.\
+        \ The code must belong to their own tenant or to a global tenant, whose referrers\
+        \ serve every tenant. No user_id or tenant_id override is accepted. New assignments\
+        \ reject self-referral and require an active program. Repeating the same code\
+        \ returns the original assignment without changing its timestamp; changing\
+        \ the code returns 409. Only activity from assignment onward counts. This\
+        \ does not change signup_source."
       operationId: assignAffiliateReferral
       requestBody:
         content:
@@ -603,6 +667,59 @@ paths:
       x-accepts:
       - application/json
   /v1/affiliate_referrers/{referrer_id}/code:
+    get:
+      description: "ADMIN, INTEGRATOR, or AFFILIATE_MANAGER required within tenant\
+        \ and assignment scope."
+      operationId: getAffiliateReferrerCode
+      parameters:
+      - explode: false
+        in: path
+        name: referrer_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateReferrerEnvelope"
+          description: Affiliate referrer code details
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: Invalid request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: Authentication required
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: "Forbidden by role, tenant, or program assignment"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: Referrer not found within scope
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: Internal server error
+      summary: Get a referrer's current code
+      x-accepts:
+      - application/json
     put:
       description: "The owner of this affiliate membership may change its primary\
         \ code once. ADMIN callers may change any membership's code repeatedly across\
@@ -2631,6 +2748,72 @@ paths:
                 $ref: "#/components/schemas/ResponseEnvelope"
           description: Internal server error
       summary: Create a new order
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v1/orders/bulk:
+    post:
+      description: "Submits up to `matching.bulk_order_max_orders` orders (default\
+        \ 20) on a single order book for the logged in user. Every order must have\
+        \ the same `order_book_id`. By default each order is validated, locked and\
+        \ inserted independently, so a rejected order does not affect the others;\
+        \ `results` reports the outcome of every order in request order. Atomic submission\
+        \ (`atomic: true`) is not currently supported and is rejected with 400. Global-position\
+        \ orders and isolated orders are each processed sequentially in request order.\
+        \ `client_order_id` must be unique within a request."
+      operationId: createOrdersBulk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrdersBulkRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateOrdersBulkResponse"
+          description: Every order was processed; see each result's status
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Bad request, e.g. no orders, more orders than the configured\
+            \ maximum, orders on different order books, or `atomic: true` (not currently\
+            \ supported)"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Unauthorized, user not logged in"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: "Forbidden, e.g. the user's account is deactivated"
+        "413":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Request body too large
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Too many bulk requests from this user
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseEnvelope"
+          description: Internal server error
+      summary: Create many orders at once
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -4771,6 +4954,20 @@ paths:
       - explode: true
         in: query
         name: user_ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+          default: null
+        style: form
+      - description: "Leave out the trades of these users. Requires order_book_ids,\
+          \ and may not be combined with user_ids; a request that breaks either rule\
+          \ is rejected rather than served without the exclusion."
+        explode: true
+        in: query
+        name: exclude_user_ids
         required: false
         schema:
           items:
@@ -8444,6 +8641,7 @@ components:
         referrer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         referrer_user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         tenant_id: tenant_id
+        referred_tenant_id: referred_tenant_id
         signup_source: signup_source
         created_at: 2000-01-23T04:56:07.000+00:00
         referral_code: referral_code
@@ -8461,6 +8659,12 @@ components:
           format: uuid
           type: string
         tenant_id:
+          description: Tenant that owns the referrer and the program. A referrer in
+            a global tenant may refer users of any tenant.
+          type: string
+        referred_tenant_id:
+          description: Tenant that owns the referred user. Differs from tenant_id
+            only when a global tenant's referrer referred the user.
           type: string
         signup_source:
           description: Signup hostname when assigned at signup; empty for an assignment
@@ -8480,6 +8684,7 @@ components:
       - created_at
       - program_id
       - referral_code
+      - referred_tenant_id
       - referred_user_id
       - referrer_id
       - referrer_user_id
@@ -8493,6 +8698,7 @@ components:
           referrer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           referrer_user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           tenant_id: tenant_id
+          referred_tenant_id: referred_tenant_id
           signup_source: signup_source
           created_at: 2000-01-23T04:56:07.000+00:00
           referral_code: referral_code
@@ -9285,6 +9491,7 @@ components:
       - ORPHANED
       - USER_NOT_EXIST
       - DUST
+      - UNMATCHED
       type: string
     DepositInstructionForChain:
       description: Everything the caller needs to deposit USDC into the Dora vault
@@ -10426,6 +10633,7 @@ components:
       - INTEGRATOR
       - INDEXER
       - COMPETITION_MANAGER
+      - AFFILIATE_MANAGER
       type: string
     UsersTag:
       description: Admin-assignable user tag. MARKET_MAKER users are exempt from the
@@ -10462,6 +10670,9 @@ components:
           managed_competition_ids:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          managed_affiliate_program_ids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           timezone: timezone
           timezone_offset: 0
           verified_at: 2000-01-23T04:56:07.000+00:00
@@ -10494,6 +10705,9 @@ components:
           - PUBLIC
           - PUBLIC
           managed_competition_ids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          managed_affiliate_program_ids:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           timezone: timezone
@@ -10536,7 +10750,8 @@ components:
       properties:
         referral_code:
           description: "Optional affiliate code, normalized to uppercase. Accepted\
-            \ only when creating a new account in the program owning tenant. One immutable\
+            \ only when creating a new account, in the program owning tenant or in\
+            \ any tenant when the program owner is a global tenant. One immutable\
             \ attribution per user account; a later signup/linking call cannot add\
             \ or replace it. Invalid or inactive codes fail signup atomically. Independent\
             \ of QR acquisition attribution. Existing unassigned users can instead\
@@ -10656,6 +10871,9 @@ components:
           - PUBLIC
           - PUBLIC
           managed_competition_ids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          managed_affiliate_program_ids:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           timezone: timezone
@@ -10864,6 +11082,9 @@ components:
         managed_competition_ids:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        managed_affiliate_program_ids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         timezone: timezone
         timezone_offset: 0
         verified_at: 2000-01-23T04:56:07.000+00:00
@@ -10920,6 +11141,15 @@ components:
         managed_competition_ids:
           description: Competition IDs this user is explicitly allowed to manage when
             they have COMPETITION_MANAGER role. Empty means no competition-management
+            access.
+          items:
+            format: uuid
+            type: string
+          type: array
+          default: null
+        managed_affiliate_program_ids:
+          description: Affiliate program IDs this user is explicitly allowed to manage
+            when they have AFFILIATE_MANAGER role. Empty means no affiliate-management
             access.
           items:
             format: uuid
@@ -11432,6 +11662,8 @@ components:
         win_rate: win_rate
         daily_trading_volume: daily_trading_volume
         total_trading_volume: total_trading_volume
+        avg_daily_volume: avg_daily_volume
+        avg_daily_volume_on_n_days: avg_daily_volume_on_n_days
         active_trading_days: 5
         activated: true
         kyc_approved: true
@@ -11460,6 +11692,15 @@ components:
         total_trading_volume:
           description: Cumulative executed trading volume across all UTC trading days.
           type: string
+        avg_daily_volume:
+          description: total_trading_volume divided by active_trading_days. 0 if the
+            user has no active trading days.
+          type: string
+        avg_daily_volume_on_n_days:
+          description: "Executed trading volume within [start, end) divided by the\
+            \ number of requested days elapsed so far (end clamped to now, partial\
+            \ days rounded up). 0 if start is in the future."
+          type: string
         active_trading_days:
           description: Number of distinct UTC days on which the user has at least
             one executed fill.
@@ -11473,6 +11714,8 @@ components:
       required:
       - activated
       - active_trading_days
+      - avg_daily_volume
+      - avg_daily_volume_on_n_days
       - daily_trading_volume
       - first_name
       - kyc_approved
@@ -11488,6 +11731,8 @@ components:
       example:
         all_users_daily_trading_volume: all_users_daily_trading_volume
         all_users_total_trading_volume: all_users_total_trading_volume
+        all_users_avg_daily_trading_volume: all_users_avg_daily_trading_volume
+        all_users_avg_daily_trading_volume_on_n_days: all_users_avg_daily_trading_volume_on_n_days
       properties:
         all_users_daily_trading_volume:
           description: Sum of daily_trading_volume across all users matching ranking
@@ -11497,7 +11742,20 @@ components:
           description: Sum of total_trading_volume across all users matching ranking
             filters before pagination.
           type: string
+        all_users_avg_daily_trading_volume:
+          description: all_users_total_trading_volume divided by the number of distinct
+            UTC days on which any matching user had an executed fill. 0 if there are
+            none.
+          type: string
+        all_users_avg_daily_trading_volume_on_n_days:
+          description: "Executed trading volume within [start, end) across all users\
+            \ matching ranking filters, divided by the number of requested days elapsed\
+            \ so far (end clamped to now, partial days rounded up). 0 if start is\
+            \ in the future."
+          type: string
       required:
+      - all_users_avg_daily_trading_volume
+      - all_users_avg_daily_trading_volume_on_n_days
       - all_users_daily_trading_volume
       - all_users_total_trading_volume
     PnLRankingResponses:
@@ -11505,6 +11763,8 @@ components:
         summary:
           all_users_daily_trading_volume: all_users_daily_trading_volume
           all_users_total_trading_volume: all_users_total_trading_volume
+          all_users_avg_daily_trading_volume: all_users_avg_daily_trading_volume
+          all_users_avg_daily_trading_volume_on_n_days: all_users_avg_daily_trading_volume_on_n_days
         rankings:
         - user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           first_name: first_name
@@ -11516,6 +11776,8 @@ components:
           win_rate: win_rate
           daily_trading_volume: daily_trading_volume
           total_trading_volume: total_trading_volume
+          avg_daily_volume: avg_daily_volume
+          avg_daily_volume_on_n_days: avg_daily_volume_on_n_days
           active_trading_days: 5
           activated: true
           kyc_approved: true
@@ -11529,6 +11791,8 @@ components:
           win_rate: win_rate
           daily_trading_volume: daily_trading_volume
           total_trading_volume: total_trading_volume
+          avg_daily_volume: avg_daily_volume
+          avg_daily_volume_on_n_days: avg_daily_volume_on_n_days
           active_trading_days: 5
           activated: true
           kyc_approved: true
@@ -11554,6 +11818,8 @@ components:
           summary:
             all_users_daily_trading_volume: all_users_daily_trading_volume
             all_users_total_trading_volume: all_users_total_trading_volume
+            all_users_avg_daily_trading_volume: all_users_avg_daily_trading_volume
+            all_users_avg_daily_trading_volume_on_n_days: all_users_avg_daily_trading_volume_on_n_days
           rankings:
           - user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             first_name: first_name
@@ -11565,6 +11831,8 @@ components:
             win_rate: win_rate
             daily_trading_volume: daily_trading_volume
             total_trading_volume: total_trading_volume
+            avg_daily_volume: avg_daily_volume
+            avg_daily_volume_on_n_days: avg_daily_volume_on_n_days
             active_trading_days: 5
             activated: true
             kyc_approved: true
@@ -11578,6 +11846,8 @@ components:
             win_rate: win_rate
             daily_trading_volume: daily_trading_volume
             total_trading_volume: total_trading_volume
+            avg_daily_volume: avg_daily_volume
+            avg_daily_volume_on_n_days: avg_daily_volume_on_n_days
             active_trading_days: 5
             activated: true
             kyc_approved: true
@@ -12530,6 +12800,105 @@ components:
         metadata: ""
     CreateOrderResponse:
       $ref: "#/components/schemas/CreateOrderResponseEnvelope"
+    CreateOrdersBulkRequest:
+      example:
+        orders:
+        - quantity: quantity
+          inverse_leverage: inverse_leverage
+          price: price
+          kind: LIMIT
+          side: ""
+          from_global_position: true
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_modifiers:
+          - LIQUIDATION
+          - LIQUIDATION
+          good_till_date: 2000-01-23T04:56:07.000+00:00
+          client_order_id: client_order_id
+          stop_loss_price: stop_loss_price
+          take_profit_price: take_profit_price
+        - quantity: quantity
+          inverse_leverage: inverse_leverage
+          price: price
+          kind: LIMIT
+          side: ""
+          from_global_position: true
+          order_book_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          order_modifiers:
+          - LIQUIDATION
+          - LIQUIDATION
+          good_till_date: 2000-01-23T04:56:07.000+00:00
+          client_order_id: client_order_id
+          stop_loss_price: stop_loss_price
+          take_profit_price: take_profit_price
+        atomic: false
+      properties:
+        orders:
+          description: "Orders to submit, all with the same `order_book_id`. The maximum\
+            \ is configurable (matching.bulk_order_max_orders, default 20)."
+          items:
+            $ref: "#/components/schemas/CreateOrderRequest"
+          minItems: 1
+          type: array
+          default: null
+        atomic:
+          default: false
+          description: "Not currently supported: must be omitted or false, and `true`\
+            \ is rejected with 400. Orders are processed independently and partial\
+            \ creation is allowed."
+          type: boolean
+      required:
+      - orders
+    BulkOrderResult:
+      example:
+        index: 1
+        client_order_id: client_order_id
+        order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        status: 5
+        error: error
+      properties:
+        index:
+          description: Position of the order in the request
+          type: integer
+        client_order_id:
+          type: string
+        order_id:
+          description: Present when the order was created
+          format: uuid
+          type: string
+        status:
+          description: "HTTP status the order would have received from POST /v1/orders:\
+            \ 201 when created"
+          type: integer
+        error:
+          description: Present when the order was rejected
+          type: string
+      required:
+      - index
+      - status
+    CreateOrdersBulkResponse:
+      allOf:
+      - $ref: "#/components/schemas/ResponseEnvelope"
+      - properties:
+          data:
+            $ref: "#/components/schemas/CreateOrdersBulkResponse_allOf_data"
+      example:
+        data:
+          created: 0
+          rejected: 6
+          results:
+          - index: 1
+            client_order_id: client_order_id
+            order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            status: 5
+            error: error
+          - index: 1
+            client_order_id: client_order_id
+            order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            status: 5
+            error: error
+        error: error
+        metadata: ""
     PositionResponse:
       example:
         portfolio:
@@ -18657,6 +19026,7 @@ components:
         tenant_id: tenant_id
         seq: 0
         available: available
+        transaction_amount: transaction_amount
         tx_kind: DEPOSIT
         updated_at: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -18669,6 +19039,8 @@ components:
           format: int64
           type: integer
         available:
+          type: string
+        transaction_amount:
           type: string
         tx_kind:
           enum:
@@ -18684,6 +19056,7 @@ components:
       - id
       - seq
       - tenant_id
+      - transaction_amount
       - tx_kind
       - updated_at
     TenantGuaranteeFundSummary:
@@ -18705,12 +19078,14 @@ components:
           tenant_id: tenant_id
           seq: 0
           available: available
+          transaction_amount: transaction_amount
           tx_kind: DEPOSIT
           updated_at: 2000-01-23T04:56:07.000+00:00
         - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           tenant_id: tenant_id
           seq: 0
           available: available
+          transaction_amount: transaction_amount
           tx_kind: DEPOSIT
           updated_at: 2000-01-23T04:56:07.000+00:00
         summary:
@@ -18740,12 +19115,14 @@ components:
             tenant_id: tenant_id
             seq: 0
             available: available
+            transaction_amount: transaction_amount
             tx_kind: DEPOSIT
             updated_at: 2000-01-23T04:56:07.000+00:00
           - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             tenant_id: tenant_id
             seq: 0
             available: available
+            transaction_amount: transaction_amount
             tx_kind: DEPOSIT
             updated_at: 2000-01-23T04:56:07.000+00:00
           summary:
@@ -18996,6 +19373,31 @@ components:
           format: uuid
           type: string
       title: CreateConditionalOrderResponseData
+    CreateOrdersBulkResponse_allOf_data:
+      example:
+        created: 0
+        rejected: 6
+        results:
+        - index: 1
+          client_order_id: client_order_id
+          order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          status: 5
+          error: error
+        - index: 1
+          client_order_id: client_order_id
+          order_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          status: 5
+          error: error
+      properties:
+        created:
+          type: integer
+        rejected:
+          type: integer
+        results:
+          items:
+            $ref: "#/components/schemas/BulkOrderResult"
+          type: array
+          default: null
     IssuePromoLinkBatchResponse_allOf_data:
       example:
         batch_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91

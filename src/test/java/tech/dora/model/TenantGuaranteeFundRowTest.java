@@ -72,6 +72,14 @@ public class TenantGuaranteeFundRowTest {
     }
 
     /**
+     * Test the property 'transactionAmount'
+     */
+    @Test
+    public void transactionAmountTest() {
+        // TODO: test transactionAmount
+    }
+
+    /**
      * Test the property 'txKind'
      */
     @Test

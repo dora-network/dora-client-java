@@ -50,7 +50,7 @@ import tech.dora.JSON;
 /**
  * AffiliateAttribution
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class AffiliateAttribution {
   public static final String SERIALIZED_NAME_REFERRED_USER_ID = "referred_user_id";
   @SerializedName(SERIALIZED_NAME_REFERRED_USER_ID)
@@ -76,6 +76,11 @@ public class AffiliateAttribution {
   @SerializedName(SERIALIZED_NAME_TENANT_ID)
   @javax.annotation.Nonnull
   private String tenantId;
+
+  public static final String SERIALIZED_NAME_REFERRED_TENANT_ID = "referred_tenant_id";
+  @SerializedName(SERIALIZED_NAME_REFERRED_TENANT_ID)
+  @javax.annotation.Nonnull
+  private String referredTenantId;
 
   public static final String SERIALIZED_NAME_SIGNUP_SOURCE = "signup_source";
   @SerializedName(SERIALIZED_NAME_SIGNUP_SOURCE)
@@ -177,7 +182,7 @@ public class AffiliateAttribution {
   }
 
   /**
-   * Get tenantId
+   * Tenant that owns the referrer and the program. A referrer in a global tenant may refer users of any tenant.
    * @return tenantId
    */
   @javax.annotation.Nonnull
@@ -187,6 +192,25 @@ public class AffiliateAttribution {
 
   public void setTenantId(@javax.annotation.Nonnull String tenantId) {
     this.tenantId = tenantId;
+  }
+
+
+  public AffiliateAttribution referredTenantId(@javax.annotation.Nonnull String referredTenantId) {
+    this.referredTenantId = referredTenantId;
+    return this;
+  }
+
+  /**
+   * Tenant that owns the referred user. Differs from tenant_id only when a global tenant&#39;s referrer referred the user.
+   * @return referredTenantId
+   */
+  @javax.annotation.Nonnull
+  public String getReferredTenantId() {
+    return referredTenantId;
+  }
+
+  public void setReferredTenantId(@javax.annotation.Nonnull String referredTenantId) {
+    this.referredTenantId = referredTenantId;
   }
 
 
@@ -262,6 +286,7 @@ public class AffiliateAttribution {
         Objects.equals(this.referrerId, affiliateAttribution.referrerId) &&
         Objects.equals(this.referrerUserId, affiliateAttribution.referrerUserId) &&
         Objects.equals(this.tenantId, affiliateAttribution.tenantId) &&
+        Objects.equals(this.referredTenantId, affiliateAttribution.referredTenantId) &&
         Objects.equals(this.signupSource, affiliateAttribution.signupSource) &&
         Objects.equals(this.createdAt, affiliateAttribution.createdAt) &&
         Objects.equals(this.referralCode, affiliateAttribution.referralCode);
@@ -269,7 +294,7 @@ public class AffiliateAttribution {
 
   @Override
   public int hashCode() {
-    return Objects.hash(referredUserId, programId, referrerId, referrerUserId, tenantId, signupSource, createdAt, referralCode);
+    return Objects.hash(referredUserId, programId, referrerId, referrerUserId, tenantId, referredTenantId, signupSource, createdAt, referralCode);
   }
 
   @Override
@@ -281,6 +306,7 @@ public class AffiliateAttribution {
     sb.append("    referrerId: ").append(toIndentedString(referrerId)).append("\n");
     sb.append("    referrerUserId: ").append(toIndentedString(referrerUserId)).append("\n");
     sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
+    sb.append("    referredTenantId: ").append(toIndentedString(referredTenantId)).append("\n");
     sb.append("    signupSource: ").append(toIndentedString(signupSource)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    referralCode: ").append(toIndentedString(referralCode)).append("\n");
@@ -302,10 +328,10 @@ public class AffiliateAttribution {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("referred_user_id", "program_id", "referrer_id", "referrer_user_id", "tenant_id", "signup_source", "created_at", "referral_code"));
+    openapiFields = new HashSet<String>(Arrays.asList("referred_user_id", "program_id", "referrer_id", "referrer_user_id", "tenant_id", "referred_tenant_id", "signup_source", "created_at", "referral_code"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("referred_user_id", "program_id", "referrer_id", "referrer_user_id", "tenant_id", "signup_source", "created_at", "referral_code"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("referred_user_id", "program_id", "referrer_id", "referrer_user_id", "tenant_id", "referred_tenant_id", "signup_source", "created_at", "referral_code"));
   }
 
   /**
@@ -350,6 +376,9 @@ public class AffiliateAttribution {
       }
       if (!jsonObj.get("tenant_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tenant_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tenant_id").toString()));
+      }
+      if (!jsonObj.get("referred_tenant_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `referred_tenant_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("referred_tenant_id").toString()));
       }
       if (!jsonObj.get("signup_source").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `signup_source` to be a primitive type in the JSON string but got `%s`", jsonObj.get("signup_source").toString()));

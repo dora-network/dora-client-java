@@ -80,6 +80,14 @@ public class AffiliateAttributionTest {
     }
 
     /**
+     * Test the property 'referredTenantId'
+     */
+    @Test
+    public void referredTenantIdTest() {
+        // TODO: test referredTenantId
+    }
+
+    /**
      * Test the property 'signupSource'
      */
     @Test

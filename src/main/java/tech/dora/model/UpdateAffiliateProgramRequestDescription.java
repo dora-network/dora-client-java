@@ -58,7 +58,7 @@ import com.google.gson.JsonParseException;
 
 import tech.dora.JSON;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class UpdateAffiliateProgramRequestDescription extends AbstractOpenApiSchema {
     private static final Logger log = Logger.getLogger(UpdateAffiliateProgramRequestDescription.class.getName());
 

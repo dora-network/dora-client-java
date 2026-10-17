@@ -66,6 +66,8 @@ import tech.dora.model.CreateConditionalOrderResponseEnvelope;
 import tech.dora.model.CreateIntegratorUserRequest;
 import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponseEnvelope;
+import tech.dora.model.CreateOrdersBulkRequest;
+import tech.dora.model.CreateOrdersBulkResponse;
 import tech.dora.model.CreateTradingChallengeRequest;
 import tech.dora.model.CreateWithdrawalRequest;
 import tech.dora.model.CurrentLeverageAccruedInterestResponseEnvelope;
@@ -773,7 +775,7 @@ public class DefaultApi {
 
     /**
      * Assign your affiliate referrer
-     * Authenticated existing users may assign a referral code once, within their own tenant. No user_id or tenant_id override is accepted. New assignments reject self-referral and require an active program. Repeating the same code returns the original assignment without changing its timestamp; changing the code returns 409. Only activity from assignment onward counts. This does not change signup_source.
+     * Authenticated existing users may assign a referral code once. The code must belong to their own tenant or to a global tenant, whose referrers serve every tenant. No user_id or tenant_id override is accepted. New assignments reject self-referral and require an active program. Repeating the same code returns the original assignment without changing its timestamp; changing the code returns 409. Only activity from assignment onward counts. This does not change signup_source.
      * @param assignAffiliateReferralRequest  (required)
      * @return AffiliateAttributionEnvelope
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -798,7 +800,7 @@ public class DefaultApi {
 
     /**
      * Assign your affiliate referrer
-     * Authenticated existing users may assign a referral code once, within their own tenant. No user_id or tenant_id override is accepted. New assignments reject self-referral and require an active program. Repeating the same code returns the original assignment without changing its timestamp; changing the code returns 409. Only activity from assignment onward counts. This does not change signup_source.
+     * Authenticated existing users may assign a referral code once. The code must belong to their own tenant or to a global tenant, whose referrers serve every tenant. No user_id or tenant_id override is accepted. New assignments reject self-referral and require an active program. Repeating the same code returns the original assignment without changing its timestamp; changing the code returns 409. Only activity from assignment onward counts. This does not change signup_source.
      * @param assignAffiliateReferralRequest  (required)
      * @return ApiResponse&lt;AffiliateAttributionEnvelope&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -824,7 +826,7 @@ public class DefaultApi {
 
     /**
      * Assign your affiliate referrer (asynchronously)
-     * Authenticated existing users may assign a referral code once, within their own tenant. No user_id or tenant_id override is accepted. New assignments reject self-referral and require an active program. Repeating the same code returns the original assignment without changing its timestamp; changing the code returns 409. Only activity from assignment onward counts. This does not change signup_source.
+     * Authenticated existing users may assign a referral code once. The code must belong to their own tenant or to a global tenant, whose referrers serve every tenant. No user_id or tenant_id override is accepted. New assignments reject self-referral and require an active program. Repeating the same code returns the original assignment without changing its timestamp; changing the code returns 409. Only activity from assignment onward counts. This does not change signup_source.
      * @param assignAffiliateReferralRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -3029,6 +3031,157 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for createOrdersBulk
+     * @param createOrdersBulkRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Every order was processed; see each result&#39;s status </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. no orders, more orders than the configured maximum, orders on different order books, or &#x60;atomic: true&#x60; (not currently supported) </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s account is deactivated </td><td>  -  </td></tr>
+        <tr><td> 413 </td><td> Request body too large </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too many bulk requests from this user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createOrdersBulkCall(@javax.annotation.Nonnull CreateOrdersBulkRequest createOrdersBulkRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = createOrdersBulkRequest;
+
+        // create path and map variables
+        String localVarPath = "/v1/orders/bulk";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createOrdersBulkValidateBeforeCall(@javax.annotation.Nonnull CreateOrdersBulkRequest createOrdersBulkRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'createOrdersBulkRequest' is set
+        if (createOrdersBulkRequest == null) {
+            throw new ApiException("Missing the required parameter 'createOrdersBulkRequest' when calling createOrdersBulk(Async)");
+        }
+
+        return createOrdersBulkCall(createOrdersBulkRequest, _callback);
+
+    }
+
+    /**
+     * Create many orders at once
+     * Submits up to &#x60;matching.bulk_order_max_orders&#x60; orders (default 20) on a single order book for the logged in user. Every order must have the same &#x60;order_book_id&#x60;. By default each order is validated, locked and inserted independently, so a rejected order does not affect the others; &#x60;results&#x60; reports the outcome of every order in request order. Atomic submission (&#x60;atomic: true&#x60;) is not currently supported and is rejected with 400. Global-position orders and isolated orders are each processed sequentially in request order. &#x60;client_order_id&#x60; must be unique within a request.
+     * @param createOrdersBulkRequest  (required)
+     * @return CreateOrdersBulkResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Every order was processed; see each result&#39;s status </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. no orders, more orders than the configured maximum, orders on different order books, or &#x60;atomic: true&#x60; (not currently supported) </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s account is deactivated </td><td>  -  </td></tr>
+        <tr><td> 413 </td><td> Request body too large </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too many bulk requests from this user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public CreateOrdersBulkResponse createOrdersBulk(@javax.annotation.Nonnull CreateOrdersBulkRequest createOrdersBulkRequest) throws ApiException {
+        ApiResponse<CreateOrdersBulkResponse> localVarResp = createOrdersBulkWithHttpInfo(createOrdersBulkRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Create many orders at once
+     * Submits up to &#x60;matching.bulk_order_max_orders&#x60; orders (default 20) on a single order book for the logged in user. Every order must have the same &#x60;order_book_id&#x60;. By default each order is validated, locked and inserted independently, so a rejected order does not affect the others; &#x60;results&#x60; reports the outcome of every order in request order. Atomic submission (&#x60;atomic: true&#x60;) is not currently supported and is rejected with 400. Global-position orders and isolated orders are each processed sequentially in request order. &#x60;client_order_id&#x60; must be unique within a request.
+     * @param createOrdersBulkRequest  (required)
+     * @return ApiResponse&lt;CreateOrdersBulkResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Every order was processed; see each result&#39;s status </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. no orders, more orders than the configured maximum, orders on different order books, or &#x60;atomic: true&#x60; (not currently supported) </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s account is deactivated </td><td>  -  </td></tr>
+        <tr><td> 413 </td><td> Request body too large </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too many bulk requests from this user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<CreateOrdersBulkResponse> createOrdersBulkWithHttpInfo(@javax.annotation.Nonnull CreateOrdersBulkRequest createOrdersBulkRequest) throws ApiException {
+        okhttp3.Call localVarCall = createOrdersBulkValidateBeforeCall(createOrdersBulkRequest, null);
+        Type localVarReturnType = new TypeToken<CreateOrdersBulkResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Create many orders at once (asynchronously)
+     * Submits up to &#x60;matching.bulk_order_max_orders&#x60; orders (default 20) on a single order book for the logged in user. Every order must have the same &#x60;order_book_id&#x60;. By default each order is validated, locked and inserted independently, so a rejected order does not affect the others; &#x60;results&#x60; reports the outcome of every order in request order. Atomic submission (&#x60;atomic: true&#x60;) is not currently supported and is rejected with 400. Global-position orders and isolated orders are each processed sequentially in request order. &#x60;client_order_id&#x60; must be unique within a request.
+     * @param createOrdersBulkRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Every order was processed; see each result&#39;s status </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad request, e.g. no orders, more orders than the configured maximum, orders on different order books, or &#x60;atomic: true&#x60; (not currently supported) </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized, user not logged in </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden, e.g. the user&#39;s account is deactivated </td><td>  -  </td></tr>
+        <tr><td> 413 </td><td> Request body too large </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too many bulk requests from this user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createOrdersBulkAsync(@javax.annotation.Nonnull CreateOrdersBulkRequest createOrdersBulkRequest, final ApiCallback<CreateOrdersBulkResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createOrdersBulkValidateBeforeCall(createOrdersBulkRequest, _callback);
+        Type localVarReturnType = new TypeToken<CreateOrdersBulkResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for createTradingChallenge
      * @param createTradingChallengeRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -4179,6 +4332,153 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = getAffiliateProgramValidateBeforeCall(programId, _callback);
         Type localVarReturnType = new TypeToken<AffiliateProgramEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getAffiliateReferrerCode
+     * @param referrerId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Affiliate referrer code details </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden by role, tenant, or program assignment </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Referrer not found within scope </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getAffiliateReferrerCodeCall(@javax.annotation.Nonnull UUID referrerId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/affiliate_referrers/{referrer_id}/code"
+            .replace("{" + "referrer_id" + "}", localVarApiClient.escapeString(referrerId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getAffiliateReferrerCodeValidateBeforeCall(@javax.annotation.Nonnull UUID referrerId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'referrerId' is set
+        if (referrerId == null) {
+            throw new ApiException("Missing the required parameter 'referrerId' when calling getAffiliateReferrerCode(Async)");
+        }
+
+        return getAffiliateReferrerCodeCall(referrerId, _callback);
+
+    }
+
+    /**
+     * Get a referrer&#39;s current code
+     * ADMIN, INTEGRATOR, or AFFILIATE_MANAGER required within tenant and assignment scope.
+     * @param referrerId  (required)
+     * @return AffiliateReferrerEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Affiliate referrer code details </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden by role, tenant, or program assignment </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Referrer not found within scope </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AffiliateReferrerEnvelope getAffiliateReferrerCode(@javax.annotation.Nonnull UUID referrerId) throws ApiException {
+        ApiResponse<AffiliateReferrerEnvelope> localVarResp = getAffiliateReferrerCodeWithHttpInfo(referrerId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get a referrer&#39;s current code
+     * ADMIN, INTEGRATOR, or AFFILIATE_MANAGER required within tenant and assignment scope.
+     * @param referrerId  (required)
+     * @return ApiResponse&lt;AffiliateReferrerEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Affiliate referrer code details </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden by role, tenant, or program assignment </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Referrer not found within scope </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AffiliateReferrerEnvelope> getAffiliateReferrerCodeWithHttpInfo(@javax.annotation.Nonnull UUID referrerId) throws ApiException {
+        okhttp3.Call localVarCall = getAffiliateReferrerCodeValidateBeforeCall(referrerId, null);
+        Type localVarReturnType = new TypeToken<AffiliateReferrerEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get a referrer&#39;s current code (asynchronously)
+     * ADMIN, INTEGRATOR, or AFFILIATE_MANAGER required within tenant and assignment scope.
+     * @param referrerId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Affiliate referrer code details </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden by role, tenant, or program assignment </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Referrer not found within scope </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getAffiliateReferrerCodeAsync(@javax.annotation.Nonnull UUID referrerId, final ApiCallback<AffiliateReferrerEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getAffiliateReferrerCodeValidateBeforeCall(referrerId, _callback);
+        Type localVarReturnType = new TypeToken<AffiliateReferrerEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -10315,6 +10615,7 @@ public class DefaultApi {
      * Build call for getTrades
      * @param orderBookIds  (optional)
      * @param userIds  (optional)
+     * @param excludeUserIds Leave out the trades of these users. Requires order_book_ids, and may not be combined with user_ids; a request that breaks either rule is rejected rather than served without the exclusion. (optional)
      * @param start  (optional)
      * @param end  (optional)
      * @param page  (optional, default to 1)
@@ -10332,7 +10633,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getTradesCall(@javax.annotation.Nullable List<String> orderBookIds, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getTradesCall(@javax.annotation.Nullable List<String> orderBookIds, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable List<UUID> excludeUserIds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -10363,6 +10664,10 @@ public class DefaultApi {
 
         if (userIds != null) {
             localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "user_ids", userIds));
+        }
+
+        if (excludeUserIds != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "exclude_user_ids", excludeUserIds));
         }
 
         if (start != null) {
@@ -10401,8 +10706,8 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getTradesValidateBeforeCall(@javax.annotation.Nullable List<String> orderBookIds, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
-        return getTradesCall(orderBookIds, userIds, start, end, page, limit, _callback);
+    private okhttp3.Call getTradesValidateBeforeCall(@javax.annotation.Nullable List<String> orderBookIds, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable List<UUID> excludeUserIds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback _callback) throws ApiException {
+        return getTradesCall(orderBookIds, userIds, excludeUserIds, start, end, page, limit, _callback);
 
     }
 
@@ -10411,6 +10716,7 @@ public class DefaultApi {
      * Role-based date window: public callers are limited to the last month; authenticated callers may query up to the last six months. If &#x60;start&#x60; is omitted it defaults to the role-based minimum. If credentials are supplied but invalid, the request is rejected as unauthorized.
      * @param orderBookIds  (optional)
      * @param userIds  (optional)
+     * @param excludeUserIds Leave out the trades of these users. Requires order_book_ids, and may not be combined with user_ids; a request that breaks either rule is rejected rather than served without the exclusion. (optional)
      * @param start  (optional)
      * @param end  (optional)
      * @param page  (optional, default to 1)
@@ -10427,8 +10733,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ListTradeResponseEnvelope getTrades(@javax.annotation.Nullable List<String> orderBookIds, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
-        ApiResponse<ListTradeResponseEnvelope> localVarResp = getTradesWithHttpInfo(orderBookIds, userIds, start, end, page, limit);
+    public ListTradeResponseEnvelope getTrades(@javax.annotation.Nullable List<String> orderBookIds, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable List<UUID> excludeUserIds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
+        ApiResponse<ListTradeResponseEnvelope> localVarResp = getTradesWithHttpInfo(orderBookIds, userIds, excludeUserIds, start, end, page, limit);
         return localVarResp.getData();
     }
 
@@ -10437,6 +10743,7 @@ public class DefaultApi {
      * Role-based date window: public callers are limited to the last month; authenticated callers may query up to the last six months. If &#x60;start&#x60; is omitted it defaults to the role-based minimum. If credentials are supplied but invalid, the request is rejected as unauthorized.
      * @param orderBookIds  (optional)
      * @param userIds  (optional)
+     * @param excludeUserIds Leave out the trades of these users. Requires order_book_ids, and may not be combined with user_ids; a request that breaks either rule is rejected rather than served without the exclusion. (optional)
      * @param start  (optional)
      * @param end  (optional)
      * @param page  (optional, default to 1)
@@ -10453,8 +10760,8 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ListTradeResponseEnvelope> getTradesWithHttpInfo(@javax.annotation.Nullable List<String> orderBookIds, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
-        okhttp3.Call localVarCall = getTradesValidateBeforeCall(orderBookIds, userIds, start, end, page, limit, null);
+    public ApiResponse<ListTradeResponseEnvelope> getTradesWithHttpInfo(@javax.annotation.Nullable List<String> orderBookIds, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable List<UUID> excludeUserIds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
+        okhttp3.Call localVarCall = getTradesValidateBeforeCall(orderBookIds, userIds, excludeUserIds, start, end, page, limit, null);
         Type localVarReturnType = new TypeToken<ListTradeResponseEnvelope>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -10464,6 +10771,7 @@ public class DefaultApi {
      * Role-based date window: public callers are limited to the last month; authenticated callers may query up to the last six months. If &#x60;start&#x60; is omitted it defaults to the role-based minimum. If credentials are supplied but invalid, the request is rejected as unauthorized.
      * @param orderBookIds  (optional)
      * @param userIds  (optional)
+     * @param excludeUserIds Leave out the trades of these users. Requires order_book_ids, and may not be combined with user_ids; a request that breaks either rule is rejected rather than served without the exclusion. (optional)
      * @param start  (optional)
      * @param end  (optional)
      * @param page  (optional, default to 1)
@@ -10481,9 +10789,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getTradesAsync(@javax.annotation.Nullable List<String> orderBookIds, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback<ListTradeResponseEnvelope> _callback) throws ApiException {
+    public okhttp3.Call getTradesAsync(@javax.annotation.Nullable List<String> orderBookIds, @javax.annotation.Nullable List<UUID> userIds, @javax.annotation.Nullable List<UUID> excludeUserIds, @javax.annotation.Nullable OffsetDateTime start, @javax.annotation.Nullable OffsetDateTime end, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, final ApiCallback<ListTradeResponseEnvelope> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getTradesValidateBeforeCall(orderBookIds, userIds, start, end, page, limit, _callback);
+        okhttp3.Call localVarCall = getTradesValidateBeforeCall(orderBookIds, userIds, excludeUserIds, start, end, page, limit, _callback);
         Type localVarReturnType = new TypeToken<ListTradeResponseEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -19636,6 +19944,163 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = rejectTradingChallengeRegistrationRequestValidateBeforeCall(requestId, reviewTradingChallengeRegistrationRequest, _callback);
         Type localVarReturnType = new TypeToken<TradingChallengeRegistrationRequestResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for removeAffiliateReferrer
+     * @param programId  (required)
+     * @param referrerId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Removed affiliate referrer </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden by role, tenant, or program assignment </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Program or active referrer not found within scope </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call removeAffiliateReferrerCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UUID referrerId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/affiliate_programs/{program_id}/referrers/{referrer_id}"
+            .replace("{" + "program_id" + "}", localVarApiClient.escapeString(programId.toString()))
+            .replace("{" + "referrer_id" + "}", localVarApiClient.escapeString(referrerId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call removeAffiliateReferrerValidateBeforeCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UUID referrerId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'programId' is set
+        if (programId == null) {
+            throw new ApiException("Missing the required parameter 'programId' when calling removeAffiliateReferrer(Async)");
+        }
+
+        // verify the required parameter 'referrerId' is set
+        if (referrerId == null) {
+            throw new ApiException("Missing the required parameter 'referrerId' when calling removeAffiliateReferrer(Async)");
+        }
+
+        return removeAffiliateReferrerCall(programId, referrerId, _callback);
+
+    }
+
+    /**
+     * Remove a referrer from a program
+     * ADMIN, INTEGRATOR, or AFFILIATE_MANAGER required within tenant and assignment scope. Disables the referrer&#39;s code for new attributions while preserving historical attribution and reporting.
+     * @param programId  (required)
+     * @param referrerId  (required)
+     * @return AffiliateReferrerEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Removed affiliate referrer </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden by role, tenant, or program assignment </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Program or active referrer not found within scope </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AffiliateReferrerEnvelope removeAffiliateReferrer(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UUID referrerId) throws ApiException {
+        ApiResponse<AffiliateReferrerEnvelope> localVarResp = removeAffiliateReferrerWithHttpInfo(programId, referrerId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Remove a referrer from a program
+     * ADMIN, INTEGRATOR, or AFFILIATE_MANAGER required within tenant and assignment scope. Disables the referrer&#39;s code for new attributions while preserving historical attribution and reporting.
+     * @param programId  (required)
+     * @param referrerId  (required)
+     * @return ApiResponse&lt;AffiliateReferrerEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Removed affiliate referrer </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden by role, tenant, or program assignment </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Program or active referrer not found within scope </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AffiliateReferrerEnvelope> removeAffiliateReferrerWithHttpInfo(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UUID referrerId) throws ApiException {
+        okhttp3.Call localVarCall = removeAffiliateReferrerValidateBeforeCall(programId, referrerId, null);
+        Type localVarReturnType = new TypeToken<AffiliateReferrerEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Remove a referrer from a program (asynchronously)
+     * ADMIN, INTEGRATOR, or AFFILIATE_MANAGER required within tenant and assignment scope. Disables the referrer&#39;s code for new attributions while preserving historical attribution and reporting.
+     * @param programId  (required)
+     * @param referrerId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Removed affiliate referrer </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden by role, tenant, or program assignment </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Program or active referrer not found within scope </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call removeAffiliateReferrerAsync(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UUID referrerId, final ApiCallback<AffiliateReferrerEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = removeAffiliateReferrerValidateBeforeCall(programId, referrerId, _callback);
+        Type localVarReturnType = new TypeToken<AffiliateReferrerEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

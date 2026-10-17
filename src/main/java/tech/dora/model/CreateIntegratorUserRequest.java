@@ -51,7 +51,7 @@ import tech.dora.JSON;
 /**
  * CreateIntegratorUserRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class CreateIntegratorUserRequest {
   public static final String SERIALIZED_NAME_REFERRAL_CODE = "referral_code";
   @SerializedName(SERIALIZED_NAME_REFERRAL_CODE)
@@ -127,7 +127,7 @@ public class CreateIntegratorUserRequest {
   }
 
   /**
-   * Optional affiliate code, normalized to uppercase. Accepted only when creating a new account in the program owning tenant. One immutable attribution per user account; a later signup/linking call cannot add or replace it. Invalid or inactive codes fail signup atomically. Independent of QR acquisition attribution. Existing unassigned users can instead use POST /v1/affiliate_referrals/self; earlier activity is excluded.
+   * Optional affiliate code, normalized to uppercase. Accepted only when creating a new account, in the program owning tenant or in any tenant when the program owner is a global tenant. One immutable attribution per user account; a later signup/linking call cannot add or replace it. Invalid or inactive codes fail signup atomically. Independent of QR acquisition attribution. Existing unassigned users can instead use POST /v1/affiliate_referrals/self; earlier activity is excluded.
    * @return referralCode
    */
   @javax.annotation.Nullable

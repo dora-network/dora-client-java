@@ -48,7 +48,7 @@ import tech.dora.JSON;
 /**
  * A generic struct to handle optional updates for decimal fields in user requests.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class UpdateFieldDecimal {
   public static final String SERIALIZED_NAME_UPDATE = "update";
   @SerializedName(SERIALIZED_NAME_UPDATE)

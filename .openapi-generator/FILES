@@ -52,6 +52,7 @@ docs/BalancesResponse.md
 docs/Bond.md
 docs/BondKind.md
 docs/BondRunStatus.md
+docs/BulkOrderResult.md
 docs/CancelOrderResponseEnvelope.md
 docs/Candle.md
 docs/CandleResolution.md
@@ -86,6 +87,9 @@ docs/CreateIntegratorUserRequest.md
 docs/CreateOrUpdateUserResponse.md
 docs/CreateOrderRequest.md
 docs/CreateOrderResponseEnvelope.md
+docs/CreateOrdersBulkRequest.md
+docs/CreateOrdersBulkResponse.md
+docs/CreateOrdersBulkResponseAllOfData.md
 docs/CreateTradingChallengeQRRequest.md
 docs/CreateTradingChallengeRequest.md
 docs/CreateWithdrawalRequest.md
@@ -426,6 +430,7 @@ src/main/java/tech/dora/model/BalancesResponse.java
 src/main/java/tech/dora/model/Bond.java
 src/main/java/tech/dora/model/BondKind.java
 src/main/java/tech/dora/model/BondRunStatus.java
+src/main/java/tech/dora/model/BulkOrderResult.java
 src/main/java/tech/dora/model/CancelOrderResponseEnvelope.java
 src/main/java/tech/dora/model/Candle.java
 src/main/java/tech/dora/model/CandleResolution.java
@@ -460,6 +465,9 @@ src/main/java/tech/dora/model/CreateIntegratorUserRequest.java
 src/main/java/tech/dora/model/CreateOrUpdateUserResponse.java
 src/main/java/tech/dora/model/CreateOrderRequest.java
 src/main/java/tech/dora/model/CreateOrderResponseEnvelope.java
+src/main/java/tech/dora/model/CreateOrdersBulkRequest.java
+src/main/java/tech/dora/model/CreateOrdersBulkResponse.java
+src/main/java/tech/dora/model/CreateOrdersBulkResponseAllOfData.java
 src/main/java/tech/dora/model/CreateTradingChallengeQRRequest.java
 src/main/java/tech/dora/model/CreateTradingChallengeRequest.java
 src/main/java/tech/dora/model/CreateWithdrawalRequest.java
@@ -772,6 +780,7 @@ src/test/java/tech/dora/model/BalancesResponseTest.java
 src/test/java/tech/dora/model/BondKindTest.java
 src/test/java/tech/dora/model/BondRunStatusTest.java
 src/test/java/tech/dora/model/BondTest.java
+src/test/java/tech/dora/model/BulkOrderResultTest.java
 src/test/java/tech/dora/model/CancelOrderResponseEnvelopeTest.java
 src/test/java/tech/dora/model/CandleResolutionTest.java
 src/test/java/tech/dora/model/CandleTest.java
@@ -806,6 +815,9 @@ src/test/java/tech/dora/model/CreateIntegratorUserRequestTest.java
 src/test/java/tech/dora/model/CreateOrUpdateUserResponseTest.java
 src/test/java/tech/dora/model/CreateOrderRequestTest.java
 src/test/java/tech/dora/model/CreateOrderResponseEnvelopeTest.java
+src/test/java/tech/dora/model/CreateOrdersBulkRequestTest.java
+src/test/java/tech/dora/model/CreateOrdersBulkResponseAllOfDataTest.java
+src/test/java/tech/dora/model/CreateOrdersBulkResponseTest.java
 src/test/java/tech/dora/model/CreateTradingChallengeQRRequestTest.java
 src/test/java/tech/dora/model/CreateTradingChallengeRequestTest.java
 src/test/java/tech/dora/model/CreateWithdrawalRequestTest.java

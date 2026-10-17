@@ -53,6 +53,8 @@ import tech.dora.model.CreateConditionalOrderResponseEnvelope;
 import tech.dora.model.CreateIntegratorUserRequest;
 import tech.dora.model.CreateOrderRequest;
 import tech.dora.model.CreateOrderResponseEnvelope;
+import tech.dora.model.CreateOrdersBulkRequest;
+import tech.dora.model.CreateOrdersBulkResponse;
 import tech.dora.model.CreateTradingChallengeRequest;
 import tech.dora.model.CreateWithdrawalRequest;
 import tech.dora.model.CurrentLeverageAccruedInterestResponseEnvelope;
@@ -258,7 +260,7 @@ public class DefaultApiTest {
     /**
      * Assign your affiliate referrer
      *
-     * Authenticated existing users may assign a referral code once, within their own tenant. No user_id or tenant_id override is accepted. New assignments reject self-referral and require an active program. Repeating the same code returns the original assignment without changing its timestamp; changing the code returns 409. Only activity from assignment onward counts. This does not change signup_source.
+     * Authenticated existing users may assign a referral code once. The code must belong to their own tenant or to a global tenant, whose referrers serve every tenant. No user_id or tenant_id override is accepted. New assignments reject self-referral and require an active program. Repeating the same code returns the original assignment without changing its timestamp; changing the code returns 409. Only activity from assignment onward counts. This does not change signup_source.
      *
      * @throws ApiException if the Api call fails
      */
@@ -463,6 +465,20 @@ public class DefaultApiTest {
     }
 
     /**
+     * Create many orders at once
+     *
+     * Submits up to &#x60;matching.bulk_order_max_orders&#x60; orders (default 20) on a single order book for the logged in user. Every order must have the same &#x60;order_book_id&#x60;. By default each order is validated, locked and inserted independently, so a rejected order does not affect the others; &#x60;results&#x60; reports the outcome of every order in request order. Atomic submission (&#x60;atomic: true&#x60;) is not currently supported and is rejected with 400. Global-position orders and isolated orders are each processed sequentially in request order. &#x60;client_order_id&#x60; must be unique within a request.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void createOrdersBulkTest() throws ApiException {
+        CreateOrdersBulkRequest createOrdersBulkRequest = null;
+        CreateOrdersBulkResponse response = api.createOrdersBulk(createOrdersBulkRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Create a trading challenge
      *
      * Create a new trading challenge. Allowed for ADMIN and INTEGRATOR only.
@@ -566,6 +582,20 @@ public class DefaultApiTest {
     public void getAffiliateProgramTest() throws ApiException {
         UUID programId = null;
         AffiliateProgramEnvelope response = api.getAffiliateProgram(programId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get a referrer&#39;s current code
+     *
+     * ADMIN, INTEGRATOR, or AFFILIATE_MANAGER required within tenant and assignment scope.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getAffiliateReferrerCodeTest() throws ApiException {
+        UUID referrerId = null;
+        AffiliateReferrerEnvelope response = api.getAffiliateReferrerCode(referrerId);
         // TODO: test validations
     }
 
@@ -1130,11 +1160,12 @@ public class DefaultApiTest {
     public void getTradesTest() throws ApiException {
         List<String> orderBookIds = null;
         List<UUID> userIds = null;
+        List<UUID> excludeUserIds = null;
         OffsetDateTime start = null;
         OffsetDateTime end = null;
         Integer page = null;
         Integer limit = null;
-        ListTradeResponseEnvelope response = api.getTrades(orderBookIds, userIds, start, end, page, limit);
+        ListTradeResponseEnvelope response = api.getTrades(orderBookIds, userIds, excludeUserIds, start, end, page, limit);
         // TODO: test validations
     }
 
@@ -1997,6 +2028,21 @@ public class DefaultApiTest {
         UUID requestId = null;
         ReviewTradingChallengeRegistrationRequest reviewTradingChallengeRegistrationRequest = null;
         TradingChallengeRegistrationRequestResponseEnvelope response = api.rejectTradingChallengeRegistrationRequest(requestId, reviewTradingChallengeRegistrationRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Remove a referrer from a program
+     *
+     * ADMIN, INTEGRATOR, or AFFILIATE_MANAGER required within tenant and assignment scope. Disables the referrer&#39;s code for new attributions while preserving historical attribution and reporting.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void removeAffiliateReferrerTest() throws ApiException {
+        UUID programId = null;
+        UUID referrerId = null;
+        AffiliateReferrerEnvelope response = api.removeAffiliateReferrer(programId, referrerId);
         // TODO: test validations
     }
 

@@ -11,6 +11,7 @@
 |**tenantId** | **String** |  |  |
 |**seq** | **Long** |  |  |
 |**available** | **String** |  |  |
+|**transactionAmount** | **String** |  |  |
 |**txKind** | [**TxKindEnum**](#TxKindEnum) |  |  |
 |**updatedAt** | **OffsetDateTime** |  |  |
 

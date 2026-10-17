@@ -53,4 +53,20 @@ public class PnLRankingSummaryTest {
         // TODO: test allUsersTotalTradingVolume
     }
 
+    /**
+     * Test the property 'allUsersAvgDailyTradingVolume'
+     */
+    @Test
+    public void allUsersAvgDailyTradingVolumeTest() {
+        // TODO: test allUsersAvgDailyTradingVolume
+    }
+
+    /**
+     * Test the property 'allUsersAvgDailyTradingVolumeOnNDays'
+     */
+    @Test
+    public void allUsersAvgDailyTradingVolumeOnNDaysTest() {
+        // TODO: test allUsersAvgDailyTradingVolumeOnNDays
+    }
+
 }

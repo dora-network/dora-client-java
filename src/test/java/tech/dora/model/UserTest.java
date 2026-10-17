@@ -157,6 +157,14 @@ public class UserTest {
     }
 
     /**
+     * Test the property 'managedAffiliateProgramIds'
+     */
+    @Test
+    public void managedAffiliateProgramIdsTest() {
+        // TODO: test managedAffiliateProgramIds
+    }
+
+    /**
      * Test the property 'timezone'
      */
     @Test

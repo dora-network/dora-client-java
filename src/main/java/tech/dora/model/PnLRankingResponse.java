@@ -49,7 +49,7 @@ import tech.dora.JSON;
 /**
  * PnLRankingResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class PnLRankingResponse {
   public static final String SERIALIZED_NAME_USER_ID = "user_id";
   @SerializedName(SERIALIZED_NAME_USER_ID)
@@ -100,6 +100,16 @@ public class PnLRankingResponse {
   @SerializedName(SERIALIZED_NAME_TOTAL_TRADING_VOLUME)
   @javax.annotation.Nonnull
   private String totalTradingVolume;
+
+  public static final String SERIALIZED_NAME_AVG_DAILY_VOLUME = "avg_daily_volume";
+  @SerializedName(SERIALIZED_NAME_AVG_DAILY_VOLUME)
+  @javax.annotation.Nonnull
+  private String avgDailyVolume;
+
+  public static final String SERIALIZED_NAME_AVG_DAILY_VOLUME_ON_N_DAYS = "avg_daily_volume_on_n_days";
+  @SerializedName(SERIALIZED_NAME_AVG_DAILY_VOLUME_ON_N_DAYS)
+  @javax.annotation.Nonnull
+  private String avgDailyVolumeOnNDays;
 
   public static final String SERIALIZED_NAME_ACTIVE_TRADING_DAYS = "active_trading_days";
   @SerializedName(SERIALIZED_NAME_ACTIVE_TRADING_DAYS)
@@ -309,6 +319,44 @@ public class PnLRankingResponse {
   }
 
 
+  public PnLRankingResponse avgDailyVolume(@javax.annotation.Nonnull String avgDailyVolume) {
+    this.avgDailyVolume = avgDailyVolume;
+    return this;
+  }
+
+  /**
+   * total_trading_volume divided by active_trading_days. 0 if the user has no active trading days.
+   * @return avgDailyVolume
+   */
+  @javax.annotation.Nonnull
+  public String getAvgDailyVolume() {
+    return avgDailyVolume;
+  }
+
+  public void setAvgDailyVolume(@javax.annotation.Nonnull String avgDailyVolume) {
+    this.avgDailyVolume = avgDailyVolume;
+  }
+
+
+  public PnLRankingResponse avgDailyVolumeOnNDays(@javax.annotation.Nonnull String avgDailyVolumeOnNDays) {
+    this.avgDailyVolumeOnNDays = avgDailyVolumeOnNDays;
+    return this;
+  }
+
+  /**
+   * Executed trading volume within [start, end) divided by the number of requested days elapsed so far (end clamped to now, partial days rounded up). 0 if start is in the future.
+   * @return avgDailyVolumeOnNDays
+   */
+  @javax.annotation.Nonnull
+  public String getAvgDailyVolumeOnNDays() {
+    return avgDailyVolumeOnNDays;
+  }
+
+  public void setAvgDailyVolumeOnNDays(@javax.annotation.Nonnull String avgDailyVolumeOnNDays) {
+    this.avgDailyVolumeOnNDays = avgDailyVolumeOnNDays;
+  }
+
+
   public PnLRankingResponse activeTradingDays(@javax.annotation.Nonnull Integer activeTradingDays) {
     this.activeTradingDays = activeTradingDays;
     return this;
@@ -386,6 +434,8 @@ public class PnLRankingResponse {
         Objects.equals(this.winRate, pnLRankingResponse.winRate) &&
         Objects.equals(this.dailyTradingVolume, pnLRankingResponse.dailyTradingVolume) &&
         Objects.equals(this.totalTradingVolume, pnLRankingResponse.totalTradingVolume) &&
+        Objects.equals(this.avgDailyVolume, pnLRankingResponse.avgDailyVolume) &&
+        Objects.equals(this.avgDailyVolumeOnNDays, pnLRankingResponse.avgDailyVolumeOnNDays) &&
         Objects.equals(this.activeTradingDays, pnLRankingResponse.activeTradingDays) &&
         Objects.equals(this.activated, pnLRankingResponse.activated) &&
         Objects.equals(this.kycApproved, pnLRankingResponse.kycApproved);
@@ -393,7 +443,7 @@ public class PnLRankingResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, firstName, totalPnl, realizedPnl, totalTrades, winningTrades, losingTrades, winRate, dailyTradingVolume, totalTradingVolume, activeTradingDays, activated, kycApproved);
+    return Objects.hash(userId, firstName, totalPnl, realizedPnl, totalTrades, winningTrades, losingTrades, winRate, dailyTradingVolume, totalTradingVolume, avgDailyVolume, avgDailyVolumeOnNDays, activeTradingDays, activated, kycApproved);
   }
 
   @Override
@@ -410,6 +460,8 @@ public class PnLRankingResponse {
     sb.append("    winRate: ").append(toIndentedString(winRate)).append("\n");
     sb.append("    dailyTradingVolume: ").append(toIndentedString(dailyTradingVolume)).append("\n");
     sb.append("    totalTradingVolume: ").append(toIndentedString(totalTradingVolume)).append("\n");
+    sb.append("    avgDailyVolume: ").append(toIndentedString(avgDailyVolume)).append("\n");
+    sb.append("    avgDailyVolumeOnNDays: ").append(toIndentedString(avgDailyVolumeOnNDays)).append("\n");
     sb.append("    activeTradingDays: ").append(toIndentedString(activeTradingDays)).append("\n");
     sb.append("    activated: ").append(toIndentedString(activated)).append("\n");
     sb.append("    kycApproved: ").append(toIndentedString(kycApproved)).append("\n");
@@ -431,10 +483,10 @@ public class PnLRankingResponse {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("user_id", "first_name", "total_pnl", "realized_pnl", "total_trades", "winning_trades", "losing_trades", "win_rate", "daily_trading_volume", "total_trading_volume", "active_trading_days", "activated", "kyc_approved"));
+    openapiFields = new HashSet<String>(Arrays.asList("user_id", "first_name", "total_pnl", "realized_pnl", "total_trades", "winning_trades", "losing_trades", "win_rate", "daily_trading_volume", "total_trading_volume", "avg_daily_volume", "avg_daily_volume_on_n_days", "active_trading_days", "activated", "kyc_approved"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("user_id", "first_name", "total_pnl", "realized_pnl", "total_trades", "winning_trades", "losing_trades", "win_rate", "daily_trading_volume", "total_trading_volume", "active_trading_days", "activated", "kyc_approved"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("user_id", "first_name", "total_pnl", "realized_pnl", "total_trades", "winning_trades", "losing_trades", "win_rate", "daily_trading_volume", "total_trading_volume", "avg_daily_volume", "avg_daily_volume_on_n_days", "active_trading_days", "activated", "kyc_approved"));
   }
 
   /**
@@ -485,6 +537,12 @@ public class PnLRankingResponse {
       }
       if (!jsonObj.get("total_trading_volume").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `total_trading_volume` to be a primitive type in the JSON string but got `%s`", jsonObj.get("total_trading_volume").toString()));
+      }
+      if (!jsonObj.get("avg_daily_volume").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `avg_daily_volume` to be a primitive type in the JSON string but got `%s`", jsonObj.get("avg_daily_volume").toString()));
+      }
+      if (!jsonObj.get("avg_daily_volume_on_n_days").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `avg_daily_volume_on_n_days` to be a primitive type in the JSON string but got `%s`", jsonObj.get("avg_daily_volume_on_n_days").toString()));
       }
   }
 

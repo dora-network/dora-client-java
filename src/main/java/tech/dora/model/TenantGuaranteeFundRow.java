@@ -50,7 +50,7 @@ import tech.dora.JSON;
 /**
  * TenantGuaranteeFundRow
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-13T19:25:52.528153936+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class TenantGuaranteeFundRow {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -71,6 +71,11 @@ public class TenantGuaranteeFundRow {
   @SerializedName(SERIALIZED_NAME_AVAILABLE)
   @javax.annotation.Nonnull
   private String available;
+
+  public static final String SERIALIZED_NAME_TRANSACTION_AMOUNT = "transaction_amount";
+  @SerializedName(SERIALIZED_NAME_TRANSACTION_AMOUNT)
+  @javax.annotation.Nonnull
+  private String transactionAmount;
 
   /**
    * Gets or Sets txKind
@@ -215,6 +220,25 @@ public class TenantGuaranteeFundRow {
   }
 
 
+  public TenantGuaranteeFundRow transactionAmount(@javax.annotation.Nonnull String transactionAmount) {
+    this.transactionAmount = transactionAmount;
+    return this;
+  }
+
+  /**
+   * Get transactionAmount
+   * @return transactionAmount
+   */
+  @javax.annotation.Nonnull
+  public String getTransactionAmount() {
+    return transactionAmount;
+  }
+
+  public void setTransactionAmount(@javax.annotation.Nonnull String transactionAmount) {
+    this.transactionAmount = transactionAmount;
+  }
+
+
   public TenantGuaranteeFundRow txKind(@javax.annotation.Nonnull TxKindEnum txKind) {
     this.txKind = txKind;
     return this;
@@ -267,13 +291,14 @@ public class TenantGuaranteeFundRow {
         Objects.equals(this.tenantId, tenantGuaranteeFundRow.tenantId) &&
         Objects.equals(this.seq, tenantGuaranteeFundRow.seq) &&
         Objects.equals(this.available, tenantGuaranteeFundRow.available) &&
+        Objects.equals(this.transactionAmount, tenantGuaranteeFundRow.transactionAmount) &&
         Objects.equals(this.txKind, tenantGuaranteeFundRow.txKind) &&
         Objects.equals(this.updatedAt, tenantGuaranteeFundRow.updatedAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, tenantId, seq, available, txKind, updatedAt);
+    return Objects.hash(id, tenantId, seq, available, transactionAmount, txKind, updatedAt);
   }
 
   @Override
@@ -284,6 +309,7 @@ public class TenantGuaranteeFundRow {
     sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("    seq: ").append(toIndentedString(seq)).append("\n");
     sb.append("    available: ").append(toIndentedString(available)).append("\n");
+    sb.append("    transactionAmount: ").append(toIndentedString(transactionAmount)).append("\n");
     sb.append("    txKind: ").append(toIndentedString(txKind)).append("\n");
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
     sb.append("}");
@@ -304,10 +330,10 @@ public class TenantGuaranteeFundRow {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "tenant_id", "seq", "available", "tx_kind", "updated_at"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "tenant_id", "seq", "available", "transaction_amount", "tx_kind", "updated_at"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "tenant_id", "seq", "available", "tx_kind", "updated_at"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "tenant_id", "seq", "available", "transaction_amount", "tx_kind", "updated_at"));
   }
 
   /**
@@ -346,6 +372,9 @@ public class TenantGuaranteeFundRow {
       }
       if (!jsonObj.get("available").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `available` to be a primitive type in the JSON string but got `%s`", jsonObj.get("available").toString()));
+      }
+      if (!jsonObj.get("transaction_amount").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `transaction_amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("transaction_amount").toString()));
       }
       if (!jsonObj.get("tx_kind").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tx_kind` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tx_kind").toString()));
