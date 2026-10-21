@@ -28,17 +28,17 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for IssuePromoLinkBatchResponseAllOfData
+ * Model tests for IssuePromoLinkBatchResponseData
  */
-public class IssuePromoLinkBatchResponseAllOfDataTest {
-    private final IssuePromoLinkBatchResponseAllOfData model = new IssuePromoLinkBatchResponseAllOfData();
+public class IssuePromoLinkBatchResponseDataTest {
+    private final IssuePromoLinkBatchResponseData model = new IssuePromoLinkBatchResponseData();
 
     /**
-     * Model tests for IssuePromoLinkBatchResponseAllOfData
+     * Model tests for IssuePromoLinkBatchResponseData
      */
     @Test
-    public void testIssuePromoLinkBatchResponseAllOfData() {
-        // TODO: test IssuePromoLinkBatchResponseAllOfData
+    public void testIssuePromoLinkBatchResponseData() {
+        // TODO: test IssuePromoLinkBatchResponseData
     }
 
     /**
@@ -71,6 +71,38 @@ public class IssuePromoLinkBatchResponseAllOfDataTest {
     @Test
     public void linksTest() {
         // TODO: test links
+    }
+
+    /**
+     * Test the property 'linkType'
+     */
+    @Test
+    public void linkTypeTest() {
+        // TODO: test linkType
+    }
+
+    /**
+     * Test the property 'affiliateProgramId'
+     */
+    @Test
+    public void affiliateProgramIdTest() {
+        // TODO: test affiliateProgramId
+    }
+
+    /**
+     * Test the property 'affiliateMemberId'
+     */
+    @Test
+    public void affiliateMemberIdTest() {
+        // TODO: test affiliateMemberId
+    }
+
+    /**
+     * Test the property 'referralCode'
+     */
+    @Test
+    public void referralCodeTest() {
+        // TODO: test referralCode
     }
 
 }

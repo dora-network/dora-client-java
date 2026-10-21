@@ -19,47 +19,49 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.UUID;
+import java.util.List;
+import tech.dora.model.BulkOrderResult;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for RevokePromoLinkResponseAllOfData
+ * Model tests for CreateOrdersBulkResponseData
  */
-public class RevokePromoLinkResponseAllOfDataTest {
-    private final RevokePromoLinkResponseAllOfData model = new RevokePromoLinkResponseAllOfData();
+public class CreateOrdersBulkResponseDataTest {
+    private final CreateOrdersBulkResponseData model = new CreateOrdersBulkResponseData();
 
     /**
-     * Model tests for RevokePromoLinkResponseAllOfData
+     * Model tests for CreateOrdersBulkResponseData
      */
     @Test
-    public void testRevokePromoLinkResponseAllOfData() {
-        // TODO: test RevokePromoLinkResponseAllOfData
+    public void testCreateOrdersBulkResponseData() {
+        // TODO: test CreateOrdersBulkResponseData
     }
 
     /**
-     * Test the property 'id'
+     * Test the property 'created'
      */
     @Test
-    public void idTest() {
-        // TODO: test id
+    public void createdTest() {
+        // TODO: test created
     }
 
     /**
-     * Test the property 'status'
+     * Test the property 'rejected'
      */
     @Test
-    public void statusTest() {
-        // TODO: test status
+    public void rejectedTest() {
+        // TODO: test rejected
     }
 
     /**
-     * Test the property 'repeated'
+     * Test the property 'results'
      */
     @Test
-    public void repeatedTest() {
-        // TODO: test repeated
+    public void resultsTest() {
+        // TODO: test results
     }
 
 }

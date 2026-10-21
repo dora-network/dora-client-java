@@ -22,7 +22,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import tech.dora.model.Metadata;
-import tech.dora.model.PromoAttributionResponseAllOfData;
+import tech.dora.model.PromoAttributionResponseData;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -50,12 +50,12 @@ import tech.dora.JSON;
 /**
  * PromoAttributionResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T17:24:51.768947679+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class PromoAttributionResponse {
   public static final String SERIALIZED_NAME_DATA = "data";
   @SerializedName(SERIALIZED_NAME_DATA)
   @javax.annotation.Nullable
-  private PromoAttributionResponseAllOfData data;
+  private PromoAttributionResponseData data;
 
   public static final String SERIALIZED_NAME_ERROR = "error";
   @SerializedName(SERIALIZED_NAME_ERROR)
@@ -70,7 +70,7 @@ public class PromoAttributionResponse {
   public PromoAttributionResponse() {
   }
 
-  public PromoAttributionResponse data(@javax.annotation.Nullable PromoAttributionResponseAllOfData data) {
+  public PromoAttributionResponse data(@javax.annotation.Nullable PromoAttributionResponseData data) {
     this.data = data;
     return this;
   }
@@ -80,11 +80,11 @@ public class PromoAttributionResponse {
    * @return data
    */
   @javax.annotation.Nullable
-  public PromoAttributionResponseAllOfData getData() {
+  public PromoAttributionResponseData getData() {
     return data;
   }
 
-  public void setData(@javax.annotation.Nullable PromoAttributionResponseAllOfData data) {
+  public void setData(@javax.annotation.Nullable PromoAttributionResponseData data) {
     this.data = data;
   }
 
@@ -208,7 +208,7 @@ public class PromoAttributionResponse {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the optional field `data`
       if (jsonObj.get("data") != null && !jsonObj.get("data").isJsonNull()) {
-        PromoAttributionResponseAllOfData.validateJsonElement(jsonObj.get("data"));
+        PromoAttributionResponseData.validateJsonElement(jsonObj.get("data"));
       }
       if ((jsonObj.get("error") != null && !jsonObj.get("error").isJsonNull()) && !jsonObj.get("error").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `error` to be a primitive type in the JSON string but got `%s`", jsonObj.get("error").toString()));

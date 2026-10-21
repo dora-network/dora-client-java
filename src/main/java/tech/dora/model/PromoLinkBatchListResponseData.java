@@ -49,24 +49,24 @@ import java.util.Set;
 import tech.dora.JSON;
 
 /**
- * PromoLinkBatchListResponseAllOfData
+ * PromoLinkBatchListResponseData
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
-public class PromoLinkBatchListResponseAllOfData {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T17:24:51.768947679+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+public class PromoLinkBatchListResponseData {
   public static final String SERIALIZED_NAME_BATCHES = "batches";
   @SerializedName(SERIALIZED_NAME_BATCHES)
   @javax.annotation.Nonnull
   private List<PromoLinkBatchSummary> batches = new ArrayList<>();
 
-  public PromoLinkBatchListResponseAllOfData() {
+  public PromoLinkBatchListResponseData() {
   }
 
-  public PromoLinkBatchListResponseAllOfData batches(@javax.annotation.Nonnull List<PromoLinkBatchSummary> batches) {
+  public PromoLinkBatchListResponseData batches(@javax.annotation.Nonnull List<PromoLinkBatchSummary> batches) {
     this.batches = batches;
     return this;
   }
 
-  public PromoLinkBatchListResponseAllOfData addBatchesItem(PromoLinkBatchSummary batchesItem) {
+  public PromoLinkBatchListResponseData addBatchesItem(PromoLinkBatchSummary batchesItem) {
     if (this.batches == null) {
       this.batches = new ArrayList<>();
     }
@@ -97,8 +97,8 @@ public class PromoLinkBatchListResponseAllOfData {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PromoLinkBatchListResponseAllOfData promoLinkBatchListResponseAllOfData = (PromoLinkBatchListResponseAllOfData) o;
-    return Objects.equals(this.batches, promoLinkBatchListResponseAllOfData.batches);
+    PromoLinkBatchListResponseData promoLinkBatchListResponseData = (PromoLinkBatchListResponseData) o;
+    return Objects.equals(this.batches, promoLinkBatchListResponseData.batches);
   }
 
   @Override
@@ -109,7 +109,7 @@ public class PromoLinkBatchListResponseAllOfData {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PromoLinkBatchListResponseAllOfData {\n");
+    sb.append("class PromoLinkBatchListResponseData {\n");
     sb.append("    batches: ").append(toIndentedString(batches)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -139,25 +139,25 @@ public class PromoLinkBatchListResponseAllOfData {
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to PromoLinkBatchListResponseAllOfData
+   * @throws IOException if the JSON Element is invalid with respect to PromoLinkBatchListResponseData
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!PromoLinkBatchListResponseAllOfData.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in PromoLinkBatchListResponseAllOfData is not found in the empty JSON string", PromoLinkBatchListResponseAllOfData.openapiRequiredFields.toString()));
+        if (!PromoLinkBatchListResponseData.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in PromoLinkBatchListResponseData is not found in the empty JSON string", PromoLinkBatchListResponseData.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!PromoLinkBatchListResponseAllOfData.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `PromoLinkBatchListResponseAllOfData` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!PromoLinkBatchListResponseData.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `PromoLinkBatchListResponseData` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : PromoLinkBatchListResponseAllOfData.openapiRequiredFields) {
+      for (String requiredField : PromoLinkBatchListResponseData.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
           throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
@@ -179,22 +179,22 @@ public class PromoLinkBatchListResponseAllOfData {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PromoLinkBatchListResponseAllOfData.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PromoLinkBatchListResponseAllOfData' and its subtypes
+       if (!PromoLinkBatchListResponseData.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'PromoLinkBatchListResponseData' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PromoLinkBatchListResponseAllOfData> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PromoLinkBatchListResponseAllOfData.class));
+       final TypeAdapter<PromoLinkBatchListResponseData> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(PromoLinkBatchListResponseData.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<PromoLinkBatchListResponseAllOfData>() {
+       return (TypeAdapter<T>) new TypeAdapter<PromoLinkBatchListResponseData>() {
            @Override
-           public void write(JsonWriter out, PromoLinkBatchListResponseAllOfData value) throws IOException {
+           public void write(JsonWriter out, PromoLinkBatchListResponseData value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public PromoLinkBatchListResponseAllOfData read(JsonReader in) throws IOException {
+           public PromoLinkBatchListResponseData read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -205,18 +205,18 @@ public class PromoLinkBatchListResponseAllOfData {
   }
 
   /**
-   * Create an instance of PromoLinkBatchListResponseAllOfData given an JSON string
+   * Create an instance of PromoLinkBatchListResponseData given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of PromoLinkBatchListResponseAllOfData
-   * @throws IOException if the JSON string is invalid with respect to PromoLinkBatchListResponseAllOfData
+   * @return An instance of PromoLinkBatchListResponseData
+   * @throws IOException if the JSON string is invalid with respect to PromoLinkBatchListResponseData
    */
-  public static PromoLinkBatchListResponseAllOfData fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PromoLinkBatchListResponseAllOfData.class);
+  public static PromoLinkBatchListResponseData fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, PromoLinkBatchListResponseData.class);
   }
 
   /**
-   * Convert an instance of PromoLinkBatchListResponseAllOfData to an JSON string
+   * Convert an instance of PromoLinkBatchListResponseData to an JSON string
    *
    * @return JSON string
    */

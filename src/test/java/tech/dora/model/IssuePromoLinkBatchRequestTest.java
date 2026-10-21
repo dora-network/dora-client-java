@@ -21,6 +21,8 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
+import java.util.UUID;
+import tech.dora.model.IssuePromoLinkBatchRequestSingleUse;
 import tech.dora.model.PromoSourceType;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -40,51 +42,11 @@ public class IssuePromoLinkBatchRequestTest {
     }
 
     /**
-     * Test the property 'sourceType'
+     * Test the property 'linkType'
      */
     @Test
-    public void sourceTypeTest() {
-        // TODO: test sourceType
-    }
-
-    /**
-     * Test the property 'sourceId'
-     */
-    @Test
-    public void sourceIdTest() {
-        // TODO: test sourceId
-    }
-
-    /**
-     * Test the property 'sourceName'
-     */
-    @Test
-    public void sourceNameTest() {
-        // TODO: test sourceName
-    }
-
-    /**
-     * Test the property 'allocation'
-     */
-    @Test
-    public void allocationTest() {
-        // TODO: test allocation
-    }
-
-    /**
-     * Test the property 'note'
-     */
-    @Test
-    public void noteTest() {
-        // TODO: test note
-    }
-
-    /**
-     * Test the property 'expiresAt'
-     */
-    @Test
-    public void expiresAtTest() {
-        // TODO: test expiresAt
+    public void linkTypeTest() {
+        // TODO: test linkType
     }
 
 }

@@ -21,22 +21,23 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
+import java.util.UUID;
 import tech.dora.model.PromoClaimState;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for PromoClaimResponseEnvelopeAllOfData
+ * Model tests for PromoClaimResponseEnvelopeData
  */
-public class PromoClaimResponseEnvelopeAllOfDataTest {
-    private final PromoClaimResponseEnvelopeAllOfData model = new PromoClaimResponseEnvelopeAllOfData();
+public class PromoClaimResponseEnvelopeDataTest {
+    private final PromoClaimResponseEnvelopeData model = new PromoClaimResponseEnvelopeData();
 
     /**
-     * Model tests for PromoClaimResponseEnvelopeAllOfData
+     * Model tests for PromoClaimResponseEnvelopeData
      */
     @Test
-    public void testPromoClaimResponseEnvelopeAllOfData() {
-        // TODO: test PromoClaimResponseEnvelopeAllOfData
+    public void testPromoClaimResponseEnvelopeData() {
+        // TODO: test PromoClaimResponseEnvelopeData
     }
 
     /**
@@ -109,6 +110,62 @@ public class PromoClaimResponseEnvelopeAllOfDataTest {
     @Test
     public void sourceNameTest() {
         // TODO: test sourceName
+    }
+
+    /**
+     * Test the property 'linkType'
+     */
+    @Test
+    public void linkTypeTest() {
+        // TODO: test linkType
+    }
+
+    /**
+     * Test the property 'affiliateProgramId'
+     */
+    @Test
+    public void affiliateProgramIdTest() {
+        // TODO: test affiliateProgramId
+    }
+
+    /**
+     * Test the property 'affiliateMemberId'
+     */
+    @Test
+    public void affiliateMemberIdTest() {
+        // TODO: test affiliateMemberId
+    }
+
+    /**
+     * Test the property 'referralCode'
+     */
+    @Test
+    public void referralCodeTest() {
+        // TODO: test referralCode
+    }
+
+    /**
+     * Test the property 'campaignId'
+     */
+    @Test
+    public void campaignIdTest() {
+        // TODO: test campaignId
+    }
+
+    /**
+     * Test the property 'linkId'
+     */
+    @Test
+    public void linkIdTest() {
+        // TODO: test linkId
+    }
+
+    /**
+     * Test the property 'sourceId'
+     */
+    @Test
+    public void sourceIdTest() {
+        // TODO: test sourceId
     }
 
 }

@@ -24,7 +24,6 @@ import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.UUID;
-import tech.dora.model.PromoLinkStatus;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,7 +51,7 @@ import tech.dora.JSON;
 /**
  * PromoLinkAdmin
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T17:24:51.768947679+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class PromoLinkAdmin {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -69,10 +68,66 @@ public class PromoLinkAdmin {
   @javax.annotation.Nullable
   private URI url;
 
+  /**
+   * Reusable links use ACTIVE or REVOKED and have no single claimant.
+   */
+  @JsonAdapter(StatusEnum.Adapter.class)
+  public enum StatusEnum {
+    ISSUED("ISSUED"),
+    
+    CLAIMED("CLAIMED"),
+    
+    REVOKED("REVOKED"),
+    
+    ACTIVE("ACTIVE");
+
+    private String value;
+
+    StatusEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static StatusEnum fromValue(String value) {
+      for (StatusEnum b : StatusEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<StatusEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public StatusEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return StatusEnum.fromValue(value);
+      }
+    }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      StatusEnum.fromValue(value);
+    }
+  }
+
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nonnull
-  private PromoLinkStatus status;
+  private StatusEnum status;
 
   public static final String SERIALIZED_NAME_EXPIRES_AT = "expires_at";
   @SerializedName(SERIALIZED_NAME_EXPIRES_AT)
@@ -93,6 +148,63 @@ public class PromoLinkAdmin {
   @SerializedName(SERIALIZED_NAME_USER_ID)
   @javax.annotation.Nullable
   private UUID userId;
+
+  /**
+   * Defaults to SINGLE_USE for existing clients. REUSABLE creates one tracked link without a quantity.
+   */
+  @JsonAdapter(LinkTypeEnum.Adapter.class)
+  public enum LinkTypeEnum {
+    SINGLE_USE("SINGLE_USE"),
+    
+    REUSABLE("REUSABLE");
+
+    private String value;
+
+    LinkTypeEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static LinkTypeEnum fromValue(String value) {
+      for (LinkTypeEnum b : LinkTypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<LinkTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final LinkTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public LinkTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return LinkTypeEnum.fromValue(value);
+      }
+    }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      LinkTypeEnum.fromValue(value);
+    }
+  }
+
+  public static final String SERIALIZED_NAME_LINK_TYPE = "link_type";
+  @SerializedName(SERIALIZED_NAME_LINK_TYPE)
+  @javax.annotation.Nullable
+  private LinkTypeEnum linkType;
 
   public PromoLinkAdmin() {
   }
@@ -154,21 +266,21 @@ public class PromoLinkAdmin {
   }
 
 
-  public PromoLinkAdmin status(@javax.annotation.Nonnull PromoLinkStatus status) {
+  public PromoLinkAdmin status(@javax.annotation.Nonnull StatusEnum status) {
     this.status = status;
     return this;
   }
 
   /**
-   * Get status
+   * Reusable links use ACTIVE or REVOKED and have no single claimant.
    * @return status
    */
   @javax.annotation.Nonnull
-  public PromoLinkStatus getStatus() {
+  public StatusEnum getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nonnull PromoLinkStatus status) {
+  public void setStatus(@javax.annotation.Nonnull StatusEnum status) {
     this.status = status;
   }
 
@@ -249,6 +361,25 @@ public class PromoLinkAdmin {
   }
 
 
+  public PromoLinkAdmin linkType(@javax.annotation.Nullable LinkTypeEnum linkType) {
+    this.linkType = linkType;
+    return this;
+  }
+
+  /**
+   * Defaults to SINGLE_USE for existing clients. REUSABLE creates one tracked link without a quantity.
+   * @return linkType
+   */
+  @javax.annotation.Nullable
+  public LinkTypeEnum getLinkType() {
+    return linkType;
+  }
+
+  public void setLinkType(@javax.annotation.Nullable LinkTypeEnum linkType) {
+    this.linkType = linkType;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -266,12 +397,13 @@ public class PromoLinkAdmin {
         Objects.equals(this.expiresAt, promoLinkAdmin.expiresAt) &&
         Objects.equals(this.claimedAt, promoLinkAdmin.claimedAt) &&
         Objects.equals(this.claimedEmail, promoLinkAdmin.claimedEmail) &&
-        Objects.equals(this.userId, promoLinkAdmin.userId);
+        Objects.equals(this.userId, promoLinkAdmin.userId) &&
+        Objects.equals(this.linkType, promoLinkAdmin.linkType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, tokenPrefix, url, status, expiresAt, claimedAt, claimedEmail, userId);
+    return Objects.hash(id, tokenPrefix, url, status, expiresAt, claimedAt, claimedEmail, userId, linkType);
   }
 
   @Override
@@ -286,6 +418,7 @@ public class PromoLinkAdmin {
     sb.append("    claimedAt: ").append(toIndentedString(claimedAt)).append("\n");
     sb.append("    claimedEmail: ").append(toIndentedString(claimedEmail)).append("\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("    linkType: ").append(toIndentedString(linkType)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -304,7 +437,7 @@ public class PromoLinkAdmin {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "token_prefix", "url", "status", "expires_at", "claimed_at", "claimed_email", "user_id"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "token_prefix", "url", "status", "expires_at", "claimed_at", "claimed_email", "user_id", "link_type"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "token_prefix", "status", "expires_at"));
@@ -347,13 +480,23 @@ public class PromoLinkAdmin {
       if ((jsonObj.get("url") != null && !jsonObj.get("url").isJsonNull()) && !jsonObj.get("url").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("url").toString()));
       }
+      if (!jsonObj.get("status").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
+      }
       // validate the required field `status`
-      PromoLinkStatus.validateJsonElement(jsonObj.get("status"));
+      StatusEnum.validateJsonElement(jsonObj.get("status"));
       if ((jsonObj.get("claimed_email") != null && !jsonObj.get("claimed_email").isJsonNull()) && !jsonObj.get("claimed_email").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `claimed_email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("claimed_email").toString()));
       }
       if ((jsonObj.get("user_id") != null && !jsonObj.get("user_id").isJsonNull()) && !jsonObj.get("user_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `user_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user_id").toString()));
+      }
+      if ((jsonObj.get("link_type") != null && !jsonObj.get("link_type").isJsonNull()) && !jsonObj.get("link_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `link_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("link_type").toString()));
+      }
+      // validate the optional field `link_type`
+      if (jsonObj.get("link_type") != null && !jsonObj.get("link_type").isJsonNull()) {
+        LinkTypeEnum.validateJsonElement(jsonObj.get("link_type"));
       }
   }
 

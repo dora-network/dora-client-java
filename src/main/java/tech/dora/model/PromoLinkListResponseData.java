@@ -49,10 +49,10 @@ import java.util.Set;
 import tech.dora.JSON;
 
 /**
- * PromoLinkListResponseAllOfData
+ * PromoLinkListResponseData
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
-public class PromoLinkListResponseAllOfData {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T17:24:51.768947679+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+public class PromoLinkListResponseData {
   public static final String SERIALIZED_NAME_LINKS = "links";
   @SerializedName(SERIALIZED_NAME_LINKS)
   @javax.annotation.Nonnull
@@ -63,15 +63,15 @@ public class PromoLinkListResponseAllOfData {
   @javax.annotation.Nullable
   private String nextCursor;
 
-  public PromoLinkListResponseAllOfData() {
+  public PromoLinkListResponseData() {
   }
 
-  public PromoLinkListResponseAllOfData links(@javax.annotation.Nonnull List<PromoLinkAdmin> links) {
+  public PromoLinkListResponseData links(@javax.annotation.Nonnull List<PromoLinkAdmin> links) {
     this.links = links;
     return this;
   }
 
-  public PromoLinkListResponseAllOfData addLinksItem(PromoLinkAdmin linksItem) {
+  public PromoLinkListResponseData addLinksItem(PromoLinkAdmin linksItem) {
     if (this.links == null) {
       this.links = new ArrayList<>();
     }
@@ -93,7 +93,7 @@ public class PromoLinkListResponseAllOfData {
   }
 
 
-  public PromoLinkListResponseAllOfData nextCursor(@javax.annotation.Nullable String nextCursor) {
+  public PromoLinkListResponseData nextCursor(@javax.annotation.Nullable String nextCursor) {
     this.nextCursor = nextCursor;
     return this;
   }
@@ -121,9 +121,9 @@ public class PromoLinkListResponseAllOfData {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PromoLinkListResponseAllOfData promoLinkListResponseAllOfData = (PromoLinkListResponseAllOfData) o;
-    return Objects.equals(this.links, promoLinkListResponseAllOfData.links) &&
-        Objects.equals(this.nextCursor, promoLinkListResponseAllOfData.nextCursor);
+    PromoLinkListResponseData promoLinkListResponseData = (PromoLinkListResponseData) o;
+    return Objects.equals(this.links, promoLinkListResponseData.links) &&
+        Objects.equals(this.nextCursor, promoLinkListResponseData.nextCursor);
   }
 
   @Override
@@ -134,7 +134,7 @@ public class PromoLinkListResponseAllOfData {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PromoLinkListResponseAllOfData {\n");
+    sb.append("class PromoLinkListResponseData {\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("    nextCursor: ").append(toIndentedString(nextCursor)).append("\n");
     sb.append("}");
@@ -165,25 +165,25 @@ public class PromoLinkListResponseAllOfData {
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to PromoLinkListResponseAllOfData
+   * @throws IOException if the JSON Element is invalid with respect to PromoLinkListResponseData
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!PromoLinkListResponseAllOfData.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in PromoLinkListResponseAllOfData is not found in the empty JSON string", PromoLinkListResponseAllOfData.openapiRequiredFields.toString()));
+        if (!PromoLinkListResponseData.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in PromoLinkListResponseData is not found in the empty JSON string", PromoLinkListResponseData.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!PromoLinkListResponseAllOfData.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `PromoLinkListResponseAllOfData` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!PromoLinkListResponseData.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `PromoLinkListResponseData` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : PromoLinkListResponseAllOfData.openapiRequiredFields) {
+      for (String requiredField : PromoLinkListResponseData.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
           throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
@@ -208,22 +208,22 @@ public class PromoLinkListResponseAllOfData {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PromoLinkListResponseAllOfData.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PromoLinkListResponseAllOfData' and its subtypes
+       if (!PromoLinkListResponseData.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'PromoLinkListResponseData' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PromoLinkListResponseAllOfData> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PromoLinkListResponseAllOfData.class));
+       final TypeAdapter<PromoLinkListResponseData> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(PromoLinkListResponseData.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<PromoLinkListResponseAllOfData>() {
+       return (TypeAdapter<T>) new TypeAdapter<PromoLinkListResponseData>() {
            @Override
-           public void write(JsonWriter out, PromoLinkListResponseAllOfData value) throws IOException {
+           public void write(JsonWriter out, PromoLinkListResponseData value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public PromoLinkListResponseAllOfData read(JsonReader in) throws IOException {
+           public PromoLinkListResponseData read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -234,18 +234,18 @@ public class PromoLinkListResponseAllOfData {
   }
 
   /**
-   * Create an instance of PromoLinkListResponseAllOfData given an JSON string
+   * Create an instance of PromoLinkListResponseData given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of PromoLinkListResponseAllOfData
-   * @throws IOException if the JSON string is invalid with respect to PromoLinkListResponseAllOfData
+   * @return An instance of PromoLinkListResponseData
+   * @throws IOException if the JSON string is invalid with respect to PromoLinkListResponseData
    */
-  public static PromoLinkListResponseAllOfData fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PromoLinkListResponseAllOfData.class);
+  public static PromoLinkListResponseData fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, PromoLinkListResponseData.class);
   }
 
   /**
-   * Convert an instance of PromoLinkListResponseAllOfData to an JSON string
+   * Convert an instance of PromoLinkListResponseData to an JSON string
    *
    * @return JSON string
    */

@@ -21,7 +21,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import tech.dora.model.Metadata;
-import tech.dora.model.RevokePromoLinkResponseAllOfData;
+import tech.dora.model.RevokePromoLinkResponseData;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

@@ -23,7 +23,6 @@ import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.UUID;
-import tech.dora.model.PromoLinkStatus;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -103,6 +102,14 @@ public class PromoLinkAdminTest {
     @Test
     public void userIdTest() {
         // TODO: test userId
+    }
+
+    /**
+     * Test the property 'linkType'
+     */
+    @Test
+    public void linkTypeTest() {
+        // TODO: test linkType
     }
 
 }

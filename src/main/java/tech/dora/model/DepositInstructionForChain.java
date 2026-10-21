@@ -50,7 +50,7 @@ import tech.dora.JSON;
 /**
  * Everything the caller needs to deposit USDC into the Dora vault on a single chain with one signature and one transaction.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T17:24:51.768947679+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class DepositInstructionForChain {
   public static final String SERIALIZED_NAME_NETWORK_NAME = "network_name";
   @SerializedName(SERIALIZED_NAME_NETWORK_NAME)

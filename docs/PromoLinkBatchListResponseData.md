@@ -1,6 +1,6 @@
 
 
-# PromoLinkBatchListResponseAllOfData
+# PromoLinkBatchListResponseData
 
 
 ## Properties

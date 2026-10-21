@@ -19,33 +19,30 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import tech.dora.model.PromoAttributionSource;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for PromoAttributionResponseAllOfData
+ * Model tests for IssuePromoLinkBatchRequestSingleUse
  */
-public class PromoAttributionResponseAllOfDataTest {
-    private final PromoAttributionResponseAllOfData model = new PromoAttributionResponseAllOfData();
+public class IssuePromoLinkBatchRequestSingleUseTest {
+    private final IssuePromoLinkBatchRequestSingleUse model = new IssuePromoLinkBatchRequestSingleUse();
 
     /**
-     * Model tests for PromoAttributionResponseAllOfData
+     * Model tests for IssuePromoLinkBatchRequestSingleUse
      */
     @Test
-    public void testPromoAttributionResponseAllOfData() {
-        // TODO: test PromoAttributionResponseAllOfData
+    public void testIssuePromoLinkBatchRequestSingleUse() {
+        // TODO: test IssuePromoLinkBatchRequestSingleUse
     }
 
     /**
-     * Test the property 'sources'
+     * Test the property 'linkType'
      */
     @Test
-    public void sourcesTest() {
-        // TODO: test sources
+    public void linkTypeTest() {
+        // TODO: test linkType
     }
 
 }

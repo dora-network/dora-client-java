@@ -22,30 +22,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import tech.dora.model.PromoLinkBatchSummary;
+import tech.dora.model.PromoCampaignSelectorResponseDataCampaigns;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for PromoLinkBatchListResponseAllOfData
+ * Model tests for PromoCampaignSelectorResponseData
  */
-public class PromoLinkBatchListResponseAllOfDataTest {
-    private final PromoLinkBatchListResponseAllOfData model = new PromoLinkBatchListResponseAllOfData();
+public class PromoCampaignSelectorResponseDataTest {
+    private final PromoCampaignSelectorResponseData model = new PromoCampaignSelectorResponseData();
 
     /**
-     * Model tests for PromoLinkBatchListResponseAllOfData
+     * Model tests for PromoCampaignSelectorResponseData
      */
     @Test
-    public void testPromoLinkBatchListResponseAllOfData() {
-        // TODO: test PromoLinkBatchListResponseAllOfData
+    public void testPromoCampaignSelectorResponseData() {
+        // TODO: test PromoCampaignSelectorResponseData
     }
 
     /**
-     * Test the property 'batches'
+     * Test the property 'campaigns'
      */
     @Test
-    public void batchesTest() {
-        // TODO: test batches
+    public void campaignsTest() {
+        // TODO: test campaigns
     }
 
 }

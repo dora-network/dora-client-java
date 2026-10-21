@@ -130,10 +130,10 @@ import tech.dora.model.PayLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.PoolPriceResponseEnvelope;
 import tech.dora.model.PoolRequestError;
 import tech.dora.model.PromoAttributionResponse;
+import tech.dora.model.PromoCampaignSelectorResponse;
 import tech.dora.model.PromoClaimResponseEnvelope;
 import tech.dora.model.PromoLinkBatchListResponse;
 import tech.dora.model.PromoLinkListResponse;
-import tech.dora.model.PromoLinkStatus;
 import tech.dora.model.QRRewardPreviewEnvelope;
 import tech.dora.model.RegisterAffiliateReferrerRequest;
 import tech.dora.model.RemoveTradingChallengeUsersRequest;
@@ -1608,7 +1608,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Claim accepted and a pending challenge account created </td><td>  * Cache-Control -  <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid or non-email-only request </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Claim link not found or not yet safely disclosable </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Link, campaign, or email can no longer be claimed </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Campaign full, email already registered/claimed, link already claimed, or saved affiliate selection inactive (AFFILIATE_UNAVAILABLE). No additional campaign place is consumed. </td><td>  -  </td></tr>
         <tr><td> 410 </td><td> Link revoked or campaign ended </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Per-IP or durable per-token attempt limit exceeded </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Claim processing failed without committing account state </td><td>  -  </td></tr>
@@ -1679,7 +1679,7 @@ public class DefaultApi {
 
     /**
      * Claim a public QR promotion link
-     * 
+     * New users only. Send email only; campaign/link/source and affiliate selection are server-bound. Creates account, enrollment, referral attribution and encrypted delivery transactionally. One eligible account/email per campaign across all link types; existing accounts remain excluded. This does not guarantee a unique human across mailboxes. Successful reusable claims leave the link active. Permanent affiliate attribution is separate from originating link identity. Reusable failures have a per-link/email limit with a 15-minute inactivity reset, plus the route IP limit.
      * @param token Opaque bearer claim token (required)
      * @param claimPromoLinkRequest  (required)
      * @return PromoClaimResponseEnvelope
@@ -1691,7 +1691,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Claim accepted and a pending challenge account created </td><td>  * Cache-Control -  <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid or non-email-only request </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Claim link not found or not yet safely disclosable </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Link, campaign, or email can no longer be claimed </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Campaign full, email already registered/claimed, link already claimed, or saved affiliate selection inactive (AFFILIATE_UNAVAILABLE). No additional campaign place is consumed. </td><td>  -  </td></tr>
         <tr><td> 410 </td><td> Link revoked or campaign ended </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Per-IP or durable per-token attempt limit exceeded </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Claim processing failed without committing account state </td><td>  -  </td></tr>
@@ -1705,7 +1705,7 @@ public class DefaultApi {
 
     /**
      * Claim a public QR promotion link
-     * 
+     * New users only. Send email only; campaign/link/source and affiliate selection are server-bound. Creates account, enrollment, referral attribution and encrypted delivery transactionally. One eligible account/email per campaign across all link types; existing accounts remain excluded. This does not guarantee a unique human across mailboxes. Successful reusable claims leave the link active. Permanent affiliate attribution is separate from originating link identity. Reusable failures have a per-link/email limit with a 15-minute inactivity reset, plus the route IP limit.
      * @param token Opaque bearer claim token (required)
      * @param claimPromoLinkRequest  (required)
      * @return ApiResponse&lt;PromoClaimResponseEnvelope&gt;
@@ -1717,7 +1717,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Claim accepted and a pending challenge account created </td><td>  * Cache-Control -  <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid or non-email-only request </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Claim link not found or not yet safely disclosable </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Link, campaign, or email can no longer be claimed </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Campaign full, email already registered/claimed, link already claimed, or saved affiliate selection inactive (AFFILIATE_UNAVAILABLE). No additional campaign place is consumed. </td><td>  -  </td></tr>
         <tr><td> 410 </td><td> Link revoked or campaign ended </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Per-IP or durable per-token attempt limit exceeded </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Claim processing failed without committing account state </td><td>  -  </td></tr>
@@ -1732,7 +1732,7 @@ public class DefaultApi {
 
     /**
      * Claim a public QR promotion link (asynchronously)
-     * 
+     * New users only. Send email only; campaign/link/source and affiliate selection are server-bound. Creates account, enrollment, referral attribution and encrypted delivery transactionally. One eligible account/email per campaign across all link types; existing accounts remain excluded. This does not guarantee a unique human across mailboxes. Successful reusable claims leave the link active. Permanent affiliate attribution is separate from originating link identity. Reusable failures have a per-link/email limit with a 15-minute inactivity reset, plus the route IP limit.
      * @param token Opaque bearer claim token (required)
      * @param claimPromoLinkRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -1745,7 +1745,7 @@ public class DefaultApi {
         <tr><td> 201 </td><td> Claim accepted and a pending challenge account created </td><td>  * Cache-Control -  <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid or non-email-only request </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Claim link not found or not yet safely disclosable </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Link, campaign, or email can no longer be claimed </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Campaign full, email already registered/claimed, link already claimed, or saved affiliate selection inactive (AFFILIATE_UNAVAILABLE). No additional campaign place is consumed. </td><td>  -  </td></tr>
         <tr><td> 410 </td><td> Link revoked or campaign ended </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Per-IP or durable per-token attempt limit exceeded </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Claim processing failed without committing account state </td><td>  -  </td></tr>
@@ -3911,6 +3911,163 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for enableAffiliateReferrer
+     * @param programId  (required)
+     * @param referrerId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Existing enabled affiliate referrer </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden by role, tenant, or program assignment </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Program or referrer not found within scope </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call enableAffiliateReferrerCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UUID referrerId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/affiliate_programs/{program_id}/referrers/{referrer_id}/enable"
+            .replace("{" + "program_id" + "}", localVarApiClient.escapeString(programId.toString()))
+            .replace("{" + "referrer_id" + "}", localVarApiClient.escapeString(referrerId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call enableAffiliateReferrerValidateBeforeCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UUID referrerId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'programId' is set
+        if (programId == null) {
+            throw new ApiException("Missing the required parameter 'programId' when calling enableAffiliateReferrer(Async)");
+        }
+
+        // verify the required parameter 'referrerId' is set
+        if (referrerId == null) {
+            throw new ApiException("Missing the required parameter 'referrerId' when calling enableAffiliateReferrer(Async)");
+        }
+
+        return enableAffiliateReferrerCall(programId, referrerId, _callback);
+
+    }
+
+    /**
+     * Re-enable an existing referrer
+     * Uses the same ADMIN, tenant INTEGRATOR, and assigned-program AFFILIATE_MANAGER permissions as disabling. Clears disabled_at and disabled_by on the existing membership, preserving its ID, user, program, codes, customization, and attribution history. Already enabled returns 200 unchanged. Unknown or wrong-program members return 404. Does not unpause the program or change independent signup, account, tenant, or campaign rules.
+     * @param programId  (required)
+     * @param referrerId  (required)
+     * @return AffiliateReferrerEnvelope
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Existing enabled affiliate referrer </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden by role, tenant, or program assignment </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Program or referrer not found within scope </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AffiliateReferrerEnvelope enableAffiliateReferrer(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UUID referrerId) throws ApiException {
+        ApiResponse<AffiliateReferrerEnvelope> localVarResp = enableAffiliateReferrerWithHttpInfo(programId, referrerId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Re-enable an existing referrer
+     * Uses the same ADMIN, tenant INTEGRATOR, and assigned-program AFFILIATE_MANAGER permissions as disabling. Clears disabled_at and disabled_by on the existing membership, preserving its ID, user, program, codes, customization, and attribution history. Already enabled returns 200 unchanged. Unknown or wrong-program members return 404. Does not unpause the program or change independent signup, account, tenant, or campaign rules.
+     * @param programId  (required)
+     * @param referrerId  (required)
+     * @return ApiResponse&lt;AffiliateReferrerEnvelope&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Existing enabled affiliate referrer </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden by role, tenant, or program assignment </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Program or referrer not found within scope </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AffiliateReferrerEnvelope> enableAffiliateReferrerWithHttpInfo(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UUID referrerId) throws ApiException {
+        okhttp3.Call localVarCall = enableAffiliateReferrerValidateBeforeCall(programId, referrerId, null);
+        Type localVarReturnType = new TypeToken<AffiliateReferrerEnvelope>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Re-enable an existing referrer (asynchronously)
+     * Uses the same ADMIN, tenant INTEGRATOR, and assigned-program AFFILIATE_MANAGER permissions as disabling. Clears disabled_at and disabled_by on the existing membership, preserving its ID, user, program, codes, customization, and attribution history. Already enabled returns 200 unchanged. Unknown or wrong-program members return 404. Does not unpause the program or change independent signup, account, tenant, or campaign rules.
+     * @param programId  (required)
+     * @param referrerId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Existing enabled affiliate referrer </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden by role, tenant, or program assignment </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Program or referrer not found within scope </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call enableAffiliateReferrerAsync(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nonnull UUID referrerId, final ApiCallback<AffiliateReferrerEnvelope> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = enableAffiliateReferrerValidateBeforeCall(programId, referrerId, _callback);
+        Type localVarReturnType = new TypeToken<AffiliateReferrerEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for exportPromoLinksCSV
      * @param batchId  (required)
      * @param _callback Callback for upload/download progress
@@ -3922,9 +4079,10 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> CSV stream. Read the X-Promo-Export-Status trailer after consuming the body; only complete confirms a full export. HTTP 200 alone does not indicate success. </td><td>  * Cache-Control -  <br>  * Trailer - Declares the export-status trailer before streaming starts. <br>  * X-Promo-Export-Status - HTTP trailer sent after the CSV body, not an initial response header. complete means the full export was written; error means the stream failed. A missing trailer must not be treated as success. <br>  </td></tr>
         <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Batch not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call exportPromoLinksCSVCall(@javax.annotation.Nonnull UUID batchId, final ApiCallback _callback) throws ApiException {
@@ -3985,7 +4143,7 @@ public class DefaultApi {
 
     /**
      * Export promotional links as CSV
-     * Stream private claim URLs with Cache-Control private, no-store. ADMIN and same-tenant INTEGRATOR only.
+     * Export saved links. Reusable CSV includes link_id, link_type, campaign_id, affiliate_program_id, affiliate_member_id, referral_code, url, status, expires_at and created_at, with no claimant columns. Check X-Promo-Export-Status trailer for complete. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access.
      * @param batchId  (required)
      * @return String
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -3995,9 +4153,10 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> CSV stream. Read the X-Promo-Export-Status trailer after consuming the body; only complete confirms a full export. HTTP 200 alone does not indicate success. </td><td>  * Cache-Control -  <br>  * Trailer - Declares the export-status trailer before streaming starts. <br>  * X-Promo-Export-Status - HTTP trailer sent after the CSV body, not an initial response header. complete means the full export was written; error means the stream failed. A missing trailer must not be treated as success. <br>  </td></tr>
         <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Batch not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
     public String exportPromoLinksCSV(@javax.annotation.Nonnull UUID batchId) throws ApiException {
@@ -4007,7 +4166,7 @@ public class DefaultApi {
 
     /**
      * Export promotional links as CSV
-     * Stream private claim URLs with Cache-Control private, no-store. ADMIN and same-tenant INTEGRATOR only.
+     * Export saved links. Reusable CSV includes link_id, link_type, campaign_id, affiliate_program_id, affiliate_member_id, referral_code, url, status, expires_at and created_at, with no claimant columns. Check X-Promo-Export-Status trailer for complete. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access.
      * @param batchId  (required)
      * @return ApiResponse&lt;String&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -4017,9 +4176,10 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> CSV stream. Read the X-Promo-Export-Status trailer after consuming the body; only complete confirms a full export. HTTP 200 alone does not indicate success. </td><td>  * Cache-Control -  <br>  * Trailer - Declares the export-status trailer before streaming starts. <br>  * X-Promo-Export-Status - HTTP trailer sent after the CSV body, not an initial response header. complete means the full export was written; error means the stream failed. A missing trailer must not be treated as success. <br>  </td></tr>
         <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Batch not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<String> exportPromoLinksCSVWithHttpInfo(@javax.annotation.Nonnull UUID batchId) throws ApiException {
@@ -4030,7 +4190,7 @@ public class DefaultApi {
 
     /**
      * Export promotional links as CSV (asynchronously)
-     * Stream private claim URLs with Cache-Control private, no-store. ADMIN and same-tenant INTEGRATOR only.
+     * Export saved links. Reusable CSV includes link_id, link_type, campaign_id, affiliate_program_id, affiliate_member_id, referral_code, url, status, expires_at and created_at, with no claimant columns. Check X-Promo-Export-Status trailer for complete. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access.
      * @param batchId  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -4041,9 +4201,10 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> CSV stream. Read the X-Promo-Export-Status trailer after consuming the body; only complete confirms a full export. HTTP 200 alone does not indicate success. </td><td>  * Cache-Control -  <br>  * Trailer - Declares the export-status trailer before streaming starts. <br>  * X-Promo-Export-Status - HTTP trailer sent after the CSV body, not an initial response header. complete means the full export was written; error means the stream failed. A missing trailer must not be treated as success. <br>  </td></tr>
         <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Batch not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call exportPromoLinksCSVAsync(@javax.annotation.Nonnull UUID batchId, final ApiCallback<String> _callback) throws ApiException {
@@ -13806,6 +13967,158 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for grantPromoCampaignManager
+     * @param tradingChallengeId  (required)
+     * @param managerId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Grant present </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed UUID or recipient is not an active Affiliate Manager </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> ADMIN role required </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Unknown manager or unknown/non-QR campaign </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call grantPromoCampaignManagerCall(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UUID managerId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/promo_campaigns/{trading_challenge_id}/managers/{manager_id}"
+            .replace("{" + "trading_challenge_id" + "}", localVarApiClient.escapeString(tradingChallengeId.toString()))
+            .replace("{" + "manager_id" + "}", localVarApiClient.escapeString(managerId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call grantPromoCampaignManagerValidateBeforeCall(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UUID managerId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'tradingChallengeId' is set
+        if (tradingChallengeId == null) {
+            throw new ApiException("Missing the required parameter 'tradingChallengeId' when calling grantPromoCampaignManager(Async)");
+        }
+
+        // verify the required parameter 'managerId' is set
+        if (managerId == null) {
+            throw new ApiException("Missing the required parameter 'managerId' when calling grantPromoCampaignManager(Async)");
+        }
+
+        return grantPromoCampaignManagerCall(tradingChallengeId, managerId, _callback);
+
+    }
+
+    /**
+     * Grant QR campaign access for an Affiliate Manager
+     * ADMIN only. Idempotent PUT with no body. QR campaign grants are independent of home tenant and affiliate programs. Removal takes effect on the next protected request after commit; already authorized reads/downloads may finish. Batch issuance and removal serialize on the campaign lock.
+     * @param tradingChallengeId  (required)
+     * @param managerId  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Grant present </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed UUID or recipient is not an active Affiliate Manager </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> ADMIN role required </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Unknown manager or unknown/non-QR campaign </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public void grantPromoCampaignManager(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UUID managerId) throws ApiException {
+        grantPromoCampaignManagerWithHttpInfo(tradingChallengeId, managerId);
+    }
+
+    /**
+     * Grant QR campaign access for an Affiliate Manager
+     * ADMIN only. Idempotent PUT with no body. QR campaign grants are independent of home tenant and affiliate programs. Removal takes effect on the next protected request after commit; already authorized reads/downloads may finish. Batch issuance and removal serialize on the campaign lock.
+     * @param tradingChallengeId  (required)
+     * @param managerId  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Grant present </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed UUID or recipient is not an active Affiliate Manager </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> ADMIN role required </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Unknown manager or unknown/non-QR campaign </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> grantPromoCampaignManagerWithHttpInfo(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UUID managerId) throws ApiException {
+        okhttp3.Call localVarCall = grantPromoCampaignManagerValidateBeforeCall(tradingChallengeId, managerId, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * Grant QR campaign access for an Affiliate Manager (asynchronously)
+     * ADMIN only. Idempotent PUT with no body. QR campaign grants are independent of home tenant and affiliate programs. Removal takes effect on the next protected request after commit; already authorized reads/downloads may finish. Batch issuance and removal serialize on the campaign lock.
+     * @param tradingChallengeId  (required)
+     * @param managerId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Grant present </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed UUID or recipient is not an active Affiliate Manager </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> ADMIN role required </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Unknown manager or unknown/non-QR campaign </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call grantPromoCampaignManagerAsync(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UUID managerId, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = grantPromoCampaignManagerValidateBeforeCall(tradingChallengeId, managerId, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for issuePromoLinkBatch
      * @param tradingChallengeId  (required)
      * @param idempotencyKey  (required)
@@ -13820,10 +14133,11 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Exact idempotent replay </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> Batch and links created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Malformed request or missing/duplicate idempotency key </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Capacity exceeded, campaign completed, or idempotency key reused with a different payload </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call issuePromoLinkBatchCall(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull String idempotencyKey, @javax.annotation.Nonnull IssuePromoLinkBatchRequest issuePromoLinkBatchRequest, final ApiCallback _callback) throws ApiException {
@@ -13900,7 +14214,7 @@ public class DefaultApi {
 
     /**
      * Issue a promotional link batch
-     * Atomically reserve QR campaign capacity and create opaque, encrypted promotional links. ADMIN and same-tenant INTEGRATOR only. Exact idempotent replays return 200; first creation returns 201; key reuse with another payload returns 409.
+     * Mint single-use links or one reusable link bound to an existing affiliate program/member/code. Requires Idempotency-Key. Only committed new-user signups consume the shared campaign max_users limit; unused single-use links have no reserved place. Uses DORA-6544 campaign-grant authorization. Affiliate selection also requires independent access to the selected program. Migration 208 must precede reusable-link migration 209. Enable reusable creation in FE after all API replicas and reward-settlement daemon processes support this contract; older replicas fail closed instead of consuming reusable links. No program-only codes or landing-page selector. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access. Exact idempotent replays return 200; first creation returns 201; key reuse with another payload returns 409.
      * @param tradingChallengeId  (required)
      * @param idempotencyKey  (required)
      * @param issuePromoLinkBatchRequest  (required)
@@ -13913,10 +14227,11 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Exact idempotent replay </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> Batch and links created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Malformed request or missing/duplicate idempotency key </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Capacity exceeded, campaign completed, or idempotency key reused with a different payload </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
     public IssuePromoLinkBatchResponse issuePromoLinkBatch(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull String idempotencyKey, @javax.annotation.Nonnull IssuePromoLinkBatchRequest issuePromoLinkBatchRequest) throws ApiException {
@@ -13926,7 +14241,7 @@ public class DefaultApi {
 
     /**
      * Issue a promotional link batch
-     * Atomically reserve QR campaign capacity and create opaque, encrypted promotional links. ADMIN and same-tenant INTEGRATOR only. Exact idempotent replays return 200; first creation returns 201; key reuse with another payload returns 409.
+     * Mint single-use links or one reusable link bound to an existing affiliate program/member/code. Requires Idempotency-Key. Only committed new-user signups consume the shared campaign max_users limit; unused single-use links have no reserved place. Uses DORA-6544 campaign-grant authorization. Affiliate selection also requires independent access to the selected program. Migration 208 must precede reusable-link migration 209. Enable reusable creation in FE after all API replicas and reward-settlement daemon processes support this contract; older replicas fail closed instead of consuming reusable links. No program-only codes or landing-page selector. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access. Exact idempotent replays return 200; first creation returns 201; key reuse with another payload returns 409.
      * @param tradingChallengeId  (required)
      * @param idempotencyKey  (required)
      * @param issuePromoLinkBatchRequest  (required)
@@ -13939,10 +14254,11 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Exact idempotent replay </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> Batch and links created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Malformed request or missing/duplicate idempotency key </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Capacity exceeded, campaign completed, or idempotency key reused with a different payload </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<IssuePromoLinkBatchResponse> issuePromoLinkBatchWithHttpInfo(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull String idempotencyKey, @javax.annotation.Nonnull IssuePromoLinkBatchRequest issuePromoLinkBatchRequest) throws ApiException {
@@ -13953,7 +14269,7 @@ public class DefaultApi {
 
     /**
      * Issue a promotional link batch (asynchronously)
-     * Atomically reserve QR campaign capacity and create opaque, encrypted promotional links. ADMIN and same-tenant INTEGRATOR only. Exact idempotent replays return 200; first creation returns 201; key reuse with another payload returns 409.
+     * Mint single-use links or one reusable link bound to an existing affiliate program/member/code. Requires Idempotency-Key. Only committed new-user signups consume the shared campaign max_users limit; unused single-use links have no reserved place. Uses DORA-6544 campaign-grant authorization. Affiliate selection also requires independent access to the selected program. Migration 208 must precede reusable-link migration 209. Enable reusable creation in FE after all API replicas and reward-settlement daemon processes support this contract; older replicas fail closed instead of consuming reusable links. No program-only codes or landing-page selector. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access. Exact idempotent replays return 200; first creation returns 201; key reuse with another payload returns 409.
      * @param tradingChallengeId  (required)
      * @param idempotencyKey  (required)
      * @param issuePromoLinkBatchRequest  (required)
@@ -13967,10 +14283,11 @@ public class DefaultApi {
         <tr><td> 200 </td><td> Exact idempotent replay </td><td>  -  </td></tr>
         <tr><td> 201 </td><td> Batch and links created </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Malformed request or missing/duplicate idempotency key </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Capacity exceeded, campaign completed, or idempotency key reused with a different payload </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call issuePromoLinkBatchAsync(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull String idempotencyKey, @javax.annotation.Nonnull IssuePromoLinkBatchRequest issuePromoLinkBatchRequest, final ApiCallback<IssuePromoLinkBatchResponse> _callback) throws ApiException {
@@ -16590,6 +16907,7 @@ public class DefaultApi {
      * @param programId  (required)
      * @param limit  (optional, default to 100)
      * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @param includeDisabled Include disabled memberships for management. Disabled codes remain ineligible for new referrals. (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -16605,7 +16923,7 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listAffiliateReferrersCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call listAffiliateReferrersCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Boolean includeDisabled, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -16639,6 +16957,10 @@ public class DefaultApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
         }
 
+        if (includeDisabled != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("include_disabled", includeDisabled));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -16659,22 +16981,23 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listAffiliateReferrersValidateBeforeCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call listAffiliateReferrersValidateBeforeCall(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Boolean includeDisabled, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'programId' is set
         if (programId == null) {
             throw new ApiException("Missing the required parameter 'programId' when calling listAffiliateReferrers(Async)");
         }
 
-        return listAffiliateReferrersCall(programId, limit, page, _callback);
+        return listAffiliateReferrersCall(programId, limit, page, includeDisabled, _callback);
 
     }
 
     /**
      * List program referrers
-     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. Includes registrations in inactive programs.
+     * ADMIN, INTEGRATOR, or AFFILIATE_MANAGER required within the same tenant and assigned-program scope as disabling. Active memberships only by default; include_disabled&#x3D;true also returns disabled memberships. Includes memberships in paused programs.
      * @param programId  (required)
      * @param limit  (optional, default to 100)
      * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @param includeDisabled Include disabled memberships for management. Disabled codes remain ineligible for new referrals. (optional, default to false)
      * @return AffiliateReferrerListEnvelope
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -16689,17 +17012,18 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public AffiliateReferrerListEnvelope listAffiliateReferrers(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page) throws ApiException {
-        ApiResponse<AffiliateReferrerListEnvelope> localVarResp = listAffiliateReferrersWithHttpInfo(programId, limit, page);
+    public AffiliateReferrerListEnvelope listAffiliateReferrers(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Boolean includeDisabled) throws ApiException {
+        ApiResponse<AffiliateReferrerListEnvelope> localVarResp = listAffiliateReferrersWithHttpInfo(programId, limit, page, includeDisabled);
         return localVarResp.getData();
     }
 
     /**
      * List program referrers
-     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. Includes registrations in inactive programs.
+     * ADMIN, INTEGRATOR, or AFFILIATE_MANAGER required within the same tenant and assigned-program scope as disabling. Active memberships only by default; include_disabled&#x3D;true also returns disabled memberships. Includes memberships in paused programs.
      * @param programId  (required)
      * @param limit  (optional, default to 100)
      * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @param includeDisabled Include disabled memberships for management. Disabled codes remain ineligible for new referrals. (optional, default to false)
      * @return ApiResponse&lt;AffiliateReferrerListEnvelope&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -16714,18 +17038,19 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<AffiliateReferrerListEnvelope> listAffiliateReferrersWithHttpInfo(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page) throws ApiException {
-        okhttp3.Call localVarCall = listAffiliateReferrersValidateBeforeCall(programId, limit, page, null);
+    public ApiResponse<AffiliateReferrerListEnvelope> listAffiliateReferrersWithHttpInfo(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Boolean includeDisabled) throws ApiException {
+        okhttp3.Call localVarCall = listAffiliateReferrersValidateBeforeCall(programId, limit, page, includeDisabled, null);
         Type localVarReturnType = new TypeToken<AffiliateReferrerListEnvelope>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      * List program referrers (asynchronously)
-     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. Includes registrations in inactive programs.
+     * ADMIN, INTEGRATOR, or AFFILIATE_MANAGER required within the same tenant and assigned-program scope as disabling. Active memberships only by default; include_disabled&#x3D;true also returns disabled memberships. Includes memberships in paused programs.
      * @param programId  (required)
      * @param limit  (optional, default to 100)
      * @param page One-based page; the resulting offset must not exceed 2147483647. Results sort by created_at then id descending. (optional, default to 1)
+     * @param includeDisabled Include disabled memberships for management. Disabled codes remain ineligible for new referrals. (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -16741,9 +17066,9 @@ public class DefaultApi {
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listAffiliateReferrersAsync(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, final ApiCallback<AffiliateReferrerListEnvelope> _callback) throws ApiException {
+    public okhttp3.Call listAffiliateReferrersAsync(@javax.annotation.Nonnull UUID programId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Boolean includeDisabled, final ApiCallback<AffiliateReferrerListEnvelope> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listAffiliateReferrersValidateBeforeCall(programId, limit, page, _callback);
+        okhttp3.Call localVarCall = listAffiliateReferrersValidateBeforeCall(programId, limit, page, includeDisabled, _callback);
         Type localVarReturnType = new TypeToken<AffiliateReferrerListEnvelope>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -17357,6 +17682,147 @@ public class DefaultApi {
 
         okhttp3.Call localVarCall = listDepositsValidateBeforeCall(userId, page, limit, _callback);
         Type localVarReturnType = new TypeToken<ListDepositsResponseEnvelope>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listManagedPromoCampaigns
+     * @param tenantId Optional filter within the authorized campaign set; authenticate as the home-tenant account. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Authorized QR campaigns </td><td>  * Cache-Control -  <br>  </td></tr>
+        <tr><td> 400 </td><td> Malformed or repeated query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Campaign Links management role required </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listManagedPromoCampaignsCall(@javax.annotation.Nullable String tenantId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/promo_campaigns";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (tenantId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("tenant_id", tenantId));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listManagedPromoCampaignsValidateBeforeCall(@javax.annotation.Nullable String tenantId, final ApiCallback _callback) throws ApiException {
+        return listManagedPromoCampaignsCall(tenantId, _callback);
+
+    }
+
+    /**
+     * List accessible Campaign Links campaigns
+     * Authenticated QR campaign selector. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access. Managers with no grants receive an empty campaigns array. Returns all assigned tenants unless tenant_id narrows the set. Public challenge listing is unchanged.
+     * @param tenantId Optional filter within the authorized campaign set; authenticate as the home-tenant account. (optional)
+     * @return PromoCampaignSelectorResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Authorized QR campaigns </td><td>  * Cache-Control -  <br>  </td></tr>
+        <tr><td> 400 </td><td> Malformed or repeated query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Campaign Links management role required </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public PromoCampaignSelectorResponse listManagedPromoCampaigns(@javax.annotation.Nullable String tenantId) throws ApiException {
+        ApiResponse<PromoCampaignSelectorResponse> localVarResp = listManagedPromoCampaignsWithHttpInfo(tenantId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List accessible Campaign Links campaigns
+     * Authenticated QR campaign selector. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access. Managers with no grants receive an empty campaigns array. Returns all assigned tenants unless tenant_id narrows the set. Public challenge listing is unchanged.
+     * @param tenantId Optional filter within the authorized campaign set; authenticate as the home-tenant account. (optional)
+     * @return ApiResponse&lt;PromoCampaignSelectorResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Authorized QR campaigns </td><td>  * Cache-Control -  <br>  </td></tr>
+        <tr><td> 400 </td><td> Malformed or repeated query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Campaign Links management role required </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<PromoCampaignSelectorResponse> listManagedPromoCampaignsWithHttpInfo(@javax.annotation.Nullable String tenantId) throws ApiException {
+        okhttp3.Call localVarCall = listManagedPromoCampaignsValidateBeforeCall(tenantId, null);
+        Type localVarReturnType = new TypeToken<PromoCampaignSelectorResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List accessible Campaign Links campaigns (asynchronously)
+     * Authenticated QR campaign selector. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access. Managers with no grants receive an empty campaigns array. Returns all assigned tenants unless tenant_id narrows the set. Public challenge listing is unchanged.
+     * @param tenantId Optional filter within the authorized campaign set; authenticate as the home-tenant account. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Authorized QR campaigns </td><td>  * Cache-Control -  <br>  </td></tr>
+        <tr><td> 400 </td><td> Malformed or repeated query parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Campaign Links management role required </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listManagedPromoCampaignsAsync(@javax.annotation.Nullable String tenantId, final ApiCallback<PromoCampaignSelectorResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listManagedPromoCampaignsValidateBeforeCall(tenantId, _callback);
+        Type localVarReturnType = new TypeToken<PromoCampaignSelectorResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -18032,9 +18498,10 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Promotional link batches </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call listPromoLinkBatchesCall(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback _callback) throws ApiException {
@@ -18095,7 +18562,7 @@ public class DefaultApi {
 
     /**
      * List promotional link batches
-     * Return source metadata and ISSUED, CLAIMED, and REVOKED counts for each batch. ADMIN and same-tenant INTEGRATOR only.
+     * Retrieve saved Campaign Links with campaign, link_type, affiliate selection, creation date and signups. Reusable entries omit allocation/issued/claimed/revoked counts. The same member can have many links/campaigns; separate link IDs preserve origin identity for future landing pages. Landing-page selection is out of scope. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access.
      * @param tradingChallengeId  (required)
      * @return PromoLinkBatchListResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -18105,9 +18572,10 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Promotional link batches </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
     public PromoLinkBatchListResponse listPromoLinkBatches(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
@@ -18117,7 +18585,7 @@ public class DefaultApi {
 
     /**
      * List promotional link batches
-     * Return source metadata and ISSUED, CLAIMED, and REVOKED counts for each batch. ADMIN and same-tenant INTEGRATOR only.
+     * Retrieve saved Campaign Links with campaign, link_type, affiliate selection, creation date and signups. Reusable entries omit allocation/issued/claimed/revoked counts. The same member can have many links/campaigns; separate link IDs preserve origin identity for future landing pages. Landing-page selection is out of scope. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access.
      * @param tradingChallengeId  (required)
      * @return ApiResponse&lt;PromoLinkBatchListResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -18127,9 +18595,10 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Promotional link batches </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<PromoLinkBatchListResponse> listPromoLinkBatchesWithHttpInfo(@javax.annotation.Nonnull UUID tradingChallengeId) throws ApiException {
@@ -18140,7 +18609,7 @@ public class DefaultApi {
 
     /**
      * List promotional link batches (asynchronously)
-     * Return source metadata and ISSUED, CLAIMED, and REVOKED counts for each batch. ADMIN and same-tenant INTEGRATOR only.
+     * Retrieve saved Campaign Links with campaign, link_type, affiliate selection, creation date and signups. Reusable entries omit allocation/issued/claimed/revoked counts. The same member can have many links/campaigns; separate link IDs preserve origin identity for future landing pages. Landing-page selection is out of scope. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access.
      * @param tradingChallengeId  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -18151,9 +18620,10 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Promotional link batches </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Malformed request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> QR campaign not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call listPromoLinkBatchesAsync(@javax.annotation.Nonnull UUID tradingChallengeId, final ApiCallback<PromoLinkBatchListResponse> _callback) throws ApiException {
@@ -18168,7 +18638,7 @@ public class DefaultApi {
      * @param batchId  (required)
      * @param limit  (optional, default to 100)
      * @param cursor  (optional)
-     * @param status  (optional)
+     * @param status ACTIVE selects active reusable links. Single-use links retain ISSUED/CLAIMED/REVOKED. (optional)
      * @param reveal  (optional, default to false)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -18179,12 +18649,13 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Promotional links </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Malformed filter or cursor </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Batch not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listPromoLinksCall(@javax.annotation.Nonnull UUID batchId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String cursor, @javax.annotation.Nullable PromoLinkStatus status, @javax.annotation.Nullable Boolean reveal, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call listPromoLinksCall(@javax.annotation.Nonnull UUID batchId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String cursor, @javax.annotation.Nullable String status, @javax.annotation.Nullable Boolean reveal, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -18246,7 +18717,7 @@ public class DefaultApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listPromoLinksValidateBeforeCall(@javax.annotation.Nonnull UUID batchId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String cursor, @javax.annotation.Nullable PromoLinkStatus status, @javax.annotation.Nullable Boolean reveal, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call listPromoLinksValidateBeforeCall(@javax.annotation.Nonnull UUID batchId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String cursor, @javax.annotation.Nullable String status, @javax.annotation.Nullable Boolean reveal, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'batchId' is set
         if (batchId == null) {
             throw new ApiException("Missing the required parameter 'batchId' when calling listPromoLinks(Async)");
@@ -18258,11 +18729,11 @@ public class DefaultApi {
 
     /**
      * List promotional links
-     * Keyset-paginated batch links. URLs are omitted by default and decrypted only when reveal&#x3D;true. ADMIN and same-tenant INTEGRATOR only.
+     * Use reveal&#x3D;true to copy a saved private URL. Reusable entries show ACTIVE or REVOKED and have no single claimant. Treat URLs as private and do not cache/log them. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access.
      * @param batchId  (required)
      * @param limit  (optional, default to 100)
      * @param cursor  (optional)
-     * @param status  (optional)
+     * @param status ACTIVE selects active reusable links. Single-use links retain ISSUED/CLAIMED/REVOKED. (optional)
      * @param reveal  (optional, default to false)
      * @return PromoLinkListResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -18272,23 +18743,24 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Promotional links </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Malformed filter or cursor </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Batch not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
-    public PromoLinkListResponse listPromoLinks(@javax.annotation.Nonnull UUID batchId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String cursor, @javax.annotation.Nullable PromoLinkStatus status, @javax.annotation.Nullable Boolean reveal) throws ApiException {
+    public PromoLinkListResponse listPromoLinks(@javax.annotation.Nonnull UUID batchId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String cursor, @javax.annotation.Nullable String status, @javax.annotation.Nullable Boolean reveal) throws ApiException {
         ApiResponse<PromoLinkListResponse> localVarResp = listPromoLinksWithHttpInfo(batchId, limit, cursor, status, reveal);
         return localVarResp.getData();
     }
 
     /**
      * List promotional links
-     * Keyset-paginated batch links. URLs are omitted by default and decrypted only when reveal&#x3D;true. ADMIN and same-tenant INTEGRATOR only.
+     * Use reveal&#x3D;true to copy a saved private URL. Reusable entries show ACTIVE or REVOKED and have no single claimant. Treat URLs as private and do not cache/log them. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access.
      * @param batchId  (required)
      * @param limit  (optional, default to 100)
      * @param cursor  (optional)
-     * @param status  (optional)
+     * @param status ACTIVE selects active reusable links. Single-use links retain ISSUED/CLAIMED/REVOKED. (optional)
      * @param reveal  (optional, default to false)
      * @return ApiResponse&lt;PromoLinkListResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -18298,12 +18770,13 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Promotional links </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Malformed filter or cursor </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Batch not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PromoLinkListResponse> listPromoLinksWithHttpInfo(@javax.annotation.Nonnull UUID batchId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String cursor, @javax.annotation.Nullable PromoLinkStatus status, @javax.annotation.Nullable Boolean reveal) throws ApiException {
+    public ApiResponse<PromoLinkListResponse> listPromoLinksWithHttpInfo(@javax.annotation.Nonnull UUID batchId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String cursor, @javax.annotation.Nullable String status, @javax.annotation.Nullable Boolean reveal) throws ApiException {
         okhttp3.Call localVarCall = listPromoLinksValidateBeforeCall(batchId, limit, cursor, status, reveal, null);
         Type localVarReturnType = new TypeToken<PromoLinkListResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -18311,11 +18784,11 @@ public class DefaultApi {
 
     /**
      * List promotional links (asynchronously)
-     * Keyset-paginated batch links. URLs are omitted by default and decrypted only when reveal&#x3D;true. ADMIN and same-tenant INTEGRATOR only.
+     * Use reveal&#x3D;true to copy a saved private URL. Reusable entries show ACTIVE or REVOKED and have no single claimant. Treat URLs as private and do not cache/log them. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access.
      * @param batchId  (required)
      * @param limit  (optional, default to 100)
      * @param cursor  (optional)
-     * @param status  (optional)
+     * @param status ACTIVE selects active reusable links. Single-use links retain ISSUED/CLAIMED/REVOKED. (optional)
      * @param reveal  (optional, default to false)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -18326,12 +18799,13 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Promotional links </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> Malformed filter or cursor </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Batch not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listPromoLinksAsync(@javax.annotation.Nonnull UUID batchId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String cursor, @javax.annotation.Nullable PromoLinkStatus status, @javax.annotation.Nullable Boolean reveal, final ApiCallback<PromoLinkListResponse> _callback) throws ApiException {
+    public okhttp3.Call listPromoLinksAsync(@javax.annotation.Nonnull UUID batchId, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String cursor, @javax.annotation.Nullable String status, @javax.annotation.Nullable Boolean reveal, final ApiCallback<PromoLinkListResponse> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = listPromoLinksValidateBeforeCall(batchId, limit, cursor, status, reveal, _callback);
         Type localVarReturnType = new TypeToken<PromoLinkListResponse>(){}.getType();
@@ -20105,6 +20579,158 @@ public class DefaultApi {
         return localVarCall;
     }
     /**
+     * Build call for removePromoCampaignManager
+     * @param tradingChallengeId  (required)
+     * @param managerId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Grant absent </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed UUID </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> ADMIN role required </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Unknown manager or unknown/non-QR campaign </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call removePromoCampaignManagerCall(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UUID managerId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/promo_campaigns/{trading_challenge_id}/managers/{manager_id}"
+            .replace("{" + "trading_challenge_id" + "}", localVarApiClient.escapeString(tradingChallengeId.toString()))
+            .replace("{" + "manager_id" + "}", localVarApiClient.escapeString(managerId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "apiKeyAuthHeader", "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call removePromoCampaignManagerValidateBeforeCall(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UUID managerId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'tradingChallengeId' is set
+        if (tradingChallengeId == null) {
+            throw new ApiException("Missing the required parameter 'tradingChallengeId' when calling removePromoCampaignManager(Async)");
+        }
+
+        // verify the required parameter 'managerId' is set
+        if (managerId == null) {
+            throw new ApiException("Missing the required parameter 'managerId' when calling removePromoCampaignManager(Async)");
+        }
+
+        return removePromoCampaignManagerCall(tradingChallengeId, managerId, _callback);
+
+    }
+
+    /**
+     * Remove QR campaign access for an Affiliate Manager
+     * ADMIN only. Idempotent DELETE with no body. QR campaign grants are independent of home tenant and affiliate programs. Removal takes effect on the next protected request after commit; already authorized reads/downloads may finish. Batch issuance and removal serialize on the campaign lock.
+     * @param tradingChallengeId  (required)
+     * @param managerId  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Grant absent </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed UUID </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> ADMIN role required </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Unknown manager or unknown/non-QR campaign </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public void removePromoCampaignManager(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UUID managerId) throws ApiException {
+        removePromoCampaignManagerWithHttpInfo(tradingChallengeId, managerId);
+    }
+
+    /**
+     * Remove QR campaign access for an Affiliate Manager
+     * ADMIN only. Idempotent DELETE with no body. QR campaign grants are independent of home tenant and affiliate programs. Removal takes effect on the next protected request after commit; already authorized reads/downloads may finish. Batch issuance and removal serialize on the campaign lock.
+     * @param tradingChallengeId  (required)
+     * @param managerId  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Grant absent </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed UUID </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> ADMIN role required </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Unknown manager or unknown/non-QR campaign </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> removePromoCampaignManagerWithHttpInfo(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UUID managerId) throws ApiException {
+        okhttp3.Call localVarCall = removePromoCampaignManagerValidateBeforeCall(tradingChallengeId, managerId, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * Remove QR campaign access for an Affiliate Manager (asynchronously)
+     * ADMIN only. Idempotent DELETE with no body. QR campaign grants are independent of home tenant and affiliate programs. Removal takes effect on the next protected request after commit; already authorized reads/downloads may finish. Batch issuance and removal serialize on the campaign lock.
+     * @param tradingChallengeId  (required)
+     * @param managerId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Grant absent </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Malformed UUID </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> ADMIN role required </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Unknown manager or unknown/non-QR campaign </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call removePromoCampaignManagerAsync(@javax.annotation.Nonnull UUID tradingChallengeId, @javax.annotation.Nonnull UUID managerId, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = removePromoCampaignManagerValidateBeforeCall(tradingChallengeId, managerId, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for removeTradingChallengeUsers
      * @param removeTradingChallengeUsersRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -20258,9 +20884,10 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> QR PNG </td><td>  * Cache-Control -  <br>  </td></tr>
         <tr><td> 400 </td><td> Malformed QR parameter </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Link not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call renderPromoLinkQRCall(@javax.annotation.Nonnull UUID linkId, @javax.annotation.Nullable Integer size, @javax.annotation.Nullable String format, @javax.annotation.Nullable String ec, final ApiCallback _callback) throws ApiException {
@@ -20333,7 +20960,7 @@ public class DefaultApi {
 
     /**
      * Render a promotional link QR code
-     * Render the exact private claim URL as PNG with Cache-Control private, no-store. ADMIN and same-tenant INTEGRATOR only.
+     * Download private QR PNG with Content-Disposition filename promo-link-{link_id}.png; the same link_id is in saved links and CSV. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access.
      * @param linkId  (required)
      * @param size  (optional, default to 512)
      * @param format  (optional, default to png)
@@ -20346,9 +20973,10 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> QR PNG </td><td>  * Cache-Control -  <br>  </td></tr>
         <tr><td> 400 </td><td> Malformed QR parameter </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Link not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
     public String renderPromoLinkQR(@javax.annotation.Nonnull UUID linkId, @javax.annotation.Nullable Integer size, @javax.annotation.Nullable String format, @javax.annotation.Nullable String ec) throws ApiException {
@@ -20358,7 +20986,7 @@ public class DefaultApi {
 
     /**
      * Render a promotional link QR code
-     * Render the exact private claim URL as PNG with Cache-Control private, no-store. ADMIN and same-tenant INTEGRATOR only.
+     * Download private QR PNG with Content-Disposition filename promo-link-{link_id}.png; the same link_id is in saved links and CSV. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access.
      * @param linkId  (required)
      * @param size  (optional, default to 512)
      * @param format  (optional, default to png)
@@ -20371,9 +20999,10 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> QR PNG </td><td>  * Cache-Control -  <br>  </td></tr>
         <tr><td> 400 </td><td> Malformed QR parameter </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Link not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<String> renderPromoLinkQRWithHttpInfo(@javax.annotation.Nonnull UUID linkId, @javax.annotation.Nullable Integer size, @javax.annotation.Nullable String format, @javax.annotation.Nullable String ec) throws ApiException {
@@ -20384,7 +21013,7 @@ public class DefaultApi {
 
     /**
      * Render a promotional link QR code (asynchronously)
-     * Render the exact private claim URL as PNG with Cache-Control private, no-store. ADMIN and same-tenant INTEGRATOR only.
+     * Download private QR PNG with Content-Disposition filename promo-link-{link_id}.png; the same link_id is in saved links and CSV. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access.
      * @param linkId  (required)
      * @param size  (optional, default to 512)
      * @param format  (optional, default to png)
@@ -20398,9 +21027,10 @@ public class DefaultApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> QR PNG </td><td>  * Cache-Control -  <br>  </td></tr>
         <tr><td> 400 </td><td> Malformed QR parameter </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Caller cannot administer this tenant </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> No Campaign Links permission for the owning campaign; no asset data is returned </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Link not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Authentication required </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call renderPromoLinkQRAsync(@javax.annotation.Nonnull UUID linkId, @javax.annotation.Nullable Integer size, @javax.annotation.Nullable String format, @javax.annotation.Nullable String ec, final ApiCallback<String> _callback) throws ApiException {
@@ -21055,7 +21685,7 @@ public class DefaultApi {
 
     /**
      * Revoke a promotional link
-     * Revoke an unclaimed link and return one unit of QR campaign capacity. Repeating an already-revoked request is idempotent; claimed links return 409.
+     * Revoke an active promo link. Revoking a reusable link prevents new signups and preserves existing participants. Does not release a successful signup place.
      * @param linkId  (required)
      * @param revokePromoLinkRequest  (required)
      * @return RevokePromoLinkResponse
@@ -21079,7 +21709,7 @@ public class DefaultApi {
 
     /**
      * Revoke a promotional link
-     * Revoke an unclaimed link and return one unit of QR campaign capacity. Repeating an already-revoked request is idempotent; claimed links return 409.
+     * Revoke an active promo link. Revoking a reusable link prevents new signups and preserves existing participants. Does not release a successful signup place.
      * @param linkId  (required)
      * @param revokePromoLinkRequest  (required)
      * @return ApiResponse&lt;RevokePromoLinkResponse&gt;
@@ -21104,7 +21734,7 @@ public class DefaultApi {
 
     /**
      * Revoke a promotional link (asynchronously)
-     * Revoke an unclaimed link and return one unit of QR campaign capacity. Repeating an already-revoked request is idempotent; claimed links return 409.
+     * Revoke an active promo link. Revoking a reusable link prevents new signups and preserves existing participants. Does not release a successful signup place.
      * @param linkId  (required)
      * @param revokePromoLinkRequest  (required)
      * @param _callback The callback to be executed when the API call finishes

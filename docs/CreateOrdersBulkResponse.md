@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**data** | [**CreateOrdersBulkResponseAllOfData**](CreateOrdersBulkResponseAllOfData.md) |  |  [optional] |
+|**data** | [**CreateOrdersBulkResponseData**](CreateOrdersBulkResponseData.md) |  |  [optional] |
 |**error** | **String** | The error message. Present for error (non-2xx) responses. |  [optional] |
 |**metadata** | [**Metadata**](Metadata.md) | Metadata about the response, including status code and trace information. |  |
 

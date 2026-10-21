@@ -49,24 +49,24 @@ import java.util.Set;
 import tech.dora.JSON;
 
 /**
- * PromoAttributionResponseAllOfData
+ * PromoAttributionResponseData
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
-public class PromoAttributionResponseAllOfData {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T17:24:51.768947679+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+public class PromoAttributionResponseData {
   public static final String SERIALIZED_NAME_SOURCES = "sources";
   @SerializedName(SERIALIZED_NAME_SOURCES)
   @javax.annotation.Nonnull
   private List<PromoAttributionSource> sources = new ArrayList<>();
 
-  public PromoAttributionResponseAllOfData() {
+  public PromoAttributionResponseData() {
   }
 
-  public PromoAttributionResponseAllOfData sources(@javax.annotation.Nonnull List<PromoAttributionSource> sources) {
+  public PromoAttributionResponseData sources(@javax.annotation.Nonnull List<PromoAttributionSource> sources) {
     this.sources = sources;
     return this;
   }
 
-  public PromoAttributionResponseAllOfData addSourcesItem(PromoAttributionSource sourcesItem) {
+  public PromoAttributionResponseData addSourcesItem(PromoAttributionSource sourcesItem) {
     if (this.sources == null) {
       this.sources = new ArrayList<>();
     }
@@ -97,8 +97,8 @@ public class PromoAttributionResponseAllOfData {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PromoAttributionResponseAllOfData promoAttributionResponseAllOfData = (PromoAttributionResponseAllOfData) o;
-    return Objects.equals(this.sources, promoAttributionResponseAllOfData.sources);
+    PromoAttributionResponseData promoAttributionResponseData = (PromoAttributionResponseData) o;
+    return Objects.equals(this.sources, promoAttributionResponseData.sources);
   }
 
   @Override
@@ -109,7 +109,7 @@ public class PromoAttributionResponseAllOfData {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PromoAttributionResponseAllOfData {\n");
+    sb.append("class PromoAttributionResponseData {\n");
     sb.append("    sources: ").append(toIndentedString(sources)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -139,25 +139,25 @@ public class PromoAttributionResponseAllOfData {
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to PromoAttributionResponseAllOfData
+   * @throws IOException if the JSON Element is invalid with respect to PromoAttributionResponseData
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!PromoAttributionResponseAllOfData.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in PromoAttributionResponseAllOfData is not found in the empty JSON string", PromoAttributionResponseAllOfData.openapiRequiredFields.toString()));
+        if (!PromoAttributionResponseData.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in PromoAttributionResponseData is not found in the empty JSON string", PromoAttributionResponseData.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!PromoAttributionResponseAllOfData.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `PromoAttributionResponseAllOfData` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!PromoAttributionResponseData.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `PromoAttributionResponseData` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : PromoAttributionResponseAllOfData.openapiRequiredFields) {
+      for (String requiredField : PromoAttributionResponseData.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
           throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
@@ -179,22 +179,22 @@ public class PromoAttributionResponseAllOfData {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PromoAttributionResponseAllOfData.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PromoAttributionResponseAllOfData' and its subtypes
+       if (!PromoAttributionResponseData.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'PromoAttributionResponseData' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PromoAttributionResponseAllOfData> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PromoAttributionResponseAllOfData.class));
+       final TypeAdapter<PromoAttributionResponseData> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(PromoAttributionResponseData.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<PromoAttributionResponseAllOfData>() {
+       return (TypeAdapter<T>) new TypeAdapter<PromoAttributionResponseData>() {
            @Override
-           public void write(JsonWriter out, PromoAttributionResponseAllOfData value) throws IOException {
+           public void write(JsonWriter out, PromoAttributionResponseData value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public PromoAttributionResponseAllOfData read(JsonReader in) throws IOException {
+           public PromoAttributionResponseData read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -205,18 +205,18 @@ public class PromoAttributionResponseAllOfData {
   }
 
   /**
-   * Create an instance of PromoAttributionResponseAllOfData given an JSON string
+   * Create an instance of PromoAttributionResponseData given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of PromoAttributionResponseAllOfData
-   * @throws IOException if the JSON string is invalid with respect to PromoAttributionResponseAllOfData
+   * @return An instance of PromoAttributionResponseData
+   * @throws IOException if the JSON string is invalid with respect to PromoAttributionResponseData
    */
-  public static PromoAttributionResponseAllOfData fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PromoAttributionResponseAllOfData.class);
+  public static PromoAttributionResponseData fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, PromoAttributionResponseData.class);
   }
 
   /**
-   * Convert an instance of PromoAttributionResponseAllOfData to an JSON string
+   * Convert an instance of PromoAttributionResponseData to an JSON string
    *
    * @return JSON string
    */

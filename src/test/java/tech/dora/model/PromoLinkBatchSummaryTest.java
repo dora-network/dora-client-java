@@ -112,4 +112,52 @@ public class PromoLinkBatchSummaryTest {
         // TODO: test createdAt
     }
 
+    /**
+     * Test the property 'linkType'
+     */
+    @Test
+    public void linkTypeTest() {
+        // TODO: test linkType
+    }
+
+    /**
+     * Test the property 'affiliateProgramId'
+     */
+    @Test
+    public void affiliateProgramIdTest() {
+        // TODO: test affiliateProgramId
+    }
+
+    /**
+     * Test the property 'affiliateMemberId'
+     */
+    @Test
+    public void affiliateMemberIdTest() {
+        // TODO: test affiliateMemberId
+    }
+
+    /**
+     * Test the property 'referralCode'
+     */
+    @Test
+    public void referralCodeTest() {
+        // TODO: test referralCode
+    }
+
+    /**
+     * Test the property 'campaignId'
+     */
+    @Test
+    public void campaignIdTest() {
+        // TODO: test campaignId
+    }
+
+    /**
+     * Test the property 'signups'
+     */
+    @Test
+    public void signupsTest() {
+        // TODO: test signups
+    }
+
 }

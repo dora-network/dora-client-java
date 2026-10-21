@@ -1,6 +1,6 @@
 
 
-# PromoAttributionResponseAllOfData
+# PromoAttributionResponseData
 
 
 ## Properties

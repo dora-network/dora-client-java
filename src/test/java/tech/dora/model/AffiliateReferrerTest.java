@@ -95,4 +95,20 @@ public class AffiliateReferrerTest {
         // TODO: test customizedAt
     }
 
+    /**
+     * Test the property 'disabledAt'
+     */
+    @Test
+    public void disabledAtTest() {
+        // TODO: test disabledAt
+    }
+
+    /**
+     * Test the property 'disabledBy'
+     */
+    @Test
+    public void disabledByTest() {
+        // TODO: test disabledBy
+    }
+
 }

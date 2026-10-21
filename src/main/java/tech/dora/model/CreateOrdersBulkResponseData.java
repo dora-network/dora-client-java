@@ -49,10 +49,10 @@ import java.util.Set;
 import tech.dora.JSON;
 
 /**
- * CreateOrdersBulkResponseAllOfData
+ * CreateOrdersBulkResponseData
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
-public class CreateOrdersBulkResponseAllOfData {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T17:24:51.768947679+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+public class CreateOrdersBulkResponseData {
   public static final String SERIALIZED_NAME_CREATED = "created";
   @SerializedName(SERIALIZED_NAME_CREATED)
   @javax.annotation.Nullable
@@ -68,10 +68,10 @@ public class CreateOrdersBulkResponseAllOfData {
   @javax.annotation.Nullable
   private List<BulkOrderResult> results = new ArrayList<>();
 
-  public CreateOrdersBulkResponseAllOfData() {
+  public CreateOrdersBulkResponseData() {
   }
 
-  public CreateOrdersBulkResponseAllOfData created(@javax.annotation.Nullable Integer created) {
+  public CreateOrdersBulkResponseData created(@javax.annotation.Nullable Integer created) {
     this.created = created;
     return this;
   }
@@ -90,7 +90,7 @@ public class CreateOrdersBulkResponseAllOfData {
   }
 
 
-  public CreateOrdersBulkResponseAllOfData rejected(@javax.annotation.Nullable Integer rejected) {
+  public CreateOrdersBulkResponseData rejected(@javax.annotation.Nullable Integer rejected) {
     this.rejected = rejected;
     return this;
   }
@@ -109,12 +109,12 @@ public class CreateOrdersBulkResponseAllOfData {
   }
 
 
-  public CreateOrdersBulkResponseAllOfData results(@javax.annotation.Nullable List<BulkOrderResult> results) {
+  public CreateOrdersBulkResponseData results(@javax.annotation.Nullable List<BulkOrderResult> results) {
     this.results = results;
     return this;
   }
 
-  public CreateOrdersBulkResponseAllOfData addResultsItem(BulkOrderResult resultsItem) {
+  public CreateOrdersBulkResponseData addResultsItem(BulkOrderResult resultsItem) {
     if (this.results == null) {
       this.results = new ArrayList<>();
     }
@@ -145,10 +145,10 @@ public class CreateOrdersBulkResponseAllOfData {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CreateOrdersBulkResponseAllOfData createOrdersBulkResponseAllOfData = (CreateOrdersBulkResponseAllOfData) o;
-    return Objects.equals(this.created, createOrdersBulkResponseAllOfData.created) &&
-        Objects.equals(this.rejected, createOrdersBulkResponseAllOfData.rejected) &&
-        Objects.equals(this.results, createOrdersBulkResponseAllOfData.results);
+    CreateOrdersBulkResponseData createOrdersBulkResponseData = (CreateOrdersBulkResponseData) o;
+    return Objects.equals(this.created, createOrdersBulkResponseData.created) &&
+        Objects.equals(this.rejected, createOrdersBulkResponseData.rejected) &&
+        Objects.equals(this.results, createOrdersBulkResponseData.results);
   }
 
   @Override
@@ -159,7 +159,7 @@ public class CreateOrdersBulkResponseAllOfData {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CreateOrdersBulkResponseAllOfData {\n");
+    sb.append("class CreateOrdersBulkResponseData {\n");
     sb.append("    created: ").append(toIndentedString(created)).append("\n");
     sb.append("    rejected: ").append(toIndentedString(rejected)).append("\n");
     sb.append("    results: ").append(toIndentedString(results)).append("\n");
@@ -191,20 +191,20 @@ public class CreateOrdersBulkResponseAllOfData {
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to CreateOrdersBulkResponseAllOfData
+   * @throws IOException if the JSON Element is invalid with respect to CreateOrdersBulkResponseData
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!CreateOrdersBulkResponseAllOfData.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in CreateOrdersBulkResponseAllOfData is not found in the empty JSON string", CreateOrdersBulkResponseAllOfData.openapiRequiredFields.toString()));
+        if (!CreateOrdersBulkResponseData.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in CreateOrdersBulkResponseData is not found in the empty JSON string", CreateOrdersBulkResponseData.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!CreateOrdersBulkResponseAllOfData.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `CreateOrdersBulkResponseAllOfData` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!CreateOrdersBulkResponseData.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `CreateOrdersBulkResponseData` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -228,22 +228,22 @@ public class CreateOrdersBulkResponseAllOfData {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CreateOrdersBulkResponseAllOfData.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CreateOrdersBulkResponseAllOfData' and its subtypes
+       if (!CreateOrdersBulkResponseData.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'CreateOrdersBulkResponseData' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CreateOrdersBulkResponseAllOfData> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CreateOrdersBulkResponseAllOfData.class));
+       final TypeAdapter<CreateOrdersBulkResponseData> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(CreateOrdersBulkResponseData.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<CreateOrdersBulkResponseAllOfData>() {
+       return (TypeAdapter<T>) new TypeAdapter<CreateOrdersBulkResponseData>() {
            @Override
-           public void write(JsonWriter out, CreateOrdersBulkResponseAllOfData value) throws IOException {
+           public void write(JsonWriter out, CreateOrdersBulkResponseData value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public CreateOrdersBulkResponseAllOfData read(JsonReader in) throws IOException {
+           public CreateOrdersBulkResponseData read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -254,18 +254,18 @@ public class CreateOrdersBulkResponseAllOfData {
   }
 
   /**
-   * Create an instance of CreateOrdersBulkResponseAllOfData given an JSON string
+   * Create an instance of CreateOrdersBulkResponseData given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of CreateOrdersBulkResponseAllOfData
-   * @throws IOException if the JSON string is invalid with respect to CreateOrdersBulkResponseAllOfData
+   * @return An instance of CreateOrdersBulkResponseData
+   * @throws IOException if the JSON string is invalid with respect to CreateOrdersBulkResponseData
    */
-  public static CreateOrdersBulkResponseAllOfData fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CreateOrdersBulkResponseAllOfData.class);
+  public static CreateOrdersBulkResponseData fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, CreateOrdersBulkResponseData.class);
   }
 
   /**
-   * Convert an instance of CreateOrdersBulkResponseAllOfData to an JSON string
+   * Convert an instance of CreateOrdersBulkResponseData to an JSON string
    *
    * @return JSON string
    */

@@ -50,7 +50,7 @@ import tech.dora.JSON;
 /**
  * AffiliateReferrer
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T17:24:51.768947679+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class AffiliateReferrer {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -86,6 +86,16 @@ public class AffiliateReferrer {
   @SerializedName(SERIALIZED_NAME_CUSTOMIZED_AT)
   @javax.annotation.Nullable
   private OffsetDateTime customizedAt;
+
+  public static final String SERIALIZED_NAME_DISABLED_AT = "disabled_at";
+  @SerializedName(SERIALIZED_NAME_DISABLED_AT)
+  @javax.annotation.Nullable
+  private OffsetDateTime disabledAt;
+
+  public static final String SERIALIZED_NAME_DISABLED_BY = "disabled_by";
+  @SerializedName(SERIALIZED_NAME_DISABLED_BY)
+  @javax.annotation.Nullable
+  private UUID disabledBy;
 
   public AffiliateReferrer() {
   }
@@ -223,6 +233,44 @@ public class AffiliateReferrer {
   }
 
 
+  public AffiliateReferrer disabledAt(@javax.annotation.Nullable OffsetDateTime disabledAt) {
+    this.disabledAt = disabledAt;
+    return this;
+  }
+
+  /**
+   * When this membership was disabled; null while enabled.
+   * @return disabledAt
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getDisabledAt() {
+    return disabledAt;
+  }
+
+  public void setDisabledAt(@javax.annotation.Nullable OffsetDateTime disabledAt) {
+    this.disabledAt = disabledAt;
+  }
+
+
+  public AffiliateReferrer disabledBy(@javax.annotation.Nullable UUID disabledBy) {
+    this.disabledBy = disabledBy;
+    return this;
+  }
+
+  /**
+   * Actor who disabled this membership; null while enabled.
+   * @return disabledBy
+   */
+  @javax.annotation.Nullable
+  public UUID getDisabledBy() {
+    return disabledBy;
+  }
+
+  public void setDisabledBy(@javax.annotation.Nullable UUID disabledBy) {
+    this.disabledBy = disabledBy;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -239,12 +287,14 @@ public class AffiliateReferrer {
         Objects.equals(this.userId, affiliateReferrer.userId) &&
         Objects.equals(this.referralCode, affiliateReferrer.referralCode) &&
         Objects.equals(this.createdAt, affiliateReferrer.createdAt) &&
-        Objects.equals(this.customizedAt, affiliateReferrer.customizedAt);
+        Objects.equals(this.customizedAt, affiliateReferrer.customizedAt) &&
+        Objects.equals(this.disabledAt, affiliateReferrer.disabledAt) &&
+        Objects.equals(this.disabledBy, affiliateReferrer.disabledBy);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, programId, tenantId, userId, referralCode, createdAt, customizedAt);
+    return Objects.hash(id, programId, tenantId, userId, referralCode, createdAt, customizedAt, disabledAt, disabledBy);
   }
 
   @Override
@@ -258,6 +308,8 @@ public class AffiliateReferrer {
     sb.append("    referralCode: ").append(toIndentedString(referralCode)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    customizedAt: ").append(toIndentedString(customizedAt)).append("\n");
+    sb.append("    disabledAt: ").append(toIndentedString(disabledAt)).append("\n");
+    sb.append("    disabledBy: ").append(toIndentedString(disabledBy)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -276,10 +328,10 @@ public class AffiliateReferrer {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "program_id", "tenant_id", "user_id", "referral_code", "created_at", "customized_at"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "program_id", "tenant_id", "user_id", "referral_code", "created_at", "customized_at", "disabled_at", "disabled_by"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "program_id", "tenant_id", "user_id", "referral_code", "created_at", "customized_at"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "program_id", "tenant_id", "user_id", "referral_code", "created_at", "customized_at", "disabled_at", "disabled_by"));
   }
 
   /**
@@ -324,6 +376,9 @@ public class AffiliateReferrer {
       }
       if (!jsonObj.get("referral_code").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `referral_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("referral_code").toString()));
+      }
+      if ((jsonObj.get("disabled_by") != null && !jsonObj.get("disabled_by").isJsonNull()) && !jsonObj.get("disabled_by").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `disabled_by` to be a primitive type in the JSON string but got `%s`", jsonObj.get("disabled_by").toString()));
       }
   }
 

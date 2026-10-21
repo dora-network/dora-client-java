@@ -22,329 +22,213 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
+import java.util.UUID;
+import tech.dora.model.IssuePromoLinkBatchRequestSingleUse;
 import tech.dora.model.PromoSourceType;
+
+
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParseException;
 
 import tech.dora.JSON;
 
-/**
- * IssuePromoLinkBatchRequest
- */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
-public class IssuePromoLinkBatchRequest {
-  public static final String SERIALIZED_NAME_SOURCE_TYPE = "source_type";
-  @SerializedName(SERIALIZED_NAME_SOURCE_TYPE)
-  @javax.annotation.Nonnull
-  private PromoSourceType sourceType;
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T17:24:51.768947679+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+public class IssuePromoLinkBatchRequest extends AbstractOpenApiSchema {
+    private static final Logger log = Logger.getLogger(IssuePromoLinkBatchRequest.class.getName());
 
-  public static final String SERIALIZED_NAME_SOURCE_ID = "source_id";
-  @SerializedName(SERIALIZED_NAME_SOURCE_ID)
-  @javax.annotation.Nonnull
-  private String sourceId;
+    public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+        @SuppressWarnings("unchecked")
+        @Override
+        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+            if (!IssuePromoLinkBatchRequest.class.isAssignableFrom(type.getRawType())) {
+                return null; // this class only serializes 'IssuePromoLinkBatchRequest' and its subtypes
+            }
+            final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+            final TypeAdapter<IssuePromoLinkBatchRequestSingleUse> adapterIssuePromoLinkBatchRequestSingleUse = gson.getDelegateAdapter(this, TypeToken.get(IssuePromoLinkBatchRequestSingleUse.class));
 
-  public static final String SERIALIZED_NAME_SOURCE_NAME = "source_name";
-  @SerializedName(SERIALIZED_NAME_SOURCE_NAME)
-  @javax.annotation.Nullable
-  private String sourceName;
+            return (TypeAdapter<T>) new TypeAdapter<IssuePromoLinkBatchRequest>() {
+                @Override
+                public void write(JsonWriter out, IssuePromoLinkBatchRequest value) throws IOException {
+                    if (value == null || value.getActualInstance() == null) {
+                        elementAdapter.write(out, null);
+                        return;
+                    }
 
-  public static final String SERIALIZED_NAME_ALLOCATION = "allocation";
-  @SerializedName(SERIALIZED_NAME_ALLOCATION)
-  @javax.annotation.Nonnull
-  private Integer allocation;
+                    // check if the actual instance is of the type `IssuePromoLinkBatchRequestSingleUse`
+                    if (value.getActualInstance() instanceof IssuePromoLinkBatchRequestSingleUse) {
+                        JsonElement element = adapterIssuePromoLinkBatchRequestSingleUse.toJsonTree((IssuePromoLinkBatchRequestSingleUse)value.getActualInstance());
+                        elementAdapter.write(out, element);
+                        return;
+                    }
+                    throw new IOException("Failed to serialize as the type doesn't match oneOf schemas: IssuePromoLinkBatchRequestSingleUse");
+                }
 
-  public static final String SERIALIZED_NAME_NOTE = "note";
-  @SerializedName(SERIALIZED_NAME_NOTE)
-  @javax.annotation.Nullable
-  private String note;
+                @Override
+                public IssuePromoLinkBatchRequest read(JsonReader in) throws IOException {
+                    Object deserialized = null;
+                    JsonElement jsonElement = elementAdapter.read(in);
 
-  public static final String SERIALIZED_NAME_EXPIRES_AT = "expires_at";
-  @SerializedName(SERIALIZED_NAME_EXPIRES_AT)
-  @javax.annotation.Nullable
-  private OffsetDateTime expiresAt;
+                    int match = 0;
+                    ArrayList<String> errorMessages = new ArrayList<>();
+                    TypeAdapter actualAdapter = elementAdapter;
 
-  public IssuePromoLinkBatchRequest() {
-  }
+                    // deserialize IssuePromoLinkBatchRequestSingleUse
+                    try {
+                        // validate the JSON object to see if any exception is thrown
+                        IssuePromoLinkBatchRequestSingleUse.validateJsonElement(jsonElement);
+                        actualAdapter = adapterIssuePromoLinkBatchRequestSingleUse;
+                        match++;
+                        log.log(Level.FINER, "Input data matches schema 'IssuePromoLinkBatchRequestSingleUse'");
+                    } catch (Exception e) {
+                        // deserialization failed, continue
+                        errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for IssuePromoLinkBatchRequestSingleUse failed with `%s`.", e.getMessage()));
+                        log.log(Level.FINER, "Input data does not match schema 'IssuePromoLinkBatchRequestSingleUse'", e);
+                    }
 
-  public IssuePromoLinkBatchRequest sourceType(@javax.annotation.Nonnull PromoSourceType sourceType) {
-    this.sourceType = sourceType;
-    return this;
-  }
+                    if (match == 1) {
+                        IssuePromoLinkBatchRequest ret = new IssuePromoLinkBatchRequest();
+                        ret.setActualInstance(actualAdapter.fromJsonTree(jsonElement));
+                        return ret;
+                    }
 
-  /**
-   * Get sourceType
-   * @return sourceType
-   */
-  @javax.annotation.Nonnull
-  public PromoSourceType getSourceType() {
-    return sourceType;
-  }
-
-  public void setSourceType(@javax.annotation.Nonnull PromoSourceType sourceType) {
-    this.sourceType = sourceType;
-  }
-
-
-  public IssuePromoLinkBatchRequest sourceId(@javax.annotation.Nonnull String sourceId) {
-    this.sourceId = sourceId;
-    return this;
-  }
-
-  /**
-   * Get sourceId
-   * @return sourceId
-   */
-  @javax.annotation.Nonnull
-  public String getSourceId() {
-    return sourceId;
-  }
-
-  public void setSourceId(@javax.annotation.Nonnull String sourceId) {
-    this.sourceId = sourceId;
-  }
-
-
-  public IssuePromoLinkBatchRequest sourceName(@javax.annotation.Nullable String sourceName) {
-    this.sourceName = sourceName;
-    return this;
-  }
-
-  /**
-   * Get sourceName
-   * @return sourceName
-   */
-  @javax.annotation.Nullable
-  public String getSourceName() {
-    return sourceName;
-  }
-
-  public void setSourceName(@javax.annotation.Nullable String sourceName) {
-    this.sourceName = sourceName;
-  }
-
-
-  public IssuePromoLinkBatchRequest allocation(@javax.annotation.Nonnull Integer allocation) {
-    this.allocation = allocation;
-    return this;
-  }
-
-  /**
-   * Cannot exceed the configured max_links_per_batch or remaining campaign capacity.
-   * minimum: 1
-   * @return allocation
-   */
-  @javax.annotation.Nonnull
-  public Integer getAllocation() {
-    return allocation;
-  }
-
-  public void setAllocation(@javax.annotation.Nonnull Integer allocation) {
-    this.allocation = allocation;
-  }
-
-
-  public IssuePromoLinkBatchRequest note(@javax.annotation.Nullable String note) {
-    this.note = note;
-    return this;
-  }
-
-  /**
-   * Get note
-   * @return note
-   */
-  @javax.annotation.Nullable
-  public String getNote() {
-    return note;
-  }
-
-  public void setNote(@javax.annotation.Nullable String note) {
-    this.note = note;
-  }
-
-
-  public IssuePromoLinkBatchRequest expiresAt(@javax.annotation.Nullable OffsetDateTime expiresAt) {
-    this.expiresAt = expiresAt;
-    return this;
-  }
-
-  /**
-   * Defaults to challenge end and must fall between challenge start and end in the future.
-   * @return expiresAt
-   */
-  @javax.annotation.Nullable
-  public OffsetDateTime getExpiresAt() {
-    return expiresAt;
-  }
-
-  public void setExpiresAt(@javax.annotation.Nullable OffsetDateTime expiresAt) {
-    this.expiresAt = expiresAt;
-  }
-
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+                    throw new IOException(String.format(java.util.Locale.ROOT, "Failed deserialization for IssuePromoLinkBatchRequest: %d classes match result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", match, errorMessages, jsonElement.toString()));
+                }
+            }.nullSafe();
+        }
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    // store a list of schema names defined in oneOf
+    public static final Map<String, Class<?>> schemas = new HashMap<String, Class<?>>();
+
+    public IssuePromoLinkBatchRequest() {
+        super("oneOf", Boolean.FALSE);
     }
-    IssuePromoLinkBatchRequest issuePromoLinkBatchRequest = (IssuePromoLinkBatchRequest) o;
-    return Objects.equals(this.sourceType, issuePromoLinkBatchRequest.sourceType) &&
-        Objects.equals(this.sourceId, issuePromoLinkBatchRequest.sourceId) &&
-        Objects.equals(this.sourceName, issuePromoLinkBatchRequest.sourceName) &&
-        Objects.equals(this.allocation, issuePromoLinkBatchRequest.allocation) &&
-        Objects.equals(this.note, issuePromoLinkBatchRequest.note) &&
-        Objects.equals(this.expiresAt, issuePromoLinkBatchRequest.expiresAt);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(sourceType, sourceId, sourceName, allocation, note, expiresAt);
-  }
+    public IssuePromoLinkBatchRequest(Object o) {
+        super("oneOf", Boolean.FALSE);
+        setActualInstance(o);
+    }
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class IssuePromoLinkBatchRequest {\n");
-    sb.append("    sourceType: ").append(toIndentedString(sourceType)).append("\n");
-    sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
-    sb.append("    sourceName: ").append(toIndentedString(sourceName)).append("\n");
-    sb.append("    allocation: ").append(toIndentedString(allocation)).append("\n");
-    sb.append("    note: ").append(toIndentedString(note)).append("\n");
-    sb.append("    expiresAt: ").append(toIndentedString(expiresAt)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+    static {
+        schemas.put("IssuePromoLinkBatchRequestSingleUse", IssuePromoLinkBatchRequestSingleUse.class);
+    }
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    return o == null ? "null" : o.toString().replace("\n", "\n    ");
-  }
+    @Override
+    public Map<String, Class<?>> getSchemas() {
+        return IssuePromoLinkBatchRequest.schemas;
+    }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("source_type", "source_id", "source_name", "allocation", "note", "expires_at"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("source_type", "source_id", "allocation"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to IssuePromoLinkBatchRequest
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!IssuePromoLinkBatchRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in IssuePromoLinkBatchRequest is not found in the empty JSON string", IssuePromoLinkBatchRequest.openapiRequiredFields.toString()));
+    /**
+     * Set the instance that matches the oneOf child schema, check
+     * the instance parameter is valid against the oneOf child schemas:
+     * IssuePromoLinkBatchRequestSingleUse
+     *
+     * It could be an instance of the 'oneOf' schemas.
+     */
+    @Override
+    public void setActualInstance(Object instance) {
+        if (instance instanceof IssuePromoLinkBatchRequestSingleUse) {
+            super.setActualInstance(instance);
+            return;
         }
-      }
 
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!IssuePromoLinkBatchRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `IssuePromoLinkBatchRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
+        throw new RuntimeException("Invalid instance type. Must be IssuePromoLinkBatchRequestSingleUse");
+    }
 
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : IssuePromoLinkBatchRequest.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `source_type`
-      PromoSourceType.validateJsonElement(jsonObj.get("source_type"));
-      if (!jsonObj.get("source_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `source_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("source_id").toString()));
-      }
-      if ((jsonObj.get("source_name") != null && !jsonObj.get("source_name").isJsonNull()) && !jsonObj.get("source_name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `source_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("source_name").toString()));
-      }
-      if ((jsonObj.get("note") != null && !jsonObj.get("note").isJsonNull()) && !jsonObj.get("note").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `note` to be a primitive type in the JSON string but got `%s`", jsonObj.get("note").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    /**
+     * Get the actual instance, which can be the following:
+     * IssuePromoLinkBatchRequestSingleUse
+     *
+     * @return The actual instance (IssuePromoLinkBatchRequestSingleUse)
+     */
     @SuppressWarnings("unchecked")
     @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!IssuePromoLinkBatchRequest.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'IssuePromoLinkBatchRequest' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<IssuePromoLinkBatchRequest> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(IssuePromoLinkBatchRequest.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<IssuePromoLinkBatchRequest>() {
-           @Override
-           public void write(JsonWriter out, IssuePromoLinkBatchRequest value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public IssuePromoLinkBatchRequest read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
+    public Object getActualInstance() {
+        return super.getActualInstance();
     }
-  }
 
-  /**
-   * Create an instance of IssuePromoLinkBatchRequest given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of IssuePromoLinkBatchRequest
-   * @throws IOException if the JSON string is invalid with respect to IssuePromoLinkBatchRequest
-   */
-  public static IssuePromoLinkBatchRequest fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, IssuePromoLinkBatchRequest.class);
-  }
+    /**
+     * Get the actual instance of `IssuePromoLinkBatchRequestSingleUse`. If the actual instance is not `IssuePromoLinkBatchRequestSingleUse`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `IssuePromoLinkBatchRequestSingleUse`
+     * @throws ClassCastException if the instance is not `IssuePromoLinkBatchRequestSingleUse`
+     */
+    @SuppressWarnings("unchecked")
+    public IssuePromoLinkBatchRequestSingleUse getIssuePromoLinkBatchRequestSingleUse() throws ClassCastException {
+        return (IssuePromoLinkBatchRequestSingleUse)super.getActualInstance();
+    }
 
-  /**
-   * Convert an instance of IssuePromoLinkBatchRequest to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
+    /**
+     * Validates the JSON Element and throws an exception if issues found
+     *
+     * @param jsonElement JSON Element
+     * @throws IOException if the JSON Element is invalid with respect to IssuePromoLinkBatchRequest
+     */
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+        // validate oneOf schemas one by one
+        int validCount = 0;
+        ArrayList<String> errorMessages = new ArrayList<>();
+        // validate the json string with IssuePromoLinkBatchRequestSingleUse
+        try {
+            IssuePromoLinkBatchRequestSingleUse.validateJsonElement(jsonElement);
+            validCount++;
+        } catch (Exception e) {
+            errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for IssuePromoLinkBatchRequestSingleUse failed with `%s`.", e.getMessage()));
+            // continue to the next one
+        }
+        if (validCount != 1) {
+            throw new IOException(String.format(java.util.Locale.ROOT, "The JSON string is invalid for IssuePromoLinkBatchRequest with oneOf schemas: IssuePromoLinkBatchRequestSingleUse. %d class(es) match the result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", validCount, errorMessages, jsonElement.toString()));
+        }
+    }
+
+    /**
+     * Create an instance of IssuePromoLinkBatchRequest given an JSON string
+     *
+     * @param jsonString JSON string
+     * @return An instance of IssuePromoLinkBatchRequest
+     * @throws IOException if the JSON string is invalid with respect to IssuePromoLinkBatchRequest
+     */
+    public static IssuePromoLinkBatchRequest fromJson(String jsonString) throws IOException {
+        return JSON.getGson().fromJson(jsonString, IssuePromoLinkBatchRequest.class);
+    }
+
+    /**
+     * Convert an instance of IssuePromoLinkBatchRequest to an JSON string
+     *
+     * @return JSON string
+     */
+    public String toJson() {
+        return JSON.getGson().toJson(this);
+    }
 }
 

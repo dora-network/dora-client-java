@@ -51,7 +51,7 @@ import tech.dora.JSON;
 /**
  * PromoLinkBatchSummary
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T17:24:51.768947679+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class PromoLinkBatchSummary {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -75,28 +75,110 @@ public class PromoLinkBatchSummary {
 
   public static final String SERIALIZED_NAME_ALLOCATION = "allocation";
   @SerializedName(SERIALIZED_NAME_ALLOCATION)
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private Integer allocation;
 
   public static final String SERIALIZED_NAME_ISSUED = "issued";
   @SerializedName(SERIALIZED_NAME_ISSUED)
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private Long issued;
 
   public static final String SERIALIZED_NAME_CLAIMED = "claimed";
   @SerializedName(SERIALIZED_NAME_CLAIMED)
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private Long claimed;
 
   public static final String SERIALIZED_NAME_REVOKED = "revoked";
   @SerializedName(SERIALIZED_NAME_REVOKED)
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private Long revoked;
 
   public static final String SERIALIZED_NAME_CREATED_AT = "created_at";
   @SerializedName(SERIALIZED_NAME_CREATED_AT)
   @javax.annotation.Nonnull
   private OffsetDateTime createdAt;
+
+  /**
+   * Defaults to SINGLE_USE for existing clients. REUSABLE creates one tracked link without a quantity.
+   */
+  @JsonAdapter(LinkTypeEnum.Adapter.class)
+  public enum LinkTypeEnum {
+    SINGLE_USE("SINGLE_USE"),
+    
+    REUSABLE("REUSABLE");
+
+    private String value;
+
+    LinkTypeEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static LinkTypeEnum fromValue(String value) {
+      for (LinkTypeEnum b : LinkTypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<LinkTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final LinkTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public LinkTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return LinkTypeEnum.fromValue(value);
+      }
+    }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      LinkTypeEnum.fromValue(value);
+    }
+  }
+
+  public static final String SERIALIZED_NAME_LINK_TYPE = "link_type";
+  @SerializedName(SERIALIZED_NAME_LINK_TYPE)
+  @javax.annotation.Nullable
+  private LinkTypeEnum linkType;
+
+  public static final String SERIALIZED_NAME_AFFILIATE_PROGRAM_ID = "affiliate_program_id";
+  @SerializedName(SERIALIZED_NAME_AFFILIATE_PROGRAM_ID)
+  @javax.annotation.Nullable
+  private UUID affiliateProgramId;
+
+  public static final String SERIALIZED_NAME_AFFILIATE_MEMBER_ID = "affiliate_member_id";
+  @SerializedName(SERIALIZED_NAME_AFFILIATE_MEMBER_ID)
+  @javax.annotation.Nullable
+  private UUID affiliateMemberId;
+
+  public static final String SERIALIZED_NAME_REFERRAL_CODE = "referral_code";
+  @SerializedName(SERIALIZED_NAME_REFERRAL_CODE)
+  @javax.annotation.Nullable
+  private String referralCode;
+
+  public static final String SERIALIZED_NAME_CAMPAIGN_ID = "campaign_id";
+  @SerializedName(SERIALIZED_NAME_CAMPAIGN_ID)
+  @javax.annotation.Nullable
+  private UUID campaignId;
+
+  public static final String SERIALIZED_NAME_SIGNUPS = "signups";
+  @SerializedName(SERIALIZED_NAME_SIGNUPS)
+  @javax.annotation.Nullable
+  private Long signups;
 
   public PromoLinkBatchSummary() {
   }
@@ -177,7 +259,7 @@ public class PromoLinkBatchSummary {
   }
 
 
-  public PromoLinkBatchSummary allocation(@javax.annotation.Nonnull Integer allocation) {
+  public PromoLinkBatchSummary allocation(@javax.annotation.Nullable Integer allocation) {
     this.allocation = allocation;
     return this;
   }
@@ -186,17 +268,17 @@ public class PromoLinkBatchSummary {
    * Get allocation
    * @return allocation
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public Integer getAllocation() {
     return allocation;
   }
 
-  public void setAllocation(@javax.annotation.Nonnull Integer allocation) {
+  public void setAllocation(@javax.annotation.Nullable Integer allocation) {
     this.allocation = allocation;
   }
 
 
-  public PromoLinkBatchSummary issued(@javax.annotation.Nonnull Long issued) {
+  public PromoLinkBatchSummary issued(@javax.annotation.Nullable Long issued) {
     this.issued = issued;
     return this;
   }
@@ -205,17 +287,17 @@ public class PromoLinkBatchSummary {
    * Get issued
    * @return issued
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public Long getIssued() {
     return issued;
   }
 
-  public void setIssued(@javax.annotation.Nonnull Long issued) {
+  public void setIssued(@javax.annotation.Nullable Long issued) {
     this.issued = issued;
   }
 
 
-  public PromoLinkBatchSummary claimed(@javax.annotation.Nonnull Long claimed) {
+  public PromoLinkBatchSummary claimed(@javax.annotation.Nullable Long claimed) {
     this.claimed = claimed;
     return this;
   }
@@ -224,17 +306,17 @@ public class PromoLinkBatchSummary {
    * Get claimed
    * @return claimed
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public Long getClaimed() {
     return claimed;
   }
 
-  public void setClaimed(@javax.annotation.Nonnull Long claimed) {
+  public void setClaimed(@javax.annotation.Nullable Long claimed) {
     this.claimed = claimed;
   }
 
 
-  public PromoLinkBatchSummary revoked(@javax.annotation.Nonnull Long revoked) {
+  public PromoLinkBatchSummary revoked(@javax.annotation.Nullable Long revoked) {
     this.revoked = revoked;
     return this;
   }
@@ -243,12 +325,12 @@ public class PromoLinkBatchSummary {
    * Get revoked
    * @return revoked
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public Long getRevoked() {
     return revoked;
   }
 
-  public void setRevoked(@javax.annotation.Nonnull Long revoked) {
+  public void setRevoked(@javax.annotation.Nullable Long revoked) {
     this.revoked = revoked;
   }
 
@@ -272,6 +354,120 @@ public class PromoLinkBatchSummary {
   }
 
 
+  public PromoLinkBatchSummary linkType(@javax.annotation.Nullable LinkTypeEnum linkType) {
+    this.linkType = linkType;
+    return this;
+  }
+
+  /**
+   * Defaults to SINGLE_USE for existing clients. REUSABLE creates one tracked link without a quantity.
+   * @return linkType
+   */
+  @javax.annotation.Nullable
+  public LinkTypeEnum getLinkType() {
+    return linkType;
+  }
+
+  public void setLinkType(@javax.annotation.Nullable LinkTypeEnum linkType) {
+    this.linkType = linkType;
+  }
+
+
+  public PromoLinkBatchSummary affiliateProgramId(@javax.annotation.Nullable UUID affiliateProgramId) {
+    this.affiliateProgramId = affiliateProgramId;
+    return this;
+  }
+
+  /**
+   * Get affiliateProgramId
+   * @return affiliateProgramId
+   */
+  @javax.annotation.Nullable
+  public UUID getAffiliateProgramId() {
+    return affiliateProgramId;
+  }
+
+  public void setAffiliateProgramId(@javax.annotation.Nullable UUID affiliateProgramId) {
+    this.affiliateProgramId = affiliateProgramId;
+  }
+
+
+  public PromoLinkBatchSummary affiliateMemberId(@javax.annotation.Nullable UUID affiliateMemberId) {
+    this.affiliateMemberId = affiliateMemberId;
+    return this;
+  }
+
+  /**
+   * Existing affiliate referrer/member ID, not user ID.
+   * @return affiliateMemberId
+   */
+  @javax.annotation.Nullable
+  public UUID getAffiliateMemberId() {
+    return affiliateMemberId;
+  }
+
+  public void setAffiliateMemberId(@javax.annotation.Nullable UUID affiliateMemberId) {
+    this.affiliateMemberId = affiliateMemberId;
+  }
+
+
+  public PromoLinkBatchSummary referralCode(@javax.annotation.Nullable String referralCode) {
+    this.referralCode = referralCode;
+    return this;
+  }
+
+  /**
+   * An existing code belonging to the selected member. Required with both IDs for reusable links; bound on the server and revalidated at claim time.
+   * @return referralCode
+   */
+  @javax.annotation.Nullable
+  public String getReferralCode() {
+    return referralCode;
+  }
+
+  public void setReferralCode(@javax.annotation.Nullable String referralCode) {
+    this.referralCode = referralCode;
+  }
+
+
+  public PromoLinkBatchSummary campaignId(@javax.annotation.Nullable UUID campaignId) {
+    this.campaignId = campaignId;
+    return this;
+  }
+
+  /**
+   * Get campaignId
+   * @return campaignId
+   */
+  @javax.annotation.Nullable
+  public UUID getCampaignId() {
+    return campaignId;
+  }
+
+  public void setCampaignId(@javax.annotation.Nullable UUID campaignId) {
+    this.campaignId = campaignId;
+  }
+
+
+  public PromoLinkBatchSummary signups(@javax.annotation.Nullable Long signups) {
+    this.signups = signups;
+    return this;
+  }
+
+  /**
+   * Successful signups; reusable links omit allocation/issued/claimed/revoked counts.
+   * @return signups
+   */
+  @javax.annotation.Nullable
+  public Long getSignups() {
+    return signups;
+  }
+
+  public void setSignups(@javax.annotation.Nullable Long signups) {
+    this.signups = signups;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -290,12 +486,18 @@ public class PromoLinkBatchSummary {
         Objects.equals(this.issued, promoLinkBatchSummary.issued) &&
         Objects.equals(this.claimed, promoLinkBatchSummary.claimed) &&
         Objects.equals(this.revoked, promoLinkBatchSummary.revoked) &&
-        Objects.equals(this.createdAt, promoLinkBatchSummary.createdAt);
+        Objects.equals(this.createdAt, promoLinkBatchSummary.createdAt) &&
+        Objects.equals(this.linkType, promoLinkBatchSummary.linkType) &&
+        Objects.equals(this.affiliateProgramId, promoLinkBatchSummary.affiliateProgramId) &&
+        Objects.equals(this.affiliateMemberId, promoLinkBatchSummary.affiliateMemberId) &&
+        Objects.equals(this.referralCode, promoLinkBatchSummary.referralCode) &&
+        Objects.equals(this.campaignId, promoLinkBatchSummary.campaignId) &&
+        Objects.equals(this.signups, promoLinkBatchSummary.signups);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, sourceType, sourceId, sourceName, allocation, issued, claimed, revoked, createdAt);
+    return Objects.hash(id, sourceType, sourceId, sourceName, allocation, issued, claimed, revoked, createdAt, linkType, affiliateProgramId, affiliateMemberId, referralCode, campaignId, signups);
   }
 
   @Override
@@ -311,6 +513,12 @@ public class PromoLinkBatchSummary {
     sb.append("    claimed: ").append(toIndentedString(claimed)).append("\n");
     sb.append("    revoked: ").append(toIndentedString(revoked)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    linkType: ").append(toIndentedString(linkType)).append("\n");
+    sb.append("    affiliateProgramId: ").append(toIndentedString(affiliateProgramId)).append("\n");
+    sb.append("    affiliateMemberId: ").append(toIndentedString(affiliateMemberId)).append("\n");
+    sb.append("    referralCode: ").append(toIndentedString(referralCode)).append("\n");
+    sb.append("    campaignId: ").append(toIndentedString(campaignId)).append("\n");
+    sb.append("    signups: ").append(toIndentedString(signups)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -329,10 +537,10 @@ public class PromoLinkBatchSummary {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "source_type", "source_id", "source_name", "allocation", "issued", "claimed", "revoked", "created_at"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "source_type", "source_id", "source_name", "allocation", "issued", "claimed", "revoked", "created_at", "link_type", "affiliate_program_id", "affiliate_member_id", "referral_code", "campaign_id", "signups"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "source_type", "source_id", "source_name", "allocation", "issued", "claimed", "revoked", "created_at"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "source_type", "source_id", "source_name", "created_at"));
   }
 
   /**
@@ -373,6 +581,25 @@ public class PromoLinkBatchSummary {
       }
       if (!jsonObj.get("source_name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `source_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("source_name").toString()));
+      }
+      if ((jsonObj.get("link_type") != null && !jsonObj.get("link_type").isJsonNull()) && !jsonObj.get("link_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `link_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("link_type").toString()));
+      }
+      // validate the optional field `link_type`
+      if (jsonObj.get("link_type") != null && !jsonObj.get("link_type").isJsonNull()) {
+        LinkTypeEnum.validateJsonElement(jsonObj.get("link_type"));
+      }
+      if ((jsonObj.get("affiliate_program_id") != null && !jsonObj.get("affiliate_program_id").isJsonNull()) && !jsonObj.get("affiliate_program_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `affiliate_program_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("affiliate_program_id").toString()));
+      }
+      if ((jsonObj.get("affiliate_member_id") != null && !jsonObj.get("affiliate_member_id").isJsonNull()) && !jsonObj.get("affiliate_member_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `affiliate_member_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("affiliate_member_id").toString()));
+      }
+      if ((jsonObj.get("referral_code") != null && !jsonObj.get("referral_code").isJsonNull()) && !jsonObj.get("referral_code").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `referral_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("referral_code").toString()));
+      }
+      if ((jsonObj.get("campaign_id") != null && !jsonObj.get("campaign_id").isJsonNull()) && !jsonObj.get("campaign_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `campaign_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("campaign_id").toString()));
       }
   }
 

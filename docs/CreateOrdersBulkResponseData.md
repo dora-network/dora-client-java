@@ -1,6 +1,6 @@
 
 
-# CreateOrdersBulkResponseAllOfData
+# CreateOrdersBulkResponseData
 
 
 ## Properties

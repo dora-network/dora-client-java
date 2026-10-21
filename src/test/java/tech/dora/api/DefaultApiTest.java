@@ -117,10 +117,10 @@ import tech.dora.model.PayLeverageAccruedInterestResponseEnvelope;
 import tech.dora.model.PoolPriceResponseEnvelope;
 import tech.dora.model.PoolRequestError;
 import tech.dora.model.PromoAttributionResponse;
+import tech.dora.model.PromoCampaignSelectorResponse;
 import tech.dora.model.PromoClaimResponseEnvelope;
 import tech.dora.model.PromoLinkBatchListResponse;
 import tech.dora.model.PromoLinkListResponse;
-import tech.dora.model.PromoLinkStatus;
 import tech.dora.model.QRRewardPreviewEnvelope;
 import tech.dora.model.RegisterAffiliateReferrerRequest;
 import tech.dora.model.RemoveTradingChallengeUsersRequest;
@@ -342,6 +342,8 @@ public class DefaultApiTest {
     /**
      * Claim a public QR promotion link
      *
+     * New users only. Send email only; campaign/link/source and affiliate selection are server-bound. Creates account, enrollment, referral attribution and encrypted delivery transactionally. One eligible account/email per campaign across all link types; existing accounts remain excluded. This does not guarantee a unique human across mailboxes. Successful reusable claims leave the link active. Permanent affiliate attribution is separate from originating link identity. Reusable failures have a per-link/email limit with a 15-minute inactivity reset, plus the route IP limit.
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -546,9 +548,24 @@ public class DefaultApiTest {
     }
 
     /**
+     * Re-enable an existing referrer
+     *
+     * Uses the same ADMIN, tenant INTEGRATOR, and assigned-program AFFILIATE_MANAGER permissions as disabling. Clears disabled_at and disabled_by on the existing membership, preserving its ID, user, program, codes, customization, and attribution history. Already enabled returns 200 unchanged. Unknown or wrong-program members return 404. Does not unpause the program or change independent signup, account, tenant, or campaign rules.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void enableAffiliateReferrerTest() throws ApiException {
+        UUID programId = null;
+        UUID referrerId = null;
+        AffiliateReferrerEnvelope response = api.enableAffiliateReferrer(programId, referrerId);
+        // TODO: test validations
+    }
+
+    /**
      * Export promotional links as CSV
      *
-     * Stream private claim URLs with Cache-Control private, no-store. ADMIN and same-tenant INTEGRATOR only.
+     * Export saved links. Reusable CSV includes link_id, link_type, campaign_id, affiliate_program_id, affiliate_member_id, referral_code, url, status, expires_at and created_at, with no claimant columns. Check X-Promo-Export-Status trailer for complete. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access.
      *
      * @throws ApiException if the Api call fails
      */
@@ -1448,9 +1465,24 @@ public class DefaultApiTest {
     }
 
     /**
+     * Grant QR campaign access for an Affiliate Manager
+     *
+     * ADMIN only. Idempotent PUT with no body. QR campaign grants are independent of home tenant and affiliate programs. Removal takes effect on the next protected request after commit; already authorized reads/downloads may finish. Batch issuance and removal serialize on the campaign lock.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void grantPromoCampaignManagerTest() throws ApiException {
+        UUID tradingChallengeId = null;
+        UUID managerId = null;
+        api.grantPromoCampaignManager(tradingChallengeId, managerId);
+        // TODO: test validations
+    }
+
+    /**
      * Issue a promotional link batch
      *
-     * Atomically reserve QR campaign capacity and create opaque, encrypted promotional links. ADMIN and same-tenant INTEGRATOR only. Exact idempotent replays return 200; first creation returns 201; key reuse with another payload returns 409.
+     * Mint single-use links or one reusable link bound to an existing affiliate program/member/code. Requires Idempotency-Key. Only committed new-user signups consume the shared campaign max_users limit; unused single-use links have no reserved place. Uses DORA-6544 campaign-grant authorization. Affiliate selection also requires independent access to the selected program. Migration 208 must precede reusable-link migration 209. Enable reusable creation in FE after all API replicas and reward-settlement daemon processes support this contract; older replicas fail closed instead of consuming reusable links. No program-only codes or landing-page selector. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access. Exact idempotent replays return 200; first creation returns 201; key reuse with another payload returns 409.
      *
      * @throws ApiException if the Api call fails
      */
@@ -1706,7 +1738,7 @@ public class DefaultApiTest {
     /**
      * List program referrers
      *
-     * ADMIN or INTEGRATOR required. Integrators are restricted to their own tenant; ADMIN overrides other roles. Includes registrations in inactive programs.
+     * ADMIN, INTEGRATOR, or AFFILIATE_MANAGER required within the same tenant and assigned-program scope as disabling. Active memberships only by default; include_disabled&#x3D;true also returns disabled memberships. Includes memberships in paused programs.
      *
      * @throws ApiException if the Api call fails
      */
@@ -1715,7 +1747,8 @@ public class DefaultApiTest {
         UUID programId = null;
         Integer limit = null;
         Integer page = null;
-        AffiliateReferrerListEnvelope response = api.listAffiliateReferrers(programId, limit, page);
+        Boolean includeDisabled = null;
+        AffiliateReferrerListEnvelope response = api.listAffiliateReferrers(programId, limit, page, includeDisabled);
         // TODO: test validations
     }
 
@@ -1775,6 +1808,20 @@ public class DefaultApiTest {
         Long page = null;
         Long limit = null;
         ListDepositsResponseEnvelope response = api.listDeposits(userId, page, limit);
+        // TODO: test validations
+    }
+
+    /**
+     * List accessible Campaign Links campaigns
+     *
+     * Authenticated QR campaign selector. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access. Managers with no grants receive an empty campaigns array. Returns all assigned tenants unless tenant_id narrows the set. Public challenge listing is unchanged.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listManagedPromoCampaignsTest() throws ApiException {
+        String tenantId = null;
+        PromoCampaignSelectorResponse response = api.listManagedPromoCampaigns(tenantId);
         // TODO: test validations
     }
 
@@ -1844,7 +1891,7 @@ public class DefaultApiTest {
     /**
      * List promotional link batches
      *
-     * Return source metadata and ISSUED, CLAIMED, and REVOKED counts for each batch. ADMIN and same-tenant INTEGRATOR only.
+     * Retrieve saved Campaign Links with campaign, link_type, affiliate selection, creation date and signups. Reusable entries omit allocation/issued/claimed/revoked counts. The same member can have many links/campaigns; separate link IDs preserve origin identity for future landing pages. Landing-page selection is out of scope. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access.
      *
      * @throws ApiException if the Api call fails
      */
@@ -1858,7 +1905,7 @@ public class DefaultApiTest {
     /**
      * List promotional links
      *
-     * Keyset-paginated batch links. URLs are omitted by default and decrypted only when reveal&#x3D;true. ADMIN and same-tenant INTEGRATOR only.
+     * Use reveal&#x3D;true to copy a saved private URL. Reusable entries show ACTIVE or REVOKED and have no single claimant. Treat URLs as private and do not cache/log them. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access.
      *
      * @throws ApiException if the Api call fails
      */
@@ -1867,7 +1914,7 @@ public class DefaultApiTest {
         UUID batchId = null;
         Integer limit = null;
         String cursor = null;
-        PromoLinkStatus status = null;
+        String status = null;
         Boolean reveal = null;
         PromoLinkListResponse response = api.listPromoLinks(batchId, limit, cursor, status, reveal);
         // TODO: test validations
@@ -2047,6 +2094,21 @@ public class DefaultApiTest {
     }
 
     /**
+     * Remove QR campaign access for an Affiliate Manager
+     *
+     * ADMIN only. Idempotent DELETE with no body. QR campaign grants are independent of home tenant and affiliate programs. Removal takes effect on the next protected request after commit; already authorized reads/downloads may finish. Batch issuance and removal serialize on the campaign lock.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void removePromoCampaignManagerTest() throws ApiException {
+        UUID tradingChallengeId = null;
+        UUID managerId = null;
+        api.removePromoCampaignManager(tradingChallengeId, managerId);
+        // TODO: test validations
+    }
+
+    /**
      * Remove users from a trading challenge
      *
      * Remove users from a trading challenge. For COMPETITION_MANAGER, the challenge must be assigned in managed_competition_ids.
@@ -2063,7 +2125,7 @@ public class DefaultApiTest {
     /**
      * Render a promotional link QR code
      *
-     * Render the exact private claim URL as PNG with Cache-Control private, no-store. ADMIN and same-tenant INTEGRATOR only.
+     * Download private QR PNG with Content-Disposition filename promo-link-{link_id}.png; the same link_id is in saved links and CSV. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including across tenants). Grants are checked on every request; tenant filters do not confer access.
      *
      * @throws ApiException if the Api call fails
      */
@@ -2129,7 +2191,7 @@ public class DefaultApiTest {
     /**
      * Revoke a promotional link
      *
-     * Revoke an unclaimed link and return one unit of QR campaign capacity. Repeating an already-revoked request is idempotent; claimed links return 409.
+     * Revoke an active promo link. Revoking a reusable link prevents new signups and preserves existing participants. Does not release a successful signup place.
      *
      * @throws ApiException if the Api call fails
      */

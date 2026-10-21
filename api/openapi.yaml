@@ -254,9 +254,10 @@ paths:
       - application/json
   /v1/affiliate_programs/{program_id}/referrers:
     get:
-      description: ADMIN or INTEGRATOR required. Integrators are restricted to their
-        own tenant; ADMIN overrides other roles. Includes registrations in inactive
-        programs.
+      description: "ADMIN, INTEGRATOR, or AFFILIATE_MANAGER required within the same\
+        \ tenant and assigned-program scope as disabling. Active memberships only\
+        \ by default; include_disabled=true also returns disabled memberships. Includes\
+        \ memberships in paused programs."
       operationId: listAffiliateReferrers
       parameters:
       - explode: false
@@ -287,6 +288,16 @@ paths:
           default: 1
           minimum: 1
           type: integer
+        style: form
+      - description: Include disabled memberships for management. Disabled codes remain
+          ineligible for new referrals.
+        explode: true
+        in: query
+        name: include_disabled
+        required: false
+        schema:
+          default: false
+          type: boolean
         style: form
       responses:
         "200":
@@ -1026,6 +1037,14 @@ paths:
       x-accepts:
       - application/json
     post:
+      description: "New users only. Send email only; campaign/link/source and affiliate\
+        \ selection are server-bound. Creates account, enrollment, referral attribution\
+        \ and encrypted delivery transactionally. One eligible account/email per campaign\
+        \ across all link types; existing accounts remain excluded. This does not\
+        \ guarantee a unique human across mailboxes. Successful reusable claims leave\
+        \ the link active. Permanent affiliate attribution is separate from originating\
+        \ link identity. Reusable failures have a per-link/email limit with a 15-minute\
+        \ inactivity reset, plus the route IP limit."
       operationId: claimPromoLink
       parameters:
       - description: Opaque bearer claim token
@@ -1041,7 +1060,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/claimPromoLink_request"
+              $ref: "#/components/schemas/ClaimPromoLinkRequest"
         required: true
       responses:
         "201":
@@ -1075,7 +1094,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseEnvelope"
-          description: "Link, campaign, or email can no longer be claimed"
+          description: "Campaign full, email already registered/claimed, link already\
+            \ claimed, or saved affiliate selection inactive (AFFILIATE_UNAVAILABLE).\
+            \ No additional campaign place is consumed."
         "410":
           content:
             application/json:
@@ -6876,8 +6897,13 @@ paths:
       - application/json
   /v1/trading_challenges/{trading_challenge_id}/link_batches:
     get:
-      description: "Return source metadata and ISSUED, CLAIMED, and REVOKED counts\
-        \ for each batch. ADMIN and same-tenant INTEGRATOR only."
+      description: "Retrieve saved Campaign Links with campaign, link_type, affiliate\
+        \ selection, creation date and signups. Reusable entries omit allocation/issued/claimed/revoked\
+        \ counts. The same member can have many links/campaigns; separate link IDs\
+        \ preserve origin identity for future landing pages. Landing-page selection\
+        \ is out of scope. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER explicitly\
+        \ assigned to the owning QR campaign (including across tenants). Grants are\
+        \ checked on every request; tenant filters do not confer access."
       operationId: listPromoLinkBatches
       parameters:
       - explode: false
@@ -6898,19 +6924,31 @@ paths:
         "400":
           description: Malformed request
         "403":
-          description: Caller cannot administer this tenant
+          description: No Campaign Links permission for the owning campaign; no asset
+            data is returned
         "404":
           description: QR campaign not found
         "500":
           description: Internal server error
+        "401":
+          description: Authentication required
       summary: List promotional link batches
       x-accepts:
       - application/json
     post:
-      description: "Atomically reserve QR campaign capacity and create opaque, encrypted\
-        \ promotional links. ADMIN and same-tenant INTEGRATOR only. Exact idempotent\
-        \ replays return 200; first creation returns 201; key reuse with another payload\
-        \ returns 409."
+      description: "Mint single-use links or one reusable link bound to an existing\
+        \ affiliate program/member/code. Requires Idempotency-Key. Only committed\
+        \ new-user signups consume the shared campaign max_users limit; unused single-use\
+        \ links have no reserved place. Uses DORA-6544 campaign-grant authorization.\
+        \ Affiliate selection also requires independent access to the selected program.\
+        \ Migration 208 must precede reusable-link migration 209. Enable reusable\
+        \ creation in FE after all API replicas and reward-settlement daemon processes\
+        \ support this contract; older replicas fail closed instead of consuming reusable\
+        \ links. No program-only codes or landing-page selector. ADMIN, same-tenant\
+        \ INTEGRATOR, or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign\
+        \ (including across tenants). Grants are checked on every request; tenant\
+        \ filters do not confer access. Exact idempotent replays return 200; first\
+        \ creation returns 201; key reuse with another payload returns 409."
       operationId: issuePromoLinkBatch
       parameters:
       - explode: false
@@ -6933,6 +6971,17 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              reusable:
+                summary: Reusable marketing link; no quantity
+                value:
+                  link_type: REUSABLE
+                  source_type: DORA
+                  source_id: NIGERIA
+                  source_name: Nigeria campaign
+                  affiliate_program_id: 00000000-0000-0000-0000-000000000001
+                  affiliate_member_id: 00000000-0000-0000-0000-000000000002
+                  referral_code: MEMBER_CODE
             schema:
               $ref: "#/components/schemas/IssuePromoLinkBatchRequest"
         required: true
@@ -6952,7 +7001,8 @@ paths:
         "400":
           description: Malformed request or missing/duplicate idempotency key
         "403":
-          description: Caller cannot administer this tenant
+          description: No Campaign Links permission for the owning campaign; no asset
+            data is returned
         "404":
           description: QR campaign not found
         "409":
@@ -6960,14 +7010,19 @@ paths:
             \ reused with a different payload"
         "500":
           description: Internal server error
+        "401":
+          description: Authentication required
       summary: Issue a promotional link batch
       x-content-type: application/json
       x-accepts:
       - application/json
   /v1/link_batches/{batch_id}/links:
     get:
-      description: Keyset-paginated batch links. URLs are omitted by default and decrypted
-        only when reveal=true. ADMIN and same-tenant INTEGRATOR only.
+      description: "Use reveal=true to copy a saved private URL. Reusable entries\
+        \ show ACTIVE or REVOKED and have no single claimant. Treat URLs as private\
+        \ and do not cache/log them. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER\
+        \ explicitly assigned to the owning QR campaign (including across tenants).\
+        \ Grants are checked on every request; tenant filters do not confer access."
       operationId: listPromoLinks
       parameters:
       - explode: false
@@ -6995,12 +7050,19 @@ paths:
         schema:
           type: string
         style: form
-      - explode: true
+      - description: ACTIVE selects active reusable links. Single-use links retain
+          ISSUED/CLAIMED/REVOKED.
+        explode: true
         in: query
         name: status
         required: false
         schema:
-          $ref: "#/components/schemas/PromoLinkStatus"
+          enum:
+          - ACTIVE
+          - ISSUED
+          - CLAIMED
+          - REVOKED
+          type: string
         style: form
       - explode: true
         in: query
@@ -7020,18 +7082,25 @@ paths:
         "400":
           description: Malformed filter or cursor
         "403":
-          description: Caller cannot administer this tenant
+          description: No Campaign Links permission for the owning campaign; no asset
+            data is returned
         "404":
           description: Batch not found
         "500":
           description: Internal server error
+        "401":
+          description: Authentication required
       summary: List promotional links
       x-accepts:
       - application/json
   /v1/link_batches/{batch_id}/links.csv:
     get:
-      description: "Stream private claim URLs with Cache-Control private, no-store.\
-        \ ADMIN and same-tenant INTEGRATOR only."
+      description: "Export saved links. Reusable CSV includes link_id, link_type,\
+        \ campaign_id, affiliate_program_id, affiliate_member_id, referral_code, url,\
+        \ status, expires_at and created_at, with no claimant columns. Check X-Promo-Export-Status\
+        \ trailer for complete. ADMIN, same-tenant INTEGRATOR, or AFFILIATE_MANAGER\
+        \ explicitly assigned to the owning QR campaign (including across tenants).\
+        \ Grants are checked on every request; tenant filters do not confer access."
       operationId: exportPromoLinksCSV
       parameters:
       - explode: false
@@ -7081,18 +7150,24 @@ paths:
         "400":
           description: Malformed request
         "403":
-          description: Caller cannot administer this tenant
+          description: No Campaign Links permission for the owning campaign; no asset
+            data is returned
         "404":
           description: Batch not found
         "500":
           description: Internal server error
+        "401":
+          description: Authentication required
       summary: Export promotional links as CSV
       x-accepts:
       - text/csv
   /v1/promo_links/{link_id}/qr:
     get:
-      description: "Render the exact private claim URL as PNG with Cache-Control private,\
-        \ no-store. ADMIN and same-tenant INTEGRATOR only."
+      description: "Download private QR PNG with Content-Disposition filename promo-link-{link_id}.png;\
+        \ the same link_id is in saved links and CSV. ADMIN, same-tenant INTEGRATOR,\
+        \ or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including\
+        \ across tenants). Grants are checked on every request; tenant filters do\
+        \ not confer access."
       operationId: renderPromoLinkQR
       parameters:
       - explode: false
@@ -7154,18 +7229,22 @@ paths:
         "400":
           description: Malformed QR parameter
         "403":
-          description: Caller cannot administer this tenant
+          description: No Campaign Links permission for the owning campaign; no asset
+            data is returned
         "404":
           description: Link not found
         "500":
           description: Internal server error
+        "401":
+          description: Authentication required
       summary: Render a promotional link QR code
       x-accepts:
       - image/png
   /v1/promo_links/{link_id}/revoke:
     post:
-      description: Revoke an unclaimed link and return one unit of QR campaign capacity.
-        Repeating an already-revoked request is idempotent; claimed links return 409.
+      description: Revoke an active promo link. Revoking a reusable link prevents
+        new signups and preserves existing participants. Does not release a successful
+        signup place.
       operationId: revokePromoLink
       parameters:
       - explode: false
@@ -8620,6 +8699,196 @@ paths:
       summary: Preview QR reward eligibility
       x-accepts:
       - application/json
+  /v1/promo_campaigns:
+    get:
+      description: "Authenticated QR campaign selector. ADMIN, same-tenant INTEGRATOR,\
+        \ or AFFILIATE_MANAGER explicitly assigned to the owning QR campaign (including\
+        \ across tenants). Grants are checked on every request; tenant filters do\
+        \ not confer access. Managers with no grants receive an empty campaigns array.\
+        \ Returns all assigned tenants unless tenant_id narrows the set. Public challenge\
+        \ listing is unchanged."
+      operationId: listManagedPromoCampaigns
+      parameters:
+      - description: Optional filter within the authorized campaign set; authenticate
+          as the home-tenant account.
+        explode: true
+        in: query
+        name: tenant_id
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PromoCampaignSelectorResponse"
+          description: Authorized QR campaigns
+          headers:
+            Cache-Control:
+              explode: false
+              schema:
+                enum:
+                - "private, no-store"
+                type: string
+              style: simple
+        "400":
+          description: Malformed or repeated query parameters
+        "401":
+          description: Authentication required
+        "403":
+          description: Campaign Links management role required
+        "500":
+          description: Internal server error
+      summary: List accessible Campaign Links campaigns
+      x-accepts:
+      - application/json
+  /v1/promo_campaigns/{trading_challenge_id}/managers/{manager_id}:
+    delete:
+      description: ADMIN only. Idempotent DELETE with no body. QR campaign grants
+        are independent of home tenant and affiliate programs. Removal takes effect
+        on the next protected request after commit; already authorized reads/downloads
+        may finish. Batch issuance and removal serialize on the campaign lock.
+      operationId: removePromoCampaignManager
+      parameters:
+      - explode: false
+        in: path
+        name: trading_challenge_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: manager_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Grant absent
+        "400":
+          description: Malformed UUID
+        "401":
+          description: Authentication required
+        "403":
+          description: ADMIN role required
+        "404":
+          description: Unknown manager or unknown/non-QR campaign
+        "500":
+          description: Internal server error
+      summary: Remove QR campaign access for an Affiliate Manager
+      x-accepts:
+      - application/json
+    put:
+      description: ADMIN only. Idempotent PUT with no body. QR campaign grants are
+        independent of home tenant and affiliate programs. Removal takes effect on
+        the next protected request after commit; already authorized reads/downloads
+        may finish. Batch issuance and removal serialize on the campaign lock.
+      operationId: grantPromoCampaignManager
+      parameters:
+      - explode: false
+        in: path
+        name: trading_challenge_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: manager_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Grant present
+        "400":
+          description: Malformed UUID or recipient is not an active Affiliate Manager
+        "401":
+          description: Authentication required
+        "403":
+          description: ADMIN role required
+        "404":
+          description: Unknown manager or unknown/non-QR campaign
+        "500":
+          description: Internal server error
+      summary: Grant QR campaign access for an Affiliate Manager
+      x-accepts:
+      - application/json
+  /v1/affiliate_programs/{program_id}/referrers/{referrer_id}/enable:
+    post:
+      description: "Uses the same ADMIN, tenant INTEGRATOR, and assigned-program AFFILIATE_MANAGER\
+        \ permissions as disabling. Clears disabled_at and disabled_by on the existing\
+        \ membership, preserving its ID, user, program, codes, customization, and\
+        \ attribution history. Already enabled returns 200 unchanged. Unknown or wrong-program\
+        \ members return 404. Does not unpause the program or change independent signup,\
+        \ account, tenant, or campaign rules."
+      operationId: enableAffiliateReferrer
+      parameters:
+      - explode: false
+        in: path
+        name: program_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: referrer_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateReferrerEnvelope"
+          description: Existing enabled affiliate referrer
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: Invalid request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: Authentication required
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: "Forbidden by role, tenant, or program assignment"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: Program or referrer not found within scope
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AffiliateError"
+          description: Internal server error
+      summary: Re-enable an existing referrer
+      x-accepts:
+      - application/json
 components:
   schemas:
     AssignAffiliateReferralRequest:
@@ -8769,6 +9038,8 @@ components:
         referral_code: referral_code
         created_at: 2000-01-23T04:56:07.000+00:00
         customized_at: 2000-01-23T04:56:07.000+00:00
+        disabled_at: 2000-01-23T04:56:07.000+00:00
+        disabled_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         id:
           format: uuid
@@ -8798,9 +9069,21 @@ components:
           format: date-time
           nullable: true
           type: string
+        disabled_at:
+          description: When this membership was disabled; null while enabled.
+          format: date-time
+          nullable: true
+          type: string
+        disabled_by:
+          description: Actor who disabled this membership; null while enabled.
+          format: uuid
+          nullable: true
+          type: string
       required:
       - created_at
       - customized_at
+      - disabled_at
+      - disabled_by
       - id
       - program_id
       - referral_code
@@ -8842,16 +9125,16 @@ components:
     UpdateAffiliateProgramRequest:
       additionalProperties: false
       example:
-        name: UpdateAffiliateProgramRequest_name
-        description: UpdateAffiliateProgramRequest_description
+        name: UpdateAffiliateProgramRequestName
+        description: UpdateAffiliateProgramRequestDescription
         is_active: true
       properties:
         name:
-          $ref: "#/components/schemas/UpdateAffiliateProgramRequest_name"
+          $ref: "#/components/schemas/UpdateAffiliateProgramRequestName"
         description:
-          $ref: "#/components/schemas/UpdateAffiliateProgramRequest_description"
+          $ref: "#/components/schemas/UpdateAffiliateProgramRequestDescription"
         is_active:
-          $ref: "#/components/schemas/UpdateAffiliateProgramRequest_is_active"
+          $ref: "#/components/schemas/UpdateAffiliateProgramRequestIsActive"
     RegisterAffiliateReferrerRequest:
       additionalProperties: false
       example:
@@ -8951,6 +9234,8 @@ components:
           referral_code: referral_code
           created_at: 2000-01-23T04:56:07.000+00:00
           customized_at: 2000-01-23T04:56:07.000+00:00
+          disabled_at: 2000-01-23T04:56:07.000+00:00
+          disabled_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         metadata:
           status_code: 0
           trace_id: trace_id
@@ -8973,6 +9258,8 @@ components:
           referral_code: referral_code
           created_at: 2000-01-23T04:56:07.000+00:00
           customized_at: 2000-01-23T04:56:07.000+00:00
+          disabled_at: 2000-01-23T04:56:07.000+00:00
+          disabled_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           program_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           tenant_id: tenant_id
@@ -8980,6 +9267,8 @@ components:
           referral_code: referral_code
           created_at: 2000-01-23T04:56:07.000+00:00
           customized_at: 2000-01-23T04:56:07.000+00:00
+          disabled_at: 2000-01-23T04:56:07.000+00:00
+          disabled_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         metadata:
           status_code: 0
           trace_id: trace_id
@@ -9469,7 +9758,7 @@ components:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
-            $ref: "#/components/schemas/PromoClaimResponseEnvelope_allOf_data"
+            $ref: "#/components/schemas/PromoClaimResponseEnvelopeData"
       example:
         data:
           state: NOT_FOUND
@@ -9481,6 +9770,13 @@ components:
           target_equity: target_equity
           expires_at: 2000-01-23T04:56:07.000+00:00
           source_name: source_name
+          link_type: SINGLE_USE
+          affiliate_program_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          affiliate_member_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          referral_code: referral_code
+          campaign_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          link_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_id: source_id
         error: error
         metadata: ""
     Web3EventStatus:
@@ -12881,7 +13177,7 @@ components:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
-            $ref: "#/components/schemas/CreateOrdersBulkResponse_allOf_data"
+            $ref: "#/components/schemas/CreateOrdersBulkResponseData"
       example:
         data:
           created: 0
@@ -17476,7 +17772,7 @@ components:
       - REVOKED
       type: string
     IssuePromoLinkBatchRequest:
-      additionalProperties: false
+      additionalProperties: {}
       example:
         source_type: KOL
         source_id: source_id
@@ -17484,6 +17780,13 @@ components:
         allocation: 1
         note: note
         expires_at: 2000-01-23T04:56:07.000+00:00
+        link_type: SINGLE_USE
+        affiliate_program_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        affiliate_member_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        referral_code: referral_code
+      oneOf:
+      - $ref: "#/components/schemas/IssuePromoLinkBatchRequestSingleUse"
+      - $ref: "#/components/schemas/IssuePromoLinkBatchRequestSingleUse"
       properties:
         source_type:
           $ref: "#/components/schemas/PromoSourceType"
@@ -17494,8 +17797,8 @@ components:
           maxLength: 256
           type: string
         allocation:
-          description: Cannot exceed the configured max_links_per_batch or remaining
-            campaign capacity.
+          description: Required for SINGLE_USE; omit for REUSABLE. Bounded by max_links_per_batch.
+            Minting reserves no campaign place.
           format: int32
           minimum: 1
           type: integer
@@ -17507,8 +17810,26 @@ components:
             and end in the future.
           format: date-time
           type: string
+        link_type:
+          description: Defaults to SINGLE_USE for existing clients. REUSABLE creates
+            one tracked link without a quantity.
+          enum:
+          - SINGLE_USE
+          - REUSABLE
+          type: string
+        affiliate_program_id:
+          format: uuid
+          type: string
+        affiliate_member_id:
+          description: "Existing affiliate referrer/member ID, not user ID."
+          format: uuid
+          type: string
+        referral_code:
+          description: An existing code belonging to the selected member. Required
+            with both IDs for reusable links; bound on the server and revalidated
+            at claim time.
+          type: string
       required:
-      - allocation
       - source_id
       - source_type
     IssuedPromoLink:
@@ -17544,7 +17865,7 @@ components:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
-            $ref: "#/components/schemas/IssuePromoLinkBatchResponse_allOf_data"
+            $ref: "#/components/schemas/IssuePromoLinkBatchResponseData"
       example:
         data:
           batch_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -17561,6 +17882,10 @@ components:
             url: https://openapi-generator.tech
             qr_url: qr_url
             expires_at: 2000-01-23T04:56:07.000+00:00
+          link_type: SINGLE_USE
+          affiliate_program_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          affiliate_member_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          referral_code: referral_code
         error: error
         metadata: ""
     PromoLinkBatchSummary:
@@ -17574,6 +17899,12 @@ components:
         claimed: 1
         revoked: 5
         created_at: 2000-01-23T04:56:07.000+00:00
+        link_type: SINGLE_USE
+        affiliate_program_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        affiliate_member_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        referral_code: referral_code
+        campaign_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        signups: 5
       properties:
         id:
           format: uuid
@@ -17599,13 +17930,36 @@ components:
         created_at:
           format: date-time
           type: string
+        link_type:
+          description: Defaults to SINGLE_USE for existing clients. REUSABLE creates
+            one tracked link without a quantity.
+          enum:
+          - SINGLE_USE
+          - REUSABLE
+          type: string
+        affiliate_program_id:
+          format: uuid
+          type: string
+        affiliate_member_id:
+          description: "Existing affiliate referrer/member ID, not user ID."
+          format: uuid
+          type: string
+        referral_code:
+          description: An existing code belonging to the selected member. Required
+            with both IDs for reusable links; bound on the server and revalidated
+            at claim time.
+          type: string
+        campaign_id:
+          format: uuid
+          type: string
+        signups:
+          description: Successful signups; reusable links omit allocation/issued/claimed/revoked
+            counts.
+          format: int64
+          type: integer
       required:
-      - allocation
-      - claimed
       - created_at
       - id
-      - issued
-      - revoked
       - source_id
       - source_name
       - source_type
@@ -17614,7 +17968,7 @@ components:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
-            $ref: "#/components/schemas/PromoLinkBatchListResponse_allOf_data"
+            $ref: "#/components/schemas/PromoLinkBatchListResponseData"
       example:
         data:
           batches:
@@ -17627,6 +17981,12 @@ components:
             claimed: 1
             revoked: 5
             created_at: 2000-01-23T04:56:07.000+00:00
+            link_type: SINGLE_USE
+            affiliate_program_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            affiliate_member_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            referral_code: referral_code
+            campaign_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            signups: 5
           - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             source_type: KOL
             source_id: source_id
@@ -17636,6 +17996,12 @@ components:
             claimed: 1
             revoked: 5
             created_at: 2000-01-23T04:56:07.000+00:00
+            link_type: SINGLE_USE
+            affiliate_program_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            affiliate_member_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            referral_code: referral_code
+            campaign_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            signups: 5
         error: error
         metadata: ""
     PromoLinkAdmin:
@@ -17648,6 +18014,7 @@ components:
         claimed_at: 2000-01-23T04:56:07.000+00:00
         claimed_email: claimed_email
         user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        link_type: SINGLE_USE
       properties:
         id:
           format: uuid
@@ -17659,7 +18026,13 @@ components:
           format: uri
           type: string
         status:
-          $ref: "#/components/schemas/PromoLinkStatus"
+          description: Reusable links use ACTIVE or REVOKED and have no single claimant.
+          enum:
+          - ISSUED
+          - CLAIMED
+          - REVOKED
+          - ACTIVE
+          type: string
         expires_at:
           format: date-time
           type: string
@@ -17672,6 +18045,13 @@ components:
         user_id:
           format: uuid
           type: string
+        link_type:
+          description: Defaults to SINGLE_USE for existing clients. REUSABLE creates
+            one tracked link without a quantity.
+          enum:
+          - SINGLE_USE
+          - REUSABLE
+          type: string
       required:
       - expires_at
       - id
@@ -17682,7 +18062,7 @@ components:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
-            $ref: "#/components/schemas/PromoLinkListResponse_allOf_data"
+            $ref: "#/components/schemas/PromoLinkListResponseData"
       example:
         data:
           links:
@@ -17694,6 +18074,7 @@ components:
             claimed_at: 2000-01-23T04:56:07.000+00:00
             claimed_email: claimed_email
             user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            link_type: SINGLE_USE
           - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             token_prefix: token_prefix
             url: https://openapi-generator.tech
@@ -17702,6 +18083,7 @@ components:
             claimed_at: 2000-01-23T04:56:07.000+00:00
             claimed_email: claimed_email
             user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            link_type: SINGLE_USE
           next_cursor: next_cursor
         error: error
         metadata: ""
@@ -17721,7 +18103,7 @@ components:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
-            $ref: "#/components/schemas/RevokePromoLinkResponse_allOf_data"
+            $ref: "#/components/schemas/RevokePromoLinkResponseData"
       example:
         data:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -17801,7 +18183,7 @@ components:
       - $ref: "#/components/schemas/ResponseEnvelope"
       - properties:
           data:
-            $ref: "#/components/schemas/PromoAttributionResponse_allOf_data"
+            $ref: "#/components/schemas/PromoAttributionResponseData"
       example:
         data:
           sources:
@@ -19228,8 +19610,33 @@ components:
           - BELOW_MINIMUM_PAYOUT
         error: error
         metadata: ""
-    claimPromoLink_request:
+    PromoCampaignSelectorResponse:
+      example:
+        data:
+          campaigns:
+          - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            tenant_id: tenant_id
+            status: PENDING
+            start: 2000-01-23T04:56:07.000+00:00
+            end: 2000-01-23T04:56:07.000+00:00
+            max_users: 0
+          - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            tenant_id: tenant_id
+            status: PENDING
+            start: 2000-01-23T04:56:07.000+00:00
+            end: 2000-01-23T04:56:07.000+00:00
+            max_users: 0
+      properties:
+        data:
+          $ref: "#/components/schemas/PromoCampaignSelectorResponseData"
+      required:
+      - data
+    ClaimPromoLinkRequest:
       additionalProperties: {}
+      example:
+        email: email
       properties:
         email:
           format: email
@@ -19237,7 +19644,7 @@ components:
           type: string
       required:
       - email
-    UpdateAffiliateProgramRequest_name:
+    UpdateAffiliateProgramRequestName:
       description: "Updated names must contain 1 to 128 characters, without surrounding\
         \ whitespace or control characters. Omitted, null, or update=false leaves\
         \ the field unchanged."
@@ -19247,7 +19654,7 @@ components:
         nullable: true
         type: string
       - $ref: "#/components/schemas/UpdateFieldString"
-    UpdateAffiliateProgramRequest_description:
+    UpdateAffiliateProgramRequestDescription:
       description: "Updated descriptions must not exceed 2048 characters or contain\
         \ NUL. Omitted, null, or update=false leaves the field unchanged."
       oneOf:
@@ -19255,14 +19662,14 @@ components:
         nullable: true
         type: string
       - $ref: "#/components/schemas/UpdateFieldString"
-    UpdateAffiliateProgramRequest_is_active:
+    UpdateAffiliateProgramRequestIsActive:
       description: "Inactive programs retain registrations, but cannot issue or resolve\
         \ codes. Omitted, null, or update=false leaves the field unchanged."
       oneOf:
       - nullable: true
         type: boolean
       - $ref: "#/components/schemas/UpdateFieldBoolean"
-    PromoClaimResponseEnvelope_allOf_data:
+    PromoClaimResponseEnvelopeData:
       example:
         state: NOT_FOUND
         email: email
@@ -19273,6 +19680,13 @@ components:
         target_equity: target_equity
         expires_at: 2000-01-23T04:56:07.000+00:00
         source_name: source_name
+        link_type: SINGLE_USE
+        affiliate_program_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        affiliate_member_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        referral_code: referral_code
+        campaign_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        link_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        source_id: source_id
       properties:
         state:
           $ref: "#/components/schemas/PromoClaimState"
@@ -19293,6 +19707,33 @@ components:
           format: date-time
           type: string
         source_name:
+          type: string
+        link_type:
+          description: Defaults to SINGLE_USE for existing clients. REUSABLE creates
+            one tracked link without a quantity.
+          enum:
+          - SINGLE_USE
+          - REUSABLE
+          type: string
+        affiliate_program_id:
+          format: uuid
+          type: string
+        affiliate_member_id:
+          description: "Existing affiliate referrer/member ID, not user ID."
+          format: uuid
+          type: string
+        referral_code:
+          description: An existing code belonging to the selected member. Required
+            with both IDs for reusable links; bound on the server and revalidated
+            at claim time.
+          type: string
+        campaign_id:
+          format: uuid
+          type: string
+        link_id:
+          format: uuid
+          type: string
+        source_id:
           type: string
       required:
       - state
@@ -19373,7 +19814,7 @@ components:
           format: uuid
           type: string
       title: CreateConditionalOrderResponseData
-    CreateOrdersBulkResponse_allOf_data:
+    CreateOrdersBulkResponseData:
       example:
         created: 0
         rejected: 6
@@ -19398,7 +19839,15 @@ components:
             $ref: "#/components/schemas/BulkOrderResult"
           type: array
           default: null
-    IssuePromoLinkBatchResponse_allOf_data:
+    IssuePromoLinkBatchRequestSingleUse:
+      not:
+        required:
+        - allocation
+      properties:
+        link_type: {}
+      required:
+      - link_type
+    IssuePromoLinkBatchResponseData:
       example:
         batch_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_id: source_id
@@ -19414,6 +19863,10 @@ components:
           url: https://openapi-generator.tech
           qr_url: qr_url
           expires_at: 2000-01-23T04:56:07.000+00:00
+        link_type: SINGLE_USE
+        affiliate_program_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        affiliate_member_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        referral_code: referral_code
       properties:
         batch_id:
           format: uuid
@@ -19428,12 +19881,30 @@ components:
             $ref: "#/components/schemas/IssuedPromoLink"
           type: array
           default: null
+        link_type:
+          description: Defaults to SINGLE_USE for existing clients. REUSABLE creates
+            one tracked link without a quantity.
+          enum:
+          - SINGLE_USE
+          - REUSABLE
+          type: string
+        affiliate_program_id:
+          format: uuid
+          type: string
+        affiliate_member_id:
+          description: "Existing affiliate referrer/member ID, not user ID."
+          format: uuid
+          type: string
+        referral_code:
+          description: An existing code belonging to the selected member. Required
+            with both IDs for reusable links; bound on the server and revalidated
+            at claim time.
+          type: string
       required:
-      - allocation
       - batch_id
       - links
       - source_id
-    PromoLinkBatchListResponse_allOf_data:
+    PromoLinkBatchListResponseData:
       example:
         batches:
         - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -19445,6 +19916,12 @@ components:
           claimed: 1
           revoked: 5
           created_at: 2000-01-23T04:56:07.000+00:00
+          link_type: SINGLE_USE
+          affiliate_program_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          affiliate_member_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          referral_code: referral_code
+          campaign_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          signups: 5
         - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_type: KOL
           source_id: source_id
@@ -19454,6 +19931,12 @@ components:
           claimed: 1
           revoked: 5
           created_at: 2000-01-23T04:56:07.000+00:00
+          link_type: SINGLE_USE
+          affiliate_program_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          affiliate_member_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          referral_code: referral_code
+          campaign_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          signups: 5
       properties:
         batches:
           items:
@@ -19462,7 +19945,7 @@ components:
           default: null
       required:
       - batches
-    PromoLinkListResponse_allOf_data:
+    PromoLinkListResponseData:
       example:
         links:
         - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -19473,6 +19956,7 @@ components:
           claimed_at: 2000-01-23T04:56:07.000+00:00
           claimed_email: claimed_email
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          link_type: SINGLE_USE
         - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           token_prefix: token_prefix
           url: https://openapi-generator.tech
@@ -19481,6 +19965,7 @@ components:
           claimed_at: 2000-01-23T04:56:07.000+00:00
           claimed_email: claimed_email
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          link_type: SINGLE_USE
         next_cursor: next_cursor
       properties:
         links:
@@ -19493,7 +19978,7 @@ components:
           type: string
       required:
       - links
-    RevokePromoLinkResponse_allOf_data:
+    RevokePromoLinkResponseData:
       example:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         status: REVOKED
@@ -19512,7 +19997,7 @@ components:
       - id
       - repeated
       - status
-    PromoAttributionResponse_allOf_data:
+    PromoAttributionResponseData:
       example:
         sources:
         - source_type: KOL
@@ -19551,6 +20036,70 @@ components:
           default: null
       required:
       - sources
+    PromoCampaignSelectorResponseDataCampaigns:
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        tenant_id: tenant_id
+        status: PENDING
+        start: 2000-01-23T04:56:07.000+00:00
+        end: 2000-01-23T04:56:07.000+00:00
+        max_users: 0
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          type: string
+        tenant_id:
+          type: string
+        status:
+          enum:
+          - PENDING
+          - ACTIVE
+          - COMPLETED
+          type: string
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+        max_users:
+          type: integer
+      required:
+      - end
+      - id
+      - max_users
+      - name
+      - start
+      - status
+      - tenant_id
+    PromoCampaignSelectorResponseData:
+      example:
+        campaigns:
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          tenant_id: tenant_id
+          status: PENDING
+          start: 2000-01-23T04:56:07.000+00:00
+          end: 2000-01-23T04:56:07.000+00:00
+          max_users: 0
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          tenant_id: tenant_id
+          status: PENDING
+          start: 2000-01-23T04:56:07.000+00:00
+          end: 2000-01-23T04:56:07.000+00:00
+          max_users: 0
+      properties:
+        campaigns:
+          items:
+            $ref: "#/components/schemas/PromoCampaignSelectorResponseDataCampaigns"
+          type: array
+          default: null
+      required:
+      - campaigns
   securitySchemes:
     bearerAuth:
       bearerFormat: JWT

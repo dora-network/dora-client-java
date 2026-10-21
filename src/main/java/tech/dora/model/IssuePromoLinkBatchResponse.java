@@ -21,7 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
-import tech.dora.model.IssuePromoLinkBatchResponseAllOfData;
+import tech.dora.model.IssuePromoLinkBatchResponseData;
 import tech.dora.model.Metadata;
 
 import com.google.gson.Gson;
@@ -50,12 +50,12 @@ import tech.dora.JSON;
 /**
  * IssuePromoLinkBatchResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-17T04:41:48.606211851+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-21T17:24:51.768947679+02:00[Europe/Paris]", comments = "Generator version: 7.23.0")
 public class IssuePromoLinkBatchResponse {
   public static final String SERIALIZED_NAME_DATA = "data";
   @SerializedName(SERIALIZED_NAME_DATA)
   @javax.annotation.Nullable
-  private IssuePromoLinkBatchResponseAllOfData data;
+  private IssuePromoLinkBatchResponseData data;
 
   public static final String SERIALIZED_NAME_ERROR = "error";
   @SerializedName(SERIALIZED_NAME_ERROR)
@@ -70,7 +70,7 @@ public class IssuePromoLinkBatchResponse {
   public IssuePromoLinkBatchResponse() {
   }
 
-  public IssuePromoLinkBatchResponse data(@javax.annotation.Nullable IssuePromoLinkBatchResponseAllOfData data) {
+  public IssuePromoLinkBatchResponse data(@javax.annotation.Nullable IssuePromoLinkBatchResponseData data) {
     this.data = data;
     return this;
   }
@@ -80,11 +80,11 @@ public class IssuePromoLinkBatchResponse {
    * @return data
    */
   @javax.annotation.Nullable
-  public IssuePromoLinkBatchResponseAllOfData getData() {
+  public IssuePromoLinkBatchResponseData getData() {
     return data;
   }
 
-  public void setData(@javax.annotation.Nullable IssuePromoLinkBatchResponseAllOfData data) {
+  public void setData(@javax.annotation.Nullable IssuePromoLinkBatchResponseData data) {
     this.data = data;
   }
 
@@ -208,7 +208,7 @@ public class IssuePromoLinkBatchResponse {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the optional field `data`
       if (jsonObj.get("data") != null && !jsonObj.get("data").isJsonNull()) {
-        IssuePromoLinkBatchResponseAllOfData.validateJsonElement(jsonObj.get("data"));
+        IssuePromoLinkBatchResponseData.validateJsonElement(jsonObj.get("data"));
       }
       if ((jsonObj.get("error") != null && !jsonObj.get("error").isJsonNull()) && !jsonObj.get("error").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `error` to be a primitive type in the JSON string but got `%s`", jsonObj.get("error").toString()));
